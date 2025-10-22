@@ -147,21 +147,18 @@ local weatherNames = {
 
 
 local temperature = 0;
--- apikey: 82211fac04f5878eec467bbc96c06531
 function fetchWeather()
 	updateTime()
 	--setRainLevel(0)
-	fetchRemote("https://api.openweathermap.org/data/2.5/weather?q=Budapest&units=metric&appid=82211fac04f5878eec467bbc96c06531", function(data)
+	fetchRemote("[API URL]", function(data)
 		local isFlooding = false
 		local new = fromJSON(data)
-       -- iprint(new)
-       -- if new then
+        if new then
             local temp = tonumber(new["main"]["temp"])
 			local wind = new["wind"]["speed"]*3.6
-            --print(new["weather"]["description"])
             
             local weather = capitalize(new["weather"][1]["description"]) --new["weather"][1]["description"]:sub(1, 1):upper() .. new["weather"][1]["description"]:sub(2) or "Overcast"
-            --print(weather)
+
             if isFlooding then
                 weather = "Thunderstorm"
             end
@@ -175,13 +172,10 @@ function fetchWeather()
 			triggerClientEvent(getRootElement(), "returnWeatherDatas > toClient", getRootElement(), weatherNow)
             if weatherNames[weather] == "Rain" then 
                 setRainLevel(0.3)
-                --rainLevel = 0.3
             elseif weatherNames[weather] == "Thunderstorms" or weatherNames[weather] == "Thunderstorm" then 
                 setRainLevel(0.5)
-                --rainLevel = 0.5
             else 
                 setRainLevel(0)
-             --   rainLevel = 0
             end
             
             if not isFlooding then
@@ -191,9 +185,9 @@ function fetchWeather()
                     setWeather(0)
                 end
             end
-       -- else 
-         --   outputDebugString("Hibás weatherAPI!")
-        --end
+        else 
+            outputDebugString("API error!")
+        end
 	end, nil, true )
 end
 setTimer(fetchWeather, 60*60*1000, 0)
@@ -207,15 +201,11 @@ end, 350, 0)
 
 
 local function doCapitalizing( substring )
-    -- Upper the first character and leave the rest as they are
     return substring:sub( 1, 1 ):upper( ) .. substring:sub( 2 )
 end
 
 function capitalize( text )
-    -- Sanity check
     assert( type( text ) == "string", "Bad argument 1 @ capitalize [String expected, got " .. type( text ) .. "]")
-
-    -- We don't care about the number of words, so return only the first result string.gsub provides
     return ( { string.gsub( text, "%a+", doCapitalizing ) } )[1]
 end
 
