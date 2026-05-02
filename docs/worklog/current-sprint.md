@@ -1,49 +1,33 @@
-# Sprint Atual — Security Hardening
+# Sprint Atual — Phase 2: Localização PT-BR
 
-**Branch:** `security/oAccount-auth-hardening`  
+**Branch:** `main`  
 **Início:** 2026-05-01  
-**Status:** Em progresso
+**Status:** Sprint A concluída
 
 ---
 
-## Objetivo
+## Sprint A — oAccount PT-BR (CONCLUÍDA)
 
-Hardening de segurança do recurso `oAccount` — os três bloqueantes críticos de lançamento.
+**Commit:** `27d54f5`
 
----
+### Arquivos traduzidos
 
-## Tarefas
-
-| # | Tarefa | Status |
-|---|---|---|
-| 1 | Remover `saver[]` / `saverUSE` / `listITme` | ✅ Concluído |
-| 2 | Implementar rate limiting no login | ✅ Concluído |
-| 3 | Padronizar `source` validation em todos os handlers | ✅ Concluído |
-| 4 | Remover `kickFlooder` (permite cliente kickar terceiros) | ✅ Concluído |
-| 5 | Corrigir bug `destroyCode` (variável `player` nil no escopo) | ✅ Concluído |
-| 6 | Gate de verificação em `passwordChange` | ✅ Concluído |
-| 7 | Bounds check em `availableStartPositions` | ✅ Concluído |
-| 8 | Limpeza de estado no disconnect do jogador | ✅ Concluído |
-| 9 | Documentação + commit message | 🔄 Em andamento |
-
----
-
-## Arquivos Modificados
-
-- `oAccount/server.lua` — hardening completo
-
----
-
-## Vulnerabilidades Fechadas
-
-| ID | Descrição |
+| Arquivo | Strings traduzidas |
 |---|---|
-| V1 | `saver[]` armazenando user/pass concatenados em memória |
-| V2 | Evento `saverUSE` aberto a qualquer cliente |
-| V3 | Comando `/listITme` expondo credenciais a qualquer jogador |
-| V4 | Brute-force irrestrito no login |
-| V5 | Argumento `player` controlado pelo cliente em todos os handlers |
-| V6 | Nil panic em `availableStartPositions[startPosition]` |
-| V7 | Evento `kickFlooder` permitindo kick remoto de qualquer player |
-| V8 | Bug: `destroyCode` referenciando `player` nil |
-| V9 | `passwordChange` sem verificação prévia do código de reset |
+| `oAccount/shared.lua` | kedvenc_tevekenyseg, loading_texts, ban_menus, availableStartPositions |
+| `oAccount/changePW.lua` | Títulos de janelas, botões, placeholders, mensagens de infobox |
+| `oAccount/client.lua` | Login panel, char create, validações, load animation, ban panel, weekDays, addAdminCMD |
+| `oAccount/server.lua` | Registro, login, criação de personagem, admin commands, password recovery |
+
+### Tropicalização aplicada
+
+- `ORIGINAL ROLEPLAY` → `IPIRANGA ROLEPLAY` (client.lua, server.lua)
+- `OriginalRoleplay` → `Ipiranga Roleplay` (load animation subtitle)
+- `[OriginalRoleplay]` → `[Ipiranga Roleplay]` (chatbox system messages)
+- Loading texts: URLs húngaros mortos removidos, substituídos por texto PT-BR genérico
+
+---
+
+## Próxima Sprint — TD-SEC-006 ou oDashboard
+
+Ver `.ai/next-actions.md` para prioridade atualizada.

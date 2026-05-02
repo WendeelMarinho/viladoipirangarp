@@ -1,0 +1,19 @@
+# --- Pastas de IA / assistentes (não versionar) ---
+.ai/
+.claude/
+
+# Opcional: cache local do Cursor (descomente se NÃO quiser versionar regras/contexto)
+# .cursor/
+
+# --- Artefatos locais / temporários ---
+*.log
+.DS_Store
+Thumbs.db
+*.tmp
+*_git_log.txt
+_git_do.sh
+
+# --- Backups / editor ---
+*.lua.bak
+*.swp
+*~
