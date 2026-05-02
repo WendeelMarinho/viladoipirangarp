@@ -1,17 +1,6 @@
-adminSerials = {
-	["52E602241DC69E45929DF7CA9DCDDE54"] = "Carlos",
-	["A106718E8295717F198A146B8EC62DB3"] = "Carlos2",
-	["E2582905A1146DE0D09B6C6C406772B2"] = "Aron",
-	["6DADFF0244F50876A5E91D989ADBEE02"] = "Aronlorinczke",
-	["3C4EDBBC959CD9DBFF7E4E35F46B94B2"] = "Paul",
-	["10D1C517DCD4E19401F635E6DB9D93F4"] = "PaulLaptop",
-	--["A8D6BA2E6A0FE86203A10DEEA851BBA2"] = "fasz",
-	["FCF1E89E7894C8C58287D9B121B978B2"] = "kondor",
-	--["A51AEA488C429FDF52385CC085F80134"] = "keiichi",
-
-	--['FADD74F89263F9BEE73931EDAFB178A1'] = 'Dani',
-
-}
+-- adminSerialsCache: populated at runtime from the `adminserials` DB table (server-side only).
+-- On client, this table is always empty; client-side functions use element data instead.
+adminSerialsCache = {}
 
 adminPrefixs = {
 	[0] = "Játékos",
@@ -44,10 +33,10 @@ adminColors = {
 }
 
 function isPlayerDeveloper(player)
-	if adminSerials[getPlayerSerial(player)] then
-		return true
+	if localPlayer then
+		return getElementData(player, "aclLogin") == true
 	end
-	return false
+	return adminSerialsCache[getPlayerSerial(player)] ~= nil
 end
 
 function getAdminPrefix(rankNum)
@@ -59,8 +48,10 @@ function getAdminColor(rankNum)
 end
 
 function getPlayerAdminLevel(player)
-	if adminSerials[getPlayerSerial(player)] then
-		return 10
+	if localPlayer then
+		if getElementData(player, "aclLogin") then return 10 end
+	else
+		if adminSerialsCache[getPlayerSerial(player)] then return 10 end
 	end
 	return getElementData(player, "user:admin") or 0
 end
@@ -78,11 +69,10 @@ function playerHasPermission(player, level, needHighLevel)
 	if not level then level = 2 end
 
 	if needHighLevel then
-		if adminSerials[getPlayerSerial(player)] then
-			return true
-		else
-			return false
+		if localPlayer then
+			return getElementData(player, "aclLogin") == true
 		end
+		return adminSerialsCache[getPlayerSerial(player)] ~= nil
 	else
 		if getPlayerAdminLevel(player) >= 8 then
 			return true

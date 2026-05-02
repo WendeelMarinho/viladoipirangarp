@@ -7,12 +7,41 @@ local weaponTable = {4, 24, 25, 29, 31, 33, 18, 11, 46}
 
 local conn = exports.oMysql:getDBConnection()
 
-local highLevelAdmins = {
-	{"2D565C706DC4646D99D06A8D68A53BE3"}, -- Carlos
-	{"3C4EDBBC959CD9DBFF7E4E35F46B94B2"}, -- Paul
-	{"A8D6BA2E6A0FE86203A10DEEA851BBA2"}, -- Aron
+local function syncAdminACLGroup()
+	for k, v in pairs(aclGroupListObjects(aclGetGroup("Admin"))) do
+		if string.find(v:lower(), "user.") then
+			aclGroupRemoveObject(aclGetGroup("Admin"), v)
+		end
+	end
+	aclSave()
+	for serial, name in pairs(adminSerialsCache) do
+		if not isObjectInACLGroup("user."..name, aclGetGroup("Admin")) then
+			aclGroupAddObject(aclGetGroup("Admin"), "user."..name)
+		end
+	end
+	aclSave()
+	aclReload()
+	for k, v in ipairs(getElementsByType("player")) do
+		developerJoin(v)
+	end
+end
 
-}
+local function loadAdminSerialsFromDB()
+	dbQuery(function(qh)
+		local result = dbPoll(qh, 0)
+		if result then
+			adminSerialsCache = {}
+			for _, row in ipairs(result) do
+				if row["serial"] and row["name"] then
+					adminSerialsCache[row["serial"]] = row["name"]
+				end
+			end
+		else
+			outputDebugString("[oAdmin] AVISO: Falha ao carregar seriais de administrador do banco de dados.", 1)
+		end
+		syncAdminACLGroup()
+	end, conn, "SELECT serial, name FROM adminserials")
+end
 
 function sendMessageToAdmins(player, msg, level)
 	--[[local month, day = core:getDate("month"), core:getDate("monthday")
@@ -61,20 +90,21 @@ end)
 
 function developerJoin(player)
 	if not player then player = source end
-	if isPlayerDeveloper(player) then
+	local serial  = getPlayerSerial(player)
+	local devName = adminSerialsCache[serial]
+	if devName then
 		if not isGuestAccount(getPlayerAccount(player)) then
 			logOut(player)
 		end
-		local serial = getPlayerSerial(player)
 		local password = generateRandomASCIIString(30)
-		local account = getAccount(adminSerials[serial])
+		local account  = getAccount(devName)
 		if not account then
-			account = addAccount(adminSerials[serial], password)
+			account = addAccount(devName, password)
 		end
 		setAccountPassword(account, password)
 		logIn(player, account, password)
 		setElementData(player, "aclLogin", true)
-		outputChatBox("[Admin]: #ffffffFejlesztő serial érzékelve! Üdv, "..color..adminSerials[serial].."#ffffff!", player, r, g, b, true)
+		outputChatBox("[Admin]: #ffffffFejlesztő serial érzékelve! Üdv, "..color..devName.."#ffffff!", player, r, g, b, true)
 	else
 		setElementData(player, "aclLogin", nil)
 		if not isGuestAccount(getPlayerAccount(player)) then
@@ -85,22 +115,7 @@ end
 addEventHandler("onPlayerJoin", getRootElement(), developerJoin)
 
 addEventHandler("onResourceStart", resourceRoot, function()
-	for k, v in pairs(aclGroupListObjects(aclGetGroup("Admin"))) do
-		if string.find(v:lower(), "user.") then
-			aclGroupRemoveObject(aclGetGroup("Admin"), v)
-		end
-	end
-	aclSave()
-	for k, v in pairs(adminSerials) do
-		if not isObjectInACLGroup("user."..v, aclGetGroup("Admin")) then
-			aclGroupAddObject(aclGetGroup("Admin"), "user."..v)
-		end
-	end
-	aclSave()
-	aclReload()
-	for k, v in ipairs(getElementsByType("player")) do
-		developerJoin(v)
-	end
+	loadAdminSerialsFromDB()
 end)
 
 addCommandHandler("fixveh", function(thePlayer, cmd, target)
@@ -591,26 +606,18 @@ function setAdminLevel(thePlayer, cmd, targetP, level)
 				maxlevel = 11
 			end
 
-			if (level > maxlevel) then 
-				local serial = getPlayerSerial(target)
-				local volt = false 
+			if (level > maxlevel) then
+				local serial  = getPlayerSerial(target)
+				local volt    = adminSerialsCache[serial] ~= nil
 
-				for k,v in ipairs(highLevelAdmins) do 
-					if v[1] == serial then 
-						volt = true 
-						break
-					end
-				end
-
-
-				if getElementData(thePlayer,"aclLogin") then 
-					if not volt then 
+				if getElementData(thePlayer,"aclLogin") then
+					if not volt then
 						sendMessageToAdmins(thePlayer,nameColor.."-által megváltoztatott adminisztrátornak nincs jogosultsága a magagsabb rang használata!")
 					end
 				else
-					if not volt then 
+					if not volt then
 						outputChatBox("Az adminisztrátori rang adása megtagadva! ( A játékos serialja nincs engedélyezve magasabb adminsiztrátori rangra! )", thePlayer, 255,0,0,true)
-						return 
+						return
 					end
 				end
 			end
@@ -1759,5 +1766,11 @@ addCommandHandler("setvehoil", function(thePlayer, cmd, target,oil)
 		else
 			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Olajszint (Maximum 15000)]", thePlayer, r, g, b, true)
 		end
+	end
+end)
+addCommandHandler("reloadadminserials", function(player, cmd)
+	if getElementData(player, "aclLogin") then
+		loadAdminSerialsFromDB()
+		outputChatBox("[Admin]: Seriais de administrador recarregados do banco de dados.", player, r, g, b, true)
 	end
 end)

@@ -117,20 +117,27 @@ adminCMD = {
     {command = 'getplayerserial', permission = 7, shortDescription = 'Adott játékos serialjának lekérése.'},
 }
 
-function hasPermission(element,permission)
+function hasPermission(element, permission)
+    local function isDev()
+        if localPlayer then
+            return getElementData(element, "aclLogin") == true
+        end
+        return adminSerialsCache[getPlayerSerial(element)] ~= nil
+    end
+
     if ((getElementData(element, "user:admin") or 0) > 1) then
         for k, o in pairs(adminCMD) do
             if (o.command == permission) then
                 if (o.permission <= getElementData(element, "user:admin")) then
                     return true
-                elseif (adminSerials[getPlayerSerial(element)]) then
+                elseif isDev() then
                     return true
                 else
                     return false
                 end
             end
         end
-    elseif (adminSerials[getPlayerSerial(element)]) then
+    elseif isDev() then
         return true
     end
 end
