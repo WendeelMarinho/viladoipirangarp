@@ -49,18 +49,18 @@ local adminColors = {
 }
 
 local adminTag = {
-    [0] = "[Játékos]",
-    [1] = "(AdminSegéd)", 
+    [0] = "[Jogador]",
+    [1] = "(Ajudante Admin)", 
     [2] = "(Admin 1)", 
     [3] = "(Admin 2)", 
     [4] = "(Admin 3)", 
     [5] = "(Admin 4)", 
     [6] = "(Admin 5)", 
-    [7] = "(FőAdmin)", 
-    [8] = "(AdminController)", 
+    [7] = "(Admin Chefe)", 
+    [8] = "(Admin Controller)", 
     [9] = "(Server Manager)", 
-    [10] = "<Fejlesztő/>", 
-    [11] = "(Tulajdonos)",
+    [10] = "<Desenvolvedor/>", 
+    [11] = "(Dono)",
 }
 
 local adminIcons = {
@@ -78,6 +78,7 @@ local adminIcons = {
     [11] = "tulaj",
 }
 
+-- Teclas bloqueadas no painel (nome de variável legado)
 local tiltottgombok = {
     ["mouse_wheel_down"] = true,
     ["mouse_wheel_up"] = true,
@@ -240,7 +241,7 @@ function renderScore()
                 end
 
                 if getElementData(v, "user:idgAs") then 
-                    name = "#f7931e(Adminsegéd) #dcdcdc".. name
+                    name = "#f7931e(Ajudante Admin) #dcdcdc".. name
                 end
 
                 dxDrawText(name:gsub("_", " "), x+sx*0.04, starty, x+sx*0.04+sx*0.14, starty+sy*0.038, tocolor(220, 220, 220, 255*a), 0.8, fontScript:getFont("p_m", 15/myX*sx), "center", "center", false, false, false, true)

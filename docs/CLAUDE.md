@@ -18,7 +18,7 @@ docs/worklog/next-actions.md
 .cursor/context/architecture.md
 ```
 
-*(Opcional, apenas local — pasta `.ai/` não é versionada: `context.md`, `current-focus.md`, `next-actions.md` se existirem na sua máquina.)*
+*(Opcional, apenas local — pasta **`.ai/`** está no `.gitignore`; pode conter `context.md`, `current-focus.md`, `next-actions.md` na tua máquina. Na **raiz** existe **`CLAUDE.md`** como entrada para Claude Code / Cursor, apontando para este ficheiro.)*
 
 ## Escrita Obrigatória no Final de Cada Sessão
 

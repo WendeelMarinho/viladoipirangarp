@@ -17,7 +17,7 @@ end
 
 function renderPanel_options(a)
     dxDrawRectangle(sx*0.15,sy*0.22,sx*0.15,sy*0.04,tocolor(27,27,27,220*a))
-    dxDrawText("Beállítások",sx*0.15,sy*0.22,sx*0.15+sx*0.15,sy*0.22+sy*0.044,tocolor(255,255,255,255*a),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+    dxDrawText("Configurações",sx*0.15,sy*0.22,sx*0.15+sx*0.15,sy*0.22+sy*0.044,tocolor(255,255,255,255*a),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
     --dxDrawRectangle(sx*0.15,sy*0.22+sy*0.04,sx*0.15,sy*0.59,tocolor(27,27,27,100*a))
 
     local startY = sy*0.22+sy*0.045
@@ -60,7 +60,7 @@ function renderPanel_options(a)
     end
 
     --dxDrawRectangle(sx*0.31,sy*0.22,sx*0.585,sy*0.04,tocolor(27,27,27,220*a))
-    dxDrawText("Beállítások",sx*0.35,sy*0.21,sx*0.35+sx*0.585,sy*0.21+sy*0.044,tocolor(255,255,255,100*a),1,font:getFont("condensed", 9.5/myX*sx),"left","center")
+    dxDrawText("Configurações",sx*0.35,sy*0.21,sx*0.35+sx*0.585,sy*0.21+sy*0.044,tocolor(255,255,255,100*a),1,font:getFont("condensed", 9.5/myX*sx),"left","center")
     dxDrawText(selectedMenuTitle,sx*0.35,sy*0.235,sx*0.35+sx*0.585,sy*0.235+sy*0.044,tocolor(255,255,255,255*a),1/myX*sx,fonts["bebasneue-18"],"left","center")
     dxDrawRectangle(sx*0.31,sy*0.22+sy*0.062,sx*0.585,sy*0.57,tocolor(27,27,27,100*a))
     dxDrawImage(sx*0.315,sy*0.22, 45/myX*sx, 45/myX*sx, "files/options/"..selectedMenuIcon)
@@ -127,7 +127,7 @@ function renderPanel_options(a)
                     end
 
                     if selectedMenu_k == "xmas" then
-                        if v[1] == "havazás erőssége" then 
+                        if v[1] == "Intensidade da neve" then 
                             exports[v[5]]:updateSnowDensity(v[6], true, 1)
                         end
                     end
@@ -149,7 +149,7 @@ function renderPanel_options(a)
                     else
                         dxDrawRectangle(sx*0.768+1/myX*sx, startY+sy*0.009+1/myY*sy, (sx*0.117-2/myX*sx), sy*0.02-2/myY*sy, tocolor(r, g, b, 180*a))
                     end
-                    core:dxDrawShadowedText("Alapértelmezett", sx*0.768+1/myX*sx, startY+sy*0.009+1/myY*sy, sx*0.768+1/myX*sx+(sx*0.117-2/myX*sx), startY+sy*0.009+1/myY*sy+sy*0.02-2/myY*sy, tocolor(255, 255, 255, 255*a), tocolor(0, 0, 0, 255*a), 0.7/myX*sx, fonts["condensed-bold-11"], "center", "center")
+                    core:dxDrawShadowedText("Padrão", sx*0.768+1/myX*sx, startY+sy*0.009+1/myY*sy, sx*0.768+1/myX*sx+(sx*0.117-2/myX*sx), startY+sy*0.009+1/myY*sy+sy*0.02-2/myY*sy, tocolor(255, 255, 255, 255*a), tocolor(0, 0, 0, 255*a), 0.7/myX*sx, fonts["condensed-bold-11"], "center", "center")
                 end
             elseif v[2] == 3 then 
                 if core:isInSlot(sx*0.874, startY + 5/myY*sx, 20/myX*sx, 20/myX*sx) then 
@@ -170,7 +170,7 @@ function renderPanel_options(a)
                         value = (getElementData(localPlayer, v[6]) or 1)
 
                         if value == 0 then 
-                            value = "Ki"
+                            value = "Desligado"
                         end
                     end
                 end
@@ -236,7 +236,7 @@ function renderPanel_options(a)
         if not snowAvailable then
             dxDrawRectangle(sx*0.31,sy*0.22+sy*0.062,sx*0.585,sy*0.57,tocolor(27,27,27,220*a))
             dxDrawImage(sx*0.31 + sx*0.585/2 - 125/myX*sx,sy*0.22+sy*0.062 + sy*0.05, 250/myX*sx, 250/myY*sy, "files/xmas.png", 0, 0, 0, tocolor(255, 255, 255, 255 * a))
-            dxDrawText("Ezek a beállítások csak a karácsonyi időszakban érhetőek el!",sx*0.31,sy*0.635,sx*0.31 + sx*0.585,sy*0.635+sy*0.044,tocolor(255,255,255,255*a),1/myX*sx,fonts["bebasneue-18"],"center","center")
+            dxDrawText("Essas opções só ficam disponíveis no período natalino!",sx*0.31,sy*0.635,sx*0.31 + sx*0.585,sy*0.635+sy*0.044,tocolor(255,255,255,255*a),1/myX*sx,fonts["bebasneue-18"],"center","center")
         end
     end
 end
@@ -274,7 +274,7 @@ function keyPanel_options(key, state)
                     if selectedMenu_k == "graphics" then
                         exports[v[5]]:switchShader(v[6])
                     elseif selectedMenu_k == "xmas" then
-                        if v[1] == "Havazás" then 
+                        if v[1] == "Neve" then 
                             exports[v[5]]:switchShader(v[6])
                         else
                             exports[v[5]]:updateSnowJitter(v[6])

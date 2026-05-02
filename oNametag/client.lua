@@ -9,7 +9,7 @@ local font2 = fontsScript:getFont("bebasneue", 55)
 local prefixFont = fontsScript:getFont("bebasneue", 25)
 local icon = fontsScript:getFont("fontawesome2", 10)
 
-local adminLevels = {"(AdminSegéd)", "(Admin 1)", "(Admin 2)", "(Admin 3)", "(Admin 4)", "(Admin 5)", "(FőAdmin)", "(AdminController)", "(Server Manager)", "<Fejlesztő/>", "(Tulajdonos)"}
+local adminLevels = {"(Ajudante)", "(Admin 1)", "(Admin 2)", "(Admin 3)", "(Admin 4)", "(Admin 5)", "(Admin principal)", "(AdminController)", "(Server Manager)", "<Dev/>", "(Dono)"}
 local adminColors = {"#f7931e", "#f7931e", "#f7931e", "#f7931e", "#f7931e", "#f7931e", "#ae61e8", "#72b55e", "#ffcc00", "#5db2f7", "#f44141"}
 
 local sx,sy = guiGetScreenSize()
@@ -290,8 +290,8 @@ setTimer(function()
 										pName = string.gsub(v.playerName, "_", " ")
 										--local aLevel = datas.alevel
 
-										shadowedText("#f7931e(AdminSegéd) #ffffff"..pName.." #f7931e("..v.playerId..") ", x, y - dist/4, x, y - dist/4, tocolor(255, 255, 255, 255 - dist*5), 1 - dist/35, font, "center", "top", false, false, false, true)
-										playerName = "#f7931e(AdminSegéd) #ffffff"..pName.." #f7931e("..v.playerId..") "
+										shadowedText("#f7931e(Ajudante) #ffffff"..pName.." #f7931e("..v.playerId..") ", x, y - dist/4, x, y - dist/4, tocolor(255, 255, 255, 255 - dist*5), 1 - dist/35, font, "center", "top", false, false, false, true)
+										playerName = "#f7931e(Ajudante) #ffffff"..pName.." #f7931e("..v.playerId..") "
 									else
 										local playedTime = v.playedTime
 
@@ -303,8 +303,8 @@ setTimer(function()
 										local dmg = getElementData(v.element, "char:dmg")
 
 										if level < 5 then 
-											playerName = adminColors[1].."[Kezdő] #ffffff"..pName.." #f7931e("..v.playerId..")"
-											shadowedText(adminColors[1].."[Kezdő] #ffffff"..pName.." #f7931e("..v.playerId..")", x, y - dist/4, x, y - dist/4, dmg and tocolor(255, 60, 60, 255 - dist*5) or tocolor(255, 255, 255, 255 - dist*5), 1 - dist/35, font, "center", "top", false, false, false, true)
+											playerName = adminColors[1].."[Iniciante] #ffffff"..pName.." #f7931e("..v.playerId..")"
+											shadowedText(adminColors[1].."[Iniciante] #ffffff"..pName.." #f7931e("..v.playerId..")", x, y - dist/4, x, y - dist/4, dmg and tocolor(255, 60, 60, 255 - dist*5) or tocolor(255, 255, 255, 255 - dist*5), 1 - dist/35, font, "center", "top", false, false, false, true)
 										else
 											playerName = pName.." #f7931e("..v.playerId..")"
 											shadowedText(pName.." #f7931e("..v.playerId..")", x, y - dist/4, x, y - dist/4, dmg and tocolor(255, 60, 60, 255 - dist*5) or tocolor(255, 255, 255, 255 - dist*5), 1 - dist/35, font, "center", "top", false, false, false, true)
@@ -347,22 +347,22 @@ setTimer(function()
 											rendY = y - dist/4 + 40
 										end
 
-										shadowedText("*festék látható az arcán*", x, rendY, x, rendY, tocolor(141, 41, 204, 200 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
+										shadowedText("*tinta visível no rosto*", x, rendY, x, rendY, tocolor(141, 41, 204, 200 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
 									end
 
 									if not v.isAfk then 
 										if v.playerInDead then 
 											dxDrawImage(x - (60/2 * size), y - (10 * size) - (60 * size) + (1 * size), 60 * size, 60 * size, "files/death.png", 0, 0, 0, tocolor(227, 59, 59, 255))
-											shadowedText("Elhunyt (Oka: ".. v.customDeath .. ")", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
+											shadowedText("Falecido (causa: ".. v.customDeath .. ")", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
 										elseif v.playerInAnim then 
 											dxDrawImage(x - (25 * size), y - (10 * size) - (50 * size) + (1 * size), 50*size, 50*size, "files/anim.png", 0, 0, 0, tocolor(227, 59, 59, 255))
 										--	outputChatBox(getElementData(v, "playerInAnim.datas")[1]-getTickCount())
-											shadowedText("Vérszint: "..v.bloodLevel.."%", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
+											shadowedText("Sangue: "..v.bloodLevel.."%", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
 										end
 									end
 
 									if v.playerInAnim then 
-										shadowedText("Vérszint: "..v.bloodLevel.."%", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
+										shadowedText("Sangue: "..v.bloodLevel.."%", x, y - dist/4 + 20, x, y - dist/4 + 20, tocolor(227, 59, 59, 255 - dist*5), 0.9 - dist/35, font, "center", "top", false, false, false, true)
 									end
 								end
 							end
@@ -486,4 +486,4 @@ function hexToRGB(hex)
     return {tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))}
 end
 
-exports.oAdmin:addAdminCMD("anames", 2, "Játékos nevek megtekintése távolabbról, falon keresztül.")
+exports.oAdmin:addAdminCMD("anames", 2, "Ver nomes de jogadores à distância e através de paredes.")

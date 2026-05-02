@@ -224,9 +224,9 @@ function renderFactionDutyTooltip()
     core:dxDrawShadowedText(getFactionName(dutyMarkerID), 0, sy*0.79, sx, sy*0.79+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 1/myX*sx, fonts["condensed-12"], "center", "center")
 
     if isPlayerFactionMember(dutyMarkerID) then 
-        core:dxDrawShadowedText("A szolgálatba álláshoz nyomd meg az "..color.."[E] #ffffffgombot.", 0, sy*0.82, sx, sy*0.82+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
+        core:dxDrawShadowedText("Para entrar em serviço pressione "..color.."[E]#ffffff.", 0, sy*0.82, sx, sy*0.82+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
     else
-        core:dxDrawShadowedText("#bd3131Nem vagy tagja a szervezetnek!", 0, sy*0.82, sx, sy*0.82+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
+        core:dxDrawShadowedText("#bd3131Você não é membro desta organização!", 0, sy*0.82, sx, sy*0.82+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
     end
 end
 
@@ -237,11 +237,11 @@ function factionDuty()
     if isPlayerFactionMember(dutyMarkerID) then 
         local dutyState = getElementData(localPlayer, "char:duty:faction") or 0 
 --        print(dutyState)
-        if dutyState == 0 then -- dutyba lépés
+        if dutyState == 0 then -- Entrar em plantão
             if not isTimer(dutyTimer) then 
                 if client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][3] > 0 then 
-                    infobox:outputInfoBox("Sikeresen szolgálatba léptél!", "success")
-                    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 2).."Sikeresen szolgálatba álltál!", 255, 255, 255, true)
+                    infobox:outputInfoBox("Você entrou em serviço!", "success")
+                    outputChatBox(core:getServerPrefix("green-dark", "Facção", 2).."Você entrou em serviço!", 255, 255, 255, true)
                     if #client_faction_list[dutyMarkerID][8][client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][3]][3] == 1 then 
                         triggerServerEvent("faction > setMemberDutyState", resourceRoot, dutyMarkerID, client_faction_list[dutyMarkerID][8][client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][3]][3][1])
                         
@@ -250,8 +250,8 @@ function factionDuty()
                             inDutyTime = inDutyTime + 1
                         end, core:minToMilisec(1), 0)
                     else
-                        --infobox:outputInfoBox("Menj el egy ruhaboltba és válassz dutyskin-t", "warning")
-                        --outputChatBox(core:getServerPrefix("red-dark", "Frakció", 2).."Menj el egy ruhaboltba és válassz dutyskin-t", 255, 255, 255, true)
+                        --infobox:outputInfoBox("Vá até uma loja de roupas e escolha um skin de plantão.", "warning")
+                        --outputChatBox(core:getServerPrefix("red-dark", "Facção", 2).."Vá até uma loja de roupas e escolha um skin de plantão.", 255, 255, 255, true)
                         choosableSkins = client_faction_list[dutyMarkerID][8][client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][3]][3]
                         triggerServerEvent("faction > setMemberDutyState", resourceRoot, dutyMarkerID, 0)
                         startDutySkinChoosing()
@@ -265,14 +265,14 @@ function factionDuty()
                         end, core:minToMilisec(1), 0)
                     end
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Frakció", 2).."Ezzel a ranggal nem léphetsz szolgálatba! "..color.."("..client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][1]..")", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Facção", 2).."Com este posto você não pode entrar em serviço! "..color.."("..client_faction_list[dutyMarkerID][7][getPlayerRankInFaction(dutyMarkerID)][1]..")", 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Frakció", 2).."Csak "..color.."1 #ffffffpercenként állhatsz szolgálatba!", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Facção", 2).."Só pode entrar em serviço a cada "..color.."1 #ffffffminuto!", 255, 255, 255, true)
             end
-        elseif dutyState == dutyMarkerID then -- kilépés dutyból
-            infobox:outputInfoBox("Sikeresen kiléptél a szolgálatból!", "success")
-            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 2).."Sikeresen kiléptél a szolgálatból!", 255, 255, 255, true)
+        elseif dutyState == dutyMarkerID then -- Sair do plantão
+            infobox:outputInfoBox("Você saiu do serviço!", "success")
+            outputChatBox(core:getServerPrefix("green-dark", "Facção", 2).."Você saiu do serviço!", 255, 255, 255, true)
 
             triggerServerEvent("faction > setMemberDutyState", resourceRoot, 0, _, inDutyTime)
             inDutyTime = 0
@@ -284,18 +284,18 @@ function factionDuty()
                     killTimer(dutyTimer)
                 end
             end, core:minToMilisec(1), 1)
-        else -- rossz helyen dutyzik ki
-            infobox:outputInfoBox("Először add le a szolgálatot a(z) "..getFactionName(dutyState).." nevű szervezetben.", "error")
-            outputChatBox(core:getServerPrefix("red-dark", "Frakció", 2).."Először add le a szolgálatot a(z) "..color..getFactionName(dutyState).." #ffffffnevű szervezetben.", 255, 255, 255, true)
+        else -- Plantão em facção errada
+            infobox:outputInfoBox("Primeiro saia do serviço na organização "..getFactionName(dutyState)..".", "error")
+            outputChatBox(core:getServerPrefix("red-dark", "Facção", 2).."Primeiro saia do serviço na organização "..color..getFactionName(dutyState).."#ffffff.", 255, 255, 255, true)
         end
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 2).."Nem vagy tagja a(z) "..color..getFactionName(dutyMarkerID).." #ffffffnevű szervezetnek.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Facção", 2).."Você não é membro da organização "..color..getFactionName(dutyMarkerID).."#ffffff.", 255, 255, 255, true)
     end
 end
 
--- / Duty skin választó / --
+-- / Seletor de skin de plantão / --
 function renderDutySkinChooser()
-    core:dxDrawShadowedText("Válaszd ki a duty skined a "..color.."nyilak #ffffffsegítségével majd nyomd meg az "..color.."[Enter] #ffffffgombot.", 0, sy*0.79, sx, sy*0.79+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 1/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
+    core:dxDrawShadowedText("Escolha o skin de serviço com as "..color.."setas #ffffffe confirme com "..color.."[Enter]#ffffff.", 0, sy*0.79, sx, sy*0.79+sy*0.05, tocolor(255, 255, 255, 255), tocolor(0, 0, 0, 255), 1/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
 end
 
 function dutySkinKey(key, state)

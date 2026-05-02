@@ -1,6 +1,6 @@
 function addPlayerToFaction(player, command, target, factionID)
     if exports["oAdmin"]:hasPermission(player,"setplayerfaction") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         factionID, target = tonumber(factionID) or 0, tonumber(target) or 0
 
@@ -9,15 +9,15 @@ function addPlayerToFaction(player, command, target, factionID)
                 target = core:getPlayerFromPartialName(player, target)
 
                 if not isPlayerInFaction(target, factionID) then 
-                    if getElementData(target,"hasContainer") then return outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."A kiválasztott játékos konténerrel rendelkezik, ennek bérletét először fel kell mondania!", player, 255, 255, 255, true) end
+                    if getElementData(target,"hasContainer") then return outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."O jogador selecionado possui um contêiner; ele precisa encerrar o aluguel antes!", player, 255, 255, 255, true) end
 
                     local length = #server_factionMembers_list[factionID] or 0
-                    ----- Karakter ID,              rang,   leader,     név                               utolsó bejelentkezés,                          jelenleg online-e, szolgálati idő
-                    table.insert(server_factionMembers_list[factionID], length+1, {getElementData(target, "char:id"), 1, false, getElementData(target, "char:name"), getElementData(target, "user:lastlogin") or "false", true, string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), "Nincs adat", 0})
+                    ----- Char ID, posto, líder, nome, último login, online, tempo de serviço
+                    table.insert(server_factionMembers_list[factionID], length+1, {getElementData(target, "char:id"), 1, false, getElementData(target, "char:name"), getElementData(target, "user:lastlogin") or "false", true, string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), "Sem dados", 0})
 --                    print(toJSON(server_factionMembers_list[factionID]))
 
-                    outputChatBox(core:getServerPrefix("server", "Hozzáadva", 1)..color..getPlayerName(player).." #ffffffhozzáadott a(z) "..color..getFactionName(factionID).."#ffffff nevű frakcióhoz.", target, 255, 255, 255, true)
-                    triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "hozzáadta a(z) #db3535"..getFactionName(factionID).." #557ec9nevű frakcióhoz #db3535"..getPlayerName(target).."#557ec9 nevű játékost.")
+                    outputChatBox(core:getServerPrefix("server", "Adicionado", 1)..color..getPlayerName(player).." #ffffffadicionou você à facção "..color..getFactionName(factionID).."#ffffff.", target, 255, 255, 255, true)
+                    triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "adicionou o jogador #db3535"..getPlayerName(target).." #557ec9à facção #db3535"..getFactionName(factionID).."#557ec9.")
 
                     triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
 
@@ -25,13 +25,13 @@ function addPlayerToFaction(player, command, target, factionID)
 
                     setElementData(player, "log:admincmd", {getElementData(target, "char:id"), command})
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."A játékos már tagja a frakciónak! "..color.."("..getFactionName(factionID)..")", player, 255, 255, 255, true)  
+                    outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."O jogador já é membro desta facção! "..color.."("..getFactionName(factionID)..")", player, 255, 255, 255, true)  
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nem létezik ilyen frakció! "..color.."("..factionID..")", player, 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Esta facção não existe! "..color.."("..factionID..")", player, 255, 255, 255, true) 
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..command.." [Játékos] [Frakció ID]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..command.." [Jogador] [ID da Facção]", player, 255, 255, 255, true) 
         end
     end 
 end
@@ -42,7 +42,7 @@ addCommandHandler("setplayerfaction",addPlayerToFaction)
 
 function getPlayerFactions(player, command, target)
     if exports["oAdmin"]:hasPermission(player,"getplayerfactions") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         target = tonumber(target) or 0 
 
@@ -52,15 +52,15 @@ function getPlayerFactions(player, command, target)
             local target_factions = getPlayerAllFactions(target)
 
             if #target_factions > 0 then 
-                outputChatBox(core:getServerPrefix("server", "Frakció", 3)..getPlayerName(target):gsub("_", " ").." frakciói:", player, 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("server", "Facção", 3).."Facções de "..getPlayerName(target):gsub("_", " ")..":", player, 255, 255, 255, true) 
                 for k, v in ipairs(target_factions) do 
                     outputChatBox(color.." ~ #ffffff"..getFactionName(v)..color.." ["..faction_types[getFactionType(v)].."] ("..v..")", player, 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("red-light", "Frakció", 3).."A játékos nem tartozik egyetlen szerverzethez sem!", player, 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("red-light", "Facção", 3).."Este jogador não pertence a nenhuma facção!", player, 255, 255, 255, true) 
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..command.." [Játékos]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..command.." [Jogador]", player, 255, 255, 255, true) 
         end
     end
 end
@@ -69,7 +69,7 @@ addCommandHandler("getfactions", getPlayerFactions)
 
 function removePlayerFromFaction(player, command, target, factionID)
     if exports["oAdmin"]:hasPermission(player,"removeplayerfromfaction") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         factionID, target = tonumber(factionID) or 0, tonumber(target) or 0
 
@@ -81,8 +81,8 @@ function removePlayerFromFaction(player, command, target, factionID)
                     local isInFaction, factionListNumber = isPlayerInFaction(target, factionID)
                     if isInFaction then 
 
-                        outputChatBox(core:getServerPrefix("server", "Hozzáadva", 1)..color..getPlayerName(player).." #ffffffeltávolított a(z) "..color..getFactionName(factionID).."#ffffff nevű frakcióból.", target, 255, 255, 255, true)
-                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "eltávolította a(z) #db3535"..getFactionName(factionID).." #557ec9nevű frakcióból #db3535"..getPlayerName(target).."#557ec9 nevű játékost.")
+                        outputChatBox(core:getServerPrefix("server", "Adicionado", 1)..color..getPlayerName(player).." #ffffffremoveu você da facção "..color..getFactionName(factionID).."#ffffff.", target, 255, 255, 255, true)
+                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "removeu o jogador #db3535"..getPlayerName(target).." #557ec9da facção #db3535"..getFactionName(factionID).."#557ec9.")
 
                         for k, v in ipairs(server_factionMembers_list[factionID]) do 
                             if v[1] == getElementData(target, "char:id") then 
@@ -95,14 +95,14 @@ function removePlayerFromFaction(player, command, target, factionID)
                        
                         setElementData(player, "log:admincmd", {getElementData(target, "char:id"), command})
                     else
-                        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."A játékos nem tagja ennek a frakciónak! "..color.."("..getFactionName(factionID)..")", player, 255, 255, 255, true) 
+                        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."O jogador não é membro desta facção! "..color.."("..getFactionName(factionID)..")", player, 255, 255, 255, true) 
                     end
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nem létezik ilyen frakció! "..color.."("..factionID..")", player, 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Esta facção não existe! "..color.."("..factionID..")", player, 255, 255, 255, true) 
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..command.." [Játékos] [Frakció ID]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..command.." [Jogador] [ID da Facção]", player, 255, 255, 255, true) 
         end
     end
 end 
@@ -111,7 +111,7 @@ addCommandHandler("removefromfaction", removePlayerFromFaction)
 
 function removePlayerFromAllFaction(player, command, target)
     if exports["oAdmin"]:hasPermission(player,"removeplayerfromallfaction") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         target = tonumber(target) or 0
 
@@ -128,12 +128,12 @@ function removePlayerFromAllFaction(player, command, target)
           --  iprint(server_factionMembers_list)
             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
             triggerClientEvent(target, "resetPlayerFactionDatas", target)
-            outputChatBox(core:getServerPrefix("server", 2)..color..getPlayerName(target).." #ffffffeltávolított az összes frakcióból.", target, 255, 255, 255, true)
-            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "eltávolította az összes frakcióból #db3535"..getPlayerName(target).."#557ec9 nevű játékost.")
+            outputChatBox(core:getServerPrefix("server", 2)..color..getPlayerName(player).." #ffffffremoveu você de todas as facções.", target, 255, 255, 255, true)
+            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "removeu o jogador #db3535"..getPlayerName(target).." #557ec9de todas as facções.")
 
             setElementData(player, "log:admincmd", {getElementData(target, "char:id"), command})
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..command.." [Játékos]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..command.." [Jogador]", player, 255, 255, 255, true) 
         end
     end
 end
@@ -142,7 +142,7 @@ addCommandHandler("removefromallfaction", removePlayerFromAllFaction)
 
 function setPlayerFactionLeader(player, cmd, target, targetFaction) 
     if exports["oAdmin"]:hasPermission(player,"setfactionleader") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         target = tonumber(target) or 0
         targetFaction = tonumber(targetFaction) or 0 
@@ -169,11 +169,11 @@ function setPlayerFactionLeader(player, cmd, target, targetFaction)
                             print(tostring(v[3]))
 
                             if v[3] then 
-                                outputChatBox(core:getServerPrefix("server", "Hozzáadva", 1)..color..getPlayerName(player).." #ffffffleader jogot adott a(z) "..color..getFactionName(targetFaction).."#ffffff nevű frakcióban.", target, 255, 255, 255, true)
-                                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "leader jogot adott #db3535"..getPlayerName(target).."#557ec9 nevű játékosnak a(z) #db3535"..getFactionName(targetFaction).." #557ec9nevű frakcióban.")
+                                outputChatBox(core:getServerPrefix("server", "Adicionado", 1)..color..getPlayerName(player).." #ffffffconcedeu função de líder na facção "..color..getFactionName(targetFaction).."#ffffff.", target, 255, 255, 255, true)
+                                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "concedeu função de líder ao jogador #db3535"..getPlayerName(target).." #557ec9na facção #db3535"..getFactionName(targetFaction).."#557ec9.")
                             else
-                                outputChatBox(core:getServerPrefix("server", "Hozzáadva", 1)..color..getPlayerName(player).." #ffffffelvette a leder jogod a(z) "..color..getFactionName(targetFaction).."#ffffff nevű frakcióban.", target, 255, 255, 255, true)
-                                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "elvette #db3535"..getPlayerName(target).."#557ec9 nevű játékos leader jogát a(z) #db3535"..getFactionName(targetFaction).." #557ec9nevű frakcióban.")
+                                outputChatBox(core:getServerPrefix("server", "Adicionado", 1)..color..getPlayerName(player).." #ffffffremoveu sua função de líder na facção "..color..getFactionName(targetFaction).."#ffffff.", target, 255, 255, 255, true)
+                                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "removeu a função de líder do jogador #db3535"..getPlayerName(target).." #557ec9na facção #db3535"..getFactionName(targetFaction).."#557ec9.")
                             end
 
                             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
@@ -183,13 +183,13 @@ function setPlayerFactionLeader(player, cmd, target, targetFaction)
                         end
                     end
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."A játékos nem tagja a frakciónak. "..color.."("..getFactionName(targetFaction)..")", player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."O jogador não é membro desta facção. "..color.."("..getFactionName(targetFaction)..")", player, 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nem létezik ilyen frakció!", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Esta facção não existe!", player, 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Játékos] [Frakció ID]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Jogador] [ID da Facção]", player, 255, 255, 255, true) 
         end
     end
 end
@@ -197,16 +197,16 @@ addCommandHandler("setfactionleader", setPlayerFactionLeader)
 
 function addMoneyToFaction(player, cmd, factionID, money)
     if exports["oAdmin"]:hasPermission(player,"givefactionmoney") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         factionID = tonumber(factionID) or 0
         money = tonumber(money) or 0 
 
         if (factionID > 0) and (money > 0) then
             setFactionBankMoney(factionID, money, "add")
-            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "pénzt adott a(z) #db3535"..getFactionName(factionID).."#557ec9 nevű frakció számára. Összeg: #db3535"..money.."$ #557ec9| Számla új egyenlege: #db3535"..getFactionBankMoney(factionID).."$#557ec9.")
+            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "depositou dinheiro na facção #db3535"..getFactionName(factionID).."#557ec9. Valor: #db3535"..money.."$ #557ec9| Novo saldo: #db3535"..getFactionBankMoney(factionID).."$#557ec9.")
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Frakció ID] [Összeg]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID da Facção] [Valor]", player, 255, 255, 255, true) 
         end 
     end
 end
@@ -214,16 +214,16 @@ addCommandHandler("givefactionmoney", addMoneyToFaction)
 
 function removeMoneyToFaction(player, cmd, factionID, money)
     if exports["oAdmin"]:hasPermission(player,"removefactionmoney") then 
-        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+        if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
         factionID = tonumber(factionID) or 0
         money = tonumber(money) or 0 
 
         if (factionID > 0) and (money > 0) then
             setFactionBankMoney(factionID, money, "remove")
-            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "pénzt vett el a(z) #db3535"..getFactionName(factionID).."#557ec9 nevű frakciótól. Összeg: #db3535(-)"..money.."$ #557ec9| Számla új egyenlege: #db3535"..getFactionBankMoney(factionID).."$#557ec9.")
+            triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "retirou dinheiro da facção #db3535"..getFactionName(factionID).."#557ec9. Valor: #db3535(-)"..money.."$ #557ec9| Novo saldo: #db3535"..getFactionBankMoney(factionID).."$#557ec9.")
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Frakció ID] [Összeg]", player, 255, 255, 255, true) 
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID da Facção] [Valor]", player, 255, 255, 255, true) 
         end 
     end
 end

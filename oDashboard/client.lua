@@ -55,7 +55,7 @@ local optionsScrolls = {
 crosshairDatas = {1, {255, 255, 255}}
 ------------------
 
--- Frakció panel --
+-- Painel de facção --
 local selectedFactionLine = 0
 local factionPanelPage = 1
 
@@ -297,9 +297,9 @@ function render()
     
     local alpha_pagebg = interpolateBetween(0,0,0,1,0,0,(getTickCount()-pageNameTick)/250,"Linear")
     if activePage == 1 then 
-        -- karakter statisztikák
+        -- Estatísticas do personagem
             dxDrawRectangle(sx*0.165,sy*0.3,sx*0.27,sy*0.05,tocolor(27,27,27,220*alpha_pagebg))
-                dxDrawText("Karakter Statisztikák",sx*0.165,sy*0.3,sx*0.165+sx*0.27,sy*0.3+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Estatísticas do personagem",sx*0.165,sy*0.3,sx*0.165+sx*0.27,sy*0.3+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
             dxDrawRectangle(sx*0.165,sy*0.3+sy*0.05,sx*0.27,sy*0.4,tocolor(27,27,27,100*alpha_pagebg))
 
             local startY = sy*0.355
@@ -318,14 +318,14 @@ function render()
 
                 if k == 2 then 
                     if data == 1 then 
-                        data = "Nő"
+                        data = "Feminino"
                     elseif data == 2 then 
-                        data = "Férfi"
+                        data = "Masculino"
                     else
                         data = "nan"
                     end
                 elseif k == 3 then 
-                    utotag = " éves"
+                    utotag = " anos"
                 elseif k == 4 then 
                     utotag = " kg"
                 elseif k == 5 then 
@@ -334,12 +334,12 @@ function render()
                     data = getElementModel(localPlayer) or v[2]
                 elseif k == 7 then 
                     if not data then 
-                        data = "Munkanélküli"
+                        data = "Desempregado"
                     else
                         if data > 0 then 
                             data = job:getJobName(data)
                         else
-                            data = "Munkanélküli"
+                            data = "Desempregado"
                         end
                     end
                 elseif k == 8 then 
@@ -349,11 +349,11 @@ function render()
                             data = #factions
                             utotag = " db"
                         else
-                            data = "Nem vagy tagja szervezetnek"
+                            data = "Sem organização"
                         end
                     end
                 elseif k == 9 then 
-                   utotag = " perc"
+                   utotag = " min"
                 elseif k == 10 then 
                     utotag = "$"
                 elseif k == 11 then 
@@ -368,9 +368,9 @@ function render()
                 startY = startY + sy*0.033
             end
 
-        -- felhasználói információk
+        -- Informações do usuário
             dxDrawRectangle(sx*0.605,sy*0.3,sx*0.27,sy*0.05,tocolor(27,27,27,220*alpha_pagebg))
-                dxDrawText("Felhasználói információk",sx*0.605,sy*0.3,sx*0.605+sx*0.27,sy*0.3+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Informações da conta",sx*0.605,sy*0.3,sx*0.605+sx*0.27,sy*0.3+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
             dxDrawRectangle(sx*0.605,sy*0.3+sy*0.05,sx*0.27,sy*0.4,tocolor(27,27,27,100*alpha_pagebg))
 
             startY = sy*0.355
@@ -390,7 +390,7 @@ function render()
                 if k == 4 then 
                     data = exports.oAdmin:getAdminPrefix(data)
                 elseif k == 10 then
-                    data = data[1] .." óra "..data[2].." perc"
+                    data = data[1] .." h "..data[2].." min"
                 elseif k == 7 or k == 8 or k == 9 then 
                     utotag = " db"
                     data = tostring(data[k-6])
@@ -405,7 +405,7 @@ function render()
             --dxDrawRectangle(sx*0.165, sy*0.807, sx*0.27, sy*0.05,tocolor(27,27,27,220*alpha_pagebg))
     elseif activePage == 2 then 
         dxDrawRectangle(sx*0.16,sy*0.22,sx*0.27,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                dxDrawText("Járműveid",sx*0.16,sy*0.22,sx*0.16+sx*0.27,sy*0.22+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Seus veículos",sx*0.16,sy*0.22,sx*0.16+sx*0.27,sy*0.22+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.16,sy*0.22+sy*0.04,sx*0.27,sy*0.3,tocolor(27,27,27,100*alpha_pagebg))
 
         local res = getResourceFromName("oVehicle") or false
@@ -425,9 +425,9 @@ function render()
             dxDrawText(textColor..#vagyon["vehicles"].."#ffffff/"..vagyon["vehSlot"], sx*0.16+5/myX*sx, sy*0.22, sx*0.16+5/myX*sx+sx*0.27, sy*0.22+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "left", "center", false, false, false, true)
             
             if core:isInSlot(sx*0.33, sy*0.22, sx*0.1, sy*0.04) then
-                dxDrawText("Jármű slot vásárlása", sx*0.16, sy*0.22, sx*0.16+sx*0.27-5/myX*sx, sy*0.22+sy*0.04, tocolor(255, 255, 255, 255*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                dxDrawText("Comprar slot de veículo", sx*0.16, sy*0.22, sx*0.16+sx*0.27-5/myX*sx, sy*0.22+sy*0.04, tocolor(255, 255, 255, 255*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
             else
-                dxDrawText("Jármű slot vásárlása", sx*0.16, sy*0.22, sx*0.16+sx*0.27-5/myX*sx, sy*0.22+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                dxDrawText("Comprar slot de veículo", sx*0.16, sy*0.22, sx*0.16+sx*0.27-5/myX*sx, sy*0.22+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
             end
 
             if getResourceState(res) then
@@ -468,7 +468,7 @@ function render()
                                 end
                             end
 
-                            dxDrawText("Rendszám:#e97619 "..vagyon["vehicles"][i+vehicleScroll][5],sx*0.165,startY,sx*0.165+sx*0.257,startY+sy*0.034,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
+                            dxDrawText("Placa:#e97619 "..vagyon["vehicles"][i+vehicleScroll][5],sx*0.165,startY,sx*0.165+sx*0.257,startY+sy*0.034,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
 
                             startY = startY + sy*0.0325
 
@@ -484,20 +484,20 @@ function render()
                     dxDrawRectangle(sx*0.426, sy*0.265, sx*0.002, (sy*0.29),tocolor(r, g, b, 100*alpha_pagebg))
                     dxDrawRectangle(sx*0.426,sy*0.265+(sy*0.29*(lineHossz*vehicleScroll/9)),sx*0.002,(sy*0.29)*lineHossz,tocolor(r, g, b, 255*alpha_pagebg))
                 else
-                    dxDrawText("Nincs egyetlen járműved sem!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(220, 220, 220,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+                    dxDrawText("Você não possui nenhum veículo!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(220, 220, 220,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
                 end
 
             else
-                dxDrawText("Nem lehetséges az adatok lekérése!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Não foi possível carregar os dados!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
             end
         else
-            dxDrawText("Nem lehetséges az adatok lekérése!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+            dxDrawText("Não foi possível carregar os dados!",sx*0.16,sy*0.22+sy*0.04,sx*0.16+sx*0.27,sy*0.22+sy*0.04+sy*0.3,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
         end
 
         if (tonumber(selectedVehicleLine) or 0) > 0 then 
             local vehDataPanelAlpha = interpolateBetween(0,0,0,1,0,0,(getTickCount()-vehicleDataPanelTick)/500,"Linear")
             dxDrawRectangle(sx*0.72,sy*0.39,sx*0.174,sy*0.04,tocolor(27,27,27,220*vehDataPanelAlpha))
-            dxDrawText("Járműved adatai",sx*0.72,sy*0.39,sx*0.72+sx*0.174,sy*0.4+sy*0.04,tocolor(255,255,255,200*vehDataPanelAlpha),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+            dxDrawText("Dados do veículo",sx*0.72,sy*0.39,sx*0.72+sx*0.174,sy*0.4+sy*0.04,tocolor(255,255,255,200*vehDataPanelAlpha),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
             dxDrawRectangle(sx*0.72,sy*0.39+sy*0.04,sx*0.174,(sy*0.033)*13,tocolor(27,27,27,100*vehDataPanelAlpha))
 
             local startY = sy*0.39+sy*0.045
@@ -540,17 +540,17 @@ function render()
                                 --print(toJSON(tuning_categories))
                                 dxDrawText(tuning_categories[type],sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(r,g,b,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
                             else
-                                dxDrawText("Gyári",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
+                                dxDrawText("Original",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
                             end
                     else
-                        dxDrawText("Gyári",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
+                        dxDrawText("Original",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
                         --startY = startY + sy*0.0325
                     end
                 else
                     if data[2] > 0 then
                         dxDrawText(vagyon["vehicles"][selectedVehicleLine][data[2]],sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(r,g,b,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
                     else
-                        dxDrawText("Nincs adat",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
+                        dxDrawText("Sem dados",sx*0.721,startY,sx*0.721+sx*0.165,startY+sy*0.03,tocolor(227, 98, 84,255*vehDataPanelAlpha),1/myX*sx,fonts["condensed-bold-9"],"right","center",false,false,false,true)
                     end
                     --startY = startY + sy*0.0325
                 end
@@ -585,7 +585,7 @@ function render()
         end
 
         dxDrawRectangle(sx*0.16,sy*0.6,sx*0.27,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                dxDrawText("Ingatlanjaid",sx*0.16,sy*0.6,sx*0.16+sx*0.27,sy*0.6+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Seus imóveis",sx*0.16,sy*0.6,sx*0.16+sx*0.27,sy*0.6+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.16,sy*0.6+sy*0.04,sx*0.27,sy*0.203,tocolor(27,27,27,100*alpha_pagebg))
 
         local res = getResourceFromName("oInteriors") or false
@@ -609,9 +609,9 @@ function render()
             dxDrawText(textColor..ingatlanCount.."#ffffff/"..vagyon["intSlot"], sx*0.16+5/myX*sx, sy*0.6, sx*0.16+5/myX*sx+sx*0.27, sy*0.6+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "left", "center", false, false, false, true)
 
             if core:isInSlot(sx*0.33, sy*0.6, sx*0.1, sy*0.04) then 
-                dxDrawText("Ingatlan slot vásárlása", sx*0.16, sy*0.6, sx*0.16+sx*0.27-5/myX*sx, sy*0.6+sy*0.04, tocolor(255, 255, 255, 255*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                dxDrawText("Comprar slot de imóvel", sx*0.16, sy*0.6, sx*0.16+sx*0.27-5/myX*sx, sy*0.6+sy*0.04, tocolor(255, 255, 255, 255*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
             else
-                dxDrawText("Ingatlan slot vásárlása", sx*0.16, sy*0.6, sx*0.16+sx*0.27-5/myX*sx, sy*0.6+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                dxDrawText("Comprar slot de imóvel", sx*0.16, sy*0.6, sx*0.16+sx*0.27-5/myX*sx, sy*0.6+sy*0.04, tocolor(255, 255, 255, 200*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
             end
             if #vagyon["interiors"] > 0 then 
                 local startY = sy*0.645
@@ -636,7 +636,7 @@ function render()
                         dxDrawRectangle(sx*0.16,startY,sx*0.001,sy*0.03,color2)
 
                         dxDrawText(vagyon["interiors"][i+interiorScroll][1].." #e97619("..vagyon["interiors"][i+interiorScroll][2]..")",sx*0.165,startY,sx*0.165+sx*0.1,startY+sy*0.034,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"left","center",false,false,false,true)                        
-                        dxDrawText("Elhelyezkedés:#e97619 "..vagyon["interiors"][i+interiorScroll][4],sx*0.165,startY,sx*0.165+sx*0.228,startY+sy*0.034,tocolor(220,220,220,255*alpha_pagebg),0.6/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
+                        dxDrawText("Localização:#e97619 "..vagyon["interiors"][i+interiorScroll][4],sx*0.165,startY,sx*0.165+sx*0.228,startY+sy*0.034,tocolor(220,220,220,255*alpha_pagebg),0.6/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
 
                         if vagyon["interiors"][i+interiorScroll][3] == 1 then
                             dxDrawImage(sx*0.395, startY+3/myY*sy, 20/myX*sx, 20/myY*sy, "files/icons/lock.png", 0, 0, 0, tocolor(189, 49, 49, 255*alpha_pagebg))
@@ -658,7 +658,7 @@ function render()
                                 cx, cy = cx* sx, cy*sy 
 
                                 local remaining = math.floor((vagyon["interiors"][i+interiorScroll][6]  - getRealTime().timestamp) % (60 * 60 * 24) / 3600) + 1
-                                local rentText = serverColor..remaining.." #ffffffóra múlva jár le."
+                                local rentText = serverColor..remaining.." #ffffffh para expirar o aluguel."
                                 local textWidth = dxGetTextWidth(rentText, 0.8/myX*sx, fonts["condensed-bold-9"], true) + sx*0.01
 
                                 dxDrawRectangle(cx - textWidth/2, cy + sy*0.015, textWidth, sy*0.025, tocolor(30, 30, 30, 255), true)
@@ -681,14 +681,14 @@ function render()
                 dxDrawRectangle(sx*0.426, sy*0.645, sx*0.002, (sy*0.192), tocolor(r, g, b, 100*alpha_pagebg))
                 dxDrawRectangle(sx*0.426, sy*0.645+(sy*0.192*(lineHossz*interiorScroll/6)), sx*0.002, (sy*0.192)*lineHossz, tocolor(r, g, b, 255*alpha_pagebg))
             else
-                dxDrawText("Nincs egyetlen ingatlanod sem!",sx*0.16,sy*0.6+sy*0.04,sx*0.16+sx*0.27,sy*0.6+sy*0.04+sy*0.2,tocolor(220, 220, 220,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Você não possui nenhum imóvel!",sx*0.16,sy*0.6+sy*0.04,sx*0.16+sx*0.27,sy*0.6+sy*0.04+sy*0.2,tocolor(220, 220, 220,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
             end
         else
-            dxDrawText("Nem lehetséges az adatok lekérése!",sx*0.16,sy*0.6+sy*0.04,sx*0.16+sx*0.27,sy*0.6+sy*0.04+sy*0.2,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
+            dxDrawText("Não foi possível carregar os dados!",sx*0.16,sy*0.6+sy*0.04,sx*0.16+sx*0.27,sy*0.6+sy*0.04+sy*0.2,tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-18"],"center","center")
         end
 
         dxDrawRectangle(sx*0.435,sy*0.22,sx*0.46,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-        dxDrawText("Vagyon tárgyaid",sx*0.435,sy*0.22,sx*0.435+sx*0.46,sy*0.22+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+        dxDrawText("Itens do patrimônio",sx*0.435,sy*0.22,sx*0.435+sx*0.46,sy*0.22+sy*0.04,tocolor(255,255,255,200*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.435,sy*0.22+sy*0.04,sx*0.46,sy*0.103,tocolor(27,27,27,100*alpha_pagebg))
 
         local startY = sy*0.265
@@ -740,9 +740,9 @@ function render()
             end
 
             if slotPanelState == "int" then 
-                core:drawWindow(sx*0.4, sy*0.4, sx*0.2, sy*0.15, "Ingatlan Slot Vásárlás", slotPanelAlpha)
+                core:drawWindow(sx*0.4, sy*0.4, sx*0.2, sy*0.15, "Compra de slot de imóvel", slotPanelAlpha)
             elseif slotPanelState == "veh" then 
-                core:drawWindow(sx*0.4, sy*0.4, sx*0.2, sy*0.15, "Jármű Slot Vásárlás", slotPanelAlpha)
+                core:drawWindow(sx*0.4, sy*0.4, sx*0.2, sy*0.15, "Compra de slot de veículo", slotPanelAlpha)
             end
 
             if core:isInSlot(sx*0.43, sy*0.445, 20/myX*sx, 20/myX*sx) then 
@@ -758,10 +758,10 @@ function render()
             end
 
             dxDrawText(slotPanelNum, sx*0.4, sy*0.4, sx*0.4 + sx*0.2, sy*0.4 + sy*0.12, tocolor(r, g, b, 255 * slotPanelAlpha), 0.85/myX*sx, fonts["condensed-bold-25"], "center", "center")
-            dxDrawText("Slot Vásárlás: #497ff5" .. slotPanelNum * 100 .. "#ffffffPP", sx*0.4, sy*0.4, sx*0.4 + sx*0.2, sy*0.4 + sy*0.17, tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
+            dxDrawText("Compra de slot: #497ff5" .. slotPanelNum * 100 .. "#ffffffPP", sx*0.4, sy*0.4, sx*0.4 + sx*0.2, sy*0.4 + sy*0.17, tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
 
-            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.51, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150 * slotPanelAlpha, "Vásárlás", tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100 * slotPanelAlpha))
-            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.51, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150 * slotPanelAlpha, "Mégsem", tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100 * slotPanelAlpha))
+            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.51, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150 * slotPanelAlpha, "Comprar", tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100 * slotPanelAlpha))
+            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.51, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150 * slotPanelAlpha, "Cancelar", tocolor(255, 255, 255, 255 * slotPanelAlpha), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100 * slotPanelAlpha))
         end
     elseif activePage == 3 then 
         if core:isInSlot(sx*0.675, sy*0.805, sx*0.21, sy*0.05) then 
@@ -806,7 +806,7 @@ function render()
         end
 
         dxDrawRectangle(sx*0.147, sy*0.215, sx*0.22, sy*0.05,tocolor(27, 27, 27, 220*alpha_pagebg))
-        dxDrawText("Adminsegéd Lista", sx*0.147,sy*0.215, sx*0.147+sx*0.22, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
+        dxDrawText("Lista de ajudantes", sx*0.147,sy*0.215, sx*0.147+sx*0.22, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.147, sy*0.215+sy*0.05, sx*0.22, sy*0.59, tocolor(27, 27, 27, 100*alpha_pagebg))
 
         dxDrawRectangle(sx*0.361, sy*0.215+sy*0.055, sx*0.002, sy*0.58, tocolor(r, g, b, 50*alpha_pagebg))
@@ -830,7 +830,7 @@ function render()
                 dxDrawText(getElementData(v, "char:name"):gsub("_", " "), sx*0.18, starty, sx*0.18+sx*0.3, starty+sy*0.035, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "left", "center", false, false, false, true)
                 local adminColor = {hexToRGB(admin:getAdminColor(getElementData(v, "user:admin")))}
                 if getElementData(v, "user:idgAs") then
-                    dxDrawText("Ideiglenes AdminSegéd", sx*0.18, starty + sy*0.03, sx*0.18+sx*0.3, starty+sy*0.045, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
+                    dxDrawText("Ajudante admin temporário", sx*0.18, starty + sy*0.03, sx*0.18+sx*0.3, starty+sy*0.045, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
                 else 
                     dxDrawText(admin:getAdminPrefix(getElementData(v, "user:admin")), sx*0.18, starty + sy*0.03, sx*0.18+sx*0.3, starty+sy*0.045, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
                 end
@@ -844,7 +844,7 @@ function render()
         end
 
         dxDrawRectangle(sx*0.37, sy*0.215, sx*0.3, sy*0.05,tocolor(27, 27, 27, 220*alpha_pagebg))
-        dxDrawText("Adminisztrátor Lista", sx*0.37, sy*0.215, sx*0.37+sx*0.3, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
+        dxDrawText("Lista de administradores", sx*0.37, sy*0.215, sx*0.37+sx*0.3, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.37, sy*0.215+sy*0.05, sx*0.3, sy*0.59, tocolor(27, 27, 27, 100*alpha_pagebg))
 
         dxDrawRectangle(sx*0.664, sy*0.215+sy*0.055, sx*0.002, sy*0.58, tocolor(r, g, b, 50*alpha_pagebg))
@@ -877,14 +877,14 @@ function render()
                 if aduty and not hadmin then 
                     dxDrawText("/pm "..getElementData(v, "playerid"), sx*0.37, starty, sx*0.37+sx*0.28, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
                 else
-                    dxDrawText("Nincs szolgálatban!", sx*0.37, starty, sx*0.37+sx*0.28, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                    dxDrawText("Fora de plantão!", sx*0.37, starty, sx*0.37+sx*0.28, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
                 end
             end
             starty = starty + sy*0.053
         end
 
         dxDrawRectangle(sx*0.673, sy*0.215, sx*0.22, sy*0.05,tocolor(27, 27, 27, 220*alpha_pagebg))
-        dxDrawText("Vezetőségi Tagok", sx*0.673, sy*0.215, sx*0.673+sx*0.22, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
+        dxDrawText("Equipe de gestão", sx*0.673, sy*0.215, sx*0.673+sx*0.22, sy*0.215+sy*0.05,tocolor(255,255,255,255*alpha_pagebg),1/myX*sx, fonts["bebasneue-18"],"center","center")
         dxDrawRectangle(sx*0.673, sy*0.215+sy*0.05, sx*0.22, sy*0.537, tocolor(27, 27, 27, 100*alpha_pagebg))
 
         dxDrawRectangle(sx*0.887, sy*0.215+sy*0.055, sx*0.002, sy*0.525, tocolor(r, g, b, 50*alpha_pagebg))
@@ -917,7 +917,7 @@ function render()
                 if aduty and not hadmin then 
                     dxDrawText("/pm "..getElementData(v, "playerid"), sx*0.673, starty, sx*0.673+sx*0.2, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
                 else
-                    dxDrawText("Nincs szolgálatban!", sx*0.673, starty, sx*0.673+sx*0.2, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                    dxDrawText("Fora de plantão!", sx*0.673, starty, sx*0.673+sx*0.2, starty+sy*0.05, tocolor(adminColor[1], adminColor[2], adminColor[3], 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
                 end
             end
             starty = starty + sy*0.053
@@ -977,7 +977,7 @@ function render()
                     --else 
 
                         dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.22, sx*0.14, sy*0.04, tocolor(27,27,27,220*alpha_pagebg))
-                            dxDrawText("Szervezet áttekintése", sx*0.3 + 5/myX*sx, sy*0.22, sx*0.3+5/myX*sx+sx*0.14, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                            dxDrawText("Visão geral da organização", sx*0.3 + 5/myX*sx, sy*0.22, sx*0.3+5/myX*sx+sx*0.14, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
                         dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.22+sy*0.04, sx*0.14, (sy*0.045)*#factionHomepageInfos, tocolor(27,27,27,100*alpha_pagebg))
 
                         local startY = sy*0.22+sy*0.045
@@ -1041,25 +1041,25 @@ function render()
                         
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then
                             dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.58, sx*0.14, sy*0.04, tocolor(27,27,27,220*alpha_pagebg))
-                                dxDrawText("Szervezet leírása", sx*0.3 + 5/myX*sx, sy*0.58, sx*0.3+5/myX*sx+sx*0.14, sy*0.58+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                                dxDrawText("Descrição da organização", sx*0.3 + 5/myX*sx, sy*0.58, sx*0.3+5/myX*sx+sx*0.14, sy*0.58+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
                             dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.58+sy*0.04, sx*0.14, sy*0.1, tocolor(27,27,27,100*alpha_pagebg))
 
                             dxDrawText(client_faction_list[faction_datas.factions[selectedFactionLine]][12], sx*0.3 + 8/myX*sx, sy*0.58+sy*0.04+3/myY*sy, sx*0.3 + 8/myX*sx+sx*0.14, sy*0.58+sy*0.04+sy*0.1+3/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 0.9/myX*sx, fonts["condensed-bold-11"], "left", "top", false, true)
                         else
                             dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.65, sx*0.14, sy*0.04, tocolor(27,27,27,220*alpha_pagebg))
-                                dxDrawText("Szervezet leírása", sx*0.3 + 5/myX*sx, sy*0.65, sx*0.3+5/myX*sx+sx*0.14, sy*0.65+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                                dxDrawText("Descrição da organização", sx*0.3 + 5/myX*sx, sy*0.65, sx*0.3+5/myX*sx+sx*0.14, sy*0.65+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
                             dxDrawRectangle(sx*0.3 + 5/myX*sx, sy*0.65+sy*0.04, sx*0.14, sy*0.1, tocolor(27,27,27,100*alpha_pagebg))
 
                             dxDrawText(client_faction_list[faction_datas.factions[selectedFactionLine]][12], sx*0.3 + 8/myX*sx, sy*0.65+sy*0.04+3/myY*sy, sx*0.3 + 8/myX*sx+sx*0.14, sy*0.65+sy*0.04+sy*0.1+3/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 0.9/myX*sx, fonts["condensed-bold-11"], "left", "top", false, true)
                         end
-                        -- elsődleges
+                        -- Facção principal
                         if core:isInSlot(sx*0.3025, sy*0.45, sx*0.14, sy*0.05) then 
                             dxDrawRectangle(sx*0.3025, sy*0.45, sx*0.14, sy*0.05, tocolor(r, g, b, 220*alpha_pagebg))
                         else 
                             dxDrawRectangle(sx*0.3025, sy*0.45, sx*0.14, sy*0.05, tocolor(r, g, b, 150*alpha_pagebg))
                         end
 
-                        dxDrawText("Elsődleges frakció beállítása", sx*0.3025, sy*0.45, sx*0.3025+sx*0.14, sy*0.45+sy*0.053, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
+                        dxDrawText("Definir facção principal", sx*0.3025, sy*0.45, sx*0.3025+sx*0.14, sy*0.45+sy*0.053, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
                         -- Leader panel
 
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then
@@ -1069,14 +1069,14 @@ function render()
                                 dxDrawRectangle(sx*0.3025, sy*0.73, sx*0.14, sy*0.05, tocolor(r, g, b, 150*alpha_pagebg))
                             end
 
-                            dxDrawText("Leader opciók megnyitása", sx*0.3025, sy*0.73, sx*0.3025+sx*0.14, sy*0.73+sy*0.053, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
+                            dxDrawText("Abrir opções de líder", sx*0.3025, sy*0.73, sx*0.3025+sx*0.14, sy*0.73+sy*0.053, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
 
                             if isLeaderPanelShowing then 
                                 blur:createBlur(0, 0, sx, sy, 230)
 
                                 dxDrawRectangle(sx*0.4, sy*0.3, sx*0.2, sy*0.4, tocolor(40, 40, 40, 255))
 
-                                dxDrawText("Frakció leírása", sx*0.4, sy*0.31, sx*0.4+sx*0.2, sy*0.31+sy*0.4, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-11"], "center", "top")
+                                dxDrawText("Descrição da facção", sx*0.4, sy*0.31, sx*0.4+sx*0.2, sy*0.31+sy*0.4, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-11"], "center", "top")
                                 dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.34, sx*0.2-8/myX*sx, sy*0.1, tocolor(35, 35, 35, 255))
 
                                 if core:isInSlot(sx*0.4+4/myX*sx, sy*0.34, sx*0.2-8/myX*sx, sy*0.1) then 
@@ -1094,32 +1094,32 @@ function render()
                                 else
                                     dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.443, sx*0.2-8/myX*sx, sy*0.03, tocolor(35, 35, 35, 255))
                                 end
-                                dxDrawText("Mentés", sx*0.4+4/myX*sx, sy*0.443, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.443+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.75/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                dxDrawText("Salvar", sx*0.4+4/myX*sx, sy*0.443, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.443+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.75/myX*sx, fonts["bebasneue-18"], "center", "center")
 
                                 --if not (getFactionType(faction_datas.factions[selectedFactionLine]) == 4 or getFactionType(faction_datas.factions[selectedFactionLine]) == 5) then 
-                                    dxDrawText("Frakció számla kezelése", sx*0.4, sy*0.48, sx*0.4+sx*0.2, sy*0.48+sy*0.4, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-11"], "center", "top")
+                                    dxDrawText("Conta bancária da facção", sx*0.4, sy*0.48, sx*0.4+sx*0.2, sy*0.48+sy*0.4, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-11"], "center", "top")
                                     dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.5, sx*0.2-8/myX*sx, sy*0.03, tocolor(35, 35, 35, 255))
-                                    dxDrawText("Bankszámla egyenlege: "..client_faction_list[faction_datas.factions[selectedFactionLine]][9]..color.."$", sx*0.4+10/myX*sx, sy*0.5, sx*0.4+sx*0.2+10/myX*sx, sy*0.5+sy*0.03, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "left", "center", false, false, false, true)
+                                    dxDrawText("Saldo da conta: "..client_faction_list[faction_datas.factions[selectedFactionLine]][9]..color.."$", sx*0.4+10/myX*sx, sy*0.5, sx*0.4+sx*0.2+10/myX*sx, sy*0.5+sy*0.03, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "left", "center", false, false, false, true)
 
                                     if isElementWithinColShape(localPlayer, leaderMoneyTransactionCol) then 
                                         dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.535, sx*0.2-8/myX*sx, sy*0.04, tocolor(35, 35, 35, 255))
-                                        dxDrawText("Összeg: "..editboxs["faction_leader_bank_money"]..color.."$", sx*0.4+10/myX*sx, sy*0.535, sx*0.4+sx*0.2+10/myX*sx, sy*0.535+sy*0.04, tocolor(255, 255, 255, 255), 0.9/myX*sx, fonts["condensed-bold-11"], "left", "center", false, false, false, true)
+                                        dxDrawText("Valor: "..editboxs["faction_leader_bank_money"]..color.."$", sx*0.4+10/myX*sx, sy*0.535, sx*0.4+sx*0.2+10/myX*sx, sy*0.535+sy*0.04, tocolor(255, 255, 255, 255), 0.9/myX*sx, fonts["condensed-bold-11"], "left", "center", false, false, false, true)
 
                                         if core:isInSlot(sx*0.4+4/myX*sx, sy*0.58, sx*0.2-8/myX*sx, sy*0.03) then 
                                             dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.58, sx*0.2-8/myX*sx, sy*0.03, tocolor(189, 49, 49, 255))
                                         else
                                             dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.58, sx*0.2-8/myX*sx, sy*0.03, tocolor(35, 35, 35, 255))
                                         end
-                                        dxDrawText("Pénz kivétele", sx*0.4+4/myX*sx, sy*0.58, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.58+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                        dxDrawText("Sacar dinheiro", sx*0.4+4/myX*sx, sy*0.58, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.58+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "center", "center")
 
                                         if core:isInSlot(sx*0.4+4/myX*sx, sy*0.615, sx*0.2-8/myX*sx, sy*0.03) then 
                                             dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.615, sx*0.2-8/myX*sx, sy*0.03, tocolor(76, 173, 88, 255))
                                         else
                                             dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.615, sx*0.2-8/myX*sx, sy*0.03, tocolor(35, 35, 35, 255))
                                         end
-                                        dxDrawText("Pénz berakása", sx*0.4+4/myX*sx, sy*0.615, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.615+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                        dxDrawText("Depositar dinheiro", sx*0.4+4/myX*sx, sy*0.615, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.615+sy*0.033, tocolor(255, 255, 255, 255*alpha_pagebg), 0.65/myX*sx, fonts["bebasneue-18"], "center", "center")
                                     else
-                                        dxDrawText("Csak a bankban tudod kezelni a frakció számlát!", sx*0.4, sy*0.54, sx*0.4+sx*0.2, sy*0.54+sy*0.1, tocolor(189, 49, 49, 220), 1/myX*sx, fonts["bebasneue-18"], "center", "center", false, true)
+                                        dxDrawText("Só é possível gerir a conta da facção no banco!", sx*0.4, sy*0.54, sx*0.4+sx*0.2, sy*0.54+sy*0.1, tocolor(189, 49, 49, 220), 1/myX*sx, fonts["bebasneue-18"], "center", "center", false, true)
                                     end
                                 --end
 
@@ -1128,7 +1128,7 @@ function render()
                                 else
                                     dxDrawRectangle(sx*0.4+4/myX*sx, sy*0.7-4/myY*sy-sy*0.04, sx*0.2-8/myX*sx, sy*0.04, tocolor(35, 35, 35, 255))
                                 end
-                                dxDrawText("Bezárás", sx*0.4+4/myX*sx, sy*0.7-4/myY*sy-sy*0.04, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.7-4/myY*sy-sy*0.04+sy*0.043, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                dxDrawText("Fechar", sx*0.4+4/myX*sx, sy*0.7-4/myY*sy-sy*0.04, sx*0.4+4/myX*sx+sx*0.2-8/myX*sx, sy*0.7-4/myY*sy-sy*0.04+sy*0.043, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "center", "center")
                             end
                         end
                     --end
@@ -1186,7 +1186,7 @@ function render()
 
                     if selectedMemberLine > 0 then 
                         dxDrawRectangle(sx*0.67,sy*0.22,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                            dxDrawText(serverColor.."Információk #ffffff- "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " "),sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                            dxDrawText(serverColor.."Informações #ffffff- "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " "),sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                         dxDrawRectangle(sx*0.67,sy*0.22+sy*0.04,sx*0.225,sy*0.235,tocolor(27,27,27,100*alpha_pagebg))
 
                         local startY = sy*0.22+sy*0.045
@@ -1233,7 +1233,7 @@ function render()
                                 if k == 3 then 
                                     text = "#bd3131Nem"
                                 elseif k == 5 then 
-                                    text = "A felvétele óta nem állt szolgálatba"
+                                    text = "Desde a entrada não entrou em serviço"
                                 elseif k == 7 then 
                                     text = "0"
                                 else
@@ -1245,7 +1245,7 @@ function render()
                                 if k == 7 then 
                                     text = "0"
                                 else
-                                    text = "Nincs adat"
+                                    text = "Sem dados"
                                 end
                             end
 
@@ -1258,7 +1258,7 @@ function render()
 
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then 
                             dxDrawRectangle(sx*0.67,sy*0.51,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                                dxDrawText("#bd3131Tag kezelése #ffffff- "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " "),sx*0.67, sy*0.51, sx*0.67+sx*0.225, sy*0.51+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                                dxDrawText("#bd3131Gerenciar membro #ffffff- "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " "),sx*0.67, sy*0.51, sx*0.67+sx*0.225, sy*0.51+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                             dxDrawRectangle(sx*0.67,sy*0.51+sy*0.04,sx*0.225, sy*0.17, tocolor(27,27,27,100*alpha_pagebg))
 
                             local startY = sy*0.51+sy*0.045
@@ -1285,20 +1285,20 @@ function render()
                                 if i + factionLeaderOptionsPointer == 3 then 
                                     if factionLeader_buttonPressNumbers[i + factionLeaderOptionsPointer] == 1 then 
                                         if client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][3] then 
-                                            text = "Biztosan el szeretnéd venni a játékos leader jogosultságát?"
+                                            text = "Remover permissão de líder deste jogador?"
                                         else
-                                            text = "Biztosan leader jogosultságot szeretnél adni a játékosnak?"
+                                            text = "Conceder permissão de líder a este jogador?"
                                         end
                                     else
                                         if client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][3] then 
-                                            text = "Leader jog elvétele"
+                                            text = "Revogar líder"
                                         else
-                                            text = "Leader jog adása"
+                                            text = "Conceder líder"
                                         end
                                     end
                                 elseif i + factionLeaderOptionsPointer == 4 then 
                                     if factionLeader_buttonPressNumbers[i + factionLeaderOptionsPointer] == 1 then 
-                                        text = "Biztosan ki szeretnéd rúgni a frakcióból?"
+                                        text = "Expulsar este membro da facção?"
                                     else
                                         text = v[1]
                                     end
@@ -1329,7 +1329,7 @@ function render()
                     end
                 elseif factionPanelPage == 3 then 
                     dxDrawRectangle(sx*0.31,sy*0.22,sx*0.585,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                        dxDrawText("Járművek",sx*0.31,sy*0.22,sx*0.31+sx*0.585,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                        dxDrawText("Veículos",sx*0.31,sy*0.22,sx*0.31+sx*0.585,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
                     dxDrawRectangle(sx*0.31,sy*0.22+sy*0.04,sx*0.585,sy*0.43,tocolor(27,27,27,100*alpha_pagebg))
 
                     local startY = sy*0.267
@@ -1371,7 +1371,7 @@ function render()
                             dxDrawImage(sx*0.315+10/myX*sx, startY+10/myY*sy, 30/myX*sx, 30/myY*sy, "files/faction_panel/"..string.lower(getVehicleType(v)):gsub(" ", "")..".png", 0, 0, 0, tocolor(255, 255, 255, 200*alpha_pagebg))
 
                             local vehPos = Vector3(getElementPosition(v))
-                            dxDrawText("Elhelyezkedés: "..serverColor..getZoneName(vehPos.x, vehPos.y, vehPos.z), sx*0.31, startY, sx*0.31+sx*0.58, startY+sy*0.055, tocolor(255, 255, 255, 100*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
+                            dxDrawText("Localização: "..serverColor..getZoneName(vehPos.x, vehPos.y, vehPos.z), sx*0.31, startY, sx*0.31+sx*0.58, startY+sy*0.055, tocolor(255, 255, 255, 100*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "right", "center", false, false, false, true)
 
                             startY = startY + sy*0.06
                         end
@@ -1391,7 +1391,7 @@ function render()
                         dxDrawText(vehicleTypes[getVehicleType(factionVehicles[selectedFactionVehLine])], sx*0.31+4/myX*sx, sy*0.695+4/myY*sy, sx*0.31+4/myX*sx+sx*0.15, sy*0.695+4/myY*sy+sy*0.105+25/myY*sy, tocolor(255, 255, 255, 150*alpha_pagebg), 1/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
                     
                         --dxDrawRectangle(sx*0.795, sy*0.7, sx*0.1, sy*0.05)
-                        dxDrawText("Állapot: "..math.floor(getElementHealth(factionVehicles[selectedFactionVehLine])/10).."%", sx*0.795, sy*0.7, sx*0.795+sx*0.1, sy*0.7+sy*0.05, tocolor(189, 49, 49, 150*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
+                        dxDrawText("Estado: "..math.floor(getElementHealth(factionVehicles[selectedFactionVehLine])/10).."%", sx*0.795, sy*0.7, sx*0.795+sx*0.1, sy*0.7+sy*0.05, tocolor(189, 49, 49, 150*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
 
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then 
                             --[[if core:isInSlot(sx*0.7925, sy*0.755, sx*0.1, sy*0.04) then 
@@ -1406,9 +1406,9 @@ function render()
                             local tunings = getElementData(factionVehicles[selectedFactionVehLine], "veh:engineTunings")
 
                             if doorState then 
-                                doorState = "Zárva"
+                                doorState = "Fechado"
                             else
-                                doorState = "Nyitva"
+                                doorState = "Aberto"
                             end
 
                             if lightState then 
@@ -1435,9 +1435,9 @@ function render()
                             end
 
                             if string.len(tuningText) > 0 then 
-                                dxDrawText("Ajtók állapota: "..serverColor..tostring(doorState).."#ffffff\n Lámpák állapota: "..serverColor..tostring(lightState).."#ffffff\n "..tuningText, sx*0.31+4/myX*sx+sx*0.155, sy*0.695+4/myY*sy, sx*0.31+4/myX*sx+sx*0.155+sx*0.32, sy*0.695+4/myY*sy+sy*0.105-8/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 1/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
+                                dxDrawText("Portas: "..serverColor..tostring(doorState).."#ffffff\n Faróis: "..serverColor..tostring(lightState).."#ffffff\n "..tuningText, sx*0.31+4/myX*sx+sx*0.155, sy*0.695+4/myY*sy, sx*0.31+4/myX*sx+sx*0.155+sx*0.32, sy*0.695+4/myY*sy+sy*0.105-8/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 1/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
                             else
-                                dxDrawText("Ajtók állapota: "..serverColor..tostring(doorState).."#ffffff\n Lámpák állapota: "..serverColor..tostring(lightState), sx*0.31+4/myX*sx+sx*0.155, sy*0.695+4/myY*sy, sx*0.31+4/myX*sx+sx*0.155+sx*0.32, sy*0.695+4/myY*sy+sy*0.105-8/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 1/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
+                                dxDrawText("Portas: "..serverColor..tostring(doorState).."#ffffff\n Faróis: "..serverColor..tostring(lightState), sx*0.31+4/myX*sx+sx*0.155, sy*0.695+4/myY*sy, sx*0.31+4/myX*sx+sx*0.155+sx*0.32, sy*0.695+4/myY*sy+sy*0.105-8/myY*sy, tocolor(255, 255, 255, 255*alpha_pagebg), 1/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
                             end
 
                             if core:isInSlot(sx*0.862, sy*0.75, 30/myX*sx, 30/myY*sy) then 
@@ -1501,7 +1501,7 @@ function render()
 
                     if selectedRankLine > 0 then 
                         dxDrawRectangle(sx*0.67,sy*0.22,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                            dxDrawText(serverColor.."Rang Információk #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][1]:gsub("_", " "),sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                            dxDrawText(serverColor.."Informações do posto #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][1]:gsub("_", " "),sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                         dxDrawRectangle(sx*0.67,sy*0.22+sy*0.04,sx*0.225,sy*0.2,tocolor(27,27,27,100*alpha_pagebg))
 
                         local startY = sy*0.22+sy*0.045
@@ -1538,7 +1538,7 @@ function render()
 
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then   
                             dxDrawRectangle(sx*0.67,sy*0.47,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                                dxDrawText("#bd3131Rang kezelése #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][1]:gsub("_", " "),sx*0.67, sy*0.47, sx*0.67+sx*0.225, sy*0.47+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                                dxDrawText("#bd3131Gerenciar posto #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][1]:gsub("_", " "),sx*0.67, sy*0.47, sx*0.67+sx*0.225, sy*0.47+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                             dxDrawRectangle(sx*0.67,sy*0.47+sy*0.04,sx*0.225, sy*0.218, tocolor(27,27,27,100*alpha_pagebg))
 
                             local starty = sy*0.516
@@ -1565,35 +1565,35 @@ function render()
                                 dxDrawRectangle(sx*0.67, starty, sx*0.0015, size, color2)
 
                                 if i == 1 then 
-                                    dxDrawText("Rang neve:", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
+                                    dxDrawText("Nome do posto:", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
                                     dxDrawText(editboxs["faction_rank_name"], sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
                                 elseif i == 2 then 
                                     if getFactionType(faction_datas.factions[selectedFactionLine]) == 4 or getFactionType(faction_datas.factions[selectedFactionLine]) == 5 then 
-                                        dxDrawText("Ez a funkció nem érhető el", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                        dxDrawText("Esta função não está disponível", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                     else
-                                        dxDrawText("Rang fizetése: ", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
+                                        dxDrawText("Salário do posto: ", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
                                         dxDrawText(serverColor..editboxs["faction_rank_payment"].."#ffffff$", sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
                                     end
                                 elseif i == 3 then
                                     if getFactionType(faction_datas.factions[selectedFactionLine]) == 4 or getFactionType(faction_datas.factions[selectedFactionLine]) == 5 then 
-                                        dxDrawText("Ez a funkció nem érhető el", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                        dxDrawText("Esta função não está disponível", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                     else
-                                        dxDrawText("Ranghoz hozzárendelt duty: ", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
+                                        dxDrawText("Plantão vinculado ao posto: ", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
 
                                         if factionAttachedDuty > 0 then 
                                             dxDrawText(client_faction_list[faction_datas.factions[selectedFactionLine]][8][factionAttachedDuty][1], sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
                                         else
-                                            dxDrawText("Nincs hozzárendelt duty", sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
+                                            dxDrawText("Nenhum plantão vinculado", sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 100), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
                                         end
                                     end
                                 elseif i == 4 then 
                                     if factionLeader_buttonPressNumbers[5] == 1 then 
-                                        dxDrawText("Biztosan ki szeretnéd törölni ezt a rangot?", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                        dxDrawText("Excluir este posto?", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                     else
-                                        dxDrawText("Rang Törlése", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                        dxDrawText("Excluir posto", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                     end
                                 elseif i == 5 then 
-                                    dxDrawText("Rang Mentése", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                    dxDrawText("Salvar posto", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                 end
 
                                 if i == 4 then 
@@ -1608,7 +1608,7 @@ function render()
                     if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then  
                         dxDrawRectangle(sx*0.67, sy*0.735, sx*0.225, sy*0.055, tocolor(30, 30, 30, 220*alpha_pagebg))
                         dxDrawRectangle(sx*0.67, sy*0.735, sx*0.0015, sy*0.055, tocolor(r, g, b, 220*alpha_pagebg))
-                        dxDrawText("Rang létrehozása: ", sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.04, tocolor(255, 255, 255, 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "left", "top")
+                        dxDrawText("Criar posto: ", sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.04, tocolor(255, 255, 255, 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "left", "top")
                         dxDrawText(editboxs["faction_rank_create"], sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.05, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "left", "bottom")
 
                         if core:isInSlot(sx*0.87, sy*0.745, 33/myX*sx, 33/myY*sy) then 
@@ -1619,11 +1619,11 @@ function render()
                     end
                 elseif factionPanelPage == 5 then 
                     if getFactionType(faction_datas.factions[selectedFactionLine]) == 4 or getFactionType(faction_datas.factions[selectedFactionLine]) == 5 then 
-                        dxDrawText("Ez a funkció nem érhető el!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(255, 255, 255, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
+                        dxDrawText("Esta função não está disponível!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(255, 255, 255, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
                     else 
                         if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then
                             dxDrawRectangle(sx*0.31,sy*0.22,sx*0.25,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                            dxDrawText("Dutyk",sx*0.31,sy*0.22,sx*0.31+sx*0.25,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                            dxDrawText("Plantões",sx*0.31,sy*0.22,sx*0.31+sx*0.25,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
                             dxDrawRectangle(sx*0.31,sy*0.22+sy*0.04,sx*0.25,sy*0.48,tocolor(27,27,27,100*alpha_pagebg))
 
                             local startY = sy*0.22+sy*0.045
@@ -1654,7 +1654,7 @@ function render()
 
                             dxDrawRectangle(sx*0.31, sy*0.75, sx*0.25, sy*0.05, tocolor(30, 30, 30, 220*alpha_pagebg))
                             dxDrawRectangle(sx*0.31, sy*0.75, sx*0.0015, sy*0.05, tocolor(r, g, b, 220*alpha_pagebg))
-                            dxDrawText("Duty létrehozása: ", sx*0.315, sy*0.75, sx*0.315+sx*0.225, sy*0.75+sy*0.03, tocolor(255, 255, 255, 150*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "left", "center")
+                            dxDrawText("Criar plantão: ", sx*0.315, sy*0.75, sx*0.315+sx*0.225, sy*0.75+sy*0.03, tocolor(255, 255, 255, 150*alpha_pagebg), 0.6/myX*sx, fonts["bebasneue-18"], "left", "center")
                             dxDrawText(editboxs["faction_duty_create"], sx*0.315, sy*0.75, sx*0.315+sx*0.225, sy*0.75+sy*0.05, tocolor(255, 255, 255, 255*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "left", "bottom")
     
                             if core:isInSlot(sx*0.535, sy*0.758, 33/myX*sx, 33/myY*sy) then 
@@ -1666,7 +1666,7 @@ function render()
                             if selectedDutyLine > 0 then 
 
                                 dxDrawRectangle(sx*0.67,sy*0.62,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                                    dxDrawText("#bd3131Duty kezelése #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][8][selectedDutyLine][1], sx*0.67, sy*0.62, sx*0.67+sx*0.225, sy*0.62+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                                    dxDrawText("#bd3131Gerenciar plantão #ffffff- "..client_faction_list[faction_datas.factions[selectedFactionLine]][8][selectedDutyLine][1], sx*0.67, sy*0.62, sx*0.67+sx*0.225, sy*0.62+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                                 dxDrawRectangle(sx*0.67,sy*0.62+sy*0.04,sx*0.225, sy*0.128, tocolor(27,27,27,100*alpha_pagebg))
 
                                 local starty = sy*0.665
@@ -1693,16 +1693,16 @@ function render()
                                     dxDrawRectangle(sx*0.67, starty, sx*0.0015, size, color2)
 
                                     if i == 1 then 
-                                        dxDrawText("Duty neve:", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
+                                        dxDrawText("Nome do plantão:", sx*0.675, starty, sx*0.675+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "left", "center", false, false, false, true)
                                         dxDrawText(editboxs["faction_duty_name"], sx*0.665, starty, sx*0.665+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "right", "center", false, false, false, true)
                                     elseif i == 2 then 
                                         if factionLeader_buttonPressNumbers[6] == 1 then 
-                                            dxDrawText("Biztosan ki szeretnéd törölni ezt a dutyt?", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                            dxDrawText("Excluir este plantão?", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                         else
-                                            dxDrawText("Duty Törlése", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                            dxDrawText("Excluir plantão", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                         end
                                     elseif i == 3 then 
-                                        dxDrawText("Duty Mentése", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
+                                        dxDrawText("Salvar plantão", sx*0.67, starty, sx*0.67+sx*0.225, starty+size, tocolor(255, 255, 255, 255), 1/myX*sx, fonts["condensed-bold-9"], "center", "center", false, false, false, true)
                                     end
 
                                     if i == 2 then 
@@ -1713,7 +1713,7 @@ function render()
                                 end
 
                                 dxDrawRectangle(sx*0.565, sy*0.22, sx*0.1, sy*0.04, tocolor(27,27,27,220*alpha_pagebg))
-                                    dxDrawText("Duty Skinek", sx*0.565, sy*0.22, sx*0.565+sx*0.1, sy*0.22+sy*0.04, tocolor(255,255,255,255*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                    dxDrawText("Skins do plantão", sx*0.565, sy*0.22, sx*0.565+sx*0.1, sy*0.22+sy*0.04, tocolor(255,255,255,255*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "center", "center")
                                 dxDrawRectangle(sx*0.565, sy*0.22+sy*0.04, sx*0.1, sy*0.268, tocolor(27,27,27,100*alpha_pagebg))
 
                                 local startY = sy*0.22+sy*0.045
@@ -1757,11 +1757,11 @@ function render()
                                 end     
 
                                 dxDrawRectangle(sx*0.565, sy*0.55, sx*0.1, sy*0.04, tocolor(27,27,27,220*alpha_pagebg))
-                                    dxDrawText("Skin előnézet", sx*0.565, sy*0.55, sx*0.565+sx*0.1, sy*0.55+sy*0.04, tocolor(255,255,255,255*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "center", "center")
+                                    dxDrawText("Pré-visualização da skin", sx*0.565, sy*0.55, sx*0.565+sx*0.1, sy*0.55+sy*0.04, tocolor(255,255,255,255*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "center", "center")
                                 dxDrawRectangle(sx*0.565, sy*0.55+sy*0.04, sx*0.1, sy*0.2, tocolor(27,27,27,100*alpha_pagebg))
 
                                 dxDrawRectangle(sx*0.67,sy*0.22,sx*0.225,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                                    dxDrawText("Duty Itemek", sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
+                                    dxDrawText("Itens do plantão", sx*0.67, sy*0.22, sx*0.67+sx*0.225, sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center", false, false, false, true)
                                 dxDrawRectangle(sx*0.67,sy*0.22+sy*0.04,sx*0.225, sy*0.324, tocolor(27,27,27,100*alpha_pagebg))
 
                                 local startY = sy*0.22+sy*0.045
@@ -1827,12 +1827,12 @@ function render()
                                 end     
                             end
                         else 
-                            dxDrawText("Nincs jogosultságod az oldal megtekintéséhez!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(227, 98, 84, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
+                            dxDrawText("Você não tem permissão para ver esta página!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(227, 98, 84, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
                         end
                     end
                 elseif factionPanelPage == 6 then
                     if getFactionType(faction_datas.factions[selectedFactionLine]) == 4 or getFactionType(faction_datas.factions[selectedFactionLine]) == 5 then 
-                        dxDrawText("Ez a funkció nem érhető el!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(255, 255, 255, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
+                        dxDrawText("Esta função não está disponível!", sx*0.31, sy*0.22, sx*0.31+sx*0.59, sy*0.22+sy*0.56, tocolor(255, 255, 255, 100*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
                     else 
 
                     end 
@@ -1840,11 +1840,11 @@ function render()
 
             end
         else
-            dxDrawText("Nem vagy egyetlen szervezet tagja sem! :(", sx*0.14, sy*0.2, sx*0.14+sx*0.765, sy*0.2+sy*0.67, tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
+            dxDrawText("Você não é membro de nenhuma organização :(", sx*0.14, sy*0.2, sx*0.14+sx*0.765, sy*0.2+sy*0.67, tocolor(227, 98, 84,255*alpha_pagebg),1/myX*sx,fonts["bebasneue-25"],"center","center")
         end
     elseif activePage == 6 then
         dxDrawRectangle(sx*0.15, sy*0.225, sx*0.385, sy*0.05, tocolor(27, 27, 27, 220*alpha_pagebg))
-            dxDrawText("Prémium Item Shop", sx*0.15, sy*0.225, sx*0.15+sx*0.385, sy*0.225+sy*0.05, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
+            dxDrawText("Loja premium", sx*0.15, sy*0.225, sx*0.15+sx*0.385, sy*0.225+sy*0.05, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
         dxDrawRectangle(sx*0.15, sy*0.225+sy*0.05, sx*0.385, sy*0.62-sy*0.05, tocolor(27, 27, 27, 100*alpha_pagebg))
 
         dxDrawRectangle(sx*0.15, sy*0.225+sy*0.06, sx*0.385, sy*0.04, tocolor(27, 27, 27, 220*alpha_pagebg))
@@ -1907,9 +1907,9 @@ function render()
                     
                    
                     if premiumPanelLastClickedElement == (i+premiumPanelPointer) then 
-                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Biztosan?", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
+                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Confirmar?", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
                     else
-                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Vásárlás", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
+                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Comprar", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
                     end
 
                     starty = starty + sy*0.047
@@ -1949,9 +1949,9 @@ function render()
                     
 
                     if premiumPanelLastClickedElement == (i+premiumPanelPointer2) then 
-                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Biztosan?", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
+                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Confirmar?", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
                     else
-                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Vásárlás", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
+                        core:dxDrawButton(sx*0.465-5/myX*sx, starty+4/myY*sy, sx*0.07, sy*0.04-8/myY*sy, r, g, b, 220 * alpha_pagebg, "Comprar", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 150 * alpha_pagebg))
                     end
 
 
@@ -1980,10 +1980,10 @@ function render()
         end
 
         dxDrawRectangle(sx*0.54, sy*0.225, sx*0.35, sy*0.05, tocolor(27, 27, 27, 220*alpha_pagebg))
-            dxDrawText("Prémium Információk", sx*0.54, sy*0.225, sx*0.54+sx*0.35, sy*0.225+sy*0.05, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
+            dxDrawText("Informações premium", sx*0.54, sy*0.225, sx*0.54+sx*0.35, sy*0.225+sy*0.05, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
         dxDrawRectangle(sx*0.54, sy*0.225+sy*0.05, sx*0.35, sy*0.58-sy*0.05, tocolor(27, 27, 27, 100*alpha_pagebg))
         dxDrawRectangle(sx*0.54, sy*0.813, sx*0.35, sy*0.03, tocolor(27, 27, 27, 100*alpha_pagebg))
-        dxDrawText("Prémium egyenleged: "..color..comma_value(getElementData(localPlayer, "char:pp")).."#ffffffPP", sx*0.54, sy*0.813, sx*0.54+sx*0.345, sy*0.813+sy*0.03, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], "right", "center", false, false, false, true)
+        dxDrawText("Saldo premium: "..color..comma_value(getElementData(localPlayer, "char:pp")).."#ffffffPP", sx*0.54, sy*0.813, sx*0.54+sx*0.345, sy*0.813+sy*0.03, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], "right", "center", false, false, false, true)
 
         local starty = sy*0.225+sy*0.06
 
@@ -2017,7 +2017,7 @@ function render()
         local startY = sy*0.308 
 
         dxDrawText("CASE SHOP", startX, sy*0.21, startX + sx*0.377, sy*0.3, tocolor(255, 255, 255, 255 * alpha_pagebg), 0.9/myX*sx, fonts["bebasneue-25"], "center", "center")
-        dxDrawText("Eventek, prémium fegyverek, itemek. Ingyen vagy prémium pontért.", startX, sy*0.26, startX + sx*0.377, sy*0.3, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
+        dxDrawText("Eventos, armas premium e itens. Grátis ou por pontos premium.", startX, sy*0.26, startX + sx*0.377, sy*0.3, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
 
         dxDrawRectangle(startX, startY, 300/myX*sx, 300/myY*sy, tocolor(35, 35, 35, 120*alpha_pagebg))
         dxDrawImage(startX + 37.5/myX*sx, startY + 40/myY*sy, 450/myX*sx * 0.5, 317/myY*sy * 0.5, "files/cases/"..creates[1].icon..".png", 0, 0, 0, tocolor(255, 255, 255, 255 * alpha_pagebg))
@@ -2035,7 +2035,7 @@ function render()
         local hour = math.floor((kulonbseg/3600) - (day * 24))
 
         if kulonbseg > 0 then
-            dxDrawText(day .. " nap "..hour.." óra", startX, startY + 235/myY*sy, startX+300/myX*sx, startY + 235/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
+            dxDrawText(day .. " dia(s) "..hour.." h", startX, startY + 235/myY*sy, startX+300/myX*sx, startY + 235/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
             
             local lastDailyOpenedTime = getElementData(localPlayer, "dailyGift:bigGift:lastOpenTime") or 0
             local openDifference = (getElementData(root, "dash:timestamp") - lastDailyOpenedTime) / 60 / 60
@@ -2045,13 +2045,13 @@ function render()
                 remainTime = remainTime / 60 / 60
                 remainTime = math.floor(remainTime)
 
-                core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 100 * alpha_pagebg, remainTime .. " ÓRA", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
+                core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 100 * alpha_pagebg, remainTime .. " H", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
             else
-                core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 200 * alpha_pagebg, "INGYENES", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 100 * alpha_pagebg))
+                core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 200 * alpha_pagebg, "GRÁTIS", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 100 * alpha_pagebg))
             end
         else
-            dxDrawText("Nem elérhető!", startX, startY + 235/myY*sy, startX+300/myX*sx, startY + 235/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
-            core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 100 * alpha_pagebg, "INGYENES", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
+            dxDrawText("Indisponível!", startX, startY + 235/myY*sy, startX+300/myX*sx, startY + 235/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
+            core:dxDrawButton(startX + 10/myX*sx, startY + 250/myY*sy, 280/myX*sx, 40/myY*sy, creates[1].tagcolor[1], creates[1].tagcolor[2], creates[1].tagcolor[3], 100 * alpha_pagebg, "GRÁTIS", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
         end
 
         startX = startX + 304/myX*sx
@@ -2064,7 +2064,7 @@ function render()
 
         local openCount = getElementData(localPlayer,  "dailyGift:openCount") or 0
         dxDrawRectangle( startX + 10/myX*sx, startY + 37/myY*sy, 280/myX*sx * (openCount / 7), sy*0.005, tocolor(r, g, b, 200 * alpha_pagebg))
-        dxDrawText("SUPERBOX \n"..(7 - openCount).." nap múlva", startX + 10/myX*sx, startY + 15/myY*sy, startX+293/myX*sx, startY + 25/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.6/myX*sx, fonts["condensed-bold"], "right", "center")
+        dxDrawText("SUPERBOX \n"..(7 - openCount).." dia(s)", startX + 10/myX*sx, startY + 15/myY*sy, startX+293/myX*sx, startY + 25/myY*sy, tocolor(255, 255, 255, 100 * alpha_pagebg), 0.6/myX*sx, fonts["condensed-bold"], "right", "center")
         
         local lastDailyOpenedTime = getElementData(localPlayer, "dailyGift:lastOpenTime") or 0
         local openDifference = (getElementData(root, "dash:timestamp") - lastDailyOpenedTime) / 60 / 60
@@ -2073,9 +2073,9 @@ function render()
             remainTime = remainTime / 60 / 60
             remainTime = math.floor(remainTime)
 
-            core:dxDrawButton(startX + 150/myX*sx, startY + 100/myY*sy, 140/myX*sx, 40/myY*sy, r, g, b, 100 * alpha_pagebg,  remainTime .. " ÓRA", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
+            core:dxDrawButton(startX + 150/myX*sx, startY + 100/myY*sy, 140/myX*sx, 40/myY*sy, r, g, b, 100 * alpha_pagebg,  remainTime .. " H", tocolor(255, 255, 255, 100 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 20 * alpha_pagebg))
         else
-            core:dxDrawButton(startX + 150/myX*sx, startY + 100/myY*sy, 140/myX*sx, 40/myY*sy, r, g, b, 200 * alpha_pagebg, "INGYENES", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 100 * alpha_pagebg))
+            core:dxDrawButton(startX + 150/myX*sx, startY + 100/myY*sy, 140/myX*sx, 40/myY*sy, r, g, b, 200 * alpha_pagebg, "GRÁTIS", tocolor(255, 255, 255, 255 * alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], true, tocolor(0, 0, 0, 100 * alpha_pagebg))
         end
 
         startY = startY + 152/myY*sy
@@ -2102,7 +2102,7 @@ function render()
             end
         end
     end
-    --dxDrawRectangle(sx*0.14,sy*0.2,sx*0.765,sy*0.67, tocolor(255, 255, 255, 100)) -- középső terület
+    --dxDrawRectangle(sx*0.14,sy*0.2,sx*0.765,sy*0.67, tocolor(255, 255, 255, 100)) -- Área central
 end
 
 local buyPanelState = "car"
@@ -2123,30 +2123,30 @@ local tradeInt = false
 function renderCarBuyPanel()
     if buyPanelState == "car" then
         if buyPanelType == "sell" then 
-            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Jármű eladás", 1)
+            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Venda de veículo", 1)
 
             dxDrawRectangle(sx*0.4+6/myX*sx, sy*0.48, sx*0.2-12/myX*sx, sy*0.03, tocolor(27, 27, 27, 200))
-            dxDrawText("Személy ID: ", sx*0.405+6/myX*sx, sy*0.48, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
+            dxDrawText("ID do jogador: ", sx*0.405+6/myX*sx, sy*0.48, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
             dxDrawText(color..buyPanelEditboxs["buypanel-name"], sx*0.395+6/myX*sx, sy*0.48, sx*0.395+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
 
             dxDrawRectangle(sx*0.4+6/myX*sx, sy*0.52, sx*0.2-12/myX*sx, sy*0.03, tocolor(27, 27, 27, 200))
-            dxDrawText("Jármű ára: ", sx*0.405+6/myX*sx, sy*0.52, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
+            dxDrawText("Preço do veículo: ", sx*0.405+6/myX*sx, sy*0.52, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
             dxDrawText(color..buyPanelEditboxs["buypanel-price"].."#ffffff$", sx*0.395+6/myX*sx, sy*0.52, sx*0.395+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
             
-            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Eladás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
-            core:dxDrawButton(sx*0.4+6/myX*sx + sx*0.1, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Mégsem", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Vender", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx + sx*0.1, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Cancelar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
         elseif buyPanelType == "buy" then 
-            core:drawWindow(sx*0.4, sy*0.5 - sy*0.23/2, sx*0.2, sy*0.32, "Jármű vásárlás", 1)
+            core:drawWindow(sx*0.4, sy*0.5 - sy*0.23/2, sx*0.2, sy*0.32, "Compra de veículo", 1)
 
             local tunings = getElementData(tradeVeh, "veh:engineTunings")
 
             local tuningList = {"engine", "gear", "brake", "turbo", "ecu", "wloss"}
-            local tuningNamesList = {"Motor", "Váltó", "Fékek", "Turbó", "ECU", "Súlycsökkentés"}
+            local tuningNamesList = {"Motor", "Câmbio", "Freios", "Turbo", "ECU", "Redução de peso"}
 
             local tuningVehList = {}
             local listStartY = sy*0.48
 
-            dxDrawText(color..getPlayerName(traderPlayer):gsub("_", " ").." #ffffffel szeretne neked adni egy \n "..color..vehicle:getModdedVehicleName(tradeVeh).." #fffffftípusú járművet \n #98e396"..tradePrice.."#ffffff$-ért.", sx*0.4, sy*0.5 - sy*0.23/2, sx*0.6, (sy*0.5 - sy*0.23/2)  + sy*0.12, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
+            dxDrawText(color..getPlayerName(traderPlayer):gsub("_", " ").." #ffffffquer te vender um \n "..color..vehicle:getModdedVehicleName(tradeVeh).." #ffffffpor \n #98e396"..tradePrice.."#ffffff$.", sx*0.4, sy*0.5 - sy*0.23/2, sx*0.6, (sy*0.5 - sy*0.23/2)  + sy*0.12, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
 
             for i = 1, #tuningList do
                 local barAlpha = 200
@@ -2175,48 +2175,48 @@ function renderCarBuyPanel()
                         dxDrawText(tuning_categories[type], sx*0.4+2/myX*sx, listStartY, sx*0.4+2/myX*sx+sx*0.2-12/myX*sx, listStartY+sy*0.03, tocolor(r, g, b, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center")
                     end
                 else
-                    table.insert(tuningVehList, "Gyári")
-                    dxDrawText("#f54949Gyári", sx*0.4+2/myX*sx, listStartY, sx*0.4+2/myX*sx+sx*0.2-12/myX*sx, listStartY+sy*0.03, tocolor(r, g, b, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
+                    table.insert(tuningVehList, "Original")
+                    dxDrawText("#f54949Original", sx*0.4+2/myX*sx, listStartY, sx*0.4+2/myX*sx+sx*0.2-12/myX*sx, listStartY+sy*0.03, tocolor(r, g, b, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
                 end
 
                 listStartY = listStartY + sy*0.03
             end
 
 
-            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Vásárlás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
-            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Elutasítás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Comprar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Recusar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
         end
     elseif buyPanelState == "int" then 
         if buyPanelType == "sell" then 
-            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Ingatlan eladás", 1)
+            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Venda de imóvel", 1)
 
             dxDrawRectangle(sx*0.4+6/myX*sx, sy*0.48, sx*0.2-12/myX*sx, sy*0.03, tocolor(27, 27, 27, 200))
-            dxDrawText("Személy ID: ", sx*0.405+6/myX*sx, sy*0.48, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
+            dxDrawText("ID do jogador: ", sx*0.405+6/myX*sx, sy*0.48, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
             dxDrawText(color..buyPanelEditboxs["buypanel-name"], sx*0.395+6/myX*sx, sy*0.48, sx*0.395+6/myX*sx+sx*0.2-12/myX*sx, sy*0.48+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
 
             dxDrawRectangle(sx*0.4+6/myX*sx, sy*0.52, sx*0.2-12/myX*sx, sy*0.03, tocolor(27, 27, 27, 200))
-            dxDrawText("Ingatlan ára: ", sx*0.405+6/myX*sx, sy*0.52, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
+            dxDrawText("Preço do imóvel: ", sx*0.405+6/myX*sx, sy*0.52, sx*0.405+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "left", "center")
             dxDrawText(color..buyPanelEditboxs["buypanel-price"].."#ffffff$", sx*0.395+6/myX*sx, sy*0.52, sx*0.395+6/myX*sx+sx*0.2-12/myX*sx, sy*0.52+sy*0.03, tocolor(255, 255, 255, 255), 0.75/myX*sx, fonts["condensed-bold-11"], "right", "center", false, false, false, true)
             
-            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Eladás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
-            core:dxDrawButton(sx*0.4+6/myX*sx + sx*0.1, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Mégsem", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Vender", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx + sx*0.1, sy*0.56, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Cancelar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
         elseif buyPanelType == "buy" then 
-            core:drawWindow(sx*0.4, sy*0.5 - sy*0.23/2, sx*0.2, sy*0.32, "Ingatlan vásárlás", 1)
+            core:drawWindow(sx*0.4, sy*0.5 - sy*0.23/2, sx*0.2, sy*0.32, "Compra de imóvel", 1)
 
             local dataList = {"inttype", "custom"}
-            local tuningNamesList = {"Típus", "Szerkeszthető"}
+            local tuningNamesList = {"Tipo", "Editável"}
             local intTypes = {
-                [0] = "Ház",
-                [1] = "Biznisz",
-                [2] = "Önkormányzati ingatlan",
-                [3] = "Bérház",
-                [4] = "Garázs",
+                [0] = "Casa",
+                [1] = "Negócio",
+                [2] = "Imóvel público",
+                [3] = "Prédio",
+                [4] = "Garagem",
             }
 
             local tuningVehList = {}
             local listStartY = sy*0.48
 
-            dxDrawText(color..getPlayerName(traderPlayer):gsub("_", " ").." #ffffffel szeretne neked adni egy \n "..color..getElementData(tradeInt, "name").." #ffffffnevű ingatlant \n #98e396"..tradePrice.."#ffffff$-ért.", sx*0.4, sy*0.5 - sy*0.23/2, sx*0.6, (sy*0.5 - sy*0.23/2)  + sy*0.12, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
+            dxDrawText(color..getPlayerName(traderPlayer):gsub("_", " ").." #ffffffquer te vender o imóvel \n "..color..getElementData(tradeInt, "name").." \n #98e396"..tradePrice.."#ffffff$.", sx*0.4, sy*0.5 - sy*0.23/2, sx*0.6, (sy*0.5 - sy*0.23/2)  + sy*0.12, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-bold-11"], "center", "center", false, false, false, true)
 
             for i = 1, #dataList do
                 local barAlpha = 200
@@ -2231,7 +2231,7 @@ function renderCarBuyPanel()
                     dataValue = intTypes[dataValue]
                 elseif dataList[i] == "custom" then 
                     if dataValue == 0 then 
-                        dataValue = "Nem"
+                        dataValue = "Não"
                     else
                         dataValue = dataValue .. "x" .. dataValue
                     end
@@ -2245,8 +2245,8 @@ function renderCarBuyPanel()
             end
 
 
-            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Vásárlás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
-            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Elutasítás", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.4+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 76, 173, 88, 150, "Comprar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
+            core:dxDrawButton(sx*0.5+6/myX*sx, sy*0.665, sx*0.1-12/myX*sx, sy*0.03, 189, 49, 49, 150, "Recusar", tocolor(255, 255, 255, 255), 0.8/myX*sx, fonts["condensed-bold-11"], true, tocolor(0, 0, 0, 100))
         end
     end
 end
@@ -2306,19 +2306,19 @@ function keyCarBuyPanel(key, state)
                                             ["buypanel-price"] = 0,
                                         }
                                     else
-                                        infobox:outputInfoBox("Legalább 1$-ért kell el adnod.", "error")
+                                        infobox:outputInfoBox("O preço mínimo é de 1$.", "error")
                                     end
                                 else
-                                    infobox:outputInfoBox("Ez a játékos éppen vásárol/elad.", "error")
+                                    infobox:outputInfoBox("Este jogador já está em uma negociação.", "error")
                                 end
                             else
-                                infobox:outputInfoBox("Ez a játékos túl messze van tőled.", "error")
+                                infobox:outputInfoBox("Este jogador está muito longe de você.", "error")
                             end
                         else
-                            infobox:outputInfoBox("Magadnak nem adhatod el.", "error")
+                            infobox:outputInfoBox("Você não pode vender para si mesmo.", "error")
                         end
                     else
-                        infobox:outputInfoBox("Nem található játékos "..buyPanelEditboxs["buypanel-name"].." névrészlettel.", "error")
+                        infobox:outputInfoBox("Nenhum jogador encontrado com o trecho "..buyPanelEditboxs["buypanel-name"]..".", "error")
                     end
                 end    
             elseif buyPanelType == "buy" then 
@@ -2433,15 +2433,15 @@ function tradeEnd(type)
     removeEventHandler("onClientKey", root, keyCarBuyPanel)
 
     if type == 1 then 
-        infobox:outputInfoBox("Túl messzire mentél az eladótól, így a vásárlás megszakadt.", "warning")
+        infobox:outputInfoBox("Você se afastou demais do vendedor; a compra foi cancelada.", "warning")
     elseif type == 2 then 
-        infobox:outputInfoBox("Sikeres vásárlás.", "success")
+        infobox:outputInfoBox("Compra concluída.", "success")
     elseif type == 3 then 
-        infobox:outputInfoBox("Nincs elegendő pénzed a vásárláshoz.", "error")
+        infobox:outputInfoBox("Dinheiro insuficiente para a compra.", "error")
     elseif type == 4 then 
-        infobox:outputInfoBox("Elutasítottad az ajánlatot.", "success")
+        infobox:outputInfoBox("Você recusou a oferta.", "success")
     elseif type == 5 then 
-        infobox:outputInfoBox("Nincs elegendő slotod a vásárláshoz.", "error")
+        infobox:outputInfoBox("Você não tem slots livres suficientes.", "error")
     end
 
     if buyPanelState == "car" then
@@ -2639,7 +2639,7 @@ function click(key,state)
                         if core:isInSlot(sx*0.4+6/myX*sx, sy*0.51, sx*0.1-12/myX*sx, sy*0.03) then 
                             if slotPanelNum > 0 then
                                 if getElementData(localPlayer, "char:pp") >= slotPanelNum * 100 then 
-                                    infobox:outputInfoBox("Sikeres vásárlás!", "success")
+                                    infobox:outputInfoBox("Compra concluída!", "success")
                                     triggerServerEvent("slot > buySlot", resourceRoot, slotPanelState, slotPanelNum)
 
                                     slotPanelTick = getTickCount()
@@ -2649,7 +2649,7 @@ function click(key,state)
                                         slotPanelShowing = false
                                     end, 300, 1)
                                 else
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz! ("..(slotPanelNum*100).."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..(slotPanelNum*100).."PP)", "error")
                                 end
                             end
                         end
@@ -2721,13 +2721,13 @@ function click(key,state)
                                 destroyElement(mapVehicleMarker)
                                 mapVehicleBlip = false
                                 mapVehicleMarker = false
-                                infobox:outputInfoBox("A járműved megjelölése törölve lett a térképről!","success")
+                                infobox:outputInfoBox("Marcação do veículo removida do mapa!","success")
                             else
-                                infobox:outputInfoBox("A járműved meg lett jelölve a térképen!","success")
+                                infobox:outputInfoBox("Seu veículo foi marcado no mapa!","success")
                                 --mapVehicleBlip = createBlip(vagyon["vehicles"][selectedVehicleLine][6][1],vagyon["vehicles"][selectedVehicleLine][6][2],vagyon["vehicles"][selectedVehicleLine][6][3],3)
                                 vehicleElement = vagyon["vehicles"][selectedVehicleLine][13]
                                 mapVehicleBlip = createBlipAttachedTo(vehicleElement, 3)
-                                setElementData(mapVehicleBlip, "blip:name", "Járműved")
+                                setElementData(mapVehicleBlip, "blip:name", "Seu veículo")
                                 mapVehicleMarker = createMarker(vagyon["vehicles"][selectedVehicleLine][6][1],vagyon["vehicles"][selectedVehicleLine][6][2],vagyon["vehicles"][selectedVehicleLine][6][3],"checkpoint",3.0,r,g,b)
                                 setElementData(mapVehicleMarker, "vehmapmarker", true)
                                 attachElements(mapVehicleMarker, vehicleElement)
@@ -2743,10 +2743,10 @@ function click(key,state)
                                         closeDash()
                                         showBuyPanel("sell", "car")
                                     else
-                                        infobox:outputInfoBox("A jármű túl messze van tőled!", "error")
+                                        infobox:outputInfoBox("O veículo está muito longe de você!", "error")
                                     end
                                 else
-                                    infobox:outputInfoBox("Jelenleg már folyamatban van egy vásárlás/eladás!", "error")
+                                    infobox:outputInfoBox("Já existe uma compra/venda em andamento!", "error")
                                 end
                             end
                         end
@@ -2764,10 +2764,10 @@ function click(key,state)
                                                 selledInt = activeInteriorMarker
                                                 closeDash()
                                             else
-                                                infobox:outputInfoBox("Nem állsz az interior markerben!", "error")
+                                                infobox:outputInfoBox("Você não está no marcador do interior!", "error")
                                             end
                                         else
-                                            infobox:outputInfoBox("Jelenleg már folyamatban van egy vásárlás/eladás!", "error")
+                                            infobox:outputInfoBox("Já existe uma compra/venda em andamento!", "error")
                                         end
                                     end
                                 end
@@ -2793,7 +2793,7 @@ function click(key,state)
 
                     if admincount == 0 then 
                         if not isTimer(callAdminTimer) then 
-                            infobox:outputInfoBox("Sikeresen értesítetted az adminisztrátorokat!", "success")
+                            infobox:outputInfoBox("Administradores notificados!", "success")
                             triggerServerEvent("dash > admin > callAdmins", resourceRoot)
                             callAdminTimer = setTimer(function()
                                 if isTimer(callAdminTimer) then
@@ -2801,10 +2801,10 @@ function click(key,state)
                                 end
                             end, core:minToMilisec(5), 1)
                         else
-                            infobox:outputInfoBox("Csak 5 percenként kérhetsz adminisztrátori segítséget!", "warning")
+                            infobox:outputInfoBox("Só pode pedir ajuda admin a cada 5 minutos!", "warning")
                         end
                     else
-                        infobox:outputInfoBox("Jelenleg van adminisztrátor szolgálatban!", "warning")
+                        infobox:outputInfoBox("Já há administrador em plantão!", "warning")
                     end
                 end
             elseif activePage == 4 then 
@@ -2892,9 +2892,9 @@ function click(key,state)
                                     if not ( editboxs["faction_leader_description"] == client_faction_list[faction_datas.factions[selectedFactionLine]][12] ) then 
                                         selectedEditbox = false
                                         triggerServerEvent("faction > leader > editFactionDesc", resourceRoot, faction_datas.factions[selectedFactionLine], editboxs["faction_leader_description"])
-                                        infobox:outputInfoBox("Sikeresen módosítottad a frakció leírását!", "success")
+                                        infobox:outputInfoBox("Descrição da facção atualizada!", "success")
                                     else
-                                        infobox:outputInfoBox("Nem változott a frakció leírása!", "warning")
+                                        infobox:outputInfoBox("A descrição da facção não mudou!", "warning")
                                     end
                                 end
 
@@ -2970,45 +2970,45 @@ function click(key,state)
                                                     triggerServerEvent("faction > leader > setPlayerRank", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][2]+1)
                                                     selectedMemberLine = 0
                                                 else 
-                                                    infobox:outputInfoBox("Ez a játékos már a maximum rangon van!", "error")
+                                                    infobox:outputInfoBox("Este jogador já está no posto máximo!", "error")
                                                 end
                                             elseif k == 2 then
                                                 if client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][2] > 1 then 
                                                     triggerServerEvent("faction > leader > setPlayerRank", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][2]-1)
                                                     selectedMemberLine = 0
                                                 else 
-                                                    infobox:outputInfoBox("Ez a játékos már a minimum rangon van!", "error")
+                                                    infobox:outputInfoBox("Este jogador já está no posto mínimo!", "error")
                                                 end
                                             elseif k == 3 then 
                                                 if factionLeader_buttonPressNumbers[k] >= 2 then 
                                                     if not (client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1] == getElementData(localPlayer, "char:id")) then 
                                                         if client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][3] then 
-                                                            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen elvetted a leader jososultságot "..color..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").." #ffffffnevű játékostól.", 255, 255, 255, true)
-                                                            infobox:outputInfoBox("Sikeresen elvetted a leader jogosultságát "..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").." nevű játékostól.", "success")
+                                                            outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Você removeu a permissão de líder de "..color..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").."#ffffff.", 255, 255, 255, true)
+                                                            infobox:outputInfoBox("Permissão de líder removida de "..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ")..".", "success")
                                                             triggerServerEvent("faction > leader > setleader", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1], false)
                                                         else
-                                                            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen leader jososultságot adtál "..color..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").." #ffffffnevű játékosnak.", 255, 255, 255, true)
-                                                            infobox:outputInfoBox("Sikeresen leader jogosultságot adtál"..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").." nevű játékosnak.", "success")
+                                                            outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Você concedeu líder a "..color..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ").."#ffffff.", 255, 255, 255, true)
+                                                            infobox:outputInfoBox("Permissão de líder concedida a "..client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]:gsub("_", " ")..".", "success")
                                                             triggerServerEvent("faction > leader > setleader", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1], true)
                                                         end
                                                     else
-                                                        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Saját magadattól nem veheted el a leader jogosultságot.", 255, 255, 255, true)
-                                                        infobox:outputInfoBox("Saját magadattól nem veheted el a leader jogosultságot.", "error")
+                                                        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Você não pode remover o líder de si mesmo.", 255, 255, 255, true)
+                                                        infobox:outputInfoBox("Você não pode remover o líder de si mesmo.", "error")
                                                     end
                                                     factionLeader_buttonPressNumbers[k] = 0
                                                 end
                                             elseif k == 4 then 
                                                 if factionLeader_buttonPressNumbers[k] >= 2 then 
                                                     if not (client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1] == getElementData(localPlayer, "char:id")) then 
-                                                        outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen kirúgtad a frakcióból "..color..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " ").." #ffffffnevű játékost.", 255, 255, 255, true)
-                                                        infobox:outputInfoBox("Sikeresen kirúgtad a frakcióból "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " ").." nevű játékost.", "success")
+                                                        outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Você expulsou "..color..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " ").." #ffffffda facção.", 255, 255, 255, true)
+                                                        infobox:outputInfoBox("Você expulsou "..tostring(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][4]):gsub("_", " ").." da facção.", "success")
 
                                                         triggerServerEvent("faction > leader > fire", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1])
 
                                                         selectedMemberLine = 0
                                                     else
-                                                        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Saját magadat nem rúghatod ki a frakcióból.", 255, 255, 255, true)
-                                                        infobox:outputInfoBox("Saját magadat nem rúghatod ki a frakcióból!", "error")
+                                                        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Você não pode se expulsar da facção.", 255, 255, 255, true)
+                                                        infobox:outputInfoBox("Você não pode se expulsar da facção!", "error")
                                                     end
                                                     factionLeader_buttonPressNumbers[k] = 0
                                                 end
@@ -3017,21 +3017,21 @@ function click(key,state)
                                                     if (client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][9] or 0) > 0 then 
                                                         triggerServerEvent("faction > leader > resetPlayerDutyTime", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1])
                                                     else
-                                                        infobox:outputInfoBox("Csak akkor nullázhatod a szolgálati időt, ha az eléri az 1 percet!", "error")
+                                                        infobox:outputInfoBox("Só pode zerar o tempo de serviço após 1 minuto!", "error")
                                                     end
                                                 else
-                                                    infobox:outputInfoBox("Ez a funkció csak LEGÁLIS frakciók számára érhető el!", "warning")
+                                                    infobox:outputInfoBox("Esta função só está disponível para facções legais!", "warning")
                                                 end
                                             elseif k == 6 then 
                                                 if client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][6] then 
                                                     if client_faction_list[faction_datas.factions[selectedFactionLine]][3] <= 3 then
                                                         triggerServerEvent("faction > leader > giveBadgeToPlayer", resourceRoot, faction_datas.factions[selectedFactionLine], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1], client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][2])
                                                     else
-                                                        infobox:outputInfoBox("Ez a funkció csak LEGÁLIS frakciók számára érhető el!", "warning")
+                                                        infobox:outputInfoBox("Esta função só está disponível para facções legais!", "warning")
                                                     end
                                                     --print(client_factionMember_list[faction_datas.factions[selectedFactionLine]][selectedMemberLine][1])
                                                 else 
-                                                    infobox:outputInfoBox("Csak ONLINE tagnak adhatsz jelvényt!", "error")
+                                                    infobox:outputInfoBox("Só pode dar distintivo a membro online!", "error")
                                                 end
                                             end
 
@@ -3089,7 +3089,7 @@ function click(key,state)
                                     if lastDashFactionVehInteraction + 1000 < getTickCount() then 
                                         lastDashFactionVehInteraction = getTickCount()
                                         triggerServerEvent("faction > giveVehicleKeyToLeader", resourceRoot, getElementData(factionVehicles[selectedFactionVehLine], "veh:id"))
-                                        infobox:outputInfoBox("Sikeresen adtál magadnak egy járműkulcsot. (Jármű azonosító: "..getElementData(factionVehicles[selectedFactionVehLine], "veh:id")..")", "success")
+                                        infobox:outputInfoBox("Você pegou uma chave do veículo. (ID: "..getElementData(factionVehicles[selectedFactionVehLine], "veh:id")..")", "success")
                                         --print("kulcs", getElementData(factionVehicles[selectedFactionVehLine], "veh:id"))
                                     end
                                 end
@@ -3133,7 +3133,7 @@ function click(key,state)
                                     if #client_faction_list[faction_datas.factions[selectedFactionLine]][7] < 25 then 
                                         triggerServerEvent("faction > leader > createRank", resourceRoot, faction_datas.factions[selectedFactionLine], editboxs["faction_rank_create"])
                                     else
-                                        infobox:outputInfoBox("Nem hozhatsz létre 25-nél több rangot!", "warning")
+                                        infobox:outputInfoBox("Não é possível criar mais de 25 postos!", "warning")
                                     end
                                 end
                                 editboxs["faction_rank_create"] = ""
@@ -3170,14 +3170,14 @@ function click(key,state)
                                             factionLeader_buttonPressNumbers[5] = factionLeader_buttonPressNumbers[5] + 1
                                             if factionLeader_buttonPressNumbers[5] >= 2 then 
                                                 if getAllPlayerInRank(client_faction_list[faction_datas.factions[selectedFactionLine]][1], selectedRankLine) > 0 then 
-                                                    infobox:outputInfoBox("Csak akkor törölhetsz rangot ha nincs olyan rangal rendelkező tag!", "warning")
+                                                    infobox:outputInfoBox("Só pode excluir um posto se nenhum membro o usar!", "warning")
                                                 else
                                                     if selectedRankLine == #client_faction_list[faction_datas.factions[selectedFactionLine]][7] then 
                                                         triggerServerEvent("faction > leader > delRank", resourceRoot, faction_datas.factions[selectedFactionLine], selectedRankLine)
                                                         selectedRankLine = 0
-                                                        infobox:outputInfoBox("Sikeresen töröltél egy rangot!", "success")
+                                                        infobox:outputInfoBox("Posto excluído com sucesso!", "success")
                                                     else 
-                                                        infobox:outputInfoBox("Ez a rang nem törölhető!", "warning")
+                                                        infobox:outputInfoBox("Este posto não pode ser excluído!", "warning")
                                                     end
                                                 end
                                                 factionLeader_buttonPressNumbers[5] = 0
@@ -3191,12 +3191,12 @@ function click(key,state)
 
 
                                                 if (tonumber(editboxs["faction_rank_payment"]) == tonumber(client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][2])) and (tostring(editboxs["faction_rank_name"]) == tostring(client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][1])) and (tonumber(factionAttachedDuty) == tonumber(client_faction_list[faction_datas.factions[selectedFactionLine]][7][selectedRankLine][3])) then 
-                                                    infobox:outputInfoBox("Nem történt változtatás!", "warning")
+                                                    infobox:outputInfoBox("Nada foi alterado!", "warning")
                                                 else
                                                     triggerServerEvent("faction > leader > editRank", resourceRoot, faction_datas.factions[selectedFactionLine], selectedRankLine, tostring(editboxs["faction_rank_name"]), tonumber(editboxs["faction_rank_payment"]), tonumber(factionAttachedDuty))
                                                 end
                                             else
-                                                infobox:outputInfoBox("A rang nevének minimum 3 karakterből kell állnia!", "warning")
+                                                infobox:outputInfoBox("O nome do posto precisa ter pelo menos 3 caracteres!", "warning")
                                             end
                                         end
                                     end
@@ -3224,12 +3224,12 @@ function click(key,state)
                                     if #client_faction_list[faction_datas.factions[selectedFactionLine]][8] < 25 then 
                                         triggerServerEvent("faction > leader > createDuty", resourceRoot, faction_datas.factions[selectedFactionLine], editboxs["faction_duty_create"])
                                         editboxs["faction_duty_create"] = ""
-                                        infobox:outputInfoBox("Sikeresen létrehoztál egy dutyt!", "success")
+                                        infobox:outputInfoBox("Plantão criado com sucesso!", "success")
                                     else
-                                        infobox:outputInfoBox("Nem hozhatsz létre 25-nél több dutyt!", "warning")
+                                        infobox:outputInfoBox("Não é possível criar mais de 25 plantões!", "warning")
                                     end
                                 else
-                                    infobox:outputInfoBox("A duty nevének minimum 3 karakterből kell állnia!", "warning")
+                                    infobox:outputInfoBox("O nome do plantão precisa ter pelo menos 3 caracteres!", "warning")
                                 end
                             end
 
@@ -3356,11 +3356,11 @@ function click(key,state)
                                                 factionLeader_buttonPressNumbers[6] = 0
                                             end
                                         else
-                                            infobox:outputInfoBox("Ez a duty nem törölhető!", "warning")
+                                            infobox:outputInfoBox("Este plantão não pode ser excluído!", "warning")
                                         end
                                     elseif i == 3 then  -- BELE KELL RAKNI AZT, HOGY A FOLYAMATOS MENTÉSSEL NE TUDJA KIFAGYASZTANI A SZERVERT
                                         --if (editboxs["faction_duty_name"] == client_faction_list[faction_datas.factions[selectedFactionLine]][8][selectedDutyLine][1]) then
-                                        --    infobox:outputInfoBox("Nem történt változtatás!", "warning")
+                                        --    infobox:outputInfoBox("Nada foi alterado!", "warning")
                                         --else
                                             triggerServerEvent("faction > leader > editDuty", resourceRoot, faction_datas.factions[selectedFactionLine], selectedDutyLine, editboxs["faction_duty_name"], factionDutyElements_temp["skins"], factionDutyElements_temp["items"])
                                         --end
@@ -3415,7 +3415,7 @@ function click(key,state)
                                             triggerServerEvent("premiumShop > buyPremiumMoney", resourceRoot, {v.icon, v.price, v.count})
                                         end
                                     else
-                                        infobox:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz!", "error")
+                                        infobox:outputInfoBox("Pontos premium insuficientes para a compra!", "error")
                                         premiumPanelLastClickedElement = 0
                                     end
                                     premiumPanelLastClickedElement = 0
@@ -3441,7 +3441,7 @@ function click(key,state)
                                         triggerServerEvent("premiumShop > buyPremiumPackage", resourceRoot, {v.name, v.price, v.items})
                                         premiumPanelLastClickedElement = 0
                                     else
-                                        infobox:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz!", "error")
+                                        infobox:outputInfoBox("Pontos premium insuficientes para a compra!", "error")
                                         premiumPanelLastClickedElement = 0
                                     end
                                 else
@@ -3478,14 +3478,14 @@ function click(key,state)
                             remainTime = remainTime / 60 / 60
                             remainTime = math.floor(remainTime)
 
-                            infobox:outputInfoBox("Az elmúlt {#colorcode}"..remainTime.." #ffffffórában már kinyitottad a különleges dobozt!", "warning")
+                            infobox:outputInfoBox("Nas últimas {#colorcode}"..remainTime.." #ffffffhoras você já abriu a caixa especial!", "warning")
                         else
                             if _openSelectedCreate(creates[1].name, creates[1].icon, creates[1].gifts) then 
                                 setElementData(localPlayer, "dailyGift:bigGift:lastOpenTime", getElementData(root, "dash:timestamp"))
                             end
                         end
                     else
-                        infobox:outputInfoBox("Ez az ajánlat nem érhető el!", "error") 
+                        infobox:outputInfoBox("Esta oferta não está disponível!", "error") 
                     end
                 end
                 
@@ -3499,7 +3499,7 @@ function click(key,state)
                         local remainTime = (23*60*60) - (getElementData(root,"dash:timestamp") - lastDailyOpenedTime) --math.floor(23 - openDifference)
                         remainTime = remainTime / 60 / 60
                         remainTime = math.floor(remainTime)
-                        infobox:outputInfoBox("Az elmúlt {#colorcode}"..remainTime.." #ffffffórában már kinyitottad a napi ajándékodat!", "warning")
+                        infobox:outputInfoBox("Nas últimas {#colorcode}"..remainTime.." #ffffffhoras você já abriu o presente diário!", "warning")
                     else
                         if openCount == 7 then 
                             if _openSelectedCreate("DAILY SUPER BOX", "easter", dailyBoxRewards["super"]) then 
@@ -3522,11 +3522,11 @@ function click(key,state)
                         if getElementData(localPlayer, "char:pp") >= creates[1 + i].price then 
                             if _openSelectedCreate(creates[1 + i].name, creates[1 + i].icon, creates[1 + i].gifts) then 
                                 setElementData(localPlayer, "char:pp", getElementData(localPlayer, "char:pp") - creates[1 + i].price)
-                                infobox:outputInfoBox("Sikeresen vásároltál egy {#colorcode}"..creates[1 + i].name.."#ffffff boxot. ", "success")
-                                outputChatBox(core:getServerPrefix("green-dark", "Case shop", 2).."Sikeresen vásároltál "..color..creates[1 + i].price.."PP#ffffff-ért egy "..color..creates[1 + i].name.." #ffffffboxot. ", 255, 255, 255, true)
+                                infobox:outputInfoBox("Você comprou uma {#colorcode}"..creates[1 + i].name.."#ffffff caixa. ", "success")
+                                outputChatBox(core:getServerPrefix("green-dark", "Case shop", 2).."Você comprou a caixa "..color..creates[1 + i].name.." #ffffffpor "..color..creates[1 + i].price.."PP#ffffff.", 255, 255, 255, true)
                             end
                         else
-                            infobox:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz! {#colorcode}("..creates[1 + i].price.."PP)", "error")
+                            infobox:outputInfoBox("Pontos premium insuficientes! {#colorcode}("..creates[1 + i].price.."PP)", "error")
                         end
                     end
         
@@ -4027,7 +4027,7 @@ addEventHandler("onClientPlayerQuit", root, function()
     end
 end)
 
--- Beállítások mentése -- 
+-- Salvar configurações --
 addEventHandler("onClientResourceStart", resourceRoot, function()
 
     local data = exports.oJSON:loadDataFromJSONFile("dashboardOptions", true)
@@ -4161,7 +4161,7 @@ function getPlayerFactionDatas()
         end
     end
     
-    -- jelenleg elérhető játékosok beállítása
+    -- Ajuste dos jogadores atualmente disponíveis
     for key, members in pairs(client_factionMember_list) do 
         if members then 
             for key, data in pairs(members) do 
@@ -4175,7 +4175,7 @@ addEventHandler("resetPlayerFactionDatas", root, getPlayerFactionDatas)
 
 -----------------
 
--- Jármű keresés --
+-- Busca de veículo --
 
 addEventHandler("onClientMarkerHit", resourceRoot, function(player,mdim)
     if mdim then 
@@ -4184,7 +4184,7 @@ addEventHandler("onClientMarkerHit", resourceRoot, function(player,mdim)
             destroyElement(mapVehicleBlip)
             mapVehicleBlip = false 
             mapVehicleMarker = false 
-            infobox:outputInfoBox("Megtaláltad a járműved!","success")
+            infobox:outputInfoBox("Você encontrou seu veículo!","success")
         end
     end
 end)
@@ -4274,9 +4274,9 @@ function getPlayerAllOwnedVehicle()
                 local vehLampState = "nan"
 
                 if vehDoorState == true then 
-                    vehDoorState = "Zárva"
+                    vehDoorState = "Fechado"
                 else
-                    vehDoorState = "Nyitva"
+                    vehDoorState = "Aberto"
                 end
 
                 if vehEngineState == true then 
@@ -4299,7 +4299,7 @@ function getPlayerAllOwnedVehicle()
                 end
 
                 local fuelLevel = math.floor(getElementData(v, "veh:fuel")).." #ffffff/ "..getElementData(v, "veh:maxFuel")
-                local fuelType = fuelTypes[getElementData(v, "veh:fuelType")] or "Nincs adat!"
+                local fuelType = fuelTypes[getElementData(v, "veh:fuelType")] or "Sem dados!"
                 local oilState = math.floor(getElementData(v, "veh:distanceToOilChange")) or 0
 
                 local isBooked = getElementData(v, "vehIsBooked") or false

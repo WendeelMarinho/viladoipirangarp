@@ -10,7 +10,7 @@ local core = exports.oCore
 
 local tempTable = {}
 local infoTable = {}
-local infoType = {success = "Siker!", error = "Hiba!", warning = "Figyelmeztetés!", info = "Információ!", aduty = "Adminisztrátor szolgálat!", bug = "Hibajelentés!", gift = "Ajándék!"}
+local infoType = {success = "Sucesso!", error = "Erro!", warning = "Aviso!", info = "Informação!", aduty = "Plantão administrativo!", bug = "Reporte de bug!", gift = "Presente!"}
 local infoColors = {success = {55, 155, 31}, error = {168, 45, 31}, warning = {206, 149, 16}, info = {38, 117, 173}, aduty = {240, 129, 24}, bug = {224, 44, 20}, gift = {222, 42, 75}}
 local colorHexa = {success = "#379b1f", error = "#a82d1f", warning = "#ce9510", info = "#2675ad", aduty = "#f08118", bug = "#e02c14", gift = "#de2a4b"}
 local infoIcons = {
@@ -106,7 +106,7 @@ end
 
 function outputInfoBox(msg, type)
     if not infoType[type] then
-        outputDebugString("Nem megfelelő típus.", 1)
+        outputDebugString("Tipo inválido.", 1)
         return
     end
 

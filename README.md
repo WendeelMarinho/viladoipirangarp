@@ -52,7 +52,7 @@ O projeto é um **gamemode completo** de RP: contas e personagens, economia, inv
 
    `oCore` → `oMysql` → `oAccount` → demais recursos.
 
-   Detalhes de dependências e exports críticos: **`.cursor/context/architecture.md`** (no repositório) e **`docs/CLAUDE.md`**.
+   Detalhes de dependências e exports críticos: **`.cursor/context/architecture.md`** (no repositório) e **`docs/CLAUDE.md`** (regras completas). Na raiz, **`CLAUDE.md`** serve de entrada para **Claude Code** / Cursor e aponta para `docs/CLAUDE.md`.
 
 5. Ative os recursos no **`mtaserver.conf`** conforme a lista do seu deploy (não é obrigatório subir todos os recursos de uma vez em ambiente de teste).
 
@@ -97,8 +97,8 @@ O projeto é um **gamemode completo** de RP: contas e personagens, economia, inv
 | Área | Status |
 |------|--------|
 | `oAccount` | Sprint A — textos ao jogador em PT-BR |
-| `oDashboard` | Em progresso (`global.lua`, servidor de compras, bug report, etc.; ainda há strings em `client.lua` / facções) |
-| `[Interface]` | Parcial (`oInterface`, `oScoreboard`, …) |
+| `oDashboard` | Sprints B / B.1 / B.2 concluídos nas áreas priorizadas (facções, bug report, caixas, opções, comentários/debug); rever `client.lua` e restantes no roadmap |
+| `[Interface]` | Parcial (HUD, radar, placar, etc.; vários ficheiros já em PT-BR) |
 | Restante do gamemode | Roadmap (ver `docs/translation-roadmap.md`) |
 
 **Marca:** **Ipiranga Roleplay** na UI. A string técnica em vários `triggerHack.lua` / `antiHook.lua` (`_OriginalRP`) permanece por **compatibilidade** com o mecanismo de nomes ofuscados entre recursos.
@@ -109,12 +109,15 @@ O projeto é um **gamemode completo** de RP: contas e personagens, economia, inv
 
 | Documento | Conteúdo |
 |-----------|----------|
-| [**docs/CLAUDE.md**](docs/CLAUDE.md) | Regras do projeto, handlers, ordem de refatoração, branches |
+| [**docs/CLAUDE.md**](docs/CLAUDE.md) | Regras do projeto, handlers, ordem de refatoração, branches (canónico) |
+| [**CLAUDE.md**](CLAUDE.md) (raiz) | Entrada Claude Code / agentes: checklist + link para `docs/CLAUDE.md` |
 | [**docs/translation-roadmap.md**](docs/translation-roadmap.md) | Glossário e fases de tradução |
 | [**docs/technical-debt-report.md**](docs/technical-debt-report.md) | Dívida técnica e itens de segurança/arquitetura |
 | [**docs/prioritized-resource-list.md**](docs/prioritized-resource-list.md) | Priorização de recursos |
 | [**docs/relatorio-tecnico.md**](docs/relatorio-tecnico.md) | Relatório técnico / auditoria (quando aplicável) |
 | [**docs/worklog/**](docs/worklog/) | Sprints e próximas ações |
+| [**docs/cursor/ecc-integration.md**](docs/cursor/ecc-integration.md) | ECC em modo mínimo (Cursor / Claude) |
+| [**AGENTS.md**](AGENTS.md) | Índice de agentes + links ECC `ecc-*` |
 
 Índice da pasta `docs/`: [**docs/README.md**](docs/README.md).
 
@@ -122,8 +125,8 @@ O projeto é um **gamemode completo** de RP: contas e personagens, economia, inv
 
 ## Roadmap (alto nível)
 
-1. Completar tradução em **`oDashboard/client.lua`** e **`oDashboard/faction/*`**
-2. Completar **`[Interface]`** (HUD, radar, infobox, speedo, etc.)
+1. Rever **`oDashboard/client.lua`** e strings remanescentes fora do âmbito B.2
+2. Continuar **`[Interface]`** e resto do gamemode conforme **`docs/translation-roadmap.md`**
 3. Auditoria global de **SQL** e de **`source`** em eventos remotos
 4. Hardening contínuo e release pública **Ipiranga Roleplay**
 

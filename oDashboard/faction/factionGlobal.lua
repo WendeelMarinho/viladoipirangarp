@@ -1,1 +1,1 @@
-faction_types = {"Rendvédelem", "Egészségügy", "Legális szervezet", "Banda", "Maffia"}
+faction_types = {"Forças de segurança", "Saúde", "Organização legal", "Gangue", "Máfia"}

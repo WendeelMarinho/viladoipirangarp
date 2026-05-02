@@ -1,7 +1,7 @@
 local sx,sy = guiGetScreenSize()
 local myX, myY = 1600, 900
 
-local size = 1.2 -- NE VÉLTOZTASD!
+local size = 1.2 -- Não altere!
 
 local oilCheck1 = false
 local oilCheck2 = false
@@ -473,7 +473,7 @@ addEventHandler("onClientPreRender", getRootElement(), function (deltaTime)
             else
                 if checkNeed then
                     triggerServerEvent("speedo > setVehicleDatas", resourceRoot, vehicle, currFuel, currDis)
-                    exports.oInfobox:outputInfoBox("Kifogyott az üzemanyag!", "warning")
+                    exports.oInfobox:outputInfoBox("O combustível acabou!", "warning")
                     checkNeed = false
                 end
             end
@@ -486,8 +486,8 @@ addEventHandler("onClientPreRender", getRootElement(), function (deltaTime)
                         if not oilCheck1 then
                             lastTrigger = getTickCount()
                             modelID = getElementModel(vehicle)
-                            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3)..""..vehicleScript:getModdedVehName(modelID).." tipusú járműved a jelenlegi olajszintjével már csak "..math.floor(oil).."km-t lehet tenni! További infók a dashboardban.",255,255,255,true)
-                            exports.oInfobox:outputInfoBox("Járműved olajszintje alacsony, Információk a chatboxban!", "warning")
+                            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3)..""..vehicleScript:getModdedVehName(modelID).." — com o nível de óleo atual seu veículo só pode rodar mais "..math.floor(oil).." km! Veja mais no painel (F2).",255,255,255,true)
+                            exports.oInfobox:outputInfoBox("Nível de óleo baixo. Detalhes no chat!", "warning")
                             setElementData(vehicle,"oilLamp",true)
                             oilCheck1 = true
                         end
@@ -497,8 +497,8 @@ addEventHandler("onClientPreRender", getRootElement(), function (deltaTime)
                         if not oilCheck2 then
                             lastTrigger = getTickCount()
                             modelID = getElementModel(vehicle)
-                            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3)..""..vehicleScript:getModdedVehName(modelID).." tipusú járműved a jelenlegi olajszintjével már csak "..math.floor(oil).."km-t lehet tenni! További infók a dashboardban.",255,255,255,true)
-                            exports.oInfobox:outputInfoBox("Járműved olajszintje alacsony, Információk a chatboxban!", "warning")
+                            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3)..""..vehicleScript:getModdedVehName(modelID).." — com o nível de óleo atual seu veículo só pode rodar mais "..math.floor(oil).." km! Veja mais no painel (F2).",255,255,255,true)
+                            exports.oInfobox:outputInfoBox("Nível de óleo baixo. Detalhes no chat!", "warning")
                             oilCheck2 = true
                             setElementData(vehicle,"oilLamp",true)
 
@@ -511,7 +511,7 @@ addEventHandler("onClientPreRender", getRootElement(), function (deltaTime)
                 if lastTrigger + 1000 < getTickCount() then
                     lastTrigger = getTickCount()
                     triggerServerEvent("speedo > setVehicleDatas", resourceRoot, vehicle, currFuel, currDis, oil)
-                    exports.oInfobox:outputInfoBox("A járműved lerobbant mivel kifogyott az olaj belőle!", "warning")
+                    exports.oInfobox:outputInfoBox("Seu veículo quebrou porque ficou sem óleo!", "warning")
 
 
                     checkNeed2 = false

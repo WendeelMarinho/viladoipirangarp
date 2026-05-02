@@ -124,7 +124,7 @@ local mainBlips = {
 	{1700.0952148438,-1169.2821044922,23.828125, "blips/2.png"},
 
 	--{722.75079345703, -1494.7630615234, 1.9343447685242, "blips/19.png"},
-	--{1008.9260864258, -1445.7407226563, 13.554634094238, "blips/31.png"}, KLUB
+	--{1008.9260864258, -1445.7407226563, 13.554634094238, "blips/31.png"}, -- Boate / clube
 	--{1429.2377929688, 371.23767089844, 18.862117767334, "blips/18.png"},
 	{2244.4267578125, -1663.9234619141, 15.4765625, "blips/15.png"},
 	{480.7594909668, -1536.1046142578, 19.531429290771, "blips/15.png"},
@@ -147,7 +147,7 @@ local mainBlips = {
 
 	{2275.0703125,-2343.5190429688,13.546875, "blips/27.png"},
 
-	--{153.6167755127, -1942.4256591797, 3.7734375, "blips/19.png"},  HAJÓBÉRLŐ
+	--{153.6167755127, -1942.4256591797, 3.7734375, "blips/19.png"},  -- Aluguel de barco (desativado)
 	--{1560.2463378906, -2211.001953125, 14.018497467041, "blips/20.png"},
 
 	--{133.0544128418, -1329.1048583984, 48.128692626953, "blips/21.png"},
@@ -181,47 +181,47 @@ local mainBlips = {
 
 	{387.22622680664, -1870.6955566406, 7.8359375, "blips/24.png"}, --
 
-	{2814.9345703125, -1618.3328857422, 11.023014068604, "blips/15.png"}, -- Illegál frakció ruhabolt
+	{2814.9345703125, -1618.3328857422, 11.023014068604, "blips/15.png"}, -- Roupa de facção ilegal
 
 	{1199.3642578125, -918.19445800781, 43.122100830078, "blips/7.png"},
 
 	--{589.11511230469, -1172.5225830078, 23.288547515869, "blips/54.png"},
 
-	{719.44732666016, -1361.3049316406, 13.427791595459, "blips/25.png"}, --PLÁZA
+	{719.44732666016, -1361.3049316406, 13.427791595459, "blips/25.png"}, -- Shopping / praça
 
 	{1835.2557373047,-1682.4937744141,13.397357940674, "blips/31.png"},
 
 	-- LV
 
-	{103.13995361328,-291.99694824219,1.578125, "blips/64.png"}, -- gyar
+	{103.13995361328,-291.99694824219,1.578125, "blips/64.png"}, -- Fábrica
 
 
-	-- fegyvercraft
+	-- Craft de armas
 	{2387.1577148438, -653.70324707031, 127.5396194458, "blips/67.png"},
 	{-2454.5615234375,2254.2758789062,4.9802069664001, "blips/68.png"},
 	{2646.1188964844,-2089.376953125,16.953125, "blips/69.png"},
 
 
-	{216.45295715332,14.669826507568,2.57080078125, "blips/46.png"}, -- aukciós telep
+	{216.45295715332,14.669826507568,2.57080078125, "blips/46.png"}, -- Pátio de leilão
 
-	{-742.4775390625,237.5651550293,3.1307954788208, "blips/37.png"}, -- kikötő blueberry
-	{2613.5798339844,-2471.1716308594,3, "blips/37.png"}, -- kikötő ls2
-	{-2238.0183105469,2412.5407714844,3.7793831825256, "blips/37.png"}, -- kikötő bayside
+	{-742.4775390625,237.5651550293,3.1307954788208, "blips/37.png"}, -- Porto Blueberry
+	{2613.5798339844,-2471.1716308594,3, "blips/37.png"}, -- Porto LS2
+	{-2238.0183105469,2412.5407714844,3.7793831825256, "blips/37.png"}, -- Porto Bayside
 
-	{2713.111328125,-1104.1528320312,69.57755279541, "blips/28.png"}, -- kulcsmásoló
+	{2713.111328125,-1104.1528320312,69.57755279541, "blips/28.png"}, -- Chaveiro / cópia de chaves
 
-	{-2537.7817382812,2320.548828125,4.984375, "blips/52.png"}, -- drágakő értékbecslő
-	{1085.3483886719,-1213.5087890625,17.812009811401, "blips/19.png"}, -- bútorfelvásárló
-	{953.70886230469,-1336.3480224609,13.539100646973, "blips/49.png"}, -- lottózó
+	{-2537.7817382812,2320.548828125,4.984375, "blips/52.png"}, -- Avaliador de pedras preciosas
+	{1085.3483886719,-1213.5087890625,17.812009811401, "blips/19.png"}, -- Compra de móveis
+	{953.70886230469,-1336.3480224609,13.539100646973, "blips/49.png"}, -- Lotérica
 
-	--{1422.3221435547,-1177.7465820312,25.9921875, "blips/48.png"}, -- játékfejlesztő irodaház
+	--{1422.3221435547,-1177.7465820312,25.9921875, "blips/48.png"}, -- Escritório dev (desativado)
 
-	{-2382.7751464844,2216.4033203125,6.407133102417, "blips/42.png"}, -- Bayside hal
+	{-2382.7751464844,2216.4033203125,6.407133102417, "blips/42.png"}, -- Peixaria Bayside
 
 	{2396.9421386719,-1897.9167480469,13.561561584473, "blips/7.png"}, -- cluckinbell
 
-	{2523.5158691406,-1525.4184570312,23.821899414062, "blips/65.png"}, -- használt autókerek
-	{205.22537231445,-172.5619354248,1.578125, "blips/65.png"}, -- használt autókerek
+	{2523.5158691406,-1525.4184570312,23.821899414062, "blips/65.png"}, -- Pneus usados
+	{205.22537231445,-172.5619354248,1.578125, "blips/65.png"}, -- Pneus usados
 
 	{1471.3944091797,-1265.3369140625,14.5625, "blips/21.png"}, -- nav 
 	
@@ -290,9 +290,9 @@ addCommandHandler("showplayers",
 		if getElementData(localPlayer, "user:admin") >= 3 then
 			playerCanSeePlayers = not playerCanSeePlayers
 			if playerCanSeePlayers then 
-				outputChatBox(color .. " Sikeresen láthatóvá tetted a playereket a radarodon!", 255,255,255,true)
+				outputChatBox(color .. " Você exibiu os jogadores no seu radar!", 255,255,255,true)
 			else
-				outputChatBox(color .. " Sikeresen eltüntetted a playereket a radarodon!", 255,255,255,true)
+				outputChatBox(color .. " Você ocultou os jogadores no seu radar!", 255,255,255,true)
 			end
 		end
 	end
@@ -349,7 +349,7 @@ addEventHandler("onClientElementDataChange", getRootElement(),
 		end
 
 		if getElementType(source) == "blip" and dataName == "blip:name" then
-			blipTooltips[source] = getElementData(source, dataName) or "Nincs adat"
+			blipTooltips[source] = getElementData(source, dataName) or "Sem dados"
 		end
 	end
 )
@@ -475,7 +475,7 @@ function renderMinimap(x, y, w, h)
 				local blipPosX, blipPosY = getElementPosition(defaultBlips[i])
 				local blipType = getElementData(defaultBlips[i], "blip:type") or false
 				renderBlip("blips/"..getBlipIcon(defaultBlips[i])..".png", blipPosX, blipPosY, remapPlayerPosX, remapPlayerPosY, respc(22), respc(22), 0xFFFFFFFF, cameraRotation, blipType, tableId)
-				blipTooltips[defaultBlips[i]] = getElementData(defaultBlips[i], "blip:name") or "Nincs adat"
+				blipTooltips[defaultBlips[i]] = getElementData(defaultBlips[i], "blip:name") or "Sem dados"
 				defaultBlipsCount = defaultBlipsCount + 1
 			end
 		end
@@ -588,8 +588,8 @@ function renderMinimap(x, y, w, h)
 				dxDrawText(gpstext, minimapPosX + respc(20) + gpsLineIconSize, minimapPosY + respc(3.5),  minimapPosX + respc(20) + gpsLineIconSize, minimapPosY + respc(3.5) + respc(40), tocolor(255, 255, 255, 120 * interpolateAlpha), 1, fontScript:getFont("p_m", 14/myX*sx), "left", "bottom")
 				
 				dxDrawImage(minimapPosX + respc(10), minimapPosY + respc(10), gpsLineIconSize, gpsLineIconSize, "gps/images/end.png", 0, 0, 0, tocolor(r, g, b, 255 * interpolateAlpha))
-				gpstext = "Kellemes időtöltést!"
-				gpstext2 = "Megérkezett az úti célhoz!"
+				gpstext = "Boa viagem!"
+				gpstext2 = "Você chegou ao destino!"
 
 				if interpolationProgress > 1 then
 					waypointEndInterpolation = false
@@ -613,8 +613,8 @@ function renderMinimap(x, y, w, h)
 
 					dxDrawImage(minimapPosX + respc(10), minimapPosY + respc(10), gpsLineIconSize, gpsLineIconSize, "gps/images/refresh.png", refreshAngle, 0, 0, tocolor(r, g, b))
 
-					gpstext = "Kérem várjon!"
-					gpstext2 = "Újratervezés!"
+					gpstext = "Aguarde..."
+					gpstext2 = "Recalculando rota!"
 
 					if reRouteProgress > 1 then
 						reRouting = getTickCount()
@@ -623,11 +623,11 @@ function renderMinimap(x, y, w, h)
 					currentWaypoint = nextWp
 
 					dxDrawImage(minimapPosX + respc(10), minimapPosY + respc(10), gpsLineIconSize, gpsLineIconSize, "gps/images/around.png", 0, 0, 0, tocolor(r, g, b))
-					gpstext2 = "Forduljon vissza!"
-					gpstext = "0 méter"
+					gpstext2 = "Faça a volta!"
+					gpstext = "0 metros"
 				else
 					dxDrawImage(minimapPosX + respc(10), minimapPosY + respc(10), gpsLineIconSize, gpsLineIconSize, "gps/images/" .. gpsWaypoints[nextWp][2] .. ".png", 0, 0, 0, tocolor(r, g, b))
-					gpstext = floor((gpsWaypoints[nextWp][3] or 0) / 10) * 10 .. " méter"
+					gpstext = floor((gpsWaypoints[nextWp][3] or 0) / 10) * 10 .. " metros"
 					gpstext2 = gpsUtasitasok[gpsWaypoints[nextWp][2]]
 				end
 			end
@@ -664,7 +664,7 @@ local bigMap_OptionsHoverAnimType
 local bigMap_OptionsRotationTick
 local bigMap_OptionsPanelShowing = false
 
-local Blip3DStatesNames = {"#f04f4fKikapcsolva", "#65e681Bekapcsolva"}
+local Blip3DStatesNames = {"#f04f4fDesligado", "#65e681Ligado"}
 
 local backTick, startValue1, startValue2, backRenderTimer = 0, 0, 0, nil
 
@@ -887,20 +887,20 @@ function renderTheBigmap()
 		--[[if bigMap_OptionsPanelShowing then 
 
 			dxDrawRectangle(bigmapPosX + bigmapWidth - respc(210),bigmapPosY + bigmapHeight - respc(130),respc(200),respc(90),tocolor(35,35,35,255))
-			dxDrawText(color.."Radar #dcdcdc- Beállítások",bigmapPosX + bigmapWidth - respc(210),bigmapPosY + bigmapHeight - respc(130),bigmapPosX + bigmapWidth - respc(210)+respc(200),bigmapPosY + bigmapHeight - respc(130)+respc(90),tocolor(220,220,220,255),1,font,"center","top",false,false,false,true)
+			dxDrawText(color.."Radar #dcdcdc- Configurações",bigmapPosX + bigmapWidth - respc(210),bigmapPosY + bigmapHeight - respc(130),bigmapPosX + bigmapWidth - respc(210)+respc(200),bigmapPosY + bigmapHeight - respc(130)+respc(90),tocolor(220,220,220,255),1,font,"center","top",false,false,false,true)
 
 
 			dxDrawText("3D Blippek: "..color..Blip3DStatesNames[(state3DBlip)],bigmapPosX + bigmapWidth - respc(210),bigmapPosY + bigmapHeight - respc(130),bigmapPosX + bigmapWidth - respc(210)+respc(200),bigmapPosY + bigmapHeight - respc(130)+respc(90),tocolor(220,220,220,255),1,font,"center","center",false,false,false,true)
 
 			dxDrawImage(bigmapPosX + bigmapWidth - respc(25), bigmapPosY + bigmapHeight - respc(22),respc(20),respc(20),"files/settings.png",rotation,0,0,tocolor(r,g,b,255))
-			dxDrawText("Beállítások", bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight - zoneLineHeight, bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight, tocolor(r,g,b,255*textalpha), 1, font, "right", "center")
+			dxDrawText("Configurações", bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight - zoneLineHeight, bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight, tocolor(r,g,b,255*textalpha), 1, font, "right", "center")
 		else
 			dxDrawImage(bigmapPosX + bigmapWidth - respc(25), bigmapPosY + bigmapHeight - respc(22),respc(20),respc(20),"files/settings.png",rotation,0,0,tocolor(220,220,220,255))
-			dxDrawText("Beállítások", bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight - zoneLineHeight, bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight, tocolor(220,220,220,255*textalpha), 1, font, "right", "center")
+			dxDrawText("Configurações", bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight - zoneLineHeight, bigmapPosX + bigmapWidth - respc(27), bigmapPosY + bigmapHeight, tocolor(220,220,220,255*textalpha), 1, font, "right", "center")
 		end]]
 
 		dxDrawRectangle(bigmapPosX + respc(25), bigmapPosY+bigmapHeight-respc(75), respc(115), respc(50),tocolor(30,30,30,255))
-		dxDrawText("3D BLIPPEK: ", bigmapPosX + respc(30), bigmapPosY+bigmapHeight-respc(70), bigmapPosX + respc(25)+respc(100), bigmapPosY+bigmapHeight-respc(75)+respc(50), tocolor(220,220,220,255), 1, exports.oFont:getFont("condensed", math.floor(respc(8))), "left", "top")
+		dxDrawText("BLIPS 3D: ", bigmapPosX + respc(30), bigmapPosY+bigmapHeight-respc(70), bigmapPosX + respc(25)+respc(100), bigmapPosY+bigmapHeight-respc(75)+respc(50), tocolor(220,220,220,255), 1, exports.oFont:getFont("condensed", math.floor(respc(8))), "left", "top")
 		dxDrawText(Blip3DStatesNames[(state3DBlip)], bigmapPosX + respc(30), bigmapPosY+bigmapHeight-respc(70), bigmapPosX + respc(25)+respc(100), bigmapPosY+bigmapHeight-respc(75)+respc(45), tocolor(220,220,220,255), 1, exports.oFont:getFont("condensed", math.floor(respc(14))), "left", "bottom", false, false, false, true)
 
 		if isCursorShowing() then
@@ -1041,7 +1041,7 @@ function renderTheBigmap()
 				end
 			end
 		end
-		-- GTA V BLIP vége
+		-- Fim dos blips estilo GTA V
 
 		if visibleBlipTooltip then
 			visibleBlipTooltip = false
@@ -1051,7 +1051,7 @@ function renderTheBigmap()
 
 			dxDrawRectangle(bigmapPosX + respc(25), bigmapPosY+respc(25), respc(375), respc(30),tocolor(30,30,30,255))
 
-			dxDrawText("Nyomd meg a "..color.."[Space] #dcdcdcgombot a nézet visszaállításához.", bigmapPosX + respc(25), bigmapPosY+respc(25), bigmapPosX + respc(25) + respc(375), bigmapPosY+respc(25) + respc(30), tocolor(220,220,220,255), 1, exports.oFont:getFont("condensed", math.floor(respc(10))), "center", "center",false,false,false,true)
+			dxDrawText("Pressione "..color.."[Espaço] #dcdcdcpara restaurar a visão do mapa.", bigmapPosX + respc(25), bigmapPosY+respc(25), bigmapPosX + respc(25) + respc(375), bigmapPosY+respc(25) + respc(30), tocolor(220,220,220,255), 1, exports.oFont:getFont("condensed", math.floor(respc(10))), "center", "center",false,false,false,true)
 
 			if getKeyState("space") then
 				moveRadarPositon(mapMovedPos[1], mapMovedPos[2])

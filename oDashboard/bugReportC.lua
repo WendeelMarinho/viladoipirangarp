@@ -179,7 +179,7 @@ function closeBugReportMenu()
     end, 500, 1)
 end
 
--- Fejlesztői felület
+-- Interface de desenvolvimento
 local bugTable = {}
 
 local progressColors = {
@@ -210,7 +210,7 @@ function renderBugListPanel()
     dxDrawRectangle(sx*0.25+2/myX*sx, sy*0.25+2/myY*sy, sx*0.5-4/myX*sx, sy*0.5-4/myY*sy, tocolor(35, 35, 35, 255*alpha))
 
     dxDrawText("Bug Reports", sx*0.25+10/myX*sx, sy*0.25+10/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+10/myY*sy+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 17/myX*sx), "left", "center")
-    dxDrawText("Ebben a listában található az összes, játékosok által jelentett hiba!", sx*0.25+10/myX*sx, sy*0.25+35/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+35/myY*sy+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
+    dxDrawText("Nesta lista aparecem todos os bugs reportados pelos jogadores no Ipiranga Roleplay.", sx*0.25+10/myX*sx, sy*0.25+35/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+35/myY*sy+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
 
     local startY = sy*0.33
     for i = 1, 8 do 
@@ -243,9 +243,9 @@ function renderBugListPanel()
 
             if string.len(v[3][4]) > 0 then  
                 if core:isInSlot(sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.1, sy*0.055) then 
-                    dxDrawText(v[3][1] .. " #0077ed(Kép URL másolása)", sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.25+10/myX*sx+sx*0.1, startY+sy*0.055, tocolor(255, 255, 255, 150*alpha), 1, font:getFont("bebasneue", 10/myX*sx), "left", "center", false, false, false, true)
+                    dxDrawText(v[3][1] .. " #0077ed(copiar URL da imagem)", sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.25+10/myX*sx+sx*0.1, startY+sy*0.055, tocolor(255, 255, 255, 150*alpha), 1, font:getFont("bebasneue", 10/myX*sx), "left", "center", false, false, false, true)
                 else
-                    dxDrawText(v[3][1] .. " #429bf5(Kép URL másolása)", sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.25+10/myX*sx+sx*0.1, startY+sy*0.055, tocolor(255, 255, 255, 150*alpha), 1, font:getFont("bebasneue", 10/myX*sx), "left", "center", false, false, false, true)
+                    dxDrawText(v[3][1] .. " #429bf5(copiar URL da imagem)", sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.25+10/myX*sx+sx*0.1, startY+sy*0.055, tocolor(255, 255, 255, 150*alpha), 1, font:getFont("bebasneue", 10/myX*sx), "left", "center", false, false, false, true)
                 end
             else
                 dxDrawText(v[3][1], sx*0.25+10/myX*sx, startY+sy*0.025, sx*0.25+10/myX*sx+sx*0.1, startY+sy*0.055, tocolor(255, 255, 255, 150*alpha), 1, font:getFont("bebasneue", 10/myX*sx), "left", "center", false, false, false, true)
@@ -268,14 +268,14 @@ function renderBugListPanel()
                 
                 cx, cy = cx + 5/myX*sx, cy + 5/myY*sy
 
-                local boxWidth = dxGetTextWidth("Beküldő: #de3a3a"..v[2][2].."#ffffff (Char: "..v[2][1].." | User: "..v[2][3]..")", 1, font:getFont("condensed", 9/myX*sx), true)
+                local boxWidth = dxGetTextWidth("Enviado por: #de3a3a"..v[2][2].."#ffffff (Char: "..v[2][1].." | User: "..v[2][3]..")", 1, font:getFont("condensed", 9/myX*sx), true)
                 boxWidth = boxWidth + 15/myX*sx
 
                 dxDrawRectangle(cx, cy, boxWidth+2/myX*sx, sy*0.1, tocolor(30, 30, 30, 200*alpha), true)
                 dxDrawRectangle(cx+2/myX*sx, cy+2/myY*sy, boxWidth, sy*0.1-4/myY*sy, tocolor(35, 35, 35, 255*alpha), true)
                 --dxDrawRectangle(cx+4/myX*sx, cy+4/myY*sy, sx*0.08, sy*0.025, _, true)
-                dxDrawText("Beküldés dátuma: "..color..v[4], cx+8/myX*sx, cy+4/myY*sy, cx+8/myX*sx+sx*0.08, cy+4/myY*sy+sy*0.025, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, true, true)
-                dxDrawText("Beküldő: #de3a3a"..v[2][2].."#ffffff (Char: "..v[2][1].." | User: "..v[2][3]..")", cx+8/myX*sx, cy+4/myY*sy+0.03, cx+8/myX*sx+sx*0.08, cy+4/myY*sy+sy*0.055, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, true, true)
+                dxDrawText("Data do envio: "..color..v[4], cx+8/myX*sx, cy+4/myY*sy, cx+8/myX*sx+sx*0.08, cy+4/myY*sy+sy*0.025, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, true, true)
+                dxDrawText("Enviado por: #de3a3a"..v[2][2].."#ffffff (Char: "..v[2][1].." | User: "..v[2][3]..")", cx+8/myX*sx, cy+4/myY*sy+0.03, cx+8/myX*sx+sx*0.08, cy+4/myY*sy+sy*0.055, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, true, true)
                 dxDrawText(v[3][3], cx+8/myX*sx, cy+4/myY*sy+sy*0.035, cx+8/myX*sx+(boxWidth-25/myX*sx), cy+4/myY*sy+sy*0.095, tocolor(r, g, b, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top", false, true, true, false)
             end
         end

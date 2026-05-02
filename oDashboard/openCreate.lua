@@ -57,7 +57,7 @@ function renderOpening()
     --end
 
     if not openedCreateDatas.opened then 
-        core:dxDrawButton(sx*0.45, sy*0.66, sx*0.1, sy*0.035, r, g, b, 220 * bgAnimationValue, "Nyitás", tocolor(255, 255, 255, 255 * bgAnimationValue), 1, font:getFont("condensed", 11/myX*sx), true, tocolor(0, 0, 0, 50 * bgAnimationValue))
+        core:dxDrawButton(sx*0.45, sy*0.66, sx*0.1, sy*0.035, r, g, b, 220 * bgAnimationValue, "Abrir", tocolor(255, 255, 255, 255 * bgAnimationValue), 1, font:getFont("condensed", 11/myX*sx), true, tocolor(0, 0, 0, 50 * bgAnimationValue))
     end
 
     startX = -sx*0.06
@@ -82,10 +82,10 @@ function renderOpening()
             dxDrawText(v.money .. "PP", startX, sy*0.53, startX + w, sy*0.53, tocolor(255, 255, 255, 200 * bgAnimationValue), 1, font:getFont("p_bo", 12/myX*sx), "center", "center")
         elseif v.type == 4 then 
             dxDrawImage(startX + w/2 - 35/myX*sx, sy*0.5 - 60/myY*sy, 70/myX*sx, 70/myY*sy, "files/daily/house.png", 0, 0, 0, tocolor(255, 255, 255, 255 * bgAnimationValue))
-            dxDrawText(v.money .. " ingatlan slot", startX, sy*0.53, startX + w, sy*0.53, tocolor(255, 255, 255, 200 * bgAnimationValue), 1, font:getFont("p_bo", 12/myX*sx), "center", "center")
+            dxDrawText(v.money .. " slots de imóvel", startX, sy*0.53, startX + w, sy*0.53, tocolor(255, 255, 255, 200 * bgAnimationValue), 1, font:getFont("p_bo", 12/myX*sx), "center", "center")
         elseif v.type == 5 then 
             dxDrawImage(startX + w/2 - 35/myX*sx, sy*0.5 - 60/myY*sy, 70/myX*sx, 70/myY*sy, "files/daily/car.png", 0, 0, 0, tocolor(255, 255, 255, 255 * bgAnimationValue))
-            dxDrawText(v.money .. " jármű slot", startX, sy*0.53, startX + w, sy*0.53, tocolor(255, 255, 255, 200 * bgAnimationValue), 1, font:getFont("p_bo", 12/myX*sx), "center", "center")
+            dxDrawText(v.money .. " slots de veículo", startX, sy*0.53, startX + w, sy*0.53, tocolor(255, 255, 255, 200 * bgAnimationValue), 1, font:getFont("p_bo", 12/myX*sx), "center", "center")
         end
 
         startX = startX + sx*0.125
@@ -93,7 +93,7 @@ function renderOpening()
 
     local panelW, panelH = sx*0.63, sy*0.195
     local panelX, panelY = sx*0.5 - panelW/2, sy - (sy*0.25 * bgAnimationValue)
-    core:drawWindow(panelX, panelY, panelW, panelH, "Elérhető itemek - "..openedCreateDatas.name, bgAnimationValue)
+    core:drawWindow(panelX, panelY, panelW, panelH, "Itens disponíveis - "..openedCreateDatas.name, bgAnimationValue)
 
     local startX = panelX + sx*0.007
     for i = 1, 4 do 
@@ -120,9 +120,9 @@ function renderOpening()
                 elseif openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].type == 3 then 
                     name = openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].money .. "PP"
                 elseif openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].type == 4 then 
-                    name = openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].money .. " ingatlan slot"
+                    name = openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].money .. " slots de imóvel"
                 elseif openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].type == 5 then 
-                    name = openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].money .. " jármű slot"
+                    name = openedCreateDatas.availableLoots[i][i2 + raritys[i].scroll].money .. " slots de veículo"
                 end
 
                 dxDrawText(name, startX + sx*0.003, startY, startX + sx*0.003+sx*0.148, startY+sy*0.025, tocolor(255, 255, 255, 255 * bgAnimationValue), 1, font:getFont("condensed", 9/myX*sx), "left", "center")
@@ -162,10 +162,10 @@ function renderOpening()
             displaytext = winnerItem.money.."PP"
         elseif winnerItem.type == 4 then 
             dxDrawImage(sx*0.5 - 60/myX*sx*winnerAnimation, sy*0.49 - 60/myY*sy*winnerAnimation, 120/myX*sx*winnerAnimation, 120/myY*sy*winnerAnimation, "files/daily/house.png", 0, 0, 0, tocolor(255, 255, 255, 255 * winnerAnimation))
-            displaytext = winnerItem.money.." ingatlan slot"
+            displaytext = winnerItem.money.." slots de imóvel"
         elseif winnerItem.type == 5 then 
             dxDrawImage(sx*0.5 - 60/myX*sx*winnerAnimation, sy*0.49 - 60/myY*sy*winnerAnimation, 120/myX*sx*winnerAnimation, 120/myY*sy*winnerAnimation, "files/daily/car.png", 0, 0, 0, tocolor(255, 255, 255, 255 * winnerAnimation))
-            displaytext = winnerItem.money.." jármű slot"
+            displaytext = winnerItem.money.." slots de veículo"
         end
 
         local textw = dxGetTextWidth(displaytext, 1 * winnerAnimation, font:getFont("p_bo", 40/myX*sx))
@@ -291,19 +291,19 @@ function openingEnd()
     interface:toggleHud(false)
 
     if winnerItem.type == 1 then
-        outputChatBox(core:getServerPrefix("server", "Case", 2).."Kinyitottál egy "..color..inventory:getItemName(winnerItem.item, winnerItem.itemvalue).."#ffffff-et egy "..color..openedCreateDatas.name.."#ffffff boxból.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Case", 2).."Você sorteou "..color..inventory:getItemName(winnerItem.item, winnerItem.itemvalue).."#ffffff na caixa "..color..openedCreateDatas.name.."#ffffff.", 255, 255, 255, true)
         inventory:giveItem(winnerItem.item, winnerItem.itemvalue, 1, 0)
     elseif winnerItem.type == 2 then
-        outputChatBox(core:getServerPrefix("server", "Case", 2).."Kinyitottál "..color..winnerItem.money.."$#ffffff-t egy "..color..openedCreateDatas.name.."#ffffff boxból.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Case", 2).."Você sorteou "..color..winnerItem.money.."$#ffffff na caixa "..color..openedCreateDatas.name.."#ffffff.", 255, 255, 255, true)
         setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money") + winnerItem.money)
     elseif winnerItem.type == 3 then
-        outputChatBox(core:getServerPrefix("server", "Case", 2).."Kinyitottál "..color..winnerItem.money.."PP#ffffff-t egy "..color..openedCreateDatas.name.."#ffffff boxból.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Case", 2).."Você sorteou "..color..winnerItem.money.."PP#ffffff na caixa "..color..openedCreateDatas.name.."#ffffff.", 255, 255, 255, true)
         setElementData(localPlayer, "char:pp", getElementData(localPlayer, "char:pp") + winnerItem.money)
     elseif winnerItem.type == 4 then
-        outputChatBox(core:getServerPrefix("server", "Case", 2).."Kinyitottál "..color..winnerItem.money.." ingatlasn slotot#ffffff egy "..color..openedCreateDatas.name.."#ffffff boxból.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Case", 2).."Você sorteou "..color..winnerItem.money.." slots de imóvel#ffffff na caixa "..color..openedCreateDatas.name.."#ffffff.", 255, 255, 255, true)
         setElementData(localPlayer, "char:intSlot", getElementData(localPlayer, "char:intSlot") + winnerItem.money)
     elseif winnerItem.type == 5 then
-        outputChatBox(core:getServerPrefix("server", "Case", 2).."Kinyitottál "..color..winnerItem.money.." jármű slotot#ffffff egy "..color..openedCreateDatas.name.."#ffffff boxból.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Case", 2).."Você sorteou "..color..winnerItem.money.." slots de veículo#ffffff na caixa "..color..openedCreateDatas.name.."#ffffff.", 255, 255, 255, true)
         setElementData(localPlayer, "char:vehSlot", getElementData(localPlayer, "char:vehSlot") + winnerItem.money)
     end
 

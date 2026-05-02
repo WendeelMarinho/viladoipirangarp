@@ -144,7 +144,7 @@ function makeRoute(destinationX, destinationY, uTurned)
 		["Tierra Robada"] = false
 	}
 
-	if (disallowedZones[cityName]) then exports.oInfobox:outputInfoBox("Nem található útvonal a kiválasztott célhoz.", "error") return end
+	if (disallowedZones[cityName]) then exports.oInfobox:outputInfoBox("Não foi possível traçar rota até o destino selecionado.", "error") return end
 
 	if disallowedZones[currentZoneName] or disallowedZones[currentCityName] then
 		playOneGPSSound("nincskapcs")
@@ -153,7 +153,7 @@ function makeRoute(destinationX, destinationY, uTurned)
 	end
 
 	if disallowedZones[zoneName] or disallowedZones[cityName] then
-		exports.oInfobox:outputInfoBox("Nem található útvonal a kiválasztott célhoz.", "error")
+		exports.oInfobox:outputInfoBox("Não foi possível traçar rota até o destino selecionado.", "error")
 		playOneGPSSound("masikuticel")
 		setElementData(occupiedVehicle, "gpsDestination", false)
 		return false
@@ -164,7 +164,7 @@ function makeRoute(destinationX, destinationY, uTurned)
 	if not routePath then
 		if not uTurned then
 			playOneGPSSound("masikuticel")
-			exports.oInfobox:outputInfoBox("Nem található útvonal a kiválasztott célhoz.", "error")
+			exports.oInfobox:outputInfoBox("Não foi possível traçar rota até o destino selecionado.", "error")
 		else
 			playOneGPSSound("nincskapcs")
 		end
@@ -277,7 +277,7 @@ function makeRoute(destinationX, destinationY, uTurned)
 	selectedRouteSound = false
 
 	if not uTurned then
-		--selectedRouteSound = playSound("gps/sounds/" .. carCanGPSVal .. "/uticel.mp3")
+		--selectedRouteSound = playSound("gps/sounds/" .. carCanGPSVal .. "/uticel.mp3") -- som: destino da rota (arquivo legado)
 	end
 end
 

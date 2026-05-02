@@ -1,7 +1,7 @@
 local sx,sy = guiGetScreenSize()
 local myX,myY = 1600, 900 
 
----[ Változók ]---
+---[ Variáveis ]---
 local moveNowId = 0
 local sizeingNowId = 0
 local sizeingNowType = "width"
@@ -153,7 +153,7 @@ function renderHudEditor()
             end
 
 
-            if v[1] == "Actionbar" then  -- Actionbar slot +/- és forgatás
+            if v[1] == "Actionbar" then  -- Actionbar: slots +/- e rotação
                 if core:isInSlot(sx*v[2]+sx*v[4]*actionBarSlotCount,sy*v[3]+sy*0.001,12/myX*sx,12/myY*sy) then 
                     dxDrawImage(sx*v[2]+sx*v[4]*actionBarSlotCount,sy*v[3]+sy*0.001,12/myX*sx,12/myY*sy,"files/plus.png",0,0,0,tocolor(blueR, blueG, blueB,255))
                 else
@@ -251,7 +251,7 @@ function keyPress(key,state)
                             local wn = widgets[nonRenderedElements[i]][1]
                             if wn == "HP" or wn == "Armor" or wn == "Étel/Ital" or wn == "Comida/Bebida" or wn == "Stamina" and exports["oHud"]:getHudType() == 2 then 
                                 exports.oInfobox:outputInfoBox('O HUD 2 está ativo. Desative-o antes de adicionar este widget.','error')
-                                --outputChatBox(core:getServerPrefix("server", "Interface", 3).."A Hud 2 van kiválasztva előbb zárd be!",255,255,255,true)
+                                --outputChatBox(core:getServerPrefix("server", "Interface", 3).."O HUD 2 está selecionado; feche-o antes!",255,255,255,true)
                                 return
                             end
                             widgets[nonRenderedElements[i]][7] = true
@@ -323,12 +323,12 @@ function keyPress(key,state)
                         end
                     end
 
-                    if v[1] == "Actionbar" then  -- Actionbar slot +/- és forgatás
+                    if v[1] == "Actionbar" then  -- Actionbar: slots +/- e rotação
                         if core:isInSlot(sx*v[2]+sx*v[4]*actionBarSlotCount,sy*v[3]+sy*0.001,12/myX*sx,12/myY*sy) then -- +
                             if actionBarSlotCount < 9 then 
                                 actionBarSlotCount = actionBarSlotCount + 1
                                 --triggerEvent("inv > bindActionbarSlots")
-                                --outputChatBox("bindelni kellene")
+                                --outputChatBox("seria preciso fazer bind")
                                 exports.oInventory:bindActionbarSlots()
                             end
                         end
@@ -337,7 +337,7 @@ function keyPress(key,state)
                             if actionBarSlotCount > 1 then 
                                 actionBarSlotCount = actionBarSlotCount - 1
                                 --triggerEvent("inv > bindActionbarSlots")
-                                --outputChatBox("bindelni kellene")
+                                --outputChatBox("seria preciso fazer bind")
                                 exports.oInventory:bindActionbarSlots()
                             end
                         end
@@ -427,7 +427,7 @@ function getInterfaceElementData(id, data)
             return widgets[id][dataNeed]
         end
     else
-        return outputDebugString("Nincs lekérhető adat. (Id:"..id.."; DataName:"..data..")",1)
+        return outputDebugString("Sem dados disponíveis. (Id:"..id.."; DataName:"..data..")",1)
     end
 end
 
@@ -462,7 +462,7 @@ function setInterfaceElementData(id, data, value)
             
         end
     else
-        return outputDebugString("Nincs lekérhető adat. (Id:"..id.."; DataName:"..data..")",1)
+        return outputDebugString("Sem dados disponíveis. (Id:"..id.."; DataName:"..data..")",1)
     end
 end
 

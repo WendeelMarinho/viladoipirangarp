@@ -144,7 +144,7 @@ addEventHandler("onClientResourceStart", root, function(res)
 
         alcoholPNG = dxCreateTexture("hud/icons/alcohol.png")
 
-        oxygenLevel = getPedOxygenLevel(localPlayer)/10.02  --1002(átlag maxlevel) 1002/x=100 x= 10.2
+        oxygenLevel = getPedOxygenLevel(localPlayer)/10.02  -- 1002 (nível médio máx.) 1002/x=100 x=10.2
         oxygenPNG = dxCreateTexture("hud/icons/oxygen.png")
 	end
 end)
@@ -706,7 +706,7 @@ addEventHandler("onClientPreRender", getRootElement(),
                     end
 
                     if playerVelZ >= 0.1 and not isJumped and not occupiedVehicle then
-                        -- Ugrás
+                        -- Pulo
                         isJumped = true
                         stamina = stamina - 4.5
                         staminaFueling = true
@@ -725,7 +725,7 @@ addEventHandler("onClientPreRender", getRootElement(),
                         isJumped = false
                     end
                     --outputChatBox(actualSpeed)
-                    if actualSpeed < 0.05 and not isJumped and staminaFueling then -- feltöltés
+                    if actualSpeed < 0.05 and not isJumped and staminaFueling then -- Recarga da stamina
                     -- outputChatBox("a")
                         if stamina <= 100 then
                             if stamina > 25 then

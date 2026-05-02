@@ -97,10 +97,10 @@ addEventHandler("buypanel > endVehSell", resourceRoot, function(traderPlayer, ty
     setElementData(traderPlayer, "dashboard:inTrade", false)
     setElementData(client, "dashboard:inTrade", false)
 
-    if type == 1 then -- túl messzire kerültek
+    if type == 1 then -- Muito longe um do outro
         infobox:outputInfoBox("A venda foi cancelada: vocês ficaram longe demais um do outro.", "warning", traderPlayer)
-    elseif type == 2 then -- elfogadva
-        exports.oInventory:deleteAllExisitingItemWithValue(234, getElementData(veh, "veh:id")) -- törli az összes másolt kulcsot
+    elseif type == 2 then -- Aceito
+        exports.oInventory:deleteAllExisitingItemWithValue(234, getElementData(veh, "veh:id")) -- Remove todas as chaves copiadas
 
         infobox:outputInfoBox("Venda concluída!", "success", traderPlayer)
         setElementData(client, "char:money", getElementData(client, "char:money")-price)
@@ -109,11 +109,11 @@ addEventHandler("buypanel > endVehSell", resourceRoot, function(traderPlayer, ty
 
         outputChatBox(core:getServerPrefix("server", "Veículo", 3).."Você comprou o veículo ID "..color..getElementData(veh, "veh:id").." #ffffffpor "..color..price.."$#ffffff.", client, 255, 255, 255, true)
         outputChatBox(core:getServerPrefix("server", "Veículo", 3).."Você vendeu o veículo ID "..color..getElementData(veh, "veh:id").." #ffffffpor "..color..price.."$#ffffff.", traderPlayer, 255, 255, 255, true)
-    elseif type == 3 then -- nincs elég pénz
+    elseif type == 3 then -- Dinheiro insuficiente
         infobox:outputInfoBox("O comprador não tem dinheiro suficiente!", "error", traderPlayer)
-    elseif type == 4 then -- elutasítva
+    elseif type == 4 then -- Recusado
         infobox:outputInfoBox("A proposta foi recusada!", "error", traderPlayer)
-    elseif type == 4 then -- elutasítva
+    elseif type == 4 then -- Recusado (slot)
         infobox:outputInfoBox("O comprador não tem slot de veículo suficiente!", "error", traderPlayer)
     end
 end)
@@ -124,12 +124,12 @@ addEventHandler("buypanel > endIntSell", resourceRoot, function(traderPlayer, ty
     setElementData(traderPlayer, "dashboard:inTrade", false)
     setElementData(client, "dashboard:inTrade", false)
 
-    if type == 1 then -- túl messzire kerültek
+    if type == 1 then -- Muito longe um do outro
         infobox:outputInfoBox("A venda foi cancelada: vocês ficaram longe demais um do outro.", "warning", traderPlayer)
-    elseif type == 2 then -- elfogadva
+    elseif type == 2 then -- Aceito
         local intID = getElementData(int, "dbid")
         local newOwnerID = getElementData(client, "char:id")
-        exports.oInventory:deleteAllExisitingItemWithValue(235, intID) -- törli az összes másolt kulcsot
+        exports.oInventory:deleteAllExisitingItemWithValue(235, intID) -- Remove todas as chaves copiadas
 
         infobox:outputInfoBox("Venda concluída!", "success", traderPlayer)
         setElementData(client, "char:money", getElementData(client, "char:money")-price)
@@ -141,11 +141,11 @@ addEventHandler("buypanel > endIntSell", resourceRoot, function(traderPlayer, ty
 
         outputChatBox(core:getServerPrefix("server", "Imóvel", 3).."Você comprou o imóvel "..color..getElementData(int, "name").." #ffffffpor "..color..price.."$#ffffff.", client, 255, 255, 255, true)
         outputChatBox(core:getServerPrefix("server", "Imóvel", 3).."Você vendeu o imóvel "..color..getElementData(int, "name").." #ffffffpor "..color..price.."$#ffffff.", traderPlayer, 255, 255, 255, true)
-    elseif type == 3 then -- nincs elég pénz
+    elseif type == 3 then -- Dinheiro insuficiente
         infobox:outputInfoBox("O comprador não tem dinheiro suficiente!", "error", traderPlayer)
-    elseif type == 4 then -- elutasítva
+    elseif type == 4 then -- Recusado
         infobox:outputInfoBox("A proposta foi recusada!", "error", traderPlayer)
-    elseif type == 4 then -- elutasítva
+    elseif type == 4 then -- Recusado (slot)
         infobox:outputInfoBox("O comprador não tem slot de imóvel suficiente!", "error", traderPlayer)
     end
 end)

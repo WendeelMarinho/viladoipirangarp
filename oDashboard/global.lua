@@ -80,7 +80,7 @@ options = {
     ["graphics"] = {
         name = "Configurações gráficas",
         icon = "graphics.png",
-        --- megnevezés, type (1:on/off, 2:csúszka, 3:jobbra-balra gomb), minimum érték, maximum érték, function, state, availableInBeta
+        --- nome, tipo (1:on/off, 2:slider, 3:botão esq/dir), valor mín., valor máx., função, estado, disponível na beta
         {"Distância de visão", 2, 100, 4000, "setMaxShowDistance", 0, true},
         {"Paleta de cores", 3, 0, 17, "oShader_Palette", 0, true},
         {"Bloom", 1, 1, 1, "oShader_Bloom", false, true}, --dash > shader > toggleBloom
@@ -91,14 +91,14 @@ options = {
         {"Texturas HD", 1, 1, 1, "oShader_HDTextures", false, true},
         {"Profundidade de campo", 1, 1, 1, "oShader_Depth", false, true},
         {"Anti-aliasing (FXAA)", 1, 1, 1, "oShader_FXAA", true, true}
-        --{"Havazás", 1, 1, 1, "snow:state", false, true},
-        --{"Kidolgozott fű", 1, 1, 1, "oShader_HDGrass", false},
+        --{"Queda de neve", 1, 1, 1, "snow:state", false, true},
+        --{"Grama detalhada", 1, 1, 1, "oShader_HDGrass", false},
     },
 
     ["char"] = {
         name = "Configurações do personagem",
         icon = "char.png",
-        --- megnevezés, type (1:on/off, 3:jobbra-balra gomb), minimum érték, maximum érték, function, state, availableInBeta
+        --- nome, tipo (1:on/off, 3:botão esq/dir), valor mín., valor máx., função, estado, disponível na beta
         {"Estilo de luta", 3, 1, 20, "", "char:fightStyle", true},
         {"Estilo de caminhada", 3, 1, 23, "", "char:walkStyle", true},
         {"Animação ao falar", 3, 0, 10, "", "char:talkAnimation", true},
@@ -181,19 +181,19 @@ color, r, g, b = core:getServerColor()
 serverColor, r, g, b = core:getServerColor()
 moneyColor = "#7cc576"
 
---- FRAKCIÓK
+--- FACÇÕES
 factionPages = {
-    --{"név", "icon"},
+    --{"nome", "ícone"},
     {"Visão geral", "home"},
     {"Membros", "team"},
     {"Veículos", "vehicle"},
     {"Patentes", "ranks"},
     {"Serviços (duty)", "dutys"},
-    --{"Raktár", "inventory"},
+    --{"Armazém", "inventory"},
 }
 
 factionHomepageInfos = {
-    --{"Leírás", "megnevezése a táblában", háttérR, háttérG, háttérB, textR, textG, textB}
+    --{"Descrição", "nome na tabela", fundoR, fundoG, fundoB, textoR, textoG, textoB}
     {"Membros", 0, r, g, b, 220, 220, 220},
     {"Veículos", 6, r, g, b, 220, 220, 220},
     {"Patentes", 7, r, g, b, 220, 220, 220},
@@ -266,6 +266,7 @@ factionLogMessageColor = "#fc7b03"
 factionLogNameColor = "#0d73e0"
 factionLogPrefix = "#fc5a03[Organização - LOG]: "..factionLogMessageColor
 
+-- Teclas bloqueadas no painel (nome legado: tiltott_keys)
 tiltott_keys = {
     ["backspace"] = true,
     ["enter"] = true,
@@ -332,7 +333,7 @@ premiumCategories = {
         {id = 22, price = 1, count = 1, value = 1},    
     }},
     {name = "Armas", items = {
-        -- Lőszerek
+        -- Munições
         {id = 45, price = 200, count = 50, value = 1},    
         {id = 46, price = 100, count = 5, value = 1},    
         {id = 47, price = 100, count = 25, value = 1},    
@@ -352,7 +353,7 @@ premiumCategories = {
         {id = 40, price = 5000, count = 1, value = 100},    
         {id = 42, price = 5500, count = 1, value = 100},  
 
-        -- skines fegyverek
+        -- Armas com skin
         {id = 27, price = 9000, count = 1, value = 2}, 
         {id = 27, price = 9500, count = 1, value = 3}, 
         {id = 27, price = 9500, count = 1, value = 4}, 
@@ -553,6 +554,7 @@ premiumInfos = {
     }},
 }
 
+-- Tecla física → caractere layout húngaro (entrada; não alterar valores)
 custom_keys = {
     ["["] = "ő",
     ["]"] = "ú",
@@ -694,11 +696,11 @@ end
 
 
 -- CREATE
--- gift item felépítése 
--- {item = (item id/0), rarity = (1:COMMON, 2:RARE, 3:EPIC, 4:LEGENDARY), money = (pénz/pp/ingatlan slot/jármű slot), type = (1:item, 2:dollár, 3:pp, 4:ingatlan slot, 5:jármű slot), itemvalue = (item value pl. skines fegyvernél skin)}
+-- Estrutura do item de presente
+-- {item = (id do item/0), rarity = (1:COMMON, 2:RARE, 3:EPIC, 4:LEGENDARY), money = (dinheiro/pp/slot imóvel/slot veículo), type = (1:item, 2:dólar, 3:pp, 4:slot imóvel, 5:slot veículo), itemvalue = (ex.: skin em arma com skin)}
 
 
--- legolcsóbbtól kicsit olcsóbb kivéve mesterkönyv
+-- Do mais barato ao um pouco mais caro, exceto livros mestres
 creates = {
     {name = "REBOOT BOX", price = 0, money_type = "$", icon = "reboot", specialtag = "REBOOT", tagcolor = {247, 60, 47}, expire = 1673218740, gifts = {
         {item = 89, rarity = 3, money = 0, type = 1, itemvalue = 1},
@@ -827,8 +829,8 @@ dailyBoxRewards = {
         {item = 0, rarity = 2, money = 120, type = 3, itemvalue = 1},
         {item = 0, rarity = 3, money = 200, type = 3, itemvalue = 1},
         {item = 0, rarity = 4, money = 800, type = 3, itemvalue = 1},
-        {item = 0, rarity = 4, money = 1, type = 4, itemvalue = 1}, -- ingatlan slot
-        {item = 0, rarity = 4, money = 1, type = 5, itemvalue = 1}, -- jármű slot
+        {item = 0, rarity = 4, money = 1, type = 4, itemvalue = 1}, -- slot de imóvel
+        {item = 0, rarity = 4, money = 1, type = 5, itemvalue = 1}, -- slot de veículo
         {item = 94, rarity = 1, money = 0, type = 1, itemvalue = 1},
         {item = 104, rarity = 1, money = 0, type = 1, itemvalue = 1},
         {item = 236, rarity = 2, money = 0, type = 1, itemvalue = 1},

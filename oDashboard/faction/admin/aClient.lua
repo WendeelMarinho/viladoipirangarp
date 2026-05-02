@@ -6,7 +6,7 @@ local myX, myY = 1600, 900
 local page = 1
 
 local factions = {
-    ---- Id, Név, Típus, Engedélyezett dutyskinek, Engedélyezett dutyitemek, dutyk, játékosok, járművek, ranks, frakció számla, létrehozás dátuma
+    ---- Id, nome, tipo, skins de plantão permitidos, itens de plantão permitidos, plantões, jogadores, veículos, postos, conta da facção, data de criação
 }
 
 local renderedList = {}
@@ -70,18 +70,18 @@ function renderPanel()
         dxDrawImage(0+(200/myX*sx),0+(140/myY*sy),sx-(400/myX*sx),sy-(280/myY*sy),textures["logo"],0,0,0,tocolor(255,255,255,50*a))
 
         if core:isInSlot(sx*0.355, sy*0.258, sx*0.08, sy*0.02) then 
-            dxDrawText("Frakció Létrehozása", sx*0.355, sy*0.258, _, _, tocolor(138, 219, 125,255*a),0.9/myX*sx,fonts["condensed-11"])
+            dxDrawText("Criar facção", sx*0.355, sy*0.258, _, _, tocolor(138, 219, 125,255*a),0.9/myX*sx,fonts["condensed-11"])
         else
-            dxDrawText("Frakció Létrehozása", sx*0.355, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
+            dxDrawText("Criar facção", sx*0.355, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
         end
 
-        dxDrawText("Rádió Frekvencia Levédése", sx*0.45, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
+        dxDrawText("Bloquear frequência de rádio", sx*0.45, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
 
 
         if core:isInSlot(sx*0.615,sy*0.258,sx*0.032,sy*0.025) then 
-            dxDrawText("Frissítés", sx*0.615, sy*0.258, _, _, tocolor(r,g,b,255*a),0.9/myX*sx,fonts["condensed-11"])
+            dxDrawText("Atualizar", sx*0.615, sy*0.258, _, _, tocolor(r,g,b,255*a),0.9/myX*sx,fonts["condensed-11"])
         else
-            dxDrawText("Frissítés", sx*0.615, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
+            dxDrawText("Atualizar", sx*0.615, sy*0.258, _, _, tocolor(255,255,255,255*a),0.9/myX*sx,fonts["condensed-11"])
         end
 
         local starty = 0.29
@@ -132,11 +132,11 @@ function renderPanel()
         end
 
     elseif page == 2 then 
-        dxDrawText("Frakció létrehozása",sx*0.3,sy*0.23,sx*0.3+sx*0.4,sy*0.23+sy*0.005, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-14"], "center", "center")
+        dxDrawText("Criar facção",sx*0.3,sy*0.23,sx*0.3+sx*0.4,sy*0.23+sy*0.005, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-14"], "center", "center")
         dxDrawRectangle(sx*0.3,sy*0.25,sx*0.4,sy*0.48,tocolor(40,40,40,240*a))
         dxDrawImage(0+(200/myX*sx),0+(140/myY*sy),sx-(400/myX*sx),sy-(280/myY*sy),"files/logo.png",0,0,0,tocolor(255,255,255,50*a)) 
 
-        dxDrawText("Típus:",sx*0.31,sy*0.31,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
+        dxDrawText("Tipo:",sx*0.31,sy*0.31,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
 
         local startY = 0.34
         for k, v in ipairs(faction_types) do 
@@ -216,11 +216,11 @@ function renderPanel()
 
         createFaction_Datas.name = getEditboxValue(getEditboxFromName("faction-name")) or ""
     elseif page == 3 then 
-        dxDrawText("Frakció szerkesztése - "..color..editedFactionDatas.name,sx*0.3,sy*0.23,sx*0.3+sx*0.4,sy*0.23+sy*0.005, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-14"], "center", "center", false, false, false, true)
+        dxDrawText("Editar facção - "..color..editedFactionDatas.name,sx*0.3,sy*0.23,sx*0.3+sx*0.4,sy*0.23+sy*0.005, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-14"], "center", "center", false, false, false, true)
         dxDrawRectangle(sx*0.3,sy*0.25,sx*0.4,sy*0.48,tocolor(40,40,40,240*a))
         dxDrawImage(0+(200/myX*sx),0+(140/myY*sy),sx-(400/myX*sx),sy-(280/myY*sy),"files/logo.png",0,0,0,tocolor(255,255,255,50*a)) 
 
-        dxDrawText("Típus:",sx*0.31,sy*0.31,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
+        dxDrawText("Tipo:",sx*0.31,sy*0.31,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
 
         local startY = 0.34
         for k, v in ipairs(faction_types) do 
@@ -272,7 +272,7 @@ function renderPanel()
                 startY = startY + 0.0405
             end
 
-            dxDrawText("Duty Pozíció:",sx*0.31,sy*0.38,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
+            dxDrawText("Posição do plantão:",sx*0.31,sy*0.38,_,_,tocolor(r,g,b,255*a), 1/myX*sx, fonts["condensed-12"])
 
             local starty = sy*0.45
             if #editedFactionDatas.dutyPos > 0 then 
@@ -285,9 +285,9 @@ function renderPanel()
             dxDrawRectangle(sx*0.31, sy*0.41, sx*0.07, sy*0.03, tocolor(30, 30, 30, 255*a))
 
             if core:isInSlot(sx*0.31, sy*0.41, sx*0.07, sy*0.03) then 
-                dxDrawText("Beállítás", sx*0.31, sy*0.41, sx*0.31+sx*0.07, sy*0.41+sy*0.03, tocolor(r, g, b, 255*a), 1/myX*sx, fonts["condensed-11"], "center", "center")
+                dxDrawText("Definir", sx*0.31, sy*0.41, sx*0.31+sx*0.07, sy*0.41+sy*0.03, tocolor(r, g, b, 255*a), 1/myX*sx, fonts["condensed-11"], "center", "center")
             else
-                dxDrawText("Beállítás", sx*0.31, sy*0.41, sx*0.31+sx*0.07, sy*0.41+sy*0.03, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-11"], "center", "center")
+                dxDrawText("Definir", sx*0.31, sy*0.41, sx*0.31+sx*0.07, sy*0.41+sy*0.03, tocolor(220, 220, 220, 255*a), 1/myX*sx, fonts["condensed-11"], "center", "center")
             end
         end
 
@@ -315,7 +315,7 @@ function onKey(key, state)
             if page == 1 then 
                 if core:isInSlot(sx*0.615,sy*0.258,sx*0.032,sy*0.025) then 
                     if isTimer(refresh_timer) then 
-                        outputChatBox(core:getServerPrefix("red-dark","Frakció", 2).. "Csak "..color..allowed_refresh_time.." #ffffffmásodpercenként frissítheted a frakciólistát!",255,255,255,true)
+                        outputChatBox(core:getServerPrefix("red-dark","Facção", 2).. "Só pode atualizar a lista a cada "..color..allowed_refresh_time.." #ffffffsegundos!",255,255,255,true)
                     else
                         refresh_timer = setTimer(function() 
                             if isTimer(refresh_timer) then 
@@ -324,7 +324,7 @@ function onKey(key, state)
                         end, allowed_refresh_time*1000, 1)
 
                         refreshFactionList()
-                        outputChatBox(core:getServerPrefix("green-dark","Frakció", 2).. "Frakciólista frissítve!",255,255,255,true)
+                        outputChatBox(core:getServerPrefix("green-dark","Facção", 2).. "Lista de facções atualizada!",255,255,255,true)
                         return
                     end
                 end 
@@ -351,7 +351,7 @@ function onKey(key, state)
                         if moreMenuPointer == k+line_pointer then 
                             if core:isInSlot(sx*0.688, sy*starty+2/myY*sy, 26/myX*sx, 26/myY*sy) then 
                                 --triggerServerEvent("faction_admin > delFaction", resourceRoot, v[1])
-                                outputChatBox(core:getServerPrefix("red-dark","Frakció", 2).. "Ez a funkció jelenleg nem elérhető!",255,255,255,true)
+                                outputChatBox(core:getServerPrefix("red-dark","Facção", 2).. "Esta função não está disponível no momento!",255,255,255,true)
                             end
         
                             if core:isInSlot(sx*0.66, sy*starty+2/myY*sy, 26/myX*sx, 26/myY*sy) then 
@@ -623,25 +623,25 @@ function setAdminPanelPage(newPage)
     page = newPage
     if page == 1 then 
     elseif page == 2 then 
-        createEditbox("faction-name", "Frakció neve", 0.302, 0.255, 0.395, 0.04, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-name", "Nome da facção", 0.302, 0.255, 0.395, 0.04, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
 
-        createEditbox("faction-dutyskin", "Skin hozzáadása", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-dutyskin", "Adicionar skin", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
 
-        createEditbox("faction-dutyitem", "Dutyitem hozzáadása", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-dutyitem", "Adicionar item de plantão", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
     elseif page == 3 then 
-        createEditbox("faction-name", "Frakció neve", 0.302, 0.255, 0.395, 0.04, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-name", "Nome da facção", 0.302, 0.255, 0.395, 0.04, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
 
-        createEditbox("faction-dutyskin", "Skin hozzáadása", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-dutyskin", "Adicionar skin", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
 
-        createEditbox("faction-dutyitem", "Dutyitem hozzáadása", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+        createEditbox("faction-dutyitem", "Adicionar item de plantão", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
     end
 end
 
 function setFactionCreatePanelGroupType(oldType, newType) 
     if oldType == 4 or oldType == 5 then 
         if newType >= 1 and newType <= 3 then 
-            createEditbox("faction-dutyskin", "Skin hozzáadása", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
-            createEditbox("faction-dutyitem", "Dutyitem hozzáadása", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+            createEditbox("faction-dutyskin", "Adicionar skin", 0.39, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
+            createEditbox("faction-dutyitem", "Adicionar item de plantão", 0.54, 0.315, 0.13, 0.035, fonts["condensed-11"], 1/myX*sx, tocolor(220,220,220,255), tocolor(50,50,50,240))
         end
     elseif oldType >= 1 and oldType <= 3 then 
         if newType == 4 or newType == 5 then 
@@ -731,6 +731,7 @@ local editboxs = {
 
 local dataNames = {"name", "showname", "x", "y", "w", "h", "font", "font_size"}
 
+-- Teclas bloqueadas durante edição (nome legado: tiltott_keys)
 local tiltott_keys = {
     ["backspace"] = true,
 	["tab"] = true,
@@ -783,6 +784,7 @@ local tiltott_keys = {
     ["arrow_r"] = true,
 }
 
+-- Mapeamento tecla física → caractere do layout húngaro (entrada de texto; valores não alterar)
 local custom_keys = {
     ["["] = "ő",
     ["]"] = "ú",
@@ -1023,7 +1025,7 @@ end
 function isFactionSaveAllowed()
     return true 
 
-    -- a kikommentelt rész valamiért nem működik rendesen, de jó lenne majd valamikor rájönni, hogy miért 
+    -- A parte comentada abaixo não funciona corretamente; convém descobrir o motivo em algum momento.
     
     --[[if string.len(editedFactionDatas.name) >= 4 then 
         if editedFactionDatas.type == 4 or editedFactionDatas.type == 5 then 
@@ -1064,26 +1066,26 @@ end
 addEventHandler("faction > returnFactionListOnClient", root, function(list) 
     factions = list
 
-    outputChatBox("faction > returnFactionListOnClient <- CLIENT")
+    outputChatBox("faction > returnFactionListOnClient <- cliente (debug)")
 end)]]
 
---[[exports.oAdmin:addAdminCMD("addplayertofaction", 6, "Játékos frakcióhoz adása.")
-exports.oAdmin:addAdminCMD("giveplayerfaction", 6, "Játékos frakcióhoz adása.")
-exports.oAdmin:addAdminCMD("addtofaction", 6, "Játékos frakcióhoz adása.")
+--[[exports.oAdmin:addAdminCMD("addplayertofaction", 6, "Adicionar jogador à facção.")
+exports.oAdmin:addAdminCMD("giveplayerfaction", 6, "Adicionar jogador à facção.")
+exports.oAdmin:addAdminCMD("addtofaction", 6, "Adicionar jogador à facção.")
 
-exports.oAdmin:addAdminCMD("getplayerfactions", 4, "Játékos frakcióinak lekérése.")
-exports.oAdmin:addAdminCMD("getfactions", 4, "Játékos frakcióinak lekérése.")
+exports.oAdmin:addAdminCMD("getplayerfactions", 4, "Listar facções do jogador.")
+exports.oAdmin:addAdminCMD("getfactions", 4, "Listar facções do jogador.")
 
-exports.oAdmin:addAdminCMD("removeplayerfromfaction", 6, "Játékos kivétele frakcióból.")
-exports.oAdmin:addAdminCMD("removefromfaction", 6, "Játékos kivétele frakcióból.")
+exports.oAdmin:addAdminCMD("removeplayerfromfaction", 6, "Remover jogador da facção.")
+exports.oAdmin:addAdminCMD("removefromfaction", 6, "Remover jogador da facção.")
 
-exports.oAdmin:addAdminCMD("removeplayerfromallfaction", 7, "Játékos kivétele az összes frakcióból.")
-exports.oAdmin:addAdminCMD("removefromallfaction", 7, "Játékos kivétele az összes frakcióból.")
+exports.oAdmin:addAdminCMD("removeplayerfromallfaction", 7, "Remover jogador de todas as facções.")
+exports.oAdmin:addAdminCMD("removefromallfaction", 7, "Remover jogador de todas as facções.")
 
-exports.oAdmin:addAdminCMD("setfactionleader", 7, "Frakció leaderének megadása.")
+exports.oAdmin:addAdminCMD("setfactionleader", 7, "Definir líder da facção.")
 
-exports.oAdmin:addAdminCMD("factionlist", 7, "Frakció lista megtekintése.")
-exports.oAdmin:addAdminCMD("showfactions", 7, "Frakció lista megtekintése.")
+exports.oAdmin:addAdminCMD("factionlist", 7, "Ver lista de facções.")
+exports.oAdmin:addAdminCMD("showfactions", 7, "Ver lista de facções.")
 
-exports.oAdmin:addAdminCMD("givefactionmoney", 7, "Pénz adása frakció számára.")
-exports.oAdmin:addAdminCMD("removefactionmoney", 7, "Pénz elvétele frakciótól.")]]
+exports.oAdmin:addAdminCMD("givefactionmoney", 7, "Depositar dinheiro na conta da facção.")
+exports.oAdmin:addAdminCMD("removefactionmoney", 7, "Retirar dinheiro da conta da facção.")]]

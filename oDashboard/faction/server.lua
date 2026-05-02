@@ -68,12 +68,12 @@ function saveRequest()
     for k, v in ipairs(getElementsByType("player")) do 
         setElementData(v, "char:factions", {})
     end
-	outputDebugString("[oServerStop]: oDashboard(factions) sikeres mentés.",3);
+	outputDebugString("[oServerStop]: oDashboard(factions) salvamento concluído.",3);
 end 
 
 addEvent("faction_admin > createFaction", true)
 addEventHandler("faction_admin > createFaction", resourceRoot, function(player, factionDatas)
-    -- id, név, tipus, engedélyezett dutyskinek, engedélyezett dutyitemek, járművek, ranks, dutys, számla összege, create date, dutyPos, description
+    -- id, nome, tipo, skins de plantão permitidos, itens de plantão permitidos, veículos, postos, plantões, saldo da conta, data de criação, dutyPos, descrição
     local createDate = ""
 
     local time = getRealTime()
@@ -81,11 +81,11 @@ addEventHandler("faction_admin > createFaction", resourceRoot, function(player, 
     createDate = tostring(time.year+1900 .. ". "..(time.month+1)..". "..time.monthday.." "..time.hour..":"..time.second)
 
     --print(factionDatas["type"])
-    local insertResult, _, insertID = dbPoll(dbQuery(conn, "INSERT INTO factions SET name=?, type=?, money=?, ranks=?, members=?, allowedDutyItems=?, allowedDutySkins=?, dutys=?, editDate=?", factionDatas["name"], factionDatas["type"], 0, toJSON({{"Alapértelmezett rang", 0, 1}}), toJSON({}), toJSON(factionDatas["allowedItems"]), toJSON(factionDatas["allowedSkins"]), toJSON({"Alapértelmezett duty", {}, {}}), createDate), 100)
-    table.insert(server_faction_list, insertID, {insertID, factionDatas["name"], factionDatas["type"], factionDatas["allowedSkins"], factionDatas["allowedItems"], {}, {{"Alapértelmezett rang", 0, 1}}, {{"Alapértelmezett duty", {}, {}}}, 0, createDate, {}, "Alapertelmezett leiras"})
+    local insertResult, _, insertID = dbPoll(dbQuery(conn, "INSERT INTO factions SET name=?, type=?, money=?, ranks=?, members=?, allowedDutyItems=?, allowedDutySkins=?, dutys=?, editDate=?", factionDatas["name"], factionDatas["type"], 0, toJSON({{"Posto padrão", 0, 1}}), toJSON({}), toJSON(factionDatas["allowedItems"]), toJSON(factionDatas["allowedSkins"]), toJSON({"Plantão padrão", {}, {}}), createDate), 100)
+    table.insert(server_faction_list, insertID, {insertID, factionDatas["name"], factionDatas["type"], factionDatas["allowedSkins"], factionDatas["allowedItems"], {}, {{"Posto padrão", 0, 1}}, {{"Plantão padrão", {}, {}}}, 0, createDate, {}, "Descrição padrão"})
     table.insert(server_factionMembers_list, insertID, {})
 
-    triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "létrehozta a(z) #db3535" ..factionDatas["name"].." #557ec9frakciót, típusa: #db3535"..faction_types[factionDatas["type"]].."#557ec9. #db3535[DBID: "..insertID.."]")
+    triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "criou a facção #db3535" ..factionDatas["name"].." #557ec9, tipo: #db3535"..faction_types[factionDatas["type"]].."#557ec9. #db3535[DBID: "..insertID.."]")
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list) 
     triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
@@ -109,7 +109,7 @@ addEvent("faction_admin > delFaction", true)
 addEventHandler("faction_admin > delFaction", resourceRoot, function(factionID)
     factionID = tonumber(factionID)
     if getFactionPlayersCount(factionID) == 0 then 
-        triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "kitörölte a(z) #db3535"..getFactionName(factionID).." #557ec9nevű frakciót.")
+        triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "excluiu a facção #db3535"..getFactionName(factionID).."#557ec9.")
         local temp = server_faction_list
 
         deleteDutyMarker(factionID)
@@ -120,7 +120,7 @@ addEventHandler("faction_admin > delFaction", resourceRoot, function(factionID)
         triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
         triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Ebben a frakcióban vannak játékosok!", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Ainda há jogadores nesta facção!", client, 255, 255, 255, true)
     end
 end)
 
@@ -167,17 +167,17 @@ function saveFactions()
         
             if exec then 
                 savedFactions[1] = savedFactions[1] + 1
-                --outputDebugString("[Faction]: Frakció elmentve: "..v[2])
+                --outputDebugString("[Faction]: Facção salva: "..v[2])
             else
                 savedFactions[2] = savedFactions[2] + 1
-               -- outputDebugString("[Faction]: Frakció elmentve: "..v[2], 1)
+               -- outputDebugString("[Faction]: Facção salva: "..v[2], 1)
             end
         else
             local exec = dbExec(conn, "DELETE FROM factions WHERE id=?", k)
         end
     end
 
-    outputDebugString("[Faction]: "..savedFactions[1].."db frakció sikeresen elmentve! ("..savedFactions[2].."db sikertelen mentés)")
+    outputDebugString("[Faction]: "..savedFactions[1].." facção(ões) salva(s) com sucesso! ("..savedFactions[2].." falha(s) ao salvar)")
 end
 
 function isRealFaction(id)
@@ -340,10 +340,10 @@ function getFactionBankMoney(factionID)
     return server_faction_list[factionID][9]
 end
 
--- / Admin panel / --
+-- Painel admin --
 addEvent("faction > admin > modifyFactionDatas", true)
 addEventHandler("faction > admin > modifyFactionDatas", resourceRoot, function(factionID, factionName, factionDutyPos, allowedDutySkins, allowedDutyItems)
-    if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(client) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
+    if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(client) then return end -- Verifica se o jogador está na lista de admins verificados; caso contrário, kick por abuso.
 
     local oldDutyPos = server_faction_list[factionID][11]
     server_faction_list[factionID][2] = factionName
@@ -366,20 +366,20 @@ addEventHandler("faction > admin > modifyFactionDatas", resourceRoot, function(f
     end
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
-    triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "módosította a(z) #db3535" ..factionName.." #557ec9nevű frakciót, típusa: #db3535"..faction_types[server_faction_list[factionID][3]].."#557ec9. #db3535[DBID: "..server_faction_list[factionID][1].."]")
+    triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "modificou a facção #db3535" ..factionName.." #557ec9, tipo: #db3535"..faction_types[server_faction_list[factionID][3]].."#557ec9. #db3535[DBID: "..server_faction_list[factionID][1].."]")
 end)
 
--- / Leader / --
+-- Líder --
 addEvent("faction > leader > fire", true)
 addEventHandler("faction > leader > fire", resourceRoot, function(factionID, charID)
     for k, v in pairs(server_factionMembers_list[factionID]) do 
         if v[1] == charID then 
-            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." kirúgta "..factionLogNameColor..tostring(v[4]):gsub("_", " ")..factionLogMessageColor.." nevű játékost a "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióból.")
+            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." expulsou o jogador "..factionLogNameColor..tostring(v[4]):gsub("_", " ")..factionLogMessageColor.." da facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
             table.remove(server_factionMembers_list[factionID], k)
 
             local player = findPlayerFromCharID(charID) 
             if player then
-                outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Ki lettél rúgva a(z) "..color..getFactionName(factionID).." #fffffffrakcióból. Általa: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Você foi expulso da facção "..color..getFactionName(factionID).." #ffffff. Por: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
             end
 
             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
@@ -392,9 +392,9 @@ addEventHandler("faction > leader > setleader", resourceRoot, function(factionID
     for k, v in pairs(server_factionMembers_list[factionID]) do 
         if v[1] == charID then 
             if state then 
-                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." leader jogosultságot adott "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." nevű játékosnak a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban.")
+                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." concedeu função de líder a "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
             else 
-                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." elvette a leader jogosultságát "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." nevű játékosnak a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban.")
+                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." revogou a função de líder de "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
             end 
 
             v[3] = state 
@@ -402,9 +402,9 @@ addEventHandler("faction > leader > setleader", resourceRoot, function(factionID
             local player = findPlayerFromCharID(charID) 
             if player then
                 if state then 
-                    outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Leader jogosultságot kaptál a(z) "..color..getFactionName(factionID).." #fffffffrakcióban. Általa: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Facção", 3).."Você recebeu função de líder na facção "..color..getFactionName(factionID).." #ffffff. Por: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
                 else
-                    outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Elvették a leader jogosultságodat a(z) "..color..getFactionName(factionID).." #fffffffrakcióban. Általa: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Facção", 3).."Sua função de líder foi removida na facção "..color..getFactionName(factionID).." #ffffff. Por: "..color..getPlayerName(client):gsub("_", " "), player, 255, 255, 255, true)
                 end
             end
 
@@ -424,13 +424,13 @@ addEventHandler("faction > leader > setPlayerRank", resourceRoot, function(facti
             local player = findPlayerFromCharID(charID) 
             if player then
                 if newRank > oldRank then 
-                    outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Előléptettek a(z) "..color..getFactionName(factionID).." #ffffffnevű frakcióban. Új rangod: "..color..server_faction_list[factionID][7][newRank][1]:gsub("_", " "), player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Facção", 3).."Você foi promovido na facção "..color..getFactionName(factionID).."#ffffff. Novo posto: "..color..server_faction_list[factionID][7][newRank][1]:gsub("_", " "), player, 255, 255, 255, true)
                 else
-                    outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Lefokoztak a(z) "..color..getFactionName(factionID).." #ffffffnevű frakcióban. Új rangod: "..color..server_faction_list[factionID][7][newRank][1]:gsub("_", " "), player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Facção", 3).."Você foi rebaixado na facção "..color..getFactionName(factionID).."#ffffff. Novo posto: "..color..server_faction_list[factionID][7][newRank][1]:gsub("_", " "), player, 255, 255, 255, true)
                 end
             end
 
-            infobox:outputInfoBox("Sikeresen módosítottad "..v[4]:gsub("_", " ").." nevű játékos rangját!", "success", client)
+            infobox:outputInfoBox("Posto do jogador "..v[4]:gsub("_", " ").." alterado com sucesso!", "success", client)
             
             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
         end
@@ -446,10 +446,10 @@ addEventHandler("faction > leader > resetPlayerDutyTime", resourceRoot, function
 
             local player = findPlayerFromCharID(charID) 
             if player then
-                outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Nullázták a szolgálati idődet a(z) "..color..getFactionName(factionID).." #ffffffnevű frakcióban.", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "Facção", 3).."Seu tempo de plantão foi zerado na facção "..color..getFactionName(factionID).."#ffffff.", player, 255, 255, 255, true)
             end
 
-            infobox:outputInfoBox("Sikeresen nulláztad "..v[4]:gsub("_", " ").." nevű játékos szolgálati idejét!", "success", client)
+            infobox:outputInfoBox("Tempo de plantão de "..v[4]:gsub("_", " ").." zerado com sucesso!", "success", client)
             
         end
     end
@@ -464,12 +464,12 @@ addEventHandler("faction > leader > giveBadgeToPlayer", resourceRoot, function(f
             if player then
                 local badgeText = server_faction_list[factionID][7][rank][1].." #"..math.random(1, 9999)
 
-                outputChatBox(core:getServerPrefix("server", "Frakció", 3).."Kaptál egy jelvényt! "..color.."("..badgeText..")", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "Facção", 3).."Você recebeu um distintivo! "..color.."("..badgeText..")", player, 255, 255, 255, true)
                 inventory:giveItem(player, 69, badgeText, 1, 0) 
 
-                infobox:outputInfoBox("Sikeresen adtál "..v[4]:gsub("_", " ").." nevű játékosnak egy jelvényt! ("..badgeText..")", "success", client)
+                infobox:outputInfoBox("Distintivo entregue a "..v[4]:gsub("_", " ").."! ("..badgeText..")", "success", client)
 
-                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." jelvényt adott "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." nevű játékosnak a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban. "..factionLogNameColor.."("..badgeText..")")
+                outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." deu um distintivo a "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". "..factionLogNameColor.."("..badgeText..")")
             end
         end
     end
@@ -482,24 +482,24 @@ addEventHandler("faction > leader > addmember", resourceRoot, function(factionID
     if target then 
         if not isPlayerInFaction(target, factionID) then 
             if getFactionType(factionID) == 4 or getFactionType(factionID) == 5 then 
-                if getElementData(target,"hasContainer") then return infobox:outputInfoBox("A kiválasztott játékos konténerrel rendelkezik, ezt előtte fel kell mondania!") end
+                if getElementData(target,"hasContainer") then return infobox:outputInfoBox("O jogador selecionado possui contêiner; ele precisa encerrar o aluguel antes!") end
             end 
 
-            table.insert(server_factionMembers_list[factionID], #server_factionMembers_list[factionID]+1, {getElementData(target, "char:id"), 1, false, getElementData(target, "char:name"), "false", "Nincs adat", string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), "Nincs adat", 0})
-            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." felvette "..factionLogNameColor..getPlayerName(target):gsub("_", " ")..factionLogMessageColor.." nevű játékost a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban.")
+            table.insert(server_factionMembers_list[factionID], #server_factionMembers_list[factionID]+1, {getElementData(target, "char:id"), 1, false, getElementData(target, "char:name"), "false", "Sem dados", string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), "Sem dados", 0})
+            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." recrutou "..factionLogNameColor..getPlayerName(target):gsub("_", " ")..factionLogMessageColor.." para a facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
 
-            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen felvetted a frakcióba "..color..getPlayerName(target):gsub("_", " ").."#ffffff nevű játékost.", client, 255, 255, 255, true)
-            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 1).."Felvettek a(z) "..color..getFactionName(factionID).."#ffffff nevű frakcióba.", target, 255, 255, 255, true)
-            infobox:outputInfoBox("Sikeresen felvetted a frakcióba "..getPlayerName(target):gsub("_", " ").." nevű játékost.", "success", client)
+            outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Você recrutou "..color..getPlayerName(target):gsub("_", " ").."#ffffff para a facção.", client, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("green-dark", "Facção", 1).."Você entrou na facção "..color..getFactionName(factionID).."#ffffff.", target, 255, 255, 255, true)
+            infobox:outputInfoBox("Jogador "..getPlayerName(target):gsub("_", " ").." recrutado com sucesso!", "success", client)
 
             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Ez a játékos már a frakció tagja.", client, 255, 255, 255, true)
-            infobox:outputInfoBox("Ez a játékos már tagja a frakciónak!", "error", client)
+            outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Este jogador já é membro da facção.", client, 255, 255, 255, true)
+            infobox:outputInfoBox("Este jogador já é membro da facção!", "error", client)
         end
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nincs ilyen ID-vel rendlekező játékos.", client, 255, 255, 255, true)
-        infobox:outputInfoBox("Nincs ilyen ID-vel rendlekező játékos!", "error", client)
+        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Não há jogador com este ID.", client, 255, 255, 255, true)
+        infobox:outputInfoBox("Não há jogador com este ID!", "error", client)
     end
 end)
 
@@ -507,16 +507,16 @@ addEvent("faction > leader > createRank", true)
 addEventHandler("faction > leader > createRank", resourceRoot, function(factionID, rankName)
     table.insert(server_faction_list[factionID][7], #server_faction_list[factionID][7] + 1, {rankName, 0, 0})
 
-    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." létrehozott egy új rangot a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban. "..factionLogNameColor.."("..rankName..")")
-    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen létrehoztál egy új rangot."..color.." ("..rankName..")", client, 255, 255, 255, true)
+    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." criou um novo posto na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". "..factionLogNameColor.."("..rankName..")")
+    outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Novo posto criado com sucesso."..color.." ("..rankName..")", client, 255, 255, 255, true)
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
 end)
 
 addEvent("faction > leader > delRank", true)
 addEventHandler("faction > leader > delRank", resourceRoot, function(factionID, rankID)
-    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." törölt egy rangot a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban. "..factionLogNameColor.."("..server_faction_list[factionID][7][rankID][1]..")")
-    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen töröltél rangot."..color.." ("..server_faction_list[factionID][7][rankID][1]..")", client, 255, 255, 255, true)
+    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." excluiu um posto na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". "..factionLogNameColor.."("..server_faction_list[factionID][7][rankID][1]..")")
+    outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Posto excluído com sucesso."..color.." ("..server_faction_list[factionID][7][rankID][1]..")", client, 255, 255, 255, true)
 
     table.remove(server_faction_list[factionID][7], rankID)
 
@@ -529,7 +529,7 @@ addEventHandler("faction > leader > editRank", resourceRoot, function(factionID,
     server_faction_list[factionID][7][rankID][2] = rankPayment
     server_faction_list[factionID][7][rankID][3] = attachedDuty
 
-    infobox:outputInfoBox("Sikeresen módosítottál egy rangot!", "success", client)
+    infobox:outputInfoBox("Posto alterado com sucesso!", "success", client)
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
 end)
@@ -538,8 +538,8 @@ addEvent("faction > leader > createDuty", true)
 addEventHandler("faction > leader > createDuty", resourceRoot, function(factionID, dutyName)
     table.insert(server_faction_list[factionID][8], #server_faction_list[factionID][8] + 1, {dutyName, {}, {}})
 
-    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." létrehozott egy új dutyt a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban. "..factionLogNameColor.."("..dutyName..")")
-    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen létrehoztál egy új rangot."..color.." ("..dutyName..")", client, 255, 255, 255, true)
+    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." criou um novo plantão na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". "..factionLogNameColor.."("..dutyName..")")
+    outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Novo plantão criado com sucesso."..color.." ("..dutyName..")", client, 255, 255, 255, true)
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
 end)
 
@@ -549,15 +549,15 @@ addEventHandler("faction > leader > editDuty", resourceRoot, function(factionID,
     server_faction_list[factionID][8][dutyID][2] = dutyItems
     server_faction_list[factionID][8][dutyID][3] = dutySkins
 
-    infobox:outputInfoBox("Sikeresen módosítottál egy dutyt!", "success", client)
+    infobox:outputInfoBox("Plantão alterado com sucesso!", "success", client)
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
 end)
 
 addEvent("faction > leader > delDuty", true)
 addEventHandler("faction > leader > delDuty", resourceRoot, function(factionID, dutyID)
-    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." törölt egy dutyt a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakcióban. "..factionLogNameColor.."("..server_faction_list[factionID][8][dutyID][1]..")")
-    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen töröltél rangot."..color.." ("..server_faction_list[factionID][8][dutyID][1]..")", client, 255, 255, 255, true)
+    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." excluiu um plantão na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". "..factionLogNameColor.."("..server_faction_list[factionID][8][dutyID][1]..")")
+    outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Plantão excluído com sucesso."..color.." ("..server_faction_list[factionID][8][dutyID][1]..")", client, 255, 255, 255, true)
 
     table.remove(server_faction_list[factionID][8], dutyID)
 
@@ -566,8 +566,8 @@ end)
 
 addEvent("faction > leader > editFactionDesc", true)
 addEventHandler("faction > leader > editFactionDesc", resourceRoot, function(factionID, newDesc)
-    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." módosította a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakció leírását. Új leírás: "..factionLogNameColor..newDesc)
-    outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeresen megváltoztattad a frakció leírását.", client, 255, 255, 255, true)
+    outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." alterou a descrição da facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". Nova descrição: "..factionLogNameColor..newDesc)
+    outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Descrição da facção alterada com sucesso.", client, 255, 255, 255, true)
 
     server_faction_list[factionID][12] = newDesc
 
@@ -578,57 +578,57 @@ addEvent("faction > leader > addskins", true)
 addEventHandler("faction > leader > addskins", getRootElement(), function(factionId, skins)
     table.insert(server_faction_list[factionId][4], #server_faction_list[factionId][4]+1, skins)
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
-    infobox:outputInfoBox("Sikeresen hozzáadtad a ".. skins.."-s id-vel rendelkező skint!", "success", client)
+    infobox:outputInfoBox("Skin ID ".. skins.." adicionada com sucesso!", "success", client)
 end)
 
 addEvent("faction > leader > removeSkins", true)
 addEventHandler("faction > leader > removeSkins", getRootElement(), function(factionId, tableId, skins)
     table.remove(server_faction_list[factionId][4], tableId)
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
-    infobox:outputInfoBox("Sikeresen törölted a ".. skins.."-s id-vel rendelkező skint!", "success", client)
+    infobox:outputInfoBox("Skin ID ".. skins.." removida com sucesso!", "success", client)
 end)
 
 addEvent("faction > leader > bankTransaction", true)
 addEventHandler("faction > leader > bankTransaction", resourceRoot, function(factionID, money, state)
     if state == 1 then 
         if (server_faction_list[factionID][9] - money) >= 0 then 
-            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." levett pénzt a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakció számlájáról. Összeg: "..factionLogNameColor..money.."$"..factionLogMessageColor.." Frakció számla egyenlege: "..factionLogNameColor..(server_faction_list[factionID][9] - money).."$")
-            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeres tranzakció.", client, 255, 255, 255, true)
+            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." retirou dinheiro da conta da facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". Valor: "..factionLogNameColor..money.."$"..factionLogMessageColor.." Novo saldo: "..factionLogNameColor..(server_faction_list[factionID][9] - money).."$")
+            outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Transação concluída.", client, 255, 255, 255, true)
             server_faction_list[factionID][9] = server_faction_list[factionID][9] - money
 
             setElementData(client, "char:money", getElementData(client, "char:money") + money)
 
-            infobox:outputInfoBox("Sikeres tranzakció!", "success", client)
+            infobox:outputInfoBox("Transação concluída!", "success", client)
         else
-            infobox:outputInfoBox("Nincs ennyi pénze a frakciónak!", "error", client)
-            outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nincs ennyi pénze a frakciónak! ("..color..money.."$#ffffff)", client, 255, 255, 255, true)
+            infobox:outputInfoBox("A facção não tem saldo suficiente!", "error", client)
+            outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."A facção não tem saldo suficiente! ("..color..money.."$#ffffff)", client, 255, 255, 255, true)
         end
     elseif state == 2 then 
         if money <= getElementData(client, "char:money") then 
-            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." pénzt tett be a(z) "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor.." nevű frakció számlájára. Összeg: "..factionLogNameColor..money.."$"..factionLogMessageColor.." Frakció számla egyenlege: "..factionLogNameColor..(server_faction_list[factionID][9] + money).."$")
-            outputChatBox(core:getServerPrefix("green-dark", "Frakció", 3).."Sikeres tranzakció.", client, 255, 255, 255, true)
+            outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." depositou na conta da facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..". Valor: "..factionLogNameColor..money.."$"..factionLogMessageColor.." Novo saldo: "..factionLogNameColor..(server_faction_list[factionID][9] + money).."$")
+            outputChatBox(core:getServerPrefix("green-dark", "Facção", 3).."Transação concluída.", client, 255, 255, 255, true)
             server_faction_list[factionID][9] = server_faction_list[factionID][9] + money
 
             setElementData(client, "char:money", getElementData(client, "char:money") - money)
 
-            infobox:outputInfoBox("Sikeres tranzakció!", "success", client)
+            infobox:outputInfoBox("Transação concluída!", "success", client)
         else
-            infobox:outputInfoBox("Nincs nálad ennyi pénz!", "error", client)
-            outputChatBox(core:getServerPrefix("red-dark", "Frakció", 3).."Nincs nálad ennyi pénz! ("..color..money.."$#ffffff)", client, 255, 255, 255, true)
+            infobox:outputInfoBox("Você não tem dinheiro suficiente!", "error", client)
+            outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Você não tem dinheiro suficiente! ("..color..money.."$#ffffff)", client, 255, 255, 255, true)
         end
     end
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
 end)
 
--- / member / --
+-- Membro --
 addEvent("faction > setMemberDutyState", true)
 addEventHandler("faction > setMemberDutyState", resourceRoot, function(dutyState, dutySkin, dutyTime)
     local oldDutyState = getElementData(client, "char:duty:faction") or 0
     setElementData(client, "char:duty:faction", dutyState)
 
     if dutyState == 0 then 
-        outputChatBoxToFactionMembers(oldDutyState, color..getPlayerName(client):gsub("_", " ").." ("..getRankName(oldDutyState, getPlayerRankInFaction(oldDutyState, client))..") #ffffffkilépett a szolgálatból.")
+        outputChatBoxToFactionMembers(oldDutyState, color..getPlayerName(client):gsub("_", " ").." ("..getRankName(oldDutyState, getPlayerRankInFaction(oldDutyState, client))..") #ffffffsaiu de serviço.")
         inventory:takeDutyItems(client)
         setElementModel(client, getElementData(client, "char:originalSkin"))
 
@@ -645,7 +645,7 @@ addEventHandler("faction > setMemberDutyState", resourceRoot, function(dutyState
         end
     else
         setElementData(client, "char:originalSkin", getElementModel(client))
-        outputChatBoxToFactionMembers(dutyState, color..getPlayerName(client):gsub("_", " ").." ("..getRankName(dutyState, getPlayerRankInFaction(dutyState, client))..") #ffffffszolgálatba állt.")
+        outputChatBoxToFactionMembers(dutyState, color..getPlayerName(client):gsub("_", " ").." ("..getRankName(dutyState, getPlayerRankInFaction(dutyState, client))..") #ffffffentrou em serviço.")
         local player = client
         for k, v in pairs(server_faction_list[dutyState][8][server_faction_list[dutyState][7][getPlayerRankInFaction(dutyState, client)][3]][2]) do 
             --setTimer(function() 
@@ -718,7 +718,7 @@ addEventHandler("faction > giveVehicleKeyToLeader", resourceRoot, function(vehid
     inventory:giveItem(client, 51, vehid, 1, 0)
 end)
 
----- / Duty Marker / ----
+---- Marcador de plantão ----
 
 function createDutyMarker(factionID) 
 
@@ -780,16 +780,16 @@ addEventHandler("mainFactionSettings", getRootElement(), function(player, factio
     local charId = getElementData(player, "char:id") or 0
     local selected = getElementData(player, "char:mainFaction") or 0
     if selected == factionId then 
-        exports.oInfobox:outputInfoBox("Jelenleg is ez az elsődleges frakciód.", "warning", player)
+        exports.oInfobox:outputInfoBox("Esta já é a sua facção principal.", "warning", player)
     else 
         dbQuery(function(qh)
             local result, numAff = dbPoll(qh, 0)
             if numAff > 0 then 
                 setElementData(player, "char:mainFaction", factionId)
                 dbExec(conn, "UPDATE characters SET mainFaction = ? WHERE id = ?", factionId, charId)
-                exports.oInfobox:outputInfoBox("Sikeresen beállítottad a ".. factionName .. " frakciót elsődleges frakcióként!", "success", player)
+                exports.oInfobox:outputInfoBox("Facção ".. factionName .. " definida como principal!", "success", player)
             else
-                exports.oInfobox:outputInfoBox("Hiba történt keress fel egy fejlesztőt (#770)", "error", player)
+                exports.oInfobox:outputInfoBox("Erro ao salvar. Contate um desenvolvedor (#770)", "error", player)
             end
         end, conn, "SELECT * FROM characters WHERE id = ?", charId)
     end
