@@ -181,15 +181,15 @@ szamok = {
 	["num_9"] = true,
 }
 
-kedvenc_tevekenyseg = {"Sportolás","Túrázás","Horgászat","Zenehallgatás","Autózás","Kertészkedés","Munka","Segítés az embereknek","Lövöldözés","Evés vagy Ivás","Motorozás","Hajózás","Biciklizés","Világjárás","Vásárlás"}
+kedvenc_tevekenyseg = {"Esportes","Caminhada","Pesca","Ouvir música","Dirigir","Jardinagem","Trabalho","Ajudar pessoas","Atirar","Comer ou beber","Motociclismo","Navegar","Ciclismo","Viajar","Fazer compras"}
 loading_texts = {
-	"Ahhoz, hogy ne maradj le legújabb posztjainkról, KÖVESD be facebook oldalunkat! https://www.facebook.com/OriginalRoleplayOfficial",
-	"Beszélgetni szeretnél? Kérdésed van? CSATLAKOZZ Discord szerverünkre! dc.originalrp.eu",
-	"Szervezet tagja szeretnél lenni? Panaszt akarsz tenni egy játékosra vagy adminisztrátorra?  Fórumunkon megteheted! https://forum.originalrp.eu",
-	"Támogatni szeretnéd a szervert? Minden támogatással kapcsolatos kérdésedre weboldalunkon választ kapsz! https://www.originalrp.eu",
+	"Para não perder nossas novidades, siga nossas redes sociais! Procure por Ipiranga Roleplay.",
+	"Quer conversar ou tirar dúvidas? Junte-se ao nosso servidor do Discord!",
+	"Quer entrar em uma organização ou registrar uma reclamação? Acesse nosso fórum!",
+	"Quer apoiar o servidor? Confira nosso site para saber como contribuir!",
 }
 
-ban_menus = {"Adminisztrátor", "Indok", "Kitiltás időpontja", "Kitiltás lejárata", "Serial", "Felhasználó név"}
+ban_menus = {"Administrador", "Motivo", "Data do banimento", "Expiração do ban", "Serial", "Nome de usuário"}
 ban_requset_menus = {"admin", "reason", "ban_date", "end_date", "serial", "username"}
 
 saveNeededWeaponSkills = {69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79}
@@ -198,6 +198,6 @@ saveNeededWeaponSkills = {69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79}
 charCreateCameraPosition = {1244.5532226562,-1478.4471435547,13.6,1245.513671875,-1478.1688232422,13.6}
 charCreatePedPosition = {1250.0418701172,-1478.8286132812,13.539237976074,57}
 availableStartPositions = {
-	{"Érkezés repülővel", "Los Santos", {1685.5225830078, -2331.5036621094, 13.546875, 0}},
-	{"Érkezés hajóval", "Red County", {-743.67333984375,222.09120178223,3.1307954788208, 32}},
+	{"Chegada de avião", "Los Santos", {1685.5225830078, -2331.5036621094, 13.546875, 0}},
+	{"Chegada de barco", "Red County", {-743.67333984375,222.09120178223,3.1307954788208, 32}},
 }

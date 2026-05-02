@@ -160,27 +160,27 @@ local barHeight = sy*0.045
 
 local loginpanelboxok = {
 	["login"] = {
-		{name = "username", displaytext = "Felhasználónév", icon = "user.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "password", displaytext = "Jelszó", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
-		{name = "savepw", displaytext = "Adatok megjegyzése", onoff = true, tick = true, animation = {getTickCount()}},
-		{name = "loginbutton", displaytext = "Bejelentkezés", icon = "login.png", button = true},
+		{name = "username", displaytext = "Nome de usuário", icon = "user.png", secret = false, maxlen = 30, text = "", input = true},
+		{name = "password", displaytext = "Senha", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
+		{name = "savepw", displaytext = "Lembrar dados", onoff = true, tick = true, animation = {getTickCount()}},
+		{name = "loginbutton", displaytext = "Entrar", icon = "login.png", button = true},
 	},
 
 	["register"] = {
-		{name = "username", displaytext = "Felhasználónév", icon = "user.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "password", displaytext = "Jelszó", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
-		{name = "password2", displaytext = "Jelszó x2", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
+		{name = "username", displaytext = "Nome de usuário", icon = "user.png", secret = false, maxlen = 30, text = "", input = true},
+		{name = "password", displaytext = "Senha", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
+		{name = "password2", displaytext = "Confirmar senha", icon = "pw.png", secret = true, showing = false, maxlen = 30, text = "", input = true},
 		{name = "email", displaytext = "E-mail", icon = "mail.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "invitecode", displaytext = "Meghívó kód", icon = "invite.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "registerbutton", displaytext = "Regisztráció", icon = "reg.png", button = true},
+		{name = "invitecode", displaytext = "Código de convite", icon = "invite.png", secret = false, maxlen = 30, text = "", input = true},
+		{name = "registerbutton", displaytext = "Registrar", icon = "reg.png", button = true},
 	},
 
 	["char_create"] = {
-		{name = "charname", displaytext = "Karaktered neve", icon = "name.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "borncity", displaytext = "Születési hely", icon = "borncity.png", secret = false, maxlen = 30, text = "", input = true},
-		{name = "age", displaytext = "Életkor", icon = "age.png", secret = false, maxlen = 30, text = "", input = true, suffix = "év"},
-		{name = "weight", displaytext = "Súly", icon = "weight.png", secret = false, maxlen = 30, text = "", input = true, suffix = "kg"},
-		{name = "height", displaytext = "Magasság", icon = "height.png", secret = false, maxlen = 30, text = "", input = true, suffix = "cm"},
+		{name = "charname", displaytext = "Nome do personagem", icon = "name.png", secret = false, maxlen = 30, text = "", input = true},
+		{name = "borncity", displaytext = "Cidade natal", icon = "borncity.png", secret = false, maxlen = 30, text = "", input = true},
+		{name = "age", displaytext = "Idade", icon = "age.png", secret = false, maxlen = 30, text = "", input = true, suffix = "anos"},
+		{name = "weight", displaytext = "Peso", icon = "weight.png", secret = false, maxlen = 30, text = "", input = true, suffix = "kg"},
+		{name = "height", displaytext = "Altura", icon = "height.png", secret = false, maxlen = 30, text = "", input = true, suffix = "cm"},
 	}
 }
 
@@ -230,14 +230,14 @@ function renderLoginV2()
 	-- V2 login panel
 	if not renderRememberPanel and not emailChangeShowing then 
 
-		dxDrawText("Elfelejtetted a jelszavadat? Kérj jelszóemlékeztetőt!", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
-		dxDrawText("Jelszóemlékeztető", 10/myX*sx, 28/myX*sx, _, _, tocolor(loginColors[1], loginColors[2], loginColors[3], 150), 1, fontscript:getFont("p_bo", 13/myX*sx))
+		dxDrawText("Esqueceu sua senha? Solicite uma recuperação!", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
+		dxDrawText("Recuperar senha", 10/myX*sx, 28/myX*sx, _, _, tocolor(loginColors[1], loginColors[2], loginColors[3], 150), 1, fontscript:getFont("p_bo", 13/myX*sx))
 
 		local startY = sy*0.5 - (((barHeight + sy*0.005) * #loginpanelboxok[loginPanelPage] + (sy*0.02 * 2)) / 2)
 
 		-- dxDrawLine(0, sy*0.5, sx, sy*0.5)
 
-		dxDrawText("ORIGINAL ROLEPLAY", sx*0.435, startY, sx*0.6, startY, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
+		dxDrawText("IPIRANGA ROLEPLAY",sx*0.435, startY, sx*0.6, startY, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
 		dxDrawImage(sx*0.4, startY - sy*0.02, 50/myX*sx, 50/myX*sx, "img/logo.png", 0, 0, 0, tocolor(loginColors[1], loginColors[2], loginColors[3], 240))
 
 		startY = startY + sy*0.02
@@ -245,11 +245,11 @@ function renderLoginV2()
 
 		hoveverdInput = false 
 
-		if loginPanelPage == "login" then 	
-			dxDrawText("Bejelentkezés", sx*0.435, startY, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+		if loginPanelPage == "login" then
+			dxDrawText("Entrar", sx*0.435, startY, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 			startY = startY + sy*0.02
-		elseif loginPanelPage == "register" then 
-			dxDrawText("Regisztráció", sx*0.435, startY, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+		elseif loginPanelPage == "register" then
+			dxDrawText("Registrar", sx*0.435, startY, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 			startY = startY + sy*0.02
 		end
 
@@ -354,23 +354,22 @@ function renderLoginV2()
 			end
 		end
 
-		if loginPanelPage == "login" then 
-			dxDrawText("Nincs még felhasználód? Regisztrálj egyet!", sx*0.4, startY + sy*0.02, sx*0.6, startY + sy*0.02, tocolor(255, 255, 255, 100), 1, fontscript:getFont("p_r", 12/myX*sx), "center", "center")
+		if loginPanelPage == "login" then
+			dxDrawText("Ainda não tem conta? Crie uma!", sx*0.4, startY + sy*0.02, sx*0.6, startY + sy*0.02, tocolor(255, 255, 255, 100), 1, fontscript:getFont("p_r", 12/myX*sx), "center", "center")
 
-			if core:isInSlot(sx*0.4, startY + sy*0.03, sx*0.2, sy*0.01) then 
-				dxDrawText("Regisztráció", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
+			if core:isInSlot(sx*0.4, startY + sy*0.03, sx*0.2, sy*0.01) then
+				dxDrawText("Registrar", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
 			else
-				dxDrawText("Regisztráció", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 200), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
+				dxDrawText("Registrar", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 200), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
 			end
 
-			--dxDrawText("Nincs még felhasználód? Regisztrálj egyet!", sx*0.4, startY + sy*0.007, sx*0.6, startY + sy*0.007, tocolor(255, 255, 255, 100), 1, fontscript:getFont("p_m", 11/myX*sx), "center", "center")
-		elseif loginPanelPage == "register" then 
-			dxDrawText("Van már regisztrált fiókod?", sx*0.4, startY + sy*0.02, sx*0.6, startY + sy*0.02, tocolor(255, 255, 255, 100), 1, fontscript:getFont("p_r", 12/myX*sx), "center", "center")
+		elseif loginPanelPage == "register" then
+			dxDrawText("Já tem uma conta?", sx*0.4, startY + sy*0.02, sx*0.6, startY + sy*0.02, tocolor(255, 255, 255, 100), 1, fontscript:getFont("p_r", 12/myX*sx), "center", "center")
 
-			if core:isInSlot(sx*0.4, startY + sy*0.03, sx*0.2, sy*0.01) then 
-				dxDrawText("Bejelentkezés", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
+			if core:isInSlot(sx*0.4, startY + sy*0.03, sx*0.2, sy*0.01) then
+				dxDrawText("Entrar", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
 			else
-				dxDrawText("Bejelentkezés", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 200), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
+				dxDrawText("Entrar", sx*0.4, startY + sy*0.035, sx*0.6, startY + sy*0.035, tocolor(loginColors[1], loginColors[2], loginColors[3], 200), 1, fontscript:getFont("p_m", 12/myX*sx), "center", "center")
 			end
 		end
 
@@ -495,7 +494,7 @@ function keyLoginV2(key, state)
 						if core:isInSlot(sx*0.4, startY, sx*0.2, barHeight) then 
 							if v.name == "loginbutton" then 
 								if mehetaclick then
-									if (getElementData(localPlayer, "model:isLoading") or false) then exports.oInfobox:outputInfoBox("Amíg a modellek töltődnek nem tudsz bejelentkezni!","error") return end
+									if (getElementData(localPlayer, "model:isLoading") or false) then exports.oInfobox:outputInfoBox("Aguarde o carregamento dos modelos para entrar.","error") return end
 
 
 									local user = false 
@@ -527,7 +526,7 @@ function keyLoginV2(key, state)
 								end
 							elseif v.name == "registerbutton" then 
 								if mehetaclick then
-									if (getElementData(localPlayer, "model:isLoading") or false) then exports.oInfobox:outputInfoBox("Amíg a modellek töltődnek nem tudsz regisztrálni!","error") return end
+									if (getElementData(localPlayer, "model:isLoading") or false) then exports.oInfobox:outputInfoBox("Aguarde o carregamento dos modelos para se registrar.","error") return end
 
 									local user = false 
 									local pass = false 
@@ -555,11 +554,11 @@ function keyLoginV2(key, state)
 											mehetaclick = false 
 											setTimer(function() mehetaclick= true end, 1000,1)
 										else 
-											exports.oInfobox:outputInfoBox("A két jelszó nem egyezik meg!","error")
+											exports.oInfobox:outputInfoBox("As senhas não coincidem.","error")
 										end 
 									else 
-										exports.oInfobox:outputInfoBox("Kötelező megadnod 3 karakternél hosszabb felhasználó nevet és 5 karakternél hosszabb jelszót!","error")
-										exports.oInfobox:outputInfoBox("Ugyan ezek vonatkoznak a Jelszó 2x és az Email mezőre is!","error")
+										exports.oInfobox:outputInfoBox("Nome de usuário deve ter no mínimo 3 caracteres e senha no mínimo 5.","error")
+										exports.oInfobox:outputInfoBox("O mesmo vale para o campo Confirmar Senha e E-mail.","error")
 									end
 								else 
 									floodclick = floodclick + 1
@@ -744,9 +743,9 @@ function renderCharCreate()
 
 	dxDrawImage(0, 0, sx, sy, "bg.png", 0, 0, 0, tocolor(255, 255, 255, 200))
 
-	dxDrawText("ORIGINAL ROLEPLAY", sx*0.135, sy*0.2, sx*0.6, sy*0.2, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
+	dxDrawText("IPIRANGA ROLEPLAY",sx*0.135, sy*0.2, sx*0.6, sy*0.2, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
 	dxDrawImage(sx*0.1, sy*0.2 - sy*0.02, 50/myX*sx, 50/myX*sx, "img/logo.png", 0, 0, 0, tocolor(loginColors[1], loginColors[2], loginColors[3], 240))
-	dxDrawText("Karakter létrehozás", sx*0.135, sy*0.22, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+	dxDrawText("Criar Personagem", sx*0.135, sy*0.22, sx*0.6, startY, tocolor(255, 255, 255, 240), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 
 	local startY = sy*0.25
 	for k, v in ipairs(loginpanelboxok["char_create"]) do 
@@ -813,7 +812,7 @@ function renderCharCreate()
 	end
 
 	startY = startY + sy*0.02
-	dxDrawText("Kinézet kiválasztása:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+	dxDrawText("Escolher aparência:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 	startY = startY + sy*0.02
 
 	if selected_nem == 1 or core:isInSlot(sx*0.1, startY, 40/myX*sx, 40/myX*sx) then 
@@ -841,7 +840,7 @@ function renderCharCreate()
 	end
 
 	startY = startY + sy*0.07
-	dxDrawText("Avatar kiválasztása:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+	dxDrawText("Escolher avatar:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 	startY = startY + sy*0.02
 
 	if fileExists("avatars/"..(selected_avatar-1)..".png") then 
@@ -859,7 +858,7 @@ function renderCharCreate()
 	end
 
 	startY = startY + sy*0.09
-	dxDrawText("Érkezés a városba:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
+	dxDrawText("Chegada à cidade:", sx*0.1, startY, sx*0.6, startY, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_m", 13/myX*sx), "left", "center")
 	startY = startY + sy*0.015
 
 	for k, v in ipairs(availableStartPositions) do 
@@ -885,8 +884,8 @@ function renderCharCreate()
 		spinnerRot = spinnerRot + 2
 		dxDrawImage(((sx*0.1 + sx*0.2 / 2) - 10/myX * sx ), startY + barHeight / 2 - 10/myX*sx, 20/myX*sx, 20/myX*sx, "img/v2_icons/loading.png", spinnerRot, 0, 0, tocolor(255, 255, 255, 255))
 	else
-		dxDrawText("Karakter létrehozása", sx*0.1, startY, sx*0.3 - 30/myX*sx, startY + barHeight + sy*0.004, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_bo", 13/myX*sx), "center", "center")
-		dxDrawImage((sx*0.1 + sx*0.2 / 2) - 10/myX * sx + dxGetTextWidth("Karakter létrehozása",1, fontscript:getFont("p_bo", 13/myX*sx))/2, startY + barHeight / 2 - 10/myX*sx, 20/myX*sx, 20/myX*sx, "img/v2_icons/reg.png", 0, 0, 0, tocolor(255, 255, 255, 255))
+		dxDrawText("Criar Personagem", sx*0.1, startY, sx*0.3 - 30/myX*sx, startY + barHeight + sy*0.004, tocolor(255, 255, 255, 255), 1, fontscript:getFont("p_bo", 13/myX*sx), "center", "center")
+		dxDrawImage((sx*0.1 + sx*0.2 / 2) - 10/myX * sx + dxGetTextWidth("Criar Personagem",1, fontscript:getFont("p_bo", 13/myX*sx))/2, startY + barHeight / 2 - 10/myX*sx, 20/myX*sx, 20/myX*sx, "img/v2_icons/reg.png", 0, 0, 0, tocolor(255, 255, 255, 255))
 	end
 end 
 
@@ -943,7 +942,7 @@ addEventHandler("successfulLogin", root,
 			tick = getTickCount()
 
 			charCreateShow = true
-			exports.oInfobox:outputInfoBox("Nincs karaktered! Hozz létre egyet!","info")
+			exports.oInfobox:outputInfoBox("Você não tem personagem! Crie um.","info")
 
 			setCameraMatrix(unpack(charCreateCameraPosition))
 			charCreatePed = createPed(1, charCreatePedPosition[1], charCreatePedPosition[2], charCreatePedPosition[3], charCreatePedPosition[4])
@@ -1084,7 +1083,7 @@ function keyCharCreate(key, state)
 				local height = tonumber(loginpanelboxok["char_create"][5].text )
 				
 				for k,v in pairs(invalidChars) do 
-					if string.find(characterName,k) then return infobox:outputInfoBox("Karaktered neve nem tartalmazhat ékezetes betűket vagy számokat!", "error") end
+					if string.find(characterName,k) then return infobox:outputInfoBox("O nome do personagem não pode conter acentos ou números.", "error") end
 				end 
 
 					if string.find(characterName, " ") then
@@ -1105,25 +1104,25 @@ function keyCharCreate(key, state)
 													pendingCharCreate = false
 												end, 2500, 1)
 											else
-												infobox:outputInfoBox("A magasságnak 150cm és 240cm közé kell esnie!", "error")
+												infobox:outputInfoBox("A altura deve estar entre 150cm e 240cm.", "error")
 											end
 										else
-											infobox:outputInfoBox("A súlynak 50kg és 200kg közé kell esnie!", "error")
+											infobox:outputInfoBox("O peso deve estar entre 50kg e 200kg.", "error")
 										end
 									else
-										infobox:outputInfoBox("Az életkornak 18 és 99 közé kell esnie!", "error")
+										infobox:outputInfoBox("A idade deve estar entre 18 e 99 anos.", "error")
 									end
 								else
-									infobox:outputInfoBox("Hibás a megadott születési hely!", "error")
+									infobox:outputInfoBox("Cidade natal inválida.", "error")
 								end
 							else
-								infobox:outputInfoBox("Túl hosszú a megadott karakternév!", "error")
+								infobox:outputInfoBox("Nome do personagem muito longo.", "error")
 							end
 						else
-							infobox:outputInfoBox("Túl rövid a megadott karakternév!", "error")
+							infobox:outputInfoBox("Nome do personagem muito curto.", "error")
 						end
 					else
-						infobox:outputInfoBox("Hibás a megadott karakternév! [Kötelező a vezeték és keresztneved space-val való elválasztása!]", "error")
+						infobox:outputInfoBox("Nome do personagem inválido. [Sobrenome e nome devem ser separados por espaço.]", "error")
 					end
 			end
 		elseif (key == "tab") then 
@@ -1252,9 +1251,9 @@ function charLoadAnimation()
 
 	
 
-	dxDrawText("OriginalRoleplay", 0, sy*0.15, sx, sy*0.15, tocolor(255, 255, 255, 100 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 14/myX*sx), "center", "center")
-	dxDrawText("ÜDVÖZLÜNK A SZERVEREN!", 0, sy*0.18, sx, sy*0.18, tocolor(255, 255, 255, 255 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 30/myX*sx), "center", "center")
-	dxDrawText("Karakter betöltése folyamatban...", 0, sy*0.21, sx, sy*0.21, tocolor(255, 255, 255, 150 * loadPanelAlpha), 1, fontscript:getFont("p_bo", 14/myX*sx), "center", "center")
+	dxDrawText("Ipiranga Roleplay", 0, sy*0.15, sx, sy*0.15, tocolor(255, 255, 255, 100 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 14/myX*sx), "center", "center")
+	dxDrawText("BEM-VINDO AO SERVIDOR!", 0, sy*0.18, sx, sy*0.18, tocolor(255, 255, 255, 255 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 30/myX*sx), "center", "center")
+	dxDrawText("Carregando personagem...", 0, sy*0.21, sx, sy*0.21, tocolor(255, 255, 255, 150 * loadPanelAlpha), 1, fontscript:getFont("p_bo", 14/myX*sx), "center", "center")
 
 	dxDrawImage(sx/2-200/myX*sx + 7/myX*sx,sy/2-200/myX*sx,400/myX*sx, 400/myX*sx,"img/logo.png",0,0,0,tocolor(255,255,255,30*loadPanelAlpha))
 	local skinId = getElementModel(localPlayer)
@@ -1263,7 +1262,7 @@ function charLoadAnimation()
 
 	--dxDrawImage(0,0,sx,sy,"img/logo1.png",0,0,0,tocolor(255,255,255,255*logoAlpha*loadPanelAlpha))
 
-	local greatingText = "Problémába ütköztél? Segítségre szorulsz? Keresd adminisztrátorjainkat a szerveren, discordon vagy fórumon!"
+	local greatingText = "Teve algum problema? Precisa de ajuda? Procure nossos administradores no servidor, no Discord ou no fórum!"
 	local rectangleWidth = dxGetTextWidth(greatingText, 1, fontscript:getFont("p_m", 14/myX*sx)) + 15/myX*sx
 	core:dxDrawRoundedRectangle(sx/2 - rectangleWidth/2, sy*0.85, rectangleWidth, sy*0.035, tocolor(255, 255, 255, 200 * loadPanelAlpha), tocolor(255, 255, 255, 200 * loadPanelAlpha))
 	dxDrawText(greatingText,sx/2 - rectangleWidth/2, sy*0.85,sx/2 - rectangleWidth/2 + rectangleWidth, sy*0.85 + sy*0.04,tocolor(0,0,0,255*loadPanelAlpha),1, fontscript:getFont("p_m", 14/myX*sx),"center","center")
@@ -1351,7 +1350,7 @@ function renderBanPanel()
 
 	--dxDrawImage(0,0,sx,sy,"img/logo1.png",0,0,0,tocolor(255,255,255,255*logoAlpha))
 
-	dxDrawText("Ki lettél tilva a szerverről!", 0, sy*0.1, sx, sy*0.1+sy*0.1, tocolor(255, 0, 0, 255*logoAlpha), 1/myX*sx, fonts["bebasneue-35"], "center", "center")
+	dxDrawText("Você foi banido do servidor!", 0, sy*0.1, sx, sy*0.1+sy*0.1, tocolor(255, 0, 0, 255*logoAlpha), 1/myX*sx, fonts["bebasneue-35"], "center", "center")
 	dxDrawRectangle(sx*0.357, sy*0.35, sx*0.286, sy*0.3, tocolor(40, 40, 40, 220*pA))
 
 	local starty = sy*0.355
@@ -1401,7 +1400,7 @@ function renderBanPanel()
 end
 
 
-local weekDays = {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"}
+local weekDays = {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"}
 
 function formatDate(format, escaper, timestamp)
 	escaper = escaper or "'"
@@ -1606,7 +1605,7 @@ function smoothMoveCamera(x1,y1,z1,x1t,y1t,z1t,x2,y2,z2,x2t,y2t,z2t,time)
 	return true
 end
 
-exports.oAdmin:addAdminCMD("setaccountstate", 6, "Felhasználói fiók státuszának állítása.")
+exports.oAdmin:addAdminCMD("setaccountstate", 6, "Alterar status de conta de usuário.")
 
 local databaseAccounts = {}
 local databaseCharacters = {}

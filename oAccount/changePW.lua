@@ -22,35 +22,35 @@ selectedInput = false
 function drawForgotPassword()
 	buttons = {}
 	
-	dxDrawText("Visszalépéshez használd a vissza gombot! \nCsak a saját, általad megadott emailcímet add meg!\nSoha ne add ki senkinek a jelszavad!\nHiba esetén keress fel egy fejlesztőt!\n©Original Roleplay", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
+	dxDrawText("Use o botão Voltar para retornar!\nInsira apenas o e-mail cadastrado por você!\nNunca compartilhe sua senha com ninguém!\nEm caso de problemas, contate um desenvolvedor.\n©Ipiranga Roleplay", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
 	if selectedTab == 1 then
-		core:drawWindow(panelX, panelY, panelW, panelH, "Jelszóemlékeztető", 1)
+		core:drawWindow(panelX, panelY, panelW, panelH, "Recuperar Senha", 1)
 
-		drawInput("emailInput|50", "Email cím", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
+		drawInput("emailInput|50", "Endereço de e-mail", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
 
-		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Tovább", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50)) -- gomb design
-		buttons["nextRemember"] = {panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy} -- ez állítja be a gomb pozícióját mert dexter bonyolultan csinálta meg 
+		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Avançar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+		buttons["nextRemember"] = {panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy}
 
-		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, 255, 25, 36, 200, "Vissza", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, 255, 25, 36, 200, "Voltar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
 		buttons["backwardPanel"] = {panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy}
 
-	elseif selectedTab == 2 then 
-        core:drawWindow(panelX, panelY, panelW, panelH, "Add meg a visszaigazoló kódot!", 1)
+	elseif selectedTab == 2 then
+        core:drawWindow(panelX, panelY, panelW, panelH, "Insira o código de verificação", 1)
 
-        drawInput("recoveryCode|10", "Visszaigazoló kód", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
+        drawInput("recoveryCode|10", "Código de verificação", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
 
-		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Tovább", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Avançar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
 		buttons["nextRemember2"] = {panelX + 4/myX*sx, panelY + panelH - 73/myY*sy, panelW - 8/myX*sx, 32/myY*sy}
 
-		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, 255, 25, 36, 200, "Vissza", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, 255, 25, 36, 200, "Voltar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
         buttons["backwardPanel2"] = {panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy}
-	elseif selectedTab == 3 then 
-        core:drawWindow(panelX, panelY, panelW, panelH, "Add meg az új jleszavadat!", 1)
+	elseif selectedTab == 3 then
+        core:drawWindow(panelX, panelY, panelW, panelH, "Insira sua nova senha", 1)
 
-		drawInput("password1|20", "Jelszó 1x", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"], 1, tocolor(30, 30, 30, 255), 1, true)
-		drawInput("password2|20", "Jelszó 2x", panelX + 4/myX*sx, panelY+25/myY*sy + 35/myY*sy, panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"], 1, tocolor(30, 30, 30, 255), 1, true)
+		drawInput("password1|20", "Nova senha", panelX + 4/myX*sx, panelY+25/myY*sy , panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"], 1, tocolor(30, 30, 30, 255), 1, true)
+		drawInput("password2|20", "Confirmar nova senha", panelX + 4/myX*sx, panelY+25/myY*sy + 35/myY*sy, panelW - 8/myX*sx, 32/myY*sy, fonts["condensed-10"], 1, tocolor(30, 30, 30, 255), 1, true)
 
-		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Megerősítés", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+		core:dxDrawButton(panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Confirmar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
 		buttons["nextRemember3"] = {panelX + 4/myX*sx, panelY + panelH - 37/myY*sy, panelW - 8/myX*sx, 32/myY*sy}
 	end
 
@@ -102,13 +102,13 @@ function forgotPasswordClick(button,state)
 						if utf8.find(fakeInputs[validationInput], "@") and utf8.find(fakeInputs[validationInput], ".") then 
 							triggerServerEvent("rememberCheck", localPlayer, localPlayer, fakeInputs[validationInput])
 						else
-							exports.oInfobox:outputInfoBox("Adj meg egy valós email címet!","error")
+							exports.oInfobox:outputInfoBox("Insira um endereço de e-mail válido.","error")
 						end
 					else
-						exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+						exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 					end
 				else 
-					exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+					exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 				end
 			elseif data[1] == "backwardPanel" then 
 				if renderRememberPanel then 
@@ -118,13 +118,13 @@ function forgotPasswordClick(button,state)
 				if utf8.len(fakeInputs[validationInput]) > 0 then 
 					triggerServerEvent("rememberCheck2", localPlayer, localPlayer, fakeInputs[validationInput])
 				else 
-					exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+					exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 				end
 			elseif data[1] == "backwardPanel2" and selectedTab == 2 then
 				if renderRememberPanel then 
 					closeResetPasswordPanel()
 				end 
-				exports.oInfobox:outputInfoBox("Mivel vissza léptél ezért a kód már nem használható fel!","error")
+				exports.oInfobox:outputInfoBox("Como você voltou, o código não pode mais ser utilizado.","error")
 				triggerServerEvent("destroyCode", localPlayer, localPlayer)
 			elseif data[1] == "nextRemember3" and selectedTab == 3 then
 				local pw1 = fakeInputs["password1|20"]
@@ -134,10 +134,10 @@ function forgotPasswordClick(button,state)
 						triggerServerEvent("passwordChange", localPlayer, localPlayer, hash("sha256", "originalRoleplayAccount"..pw1.."2k20"))
                         closeResetPasswordPanel()
 					else 
-						exports.oInfobox:outputInfoBox("A két jelszó nem egyezzik!","error")
+						exports.oInfobox:outputInfoBox("As senhas não coincidem.","error")
 					end
 				else 
-					exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+					exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 				end
 			elseif data[1] == "confirmEmail" then 
 				if fakeInputs[validationInput] then 
@@ -148,16 +148,16 @@ function forgotPasswordClick(button,state)
 								triggerServerEvent("changeEmail", localPlayer,localPlayer,fakeInputs[validationInput])
                                 removeEventHandler("onClientClick", getRootElement(), forgotPasswordClick)
 							else 
-								exports.oInfobox:outputInfoBox("Adj meg egy valós email címet!","error")
+								exports.oInfobox:outputInfoBox("Insira um endereço de e-mail válido.","error")
 							end
 						else
-							exports.oInfobox:outputInfoBox("Adj meg egy valós email címet!","error")
+							exports.oInfobox:outputInfoBox("Insira um endereço de e-mail válido.","error")
 						end
 					else 
-						exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+						exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 					end
 				else 
-					exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+					exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 				end
 			end
 		end
@@ -187,13 +187,13 @@ function rememberKey(button, state)
 				if utf8.find(fakeInputs[selectedInput], "@") and utf8.find(fakeInputs[selectedInput], ".") then 
 					validationInput = false
 				else
-					exports.oInfobox:outputInfoBox("Adj meg egy valós email címet!","error")
+					exports.oInfobox:outputInfoBox("Insira um endereço de e-mail válido.","error")
 				end
 			else
-				exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+				exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 			end
 		else 
-			exports.oInfobox:outputInfoBox("Üresen nem hagyhatod ezt a mezőt!","error")
+			exports.oInfobox:outputInfoBox("Este campo não pode estar vazio.","error")
 		end
 	end
 end
@@ -240,14 +240,14 @@ local panelW2,panelH2 = 300/myX*sx, 200/myY*sy
 local panelX2, panelY2 = sx/2 - panelW2/2, sy/2 - panelH2/2
 
 function drawForceEmailChange()
-    core:drawWindow(panelX2, panelY2, panelW2, panelH2, "E-mail cím megváltoztatása", 1)
+    core:drawWindow(panelX2, panelY2, panelW2, panelH2, "Alterar endereço de e-mail", 1)
 
 
 	buttons = {}
 
-	dxDrawText("Változtasd meg \n a jelenleg használt E-mail címed!\n\n#eb5146Fontos, hogy hiteles email címet adj meg\n A későbbiekben szükséged lesz rá!", sx/2, panelY2 + 80/myY*sy, sx/2, panelY2 + 63/myY*sy, tocolor(255,255,255,150), 1, fonts["condensed-10"], "center", "center",false,false,false,true)
-	drawInput("emailInput|50", "Email cím", panelX2 + 4/myX*sx, panelY2+125/myY*sy , panelW2 - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
-	core:dxDrawButton(panelX2 + 4/myX*sx, panelY2 + panelH2 - 37/myY*sy, panelW2 - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Megváltoztatás", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
+	dxDrawText("Altere o seu endereço de e-mail atual!\n\n#eb5146Importante: insira um e-mail válido.\nVocê precisará dele no futuro!", sx/2, panelY2 + 80/myY*sy, sx/2, panelY2 + 63/myY*sy, tocolor(255,255,255,150), 1, fonts["condensed-10"], "center", "center",false,false,false,true)
+	drawInput("emailInput|50", "Endereço de e-mail", panelX2 + 4/myX*sx, panelY2+125/myY*sy , panelW2 - 8/myX*sx, 32/myY*sy, fonts["condensed-10"],1, tocolor(30, 30, 30, 255), 1)
+	core:dxDrawButton(panelX2 + 4/myX*sx, panelY2 + panelH2 - 37/myY*sy, panelW2 - 8/myX*sx, 32/myY*sy, r, g, b, 200, "Alterar", tocolor(255, 255, 255, 255), 1, fonts["condensed-10"], true, tocolor(0, 0, 0, 50))
 	buttons["confirmEmail"] = {panelX2 + 4/myX*sx, panelY2 + panelH2 - 37/myY*sy, panelW2 - 8/myX*sx, 32/myY*sy}
 
 
