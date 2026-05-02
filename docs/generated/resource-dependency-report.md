@@ -1,6 +1,6 @@
 # Resource dependency report
 
-**Generated (UTC):** `2026-05-02T16:53:53.270457+00:00`  
+**Generated (UTC):** `2026-05-02T21:09:45.562237+00:00`  
 **Scan root:** `/root/multitheftauto_linux_x64/mods/deathmatch/resources/vila-do-ipiranga-rp`  
 **Starter parsed from:** `/root/multitheftauto_linux_x64/mods/deathmatch/resources/vila-do-ipiranga-rp/[Core]/oStarter/server.lua`  
 
@@ -9,14 +9,14 @@
 | Metric | Value |
 |--------|------:|
 | Resources with `meta.xml` | 400 |
-| Effective starter order length (incl. `oFKSkins_*` on disk) | 209 |
+| Effective starter order length (incl. `oFKSkins_*` on disk) | 8 |
 | `exports.*:*` / `call(...)` edges | 4453 |
-| Literal `getResourceFromName("...")` hits | 51 |
+| Literal `getResourceFromName("...")` hits | 41 |
 | Trigger/handler/addEvent records | 12343 |
 | Heuristic cross-resource event edges (JSON truncado ≥8k) | 8000 |
 | Heuristic event edges deduped total | 12748 |
-| Undeclared / load-order **aggregated** flags | 442 |
-| Undeclared raw edge rows (pre-aggregate) | 2854 |
+| Undeclared / load-order **aggregated** flags | 60 |
+| Undeclared raw edge rows (pre-aggregate) | 286 |
 | Mutual export pairs (A↔B) | 17 |
 | Largest export SCC size | 27 | (#SCCs 1)
 
@@ -159,27 +159,6 @@ Pares onde **ambos** os recursos chamam um ao outro via `exports.X:Y` (candidato
 | `external_or_missing_resource` | `vila-do-ipiranga-rp` | `sarp_assets` | 1 | `getFontsDetail` | Provider not found as a resource folder under scan root (may be MTA default resource, typo, or dynamic). |
 | `external_or_missing_resource` | `vila-do-ipiranga-rp` | `sarp_hud` | 1 | `showInfobox` | Provider not found as a resource folder under scan root (may be MTA default resource, typo, or dynamic). |
 | `external_or_missing_resource` | `vila-do-ipiranga-rp` | `shader_dynamic_sky` | 21 | `isDynamicSkyEnabled, getDynamicSunVector, getDynamicMoonVector, getMoonPhaseValue` | Provider not found as a resource folder under scan root (may be MTA default resource, typo, or dynamic). |
-| `fragile_load_order` | `oAccount` | `oAdmin` | 2 | `addAdminCMD` | Provider `oAdmin` starts at same index or after `oAccount` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oAdmin` | `oDashboard` | 2 | `getPlayerAllFactions, getFactionName` | Provider `oDashboard` starts at same index or after `oAdmin` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oAdmin` | `oJob` | 1 | `getJobName` | Provider `oJob` starts at same index or after `oAdmin` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oBank` | `oMinigames` | 1 | `createMinigame` | Provider `oMinigames` starts at same index or after `oBank` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oCarshop` | `oDashboard` | 9 | `getFactionMoney, getFactionName, getPlayerAllFactions, isPlayerLeader, setFactionBankMoney, outputFactionLogToAdmins` | Provider `oDashboard` starts at same index or after `oCarshop` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oChat` | `oDashboard` | 3 | `getTalkingAnimation, getFactionType` | Provider `oDashboard` starts at same index or after `oChat` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oChat` | `oInfobox` | 4 | `outputInfoBox` | Provider `oInfobox` starts at same index or after `oChat` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oChat` | `oInventory` | 2 | `hasItem` | Provider `oInventory` starts at same index or after `oChat` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oCore` | `oAdmin` | 7 | `isSerialDeveloper, isPlayerDeveloper, addWhitelistedSerial` | Provider `oAdmin` starts at same index or after `oCore` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oCore` | `oChat` | 1 | `sendLocalMeAction` | Provider `oChat` starts at same index or after `oCore` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oCore` | `oDashboard` | 1 | `getDashboardSettingsValue` | Provider `oDashboard` starts at same index or after `oCore` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oCore` | `oInfobox` | 4 | `outputInfoBox, addInfoBox` | Provider `oInfobox` starts at same index or after `oCore` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oDashboard` | `oBank` | 1 | `getPlayerAllBankMoney` | Provider `oBank` starts at same index or after `oDashboard` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oDashboard` | `oShader_Vignette` | 2 | `setShaderValues` | Provider `oShader_Vignette` starts at same index or after `oDashboard` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oDeath` | `oAdmin` | 2 | `addAdminCMD` | Provider `oAdmin` starts at same index or after `oDeath` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oDrugs` | `oMinigames` | 1 | `createMinigame` | Provider `oMinigames` starts at same index or after `oDrugs` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oFuel` | `oRope` | 1 | `renderRope` | Provider `oRope` starts at same index or after `oFuel` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oInfobox` | `oInterface` | 2 | `getInterfaceElementData` | Provider `oInterface` starts at same index or after `oInfobox` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oInteraction` | `oBag` | 2 | `attachBag, deattachBag` | Provider `oBag` starts at same index or after `oInteraction` in oStarter (export may run before provider is ready during boot). |
-| `fragile_load_order` | `oInteraction` | `oDrugs` | 1 | `collectPlant` | Provider `oDrugs` starts at same index or after `oInteraction` in oStarter (export may run before provider is ready during boot). |
-*… 160 linhas adicionais no JSON.*
 
 ## Hidden coupling: `getResourceFromName("…")` (sample)
 
@@ -191,24 +170,14 @@ Pares onde **ambos** os recursos chamam um ao outro via `exports.X:Y` (candidato
 | `oAccount` | `oAccount` | `oAccount/serverBK.lua:75` |
 | `vila-do-ipiranga-rp` | `oAccount` | `oAccount/server.lua:110` |
 | `vila-do-ipiranga-rp` | `oAccount` | `oAccount/serverBK.lua:75` |
-| `oStarter` | `oBillboards` | `[Core]/oStarter/server.lua:289` |
-| `vila-do-ipiranga-rp` | `oBillboards` | `[Core]/oStarter/server.lua:289` |
 | `oDashboard` | `oInteriors` | `oDashboard/client.lua:591` |
 | `vila-do-ipiranga-rp` | `oInteriors` | `oDashboard/client.lua:591` |
 | `oInventoryOLD` | `oInventory` | `[Old]/oInventoryOLD/codeS.lua:140` |
 | `oInventoryOLD` | `oInventory` | `[Old]/oInventoryOLD/codeSOLD.lua:123` |
 | `oInventoryOLD` | `oInventory` | `[Old]/oInventoryOLD/codeSOLD.lua:161` |
-| `oStarter` | `oInventory` | `[Core]/oStarter/server.lua:287` |
-| `vila-do-ipiranga-rp` | `oInventory` | `[Core]/oStarter/server.lua:287` |
 | `vila-do-ipiranga-rp` | `oInventory` | `[Old]/oInventoryOLD/codeS.lua:140` |
 | `vila-do-ipiranga-rp` | `oInventory` | `[Old]/oInventoryOLD/codeSOLD.lua:123` |
 | `vila-do-ipiranga-rp` | `oInventory` | `[Old]/oInventoryOLD/codeSOLD.lua:161` |
-| `oStarter` | `oPlaneCrash` | `[Core]/oStarter/server.lua:291` |
-| `vila-do-ipiranga-rp` | `oPlaneCrash` | `[Core]/oStarter/server.lua:291` |
-| `oStarter` | `oPlant` | `[Core]/oStarter/server.lua:290` |
-| `vila-do-ipiranga-rp` | `oPlant` | `[Core]/oStarter/server.lua:290` |
-| `oStarter` | `oSpeedo` | `[Core]/oStarter/server.lua:288` |
-| `vila-do-ipiranga-rp` | `oSpeedo` | `[Core]/oStarter/server.lua:288` |
 | `vila-do-ipiranga-rp` | `oStarter` | `server.lua:6` |
 | `oDashboard` | `oVehicle` | `oDashboard/client.lua:411` |
 | `vila-do-ipiranga-rp` | `oVehicle` | `oDashboard/client.lua:411` |
@@ -227,6 +196,16 @@ Pares onde **ambos** os recursos chamam um ao outro via `exports.X:Y` (candidato
 | `vila-do-ipiranga-rp` | `shader_snow_ground` | `[Shaders]/ambient_effect/rain.lua:3` |
 | `vila-do-ipiranga-rp` | `shader_snow_ground` | `[Shaders]/ambient_effect/rain.lua:127` |
 | `vila-do-ipiranga-rp` | `shader_snow_ground` | `[Shaders]/ambient_effect/rain.lua:129` |
+| `vila-do-ipiranga-rp` | `shader_snow_ground` | `[Shaders]/ambient_effect/rain.lua:130` |
+| `ambient_effect` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:2` |
+| `ambient_effect` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:48` |
+| `ambient_effect` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:50` |
+| `ambient_effect` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:53` |
+| `ambient_effect` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:54` |
+| `vila-do-ipiranga-rp` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:2` |
+| `vila-do-ipiranga-rp` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:48` |
+| `vila-do-ipiranga-rp` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:50` |
+| `vila-do-ipiranga-rp` | `shader_wet_roads` | `[Shaders]/ambient_effect/rain.lua:53` |
 
 ## `meta.xml` `<include resource="…"/>` (declared)
 

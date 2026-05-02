@@ -33,6 +33,7 @@ Use esta pasta para documentação complementar e worklogs.
 | [generated/resource-dependency-report.md](generated/resource-dependency-report.md) | Relatório executivo gerado pelo scanner |
 | [generated/architecture-risk-report.json](generated/architecture-risk-report.json) · [architecture-risk-report.md](generated/architecture-risk-report.md) | **Risk intel v3.1** — tudo v3.0 (histórico, `trend_analysis`, `risk_heatmap`, smells, ownership, roadmap) + **`coupling_analysis`** (C<sub>a</sub>/C<sub>e</sub>, instabilidade Martin, rankings) + **`regression_analysis`** (`regression_events`, `regression_score` 0–100, `regression_severity`; blast vs baseline só desde **v3.1.0** nos snapshots) + **`executive_scorecard`** (saúde, maturidade, resiliência operacional, segurança de mudanças, pressão de dívida técnica) |
 | [tooling/export_meta_summary.py](tooling/export_meta_summary.py) | Script regenerar estatísticas de export |
+| [tooling/rebuild_orp_map_wave.py](tooling/rebuild_orp_map_wave.py) | Regenera `starter_manifest.lua`: onda de mapas `<map>` cedo + exclusões legado ORP |
 | [tooling/resource_dependency_scan.py](tooling/resource_dependency_scan.py) | Scanner completo deps inter-recursos |
 | [tooling/architecture_risk_analyzer.py](tooling/architecture_risk_analyzer.py) | Analyzer corporativo **v3.1.0** (`--write` \| `--input` \| `--json-output` \| `--md-output`; stdlib; escrita atómica; histórico últimos 50; baseline v3.0.x compatível sem falsos positivos de blast) |
 | [worklog/current-sprint.md](worklog/current-sprint.md) | Sprint atual |

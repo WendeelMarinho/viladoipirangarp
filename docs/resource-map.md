@@ -11,7 +11,7 @@
 | **~400** | Pastas no pacote que contêm `meta.xml` (inventário *código-fonte*) |
 | **~210** | Recursos efectivamente iniciados pelo **`oStarter`** + quaisquer `oFKSkins_*` registados quando o servidor arranca |
 
-**Contrato oficial de arranque:** `[Core]/oStarter/starter_manifest.lua` (**`ORP_ORIGINAL_RP_START_ORDER`**) + `server.lua` (perfil + skins `oFKSkins_*`). Perfil típico: **`original_rp`** (lista Original Roleplay sanitizada: sem duplicados `oNewPD`/`oBillboards`; sem recursos inexistentes `oPlant`/`oPlaneCrash`/`gtavbahama`; ver `infra/acl-e-recursos.md`). Alternativa QA: **`streamlined`** (`ORP_STREAMLINED_EXCLUDE` no manifest).
+**Contrato oficial de arranque:** `[Core]/oStarter/starter_manifest.lua` (**`ORP_ORIGINAL_RP_START_ORDER`**) + `server.lua` (perfil + skins `oFKSkins_*`). A lista inclui **onda única de mapas cedo** (após `oMapfix`/`oSampModels`), gerada a partir de recursos com `<map>` em `meta.xml`; ver [governanca-tooling-mapas-e-arranque.md](governanca-tooling-mapas-e-arranque.md) e [tooling/rebuild_orp_map_wave.py](tooling/rebuild_orp_map_wave.py). Perfil típico: **`original_rp`**; alternativa QA: **`streamlined`** (`ORP_STREAMLINED_EXCLUDE` no manifest).
 
 **Importante:** A lista oficial ORP também inclui nome **sem** prefixo **`o`** (`npc_hlc`, `trailerDepoBuild`, `cigy`, packs `dude_*`, …) — cortar apenas por prefixo **`o*`** partiria mapas/gameplay indispensáveis.
 

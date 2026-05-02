@@ -1,6 +1,6 @@
 # Governança de arquitetura, tooling e arranque (mapas + oStarter)
 
-**Atualização:** 2026-05-02  
+**Atualização:** 2026-05-02 · fase mapas cedo (orquestrador)  
 **Escopo:** pacote gamemode `vila-do-ipiranga-rp` (referência também em [README.md](README.md), [resource-map.md](resource-map.md)).
 
 ---
@@ -43,24 +43,44 @@ Ou seja: **o “orquestrador” não varre pastas nem carrega todos os `.map` au
 
 ---
 
-## 3. Mapas instalados versus mapas arrancados pelo oStarter
+## 3. Mapas: política “no início” e alinhamento Original Roleplay
 
-- **“.map instalado”** aqui significa: existe ficheiro **`*.map`** dentro de algum recurso cujo pai contém **`meta.xml`** (árvore `vila-do-ipiranga-rp/`).
-- **“Pronto para rodar”** no arranque canónico: o **nome do recurso** (pasta, ex. `oNewDeliMap`) está em **`ORP_ORIGINAL_RP_START_ORDER`** (após filtro de perfil) **e** o servidor consegue resolver o recurso via `getResourceFromName` (tipicamente symlink em `mods/deathmatch/resources/<nome>` apontando para esta árvore).
+### 3.1 Modelo MTA (referência externa)
 
-**Números (inventário automático 2026‑05‑02, cópia de trabalho):**
+No MTA, [**mapas são recursos próprios**](https://wiki.multitheftauto.com/wiki/Writing_Gamemodes) com `<map>` em `meta.xml`; o gamemode deve carregá‑los (aqui via `oStarter`, não via *mapmanager* clássico). O repositório público [**FZoltanI/originalroleplay**](https://github.com/FZoltanI/originalroleplay) documenta a linhagem **Original Roleplay** (equipa histórica Carlos, Paul, Dexter, Jack — objectos e mapas em pacotes dedicados), de onde deriva a árvore analisada.
+
+### 3.2 O que mudou no `oStarter` (Vale do Ipiranga)
+
+Em [`[Core]/oStarter/starter_manifest.lua`](../%5BCore%5D/oStarter/starter_manifest.lua), após a **infra mínima até `npc_hlc`**, aplicam‑se:
+
+1. **`oDestroyer`**, **`oWater`** — preparação de mundo (Original RP costumava colocar destruidor/água cedo).
+2. **`oMapfix`**, **`oSampModels`** — colisões/modelos de apoio aos mapas.
+3. **Onda única de mapas** — todos os recursos cujo `meta.xml` declara **`<map`** (descoberta recursiva na raíz do gamemode), **exceto** lista negra em [tooling/rebuild_orp_map_wave.py](tooling/rebuild_orp_map_wave.py) (legados `[OLD]` de teste, `asd_*`, paul `f1map2`/`rallymap`, *template* Dexter, recurso colidente `map` sob `oTraffipax`, etc.), **ordenados alfabéticamente** (determinístico).
+4. **Ordem canónica preservada** para o restante (UI, economia, shaders, etc.), retirando duplicados já movidos para a onda de mapas.
+
+**Correções de integridade:**
+
+- **`oPiruMap` → `oPiruMapOLD`** (único recurso com `.map` presente no pacote para essa área).
+- **Mapas adicionados** que já existiam em pastas típicas **`[Maps]/`**, **`[Maps]/[Faction]/`**, etc., mas faltavam no manifest antigo: exemplo **`oCity-Main`**, **`oBorderMap`**, **`oClub-mappolas`**, **`oDeliMap`**, **`oEastCoastMap`**, **`oLSFD1`/`oLSFD2`**, **`oNAVInterior`**, **`oCartelTijuana*Map`**, **`oMechanicLV`**, **`oBeerMaffiaInti_map`**, **`oHooverMAP`** (mapeamento físico; **`oHooverHQfix`** mantém‑se depois como recurso de correção), **`oLCMOBMap`**, **`oRally-Map`**, etc.
+
+**Regenerar a lista** (após adicionar/remover recursos‑mapa):
+
+```bash
+python3 docs/tooling/rebuild_orp_map_wave.py
+python3 docs/tooling/resource_dependency_scan.py --write
+```
+
+### 3.3 Números (cópia de trabalho, 2026‑05‑02)
 
 | Métrica | Valor |
 |--------|------:|
-| Entradas em `ORP_ORIGINAL_RP_START_ORDER` | 199 |
-| Recursos com pelo menos um `.map` + `meta.xml` no pacote | **121** |
-| Intersecção: recursos com `.map` **e** presentes na lista do oStarter | **58** |
+| Entradas totais em `ORP_ORIGINAL_RP_START_ORDER` | **229** |
+| Recursos com `<map>` no `meta.xml` considerados na onda | **89** (após exclusões) |
+| Índice aproximado de **`oInfobox`** na fila (~início HUD pesado) | **~121** (mapas ficam antes) |
 
-Os restantes **~63** recursos com ficheiro `.map` estão no disco (souvente `[Maps]/[OLD]`, `[paul]`, HQs alternativas, eventos) mas **não** são dados `start` pelo manifest actual — podem ser usados por eventos, por arranque manual, ou ser legado.
+Perfis **`streamlined`** continuam a filtrar `dude_telep`, `dude_map`, `dude_billboard` na função `orpFilterStarterProfile` (**não listar no EXCLUDE**, para esse perfil continuar válido).
 
-**Nota de integridade:** o manifest referencia **`oPiruMap`**, mas **não existe** recurso/pasta `oPiruMap` nesta árvore (há apenas legado `oPiruMapOLD` com `.map`). O oStarter imprime **`[STARTER]: AVISO — resource 'oPiruMap' não encontrado`** em runtime; corrigir incluindo o recurso em falta ou ajustando a lista ao nome real disponível no `mods/deathmatch/resources`.
-
-Catálogo legível recurso‑a‑recurso: [catalogo-originalrp-ipiranga.md](catalogo-originalrp-ipiranga.md).
+Catálogo recurso‑a‑recurso (tabela mais extensa — pode estar parcialmente desfasada dos números acima): [catalogo-originalrp-ipiranga.md](catalogo-originalrp-ipiranga.md).
 
 ---
 
