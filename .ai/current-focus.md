@@ -5,25 +5,29 @@ updated: 2026-05-01
 
 # Foco Atual
 
-**Branch:** `security/oAdmin-serial-migration`  
-**Phase:** 1 — Security Hardening  
-**Recurso:** oAdmin
+**Phase:** 2 — Localization, Security (continuação) e Modernização Incremental  
+**Branch ativo:** `main`
 
-## O que foi feito nesta sessão
+## Phase 1 — CONCLUÍDA
 
-- Migração de `adminSerials` hardcoded → `adminSerialsCache` (DB-backed)
-- Remoção de `highLevelAdmins` hardcoded
-- Adição de `loadAdminSerialsFromDB()` com callback assíncrono
-- Adição de `syncAdminACLGroup()` executado após carregamento do cache
-- `developerJoin()` agora usa `adminSerialsCache` diretamente
-- `hasPermission()` (shared) usa dual-path: server → cache, client → element data
-- `isPlayerDeveloper()`, `getPlayerAdminLevel()`, `playerHasPermission()` atualizados com dual-path
-- Comando `/reloadadminserials` adicionado para gestão em runtime
+| Commit | Trabalho |
+|---|---|
+| `f048d8e` | oAccount: saver[] removido, rate limiting, source validation |
+| `3241215` | oAdmin: adminSerialsCache DB-driven, /reloadadminserials |
+| `65e3dd4` | Infraestrutura: CLAUDE.md, .ai/, .cursor/, docs/ |
+| `459f6be` | oCore: whitelistSerials removido, pcall fail-secure |
 
-## Arquivos modificados
+## Phase 2 Sprint A — CONCLUÍDA
 
-- `oAdmin/g_admin.lua` — reescrito com adminSerialsCache
-- `oAdmin/g_commands.lua` — hasPermission() atualizado
-- `oAdmin/s_admin.lua` — DB loading, developerJoin, highLevelAdmins removido
+| Commit | Trabalho |
+|---|---|
+| `27d54f5` | oAccount: tradução PT-BR completa + tropicalização (4 arquivos, 305 linhas) |
 
-## Estado: IMPLEMENTAÇÃO CONCLUÍDA, documentação em andamento
+## Próximo foco
+
+**TD-SEC-006** — Implementação do hashing de senhas com salt por usuário  
+Decisão arquitetural já aprovada: SHA-256 server-side, `password_salt VARCHAR(32) NULL`, lazy migration.
+
+**Próxima tradução:** oDashboard + [Interface] (HUD, nametag, radar)
+
+Ver `.ai/next-actions.md` para backlog completo.

@@ -10,6 +10,7 @@ CREATE TABLE `accounts` (
   `id` int(22) NOT NULL,
   `username` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
+  `password_salt` varchar(32) DEFAULT NULL,
   `serial` varchar(32) NOT NULL,
   `email` varchar(50) NOT NULL,
   `ip` varchar(22) NOT NULL,

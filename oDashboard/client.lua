@@ -273,7 +273,7 @@ function render()
         dxDrawImage(0, 0, sx, sy,"files/bug.png", 0, 0, 0, tocolor(255, 255, 255, 255*alpha_panel))
     end
 
-    dxDrawText(color.."Original#ffffffRoleplay",sx*0.15,sy*0.14,_,_,tocolor(255,255,255,255*alpha_panel),1/myX*sx,fonts["condensed-bold"],_,_,false,false,false,true)
+    dxDrawText(color.."Ipiranga#ffffffRoleplay",sx*0.15,sy*0.14,_,_,tocolor(255,255,255,255*alpha_panel),1/myX*sx,fonts["condensed-bold"],_,_,false,false,false,true)
     local alpha_pagename = interpolateBetween(0,0,0,1,0,0,(getTickCount()-pageNameTick)/500,"Linear")
     dxDrawText(pages[activePage][1],sx*0.15,sy*0.165,_,_,tocolor(255,255,255,255*alpha_pagename),0.9/myX*sx,fonts["condensed-bold"],_,_,false,false,false,true)
 
@@ -1318,7 +1318,7 @@ function render()
                     if isPlayerLeader(faction_datas.factions[selectedFactionLine]) then  
                         dxDrawRectangle(sx*0.67, sy*0.735, sx*0.225, sy*0.055, tocolor(30, 30, 30, 220*alpha_pagebg))
                         dxDrawRectangle(sx*0.67, sy*0.735, sx*0.0015, sy*0.055, tocolor(r, g, b, 220*alpha_pagebg))
-                        dxDrawText("Játékos felvétele: (ID/Név)", sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.04, tocolor(255, 255, 255, 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "left", "top")
+                        dxDrawText("Recrutar jogador: (ID / nome)", sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.04, tocolor(255, 255, 255, 150*alpha_pagebg), 0.7/myX*sx, fonts["bebasneue-18"], "left", "top")
                         dxDrawText(editboxs["faction_member_join"], sx*0.675, sy*0.74, sx*0.675+sx*0.225, sy*0.74+sy*0.05, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["bebasneue-18"], "left", "bottom")
 
                         if core:isInSlot(sx*0.87, sy*0.745, 33/myX*sx, 33/myY*sy) then 

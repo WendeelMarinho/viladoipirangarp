@@ -5,45 +5,39 @@ updated: 2026-05-01
 
 # Sprint Atual — Cursor Context
 
-## Sprint: Security Hardening Phase 1
-**Branch:** `security/oAdmin-serial-migration` (concluída), `security/oAccount-auth-hardening` (concluída)
-**Status:** Concluída — aguardando commit e testes em servidor dev
+## Sprint: TD-SEC-006 + Sprint B (Dashboard / Interface)
+**Branch:** trabalho local em `main` / branch de feature conforme preferência do mantenedor  
+**Status:** TD-SEC-006 implementado; Sprint B parcialmente entregue (tradução PT-BR em `oDashboard/global.lua`, `dashServer.lua`, `bugReportC.lua`, branding no `client.lua`; `[Interface]` em `oInterface` + `oScoreboard`)
 
-## O que foi feito nesta sprint
+## Concluído nesta sprint
 
-### oAccount — Auth Hardening
-- Removido `saver[]` (cache de senhas em plaintext)
-- Adicionado rate limiting: 5 tentativas / 5 min por serial
-- Corrigido source spoofing em todos os event handlers de auth
-- Gate `verifiedPasswordReset` para evitar bypass de troca de senha
+### TD-SEC-006 — senhas salgadas (compatível com legado)
+- Coluna `password_salt VARCHAR(32) NULL` documentada em `orp_main.sql` e script `sql/migrations/td_sec_006_password_salt.sql`
+- Helpers: `generatePasswordSalt()` (32 hex), `computeSaltedPassword()`, `accountUsesLegacyPasswordRow()`
+- Login: `SELECT` por usuário; verificação legado (`password_salt` vazio/nulo) ou `SHA256(legacyHash .. salt)`; **migração lazy** após sucesso
+- Registro e `passwordChange`: gravam hash salgado + salt (sem alterar hash no cliente)
+- **Não** alterado: prefixo `originalRoleplayAccount`…`2k20` no client
 
-### oAdmin — Serial Migration
-- Removida tabela `adminSerials` hardcoded (7 seriais)
-- Removida `highLevelAdmins` hardcoded
-- Implementado `adminSerialsCache` populado do banco (`adminserials`)
-- `loadAdminSerialsFromDB()` + `syncAdminACLGroup()` no boot
-- `developerJoin()` agora usa o cache
-- `/reloadadminserials` para reload em runtime sem restart
+### Sprint B — tropicalização / PT-BR (parcial)
+- Dashboard: páginas, estatísticas, opções, facções, premium, daily gifts, tuning, `dashServer`, painel de bug report, texto de recrutamento
+- Interface: widgets padrão em `oInterface/global.lua`, textos de edição em `oInterface/client.lua`, cabeçalhos em `oScoreboard/client.lua`
+- `triggerHack` / salts `_OriginalRP` **intactos** (acoplamento ao anticheat)
 
-### oCore — Whitelist Migration
-- Removida tabela `whitelistSerials` hardcoded (10 seriais)
-- `onPlayerConnect` agora usa `exports.oAdmin:isSerialDeveloper(playerSerial)` com pcall
-- `/acceptserial` agora persiste via `exports.oAdmin:addWhitelistedSerial()` no banco
-- Novos exports em oAdmin: `isSerialDeveloper` (server), `addWhitelistedSerial` (server)
-- blacklistSerials mantido (2 entradas, tratado como banning temporário)
+### Documentação
+- `README.md` reescrito (overview, stack, instalação, segurança, tradução, roadmap, créditos)
+- Este arquivo `.cursor/context/current-sprint.md` atualizado
 
-## Próximas ações imediatas
+## Próximas ações
 
-1. Popular tabela `adminserials` com seriais dos admins do Ipiranga RP
-2. Testar login de developer em servidor de desenvolvimento
-3. Verificar `/reloadadminserials` e `/acceptserial` em runtime
-4. Planejamento: migração de hash de senhas (TD-SEC-006)
+1. **Produção:** executar `sql/migrations/td_sec_006_password_salt.sql` em todo ambiente com DB já criado antes do deploy do `oAccount` novo
+2. Completar tradução em `oDashboard/client.lua` (centenas de `outputInfoBox` / `dxDrawText` HU restantes) e `faction/*.lua`
+3. Completar `[Interface]` (`oHud`, `oRadar`, `oInfobox`, `oSpeedo`, `oCrosshair`) — apenas strings visíveis ao jogador
+4. Testes em servidor dev: login legado → migração; login já migrado; registro; reset de senha
 
-## Arquivos modificados nesta sprint
+## Arquivos tocados (esta entrega)
 
-- `oAccount/server.lua` — hardening completo
-- `oAdmin/g_admin.lua` — adminSerialsCache + isSerialDeveloper
-- `oAdmin/g_commands.lua` — hasPermission() com isDev() closure
-- `oAdmin/s_admin.lua` — loadAdminSerialsFromDB, syncAdminACLGroup, addWhitelistedSerial, reloadadminserials
-- `oAdmin/meta.xml` — exports: isSerialDeveloper, addWhitelistedSerial
-- `[Core]/oCore/server.lua` — whitelist migrada para DB-driven
+- `oAccount/server.lua` — TD-SEC-006
+- `orp_main.sql`, `sql/migrations/td_sec_006_password_salt.sql`
+- `oDashboard/global.lua`, `oDashboard/client.lua`, `oDashboard/dashServer.lua`, `oDashboard/bugReportC.lua`
+- `[Interface]/oInterface/global.lua`, `[Interface]/oInterface/client.lua`, `[Interface]/oScoreboard/client.lua`
+- `README.md`, `.cursor/context/current-sprint.md`

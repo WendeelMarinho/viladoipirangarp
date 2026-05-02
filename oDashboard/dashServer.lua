@@ -8,8 +8,8 @@ addEventHandler("dash > admin > callAdmins", resourceRoot, function()
     for k, v in ipairs(getElementsByType("player")) do 
         local alevel = getElementData(v, "user:admin") or 0
         if alevel > 0 then 
-            outputChatBox(core:getServerPrefix("red-dark", "Adminisztrátor Segítségkérés", 2).." Adminisztrátori segítségre lenne szüksége "..color..getElementData(client, "char:name"):gsub("_", " ").." ("..getElementData(client, "playerid")..")#ffffff nevű játékosnak.", v, 255, 255, 255, true)
-            infobox:outputInfoBox("Adminisztrátori segítségre van szükség!", "info", v)
+            outputChatBox(core:getServerPrefix("red-dark", "Pedido de ajuda (admin)", 2).." O jogador "..color..getElementData(client, "char:name"):gsub("_", " ").." ("..getElementData(client, "playerid")..")#ffffff precisa de um administrador.", v, 255, 255, 255, true)
+            infobox:outputInfoBox("Um jogador pediu ajuda de administrador!", "info", v)
         end
     end
 end)
@@ -21,10 +21,10 @@ addEventHandler("premiumShop > buyPremiumItem", resourceRoot, function(itemDatas
     inventory = exports.oInventory
     local itemID = inventory:giveItem(client, id, value, count, 0, _, _, _, client,1)
     setElementData(client, "char:pp", getElementData(client, "char:pp") - price)
-    infobox:outputInfoBox("Sikeres vásárlás! Részletek a chatboxban.", "success", client)
+    infobox:outputInfoBox("Compra realizada! Detalhes no chat.", "success", client)
 
-    outputChatBox(core:getServerPrefix("server", "Prémium", 2).."Kedves: "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Sikeresen vásároltál egy "..color..inventory:getItemName(id).." #ffffffnevű itemet!" , client, 255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("red-dark", "Prémium", 2)..color.."Ezekre az üzenetekre bármikor szükséged lehet, ahoz, hogy bizonyítsd az item eredetét! Ha a későbbiekben ezekről az üzenetekről nem tudsz képet mutatni, akkor az item nem minősül prémium itemnek!", client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Premium", 2).."Olá, "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Você comprou o item "..color..inventory:getItemName(id).."#ffffff." , client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("red-dark", "Premium", 2)..color.."Guarde estas mensagens para comprovar a origem do item premium. Sem print, o item pode não ser considerado premium.", client, 255, 255, 255, true)
 end)
 
 addEvent("premiumShop > buyPremiumMoney", true)
@@ -33,9 +33,9 @@ addEventHandler("premiumShop > buyPremiumMoney", resourceRoot, function(itemData
 
     setElementData(client, "char:pp", getElementData(client, "char:pp") - price)
     setElementData(client, "char:money", getElementData(client, "char:money") + count)
-    infobox:outputInfoBox("Sikeres vásárlás! Részletek a chatboxban.", "success", client)
+    infobox:outputInfoBox("Compra realizada! Detalhes no chat.", "success", client)
 
-    outputChatBox(core:getServerPrefix("server", "Prémium", 2).."Kedves: "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Sikeresen vásároltál "..color..count.."$#ffffff-t, "..color..price.."PP#ffffff-ért!" , client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Premium", 2).."Olá, "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Você comprou "..color..count.."$#ffffff por "..color..price.." PP#ffffff." , client, 255, 255, 255, true)
 end)
 
 
@@ -59,10 +59,10 @@ addEventHandler("premiumShop > buyPremiumPackage", resourceRoot, function(packag
         --end, k*1000, 1)
     end
     setElementData(client, "char:pp", getElementData(client, "char:pp") - price)
-    infobox:outputInfoBox("Sikeres vásárlás! Részletek a chatboxban.", "success", client)
+    infobox:outputInfoBox("Compra realizada! Detalhes no chat.", "success", client)
 
-    outputChatBox(core:getServerPrefix("server", "Prémium", 2).."Kedves: "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Sikeresen vásároltál egy "..color..name.." #ffffffnevű prémium csomagot!" , client, 255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("red-dark", "Prémium", 2)..color.."Ezekre az üzenetekre bármikor szükséged lehet, ahoz, hogy bizonyítsd az item eredetét! Ha a későbbiekben ezekről az üzenetekről nem tudsz képet mutatni, akkor az item nem minősül prémium itemnek!", client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Premium", 2).."Olá, "..color..getPlayerName(client):gsub("_", " ").."#ffffff! Você comprou o pacote premium "..color..name.."#ffffff." , client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("red-dark", "Premium", 2)..color.."Guarde estas mensagens para comprovar a origem dos itens premium. Sem print, podem não ser considerados premium.", client, 255, 255, 255, true)
 end)
 
 addEvent("slot > buySlot", true)
@@ -76,7 +76,7 @@ addEventHandler("buypanel > startVehSell", resourceRoot, function(tradePlayer, p
     setElementData(tradePlayer, "dashboard:inTrade", true)
     setElementData(client, "dashboard:inTrade", true)
     
-    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." el akar neked adni egy járművet!", "info", tradePlayer)
+    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." quer te vender um veículo!", "info", tradePlayer)
 
     triggerClientEvent(tradePlayer, "buypanel > startbuy", tradePlayer, client, price, veh)
 end)
@@ -86,7 +86,7 @@ addEventHandler("buypanel > startIntSell", resourceRoot, function(tradePlayer, p
     setElementData(tradePlayer, "dashboard:inTrade", true)
     setElementData(client, "dashboard:inTrade", true)
     
-    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." el akar neked adni egy ingatlant!", "info", tradePlayer)
+    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." quer te vender um imóvel!", "info", tradePlayer)
 
     triggerClientEvent(tradePlayer, "buypanel > startbuy > int", tradePlayer, client, price, veh)
 end)
@@ -98,23 +98,23 @@ addEventHandler("buypanel > endVehSell", resourceRoot, function(traderPlayer, ty
     setElementData(client, "dashboard:inTrade", false)
 
     if type == 1 then -- túl messzire kerültek
-        infobox:outputInfoBox("Mivel túl messzire kerültetek egymástól, az eladás megszakadt!", "warning", traderPlayer)
+        infobox:outputInfoBox("A venda foi cancelada: vocês ficaram longe demais um do outro.", "warning", traderPlayer)
     elseif type == 2 then -- elfogadva
         exports.oInventory:deleteAllExisitingItemWithValue(234, getElementData(veh, "veh:id")) -- törli az összes másolt kulcsot
 
-        infobox:outputInfoBox("Sikeres eladás!", "success", traderPlayer)
+        infobox:outputInfoBox("Venda concluída!", "success", traderPlayer)
         setElementData(client, "char:money", getElementData(client, "char:money")-price)
         setElementData(traderPlayer, "char:money", getElementData(traderPlayer, "char:money")+price)
         setElementData(veh, "veh:owner", getElementData(client, "char:id"))
 
-        outputChatBox(core:getServerPrefix("server", "Jármű vásárlás", 3).."Megvásároltad a(z) "..color..getElementData(veh, "veh:id").." #ffffffazonosítóval rendelkező járművet, "..color..price.."$#ffffff-ért.", client, 255, 255, 255, true)
-        outputChatBox(core:getServerPrefix("server", "Jármű eladás", 3).."Eladtad a(z) "..color..getElementData(veh, "veh:id").." #ffffffazonosítóval rendelkező járművet, "..color..price.."$#ffffff-ért.", traderPlayer, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo", 3).."Você comprou o veículo ID "..color..getElementData(veh, "veh:id").." #ffffffpor "..color..price.."$#ffffff.", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo", 3).."Você vendeu o veículo ID "..color..getElementData(veh, "veh:id").." #ffffffpor "..color..price.."$#ffffff.", traderPlayer, 255, 255, 255, true)
     elseif type == 3 then -- nincs elég pénz
-        infobox:outputInfoBox("A vásárlónak nincs elegendő pénze a vásárláshoz!", "error", traderPlayer)
+        infobox:outputInfoBox("O comprador não tem dinheiro suficiente!", "error", traderPlayer)
     elseif type == 4 then -- elutasítva
-        infobox:outputInfoBox("Elutasították az ajánlatodat!", "error", traderPlayer)
+        infobox:outputInfoBox("A proposta foi recusada!", "error", traderPlayer)
     elseif type == 4 then -- elutasítva
-        infobox:outputInfoBox("A vásárló nem rendelkezik elegendő jármű slottal!", "error", traderPlayer)
+        infobox:outputInfoBox("O comprador não tem slot de veículo suficiente!", "error", traderPlayer)
     end
 end)
 
@@ -125,13 +125,13 @@ addEventHandler("buypanel > endIntSell", resourceRoot, function(traderPlayer, ty
     setElementData(client, "dashboard:inTrade", false)
 
     if type == 1 then -- túl messzire kerültek
-        infobox:outputInfoBox("Mivel túl messzire kerültetek egymástól, az eladás megszakadt!", "warning", traderPlayer)
+        infobox:outputInfoBox("A venda foi cancelada: vocês ficaram longe demais um do outro.", "warning", traderPlayer)
     elseif type == 2 then -- elfogadva
         local intID = getElementData(int, "dbid")
         local newOwnerID = getElementData(client, "char:id")
         exports.oInventory:deleteAllExisitingItemWithValue(235, intID) -- törli az összes másolt kulcsot
 
-        infobox:outputInfoBox("Sikeres eladás!", "success", traderPlayer)
+        infobox:outputInfoBox("Venda concluída!", "success", traderPlayer)
         setElementData(client, "char:money", getElementData(client, "char:money")-price)
         setElementData(traderPlayer, "char:money", getElementData(traderPlayer, "char:money")+price)
         setElementData(int, "owner", newOwnerID)
@@ -139,14 +139,14 @@ addEventHandler("buypanel > endIntSell", resourceRoot, function(traderPlayer, ty
 
         dbExec(conn, "UPDATE `interiors` SET `owner` = ? WHERE id = ?", newOwnerID, intID)
 
-        outputChatBox(core:getServerPrefix("server", "Ingatlan vásárlás", 3).."Megvásároltad a(z) "..color..getElementData(int, "name").." #ffffffnevű ingatlant, "..color..price.."$#ffffff-ért.", client, 255, 255, 255, true)
-        outputChatBox(core:getServerPrefix("server", "Ingatlan eladás", 3).."Eladtad a(z) "..color..getElementData(int, "name").." #ffffffnevű ingatlant, "..color..price.."$#ffffff-ért.", traderPlayer, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Imóvel", 3).."Você comprou o imóvel "..color..getElementData(int, "name").." #ffffffpor "..color..price.."$#ffffff.", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Imóvel", 3).."Você vendeu o imóvel "..color..getElementData(int, "name").." #ffffffpor "..color..price.."$#ffffff.", traderPlayer, 255, 255, 255, true)
     elseif type == 3 then -- nincs elég pénz
-        infobox:outputInfoBox("A vásárlónak nincs elegendő pénze a vásárláshoz!", "error", traderPlayer)
+        infobox:outputInfoBox("O comprador não tem dinheiro suficiente!", "error", traderPlayer)
     elseif type == 4 then -- elutasítva
-        infobox:outputInfoBox("Elutasították az ajánlatodat!", "error", traderPlayer)
+        infobox:outputInfoBox("A proposta foi recusada!", "error", traderPlayer)
     elseif type == 4 then -- elutasítva
-        infobox:outputInfoBox("A vásárló nem rendelkezik elegendő slottal!", "error", traderPlayer)
+        infobox:outputInfoBox("O comprador não tem slot de imóvel suficiente!", "error", traderPlayer)
     end
 end)
 

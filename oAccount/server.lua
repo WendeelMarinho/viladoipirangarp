@@ -57,6 +57,34 @@ local tiltottCommands = {
 
 local con = exports.oMysql:getDBConnection()
 
+-- TD-SEC-006: legacy_client_hash from client unchanged; stored = SHA256(legacy_client_hash .. salt); salt = 32 hex chars
+local function realTimeStamp()
+    local rt = getRealTime()
+    return tonumber(rt.timestamp) or getTickCount()
+end
+
+local function generatePasswordSalt()
+    local ts = realTimeStamp()
+    local a = hash("sha256", tostring(math.random()) .. "|" .. tostring(getTickCount()) .. "|" .. tostring(ts))
+    local b = hash("sha256", tostring(math.random()) .. "|" .. tostring(ts) .. "|" .. tostring(getTickCount()))
+    return string.sub(a, 1, 16) .. string.sub(b, 1, 16)
+end
+
+local function computeSaltedPassword(legacyClientHash, saltHex)
+    return hash("sha256", tostring(legacyClientHash) .. tostring(saltHex))
+end
+
+local function accountUsesLegacyPasswordRow(row)
+    local s = row["password_salt"]
+    if s == nil or s == false then return true end
+    if type(s) ~= "string" then s = tostring(s) end
+    return s == ""
+end
+
+do
+    math.randomseed(realTimeStamp() + (getTickCount() % 2147483647))
+end
+
 local loginAttempts = {}      -- [serial] = {count, firstFailTime}
 local LOGIN_MAX_ATTEMPTS = 5
 local LOGIN_COOLDOWN_MS  = 5 * 60 * 1000
@@ -255,7 +283,9 @@ addEventHandler("registerOnServer", root,
                         --    dbExec(con, "INSERT INTO accounts (username, password, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?)",username,pass1,serial,email,ip,0,regDate)
                         --else
                             exports.oInfobox:outputInfoBox("Cadastro realizado! Agora você pode entrar.","success",player)
-                            dbExec(con, "INSERT INTO accounts (username, password, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?)",username,pass1,serial,email,ip,1,regDate)
+                            local regSalt = generatePasswordSalt()
+                            local regStored = computeSaltedPassword(pass1, regSalt)
+                            dbExec(con, "INSERT INTO accounts (username, password, password_salt, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?,?)",username, regStored, regSalt, serial, email, ip, 1, regDate)
                             triggerClientEvent(player,"backToLogin",player)
 
                             if inviteCode then 
@@ -327,62 +357,95 @@ addEventHandler("loginOnServer",getRootElement(), function(_, username, password
     local accountId = 0
     local forceEmailChange = false
     dbQuery(function(qh)
-        local result, numAffect = dbPoll(qh, 0)
+        local result = dbPoll(qh, 0)
         if not isElement(player) then return end
-        if #result > 0 then
 
-            for k,row in ipairs(result) do
-                if (tostring(row["serial"]) == tostring(serial)) or (row["serial"] == "*") then
-                    if row["verified"] == 1 then
-                        if row["suspended"] == "N" then
-                            accountId = row["id"]
-                            forceEmailChange = row["emailForceChange"]
-                            setElementData(player,"user:id",row["id"])
-                            setElementData(player, "user:name", row["username"])
-                            setElementData(player, "user:aduty", false)
-                            setElementData(player, "user:hadmin", false)
-                            setElementData(player, "user:admin", row["admin"])
-                            setElementData(player, "user:adminnick", row["adminnick"])
-                            setElementData(player, "user:email", row["email"])
-                            setElementData(player, "user:registerDate", row["registerDate"])
-
-                            setElementData(player, "char:health", 100) -- bugos hud miatt
-
-                            databaseAccounts[accountId] = row
-                            if row["serial"] == "*" then
-                                dbExec(con, "UPDATE accounts SET serial = ? WHERE id = ?",serial ,row["id"])
-                            end
-                        else
-                            exports.oInfobox:outputInfoBox("Sua conta está bloqueada no momento.", "error", player)
-                            exports.oInfobox:outputInfoBox("Procure um administrador nível 5 ou superior.", "error", player)
-                            return
-                        end
-                    else
-                        exports.oInfobox:outputInfoBox("É necessária a aprovação do cadastro para entrar.", "error", player)
-                        exports.oInfobox:outputInfoBox("Procure um administrador nível 5 ou superior.", "error", player)
-                        return
-                    end
-                else
-                    exports.oInfobox:outputInfoBox("Esta conta não está associada a este computador.","error",player)
-                    return
-                end
-            end
-            loginAttempts[serial] = nil
-            exports.oInfobox:outputInfoBox("Login realizado com sucesso na conta "..username.."!","success",player)
-            setElementData(player, "user:serial", getPlayerSerial(player))
-            --print(forceEmailChange)
-            if forceEmailChange == "N" then
-                characterCheck(player, accountId)
-            else
-                triggerClientEvent(player, "emailForceChange", player, player)
-            end
-        else
+        local function recordPasswordFailure()
             local att = loginAttempts[serial] or {count = 0, firstFailTime = getTickCount()}
             att.count = att.count + 1
             loginAttempts[serial] = att
             exports.oInfobox:outputInfoBox("Nome de usuário ou senha incorretos.","error",player)
         end
-    end, con, "SELECT * FROM accounts WHERE BINARY username = ? AND password = ?", username, password)
+
+        if not result or #result == 0 then
+            recordPasswordFailure()
+            return
+        end
+
+        local legacyClientHash = password
+        local matchedRow
+        for _, r in ipairs(result) do
+            local ok
+            if accountUsesLegacyPasswordRow(r) then
+                ok = string.upper(tostring(r["password"])) == string.upper(tostring(legacyClientHash))
+            else
+                local expected = computeSaltedPassword(legacyClientHash, r["password_salt"])
+                ok = string.upper(tostring(r["password"])) == string.upper(tostring(expected))
+            end
+            if ok then
+                matchedRow = r
+                break
+            end
+        end
+
+        if not matchedRow then
+            recordPasswordFailure()
+            return
+        end
+
+        if accountUsesLegacyPasswordRow(matchedRow) then
+            local newSalt = generatePasswordSalt()
+            local newStored = computeSaltedPassword(legacyClientHash, newSalt)
+            dbExec(con, "UPDATE accounts SET password = ?, password_salt = ? WHERE id = ?", newStored, newSalt, matchedRow["id"])
+            matchedRow["password"] = newStored
+            matchedRow["password_salt"] = newSalt
+        end
+
+        if not ((tostring(matchedRow["serial"]) == tostring(serial)) or (matchedRow["serial"] == "*")) then
+            exports.oInfobox:outputInfoBox("Esta conta não está associada a este computador.","error",player)
+            return
+        end
+
+        local row = matchedRow
+        if row["verified"] == 1 then
+            if row["suspended"] == "N" then
+                accountId = row["id"]
+                forceEmailChange = row["emailForceChange"]
+                setElementData(player,"user:id",row["id"])
+                setElementData(player, "user:name", row["username"])
+                setElementData(player, "user:aduty", false)
+                setElementData(player, "user:hadmin", false)
+                setElementData(player, "user:admin", row["admin"])
+                setElementData(player, "user:adminnick", row["adminnick"])
+                setElementData(player, "user:email", row["email"])
+                setElementData(player, "user:registerDate", row["registerDate"])
+
+                setElementData(player, "char:health", 100) -- bugos hud miatt
+
+                databaseAccounts[accountId] = row
+                if row["serial"] == "*" then
+                    dbExec(con, "UPDATE accounts SET serial = ? WHERE id = ?",serial ,row["id"])
+                end
+            else
+                exports.oInfobox:outputInfoBox("Sua conta está bloqueada no momento.", "error", player)
+                exports.oInfobox:outputInfoBox("Procure um administrador nível 5 ou superior.", "error", player)
+                return
+            end
+        else
+            exports.oInfobox:outputInfoBox("É necessária a aprovação do cadastro para entrar.", "error", player)
+            exports.oInfobox:outputInfoBox("Procure um administrador nível 5 ou superior.", "error", player)
+            return
+        end
+
+        loginAttempts[serial] = nil
+        exports.oInfobox:outputInfoBox("Login realizado com sucesso na conta "..username.."!","success",player)
+        setElementData(player, "user:serial", getPlayerSerial(player))
+        if forceEmailChange == "N" then
+            characterCheck(player, accountId)
+        else
+            triggerClientEvent(player, "emailForceChange", player, player)
+        end
+    end, con, "SELECT * FROM accounts WHERE BINARY username = ?", username)
 end)
 
 
@@ -1065,7 +1128,9 @@ addEventHandler("passwordChange", getRootElement(), function(_, password)
     if not isElement(player) or getElementType(player) ~= "player" then return end
     if not verifiedPasswordReset[player] then return end
     verifiedPasswordReset[player] = nil
-    if dbExec(con, "UPDATE accounts SET password = ? WHERE serial = ?", password, getPlayerSerial(player)) then
+    local pwSalt = generatePasswordSalt()
+    local pwStored = computeSaltedPassword(password, pwSalt)
+    if dbExec(con, "UPDATE accounts SET password = ?, password_salt = ? WHERE serial = ?", pwStored, pwSalt, getPlayerSerial(player)) then
         exports.oInfobox:outputInfoBox("Senha alterada com sucesso! Agora você pode entrar.", "success", player)
     else
         exports.oInfobox:outputInfoBox("Tente novamente! ( Error code: SQL 1 90) (LUA: @912) | Se não funcionar, avise um desenvolvedor.","error",player)

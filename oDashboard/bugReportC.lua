@@ -1,11 +1,11 @@
 local alpha = 0
 
 local bugReportInfos = {
-    color.."1.) #ffffffAmennyiben a hiba nagyban befolyásolja a szerver\nműködését abban az estben keress fel egy "..color.."VEZETŐSÉGI #fffffftagot. ",
-    color.."2.) #ffffffHa szükséges, akkor mellékelj "..color.."képet #ffffffa hibáról. \n(Ezt úgy teheded meg, hogy az adott képet feltöltöd a "..color.."\nwww.imgur.com #ffffffcímen elérhető oldalra és a kép linkjét a \nmegadott mezőbe beilleszted.)",
-    color.."3.) #ffffffMiután beadtad a hiba jelentést a rendszer eltárolja a \nnevedet, így amennyiben a hibával kapcoslatban felmerülnek \nkérdések, akkor el fogonk tudni érni. ",
-    color.."4.) #ffffffA visszaélések elkerülése véget, hibát csak "..color.."5 #ffffffpercenként \ntudsz jelenteni. (Több hiba esetén keress fel egy vezetőségi\ntagot!) ",
-    color.."5.) A hiba jelentéssel kapcsolatos visszaéléseket a hiba \n jelentés funkció letiltásával és KITILTÁSSAL szankcionáljuk.",
+    color.."1.) #ffffffSe o bug afeta muito o servidor, fale com um membro da "..color.."EQUIPE#ffffff.",
+    color.."2.) #ffffffSe precisar, anexe "..color.."print(s) #ffffffdo bug.\n(Envie a imagem para "..color.."imgur.com#ffffff e cole o link no campo indicado.)",
+    color.."3.) #ffffffApós enviar o relatório, o sistema guarda seu nome para contato se houver dúvidas.",
+    color.."4.) #ffffffPara evitar abuso, só é possível reportar a cada "..color.."5#ffffff minutos. (Vários bugs: procure a equipe.)",
+    color.."5.) #ffffffAbuso do sistema de bug report pode resultar em bloqueio da função ou banimento.",
 }
 
 local selectedText = 1
@@ -33,9 +33,9 @@ function renderBugReportPanel()
 
     local clickAlpha = interpolateBetween(0, 0, 0, 1, 0, 0, (getTickCount()-clickTick)/400, "Linear")
 
-    dxDrawText("Hiba jelentése a fejlesztők felé", sx*0.405, sy*0.305, sx*0.405+sx*0.1, sy*0.305+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
+    dxDrawText("Reportar bug aos desenvolvedores", sx*0.405, sy*0.305, sx*0.405+sx*0.1, sy*0.305+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
 
-    dxDrawText("Mielőtt hibát jelentesz olvasd el az alább található tájékoztatást!", sx*0.405, sy*0.33, sx*0.405+sx*0.1, sy*0.33+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
+    dxDrawText("Antes de enviar, leia as informações abaixo.", sx*0.405, sy*0.33, sx*0.405+sx*0.1, sy*0.33+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
 
     dxDrawRectangle(sx*0.405, sy*0.35, sx*0.19, sy*0.08, tocolor(30, 30, 30, 200*alpha))
     dxDrawText(bugReportInfos[selectedText], sx*0.407, sy*0.352, sx*0.405+sx*0.19, sy*0.35+sy*0.08, tocolor(255, 255, 255, 255*clickAlpha*alpha), 0.8, font:getFont("condensed", 10/myX*sx), "center", "center", true, true, false, true)
@@ -69,10 +69,10 @@ function renderBugReportPanel()
         startX = startX + sx*0.022
     end
 
-    core:createEditbox(sx*0.405, sy*0.45, sx*0.19, sy*0.03, "bugreport-script", "Rendszer megnevezése", "text", true, {30, 30, 30, 255*alpha}, 0.4)
-    core:createEditbox(sx*0.405, sy*0.482, sx*0.19, sy*0.03, "bugreport-title", "Hiba megnevezése", "text", true, {30, 30, 30, 255*alpha}, 0.4)
-    core:createEditbox(sx*0.405, sy*0.514, sx*0.19, sy*0.03, "bugreport-desc", "Hiba leírása", "text", true, {30, 30, 30, 255*alpha}, 0.4)
-    core:createEditbox(sx*0.405, sy*0.546, sx*0.19, sy*0.03, "bugreport-image", "Kép(ek) a hibáról (Nem kötelező!)", "text", true, {30, 30, 30, 255*alpha}, 0.4)
+    core:createEditbox(sx*0.405, sy*0.45, sx*0.19, sy*0.03, "bugreport-script", "Nome do recurso/script", "text", true, {30, 30, 30, 255*alpha}, 0.4)
+    core:createEditbox(sx*0.405, sy*0.482, sx*0.19, sy*0.03, "bugreport-title", "Título do bug", "text", true, {30, 30, 30, 255*alpha}, 0.4)
+    core:createEditbox(sx*0.405, sy*0.514, sx*0.19, sy*0.03, "bugreport-desc", "Descrição do bug", "text", true, {30, 30, 30, 255*alpha}, 0.4)
+    core:createEditbox(sx*0.405, sy*0.546, sx*0.19, sy*0.03, "bugreport-image", "Link da imagem (opcional)", "text", true, {30, 30, 30, 255*alpha}, 0.4)
 
     dxDrawRectangle(sx*0.405, sy*0.58, 30/myX*sx, 30/myY*sy, tocolor(30, 30, 30, 200*alpha))
     dxDrawRectangle(sx*0.405+2/myX*sx, sy*0.58+2/myY*sy, 26/myX*sx, 26/myY*sy, tocolor(35, 35, 35, 200*alpha))
@@ -85,7 +85,7 @@ function renderBugReportPanel()
         dxDrawImage(sx*0.405+5/myX*sx, sy*0.58+5/myY*sy, 20/myX*sx, 20/myY*sy, "files/admin_panel/tick.png", 0, 0, 0, tocolor(r, g, b, 255*alpha))
     end
 
-    dxDrawText("Elolvastam és megértettem a tájékoztatóban foglaltakat.", sx*0.405 + 35/myX*sx, sy*0.58, sx*0.405 + 35/myX*sx+30/myX*sx, sy*0.58+30/myY*sy, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center")
+    dxDrawText("Li e entendi as regras acima.", sx*0.405 + 35/myX*sx, sy*0.58, sx*0.405 + 35/myX*sx+30/myX*sx, sy*0.58+30/myY*sy, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center")
 
     --dxDrawRectangle(sx*0.405, sy*0.62, sx*0.19, sy*0.07)
     local textColor = tocolor(255, 255, 255, 255*alpha)
@@ -98,7 +98,7 @@ function renderBugReportPanel()
         end
     end
 
-    dxDrawText("Hiba jelentés beküldése", sx*0.405, sy*0.62, sx*0.405+sx*0.19, sy*0.62+sy*0.07, textColor, 1, font:getFont("condensed", 15/myX*sx), "center", "center")
+    dxDrawText("Enviar relatório", sx*0.405, sy*0.62, sx*0.405+sx*0.19, sy*0.62+sy*0.07, textColor, 1, font:getFont("condensed", 15/myX*sx), "center", "center")
 end
 
 function keyBugReportPanel(key, state)
@@ -111,24 +111,24 @@ function keyBugReportPanel(key, state)
             if ((not acceptInfos) or (string.len(core:getEditboxText("bugreport-script")) < 2) or (string.len(core:getEditboxText("bugreport-title")) < 4) or (string.len(core:getEditboxText("bugreport-desc")) < 10)) then 
             else
                 if string.len(core:getEditboxText("bugreport-script")) > 25 then 
-                    return infobox:outputInfoBox("A rendszer neve nem haladhatja meg a 25 karaktert!", "warning")
+                    return infobox:outputInfoBox("O nome do recurso não pode passar de 25 caracteres!", "warning")
                 end 
 
                 if string.len(core:getEditboxText("bugreport-title")) > 25 then 
-                    return infobox:outputInfoBox("A hiba megnevezése nem haladhatja meg a 25 karaktert!", "warning")
+                    return infobox:outputInfoBox("O título não pode passar de 25 caracteres!", "warning")
                 end 
                 
                 if string.len(core:getEditboxText("bugreport-desc")) > 200 then 
-                    return infobox:outputInfoBox("A hiba leírása nem haladhatja meg a 200 karaktert!", "warning")
+                    return infobox:outputInfoBox("A descrição não pode passar de 200 caracteres!", "warning")
                 end 
 
                 if string.len(core:getEditboxText("bugreport-image")) > 100 then 
-                    return infobox:outputInfoBox("A kép URL címe nem haladhatja meg a 100 karaktert!", "warning")
+                    return infobox:outputInfoBox("O link da imagem não pode passar de 100 caracteres!", "warning")
                 end 
 
                 triggerServerEvent("bugreport > addBugReport", resourceRoot, {getElementData(localPlayer, "char:id"), getElementData(localPlayer, "char:name"):gsub("_", " "), getElementData(localPlayer, "user:id"), getElementData(localPlayer, "user:name")}, {core:getEditboxText("bugreport-script"), core:getEditboxText("bugreport-title"), core:getEditboxText("bugreport-desc"), core:getEditboxText("bugreport-image")}, string.format("%04d.%02d.%02d %02d:%02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute"), core:getDate("second")))
                 closeBugReportMenu()
-                infobox:outputInfoBox("Köszönjük, hogy jelentetted a hibát! A hiba hamarosan javításra kerül!", "success")
+                infobox:outputInfoBox("Obrigado pelo relatório! A equipe vai analisar em breve.", "success")
             end
         end
 
@@ -190,10 +190,10 @@ local progressColors = {
 }
 
 local progressTitles = {
-    ["wait_dev"] = {"Javításra vár", ""},
-    ["error_in_dev"] = {"Nem javítható", ""},
-    ["dev_complete"] = {"Kijavítva", ""},
-    ["dev_in_progress"] = {"Javítás folyamatban", ""},
+    ["wait_dev"] = {"Aguardando correção", ""},
+    ["error_in_dev"] = {"Não corrigível", ""},
+    ["dev_complete"] = {"Corrigido", ""},
+    ["dev_in_progress"] = {"Em correção", ""},
 }
 
 local bugReportPointer = 0

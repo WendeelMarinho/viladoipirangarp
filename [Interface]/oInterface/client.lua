@@ -97,18 +97,18 @@ function renderHudEditor()
 
     if core:isInSlot(sx*0.005,sy*0.01,sx*0.13,sy*0.04) then 
         dxDrawImage(sx*0.005,sy*0.01,35/myX*sx,35/myY*sy,"files/reset.png",0,0,0,tocolor(blueR, blueG, blueB,255))
-        dxDrawText("Interface visszaállítása", sx*0.03,sy*0.02,sx*0.03+sx*0.1,sy*0.02+sy*0.02, tocolor(blueR, blueG, blueB,255),0.8/myX*sx,font,"left","center")
+        dxDrawText("Restaurar interface", sx*0.03,sy*0.02,sx*0.03+sx*0.1,sy*0.02+sy*0.02, tocolor(blueR, blueG, blueB,255),0.8/myX*sx,font,"left","center")
     else
         dxDrawImage(sx*0.005,sy*0.01,35/myX*sx,35/myY*sy,"files/reset.png",0,0,0,tocolor(220,220,220,255))
-        dxDrawText("Interface visszaállítása", sx*0.03,sy*0.02,sx*0.03+sx*0.1,sy*0.02+sy*0.02, tocolor(220,220,220,255),0.8/myX*sx,font,"left","center")
+        dxDrawText("Restaurar interface", sx*0.03,sy*0.02,sx*0.03+sx*0.1,sy*0.02+sy*0.02, tocolor(220,220,220,255),0.8/myX*sx,font,"left","center")
     end
 
     if core:isInSlot(sx*0.005,sy*0.055,sx*0.13,sy*0.04) then 
         dxDrawImage(sx*0.005,sy*0.055,35/myX*sx,35/myY*sy,"files/plus.png",0,0,0,tocolor(greenR, greenG, greenB ,255))
-        dxDrawText("Interface elem hozzáadása", sx*0.03,sy*0.065,sx*0.03+sx*0.1,sy*0.065+sy*0.02, tocolor(greenR, greenG, greenB ,255),0.8/myX*sx,font,"left","center")
+        dxDrawText("Adicionar elemento", sx*0.03,sy*0.065,sx*0.03+sx*0.1,sy*0.065+sy*0.02, tocolor(greenR, greenG, greenB ,255),0.8/myX*sx,font,"left","center")
     else
         dxDrawImage(sx*0.005,sy*0.055,35/myX*sx,35/myY*sy,"files/plus.png",0,0,0,tocolor(220,220,220,255))
-        dxDrawText("Interface elem hozzáadása", sx*0.03,sy*0.065,sx*0.03+sx*0.1,sy*0.065+sy*0.02, tocolor(220,220,220,255),0.8/myX*sx,font,"left","center")
+        dxDrawText("Adicionar elemento", sx*0.03,sy*0.065,sx*0.03+sx*0.1,sy*0.065+sy*0.02, tocolor(220,220,220,255),0.8/myX*sx,font,"left","center")
     end
 
     for k,v in ipairs(widgets) do 
@@ -248,8 +248,9 @@ function keyPress(key,state)
                 for i = 1, #nonRenderedElements do 
                     if nonRenderedElements[i] then 
                         if core:isInSlot(sx*0.006, starty, sx*0.128, sy*0.03) then 
-                            if widgets[nonRenderedElements[i]][1] == "HP" or widgets[nonRenderedElements[i]][1] == "Armor" or widgets[nonRenderedElements[i]][1] == "Étel/Ital" or widgets[nonRenderedElements[i]][1] == "Stamina" and exports["oHud"]:getHudType() == 2 then 
-                                exports.oInfobox:outputInfoBox('A Hud 2 van kiválasztva előbb zárd be!','error')
+                            local wn = widgets[nonRenderedElements[i]][1]
+                            if wn == "HP" or wn == "Armor" or wn == "Étel/Ital" or wn == "Comida/Bebida" or wn == "Stamina" and exports["oHud"]:getHudType() == 2 then 
+                                exports.oInfobox:outputInfoBox('O HUD 2 está ativo. Desative-o antes de adicionar este widget.','error')
                                 --outputChatBox(core:getServerPrefix("server", "Interface", 3).."A Hud 2 van kiválasztva előbb zárd be!",255,255,255,true)
                                 return
                             end
@@ -374,7 +375,7 @@ function resethud()
     local file_size = fileGetSize(fileDefault) or 0
     widgets = fromJSON(fileRead(fileDefault, file_size))
     fileClose(fileDefault)
-    outputChatBox(core:getServerPrefix("server", "Interface", 3).."Alaphelyzetbe állítottad az interfacet!",255,255,255,true)
+    outputChatBox(core:getServerPrefix("server", "Interface", 3).."Interface restaurada para o padrão.",255,255,255,true)
     getNonRenderedElements()
 end
 addCommandHandler("resethud",resethud)

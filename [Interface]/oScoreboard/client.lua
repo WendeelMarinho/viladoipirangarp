@@ -186,7 +186,7 @@ function renderScore()
     --dxDrawRectangle(x, y, w, h, tocolor(255,25,25,240*a))
     dxDrawRectangle(x+2/myX*sx, y+2/myY*sy, w-4/myX*sx, sy*0.025, tocolor(35, 35, 35, 220*a))
 
-    dxDrawText("Scoreboard", x, y, x+w, y+sy*0.031, tocolor(220,220,220,255*a), 1, fontScript:getFont("p_bo", 15/myX*sx), "center", "center", false, false, false, true)
+    dxDrawText("Placar", x, y, x+w, y+sy*0.031, tocolor(220,220,220,255*a), 1, fontScript:getFont("p_bo", 15/myX*sx), "center", "center", false, false, false, true)
     --dxDrawImage(x + sx*0.2145, y + 2/myY*sy, 22/myY*sy, 22/myY*sy, "files/logo.png", 0, 0, 0, tocolor(220, 220, 220, 255*logo_a))s
 
     roundedRectangle(x+sx*0.035, y+sy*0.032, sx*0.16, sy*0.025, tocolor(35, 35, 35,240*a), tocolor(35, 35, 35,240*a), false)
@@ -195,14 +195,14 @@ function renderScore()
     if string.len(score_editbox) > 0 then
         dxDrawText(score_editbox, x+sx*0.035, y+sy*0.032, x+sx*0.035+sx*0.16, y+sy*0.032+sy*0.025, tocolor(255, 255, 255, 200*a), 0.8/myX*sx, fonts["sf-light-10"], "center", "center") 
     else
-        dxDrawText("Játékos keresése (ID vagy névrészlet alapján)", x+sx*0.035, y+sy*0.032, x+sx*0.035+sx*0.16, y+sy*0.032+sy*0.025, tocolor(255, 255, 255, 100*a), 0.8/myX*sx, fonts["sf-light-10"], "center", "center")
+        dxDrawText("Buscar jogador (ID ou parte do nome)", x+sx*0.035, y+sy*0.032, x+sx*0.035+sx*0.16, y+sy*0.032+sy*0.025, tocolor(255, 255, 255, 100*a), 0.8/myX*sx, fonts["sf-light-10"], "center", "center")
     end
 
     dxDrawRectangle(x+2/myX*sx, y+sy*0.062, w-4/myX*sx, sy*0.03, tocolor(35, 35, 35, 220*a))
     dxDrawText("#", x+2/myX*sx, y+sy*0.062, x+2/myX*sx+35/myX*sx, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
     dxDrawText("ID", x+sx*0.01, y+sy*0.062,  x+sx*0.025+sx*0.025, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
-    dxDrawText("Játékosnév", x+sx*0.04, y+sy*0.062, x+sx*0.04+sx*0.14, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
-    dxDrawText("Szint", x+sx*0.05+sx*0.12, y+sy*0.062, x+sx*0.05+sx*0.12+sx*0.04, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
+    dxDrawText("Jogador", x+sx*0.04, y+sy*0.062, x+sx*0.04+sx*0.14, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
+    dxDrawText("Nível", x+sx*0.05+sx*0.12, y+sy*0.062, x+sx*0.05+sx*0.12+sx*0.04, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
     dxDrawText("Ping", x+sx*0.05+sx*0.147, y+sy*0.062, x+sx*0.05+sx*0.147+sx*0.04, y+sy*0.062+sy*0.032, tocolor(r,g,b,255*a), 0.85, fontScript:getFont("p_bo", 15/myX*sx), "center", "center")
 
     local starty = y+sy*0.095

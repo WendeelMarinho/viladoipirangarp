@@ -1,68 +1,68 @@
 pages = {
-    {"Áttekintés","user.png"},
-    {"Vagyon","dollar.png"},
-    {"Adminisztrátorok","admins.png"},
-    {"Beállítások","options.png"},
-    {"Szervezetek","factions.png"},
-    {"Prémium","pp.png"},
-    {"Napi ajándék és Case Shop","daily.png"},
+    {"Visão geral","user.png"},
+    {"Patrimônio","dollar.png"},
+    {"Administradores","admins.png"},
+    {"Configurações","options.png"},
+    {"Organizações","factions.png"},
+    {"Premium","pp.png"},
+    {"Presente diário e Case Shop","daily.png"},
     --{"Kisállat","pet.png"},
 }
 
 charStats = {
-    {"Karakter név", "char:name"},
-    {"Nem", "char:gender"},
-    {"Életkor", "char:age"},
-    {"Testsúly", "char:weight"},
-    {"Magasság", "char:height"},
-    {"Kinézet ID", "nan"},
-    {"Munka", "char:job"},
-    {"Szervezet", "char:faction"},
-    {"Idő a fizetésig", "char:minToPayment"},
-    {"Készpénz", "char:money"},
-    {"Járművek", "0"},
-    {"Ingatlanok", "0"},
+    {"Nome do personagem", "char:name"},
+    {"Gênero", "char:gender"},
+    {"Idade", "char:age"},
+    {"Peso", "char:weight"},
+    {"Altura", "char:height"},
+    {"ID de aparência", "nan"},
+    {"Trabalho", "char:job"},
+    {"Organização", "char:faction"},
+    {"Tempo até o pagamento", "char:minToPayment"},
+    {"Dinheiro (mão)", "char:money"},
+    {"Veículos", "0"},
+    {"Imóveis", "0"},
 }
 
 userStats = {
-    {"Felhasználónév", "user:name"},
-    {"Account ID", "user:id"},
-    {"Karakter ID / Meghívó kód", "char:id"},
-    {"Admin rang", "user:admin"},
-    {"Admin név", "user:adminnick"},
-    {"Regisztráció dátuma", "user:registerDate"},
-    {"Ban(ok)", "dashboard:banKickJailCount"},
-    {"Kick(ek)", "dashboard:banKickJailCount"},
-    {"Jail(ek)", "dashboard:banKickJailCount"},
-    {"Játszott idő", "char:playedTime"},
-    {"Email", "user:email"},
+    {"Nome de usuário", "user:name"},
+    {"ID da conta", "user:id"},
+    {"ID do personagem / código de convite", "char:id"},
+    {"Nível admin", "user:admin"},
+    {"Nome admin", "user:adminnick"},
+    {"Data de registro", "user:registerDate"},
+    {"Ban(s)", "dashboard:banKickJailCount"},
+    {"Kick(s)", "dashboard:banKickJailCount"},
+    {"Jail(s)", "dashboard:banKickJailCount"},
+    {"Tempo jogado", "char:playedTime"},
+    {"E-mail", "user:email"},
     {"Serial", "user:serial"},
 }
 
 vagyonTargyak = {
-    {"Készpénz", "char:money"},
+    {"Dinheiro (mão)", "char:money"},
     {"Casino Coin", "char:cc"},
-    {"Banki egyenleg", "_bankmoney"},
+    {"Saldo bancário", "_bankmoney"},
  --   {"Prémium Pont", "char:pp"},
 }
 
 adminPrefix = {"AS","A1","A2","A3","FA","SA","</>","T"}
 
 vehicleDatas = {
-    {"Jármű állapota",10},
-    {"Motor állapota",4},
-    {"Ajtók állapota",3},
-    {"Lámpák állapota",11},
-    {"Üzemanyagszint",15},
-    {"Üzemanyag típusa",16},
-    {"Pozíció",9},
+    {"Estado do veículo",10},
+    {"Estado do motor",4},
+    {"Estado das portas",3},
+    {"Estado das luzes",11},
+    {"Nível de combustível",15},
+    {"Tipo de combustível",16},
+    {"Posição",9},
     {"Motor", 12, "engine"},
-    {"Váltó", 12, "gear"},
-    {"Fékek", 12, "brake"},
-    {"Turbó", 12, "turbo"},
+    {"Câmbio", 12, "gear"},
+    {"Freios", 12, "brake"},
+    {"Turbo", 12, "turbo"},
     {"ECU", 12, "ecu"},
-    {"Súlycsökkentés", 12, "wloss"},
-    {"Távolság az olajcseréig:", 19, "wloss"},
+    {"Redução de peso", 12, "wloss"},
+    {"Distância até a troca de óleo:", 19, "wloss"},
 }
 
 walkingStyles = {0, 54, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138}
@@ -78,58 +78,58 @@ talkinkingAnimations = {
 
 options = {
     ["graphics"] = {
-        name = "Grafikai beállítások",
+        name = "Configurações gráficas",
         icon = "graphics.png",
         --- megnevezés, type (1:on/off, 2:csúszka, 3:jobbra-balra gomb), minimum érték, maximum érték, function, state, availableInBeta
-        {"Látótávolság", 2, 100, 4000, "setMaxShowDistance", 0, true},
-        {"Paletta", 3, 0, 17, "oShader_Palette", 0, true},
+        {"Distância de visão", 2, 100, 4000, "setMaxShowDistance", 0, true},
+        {"Paleta de cores", 3, 0, 17, "oShader_Palette", 0, true},
         {"Bloom", 1, 1, 1, "oShader_Bloom", false, true}, --dash > shader > toggleBloom
-        {"Jármű tükröződés", 1, 0, 0, "oShader_VehicleReflection", false, true},
-        {"Mozgási elmosódás", 1, 1, 1, "oShader_MotionBlur", false, true},
+        {"Reflexo nos veículos", 1, 0, 0, "oShader_VehicleReflection", false, true},
+        {"Desfoque de movimento", 1, 1, 1, "oShader_MotionBlur", false, true},
         {"Vignette", 1, 1, 1, "oShader_Vignette", false, true},
-        {"Kidolgozott víz", 1, 1, 1, "oShader_Water", false, true}, --dash > shader > toggleWater
-        {"Kidolgozott textúrák", 1, 1, 1, "oShader_HDTextures", false, true},
-        {"Mélységélesség", 1, 1, 1, "oShader_Depth", false, true},
-        {"Anti-aliasing (élsimítás)", 1, 1, 1, "oShader_FXAA", true, true}
+        {"Água detalhada", 1, 1, 1, "oShader_Water", false, true}, --dash > shader > toggleWater
+        {"Texturas HD", 1, 1, 1, "oShader_HDTextures", false, true},
+        {"Profundidade de campo", 1, 1, 1, "oShader_Depth", false, true},
+        {"Anti-aliasing (FXAA)", 1, 1, 1, "oShader_FXAA", true, true}
         --{"Havazás", 1, 1, 1, "snow:state", false, true},
         --{"Kidolgozott fű", 1, 1, 1, "oShader_HDGrass", false},
     },
 
     ["char"] = {
-        name = "Karakter beállítások",
+        name = "Configurações do personagem",
         icon = "char.png",
         --- megnevezés, type (1:on/off, 3:jobbra-balra gomb), minimum érték, maximum érték, function, state, availableInBeta
-        {"Harcstílus", 3, 1, 20, "", "char:fightStyle", true},
-        {"Sétastílus", 3, 1, 23, "", "char:walkStyle", true},
-        {"Beszéd animáció", 3, 0, 10, "", "char:talkAnimation", true},
+        {"Estilo de luta", 3, 1, 20, "", "char:fightStyle", true},
+        {"Estilo de caminhada", 3, 1, 23, "", "char:walkStyle", true},
+        {"Animação ao falar", 3, 0, 10, "", "char:talkAnimation", true},
         {"Avatar", 4, 0, 10, "", 1, true, ":oAccount/avatars/"},
     },
 
     ["other"] = {
-        name = "Egyéb beállítások",
+        name = "Outras configurações",
         icon = "settings.png",
-        {"Szöveg körvonal", 3, 1, 3, "", 1, true},
-        {"Nametag stílus", 3, 1, 3, "", 1, true},
+        {"Contorno do texto", 3, 1, 3, "", 1, true},
+        {"Estilo do nametag", 3, 1, 3, "", 1, true},
 
         --v1.0.1 UPDATE
-        {"Saját név megjelenítése", 1, 1, 1, "", 0, true},
-        {"Tippek", 1, 1, 1, "", 1, true},
+        {"Mostrar meu nome", 1, 1, 1, "", 0, true},
+        {"Dicas", 1, 1, 1, "", 1, true},
     },
 
     ["crosshair"] = {
-        name = "Célkereszt",
+        name = "Mira",
         icon = "target.png",
-        {"Kinézet", 4, 0, 10, "", 1, true, ":oCrosshair/crosshairs/"},
-        {"Szín", 5, 0, 10, "", 1, true},
+        {"Aparência", 4, 0, 10, "", 1, true, ":oCrosshair/crosshairs/"},
+        {"Cor", 5, 0, 10, "", 1, true},
     },
 
     ["xmas"] = {
-        name = "Karácsony",
+        name = "Natal",
         icon = "xmas.png",
-        {"Havazás", 1, 1, 1, "oShader_Snow", false, true},
-        {"Havazás stílusa", 3, 1, 2, "oShader_Snow", 1, true},
-        {"Havazás erőssége", 2, 500, 2000, "oShader_Snow", 2000, true},
-        {"Havazás hullámzása", 1, 1, 1, "oShader_Snow", true, true},
+        {"Neve", 1, 1, 1, "oShader_Snow", false, true},
+        {"Estilo da neve", 3, 1, 2, "oShader_Snow", 1, true},
+        {"Intensidade da neve", 2, 500, 2000, "oShader_Snow", 2000, true},
+        {"Neve ondulante", 1, 1, 1, "oShader_Snow", true, true},
 
     }
 }
@@ -151,8 +151,8 @@ function getTalkingAnimation(id)
 end
 
 vignetteSetup = {
-    {"Áttetszőség", 3, 0.1, 1, "", 0.5, true},
-    {"Kiterjedés", 3, 1, 10, "", 5, true},
+    {"Opacidade", 3, 0.1, 1, "", 0.5, true},
+    {"Extensão", 3, 1, 10, "", 5, true},
 }
 
 crosshairColors = {
@@ -184,87 +184,87 @@ moneyColor = "#7cc576"
 --- FRAKCIÓK
 factionPages = {
     --{"név", "icon"},
-    {"Áttekintés", "home"},
-    {"Tagok", "team"},
-    {"Járművek", "vehicle"},
-    {"Rangok", "ranks"},
-    {"Dutyk", "dutys"},
+    {"Visão geral", "home"},
+    {"Membros", "team"},
+    {"Veículos", "vehicle"},
+    {"Patentes", "ranks"},
+    {"Serviços (duty)", "dutys"},
     --{"Raktár", "inventory"},
 }
 
 factionHomepageInfos = {
     --{"Leírás", "megnevezése a táblában", háttérR, háttérG, háttérB, textR, textG, textB}
-    {"Tagok", 0, r, g, b, 220, 220, 220},
-    {"Járművek", 6, r, g, b, 220, 220, 220},
-    {"Rangok", 7, r, g, b, 220, 220, 220},
-    {"Dutyk", 8, r, g, b, 220, 220, 220},
+    {"Membros", 0, r, g, b, 220, 220, 220},
+    {"Veículos", 6, r, g, b, 220, 220, 220},
+    {"Patentes", 7, r, g, b, 220, 220, 220},
+    {"Serviços (duty)", 8, r, g, b, 220, 220, 220},
 }
 
 factionMemberInformations = {
-    {"Név", 4},
-    {"Rang", 2},
-    {"Leader", 3},
-    {"Szolgálatban", 5},
-    {"Utolsó szolgálatba állás", 8},
-    {"Utolsó bejelentkezés", 7},
-    {"Szolgálatban töltött idő", 9, "perc"},
+    {"Nome", 4},
+    {"Patente", 2},
+    {"Líder", 3},
+    {"Em serviço", 5},
+    {"Último início de serviço", 8},
+    {"Último login", 7},
+    {"Tempo em serviço", 9, "min"},
 }
 
 factionLeaderOptions = {
-    {"Előléptetés"},
-    {"Lefokozás"},
-    {"Leader jog adása"},
-    {"Kirúgás"},
-    {"Szolgálati idő nullázása"},
-    {"Jelvény adás"},
+    {"Promover"},
+    {"Rebaixar"},
+    {"Conceder líder"},
+    {"Expulsar"},
+    {"Zerar tempo de serviço"},
+    {"Dar distintivo"},
 }
 
 factionRankInformations = {
-    {"Megnevezés", 1},
-    {"Fizetés", 2},
-    {"Hozzárendelt duty azonosító", 3},
-    {"Tagok ezen a rangon", 0},
+    {"Nome", 1},
+    {"Salário", 2},
+    {"ID do duty vinculado", 3},
+    {"Membros nesta patente", 0},
 }
 
 vehicleTypes = {
-    ["Automobile"] = "Autó",
-    ["Plane"] = "Repülő",
-    ["Bike"] = "Motor",
-    ["Helicopter"] = "Helikopter",
-    ["Boat"] = "Hajó",
-    ["Train"] = "Vonat",
-    ["Trailer"] = "Trailer",
+    ["Automobile"] = "Carro",
+    ["Plane"] = "Avião",
+    ["Bike"] = "Moto",
+    ["Helicopter"] = "Helicóptero",
+    ["Boat"] = "Barco",
+    ["Train"] = "Trem",
+    ["Trailer"] = "Reboque",
     ["BMX"] = "BMX",
     ["Monster Truck"] = "Monster Truck",
-    ["Quad"] = "Quad",
+    ["Quad"] = "Quadriciclo",
 }
 
 vehicleTunings = {
-    ["engine-1"] = "Alap motor",
-    ["engine-2"] = "Verseny motor",
-    ["engine-3"] = "Profi motor",
-    ["engine-4"] = "Prémium motor",
-    ["gear-1"] = "Alap váltó",
-    ["gear-2"] = "Verseny váltó",
-    ["gear-3"] = "Profi váltó",
-    ["gear-4"] = "Prémium váltó",
-    ["brake-1"] = "Alap fékek",
-    ["brake-2"] = "Verseny fékek",
-    ["brake-3"] = "Profi fékek",
-    ["brake-4"] = "Prémium fékek",
-    ["turbo-1"] = "Alap turbó",
-    ["turbo-2"] = "Verseny turbó",
-    ["turbo-3"] = "Profi turbó",
-    ["turbo-4"] = "Prémium turbó",
-    ["ecu-1"] = "Alap ECU",
-    ["ecu-2"] = "Verseny ECU",
-    ["ecu-3"] = "Profi ECU",
-    ["ecu-4"] = "Prémium ECU",
+    ["engine-1"] = "Motor básico",
+    ["engine-2"] = "Motor esportivo",
+    ["engine-3"] = "Motor profissional",
+    ["engine-4"] = "Motor premium",
+    ["gear-1"] = "Câmbio básico",
+    ["gear-2"] = "Câmbio esportivo",
+    ["gear-3"] = "Câmbio profissional",
+    ["gear-4"] = "Câmbio premium",
+    ["brake-1"] = "Freios básicos",
+    ["brake-2"] = "Freios esportivos",
+    ["brake-3"] = "Freios profissionais",
+    ["brake-4"] = "Freios premium",
+    ["turbo-1"] = "Turbo básico",
+    ["turbo-2"] = "Turbo esportivo",
+    ["turbo-3"] = "Turbo profissional",
+    ["turbo-4"] = "Turbo premium",
+    ["ecu-1"] = "ECU básica",
+    ["ecu-2"] = "ECU esportiva",
+    ["ecu-3"] = "ECU profissional",
+    ["ecu-4"] = "ECU premium",
 }
 
 factionLogMessageColor = "#fc7b03"
 factionLogNameColor = "#0d73e0"
-factionLogPrefix = "#fc5a03[Frakció - LOG]: "..factionLogMessageColor
+factionLogPrefix = "#fc5a03[Organização - LOG]: "..factionLogMessageColor
 
 tiltott_keys = {
     ["backspace"] = true,
@@ -321,7 +321,7 @@ tiltott_keys = {
 }
 
 premiumCategories = {
-    {name = "Étel & Ital", items = {
+    {name = "Comida e bebida", items = {
         {id = 76, price = 30, count = 1, value = 1}, 
     
     
@@ -331,7 +331,7 @@ premiumCategories = {
         {id = 12, price = 2, count = 1, value = 1},    
         {id = 22, price = 1, count = 1, value = 1},    
     }},
-    {name = "Fegyverek", items = {
+    {name = "Armas", items = {
         -- Lőszerek
         {id = 45, price = 200, count = 50, value = 1},    
         {id = 46, price = 100, count = 5, value = 1},    
@@ -404,7 +404,7 @@ premiumCategories = {
         {id = 42, price = 7300, count = 1, value = 4}, 
         {id = 42, price = 7000, count = 1, value = 5}, 
     }},
-    {name = "Egyéb itemek", items = { -- 94, 104, 101, 
+    {name = "Outros itens", items = { -- 94, 104, 101, 
         -- Prémium kártyák
         {id = 82, price = 500, count = 1, value = 1},    
         {id = 89, price = 500, count = 1, value = 1},    
@@ -434,7 +434,7 @@ premiumCategories = {
         {id = 101, price = 700, count = 1, value = 1},
         {id = 104, price = 750, count = 1, value = 1},
     }},
-    {name = "Pénz", items = {
+    {name = "Dinheiro", items = {
         -- icon (png), price (pp) count ($)
         {icon = "4", price = 1000, count = 32000},    
         {icon = "5", price = 2500, count = 80000},    
@@ -443,7 +443,7 @@ premiumCategories = {
         {icon = "3", price = 20000, count = 640000},    
         {icon = "1", price = 30000, count = 1000000},    
     }},
-    {name = "Csomagok", items = {
+    {name = "Pacotes", items = {
 
     }},
 }
@@ -451,107 +451,104 @@ premiumCategories = {
 premiumItemPackages = { 
 -- állatos csomag: prémium kutyatáp 25 db 90%
 -- földes csomag: prémium föld 25db 90%
-    {name = "Colt-45 csomag", price = 6100, items = {
+    {name = "Pacote Colt-45", price = 6100, items = {
         {id = 37, count = 1, value = 100},
         {id = 47, count = 75},
         {id = 123, count = 1, value = 1},
 
     }},
 
-    {name = "Desert Eagle csomag", price = 7400, items = {
+    {name = "Pacote Desert Eagle", price = 7400, items = {
         {id = 30, count = 1, value = 100},
         {id = 47, count = 75},
         {id = 125, count = 1, value = 1},
     }},
 
-    {name = "Shotgun csomag", price = 8500, items = {
+    {name = "Pacote Shotgun", price = 8500, items = {
         {id = 34, count = 1, value = 100},
         {id = 46, count = 75},
         {id = 121, count = 1, value = 1},
 
     }},
 
-    {name = "Lefűrészelt csövő puska csomag", price = 9600, items = {
+    {name = "Pacote espingarda serrada", price = 9600, items = {
         {id = 35, count = 1, value = 100},
         {id = 46, count = 75},
         {id = 122, count = 1, value = 1},
 
     }},
 
-    {name = "UZI csomag", price = 7900, items = {
+    {name = "Pacote UZI", price = 7900, items = {
         {id = 40, count = 1, value = 100},
         {id = 48, count = 75},
         {id = 119, count = 1, value = 1},
     }},
 
-    {name = "TEC9 csomag", price = 8100, items = {
+    {name = "Pacote TEC9", price = 8100, items = {
         {id = 42, count = 1, value = 100},
         {id = 48, count = 75},
         {id = 119, count = 1, value = 1},
     }},
 
-    {name = "P90 csomag", price = 9200, items = {
+    {name = "Pacote P90", price = 9200, items = {
         {id = 39, count = 1, value = 100},
         {id = 48, count = 75},
         {id = 120, count = 1, value = 1},
     }},
 
-    {name = "AK-47 csomag", price = 8800, items = {
+    {name = "Pacote AK-47", price = 8800, items = {
         {id = 27, count = 1, value = 100},
         {id = 45, count = 75},
         {id = 117, count = 1, value = 1},
     }},
 
-    {name = "M4 csomag", price = 10100, items = {
+    {name = "Pacote M4", price = 10100, items = {
         {id = 28, count = 1, value = 100},
         {id = 45, count = 75},
         {id = 118, count = 1, value = 1},
     }},
 
-    {name = "Mesterlövész csomag", price = 11900, items = {
+    {name = "Pacote franco-atirador", price = 11900, items = {
         {id = 38, count = 1, value = 100},
         {id = 49, count = 75},
         {id = 126, count = 1, value = 1},
     }},
 
-    {name = "Kiskedvenc csomag", price = 11000, items = {
+    {name = "Pacote bichinho de estimação", price = 11000, items = {
         {id = 94, count = 25},
     }},
 
-    {name = "Kertész csomag", price = 16500, items = {
+    {name = "Pacote jardineiro", price = 16500, items = {
         {id = 104, count = 25},
     }},
 }
 
 premiumInfos = {
-    {title = "Prémium Pont Vásárlásának Módjai", texts = {
-        --serverColor.."SMS: #ffffffLehetőség van támogatni a szervert emelt díjas SMS-sel.",
-        serverColor.."PayPal: #ffffffLehetőség van a szerver PayPalon keresztül történő támogatására.",
+    {title = "Como adquirir pontos premium", texts = {
+        serverColor.."PayPal: #ffffffVocê pode apoiar o servidor via PayPal (consulte o fórum do Ipiranga Roleplay para dados oficiais).",
     }},
 
-    {title = "Mit vásárolhatsz prémium pontból?", texts = {
-        serverColor.."Prémium itemek: #ffffffA prémium shop kínálatából vásárolhatsz itemeket, akár csomagok formájában is.",
-        serverColor.."Játékbeli dollár: #ffffffA prémium shop kínálatából vásárolhatsz különböző pénzcsomagokat.",
-        serverColor.."Slotok: #ffffffLehetőséged van a "..serverColor.."'Vagyon' #ffffff fülön ingatlan vagy jármű slot vásárlására.",
-        serverColor.."Járműbolt: #ffffffVásárolhatsz prémium pontért járműveket, ekkor az autókereskedés a limitet nem",
-        "veszi figyelembe. Csak prémium  pontért elérhető autókat is találhatsz az autóbolt kínálatában.",
-        serverColor.."Kapu: #ffffffLehetőséged van kapu vásárlására, melynek árát fórumon megtekintheted. ",
-        serverColor.."(forum.originalrp.eu) #ffffffA kapuk lerakását "..serverColor.."SzuperAdmin#ffffff vagy "..serverColor.."ServerManager#ffffff végzi.",
-        serverColor.."Amennyiben a listán nem látod azt amit szeretnél, akkor keress fel egy vezetőségi tagot!",
+    {title = "O que dá para comprar com pontos premium?", texts = {
+        serverColor.."Itens premium: #ffffffNa loja premium você compra itens e pacotes.",
+        serverColor.."Dinheiro in-game: #ffffffPacotes de dinheiro na loja premium.",
+        serverColor.."Slots: #ffffffNa aba "..serverColor.."'Patrimônio' #ffffffdá para comprar slot de imóvel ou veículo.",
+        serverColor.."Concessionária: #ffffffVeículos por pontos premium; alguns ignoram o limite da loja.",
+        "Há veículos exclusivos por pontos premium na concessionária.",
+        serverColor.."Portões: #ffffffCompra de portão conforme regras do servidor; valores no fórum do Ipiranga Roleplay.",
+        serverColor.."Instalação: #ffffffA colocação de portões é feita por "..serverColor.."SuperAdmin#ffffff ou "..serverColor.."ServerManager#ffffff.",
+        serverColor.."Não achou o que quer? #ffffffFale com a equipe no Discord ou fórum oficial.",
     }},
 
-    {title = "Prémium Pont Csomagok", texts = {
-        serverColor.."1000PP #ffffff> 990Ft",
-        serverColor.."3500PP #ffffff> 2490Ft", 
-        serverColor.."6000PP #ffffff> 4990Ft", 
-        serverColor.."12000PP #ffffff> 9500Ft",
-        serverColor.."24000PP #ffffff> 18900Ft",
-
-        --"#eb4034Az üzenetben az originalrp és KarakterID között egy szóköz szükséges!",
+    {title = "Pacotes de pontos premium (referência)", texts = {
+        serverColor.."1000 PP #ffffff— valores em BRL conforme anúncio oficial",
+        serverColor.."3500 PP #ffffff— valores em BRL conforme anúncio oficial",
+        serverColor.."6000 PP #ffffff— valores em BRL conforme anúncio oficial",
+        serverColor.."12.000 PP #ffffff— valores em BRL conforme anúncio oficial",
+        serverColor.."24.000 PP #ffffff— valores em BRL conforme anúncio oficial",
     }},
 
-    {title = "Prémium Pont vásárlásával kapcsolatos információk", texts = {
-        serverColor.."https://originalrp.eu/docs/pp.pdf",
+    {title = "Documentação de pontos premium", texts = {
+        serverColor.."Consulte o fórum ou Discord do Ipiranga Roleplay para PDFs e tabelas atualizadas.",
 
     }},
 }
@@ -567,7 +564,7 @@ custom_keys = {
     ["\\"] = "ű",
 }
 
-adminTags = {"Adminsegéd", "Adminisztrátor 1", "Adminisztrátor 2", "Adminisztrátor 3", "Adminisztrátor 4", "Adminisztrátor 5", "FőAdmin", "AdminController", "Server Manager", "Fejlesztő", "Tulajdonos"}
+adminTags = {"Ajudante", "Administrador 1", "Administrador 2", "Administrador 3", "Administrador 4", "Administrador 5", "Admin principal", "AdminController", "Server Manager", "Desenvolvedor", "Dono"}
 
 function spairs(t, order)
     -- collect the keys
@@ -602,71 +599,71 @@ function tableContains(table, element)
   end
 
 
-tuning_categories = {"Alap", "Verseny", "Profi", "Prémium"}
+tuning_categories = {"Básico", "Esportivo", "Profissional", "Premium"}
 
 fightingStyles = {4, 5, 6, 15, 16}
 walkingStyles = {0, 54, 55, 56, 118, 119, 120, 121, 122, 123, 124, 126, 128, 129, 130, 131, 132, 133, 134, 135, 137}
 
 fuelTypes = {
-    ["95"] = "Benzin",
-    ["D"] = "Dízel",
-    ["electric"] = "Elektromos",
+    ["95"] = "Gasolina",
+    ["D"] = "Diesel",
+    ["electric"] = "Elétrico",
 }
 
 dailyGifts = {
     ["small"] = {
-        {"PP", 10, "Prémium pont", "files/daily/pp.png"},
-        {"$", 2500, "Készpénz", "files/daily/dollar.png"},
+        {"PP", 10, "Pontos premium", "files/daily/pp.png"},
+        {"$", 2500, "Dinheiro (mão)", "files/daily/dollar.png"},
         {"CC", 2000, "CasinoCoin", "files/daily/cc.png"},
-        {"PP", 25, "Prémium pont", "files/daily/pp.png"},
-        {"$", 4000, "Készpénz", "files/daily/dollar.png"},
+        {"PP", 25, "Pontos premium", "files/daily/pp.png"},
+        {"$", 4000, "Dinheiro (mão)", "files/daily/dollar.png"},
         {"CC", 1000, "CasinoCoin", "files/daily/cc.png"},
-        {"PP", 5, "Prémium pont", "files/daily/pp.png"},
-        {"$", 5000, "Készpénz", "files/daily/dollar.png"},
+        {"PP", 5, "Pontos premium", "files/daily/pp.png"},
+        {"$", 5000, "Dinheiro (mão)", "files/daily/dollar.png"},
         {"CC", 500, "CasinoCoin", "files/daily/cc.png"},
 
-        {"item", 1, "Gyógyszer", exports.oInventory:getItemImage(76), item = 76},
-        {"item", 1, "Vitamin", exports.oInventory:getItemImage(150), item = 150},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(135), item = 135},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(2), item = 2},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(3), item = 3},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(4), item = 4},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(5), item = 5},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(6), item = 6},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(7), item = 7},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(8), item = 8},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(9), item = 9},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(10), item = 10},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(11), item = 11},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(12), item = 12},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(13), item = 13},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(14), item = 14},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(15), item = 15},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(16), item = 16},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(17), item = 17},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(18), item = 18},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(19), item = 19},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(20), item = 20},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(21), item = 21},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(22), item = 22},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(23), item = 23},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(24), item = 24},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(25), item = 25},
-        {"item", 1, "Béka", exports.oInventory:getItemImage(26), item = 26},
+        {"item", 1, "Remédio", exports.oInventory:getItemImage(76), item = 76},
+        {"item", 1, "Vitamina", exports.oInventory:getItemImage(150), item = 150},
+        {"item", 1, "Item", exports.oInventory:getItemImage(135), item = 135},
+        {"item", 1, "Item", exports.oInventory:getItemImage(2), item = 2},
+        {"item", 1, "Item", exports.oInventory:getItemImage(3), item = 3},
+        {"item", 1, "Item", exports.oInventory:getItemImage(4), item = 4},
+        {"item", 1, "Item", exports.oInventory:getItemImage(5), item = 5},
+        {"item", 1, "Item", exports.oInventory:getItemImage(6), item = 6},
+        {"item", 1, "Item", exports.oInventory:getItemImage(7), item = 7},
+        {"item", 1, "Item", exports.oInventory:getItemImage(8), item = 8},
+        {"item", 1, "Item", exports.oInventory:getItemImage(9), item = 9},
+        {"item", 1, "Item", exports.oInventory:getItemImage(10), item = 10},
+        {"item", 1, "Item", exports.oInventory:getItemImage(11), item = 11},
+        {"item", 1, "Item", exports.oInventory:getItemImage(12), item = 12},
+        {"item", 1, "Item", exports.oInventory:getItemImage(13), item = 13},
+        {"item", 1, "Item", exports.oInventory:getItemImage(14), item = 14},
+        {"item", 1, "Item", exports.oInventory:getItemImage(15), item = 15},
+        {"item", 1, "Item", exports.oInventory:getItemImage(16), item = 16},
+        {"item", 1, "Item", exports.oInventory:getItemImage(17), item = 17},
+        {"item", 1, "Item", exports.oInventory:getItemImage(18), item = 18},
+        {"item", 1, "Item", exports.oInventory:getItemImage(19), item = 19},
+        {"item", 1, "Item", exports.oInventory:getItemImage(20), item = 20},
+        {"item", 1, "Item", exports.oInventory:getItemImage(21), item = 21},
+        {"item", 1, "Item", exports.oInventory:getItemImage(22), item = 22},
+        {"item", 1, "Item", exports.oInventory:getItemImage(23), item = 23},
+        {"item", 1, "Item", exports.oInventory:getItemImage(24), item = 24},
+        {"item", 1, "Item", exports.oInventory:getItemImage(25), item = 25},
+        {"item", 1, "Item", exports.oInventory:getItemImage(26), item = 26},
     },
 
     ["big"] = {
-        {"vehicleSlot", 1, "Jármű slot", "files/daily/car.png"},
-        {"interiorSlot", 1, "Ingatlan slot", "files/daily/house.png"},
-        {"item", 1, "Fix kártya", exports.oInventory:getItemImage(90), item = 90},
-        {"item", 1, "Instant tankolás kártya", exports.oInventory:getItemImage(91), item = 91},
-        {"item", 1, "Instant gyógyítás kártya", exports.oInventory:getItemImage(89), item = 89},
-        {"item", 1, "Unflip kártya", exports.oInventory:getItemImage(82), item = 82},
-        {"item", 1, "Díszes váza", exports.oInventory:getItemImage(186), item = 186},
-        {"item", 1, "Rubin", exports.oInventory:getItemImage(195), item = 195},
-        {"item", 1, "Smaragdt", exports.oInventory:getItemImage(196), item = 196},
-        {"item", 1, "Zafír", exports.oInventory:getItemImage(197), item = 197},
-        {"item", 1, "Borostyánkő", exports.oInventory:getItemImage(198), item = 198},
+        {"vehicleSlot", 1, "Slot de veículo", "files/daily/car.png"},
+        {"interiorSlot", 1, "Slot de imóvel", "files/daily/house.png"},
+        {"item", 1, "Cartão de reparo", exports.oInventory:getItemImage(90), item = 90},
+        {"item", 1, "Cartão de abastecimento instantâneo", exports.oInventory:getItemImage(91), item = 91},
+        {"item", 1, "Cartão de cura instantânea", exports.oInventory:getItemImage(89), item = 89},
+        {"item", 1, "Cartão desvirar veículo", exports.oInventory:getItemImage(82), item = 82},
+        {"item", 1, "Vaso decorativo", exports.oInventory:getItemImage(186), item = 186},
+        {"item", 1, "Rubi", exports.oInventory:getItemImage(195), item = 195},
+        {"item", 1, "Esmeralda", exports.oInventory:getItemImage(196), item = 196},
+        {"item", 1, "Safira", exports.oInventory:getItemImage(197), item = 197},
+        {"item", 1, "Âmbar", exports.oInventory:getItemImage(198), item = 198},
     },
 }
 
@@ -764,7 +761,7 @@ creates = {
         {item = 123, rarity = 1, money = 0, type = 1, itemvalue = 1},
     }},
 
-    {name = "MESTERKÖNYVEK", price = 4500, money_type = "$", icon = "mesterkonyvek", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "LIVROS MESTRES", price = 4500, money_type = "$", icon = "mesterkonyvek", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
         {item = 117, rarity = 3, money = 0, type = 1, itemvalue = 1},
         {item = 118, rarity = 4, money = 0, type = 1, itemvalue = 1},
         {item = 119, rarity = 3, money = 0, type = 1, itemvalue = 1},
