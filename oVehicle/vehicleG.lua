@@ -5,18 +5,17 @@ admin = exports.oAdmin
 
 color, r, g, b = core:getServerColor()
 
-vehicleDatas = { -- Ez a tábla van használva minden exportba!!
+vehicleDatas = { -- Tabela usada em todos os exports de veículo
 	--[[
-		name: jármű neve (Default: Nincs megadva)
-		fuelType: üzemanyag típusa (95, D, electric) (Default: 95)
-		tankSize: tankméret, max üzemanyag amit bele lehet tankolni (Default: 100)
-		consumption: fogyasztás (Default: 1) minél nagyobb a szám annál többet fogyaszt
-		safetyMultiplier: jármű biztonsága (Default: 1), ha kisebb a szám mint 1 akkor biztonságosabb az autó, ha nagyobb mint egy akkor több sebzést kap a játékos
-		trunkSize: csomagtartó mérete (hány kg item fér bele) (Default: 50)
+		name: nome do veículo (Default: não definido)
+		fuelType: tipo combustível (95, D, electric) (Default: 95)
+		tankSize: capacidade do tanque (Default: 100)
+		consumption: consumo (Default: 1) maior = mais gasto
+		safetyMultiplier: “segurança” no acidente (Default: 1) <1 menos dano ao ped, >1 mais dano
+		trunkSize: capacidade porta-malas em kg de itens (Default: 50)
 	]]	
 
-	-- Üres modellek: 401, 419, 587, 533, 474, 545, 517, 600, 436, 439, 491, 466, 580, 550, 566, 529, 489, 458, 575, 567, 535, 576, 412, 603, 475, 434, 503, 561, 558, 555, 
-	-- 477 érdekes
+	-- Modelos vazios: 401, 419, ...
 
 
 	[421] = {name = "Honda Civic Type R", fuelType = "95", tankSize = 100, consumption = 3, safetyMultiplier = 0.9, trunkSize = 100},
@@ -64,7 +63,7 @@ vehicleDatas = { -- Ez a tábla van használva minden exportba!!
 	[560] = {name = "Subaru Impreza WRX", fuelType = "95", tankSize = 100, consumption = 3, safetyMultiplier = 0.7, trunkSize = 100},
 	[562] = {name = "Nissan Skyline", fuelType = "95", tankSize = 100, consumption = 3, safetyMultiplier = 0.7, trunkSize = 100},
 	[565] = {name = "Ford Focus RS", fuelType = "95", tankSize = 100, consumption = 3, safetyMultiplier = 0.8, trunkSize = 50},
-	[579] = {name = "Jeep Grand Cherokee", fuelType = "D", tankSize = 100, consumption = 4, safetyMultiplier = 1, trunkSize = 150},
+	[579] = {name = "BMW X6", fuelType = "D", tankSize = 100, consumption = 4, safetyMultiplier = 1, trunkSize = 150},
 	[458] = {name = "Mercedes-Benz E250", fuelType = "D", tankSize = 100, consumption = 3, safetyMultiplier = 0.7, trunkSize = 150},
 	[586] = {name = "Harley Davidson", fuelType = "95", tankSize = 100, consumption = 2, safetyMultiplier = 0.7, trunkSize = 50},
 	[581] = {name = "Suzuki Hayabusa", fuelType = "95", tankSize = 100, consumption = 2, safetyMultiplier = 0.7, trunkSize = 50},
@@ -265,12 +264,12 @@ trailers = {
 }
 
 doorComponents = {
-    {"bonnet_dummy", 0, "motorháztető"},
-    {"boot_dummy", 1, "csomagtartó"},
-    {"door_lf_dummy", 2, "bal első"},
-    {"door_rf_dummy", 3, "jobb első"},
-    {"door_lr_dummy", 4, "bal hátsó"},
-    {"door_rr_dummy", 5, "jobb hátsó"},
+    {"bonnet_dummy", 0, "o capô"},
+    {"boot_dummy", 1, "o porta-malas"},
+    {"door_lf_dummy", 2, "a porta dianteira esquerda"},
+    {"door_rf_dummy", 3, "a porta dianteira direita"},
+    {"door_lr_dummy", 4, "a porta traseira esquerda"},
+    {"door_rr_dummy", 5, "a porta traseira direita"},
 }
 
 function getVehicleModelFuelType(modelID) 
@@ -316,7 +315,7 @@ function getModdedVehicleName(veh)
 			return getVehicleName(veh)
 		end
 	else
-		return vehicleDatas[vehid].name or "Nincs adat!"
+		return vehicleDatas[vehid].name or "Sem dados"
 	end
 	
 end
@@ -325,7 +324,7 @@ function getModdedVehName(modelID)
 	if vehicleDatas[modelID] and vehicleDatas[modelID].name then
 		return vehicleDatas[modelID].name
 	else
-		return "nincs adat"
+		return "sem nome"
 	end
 end
 

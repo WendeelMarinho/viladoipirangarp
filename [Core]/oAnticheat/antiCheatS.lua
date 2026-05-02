@@ -1006,9 +1006,9 @@ function loadIPBlacklistTable()
                 end
             end
 
-            outputDebugString(ipcount.."db blokkolt ip cím betöltve! "..(getTickCount()-start).."ms",0,124,197,118)
+            outputDebugString("[ANTICHEAT]: "..ipcount.." IP(s) bloqueado(s) carregado(s). ("..(getTickCount()-start).." ms)",0,124,197,118)
         else
-            outputDebugString("Hiba az IP betöltések során!",0,210,49,49)
+            outputDebugString("[ANTICHEAT]: Erro ao carregar lista de IPs.",0,210,49,49)
         end
     end, "", false)
 
@@ -1024,9 +1024,9 @@ function loadIPBlacklistTable()
                 end
             end
 
-            outputDebugString(ipcount.."db blokkolt ip cím betöltve! "..(getTickCount()-start).."ms",0,124,197,118)
+            outputDebugString("[ANTICHEAT]: "..ipcount.." IP(s) bloqueado(s) carregado(s). ("..(getTickCount()-start).." ms)",0,124,197,118)
         else
-            outputDebugString("Hiba az IP betöltések során!",0,210,49,49)
+            outputDebugString("[ANTICHEAT]: Erro ao carregar lista de IPs.",0,210,49,49)
         end
     end, "", false)
 end
@@ -1069,7 +1069,7 @@ function loadVerifiedSerials()
 			table.insert(verifiedSerials, v["serial"])
 		end
 
-		print(#result .. "db adminisztrátor serial betöltve.")
+		print("[ANTICHEAT]: "..#result .." serial(is) de admin carregado(s).")
 	end
 end
 loadVerifiedSerials()
@@ -1095,8 +1095,8 @@ function checkPlayerVerifiedAdminStatus(player)
 			return true 
 		else
 			local name = getPlayerName(player) or ""
-			logAnticheat(name.." nem jogosult adminisztrátor műveletek használatára!")
-			kickPlayer(player, "Nem vagy jogosult adminisztrátor műveletek használatára!")
+			logAnticheat(name.." tentou comando admin sem serial em adminserials.")
+			kickPlayer(player, "O teu serial não está na lista de admins verificados. Contacta a equipa.")
 			return false 
 		end
 	end

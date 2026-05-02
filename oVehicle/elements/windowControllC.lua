@@ -7,7 +7,7 @@ fonts = {
     ["condensed-12"] = exports.oFont:getFont("condensed", 12),
 }
 
-windowNames = {"Bal első", "Jobb első", "Bal hátsó", "Jobb hátsó"}
+windowNames = {"Diant. esq.", "Diant. dir.", "Traseira esq.", "Traseira dir."}
 
 local animType = "open"
 local animTick = getTickCount()
@@ -33,7 +33,7 @@ function drawWindowControlPanel()
     dxDrawRectangle(winPanel[1], winPanel[2], winSize[1], winSize[2], tocolor(30, 30, 30, 255*animValue))
     dxDrawRectangle(winPanel[1], winPanel[2], winSize[1], sy*0.02, tocolor(27, 27, 27, 255*animValue))
 
-    dxDrawText("Ablakok kezelése", winPanel[1], winPanel[2], winPanel[1]+sx*0.0945, winPanel[2]+sy*0.02, tocolor(255, 255, 255, 255*animValue), 0.7/myX*sx, fonts["condensed-12"], "center", "center")
+    dxDrawText("Vidros", winPanel[1], winPanel[2], winPanel[1]+sx*0.0945, winPanel[2]+sy*0.02, tocolor(255, 255, 255, 255*animValue), 0.7/myX*sx, fonts["condensed-12"], "center", "center")
     
     local startX, startY = winPanel[1], winPanel[2]+23/myY*sy
     local windowStates = (getElementData(getPedOccupiedVehicle(localPlayer), "veh:windowStates") or {false, false, false, false})
@@ -46,7 +46,7 @@ function drawWindowControlPanel()
         if windowStates[i] then 
             stateText = "#9cd64bleengedve"
         else
-            stateText = "#eb4646felhúzva"
+            stateText = "#eb4646fechado"
         end
         
         if core:isInSlot(startX+3/myX*sx, startY, sx*0.045, sy*0.04) then 
@@ -65,16 +65,16 @@ function drawWindowControlPanel()
 
     dxDrawRectangle(winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, sx*0.09+2/myX*sx, sy*0.025, tocolor(35, 35, 35, 255*animValue))
     if core:isInSlot(winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, sx*0.09+2/myX*sx, sy*0.025) then 
-        dxDrawText("Összes ablak felhúzása", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025, tocolor(r, g, b, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+        dxDrawText("Fechar todos os vidros", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025, tocolor(r, g, b, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
     else
-        dxDrawText("Összes ablak felhúzása", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025, tocolor(255, 255, 255, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+        dxDrawText("Fechar todos os vidros", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025, tocolor(255, 255, 255, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
     end
             
     dxDrawRectangle(winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, sx*0.09+2/myX*sx, sy*0.025, tocolor(35, 35, 35, 255*animValue))
     if core:isInSlot(winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, sx*0.09+2/myX*sx, sy*0.025) then 
-        dxDrawText("Összes ablak leengedése", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+sy*0.025+2/myY*sy, tocolor(r, g, b, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+        dxDrawText("Abrir todos os vidros", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+sy*0.025+2/myY*sy, tocolor(r, g, b, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
     else
-        dxDrawText("Összes ablak leengedése", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+sy*0.025+2/myY*sy, tocolor(255, 255, 255, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+        dxDrawText("Abrir todos os vidros", winPanel[1]+3/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+2/myY*sy, winPanel[1]+3/myX*sx+sx*0.09+2/myX*sx, winPanel[2]+106/myY*sy+sy*0.025+sy*0.025+2/myY*sy, tocolor(255, 255, 255, 255*animValue), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
     end
 
     if isPanelMoveing then 
@@ -114,14 +114,14 @@ function keyWindowControlPanel(key, state)
                     setElementData(getPedOccupiedVehicle(localPlayer), "veh:windowStates", windowStates)
 
                     if windowStates[i] then 
-                        exports.oChat:sendLocalMeAction("lehúzott egy ablakot.")
+                        exports.oChat:sendLocalMeAction("fecha um vidro do veículo.")
                             
                         setElementData(localPlayer, "canWindowControll", false)
                         setTimer(function()
                             setElementData(localPlayer, "canWindowControll", true)
                         end, 1500, 1)
                     else
-                        exports.oChat:sendLocalMeAction("felhúzott egy ablakot.")
+                        exports.oChat:sendLocalMeAction("abre um vidro do veículo.")
                             
                         setElementData(localPlayer, "canWindowControll", false)
                         setTimer(function()
@@ -196,9 +196,9 @@ function togglePanel()
             setElementData(getPedOccupiedVehicle(localPlayer), "veh:windowStates", windows)
 
             if windows[seat + 1] then 
-                exports.oChat:sendLocalMeAction("lehúzott egy ablakot.")
+                exports.oChat:sendLocalMeAction("fecha um vidro do veículo.")
             else
-                exports.oChat:sendLocalMeAction("felhúzott egy ablakot.")
+                exports.oChat:sendLocalMeAction("abre um vidro do veículo.")
             end
         end
     end

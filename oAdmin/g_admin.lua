@@ -3,18 +3,18 @@
 adminSerialsCache = {}
 
 adminPrefixs = {
-	[0] = "Játékos",
-	[1] = "AdminSegéd",
+	[0] = "Jogador",
+	[1] = "Helper",
 	[2] = "Admin 1",
 	[3] = "Admin 2",
 	[4] = "Admin 3",
 	[5] = "Admin 4",
 	[6] = "Admin 5",
-	[7] = "FőAdmin",
-	[8] = "AdminController",
+	[7] = "Head Admin",
+	[8] = "Admin Controller",
 	[9] = "Server Manager",
-	[10] = "Fejlesztő",
-	[11] = "Tulajdonos",
+	[10] = "Developer",
+	[11] = "Owner",
 }
 
 adminColors = {

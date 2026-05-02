@@ -31,10 +31,10 @@ function openCarDoor()
 
                         if getElementData(vehicle, "veh:locked") then 
                             --chat:sendLocalMeAction("kinyitja egy "..getModdedVehicleName(vehicle).." ajtaját.")
-                            chat:sendLocalMeAction("kinyitja egy "..carName.." ajtaját.")
+                            chat:sendLocalMeAction("abre o veículo "..carName..".")
                         else
                             --chat:sendLocalMeAction("bezárja egy "..getModdedVehicleName(vehicle).." ajtaját.")
-                            chat:sendLocalMeAction("bezárja egy "..carName.." ajtaját.")
+                            chat:sendLocalMeAction("fecha o veículo "..carName..".")
                         end
 
                         if getPedOccupiedVehicle(localPlayer) then 
@@ -50,9 +50,9 @@ function openCarDoor()
                         end
 
                         if getElementData(vehicle, "veh:locked") then 
-                            chat:sendLocalMeAction("leveszi a lakatot egy "..carName.."-ról/ről.")
+                            chat:sendLocalMeAction("remove o cadeado do veículo "..carName..".")
                         else
-                            chat:sendLocalMeAction("felrakja a lakatot egy "..carName.."-ra/re.")
+                            chat:sendLocalMeAction("coloca o cadeado no veículo "..carName..".")
                         end
                     end
 
@@ -60,7 +60,7 @@ function openCarDoor()
                     setTimer(function() allowed_interaction = true end, 500, 1)
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs kulcsod a járműhöz.",255,255,255,true)
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não tem a chave deste veículo.",255,255,255,true)
             end
 
         end
@@ -85,9 +85,9 @@ bindKey("l", "up", function()
                         if isCursorShowing() then return end 
     
                         if getElementData(vehicle,"veh:lamp") then 
-                            chat:sendLocalMeAction("lekapcsolja egy "..getModdedVehName(vehicleID).." lámpáit.")
+                            chat:sendLocalMeAction("desliga os faróis do "..getModdedVehName(vehicleID)..".")
                         else
-                            chat:sendLocalMeAction("felkapcsolja egy "..getModdedVehName(vehicleID).." lámpáit.")
+                            chat:sendLocalMeAction("liga os faróis do "..getModdedVehName(vehicleID)..".")
                         end
     
                         triggerServerEvent("setVehicleLamp", resourceRoot, vehicle)
@@ -132,7 +132,7 @@ bindKey("space", "down", function()
                                             if not isTimer(engineTimer) then 
                                                 if getElementData(vehicle, "vehicleInTeslaCharger") then return end
                                                -- modelID = getElementModel(vehicle)
-                                                engineTimer = setTimer(function() chat:sendLocalMeAction("elindítja egy "..getModdedVehName(modelID).." motorját.")
+                                                engineTimer = setTimer(function() chat:sendLocalMeAction("liga o motor do "..getModdedVehName(modelID)..".")
                                                     triggerServerEvent("setVehicleEngineOnServer", resourceRoot, vehicle)
                                                     engineTimer = false
 
@@ -140,7 +140,7 @@ bindKey("space", "down", function()
                                                         setTimer(function()
                                                             setElementHealth(vehicle, 250)
                                                             setVehicleEngineState(vehicle, false)
-                                                            exports.oInfobox:outputInfoBox("Mivel rossz típusú üzemanyag lett tankolva a járműbe, így a motor meghibásodott!", "warning")
+                                                            exports.oInfobox:outputInfoBox("Combustível incorreto — o motor falhou!", "warning")
                                                         end, 5000, 1)
                                                     end
                                                 end, 1000, 1)
@@ -150,10 +150,10 @@ bindKey("space", "down", function()
                                                 end
                                             end
                                         else
-                                            chat:sendLocalMeAction("megpróbálja elindítani egy "..getModdedVehName(modelID).." motorját, de nem sikerül neki.")
+                                            chat:sendLocalMeAction("tenta ligar o motor do "..getModdedVehName(modelID)..", mas falha.")
                                         end
                                     else
-                                        chat:sendLocalMeAction("megpróbálja elindítani egy "..getModdedVehName(modelID).." motorját, de nem sikerül neki.")
+                                        chat:sendLocalMeAction("tenta ligar o motor do "..getModdedVehName(modelID)..", mas falha.")
                                     end
 
                                     allowed_interaction = false 
@@ -161,7 +161,7 @@ bindKey("space", "down", function()
                             end
 
                         else 
-                            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs kulcsod a járműhöz.",255,255,255,true)
+                            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não tem a chave deste veículo.",255,255,255,true)
                         end
                     end
                 end
@@ -190,12 +190,12 @@ bindKey("j", "down", function()
                         if new then return end
 
                         triggerServerEvent("setVehicleEngineOnServer", resourceRoot, vehicle)
-                        chat:sendLocalMeAction("leállítja egy "..getModdedVehicleName(vehicle).." motorját.")
+                        chat:sendLocalMeAction("desliga o motor do "..getModdedVehicleName(vehicle)..".")
 
                         allowed_interaction = false 
                         setTimer(function() allowed_interaction = true end, 250, 1)
                     else
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs kulcsod a járműhöz.",255,255,255,true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não tem a chave deste veículo.",255,255,255,true)
                     end
                 end
             end
@@ -268,7 +268,7 @@ addEventHandler("onClientVehicleStartEnter", root, function(player, seat)
     if nonLockableVehicles[modelID] then
 
         if getElementData(source, "veh:locked") then 
-            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."A jármű be van zárva.",255,255,255,true)
+            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."O veículo está trancado.",255,255,255,true)
             cancelEvent()
         end
 
@@ -300,12 +300,12 @@ addEventHandler("onClientVehicleEnter", root, function(player, seat)
 
         if getPedOccupiedVehicleSeat(localPlayer) == 0 then  
             if not getVehicleType(source) == "BMX" then
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."A jármű beindításához használd a "..color.."[J] #ffffff+ "..color.."[SPACE] #ffffffbillentyűket.",255,255,255,true)
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."A lámpa felkapcsolásához használd az "..color.."[L] #ffffffbillentyűt.",255,255,255,true)
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."A biztonsági övedet az "..color.."[F5] #ffffffbillentyűvel tudod becsatolni.",255,255,255,true)
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Para ligar o motor use "..color.."[J] #ffffff+ "..color.."[SPACE]#ffffff.",255,255,255,true)
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Para os faróis use "..color.."[L]#ffffff.",255,255,255,true)
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Cinto de segurança: "..color.."[F5]#ffffff.",255,255,255,true)
             end
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."A biztonsági övedet az "..color.."[F5] #ffffffbillentyűvel tudod becsatolni.",255,255,255,true)
+            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Cinto de segurança: "..color.."[F5]#ffffff.",255,255,255,true)
         end
     end
 
@@ -323,10 +323,10 @@ bindKey("F5", "up", function()
                     triggerServerEvent("togglePlayerSeatbelt", resourceRoot)
 
                     if state == false then 
-                        chat:sendLocalMeAction("becsatolta a biztonsági övét.")
+                        chat:sendLocalMeAction("afivel o cinto de segurança.")
                         playSound("files/belt_in.mp3")
                     else
-                        chat:sendLocalMeAction("kicsatolta a biztonsági övét.")
+                        chat:sendLocalMeAction("solta o cinto de segurança.")
                         playSound("files/belt_out.mp3")
                     end
 

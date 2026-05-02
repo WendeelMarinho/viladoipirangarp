@@ -52,18 +52,18 @@ function interactVeh()
             if not newState then
                 if componentDetails[2] >= 2 then
                     playSound("files/door_open.mp3")
-                   exports.oChat:sendLocalMeAction("kinyitja a "..componentDetails[3].."ajtót", 1)
+                   exports.oChat:sendLocalMeAction("abre "..componentDetails[3]..".", 1)
                 else
                     playSound("files/door_open.mp3")
-                   exports.oChat:sendLocalMeAction("felnyitja a "..componentDetails[3].."t", 1)
+                   exports.oChat:sendLocalMeAction("abre "..componentDetails[3]..".", 1)
                 end
             else
                 if componentDetails[2] >= 2 then
                     playSound("files/door_close.mp3")
-                   exports.oChat:sendLocalMeAction("bezárja a "..componentDetails[3].."ajtót", 1)
+                   exports.oChat:sendLocalMeAction("fecha "..componentDetails[3]..".", 1)
                 else
                     playSound("files/door_close.mp3")
-                   exports.oChat:sendLocalMeAction("bezárja a "..componentDetails[3].."t", 1)
+                   exports.oChat:sendLocalMeAction("fecha "..componentDetails[3]..".", 1)
                 end
             end
         end

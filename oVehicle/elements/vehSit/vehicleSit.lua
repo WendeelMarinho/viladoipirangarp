@@ -83,7 +83,7 @@ addEventHandler("onClientKey", root, function(key, state)
                                     if screenX and screenY then 
                                         if core:isInSlot(screenX - 20/myX*sx, screenY - 20/myY*sy, 40/myX*sx, 40/myX*sx) then
                                             triggerServerEvent("vehicle > vehicleSit > sitDown", resourceRoot, vehicle, pos, id)
-                                            chat:sendLocalMeAction("leül.")
+                                            chat:sendLocalMeAction("sentou no veículo.")
                                         end
                                     end
                                 end
@@ -98,7 +98,7 @@ addEventHandler("onClientKey", root, function(key, state)
                 if screenX and screenY then 
                     if core:isInSlot(screenX - 20/myX*sx, screenY - 20/myY*sy, 40/myX*sx, 40/myX*sx) then
                         triggerServerEvent("vehicle > vehicleSit > standUp", resourceRoot)
-                        chat:sendLocalMeAction("feláll.")
+                        chat:sendLocalMeAction("levantou-se.")
                     end
                 end
             end

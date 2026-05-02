@@ -8,19 +8,19 @@ addCommandHandler("gotocar", function(cmd, carID)
             for k, v in ipairs(getElementsByType("vehicle")) do 
                 if getElementData(v, "veh:id") == carID then 
                     triggerServerEvent("gotoCarOnServer", resourceRoot, localPlayer, v)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Odateleportáltál a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező járműhöz!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Você teleportou-se até o veículo "..color..carID.."#ffffff pelo ID.", 255, 255, 255, true)
                     return
                 end
             end
-            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
 
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/gotocar [ID]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/gotocar [ID]", 255, 255, 255, true)
         end
 
     end
 end)
-admin:addAdminCMD("gotocar", 2, "Teleportálás járműhöz")
+admin:addAdminCMD("gotocar", 2, "Teleportar até veículo (ID)")
 
 addCommandHandler("getcar", function(cmd, carID)
 
@@ -32,30 +32,30 @@ addCommandHandler("getcar", function(cmd, carID)
             for k, v in ipairs(getElementsByType("vehicle")) do 
                 if getElementData(v, "veh:id") == carID then 
                     if getElementData(v, "vehIsBooked") == 1 then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Ez a jármű le van foglalva!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Este veículo está apreendido/reservado!", 255, 255, 255, true)
                         return
                     end
 
                     if getElementData(v, "inCarshop") then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Ez a jármű egy használtautókereskedésben van!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Este veículo está num stand de usados!", 255, 255, 255, true)
                         return
                     end
 
                     triggerServerEvent("getCarOnServer", resourceRoot, localPlayer, v)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Magadhoz teleportáltad a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Veículo puxado até ti (ID "..color..carID.."#ffffff).", 255, 255, 255, true)
                     return
                 end
             end
-            outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
 
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/getcar [ID]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/getcar [ID]", 255, 255, 255, true)
         end
 
     end
 
 end)
-admin:addAdminCMD("getcar", 2, "Jármű magadhoz teleportálása")
+admin:addAdminCMD("getcar", 2, "Puxar veículo até ti pelo ID")
 
 addCommandHandler("setvehplatetext", function(cmd, carID, text)
 
@@ -71,12 +71,12 @@ addCommandHandler("setvehplatetext", function(cmd, carID, text)
                     if vehicle then 
 
                         triggerServerEvent("setVehiclePlateText", resourceRoot, localPlayer, vehicle, tostring(text))
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megváltoztattad a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező jármű rendszámát! "..color.."("..text..")", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."Alterou o veículo "..color..getElementData(vehicle, "veh:id").."#ffffff (placa)! "..color.."("..text..")", 255, 255, 255, true)
                         return
 
                     else
 
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                         return
 
                     end 
@@ -90,11 +90,11 @@ addCommandHandler("setvehplatetext", function(cmd, carID, text)
                         for k, v in ipairs(getElementsByType("vehicle")) do 
                             if getElementData(v, "veh:id") == carID then 
                                 triggerServerEvent("setVehiclePlateText", resourceRoot, localPlayer, v, tostring(text))
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megváltoztattad a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező jármű rendszámát! "..color.."("..text..")", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Alterou o veículo "..color..carID.."#ffffff (placa)! "..color.."("..text..")", 255, 255, 255, true)
                                 return
                             end
                         end
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
             
                     end
 
@@ -102,17 +102,17 @@ addCommandHandler("setvehplatetext", function(cmd, carID, text)
 
             else
 
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Hosszú rendszám!", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Placa longa demais!", 255, 255, 255, true)
 
             end
 
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setvehplatetext [ID] [Plate Text]", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setvehplatetext [ID] [texto]", 255, 255, 255, true)
     end
 
 end)
-admin:addAdminCMD("setvehplatetext", 5, "Jármű rendszámának megváltoztatása")
+admin:addAdminCMD("setvehplatetext", 5, "Alterar placa do veículo")
 
 addCommandHandler("fuelveh", function(cmd, target)
 
@@ -126,27 +126,27 @@ addCommandHandler("fuelveh", function(cmd, target)
                         --for k, v in ipairs(getElementsByType("vehicle")) do 
                         -- if getElementData(v, "veh:id") == carID then 
                                 triggerServerEvent("fuelVehicle", resourceRoot, getPedOccupiedVehicle(target), target)
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megtankoltad "..color..getPlayerName(target):gsub("_", " ").."#ffffffnevű játékos járművét!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Encheu o tanque de "..color..getPlayerName(target):gsub("_", " ").."#ffffff (no veículo dele)!", 255, 255, 255, true)
                                 return
                             --end
                         --end
                     
                     else
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/fuelveh [ID]", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/fuelveh [jogador/ID]", 255, 255, 255, true)
                     end
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."A játékos nincs járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."O jogador não está num veículo!", 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("server", "Jármű",3).."/fuelveh [ID]", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "Veículo",3).."/fuelveh [jogador/ID]", 255, 255, 255, true)
             end
                
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/fuelveh [ID]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/fuelveh [jogador/ID]", 255, 255, 255, true)
         end
     end
 end)
-admin:addAdminCMD("fuelveh", 3, "Játékos járművének megtankolása")
+admin:addAdminCMD("fuelveh", 3, "Encher tanque do veículo do jogador")
 
 addCommandHandler("setvehfuel", function(cmd, target, value)
     if getElementData(localPlayer, "user:admin") > 2 then 
@@ -159,27 +159,27 @@ addCommandHandler("setvehfuel", function(cmd, target, value)
                         --for k, v in ipairs(getElementsByType("vehicle")) do 
                         -- if getElementData(v, "veh:id") == carID then 
                                 triggerServerEvent("setFuelVeh", resourceRoot, getPedOccupiedVehicle(target), target, value)
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megtankoltad "..color..getPlayerName(target):gsub("_", " ").."#ffffffnevű játékos járművét!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Encheu o tanque de "..color..getPlayerName(target):gsub("_", " ").."#ffffff (no veículo dele)!", 255, 255, 255, true)
                                 return
                             --end
                         --end
                     
                     else
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setvehfuel [ID] [Érték (L)]", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setvehfuel [jogador] [litros]", 255, 255, 255, true)
                     end
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."A játékos nincs járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."O jogador não está num veículo!", 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setvehfuel [ID] [Érték (L)]", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setvehfuel [jogador] [litros]", 255, 255, 255, true)
             end
                
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setvehfuel [ID] [Érték (L)]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setvehfuel [jogador] [litros]", 255, 255, 255, true)
         end
     end
 end)
-admin:addAdminCMD("setvehfuel", 3, "Játékos járművének tankolásának változtatása")
+admin:addAdminCMD("setvehfuel", 3, "Definir litros no veículo do jogador")
 
 addCommandHandler("setvehcolor", function(cmd, carID, r, g, b, r1, g1, b1)
 
@@ -201,12 +201,12 @@ addCommandHandler("setvehcolor", function(cmd, carID, r, g, b, r1, g1, b1)
                     if vehicle then 
 
                         triggerServerEvent("setVehicleColorOnServer", resourceRoot, localPlayer, vehicle, {r, g, b, r1, g1, b1})
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megváltoztattad a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező jármű színét!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."Alterou o veículo "..color..getElementData(vehicle, "veh:id").."#ffffff — cor alterada!", 255, 255, 255, true)
                         return
 
                     else
 
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                         return
 
                     end 
@@ -220,22 +220,22 @@ addCommandHandler("setvehcolor", function(cmd, carID, r, g, b, r1, g1, b1)
                         for k, v in ipairs(getElementsByType("vehicle")) do 
                             if getElementData(v, "veh:id") == carID then 
                                 triggerServerEvent("setVehicleColorOnServer", resourceRoot, localPlayer, v, {r, g, b, r1, g1, b1})
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Megváltoztattad a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező jármű színét!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Alterou o veículo "..color..carID.."#ffffff — cor alterada!", 255, 255, 255, true)
                                 return
                             end
                         end
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
             
                     end
 
                 end
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setvehcolor [ID] [R] [G] [B] <R1 G1 B1>", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setvehcolor [ID] [R] [G] [B] <R1 G1 B1>", 255, 255, 255, true)
         end
     end
 
 end)
-admin:addAdminCMD("setvehcolor", 6, "Jármű színének megváltoztatása")
+admin:addAdminCMD("setvehcolor", 6, "Alterar cor do veículo")
 
 addCommandHandler("delveh", function(cmd, carID)
     if getElementData(localPlayer, "user:admin") >= 7 then 
@@ -247,12 +247,12 @@ addCommandHandler("delveh", function(cmd, carID)
                 if vehicle then 
 
                     triggerServerEvent("delVehicleOnServer", resourceRoot, localPlayer, vehicle)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Kitörölted a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Veículo apagado (ID "..color..getElementData(vehicle, "veh:id").."#ffffff).", 255, 255, 255, true)
                     return
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -266,22 +266,22 @@ addCommandHandler("delveh", function(cmd, carID)
                     for k, v in ipairs(getElementsByType("vehicle")) do 
                         if getElementData(v, "veh:id") == carID then 
                             triggerServerEvent("delVehicleOnServer", resourceRoot, localPlayer, v)
-                            outputChatBox(core:getServerPrefix("server", "Jármű",3).."Kitörölted a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("server", "Veículo",3).."Veículo apagado (ID "..color..carID.."#ffffff).", 255, 255, 255, true)
                             return
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
         
                 end
 
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Jármű",3).."/delveh [ID] ", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo",3).."/delveh [ID]", 255, 255, 255, true)
         end
     end
 
 end)
-admin:addAdminCMD("delveh", 7, "Jármű törlése")
+admin:addAdminCMD("delveh", 7, "Apagar veículo da base")
 
 addCommandHandler("setcarhp", function(cmd, carID, hp)
 
@@ -297,12 +297,12 @@ addCommandHandler("setcarhp", function(cmd, carID, hp)
                 if vehicle then 
 
                     triggerServerEvent("setVehicleHpOnServer", resourceRoot, localPlayer, vehicle, hp)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Átállítottad a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező jármű életszintjét! "..color.."("..hp..")", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Definiu a vida do veículo "..color..getElementData(vehicle, "veh:id").."#ffffff — vida: "..color.."("..hp..")", 255, 255, 255, true)
                     return
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -316,11 +316,11 @@ addCommandHandler("setcarhp", function(cmd, carID, hp)
                     for k, v in ipairs(getElementsByType("vehicle")) do 
                         if getElementData(v, "veh:id") == carID then 
                             triggerServerEvent("setVehicleHpOnServer", resourceRoot, localPlayer, v, hp)
-                            outputChatBox(core:getServerPrefix("server", "Jármű",3).."Átállítottad a(z) "..color..carID.."#ffffff-as/es ID-vel rendelkező jármű életszintjét! "..color.."("..hp..")", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("server", "Veículo",3).."Definiu a vida do veículo "..color..carID.."#ffffff — vida: "..color.."("..hp..")", 255, 255, 255, true)
                             return
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
         
                 end
 
@@ -328,11 +328,11 @@ addCommandHandler("setcarhp", function(cmd, carID, hp)
 
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/setcarhp [ID] [HP (0-1000)]", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/setcarhp [ID ou *] [HP 0-1000]", 255, 255, 255, true)
     end
 
 end)
-admin:addAdminCMD("setcarhp", 7, "Jármű életének megváltoztatása")
+admin:addAdminCMD("setcarhp", 7, "Definir vida (HP) do veículo")
 
 addCommandHandler("blowveh", function(cmd, carID, hp)
     if carID then 
@@ -343,12 +343,12 @@ addCommandHandler("blowveh", function(cmd, carID, hp)
                 if vehicle then 
 
                     triggerServerEvent("blowUpVehicle", resourceRoot, localPlayer, vehicle)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Felrobbantottad a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Veículo detonado (ID "..color..getElementData(vehicle, "veh:id").."#ffffff).", 255, 255, 255, true)
                     return
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -359,19 +359,19 @@ addCommandHandler("blowveh", function(cmd, carID, hp)
                     for k, v in ipairs(getElementsByType("vehicle")) do 
                         if getElementData(v, "veh:id") == carID then 
                             triggerServerEvent("blowUpVehicle", resourceRoot, localPlayer, v)
-                            outputChatBox(core:getServerPrefix("server", "Jármű",3).."Felrobbantottad a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("server", "Veículo",3).."Veículo detonado (ID "..color..getElementData(v, "veh:id").."#ffffff).", 255, 255, 255, true)
                             return
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
                 end
             end
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/blowveh [ID] ", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/blowveh [ID ou *]", 255, 255, 255, true)
     end
 end)
-admin:addAdminCMD("blowveh", 10, "Jármű felrobbantása")
+admin:addAdminCMD("blowveh", 10, "Explodir veículo")
 
 addCommandHandler("respawnveh", function(cmd, carID, hp)
     if carID then 
@@ -382,12 +382,12 @@ addCommandHandler("respawnveh", function(cmd, carID, hp)
                 if vehicle then 
 
                     triggerServerEvent("respawnVeh", resourceRoot, localPlayer, vehicle)
-                    outputChatBox(core:getServerPrefix("server", "Jármű",3).."Respawnolta a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo",3).."Respawn aplicado (ID "..color..getElementData(vehicle, "veh:id").."#ffffff).", 255, 255, 255, true)
                     return
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -398,19 +398,19 @@ addCommandHandler("respawnveh", function(cmd, carID, hp)
                     for k, v in ipairs(getElementsByType("vehicle")) do 
                         if getElementData(v, "veh:id") == carID then 
                             triggerServerEvent("respawnVeh", resourceRoot, localPlayer, v)
-                            outputChatBox(core:getServerPrefix("server", "Jármű",3).."Respawnolta a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("server", "Veículo",3).."Respawn aplicado (ID "..color..getElementData(v, "veh:id").."#ffffff).", 255, 255, 255, true)
                             return
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
                 end
             end
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/respawnveh [ID] ", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/respawnveh [ID ou *]", 255, 255, 255, true)
     end
 end)
-admin:addAdminCMD("respawnveh", 2, "Jármű respawnolása")
+admin:addAdminCMD("respawnveh", 2, "Respawn do veículo")
 
 addCommandHandler("warp", function(cmd)
 
@@ -421,7 +421,7 @@ addCommandHandler("warp", function(cmd)
     end
 
 end)
-admin:addAdminCMD("warp", 2, "beszállás a legközelebbi jármű anyósülésére")
+admin:addAdminCMD("warp", 2, "Entrar no veículo mais próximo")
 
 addCommandHandler("rtc", function(cmd)
 
@@ -447,18 +447,18 @@ addCommandHandler("rtc", function(cmd)
         if #rtc_needed_vehicles > 0 then 
             triggerServerEvent("rtcVehiclesOnServer", resourceRoot, localPlayer, rtc_needed_vehicles)
         else
-            outputChatBox(core:getServerPrefix("red-dark", "RTC", 3).."Nincsenek járművek a közeledben!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "RTC", 3).."Não há veículos por perto!", 255, 255, 255, true)
         end
     end 
 
 end)
-admin:addAdminCMD("rtc", 3, "Járművek respawnolása")
+admin:addAdminCMD("rtc", 3, "RTC — veículos vazios por perto (sem ocupante)")
 
 addCommandHandler("nearbyvehicles", function(cmd)
     if getElementData(localPlayer, "user:admin") >= 3 then
 
         local playerDim, playerInt = getElementDimension(localPlayer), getElementInterior(localPlayer)
-        outputChatBox(color.."<===== [Közeledben lévő járművek] =====>", 255, 255, 255, true)
+        outputChatBox(color.."<===== [Veículos próximos] =====>", 255, 255, 255, true)
 
         for k, vehicle in pairs(getElementsByType("vehicle")) do 
             if core:getDistance(localPlayer, vehicle) <= 15 then 
@@ -480,36 +480,36 @@ addCommandHandler("nearbyvehicles", function(cmd)
                             local charname = getElementData(ownerPlayer,"char:name")
                             text = charname.." ["..playerid.."]"
                         elseif not ownerPlayer then 
-                            text = getElementData(vehicle,"veh:owner").." [CHARID:OFFLINE VAGY FRAKCIÓ]"
+                            text = getElementData(vehicle,"veh:owner").." [CHAR offline ou facção]"
                         end 
 
-                        outputChatBox(core:getServerPrefix("blue-dark", getElementData(vehicle, "veh:id"), 3).."Jármű neve: "..color..getModdedVehName(getElementModel(vehicle)).." #ffffffTulajdonos: "..color..text, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("blue-dark", getElementData(vehicle, "veh:id"), 3).."Modelo: "..color..getModdedVehName(getElementModel(vehicle)).." #ffffffDono: "..color..text, 255, 255, 255, true)
                         ownerPlayer = nil
                     else 
-                        text = getElementData(vehicle,"veh:owner").." [FRAKCIÓ]"
-                        outputChatBox(core:getServerPrefix("blue-dark", getElementData(vehicle, "veh:id"), 3).."Jármű neve: "..color..getModdedVehName(getElementModel(vehicle)).." #ffffffTulajdonos: "..color..text, 255, 255, 255, true)
+                        text = getElementData(vehicle,"veh:owner").." [FACÇÃO]"
+                        outputChatBox(core:getServerPrefix("blue-dark", getElementData(vehicle, "veh:id"), 3).."Modelo: "..color..getModdedVehName(getElementModel(vehicle)).." #ffffffDono: "..color..text, 255, 255, 255, true)
                     end
                 end    
             end
         end
     end
 end)
-admin:addAdminCMD("nearbyvehicles", 3, "Közeledben lévő járművek listázása")
+admin:addAdminCMD("nearbyvehicles", 3, "Listar veículos próximos")
 
 addCommandHandler("getvehid", function(cmd)
     if getElementData(localPlayer, "user:admin") >= 2 then
 
         local veh = getPedOccupiedVehicle(localPlayer) or false
         if veh then 
-            outputChatBox(core:getServerPrefix("server", "Jármű", 3).."Jármű ID: "..color..getElementData(veh, "veh:id").." #ffffffJármű neve: "..color..getVehicleName(veh) .." #ffffffTulajdonos: "..color..getElementData(veh, "veh:owner").." #ffffffDevID: "..color..getElementModel(veh), 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Veículo", 3).."ID veículo: "..color..getElementData(veh, "veh:id").." #ffffffModelo: "..color..getVehicleName(veh) .." #ffffffDono: "..color..getElementData(veh, "veh:owner").." #ffffffID modelo GTA: "..color..getElementModel(veh), 255, 255, 255, true)
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Nem ülsz járműben!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Você não está num veículo!", 255, 255, 255, true)
         end
     end
 end)
-admin:addAdminCMD("getvehid", 2, "Jelenlegi járműved adatainak lekérése")
+admin:addAdminCMD("getvehid", 2, "Ver ID do veículo atual")
 
-admin:addAdminCMD("makeveh", 7, "Jármű létrehozása")
+admin:addAdminCMD("makeveh", 7, "Criar veículo (admin)")
 
 addCommandHandler("protectveh", function(cmd, vehID)
     if vehID then 
@@ -523,15 +523,15 @@ addCommandHandler("protectveh", function(cmd, vehID)
 
                     if getElementData(vehicle, "veh:protected") == 0 then 
                         triggerServerEvent("protectVehicleOnServer", resourceRoot, vehicle)
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."Levédted a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."Proteção ativada (ID "..color..getElementData(vehicle, "veh:id").."#ffffff).", 255, 255, 255, true)
                         return
                     else
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Ez a jármű már le van védve!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Este veículo já está protegido!", 255, 255, 255, true)
                     end
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -546,14 +546,14 @@ addCommandHandler("protectveh", function(cmd, vehID)
                         if getElementData(v, "veh:id") == vehID then 
                             if getElementData(v, "veh:protected") == 0 then 
                                 triggerServerEvent("protectVehicleOnServer", resourceRoot, v)
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Levédted a(z) "..color..getElementData(v, "veh:id").."#ffffff-as/es ID-vel rendelkező járművet!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Proteção ativada (ID "..color..getElementData(v, "veh:id").."#ffffff).", 255, 255, 255, true)
                                 return
                             else
-                                outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Ez a jármű már le van védve!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Este veículo já está protegido!", 255, 255, 255, true)
                             end
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
         
                 end
 
@@ -561,10 +561,10 @@ addCommandHandler("protectveh", function(cmd, vehID)
 
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/"..cmd.." [ID]", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/"..cmd.." [ID]", 255, 255, 255, true)
     end
 end)
-admin:addAdminCMD("protectveh", 7, "Jármű levédése")
+admin:addAdminCMD("protectveh", 7, "Marcar veículo como protegido")
 
 addCommandHandler("unprotectveh", function(cmd, vehID)
     if vehID then 
@@ -578,15 +578,15 @@ addCommandHandler("unprotectveh", function(cmd, vehID)
 
                     if getElementData(vehicle, "veh:protected") == 1 then 
                         triggerServerEvent("unprotectVehicleOnServer", resourceRoot, vehicle)
-                        outputChatBox(core:getServerPrefix("server", "Jármű",3).."Eltávolítottad a levédést a(z) "..color..getElementData(vehicle, "veh:id").."#ffffff-as/es ID-vel rendelkező járműről!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "Veículo",3).."Removeste a proteção do veículo "..color..getElementData(vehicle, "veh:id").."#ffffff!", 255, 255, 255, true)
                         return
                     else
-                        outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Ez a jármű nincs levédve!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Este veículo não está protegido!", 255, 255, 255, true)
                     end
 
                 else
 
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Jelenleg nem ülsz járműben!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Você não está num veículo!", 255, 255, 255, true)
                     return
 
                 end 
@@ -601,14 +601,14 @@ addCommandHandler("unprotectveh", function(cmd, vehID)
                         if getElementData(v, "veh:id") == vehID then 
                             if getElementData(v, "veh:protected") == 1 then 
                                 triggerServerEvent("unprotectVehicleOnServer", resourceRoot, v)
-                                outputChatBox(core:getServerPrefix("server", "Jármű",3).."Eltávolítottad a levédést a(z) "..color..getElementData(v, "veh:id").."#ffffff-as/es ID-vel rendelkező járműről!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("server", "Veículo",3).."Removeste a proteção do veículo "..color..getElementData(v, "veh:id").."#ffffff!", 255, 255, 255, true)
                                 return
                             else
-                                outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Ez a jármű nincs levédve!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Este veículo não está protegido!", 255, 255, 255, true)
                             end
                         end
                     end
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű",3).."Nincs ilyen ID-vel rendelkező jármű!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo",3).."Não há veículo com esse ID!", 255, 255, 255, true)
         
                 end
 
@@ -616,10 +616,10 @@ addCommandHandler("unprotectveh", function(cmd, vehID)
 
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Jármű",3).."/"..cmd.." [ID]", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Veículo",3).."/"..cmd.." [ID]", 255, 255, 255, true)
     end
 end)
-admin:addAdminCMD("unprotectveh", 7, "Jármű levédésének eltávolítása")
+admin:addAdminCMD("unprotectveh", 7, "Remover proteção do veículo")
 
 ---------[ Civil commands ]---------
 --kiszed
@@ -636,25 +636,25 @@ addCommandHandler("kiszed", function(cmd, id)
                             if not (getElementData(target, "vehicle:seatbeltState")) then 
                                 triggerServerEvent("takeOutFromVehicle", resourceRoot, target)
                             else
-                                outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."A játékos biztonsági öve be van kötve!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."O jogador está com o cinto afivelado!", 255, 255, 255, true)
                             end
                         else
-                            outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."A jármű ajtaja zárva van!", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."As portas do veículo estão trancadas!", 255, 255, 255, true)
                         end 
                     else
-                        outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."Ez a játékos nem ül járműben!", 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."Este jogador não está num veículo!", 255, 255, 255, true)
                     end
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."Túl távol vagy!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."Você está longe demais!", 255, 255, 255, true)
                 end 
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."Csak számot!", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."Use o ID numérico do jogador.", 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Kiszed", 2).."Ez a parancs csak járművön kívül működik!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Retirar", 2).."Este comando só funciona fora de veículo.", 255, 255, 255, true)
         end
     else
-        outputChatBox(core:getServerPrefix("server", "Haszálat", 3).."/"..cmd.." [ID]", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID]", 255, 255, 255, true)
     end
 end)
 --öv elvágása
@@ -665,7 +665,7 @@ addEventHandler("onClientVehicleStartEnter", root, function(player, seat, door)
             local occupants = getVehicleOccupants(source)
             
             if occupants[0] then
-                outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Ez nonRP-s kocsilopás! Használd a "..color.."/kiszed #ffffffparancsot.", 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Entrar assim é anti-RP — use "..color.."/kiszed #ffffffpara retirar o condutor IC.", 255, 255, 255, true) 
                 cancelEvent()
             end
         end
@@ -681,7 +681,7 @@ end)
             if getElementData(occupiedVeh, "veh:owner") == getElementData(localPlayer, "char:id") then 
                 local x, y, z = getElementPosition(occupiedVeh)
                 setElementData(occupiedVeh, "veh:parkPos", {x, y, z, getElementInterior(occupiedVeh), getElementDimension(occupiedVeh)})
-                outputChatBox(core:getServerPrefix("green-dark", "Jármű", 3).."Sikeresen leparkoztad a járművedet.", 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("green-dark", "Veículo", 3).."Veículo estacionado.", 255, 255, 255, true) 
             end
         end
     end

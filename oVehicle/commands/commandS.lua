@@ -21,7 +21,7 @@ addCommandHandler("makeveh", function(player, cmd, modelId, target, isFactionVeh
 
             --[[if tostring(plateText) then
                 if string.len(plateText) > 8 then
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Hosszú rendszám!", player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Placa longa demais!", player, 255, 255, 255, true)
                     return
                 end
             end]]
@@ -32,7 +32,7 @@ addCommandHandler("makeveh", function(player, cmd, modelId, target, isFactionVeh
 
             if isFactionVehicle == 1 then
                 if not (exports.oDashboard:isRealFaction(tonumber(target))) then
-                    outputChatBox(core:getServerPrefix("red-dark", "Jármű", 3).."Nincs ilyen azonosítóval rendelkező frakció!", player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Não existe facção com esse ID!", player, 255, 255, 255, true)
                     return
                 end
             else
@@ -62,20 +62,20 @@ addCommandHandler("makeveh", function(player, cmd, modelId, target, isFactionVeh
                 veh = createNewFactionVehicle(modelId, target, {playerX+2,playerY+2, playerZ}, {0,0,0}, {colorR, colorG, colorB}, plateText)
 
                 setTimer(function()
-                    sendMessageToAdmins(player, "létrehozott egy #db3535"..modelName.."#557ec9 nevű frakció járművet. (".."#db3535#"..getElementData(veh, "veh:id").."#557ec9) Tulajdonos: #db3535"..exports.oDashboard:getFactionName(tonumber(target)))
+                    sendMessageToAdmins(player, "criou veículo de facção #db3535"..modelName.."#557ec9 (ID "..getElementData(veh, "veh:id").."#557ec9). Facção: #db3535"..exports.oDashboard:getFactionName(tonumber(target)))
                     setElementData(player, "log:admincmd", {"Faction: "..target, cmd})
                 end, 500, 1)
             else
                 veh = createNewVehicle(modelId, target, {playerX+2,playerY+2, playerZ}, {0,0,0}, {colorR, colorG, colorB}, plateText)
                 
                 setTimer(function()
-                    sendMessageToAdmins(player, "létrehozott egy #db3535"..modelName.."#557ec9 nevű járművet. (".."#db3535#"..getElementData(veh, "veh:id").."#557ec9) Tulajdonos: #db3535"..targetName)
+                    sendMessageToAdmins(player, "criou veículo #db3535"..modelName.."#557ec9 (ID "..getElementData(veh, "veh:id").."#557ec9). Dono: #db3535"..targetName)
                     setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
                 end, 500, 1)
             end
 
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/makeveh [Model ID] [Tulajdonos/Frakció ID] [Frakció Jármű 0: Nem, 1: Igen] [R] [G] [B] [Rendszám tábla]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/makeveh [ID modelo] [ID jogador ou facção] [Veículo facção 0:não 1:sim] [R] [G] [B] [texto placa]", player, 255, 255, 255, true)
         end
 
     end
@@ -89,9 +89,9 @@ function gotoCar(player, veh)
     setElementPosition(player, vX+2, vY+2, vZ, true)
 
     if getElementData(player, "char:id") == getElementData(veh, "veh:owner") then
-        sendMessageToAdmins(player, "odateleportált a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező járműhöz. #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "teleportou-se ao veículo #db3535"..getElementData(veh,"veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "odateleportált a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező járműhöz.")
+        sendMessageToAdmins(player, "teleportou-se ao veículo #db3535"..getElementData(veh,"veh:id").."#557ec9.")
     end
 end
 addEvent("gotoCarOnServer", true)
@@ -106,9 +106,9 @@ function getCar(player, veh)
     setElementInterior(veh, getElementInterior(player))
 
     if getElementData(player, "char:id") == getElementData(veh, "veh:owner") then
-        sendMessageToAdmins(player, "magához teleportálta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "teleportou o veículo #db3535"..getElementData(veh,"veh:id").."#557ec9 até si. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "magához teleportálta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet.")
+        sendMessageToAdmins(player, "teleportou o veículo #db3535"..getElementData(veh,"veh:id").."#557ec9 até si.")
     end
 end
 addEvent("getCarOnServer", true)
@@ -120,9 +120,9 @@ function setVehPlateText(player, veh, text)
     setVehiclePlateText(veh, text)
 
     if getElementData(player, "char:id") == getElementData(veh, "veh:owner") then
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű rendszámát. Új rendszám: #db3535"..text.." #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "alterou a placa do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9. Nova: #db3535"..text.." #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű rendszámát. Új rendszám: #db3535"..text)
+        sendMessageToAdmins(player, "alterou a placa do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9. Nova placa: #db3535"..text)
     end
 
     setElementData(player, "log:admincmd", {"Veh: "..getElementData(veh, "veh:id"), "setvehplatetext"})
@@ -136,9 +136,9 @@ function setVehColor(player, veh, color)
     setVehicleColor(veh, color[1], color[2], color[3], color[4], color[5], color[6])
 
     if getElementData(player, "char:id") == getElementData(veh, "veh:owner") then
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű színét. Új szín: "..RGBToHex(color[1], color[2], color[3]).."("..color[1]..", "..color[2]..", "..color[3]..") #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "alterou a cor do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9. "..RGBToHex(color[1], color[2], color[3]).."("..color[1]..", "..color[2]..", "..color[3]..") #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű színét. Új szín: "..RGBToHex(color[1], color[2], color[3]).."("..color[1]..", "..color[2]..", "..color[3]..")")
+        sendMessageToAdmins(player, "alterou a cor do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9. "..RGBToHex(color[1], color[2], color[3]).."("..color[1]..", "..color[2]..", "..color[3]..")")
     end
 
     setElementData(player, "log:admincmd", {"Veh: "..getElementData(veh,"veh:id"), "setvehcolor"})
@@ -150,9 +150,9 @@ function delVeh(player, vehicle)
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     if getElementData(player, "char:id") == getElementData(vehicle, "veh:owner") then
-        sendMessageToAdmins(player, "kitörölte a(z) #db3535"..getElementData(vehicle,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "removeu o veículo #db3535"..getElementData(vehicle,"veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "kitörölte a(z) #db3535"..getElementData(vehicle,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet.")
+        sendMessageToAdmins(player, "removeu o veículo #db3535"..getElementData(vehicle,"veh:id").."#557ec9.")
     end
     setElementData(player, "log:admincmd", {"Veh"..getElementData(vehicle,"veh:id"), "delveh"})
 
@@ -168,9 +168,9 @@ function setVehHP(player, veh, hp)
     setVehicleDamageProof(veh, false)
 
     if getElementData(player, "char:id") == getElementData(veh, "veh:owner") then
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű életszintjét. #db3535("..hp..") #db3535[Saját jármű!]")
+        sendMessageToAdmins(player, "alterou a vida do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9 para #db3535("..hp..") #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(player, "megváltoztatta a(z) #db3535"..getElementData(veh,"veh:id").."#557ec9-as/es ID-vel rendelkező jármű életszintjét. #db3535("..hp..")")
+        sendMessageToAdmins(player, "alterou a vida do veículo #db3535"..getElementData(veh,"veh:id").."#557ec9 para #db3535("..hp..")")
     end
 
 end
@@ -198,9 +198,9 @@ function rtcVehicles(player, cars)
             setElementDimension(v, getElementData(v, "veh:owner"))
 
             if getElementData(player, "char:id") == getElementData(v, "veh:owner") then
-                sendMessageToAdmins(player, "RTC-zte a(z) #db3535"..getElementData(v,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+                sendMessageToAdmins(player, "fez RTC no veículo #db3535"..getElementData(v,"veh:id").."#557ec9. #db3535[Próprio veículo!]")
             else
-                sendMessageToAdmins(player, "RTC-zte a(z) #db3535"..getElementData(v,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet.")
+                sendMessageToAdmins(player, "fez RTC no veículo #db3535"..getElementData(v,"veh:id").."#557ec9.")
             end
         end
     end
@@ -214,9 +214,9 @@ function protectVeh(car)
     setElementData(car, "veh:protected", 1)
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "levédte a(z) #db3535"..getElementData(car,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "protegeu o veículo #db3535"..getElementData(car,"veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "levédte a(z) #db3535"..getElementData(car,"veh:id").."#557ec9-as/es ID-vel rendelkező járművet.")
+        sendMessageToAdmins(client, "protegeu o veículo #db3535"..getElementData(car,"veh:id").."#557ec9.")
     end
 end
 addEvent("protectVehicleOnServer", true)
@@ -228,9 +228,9 @@ function unprotectVeh(car)
     setElementData(car, "veh:protected", 0)
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "eltávolította a levédést a(z) #db3535"..getElementData(car,"veh:id").."#557ec9-as/es ID-vel rendelkező járműről. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "removeu a proteção do veículo #db3535"..getElementData(car,"veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "eltávolította a levédést a(z) #db3535"..getElementData(car,"veh:id").."#557ec9-as/es ID-vel rendelkező járműről.")
+        sendMessageToAdmins(client, "removeu a proteção do veículo #db3535"..getElementData(car,"veh:id").."#557ec9.")
     end
 end
 addEvent("unprotectVehicleOnServer", true)
@@ -244,9 +244,9 @@ function fuelVeh(car, target)
 
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "megtankolta  #db3535"..getPlayerName(target):gsub("_", " ").." #557ec9nevű játékos járművét. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "encheu o tanque do jogador #db3535"..getPlayerName(target):gsub("_", " ").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "megtankolta  #db3535"..getPlayerName(target):gsub("_", " ").." #557ec9nevű játékos járművét.")
+        sendMessageToAdmins(client, "encheu o tanque do jogador #db3535"..getPlayerName(target):gsub("_", " ").."#557ec9.")
     end
 end
 addEvent("fuelVehicle", true)
@@ -266,9 +266,9 @@ function setFuelVeh(car, target, value)
 
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "megtankolta (".. value .." L)  #db3535"..getPlayerName(target):gsub("_", " ").." #557ec9nevű játékos járművét. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "definiu combustível (".. value .." L) no veículo de #db3535"..getPlayerName(target):gsub("_", " ").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "megtankolta (".. value .." L)  #db3535"..getPlayerName(target):gsub("_", " ").." #557ec9nevű játékos járművét.")
+        sendMessageToAdmins(client, "definiu combustível (".. value .." L) no veículo de #db3535"..getPlayerName(target):gsub("_", " ").."#557ec9.")
     end
 end
 addEvent("setFuelVeh", true)
@@ -276,7 +276,7 @@ addEventHandler("setFuelVeh", resourceRoot, setFuelVeh)
 
 addEvent("takeOutFromVehicle", true)
 addEventHandler("takeOutFromVehicle", resourceRoot, function(target)
-    chat:sendLocalMeAction(client, "kiszedte "..getPlayerName(target):gsub("_", " ").."-ot/et a közelében lévő járműből.")
+    chat:sendLocalMeAction(client, "retirou "..getPlayerName(target):gsub("_", " ").." de um veículo próximo.")
     removePedFromVehicle(target)
 
     local targetPos = Vector3(getElementPosition(target))
@@ -290,9 +290,9 @@ function blowVeh(target, car)
     blowVehicle(car)
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "felrobbantotta  #db3535"..getElementData(car, "veh:id").." #557ec9ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "detonou o veículo #db3535"..getElementData(car, "veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "felrobbantotta  #db3535"..getElementData(car, "veh:id").." #557ec9ID-vel rendelkező járművet.")
+        sendMessageToAdmins(client, "detonou o veículo #db3535"..getElementData(car, "veh:id").."#557ec9.")
     end
 end
 addEvent("blowUpVehicle", true)
@@ -304,9 +304,9 @@ function respawnVeh(target, car)
     respawnVehicle(car)
 
     if getElementData(client, "char:id") == getElementData(car, "veh:owner") then
-        sendMessageToAdmins(client, "respawnolta #db3535"..getElementData(car, "veh:id").." #557ec9a(z) ID-vel rendelkező járművet. #db3535[Saját jármű!]")
+        sendMessageToAdmins(client, "deu respawn no veículo #db3535"..getElementData(car, "veh:id").."#557ec9. #db3535[Próprio veículo!]")
     else
-        sendMessageToAdmins(client, "respawnolta #db3535"..getElementData(car, "veh:id").." #557ec9a(z) ID-vel rendelkező járművet.")
+        sendMessageToAdmins(client, "deu respawn no veículo #db3535"..getElementData(car, "veh:id").."#557ec9.")
     end
 end
 addEvent("respawnVeh", true)

@@ -75,7 +75,7 @@ end
 addEventHandler("onResourceStop", root, function(resource)
 	for k, v in ipairs(getElementsByType("player")) do 
 		if getElementData(v, "aclLogin") then
-			outputChatBox(core:getServerPrefix("red-dark", "OriginalRoleplay", 3)..color..tostring(getResourceName(resource)).." #ffffffresource leállítva.",v,255,255,255,true) 
+			outputChatBox(core:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3)..color..tostring(getResourceName(resource)).." #ffffffrecurso parado.",v,255,255,255,true) 
 		end
 	end
 end)
@@ -83,7 +83,7 @@ end)
 addEventHandler("onResourceStart", root, function(resource)
 	for k, v in ipairs(getElementsByType("player")) do 
 		if getElementData(v, "aclLogin") then
-			outputChatBox(core:getServerPrefix("red-dark", "OriginalRoleplay", 3)..color..tostring(getResourceName(resource)).." #ffffffresource elindítva.",v,255,255,255,true) 
+			outputChatBox(core:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3)..color..tostring(getResourceName(resource)).." #ffffffrecurso iniciado.",v,255,255,255,true) 
 		end
 	end
 end)
@@ -104,7 +104,7 @@ function developerJoin(player)
 		setAccountPassword(account, password)
 		logIn(player, account, password)
 		setElementData(player, "aclLogin", true)
-		outputChatBox("[Admin]: #ffffffFejlesztő serial érzékelve! Üdv, "..color..devName.."#ffffff!", player, r, g, b, true)
+		outputChatBox("[Admin]: #ffffffSerial de developer detectado! Bem-vindo, "..color..devName.."#ffffff!", player, r, g, b, true)
 	else
 		setElementData(player, "aclLogin", nil)
 		if not isGuestAccount(getPlayerAccount(player)) then
@@ -131,13 +131,13 @@ addCommandHandler("fixveh", function(thePlayer, cmd, target)
 					fixVehicle(veh)
 					setVehicleDamageProof(veh, false)
 					setElementData(veh, "veh:broke", false)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffmegjavította a járműved.", target, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffreparou seu veículo.", target, 255, 255, 255, true)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 
 					if getElementData(thePlayer, "char:id") == getElementData(veh, "veh:owner") then 
-						sendMessageToAdmins(thePlayer, "megjavította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos járművét. #db3535[Saját jármű!]")
+						sendMessageToAdmins(thePlayer, "reparou o veículo de "..nameColor..getPlayerName(target)..adminMessageColor..". #db3535[Próprio veículo!]")
 					else
-						sendMessageToAdmins(thePlayer, "megjavította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos járművét.")
+						sendMessageToAdmins(thePlayer, "reparou o veículo de "..nameColor..getPlayerName(target)..adminMessageColor..".")
 					end
 
 					local playerStats = getElementData(thePlayer, "user:adminDatas") or {0, 0, 0, 0, 0, 0, 0, 0}
@@ -145,11 +145,11 @@ addCommandHandler("fixveh", function(thePlayer, cmd, target)
 				
 					setElementData(thePlayer, "user:adminDatas", playerStats)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."A játékos nem ül járműben!", thePlayer, 244, 40, 40, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."O jogador não está num veículo!", thePlayer, 244, 40, 40, true)
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -166,21 +166,21 @@ addCommandHandler("unflip", function(thePlayer, cmd, target)
 				if veh then
 					local _, _, r = getElementRotation(veh)
 					setElementRotation(veh, 0, 0, r)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffvissza borította a járműved.", target, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdesvirou seu veículo.", target, 255, 255, 255, true)
 
 					if getElementData(thePlayer, "char:id") == getElementData(veh, "veh:owner") then 
-						sendMessageToAdmins(thePlayer, "vissza borította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos járművét. #db3535[Saját jármű!]")	
+						sendMessageToAdmins(thePlayer, "desvirou o veículo de "..nameColor..getPlayerName(target)..adminMessageColor..". #db3535[Próprio veículo!]")	
 					else
-						sendMessageToAdmins(thePlayer, "vissza borította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos járművét.")	
+						sendMessageToAdmins(thePlayer, "desvirou o veículo de "..nameColor..getPlayerName(target)..adminMessageColor..".")	
 					end
 	
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."A játékos nem ül járműben!", thePlayer, 244, 40, 40, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."O jogador não está num veículo!", thePlayer, 244, 40, 40, true)
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -196,13 +196,13 @@ function setSkin(thePlayer, cmd, target, id)
 			if target then
 				setElementModel(target, id)
 				setElementData(target, "player:skin", id)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította a kinézetedet. "..color.."("..id..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos kinézetét. "..nameColor.."("..id..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffalterou sua aparência. "..color.."("..id..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "alterou a aparência de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..id..")")
 
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Skin ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [ID da skin]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -221,12 +221,12 @@ addCommandHandler("sethp", function(thePlayer, cmd, target, value)
 				if value < 0 then value = 0 end
 				setElementData(target, "char:health", value)
 				setElementHealth(target, value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította az életed. "..color.."("..value..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos életét. "..nameColor.."("..value..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu sua vida. "..color.."("..value..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu a vida de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..value..")")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -242,12 +242,12 @@ addCommandHandler("setdrunken", function(thePlayer, cmd, target, value)
 				if value > 100 then value = 100 end
 				if value < 0 then value = 0 end
 				setElementData(target, "char:alcoholLevel", value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította az alkohol szinted. "..color.."("..value..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos alkohol szintjét. "..nameColor.."("..value..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu seu nível de álcool. "..color.."("..value..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu o nível de álcool de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..value..")")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -265,12 +265,12 @@ addCommandHandler("setarmor", function(thePlayer, cmd, target, value)
 				if value < 0 then value = 0 end
 				setElementData(target, "char:armor", value)
 				setPedArmor(target, value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította az pajzsodat. "..color.."("..value..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos pajzsát. "..nameColor.."("..value..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu seu escudo. "..color.."("..value..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu o escudo de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..value..")")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -287,12 +287,12 @@ addCommandHandler("sethunger", function(thePlayer, cmd, target, value)
 				if value > 100 then value = 100 end
 				if value < 0 then value = 0 end
 				setElementData(target, "char:hunger", value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította az éhezésed. "..color.."("..value..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos éhségszintjét. "..nameColor.."("..value..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu sua fome. "..color.."("..value..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu a fome de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..value..")")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -309,12 +309,12 @@ addCommandHandler("setthirst", function(thePlayer, cmd, target, value)
 				if value > 100 then value = 100 end
 				if value < 0 then value = 0 end
 				setElementData(target, "char:thirst", value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította az szomjúságod. "..color.."("..value..")", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos szomjúságát. "..nameColor.."("..value..")")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu sua sede. "..color.."("..value..")", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu a sede de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..value..")")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -331,18 +331,18 @@ function givePMoney(thePlayer, cmd, target, type, value)
 				type = tonumber(type)
 				if type == 1 then 
 					setElementData(target, "char:money", getElementData(target, "char:money") + value)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffadott neked "..color.."$"..value.."#ffffff-t.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "adott "..nameColor..getPlayerName(target)..adminMessageColor.." játékosnak "..nameColor.."$"..value..adminMessageColor.."-t.",7)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdeu a você "..color.."$"..value.."#ffffff.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "deu "..nameColor.."$"..value..adminMessageColor.." a "..nameColor..getPlayerName(target)..adminMessageColor..".",7)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				elseif type == 2 then 
 					setElementData(target, "char:money", getElementData(target, "char:money") - value)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffelvett tőled "..color.."$"..value.."#ffffff-t.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "elvett "..nameColor..getPlayerName(target)..adminMessageColor.." játékostól "..nameColor.."$"..value..adminMessageColor.."-t.",7)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffremoveu de você "..color.."$"..value.."#ffffff.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "removeu "..nameColor.."$"..value..adminMessageColor.." de "..nameColor..getPlayerName(target)..adminMessageColor..".",7)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Típus (1: +$, 2: -$)] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [tipo (1: +$, 2: -$)] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -359,13 +359,13 @@ function setPMoney(thePlayer, cmd, target, value)
 			if target then
 				if target then
 					setElementData(target, "char:money", value)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffbeállította a Pénzét "..color..value.." -ra/re.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "beállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos Pénzét "..nameColor..value..adminMessageColor.."-ra/re.", 7)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu seu dinheiro em "..color..value.."#ffffff $.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "definiu o dinheiro de "..nameColor..getPlayerName(target)..adminMessageColor.." em "..nameColor..value..adminMessageColor.."$.", 7)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -383,18 +383,18 @@ function givePP(thePlayer, cmd, target, type, value)
 				type = tonumber(type)
 				if type == 1 then 
 					setElementData(target, "char:pp", getElementData(target, "char:pp") + value)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffadott neked "..color..value.." PremiumPontot#ffffff.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "adott "..nameColor..getPlayerName(target)..adminMessageColor.." játékosnak "..nameColor..value.." PremiumPontot"..adminMessageColor..".",7)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdeu a você "..color..value.."#ffffff pontos premium.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "deu "..nameColor..value.." pontos premium a "..nameColor..getPlayerName(target)..adminMessageColor..".",7)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				elseif type == 2 then 
 					setElementData(target, "char:pp", getElementData(target, "char:pp") - value)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffelvett tőled "..color..value.." PremiumPontot#ffffff.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "elvett "..nameColor..getPlayerName(target)..adminMessageColor.." játékostól "..nameColor..value.." PremiumPontot"..adminMessageColor..".",7)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffremoveu de você "..color..value.."#ffffff pontos premium.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "removeu "..nameColor..value.." pontos premium de "..nameColor..getPlayerName(target)..adminMessageColor..".",7)
 					setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Típus (1: +PP, 2: -PP)] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [tipo (1: +PP, 2: -PP)] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -410,12 +410,12 @@ function setPP(thePlayer, cmd, target, value)
 			local target = core:getPlayerFromPartialName(thePlayer, target)
 			if target then
 				setElementData(target, "char:pp", value)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffbeállította a PrémiumPontodat "..color..value.." -ra/re.", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "beállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos PrémiumPontját "..nameColor..value..adminMessageColor.."-ra/re.",7)
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu seus pontos premium em "..color..value.."#ffffff.", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "definiu os pontos premium de "..nameColor..getPlayerName(target)..adminMessageColor.." em "..nameColor..value..adminMessageColor..".",7)
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Érték]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [valor]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -435,14 +435,14 @@ addCommandHandler("goto", function(thePlayer, cmd, target)
 					setElementPosition(getPedOccupiedVehicle(thePlayer) or thePlayer, x, y + 3, z)
 					setElementInterior(thePlayer, getElementInterior(target))
 					setElementDimension(thePlayer, getElementDimension(target))
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffhozzád teleportált.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "elteleportált "..nameColor..getPlayerName(target)..adminMessageColor.." játékoshoz.")
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffteleportou-se até você.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "teleportou-se até "..nameColor..getPlayerName(target)..adminMessageColor..".")
 				end
 			else
-				outputChatBox(nameColor.."["..serverName.."]: #ffffffNem teleportálhatsz saját magadra!", thePlayer, r, g, b, true)
+				outputChatBox(nameColor.."["..serverName.."]: #ffffffNão pode teleportar-se para si mesmo!", thePlayer, r, g, b, true)
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -463,10 +463,10 @@ addCommandHandler("sgoto", function(thePlayer, cmd, target)
 					setElementDimension(thePlayer, getElementDimension(target))
 				end
 			else
-				outputChatBox(nameColor.."["..serverName.."]: #ffffffNem teleportálhatsz saját magadra!", thePlayer, r, g, b, true)
+				outputChatBox(nameColor.."["..serverName.."]: #ffffffNão pode teleportar-se para si mesmo!", thePlayer, r, g, b, true)
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -491,11 +491,11 @@ addCommandHandler("vhspawn", function(thePlayer, cmd, target)
 				setElementData(target, "playerInClientsideJobInterior", false)
 				setElementData(target, "pizza:isPlayerInInt", false)
 				setElementDimension(veh or target, 0)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffa városházára teleportált téged.", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "elteleportálta "..nameColor..getPlayerName(target)..adminMessageColor.." játékost a városházára.")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffteleportou você para a prefeitura.", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "teleportou "..nameColor..getPlayerName(target)..adminMessageColor.." para a prefeitura.")
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -517,14 +517,14 @@ addCommandHandler("gethere", function(thePlayer, cmd, target)
 					setElementData(target, "cleaner:inJobInt", false)
 					setElementData(target, "playerInClientsideJobInterior", false)
 					setElementData(target, "pizza:isPlayerInInt", false)
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffmagához teleportált.", target, 255, 255, 255, true)
-					sendMessageToAdmins(thePlayer, "magához teleportálta "..nameColor..getPlayerName(target)..adminMessageColor.." játékost.")
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffpuxou você até ele.", target, 255, 255, 255, true)
+					sendMessageToAdmins(thePlayer, "puxou "..nameColor..getPlayerName(target)..adminMessageColor.." até si.")
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Nem teleportálhatod magadra saját magadat!", thePlayer, r, g, b, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Não pode usar isto em si mesmo!", thePlayer, r, g, b, true)
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -536,13 +536,13 @@ function setAdminNick(thePlayer, cmd, target, adminnick)
 	if target and adminnick then
 		local target = core:getPlayerFromPartialName(thePlayer, target)
 		if target then
-			outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffbeállította "..color..getPlayerName(target).." #ffffffadminnevét "..color..adminnick.."#ffffff-ra/re.", root, 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffalterou o apelido admin de "..color..getPlayerName(target).." #ffffffpara "..color..adminnick.."#ffffff.", root, 255, 255, 255, true)
 			dbExec(exports.oMysql:getDBConnection(), "UPDATE accounts SET adminnick=? WHERE id=?", adminnick, getElementData(target, "user:id"))
 			setElementData(target, "user:adminnick", adminnick)
 			setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 		end
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Adminnnév]", thePlayer, r, g, b, true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [apelido admin]", thePlayer, r, g, b, true)
 	end
 end
 addCommandHandler("setadminnick", setAdminNick)
@@ -558,8 +558,8 @@ function toggleAdminDuty(thePlayer,cmd,target)
 			setElementData(thePlayer, "user:aduty", false)
 			if not hadmin then
 				setPlayerName(thePlayer, getElementData(thePlayer, "char:name"))
-				exports.oInfobox:outputInfoBox("{#colorcode}"..getAdminNick(thePlayer).." #ffffffkilépett az adminisztrátor szolgálatból!", "aduty", root)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1).."Kiléptél az adminszolgálatból.", thePlayer, r, g, b, true)
+				exports.oInfobox:outputInfoBox("{#colorcode}"..getAdminNick(thePlayer).." #ffffff saiu do expediente administrativo!", "aduty", root)
+				outputChatBox(core:getServerPrefix("server", "Admin", 1).."Você saiu do expediente admin.", thePlayer, r, g, b, true)
 			end
 		else
 			setElementData(thePlayer, "user:aduty", true)
@@ -569,8 +569,8 @@ function toggleAdminDuty(thePlayer,cmd,target)
 				setElementData(thePlayer, "char:hunger", 100)
 				setElementData(thePlayer, "char:thirst", 100)
 				setPlayerName(thePlayer, getElementData(thePlayer, "user:adminnick"))
-				exports.oInfobox:outputInfoBox("{#colorcode}"..getAdminNick(thePlayer).." #ffffffadminisztrátor szolgálatba lépett! {#colorcode}(/pm "..getElementData(thePlayer,"playerid")..")", "aduty", root)
-				outputChatBox(core:getServerPrefix("server", "Admin", 1).."Adminszolgálatba léptél.", thePlayer, r, g, b, true)
+				exports.oInfobox:outputInfoBox("{#colorcode}"..getAdminNick(thePlayer).." #ffffff entrou em expediente administrativo! {#colorcode}(/pm "..getElementData(thePlayer,"playerid")..")", "aduty", root)
+				outputChatBox(core:getServerPrefix("server", "Admin", 1).."Você entrou em expediente admin.", thePlayer, r, g, b, true)
 			end
 		end
 	end
@@ -612,18 +612,18 @@ function setAdminLevel(thePlayer, cmd, targetP, level)
 
 				if getElementData(thePlayer,"aclLogin") then
 					if not volt then
-						sendMessageToAdmins(thePlayer,nameColor.."-által megváltoztatott adminisztrátornak nincs jogosultsága a magagsabb rang használata!")
+						sendMessageToAdmins(thePlayer, nameColor.."O alvo não tem serial em adminserials: não pode receber níveis admin altos pelo promover normal.")
 					end
 				else
 					if not volt then
-						outputChatBox("Az adminisztrátori rang adása megtagadva! ( A játékos serialja nincs engedélyezve magasabb adminsiztrátori rangra! )", thePlayer, 255,0,0,true)
+						outputChatBox("Promoção de admin negada! (O serial deste jogador não está autorizado para níveis admin mais altos.)", thePlayer, 255,0,0,true)
 						return
 					end
 				end
 			end
 
 			if getElementData(target, "user:idgAs") then 
-				outputChatBox("Nem tudsz adni neki adminjogot!", thePlayer, 255,0,0,true)
+				outputChatBox("Você não pode conceder permissões de admin a este jogador!", thePlayer, 255,0,0,true)
 				outputChatBox("/sethelper", thePlayer, 255,0,0,true)
 				return
 			end
@@ -633,7 +633,7 @@ function setAdminLevel(thePlayer, cmd, targetP, level)
 				clearAdminStatsStatus(thePlayer,targetP)
 			--	outputChatBox("asd")
 			end
-			outputChatBox(color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította "..color..getPlayerName(target).." #ffffffadminszintjét. ("..adminPrefixs[getElementData(target, "user:admin")].." > "..adminPrefixs[level]..")", root, 255, 255, 255, true)
+			outputChatBox(color..getElementData(thePlayer, "user:adminnick").." #ffffffalterou o nível admin de "..color..getPlayerName(target).." #ffffff("..adminPrefixs[getElementData(target, "user:admin")].." > "..adminPrefixs[level]..")", root, 255, 255, 255, true)
 			dbExec(exports.oMysql:getDBConnection(), "UPDATE accounts SET admin=? WHERE id=?", level, getElementData(target, "user:id"))
 			setElementData(target, "user:admin", level)
 			setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
@@ -643,7 +643,7 @@ function setAdminLevel(thePlayer, cmd, targetP, level)
 			end
 		end
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Szint]", thePlayer, r, g, b, true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [nível]", thePlayer, r, g, b, true)
 	end
 end
 addCommandHandler("setadminlevel", setAdminLevel)
@@ -666,7 +666,7 @@ addCommandHandler("sethelper", function(player, cmd, targetId)
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
 		if not targetId then 
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", player, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", player, r, g, b, true)
 		else
 			local target = core:getPlayerFromPartialName(player, targetId)
 			if target then 
@@ -681,7 +681,7 @@ addCommandHandler("sethelper", function(player, cmd, targetId)
 						outputChatBox(color..getElementData(player, "user:adminnick").." #ffffffelvette "..color..getPlayerName(target).." #ffffffideiglenes adminsegédjét!", root, 255, 255, 255, true)
 					end
 				else 
-					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color.." Admint nem tudsz kinevezni ideiglenes adminsegéddé!", player, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color.." Não pode nomear uma admin principal como ajudante temporário!", player, 255, 255, 255, true)
 				end
 			end
 		end
@@ -696,19 +696,19 @@ addCommandHandler("setplayername", function(thePlayer, cmd, target, ...)
 	if target and ... then
 		local name = table.concat({...}, "_")
 		if name:len() > 22 then
-			outputChatBox("Túl hosszú név!", thePlayer)
+			outputChatBox("Nome demasiado longo!", thePlayer)
 		end
 		local target = core:getPlayerFromPartialName(thePlayer, target)
 		if target then
-			outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffmegváltoztatta a nevedet. ("..name:gsub("_", " ").."#ffffff)", target, 255, 255, 255, true)
-			sendMessageToAdmins(thePlayer, "megváltoztatta "..nameColor..getPlayerName(target):gsub("_", " ")..adminMessageColor.." játékos nevét. "..nameColor.."("..name:gsub("_", " ")..")")
+			outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffalterou seu nome. ("..name:gsub("_", " ").."#ffffff)", target, 255, 255, 255, true)
+			sendMessageToAdmins(thePlayer, "mudou o nome de "..nameColor..getPlayerName(target):gsub("_", " ")..adminMessageColor.." para "..nameColor..name:gsub("_", " ")..adminMessageColor..".")
 			setElementData(target, "char:name", name)
 			exports.oAccount:setPlayerCharactersNameTable(target, getElementData(target, "char:id"), name)
 			setPlayerName(target, name)
 			setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 		end
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Új név]", thePlayer, r, g, b, true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [novo nome]", thePlayer, r, g, b, true)
 	end
 end)
 
@@ -724,11 +724,11 @@ addCommandHandler("findchar", function(thePlayer, cmd, id)
 			if rows > 0 then
 				outputChatBox(core:getServerPrefix("server", "Admin", 3)..id.." karakter neve: "..result[1].charname, thePlayer, r, g, b, true)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Nem található karakter ilyen ID-vel.", thePlayer, 244, 40, 40, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Não há personagem com este ID.", thePlayer, 244, 40, 40, true)
 			end
 		end, exports.oMysql:getDBConnection(), "SELECT charname FROM characters WHERE id=?", id)
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Karakter ID]", thePlayer, r, g, b, true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [ID do personagem]", thePlayer, r, g, b, true)
 	end
 end)
 
@@ -743,11 +743,11 @@ addCommandHandler("findid", function(thePlayer, cmd, charname)
 			if rows > 0 then
 				outputChatBox(core:getServerPrefix("server", "Admin", 3)..charname.." karakter ID-je: "..result[1].id, thePlayer, r, g, b, true)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Nem található karakter ilyen névvel.", thePlayer, 244, 40, 40, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Não há personagem com este nome.", thePlayer, 244, 40, 40, true)
 			end
 		end, exports.oMysql:getDBConnection(), "SELECT id FROM characters WHERE charname=?", charname)
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Karakter név]", thePlayer, r, g, b, true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [nome do personagem]", thePlayer, r, g, b, true)
 	end
 end)
 
@@ -781,8 +781,8 @@ function kick(thePlayer, cmd, target, ...)
 
 				reason = table.concat({...}, " ")
 				if targetLevel <= kickerLevel then
-					outputChatBox(core:getServerPrefix("red-dark", "Kick", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffkickelte "..color..getPlayerName(target).."#ffffff játékost.",root,255,255,255,true)
-					outputChatBox(core:getServerPrefix("red-dark", "Kick", 3).."Indok: "..color..reason.."#ffffff.",root,255,255,255,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Kick", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffexpulsou "..color..getPlayerName(target).."#ffffff.",root,255,255,255,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Kick", 3).."Motivo: "..color..reason.."#ffffff.",root,255,255,255,true)
 
 					local datas = getElementData(target, "dashboard:banKickJailCount") or {0, 0, 0}
 					datas[2] = datas[2] + 1
@@ -801,7 +801,7 @@ function kick(thePlayer, cmd, target, ...)
 				end
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Indok]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [motivo]", thePlayer, r, g, b, true)
 		end
 	end
 end
@@ -827,10 +827,10 @@ addCommandHandler("freeze", function(player,cmd,target)
 
 			outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(player,"user:adminnick").." #fffffflefagyasztott!",target,255,255,255,true)
 
-			sendMessageToAdmins(player, "lefagyasztotta "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost. ")
+			sendMessageToAdmins(player, "congelou o jogador "..nameColor..getPlayerName(target)..adminMessageColor..". ")
 
 		else 
-			outputChatBox("[Használat]:#ffffff /"..cmd.." [Target]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [Target]",player,r,g,b,true)
 		end
 	end
 end)
@@ -854,10 +854,10 @@ addCommandHandler("unfreeze", function(player,cmd,target)
 
 			outputChatBox(core:getServerPrefix("server", "Admin", 1)..getElementData(player,"user:adminnick").." #ffffffkifagyasztott!",target,255,255,255,true)
 
-			sendMessageToAdmins(player, "kifagyasztotta "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost. ")
+			sendMessageToAdmins(player, "descongelou o jogador "..nameColor..getPlayerName(target)..adminMessageColor..". ")
 
 		else 
-			outputChatBox("[Használat]:#ffffff /"..cmd.." [Target]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [Target]",player,r,g,b,true)
 		end
 	end
 end)
@@ -873,7 +873,7 @@ addCommandHandler("recon", function(player,cmd,target)
 				
 				-- recon bug (látom a chatet mindenkinek akit ezelőtt néztem) elkerülése
 				if getElementData(player, "recon:reconedPlayer") then
-					outputChatBox(core:getServerPrefix("server", "Admin", 1).."Mielőtt mást reconolnál, kapcsold ki a recon funkciót!",player,255,255,255,true)
+					outputChatBox(core:getServerPrefix("server", "Admin", 1).."Antes de usar outro recon, desativa o recon atual.", player, 255, 255, 255, true)
 				return
 				end
 				
@@ -897,14 +897,14 @@ addCommandHandler("recon", function(player,cmd,target)
 					setElementInterior(player, getElementInterior(target))
 					setElementDimension(player, getElementDimension(target))
 
-					sendMessageToAdmins(player, "elkezdte reconolni "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost. ")
+					sendMessageToAdmins(player, "iniciou recon em "..nameColor..getPlayerName(target)..adminMessageColor..". ")
 				end
 
 			else 
 				if getElementData(player, "recon:reconedPlayer") then
 					reconEnd(player)
 				else
-					outputChatBox("[Használat]:#ffffff /"..cmd.." [Játékos ID]",player,r,g,b,true)
+					outputChatBox("[Uso]:#ffffff /"..cmd.." [ID do jogador]",player,r,g,b,true)
 				end
 			end
 		end
@@ -917,7 +917,7 @@ addEventHandler("onElementDataChange",root,function(key,old,new)  --ha reconolt 
 			local reconer = getElementData(source,"recon:reconerPlayer") or false
 			if reconer then 
 				reconEnd(reconer)
-				outputChatBox(core:getServerPrefix("red-dark", "Recon", 1).."A reconolt játékos lecsatlakozott így a recon megszakadt!",reconer,255,255,255,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Recon", 1).."O jogador observado desconectou — recon terminado.",reconer,255,255,255,true)
 			end
 		end
 	end
@@ -956,7 +956,7 @@ addCommandHandler("srecon", function(player,cmd,target)
 			if getElementData(player, "recon:reconedPlayer") then
 				reconEnd(player)
 			else
-				outputChatBox("[Használat]:#ffffff /"..cmd.." [Játékos ID]",player,r,g,b,true)
+				outputChatBox("[Uso]:#ffffff /"..cmd.." [ID do jogador]",player,r,g,b,true)
 			end
 		end
 	end
@@ -973,12 +973,12 @@ function slap(player,cmd,target)
 			if target then
 				local pos = Vector3(getElementPosition(target))
 				setElementPosition(target, pos.x, pos.y, pos.z+10)
-				sendMessageToAdmins(player, "felrepítette "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost. ")
+				sendMessageToAdmins(player, "levantou em voo o jogador "..nameColor..getPlayerName(target)..adminMessageColor..". ")
 
 				setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat] :#ffffff /"..cmd.." [Játékos ID]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [ID do jogador]",player,r,g,b,true)
 		end
 	end
 end
@@ -994,12 +994,12 @@ function setInt(player, cmd, target, intID)
 
 			if target then
 				setElementInterior(target, tonumber(intID))
-				sendMessageToAdmins(player, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost interiorját. "..nameColor.."("..intID..")")
+				sendMessageToAdmins(player, "alterou o interior de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..intID..")")
 
 				setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat] :#ffffff /"..cmd.." [Játékos ID] [Interior ID]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [ID do jogador] [ID interior]",player,r,g,b,true)
 		end
 	end
 end
@@ -1015,12 +1015,12 @@ function setDim(player, cmd, target, dimID)
 
 			if target then
 				setElementDimension(target, tonumber(dimID))
-				sendMessageToAdmins(player, "átállította "..nameColor..getPlayerName(target)..adminMessageColor.." nevű játékost dimenzióját. "..nameColor.."("..dimID..")")
+				sendMessageToAdmins(player, "alterou a dimensão de "..nameColor..getPlayerName(target)..adminMessageColor..". "..nameColor.."("..dimID..")")
 
 				setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat] :#ffffff /"..cmd.." [Játékos ID] [Dimenzió ID]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [ID do jogador] [ID dimensão]",player,r,g,b,true)
 		end
 	end
 end
@@ -1038,7 +1038,7 @@ function reconEnd(player, cmd)
 		setElementInterior(player, DimInt[2])
 	end
 
-	sendMessageToAdmins(player, "befejezte a megfigyelését "..nameColor..getPlayerName(getElementData(player, "recon:reconedPlayer"))..adminMessageColor.." nevű játékosnak. ")
+	sendMessageToAdmins(player, "terminou recon de "..nameColor..getPlayerName(getElementData(player, "recon:reconedPlayer"))..adminMessageColor..". ")
 
 	setElementData(getElementData(player, "recon:reconedPlayer"), "recon:reconerPlayer", false)
 	setElementData(player, "recon:reconedPlayer", false)
@@ -1114,7 +1114,7 @@ addCommandHandler("pm",
 				end
 			end
 		else 
-			outputChatBox("[Használat] :#ffffff /"..cmd.." [Admin ID] [Üzenet]",player,r,g,b,true)
+			outputChatBox("[Uso]:#ffffff /"..cmd.." [ID admin] [mensagem]",player,r,g,b,true)
 		end
 	end 
 )
@@ -1146,7 +1146,7 @@ function adminJail(player,cmd,target,time,...)
 				target = core:getPlayerFromPartialName(player, target)
 				if (getElementData(player, "user:admin") < getElementData(target, "user:admin")) or getElementData(player, "user:admin") == getElementData(target, "user:admin") then 
 					if exports.oAnticheat:checkPlayerVerifiedAdminStatus(target) then
-						outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3).."Nem tudod bebörtönözni a kiválasztott játékost",player,255,255,255,true)
+						outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3).."Não pode prender este jogador em admin jail.",player,255,255,255,true)
 						outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3)..color..getElementData(player,"user:adminnick").." be akart jail-ezni!",target,255,255,255,true)
 						return
 					end
@@ -1175,7 +1175,7 @@ function adminJail(player,cmd,target,time,...)
 
 					--triggerClientEvent(resourceRoot, "setPlayerAdminJail.Client",target,getElementData(player,"user:adminnick"),reason,time)
 
-					outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3)..color..getElementData(player,"user:adminnick").." #ffffffbebörtönözte "..color..getPlayerName(target):gsub("_", " ").."#ffffff játékost.",root,255,255,255,true)
+					outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3)..color..getElementData(player,"user:adminnick").." #ffffffprendeu em admin jail "..color..getPlayerName(target):gsub("_", " ").."#ffffff.",root,255,255,255,true)
 					outputChatBox(core:getServerPrefix("red-dark", "AdminJail", 3).."Indok: "..color..reason.." #ffffff| Idő: "..color..time.."#ffffff perc.",root,255,255,255,true)
 
 					setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
@@ -1189,13 +1189,13 @@ function adminJail(player,cmd,target,time,...)
 
 					setElementData(player, "user:adminDatas", playerStats)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."A játékos már adminjailben van!",player,255,255,255,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."O jogador já está em admin jail!",player,255,255,255,true)
 				end
 			else
 				outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."A percet számformátumban kell megadnod!",player,255,255,255,true)
 			end
 		else 
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos ID] [Idő (Perc)] [Indok]",player,r,g,b,true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [Játékos ID] [Idő (Perc)] [Indok]",player,r,g,b,true)
 		end
 	end
 end
@@ -1231,7 +1231,7 @@ function adminUnJail(player,cmd,target)
 				outputChatBox(color.."Ez a játékos nincs adminjailben!",player,255,255,255,true)
 			end
 		else 
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos ID]",player,r,g,b,true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [Játékos ID]",player,r,g,b,true)
 		end
 	end
 end
@@ -1680,7 +1680,7 @@ addCommandHandler("fixbones", function(thePlayer, cmd, target)
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador]", thePlayer, r, g, b, true)
 		end
 	end
 end)
@@ -1764,7 +1764,7 @@ addCommandHandler("setvehoil", function(thePlayer, cmd, target,oil)
 				outputChatBox(core:getServerPrefix("red-dark", "Admin", 2).."Adj meg olajszintet!", thePlayer, 255, 255, 255, true)
 			end 
 		else
-			outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Olajszint (Maximum 15000)]", thePlayer, r, g, b, true)
+			outputChatBox("[Uso]: #ffffff/"..cmd.." [nome/ID do jogador] [Olajszint (Maximum 15000)]", thePlayer, r, g, b, true)
 		end
 	end
 end)

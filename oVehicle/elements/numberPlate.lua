@@ -101,10 +101,10 @@ function toggleNumberplates()
 
         if isNumberplatesShowing then 
             startNumberplateRender()
-            outputChatBox(core:getServerPrefix("server", "Rendszám", 2).."A rendszámok megjelenítése bekapcsolva!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Placa", 2).."Exibição de placas ativada.", 255, 255, 255, true)
         else
             stopNumberplateRender()
-            outputChatBox(core:getServerPrefix("server", "Rendszám", 2).."A rendszámok megjelenítése kikapcsolva!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Placa", 2).."Exibição de placas desativada.", 255, 255, 255, true)
         end
     end
 end

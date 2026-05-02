@@ -402,7 +402,7 @@ end
 
 function saveRequest()
     saveAllVehicle()
-	outputDebugString("[oServerStop]: oVehicle sikeres mentés.",3);
+	outputDebugString("[oServerStop]: oVehicle — salvamento concluído.",3);
 end 
 
 function loadOneVehicle(v)
@@ -577,7 +577,7 @@ function loadAllVehicle()
                 loadCount = loadCount + 1
                 loadOneVehicle(v) 
             end, function()
-                outputDebugString("[Vehicle] Sikeresen betöltöttem az összes frakció járművet! (".. loadCount .." db)")
+                outputDebugString("[Veículos] Todos os veículos de facção carregados. (".. loadCount ..")")
             end)
         end
     end, conn, "SELECT * FROM vehicles WHERE isFactionVehicle = 1")
@@ -591,7 +591,7 @@ function loadAllVehicle()
                 loadCount = loadCount + 1
                 loadOneVehicle(v) 
             end, function()
-                outputDebugString("[Vehicle] Sikeresen betöltöttem az összes protectes járművet! (".. loadCount .." db)")
+                outputDebugString("[Veículos] Todos os veículos protegidos carregados. (".. loadCount ..")")
             end)
         end
     end, conn, "SELECT * FROM vehicles WHERE isFactionVehicle = 0 AND isProtected = 1")
@@ -612,7 +612,7 @@ function loadAllVehicle()
                     existingVehicleModels[v["model"]] = existingVehicleModels[v["model"]] + 1
                     triggerClientEvent(root,"syncLimits",root, existingVehicleModels)
                 end, function()
-                    outputDebugString("[Vehicle] Sikeresen betöltöttem az összes jármű limitét! (".. loadCount .." db)")
+                    outputDebugString("[Veículos] Limites por modelo sincronizados. (".. loadCount .." registros)")
                 end)
             end
         end, conn, "SELECT * FROM vehicles WHERE isFactionVehicle = 0")
@@ -846,7 +846,7 @@ addEventHandler("onVehicleDamage", root, function(dmg)
 
         local driver = getVehicleOccupant(source)
         if not getElementData(source, "veh:broke") and driver then
-            infobox:outputInfoBox("Lerobbant a járműved!", "warning", driver)
+            infobox:outputInfoBox("Seu veículo avariou!", "warning", driver)
             setElementData(source, "veh:broke", true)
         end
     end
@@ -864,10 +864,10 @@ end)
 
 addEventHandler("onVehicleStartExit", root, function(player)
     if getElementData(source,"veh:locked") then
-        infobox:outputInfoBox("Nem tudsz kiszállni, ameddig az ajtók zárva vannak!", "warning", player)
+        infobox:outputInfoBox("Não pode sair enquanto as portas estiverem trancadas!", "warning", player)
         cancelEvent()
     elseif getElementData(player, "vehicle:seatbeltState") then
-        infobox:outputInfoBox("Nem tudsz kiszállni, ameddig a biztonsági öved be van kötve! [F5]", "warning", player)
+        infobox:outputInfoBox("Não pode sair com o cinto de segurança afivelado! [F5]", "warning", player)
         cancelEvent()
     end
 end)
