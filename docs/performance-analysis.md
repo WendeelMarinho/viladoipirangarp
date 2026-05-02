@@ -99,3 +99,9 @@ Macro:
 ## Relacionamento
 
 Para dependências cargas paralelas revisar também [architecture-overview.md](architecture-overview.md) & [database-architecture.md](database-architecture.md).
+
+## Boot & fan-in risk (automatic)
+
+O relatório **[generated/architecture-risk-report.md](generated/architecture-risk-report.md)** (JSON: [architecture-risk-report.json](generated/architecture-risk-report.json)) quantifica **boot dependencies** através de `direct_dependents_in_starter` e `transitive_dependents_in_starter` sobre o grafo (exports ∪ refs ∪ `<include>`) e destaca **high fan-in resources** (cauda ~5 %). Use o `cascade_score` e o `executive_summary.prioritized_large_cycles` para ordenar mitigações antes de optimizar shaders ou consultas DB.
+
+Na **v3.1 do analyzer**, use **`coupling_analysis`** (instabilidade C<sub>e</sub>/(C<sub>a</sub>+C<sub>e</sub>) e zonas Stable/Balanced/Volatile/Rigid/Painful) em conjunto com **`risk_heatmap`** e **`architectural_smells`** tipo *Startup Bottleneck* quando optimizar §1 §4. **`regression_analysis`** destaca aumentos materiais de **cascata** ou **instabilidade** vs snapshot anterior (`executive_scorecard` sintetiza saúde + pressão técnica). Snapshots **`generated/history/`** continuam suportados; **baseline** JSON **analyzer &lt; 3.1.0** não dispara regressão de blast por recurso para evitar ruído.

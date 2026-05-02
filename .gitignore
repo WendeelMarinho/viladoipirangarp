@@ -5,6 +5,15 @@
 # Opcional: cache local do Cursor (descomente se NÃO quiser versionar regras/contexto)
 # .cursor/
 
+# --- Python ---
+**/__pycache__/
+*.py[cod]
+
+# --- Analyzer: artefactos regeneráveis (opcional; não versionar por defeito) ---
+docs/generated/architecture-risk-report.json
+docs/generated/architecture-risk-report.md
+docs/generated/history/
+
 # --- Artefatos locais / temporários ---
 *.log
 .DS_Store

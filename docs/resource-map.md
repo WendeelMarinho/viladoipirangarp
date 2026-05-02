@@ -60,6 +60,20 @@ python3 docs/tooling/resource_dependency_scan.py --write
 
 **Notas:** heuristic de eventos inter-recurso igual strings de nome; grafo truncado nos JSON se >8000 aristas únicas `(emitter, listener, event)` — ver campo `event_inter_resource_heuristic_deduped_total`.
 
+### Architectural Risk Analyzer
+
+| Artefacto | Conteúdo |
+|-----------|----------|
+| [generated/architecture-risk-report.json](generated/architecture-risk-report.json) | **v3.1** — compatível v2/v3.0; cada `resource_metrics` inclui **`afferent_coupling`**, **`efferent_coupling`**, **`instability`**, **`coupling_zone`**, **`cascade_score`** (+ chaves anteriores intactas). Raiz JSON: `coupling_analysis` (top instáveis/rígidos/acoplados), `regression_analysis`, `executive_scorecard` para além dos blocos v3.0 |
+| [generated/history/](generated/history/) | Histórico de execuções: `architecture-risk-YYYYMMDD-HHMMSS.json` (snapshot JSON completo; retenção dos **50** mais recentes) |
+| [generated/architecture-risk-report.md](generated/architecture-risk-report.md) | Secções v2 + após **Risk Trend Analysis**: **Coupling Analysis**, **Architectural Regression Detection**, **Executive Scorecard**, depois smells, ownership, heatmap e roadmap (+ baseline histórico) |
+| [tooling/architecture_risk_analyzer.py](tooling/architecture_risk_analyzer.py) | Stdlib only; entrada obrigatória válida ou **exit≠0**; escrita **atómica** (relatório + histórico); flags `--write` `--input` `--json-output` `--md-output`; **v3.1.0** |
+
+```bash
+python3 docs/tooling/resource_dependency_scan.py --write
+python3 docs/tooling/architecture_risk_analyzer.py --write
+```
+
 ## Regenerar estatísticas de export
 
 ```bash

@@ -99,3 +99,5 @@ Resultados tratados como *triage*, não prova matemática.
 
 - Incident response playbook: [deployment-guide.md](deployment-guide.md) § Incidentes
 - Performance stress surfaces: [performance-analysis.md](performance-analysis.md)
+- **Blast radius, acoplamento e regressão (v3.1):** em **incident response**, ler [architecture-risk-report.md](generated/architecture-risk-report.md) § **Coupling Analysis** / **`coupling_analysis`**, **`regression_analysis`** (novos SPOFs, ciclos densos prioritários, saltos **&gt;20 %** cascata onde baseline ≥ v3.1, Δ **instabilidade &gt;0,15**), `blast_radius.*cascade_score`, **`hidden_dependencies`**, **`architectural_smells`** (*Hidden Dependency Hub*), **`risk_heatmap`** e **`executive_scorecard`**; o backlog `remediation_backlog` mantém âncoras P0/P1.
+- **Comparativo histórico:** até **50** snapshots em **`generated/history/`**; `historical_baseline` + **`trend_analysis`** + regressão automática quando existe baseline comparável (`blast_cascade_comparison_enabled` quando o snapshot anterior tem `analyzer_version` ≥ **3.1.0**).

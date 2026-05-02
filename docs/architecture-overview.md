@@ -81,6 +81,7 @@ oMysql (DB up) → oCore (whitelist/IDs/globals) → oAccount (+ peças de UI pa
 | [resumo-tecnico-servidor.md](resumo-tecnico-servidor.md) | Ciclo vida processo / rede / starters |
 | [resource-map.md](resource-map.md) | Ordem starter, contagens export, automatização dossiers |
 | **[generated/resource-dependency-graph.json](generated/resource-dependency-graph.json)** | **Deps reais inferidas**: consumo `exports.*`, `call(getResourceFromName,…)`, `getResourceFromName`, eventos, cruzamento com `oStarter` |
+| **[generated/architecture-risk-report.json](generated/architecture-risk-report.json)** · [**architecture-risk-report.md**](generated/architecture-risk-report.md) | **Risk intel v3.1** — governança encerrada nesta fase: além de snapshots + tendência + heatmap + smells + ownership + roadmap: **acoplamento aferente/eferente** (`resource_metrics` + `coupling_analysis`), **detector de regressão** (`regression_analysis` vs snapshot anterior; cascata por recurso apenas com baseline **analyzer ≥ 3.1.0**) e **scorecard executivo** (`executive_scorecard`). Fluxo: `resource_dependency_scan.py --write` → `architecture_risk_analyzer.py --write`. |
 | **[generated/resource-dependency-report.md](generated/resource-dependency-report.md)** | Versão Markdown legível para gestão técnica (pares `exports` mútuos, fan‑in/out) |
 | [event-flow.md](event-flow.md) | Padrões evento/sync |
 | [database-architecture.md](database-architecture.md) | Tabelas schema |
