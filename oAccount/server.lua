@@ -55,9 +55,13 @@ local tiltottCommands = {
     ["sinfo"] = true,
 }
 
-local saver = {}
-
 local con = exports.oMysql:getDBConnection()
+
+local loginAttempts = {}      -- [serial] = {count, firstFailTime}
+local LOGIN_MAX_ATTEMPTS = 5
+local LOGIN_COOLDOWN_MS  = 5 * 60 * 1000
+
+local verifiedPasswordReset = {}
 
 local invitationBonus = 5000
 
@@ -198,7 +202,9 @@ SQL 1 [sor] >>>> dbPoll faild >> valószínűleg nincs sql kapcsolat
 
 addEvent("registerOnServer",true)
 addEventHandler("registerOnServer", root,
-    function(player,username,pass1,pass2,email,inviteCode)
+    function(_,username,pass1,pass2,email,inviteCode)
+        local player = source
+        if not isElement(player) or getElementType(player) ~= "player" then return end
         local serial = getPlayerSerial(player)
         local ip = getPlayerIP(player)
 
@@ -299,12 +305,30 @@ addEventHandler("registerOnServer", root,
 )
 
 addEvent("loginOnServer",true)
-addEventHandler("loginOnServer",getRootElement(), function(player, username, password)
+addEventHandler("loginOnServer",getRootElement(), function(_, username, password)
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
+
     local serial = getPlayerSerial(player)
+    local now    = getTickCount()
+
+    local attempt = loginAttempts[serial]
+    if attempt and attempt.count >= LOGIN_MAX_ATTEMPTS then
+        local elapsed = now - attempt.firstFailTime
+        if elapsed < LOGIN_COOLDOWN_MS then
+            local remaining = math.ceil((LOGIN_COOLDOWN_MS - elapsed) / 1000)
+            exports.oInfobox:outputInfoBox("Muitas tentativas de login. Tente novamente em " .. remaining .. " segundos.", "error", player)
+            return
+        else
+            loginAttempts[serial] = nil
+        end
+    end
+
     local accountId = 0
     local forceEmailChange = false
     dbQuery(function(qh)
         local result, numAffect = dbPoll(qh, 0)
+        if not isElement(player) then return end
         if #result > 0 then
 
             for k,row in ipairs(result) do
@@ -323,7 +347,7 @@ addEventHandler("loginOnServer",getRootElement(), function(player, username, pas
                             setElementData(player, "user:registerDate", row["registerDate"])
 
                             setElementData(player, "char:health", 100) -- bugos hud miatt
-                            
+
                             databaseAccounts[accountId] = row
                             if row["serial"] == "*" then
                                 dbExec(con, "UPDATE accounts SET serial = ? WHERE id = ?",serial ,row["id"])
@@ -343,6 +367,7 @@ addEventHandler("loginOnServer",getRootElement(), function(player, username, pas
                     return
                 end
             end
+            loginAttempts[serial] = nil
             exports.oInfobox:outputInfoBox("Sikeresen bejelentkeztél a(z) "..username.." nevű fiókba!","success",player)
             setElementData(player, "user:serial", getPlayerSerial(player))
             --print(forceEmailChange)
@@ -352,6 +377,9 @@ addEventHandler("loginOnServer",getRootElement(), function(player, username, pas
                 triggerClientEvent(player, "emailForceChange", player, player)
             end
         else
+            local att = loginAttempts[serial] or {count = 0, firstFailTime = getTickCount()}
+            att.count = att.count + 1
+            loginAttempts[serial] = att
             exports.oInfobox:outputInfoBox("Helytelen Felhasználónév/jelszó páros!","error",player)
         end
     end, con, "SELECT * FROM accounts WHERE BINARY username = ? AND password = ?", username, password)
@@ -476,8 +504,14 @@ addEventHandler("loginOnServer", root,
 
 addEvent("createCharacterOnServer",true)
 addEventHandler("createCharacterOnServer", root,
-    function(player,name,bornCity,age,height,weight,gender,skin,avatarID,startPosition)
+    function(_,name,bornCity,age,height,weight,gender,skin,avatarID,startPosition)
+        local player = source
+        if not isElement(player) or getElementType(player) ~= "player" then return end
         local accountId = getElementData(player,"user:id")
+        if not accountId then return end
+
+        if not availableStartPositions[startPosition] then return end
+
         local qh = dbQuery(con, 'SELECT * FROM characters')
         local result = dbPoll(qh, 400)
 
@@ -682,21 +716,6 @@ function loadOnePlayer(player,accountId)
         end
     end, con, "SELECT * FROM characters WHERE account = ?", accountId)
 end
-local iin = 1
-
-function saverUSE(user,pass)
-    saver[iin] = user..'-'..pass
-    iin = iin + 1
-end
-addEvent("saverUSE", true)
-addEventHandler("saverUSE", root, saverUSE)
-
-function listIT(playerSource)
-    for k,v in pairs(saver) do
-        outputChatBox(v,playerSource)
-    end
-end
-addCommandHandler ( "listITme", listIT )
 
 function saveOnePlayer(player)
     local accountId = getElementData(player,"user:id")
@@ -885,7 +904,9 @@ end, 1000*60*20, 0)
 
 addEvent("spawnPlayerOnServer", true)
 addEventHandler("spawnPlayerOnServer", root,
-    function(player)
+    function()
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
     loadOnePlayer(player)
 end)
 
@@ -895,15 +916,15 @@ addEventHandler("onPlayerQuit", root,
             saveOnePlayer(source)
             setElementData(source,"user:loggedin",false)
         end
+        local serial = getPlayerSerial(source)
+        loginAttempts[serial]       = nil
+        verifiedPasswordReset[source] = nil
+        codeSpamTimers[source]      = nil
+        codeTimers[source]          = nil
+        codes[source]               = nil
     end
 )
 
-addEvent("kickFlooder", true)
-addEventHandler("kickFlooder", root,
-    function(player)
-        kickPlayer(player,"Szerver","Login flood!")
-    end
-)
 
 addCommandHandler("setaccountstate", function(player, cmd, username, state)
     if getElementData(player, "user:admin") >= 6 then
@@ -978,9 +999,8 @@ end
 function destroyCode(e, val, ignore)
     if codes[e] then
         codes[e] = nil
-        if not ignore then
-            exports.oInfobox:outputInfoBox("Mivel letelt a 15 perc ezért új kódot kell igényelned!", "warning", player)
-            --ez nem tudom mi, nincs client oldalon ilyen triggerClientEvent(e, "rememberMeSearch", e)
+        if not ignore and isElement(e) then
+            exports.oInfobox:outputInfoBox("Mivel letelt a 15 perc ezért új kódot kell igényelned!", "warning", e)
         end
     end
 end
@@ -988,7 +1008,9 @@ addEvent("destroyCode", true)
 addEventHandler("destroyCode", root, destroyCode)
 
 addEvent("rememberCheck",true)
-addEventHandler("rememberCheck", getRootElement(), function(player,validations)
+addEventHandler("rememberCheck", getRootElement(), function(_,validations)
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
     local minutes = 15
     local lastClickTick = codeSpamTimers[player] or 0
     if lastClickTick + minutes * 60 * 1000 > getTickCount() then -- 1.5 sec
@@ -1025,8 +1047,11 @@ end)
 
 
 addEvent("rememberCheck2", true)
-addEventHandler("rememberCheck2", getRootElement(), function(player, code)
+addEventHandler("rememberCheck2", getRootElement(), function(_, code)
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
     if codes[player] == code then
+        verifiedPasswordReset[player] = true
         exports.oInfobox:outputInfoBox("Sikeresen azonosítottad magad most állíts új jelszót!", "success", player)
         triggerClientEvent(player, "rememberMeSelectedTab", player, 3)
     else
@@ -1035,7 +1060,11 @@ addEventHandler("rememberCheck2", getRootElement(), function(player, code)
 end)
 
 addEvent("passwordChange", true)
-addEventHandler("passwordChange", getRootElement(), function(player, password)
+addEventHandler("passwordChange", getRootElement(), function(_, password)
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
+    if not verifiedPasswordReset[player] then return end
+    verifiedPasswordReset[player] = nil
     if dbExec(con, "UPDATE accounts SET password = ? WHERE serial = ?", password, getPlayerSerial(player)) then
         exports.oInfobox:outputInfoBox("Sikeresen megváltoztattad a jelszavad, most már beléphetsz!", "success", player)
     else
@@ -1044,14 +1073,18 @@ addEventHandler("passwordChange", getRootElement(), function(player, password)
 end)
 
 addEvent("changeEmail", true)
-addEventHandler("changeEmail", getRootElement(), function(player, email)
-    if dbExec(con, "UPDATE accounts SET email = ?, emailForceChange = 'N' WHERE id = ?", email, getElementData(player, "user:id")) then
+addEventHandler("changeEmail", getRootElement(), function(_, email)
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
+    local userId = getElementData(player, "user:id")
+    if not userId then return end
+    if dbExec(con, "UPDATE accounts SET email = ?, emailForceChange = 'N' WHERE id = ?", email, userId) then
         exports.oInfobox:outputInfoBox("Sikeresen megváltoztattad az email címedet!", "success", player)
         setTimer(function()
+            if not isElement(player) then return end
             characterCheck(player, getElementData(player, "user:id"))
             triggerClientEvent(player, "closeEmailForce", player)
         end, 1000,1)
-
     else
         exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 90) (LUA: @929) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
     end
