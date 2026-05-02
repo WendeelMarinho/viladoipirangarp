@@ -2,27 +2,6 @@ local whitelistEnabled = true
 local playerIDs = {}
 local pendingSerials = {}
 
-local whitelistSerials = {
-	["52E602241DC69E45929DF7CA9DCDDE54"] = true, --carlos
-	["E2582905A1146DE0D09B6C6C406772B2"] = true, --aron
-	["A106718E8295717F198A146B8EC62DB3"] = true, --carlos laptop
-
-	["CEA522BAC3269175C7A200BBD3EA04F0"] = true, --costa
-	["FCF1E89E7894C8C58287D9B121B978B2"] = true, --kondor
-	["3C4EDBBC959CD9DBFF7E4E35F46B94B2"] = true, --paul
-	["10D1C517DCD4E19401F635E6DB9D93F4"] = true, --paul laptop
-
-	["659E685D624B685B93585B2EE40820A2"] = true, -- patrik
-
-	["FADD74F89263F9BEE73931EDAFB178A1"] = true, -- daniel
-	["A51AEA488C429FDF52385CC085F80134"] = true, -- keichii
-
-
-
-	-- TESZTEREK + ADMINOK
-
-}
-
 local blacklistSerials = {
 	["4ED87BD186DED0CF1A7BEFBDF56E48A2"] = true, --Ted
 	["AAC7994A6E7E92FC9BD08397FD0BFDB2"] = true, --Ted haverja
@@ -53,7 +32,8 @@ addEventHandler("onPlayerConnect", getRootElement(), function(playerName, _, _, 
 	end
 
 	if not whitelistEnabled then return end
-	if not whitelistSerials[playerSerial] then
+	local ok, isDev = pcall(function() return exports.oAdmin:isSerialDeveloper(playerSerial) end)
+	if not (ok and isDev) then
 		cancelEvent(true, "Jelenleg fejlesztés alatt...")
 
 		for k, v in ipairs(getElementsByType("player")) do 
@@ -171,8 +151,9 @@ end)
 addCommandHandler("acceptserial", function(thePlayer, cmd, id)
 	if exports.oAdmin:isPlayerDeveloper(thePlayer) then
 		if tonumber(id) then
-			if pendingSerials[tonumber(id)] then
-				whitelistSerials[(pendingSerials[tonumber(id)][2])] = true
+			local entry = pendingSerials[tonumber(id)]
+			if entry then
+				exports.oAdmin:addWhitelistedSerial(entry[2], entry[1])
 				table.remove(pendingSerials, tonumber(id))
 				outputChatBox("Serial hozzáadva a whitelisthez!", thePlayer, 255, 255, 255)
 			else

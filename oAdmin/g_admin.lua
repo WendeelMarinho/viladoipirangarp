@@ -39,6 +39,10 @@ function isPlayerDeveloper(player)
 	return adminSerialsCache[getPlayerSerial(player)] ~= nil
 end
 
+function isSerialDeveloper(serial)
+	return adminSerialsCache[serial] ~= nil
+end
+
 function getAdminPrefix(rankNum)
 	return adminPrefixs[rankNum]
 end

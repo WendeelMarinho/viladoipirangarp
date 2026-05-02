@@ -1774,3 +1774,13 @@ addCommandHandler("reloadadminserials", function(player, cmd)
 		outputChatBox("[Admin]: Seriais de administrador recarregados do banco de dados.", player, r, g, b, true)
 	end
 end)
+
+function addWhitelistedSerial(serial, name)
+	if not serial or serial == "" then return false end
+	if not name or name == "" then name = "player" end
+	if adminSerialsCache[serial] then return true end
+	adminSerialsCache[serial] = name
+	dbExec(conn, "INSERT INTO adminserials (serial, name) VALUES (?, ?)", serial, name)
+	syncAdminACLGroup()
+	return true
+end

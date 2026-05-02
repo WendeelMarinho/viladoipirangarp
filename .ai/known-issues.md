@@ -12,10 +12,11 @@ updated: 2026-05-01
 - Solução requerida: migração de schema + hash de todas as senhas existentes
 - Estado: pendente de planejamento detalhado
 
-## ABERTO — Whitelist hardcoded no oCore
-- `[Core]/oCore/server.lua` linhas 5–24 contém seriais de developers
-- Migrar para `adminserials` após oAdmin migration ser validada
-- Branch futuro: `security/oCore-whitelist-migration`
+## RESOLVIDO — Whitelist hardcoded no oCore
+- Data resolução: 2026-05-01
+- Branch: security/oCore-whitelist-migration
+- `[Core]/oCore/server.lua`: whitelistSerials removido, substituído por exports.oAdmin:isSerialDeveloper()
+- /acceptserial agora persiste via exports.oAdmin:addWhitelistedSerial() no banco
 
 ## ABERTO — Element data como modelo de sessão (TD-ARCH-002)
 - Estado crítico (loggedin, admin level, char id) em element data

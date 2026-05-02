@@ -57,7 +57,8 @@
 ### Riscos Residuais
 
 - Senhas ainda armazenadas sem hashing adequado no banco (TD-SEC-006) — requer migração planejada
-- Admin serials ainda hardcoded no `oAdmin` (TD-SEC-003) — próxima sprint
+- Admin serials hardcoded no oAdmin (TD-SEC-003) — **RESOLVIDO em 2026-05-01**
+- oCore whitelist hardcoded — **RESOLVIDO em 2026-05-01**
 - Element data como modelo de sessão (TD-ARCH-002) — longo prazo
 
 ### Compatibilidade
@@ -66,3 +67,51 @@
 - Todos os eventos preservados com nomes idênticos
 - Schema do banco de dados inalterado
 - Fluxo de login/registro/character create funcionalmente idêntico
+
+---
+
+## 2026-05-01 — oAdmin Serial Migration
+
+**Branch:** `security/oAdmin-serial-migration`  
+**Arquivos:** `oAdmin/g_admin.lua`, `oAdmin/g_commands.lua`, `oAdmin/s_admin.lua`
+
+### Vulnerabilidades Corrigidas
+
+#### [CRÍTICA] Seriais hardcoded removidos do oAdmin
+- **Problema:** `adminSerials` continha 7 seriais de developers em texto claro no código. `highLevelAdmins` continha os mesmos dados em formato diferente.
+- **Solução:** `adminSerialsCache = {}` global populado async do banco via `loadAdminSerialsFromDB()`. Tabela `adminserials` no banco é a fonte de verdade.
+- **Comportamento de falha:** Cache vazio = zero developers autorizados (fail-secure).
+
+#### [ALTA] Dual-path client/server para verificação de serial
+- `isPlayerDeveloper()` usa `aclLogin` element data no cliente, `adminSerialsCache` no servidor.
+- `getPlayerAdminLevel()` e `playerHasPermission()` seguem o mesmo padrão.
+
+#### Adicionado: `/reloadadminserials`
+- Comando que recarrega a tabela do banco sem restart. Requer `aclLogin=true`.
+
+### Compatibilidade
+- Todos os exports preservados: `isPlayerDeveloper`, `isPlayerInAdminDuty`, `getPlayerAdminLevel`, `hasPermission`, `getAdminPrefix`, `getAdminColor`
+- Schema do banco inalterado (`adminserials` já existia com 43 entradas)
+
+---
+
+## 2026-05-01 — oCore Whitelist Migration
+
+**Branch:** `security/oCore-whitelist-migration`  
+**Arquivos:** `[Core]/oCore/server.lua`, `oAdmin/g_admin.lua`, `oAdmin/s_admin.lua`, `oAdmin/meta.xml`
+
+### Vulnerabilidades Corrigidas
+
+#### [CRÍTICA] Whitelist hardcoded removida do oCore
+- **Problema:** `whitelistSerials` continha 10 seriais de developers no código.
+- **Solução:** `onPlayerConnect` chama `exports.oAdmin:isSerialDeveloper(playerSerial)` com `pcall` para fail-secure se oAdmin não estiver disponível.
+- `/acceptserial` agora persiste via `exports.oAdmin:addWhitelistedSerial()` — INSERT em `adminserials` + update do cache em runtime.
+
+### Novos exports (oAdmin)
+- `isSerialDeveloper(serial)` — type="server"
+- `addWhitelistedSerial(serial, name)` — type="server"
+
+### Compatibilidade
+- `blacklistSerials` mantido em oCore (2 entradas — banning temporário, escopo diferente)
+- Comandos `/pendingserials`, `/acceptserial`, `/togwhitelist` preservados
+- Export `setWhiteListEnable` preservado

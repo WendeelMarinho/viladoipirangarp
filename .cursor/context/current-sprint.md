@@ -25,16 +25,25 @@ updated: 2026-05-01
 - `developerJoin()` agora usa o cache
 - `/reloadadminserials` para reload em runtime sem restart
 
+### oCore — Whitelist Migration
+- Removida tabela `whitelistSerials` hardcoded (10 seriais)
+- `onPlayerConnect` agora usa `exports.oAdmin:isSerialDeveloper(playerSerial)` com pcall
+- `/acceptserial` agora persiste via `exports.oAdmin:addWhitelistedSerial()` no banco
+- Novos exports em oAdmin: `isSerialDeveloper` (server), `addWhitelistedSerial` (server)
+- blacklistSerials mantido (2 entradas, tratado como banning temporário)
+
 ## Próximas ações imediatas
 
-1. Popular tabela `adminserials` com seriais do Ipiranga RP
+1. Popular tabela `adminserials` com seriais dos admins do Ipiranga RP
 2. Testar login de developer em servidor de desenvolvimento
-3. Verificar `/reloadadminserials` em runtime
-4. Iniciar `security/oCore-whitelist-migration`
+3. Verificar `/reloadadminserials` e `/acceptserial` em runtime
+4. Planejamento: migração de hash de senhas (TD-SEC-006)
 
 ## Arquivos modificados nesta sprint
 
 - `oAccount/server.lua` — hardening completo
-- `oAdmin/g_admin.lua` — reescrito com adminSerialsCache
+- `oAdmin/g_admin.lua` — adminSerialsCache + isSerialDeveloper
 - `oAdmin/g_commands.lua` — hasPermission() com isDev() closure
-- `oAdmin/s_admin.lua` — loadAdminSerialsFromDB, syncAdminACLGroup, reloadadminserials
+- `oAdmin/s_admin.lua` — loadAdminSerialsFromDB, syncAdminACLGroup, addWhitelistedSerial, reloadadminserials
+- `oAdmin/meta.xml` — exports: isSerialDeveloper, addWhitelistedSerial
+- `[Core]/oCore/server.lua` — whitelist migrada para DB-driven

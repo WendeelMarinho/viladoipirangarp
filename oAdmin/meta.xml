@@ -22,6 +22,8 @@
     <export function="hasPermission" type="shared"></export>
     <export function="getAdminPrefix" type="shared"></export>
     <export function="getAdminColor" type="shared"></export>
+    <export function="isSerialDeveloper" type="server"></export>
+    <export function="addWhitelistedSerial" type="server"></export>
     <export function="addAdminCMD" type="client"></export>
     <export function="sendMessageToAdmins" type="server"></export>
 </meta>
