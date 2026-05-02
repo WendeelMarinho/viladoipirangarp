@@ -3,24 +3,24 @@ local logsDatabase
 
 addEventHandler("onResourceStart", getResourceRootElement(),
 	function ()
-		serverDatabase = dbConnect("mysql", "dbname=dbname;host=127.0.0.1;charset=utf8", "username", "pw", "multi_statements=1")
-		logsDatabase = dbConnect("mysql", "dbname=dbname;host=127.0.0.1;charset=utf8", "username", "pw", "multi_statements=1")
+		serverDatabase = dbConnect("mysql", "dbname=orp_main;host=127.0.0.1;charset=utf8", "ipirangaroleplay", "Singularity123@", "multi_statements=1")
+		logsDatabase = dbConnect("mysql", "dbname=orp_main;host=127.0.0.1;charset=utf8", "ipirangaroleplay", "Singularity123@", "multi_statements=1")
 		
 		if not serverDatabase then
 			outputServerLog("[MySQL]: Failed to connect the database.")
-			outputDebugString("[MySQL]: Sikertelen kapcsolódás az adatbázishoz!", 1)
+			outputDebugString("[MySQL]: Falha ao conectar ao banco de dados principal.", 1)
 			cancelEvent()
 		else
 			dbExec(serverDatabase, "SET NAMES utf8")
-			outputDebugString("[MySQL]: Sikeres kapcsolódás az adatbázishoz.")
+			outputDebugString("[MySQL]: Conexão com o banco principal OK.")
 		end
 
 		if not logsDatabase then
 			outputServerLog("[MySQL]: Failed to connect the LOGS database.")
-			outputDebugString("[MySQL]: Sikertelen kapcsolódás a LOG adatbázishoz!", 1)
+			outputDebugString("[MySQL]: Falha ao conectar ao banco de LOGS.", 1)
 		else
 			dbExec(logsDatabase, "SET NAMES utf8")
-			outputDebugString("[MySQL]: Sikeres kapcsolódás a LOG adatbázishoz.")
+			outputDebugString("[MySQL]: Conexão com o banco de LOGS OK.")
 		end
 	end
 )

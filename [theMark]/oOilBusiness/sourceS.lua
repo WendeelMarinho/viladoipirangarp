@@ -80,7 +80,7 @@ function startOilStation(stationID)
                         -- Ez csak akkor érvényesül ha fent van az adott játékos
                         triggerClientEvent(root, "createRepairMarker", root, stationID)
                     end
-                   outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Figyelem az egyik olaj pumpa leállt kérlek javítsd meg!", playerSource, 255, 255, 255, true)
+                   outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Figyelem az egyik olaj pumpa leállt kérlek javítsd meg!", playerSource, 255, 255, 255, true)
                     outputDebugString("Megállt")
                 end
             end, 12*60*60*1000, 0) -- 12*60*60*1000
@@ -178,11 +178,11 @@ addEventHandler("changeOilStationOwner",getRootElement(),function(playerElement,
     dbQuery(function(qh)
         local result, numAffect = dbPoll(qh, 0)
         if numAffect > 0 then 
-            -- outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Neked már van olaj teleped!",playerElement ,255, 255, 255, true)
+            -- outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Neked már van olaj teleped!",playerElement ,255, 255, 255, true)
         else 
             if dbExec(connection, "UPDATE oilbusiness SET ownerId = ?, rentOilStation = ?, name = ? WHERE dbId = ?", getElementData(playerElement, "char:id"), renewalTime,getPlayerName(playerElement) ,dbId) then 
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Sikeresen kibérelted az olaj telepet!",playerElement ,255, 255, 255, true)
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF 1 heted van meghosszabítani!",playerElement ,255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen kibérelted az olaj telepet!",playerElement ,255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF 1 heted van meghosszabítani!",playerElement ,255, 255, 255, true)
                 setElementData(playerElement, "char:money", getElementData(playerElement, "char:money")-3000)
                 local data = getElementData(getOilStationById(dbId), "oilMarker.datas")
                 data.owner = getElementData(playerElement, "char:id")
@@ -192,7 +192,7 @@ addEventHandler("changeOilStationOwner",getRootElement(),function(playerElement,
                 setElementData(getOilStationById(dbId), "oilMarker.datas", data)
                 startOilStation(dbId)
             else
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Hiba történt!",playerElement ,255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Hiba történt!",playerElement ,255, 255, 255, true)
             end
         end
     end, connection, "SELECT * FROM oilbusiness WHERE ownerId = ?", getElementData(playerElement, "char:id"))
@@ -217,12 +217,12 @@ function processRentedOilStation()
             if currentTime >= v.rentOilStation then 
                 outputChatBox("reset")
                 if isElement(playerSource) then
-                    outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Lejárt az olaj telep bérlésed!", playerSource, 255,255,255,true)
+                    outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Lejárt az olaj telep bérlésed!", playerSource, 255,255,255,true)
                 end
             elseif v.rentOilStation - dayTimeDuration <= currentTime then
                 if isElement(playerSource) then
                     local remaining = math.floor((v.rentOilStation - currentTime) % dayTimeDuration / 3600)                
-                    outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Hamarosan lejár az olaj teleped (még ".. remaining .." óra)", playerSource, 255,255,255,true)      
+                    outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Hamarosan lejár az olaj teleped (még ".. remaining .." óra)", playerSource, 255,255,255,true)      
                 end
             end
         end
@@ -235,7 +235,7 @@ addEventHandler("reapirPumpToServer", getRootElement(),function(playerElement, s
         oilDatas[stationID].errorMachine = 0
         oilDatas[stationID].wrongMachineId = 0
         dbExec(connection, "UPDATE oilbusiness SET wrongMachineId = 0, errorMachine = 0 WHERE dbId = ?", stationID)
-        outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Sikeresen megjavítottad a ".. wrongMachine .. " számú pumpát.", playerElement, 255, 255, 255, true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen megjavítottad a ".. wrongMachine .. " számú pumpát.", playerElement, 255, 255, 255, true)
         setElementData(getOilStationById(stationID), "oilMarker.datas", oilDatas[stationID])
     end
 end)
@@ -267,13 +267,13 @@ addCommandHandler("createoilstation", function(player, cmd, name)
             rentOilStation = 0
         }
         loadOilStation(newId)
-        outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Sikeresen létrehoztál egy olaj telepet (Név: ".. name .." | ID: ".. newId ..").", player, 255, 255, 255, true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen létrehoztál egy olaj telepet (Név: ".. name .." | ID: ".. newId ..").", player, 255, 255, 255, true)
     end,1000,1)
 end)
 
 addCommandHandler("deleteoilstation",function(player, cmd, id)
     if not id then 
-        outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Használat: /"..cmd .." [ID]", player, 255, 255, 255, true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Használat: /"..cmd .." [ID]", player, 255, 255, 255, true)
     else
         id = tonumber(id)
         if oilDatas[id] then 
@@ -289,9 +289,9 @@ addCommandHandler("deleteoilstation",function(player, cmd, id)
             end
             dbExec(connection, "DELETE FROM oilbusiness WHERE dbId = ?", id)
             oilDatas[id] = nil
-            outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Sikeresen törölted a(z) #".. id .. " id-vel rendelkező olaj telepet.", player, 255, 255, 255, true)
+            outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen törölted a(z) #".. id .. " id-vel rendelkező olaj telepet.", player, 255, 255, 255, true)
         else 
-            outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Ezzel az id-vel rendelkező olaj telep nem található!", player, 255, 255, 255, true) 
+            outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Ezzel az id-vel rendelkező olaj telep nem található!", player, 255, 255, 255, true) 
         end
     end
 end)
@@ -343,7 +343,7 @@ end)
 addCommandHandler("nearbyoilstation", function(player, cmd, lDist)
     if not lDist then lDist = 10 end
     local posX, posY, posZ = getElementPosition(player)
-    outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Olaj telepek a közeledben (".. lDist .." Yard)", player, 255, 255, 255, true) 
+    outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Olaj telepek a közeledben (".. lDist .." Yard)", player, 255, 255, 255, true) 
     local count = 0
     if lDist then 
         lDist = tonumber(lDist)
@@ -363,7 +363,7 @@ addCommandHandler("nearbyoilstation", function(player, cmd, lDist)
         end
     end
     if count == 0 then 
-        outputChatBox(hex .. "[OriginalRoleplay - OilStation]#FFFFFF Nem található ".. lDist .." Yard-on belül olaj telep", player, 255, 255, 255, true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP - OilStation]#FFFFFF Nem található ".. lDist .." Yard-on belül olaj telep", player, 255, 255, 255, true)
     end
 end)
 

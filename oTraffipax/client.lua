@@ -84,7 +84,7 @@ function checkAtlepes(limit, veh, difference, message)
             if seatbelts > 0 then
                 outputChatBox(" ", 255, 255, 255, true)
                 birsag = birsag + (50*seatbelts)
-                outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Mivel "..color..seatbelts.."#ffffffdb embernek nem volt bekötve a biztonsági öve, így "..color..(50*seatbelts).."$#ffffff további büntetést kaptál.", 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Multa por cinto: "..color..seatbelts.." #ffffff ocupante(s) sem cinto. "..color..(50*seatbelts).."$#ffffff adicional.", 255, 255, 255, true) 
                 --outputChatBox(" ", 255, 255, 255, true)
                 outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Bírság: ".. color .. birsag .. "$", 255, 255, 255, true)
             end
@@ -105,9 +105,9 @@ function checkAtlepes(limit, veh, difference, message)
 
 
         if message then
-            triggerServerEvent("factionScripts > cctv > sendMessage", resourceRoot, core:getServerPrefix("blue-light-2", "Traffipax", 2).."Gyorshajtás érzékelve.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Rendszám: "..color..getVehiclePlateText(veh).."#ffffff | Helyszín: "..color..getZoneName(getElementPosition(veh)).."#ffffff.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Átlépés mértéke: "..color..atlepes.."km/h#ffffff | Bírság: "..color..birsag.."$#ffffff.")
+            triggerServerEvent("factionScripts > cctv > sendMessage", resourceRoot, core:getServerPrefix("blue-light-2", "Traffipax", 2).."Excesso de velocidade detectado.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Placa: "..color..getVehiclePlateText(veh).."#ffffff | Local: "..color..getZoneName(getElementPosition(veh)).."#ffffff.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Excesso: "..color..atlepes.." km/h #ffffff | Multa: "..color..birsag.."$#ffffff.")
         else 
-            triggerServerEvent("factionScripts > cctv > sendMessage", resourceRoot, core:getServerPrefix("blue-light-2", "Traffipax", 2).."Gyorshajtás érzékelve. "..color.."(TRAFFIPAX)", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Rendszám: "..color..getVehiclePlateText(veh).."#ffffff | Helyszín: "..color..getZoneName(getElementPosition(veh)).."#ffffff.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Átlépés mértéke: "..color..atlepes.."km/h#ffffff | Bírság: "..color..birsag.."$#ffffff.")
+            triggerServerEvent("factionScripts > cctv > sendMessage", resourceRoot, core:getServerPrefix("blue-light-2", "Traffipax", 2).."Excesso de velocidade. "..color.."(radar)", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Placa: "..color..getVehiclePlateText(veh).."#ffffff | Local: "..color..getZoneName(getElementPosition(veh)).."#ffffff.", core:getServerPrefix("blue-light-2", "Traffipax", 2).."Excesso: "..color..atlepes.." km/h #ffffff | Multa: "..color..birsag.."$#ffffff.")
         end 
     else
         if not (getVehicleType(veh) == "Quad" or getVehicleType(veh) == "Bike" or getVehicleType(veh) == "BMX") then 
@@ -127,7 +127,7 @@ function checkAtlepes(limit, veh, difference, message)
 
                 playSound("traffipax.wav")
                 birsag = 50
-                outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Mivel "..color..seatbelts.."#ffffffdb embernek nem volt bekötve a biztonsági öve, így "..color..birsag.."$#ffffff büntetést kaptál.", 255, 255, 255, true) 
+                outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Cinto de segurança: "..color..seatbelts.." #ffffff ocupante(s) sem cinto. Multa "..color..birsag.."$#ffffff.", 255, 255, 255, true) 
             
                 triggerServerEvent("traffipax > moneyminus", resourceRoot, birsag)
             end

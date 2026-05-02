@@ -5,7 +5,7 @@ function OOC(cmd, ...)
 			if msg:len() > 75 then return end
 			triggerServerEvent("sendChatMessage", localPlayer,removeHex(msg), getNearestPlayers(localPlayer), 5)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end
@@ -17,7 +17,7 @@ addCommandHandler("me", function(cmd, ...)
 		if ... then
 			sendLocalMeAction(table.concat({...}, " "))
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Cselekvés]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ação]", 255, 255, 255, true)
 		end
 	end
 end, false, false)
@@ -27,7 +27,7 @@ addCommandHandler("do", function(cmd, ...)
 		if ... then
 			sendLocalDoAction(table.concat({...}, " "))
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Történés]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ambiente]", 255, 255, 255, true)
 		end
 	end
 end, false, false)
@@ -37,7 +37,7 @@ addCommandHandler("ame", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getNearestPlayers(localPlayer), 18)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Karakterleírás]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [descrição do personagem]", 255, 255, 255, true)
 		end
 	end
 end, false, false)
@@ -47,7 +47,7 @@ addCommandHandler("s", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getNearestPlayers(localPlayer, 30), 3)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end, false, false)
@@ -57,7 +57,7 @@ addCommandHandler("c", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getNearestPlayers(localPlayer, 10), 4)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end, false, false)
@@ -67,7 +67,7 @@ addCommandHandler("asay", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getRootElement(), 8)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end)
@@ -77,7 +77,7 @@ addCommandHandler("as", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getASORIDG(1), 9)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end)
@@ -87,20 +87,20 @@ addCommandHandler("a", function(cmd, ...)
 		if ... then
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getAdminPlayers(2), 10)
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end)
 
 function try(cmd, ...)
 	if not isSpam() and not isPedDead(localPlayer) then
-		if getElementData(localPlayer,"cuff:cuffed") then return outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Megbilincselve nem megpróbálozgatsz!", 255, 255, 255, true) end
+		if getElementData(localPlayer,"cuff:cuffed") then return outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Você está algemado e não pode usar /try!", 255, 255, 255, true) end
 
 		if ... then
 			local success = math.random(2)
 			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getNearestPlayers(localPlayer), math.random(12, 13))
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end
@@ -128,7 +128,7 @@ function megaphoneMessage(cmd, ...)
 				end
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Szöveg]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
 		end
 	end
 end

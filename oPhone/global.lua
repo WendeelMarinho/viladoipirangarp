@@ -12,12 +12,12 @@ phoneServices = {
 		logo = "sprint",
 		color = {"#ffdd05", 255, 221, 5},
 		packages = {
-			{name = "Kezdő", radius = 100, pricePerHour = 3, neededTime = 0},
-			{name = "Biznisz", radius = 750, pricePerHour = 75, neededTime = 15},
-			{name = "Kezdő", radius = 100, pricePerHour = 3, neededTime = 20},
-			{name = "Biznisz", radius = 750, pricePerHour = 75, neededTime = 30},
-			{name = "Kezdő", radius = 100, pricePerHour = 3, neededTime = 15},
-			{name = "Biznisz", radius = 750, pricePerHour = 75, neededTime = 15},
+			{name = "Básico", radius = 100, pricePerHour = 3, neededTime = 0},
+			{name = "Negócios", radius = 750, pricePerHour = 75, neededTime = 15},
+			{name = "Básico", radius = 100, pricePerHour = 3, neededTime = 20},
+			{name = "Negócios", radius = 750, pricePerHour = 75, neededTime = 30},
+			{name = "Básico", radius = 100, pricePerHour = 3, neededTime = 15},
+			{name = "Negócios", radius = 750, pricePerHour = 75, neededTime = 15},
 		},
 		towerPositons = Vector3(600.28576660156, -1459.1546630859, 80.15625),
 		ped = {name = "Lara Brown", pos = Vector3(606.58630371094, -1462.755859375, 14.44877243042), rot = 271, skin = 150},
@@ -28,8 +28,8 @@ phoneServices = {
 		logo = "att",
 		color = {"#00a8e5", 0, 168, 229},
 		packages = {
-			{name = "Kezdő", radius = 100, pricePerHour = 3, neededTime = 0},
-			{name = "Biznisz", radius = 750, pricePerHour = 75, neededTime = 15},
+			{name = "Básico", radius = 100, pricePerHour = 3, neededTime = 0},
+			{name = "Negócios", radius = 750, pricePerHour = 75, neededTime = 15},
 		},
 		towerPositons = Vector3(913.60369873047, -1023.0577392578, 111.0546875),
 		ped = {name = "Lara Brown", pos = Vector3(914.21942138672, -1004.6281738281, 37.979461669922), rot = 360, skin = 150},
@@ -40,9 +40,9 @@ phoneServices = {
 		logo = "verizon",
 		color = {"#ed2127", 237, 33, 39},
 		packages = {
-			{name = "Kezdő", radius = 100, pricePerHour = 3, neededTime = 0},
-			{name = "Városi", radius = 500, pricePerHour = 75, neededTime = 15},
-			{name = "Biznisz", radius = 750, pricePerHour = 75, neededTime = 61},
+			{name = "Básico", radius = 100, pricePerHour = 3, neededTime = 0},
+			{name = "Urbano", radius = 500, pricePerHour = 75, neededTime = 15},
+			{name = "Negócios", radius = 750, pricePerHour = 75, neededTime = 61},
 		},
 		towerPositons = Vector3(1566.7012939453, -1253.6917724609, 277.87973022461),
 		ped = {name = "Lara Brown", pos = Vector3(1565.2108154297, -1274.0858154297, 17.407676696777), rot = 180, skin = 150},
@@ -51,11 +51,11 @@ phoneServices = {
 
 
 options = {
-    {name = "Háttérkép", desc = "Háttérkép beállítása.", icon = "back.png", type = "menu"},
-	{name = "Csengőhang", desc = "Csengőhang beállítása.", icon = "ringstone.png", type = "menu"},
-	{name = "Értesítési hang", desc = "Értesítő hang beállítása.", icon = "ringstone.png", type = "menu"},
-	{name = "Biztonság", desc = "Biztonsági beállítások.", icon = "privacy.png", type = "menu"},
-    {name = "Dark Mode", desc = "Sötét mód használata.", icon = "darkmode.png", type = "on/off"},
+    {name = "Papel de parede", desc = "Alterar papel de parede.", icon = "back.png", type = "menu"},
+	{name = "Toque", desc = "Alterar som de chamada.", icon = "ringstone.png", type = "menu"},
+	{name = "Som de alerta", desc = "Alterar som de notificação.", icon = "ringstone.png", type = "menu"},
+	{name = "Segurança", desc = "Opções de segurança e privacidade.", icon = "privacy.png", type = "menu"},
+    {name = "Dark Mode", desc = "Ativa o modo escuro da interface.", icon = "darkmode.png", type = "on/off"},
 }
 
 uiColors = {
@@ -87,8 +87,8 @@ uiColors = {
 }
 
 appNames = {
-	[10] = "Hírdetések",
-	[11] = "Időjárás",
+	[10] = "Classificados",
+	[11] = "Tempo",
 	[12] = "Dark Web",
 --	[16] = "Taxi",
 }
@@ -107,9 +107,9 @@ defaultApps = {
 
 extraAppTypes = {
 	[11] = {
-		{"Kicsi", "dot"},
-		{"Közepes", "dot"},
-		{"Nagy", "dot"},
+		{"Pequeno", "dot"},
+		{"Médio", "dot"},
+		{"Grande", "dot"},
 	},
 
 --	[16] = {
@@ -262,9 +262,9 @@ altgrKeys = {
 }
 
 Menus911 = {
-	{"ORFK", 1, "pd"},
-	{"OMSZ", 19, "medic"},
-	{"Autószerviz", 3, "mechanic"},
+	{"Polícia — 190", 1, "pd"},
+	{"SAMU — 192", 19, "medic"},
+	{"Oficina / mecânica", 3, "mechanic"},
 }
 
 defaultContacts = { -- fordított sorrend
@@ -275,10 +275,10 @@ defaultContacts = { -- fordított sorrend
 customCalls = {
 	["bankrob"] = {
 		["beforeMission"] = {
-			"Csá, tesó!",
-			"Úgy hallom készültök valami nagyra...",
-			"Van valamim amire biztosan szükségetek lesz.",
-			"Találkozzunk. Elküldöm a koordinátákat.",
+			"Fala aí!",
+			"Tô ouvindo que vocês estão tramando algo grande...",
+			"Tenho algo que vai interessar pra vocês.",
+			"Vamos nos encontrar. Te mando as coordenadas.",
 		}
 	}
 }

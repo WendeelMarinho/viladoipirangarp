@@ -55,7 +55,7 @@ function renderWeaponCraft()
         alpha = interpolateBetween(alpha, 0, 0, 0, 0, 0, (getTickCount() - openTick) / 300, "Linear")
     end
 
-    core:drawWindow(sx*0.4, sy*0.25, sx*0.2, sy*0.5, "Gyár", alpha)
+    core:drawWindow(sx*0.4, sy*0.25, sx*0.2, sy*0.5, "Fabricação", alpha)
 
     local startY = sy*0.278
     for i = 1, 7 do 
@@ -76,14 +76,14 @@ function renderWeaponCraft()
 
             if v.faction then
                 if v.faction == 4 then 
-                    dxDrawText("Frakció: #f23333Banda", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
+                    dxDrawText("Facção: #f23333Gangue", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
                 elseif v.faction == 5 then 
-                    dxDrawText("Frakció: #f23333Maffia", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
+                    dxDrawText("Facção: #f23333Máfia", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
                 elseif type(v.faction) == "table" then 
-                    dxDrawText("Frakció: #f23333Banda, Maffia", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
+                    dxDrawText("Facção: #f23333Gangue, Máfia", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
                 end
             else
-                dxDrawText("Frakció: #33f27cNem szükséges", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
+                dxDrawText("Facção: #33f27cNão necessária", sx*0.4 + 12/myX*sx, startY, sx*0.2 - 26/myX*sx, sy*0.037, tocolor(255, 255, 255, 100 * alpha), 1, fonts:getFont("condensed", 8/myX*sx), "left", "bottom", false, false, false, true)
             end
 
             dxDrawText(v.count.."db", sx*0.4 + 8/myX*sx, startY, sx*0.2 - 36/myX*sx, sy*0.04, tocolor(r, g, b, 100 * alpha), 1, fonts:getFont("condensed", 10/myX*sx), "right", "center", false, false, false, true)
@@ -215,13 +215,13 @@ function keyCraftPanel(key, state)
             if core:isInSlot(sx*0.502, sy*0.68, sx*0.08, sy*0.05) then 
                 if craftAccepted == 5 then 
                     minigameTable = selectedObj
-                    chat:sendLocalMeAction("elkezdte a(z) "..inventory:getItemName(crafts[selectedCraft].item).." elkészítését.")
+                    chat:sendLocalMeAction("começa a fabricar "..inventory:getItemName(crafts[selectedCraft].item)..".")
                     triggerServerEvent("weaponCraft > startWeaponCraft", resourceRoot, crafts[selectedCraft].craftItems)
                     weaponInCraft, weaponInCraftCount, weaponInCraftNeedPercent = crafts[selectedCraft].item, crafts[selectedCraft].count, crafts[selectedCraft].needPercent
                     closePanel()
                     startCraftMinigame()
                 else
-                    infobox:outputInfoBox("Nincs elegendő alapanyagod vagy nem vagy tagja a szükséges frakciónak!", "error")
+                    infobox:outputInfoBox("Materiais insuficientes ou você não é da facção exigida!", "error")
                 end
             end
         elseif key == "backspace" then 
@@ -258,7 +258,7 @@ addEventHandler("onClientClick", root, function(key, state, _, _, _, _, _, eleme
                 if core:getDistance(element, localPlayer) < 1.5 then
                     if not minigameInProgress then
                         if isElement(getElementData(element, "craftTable:inUse")) then 
-                            outputChatBox(core:getServerPrefix("red-dark", "Gyár", 2).."Ez az asztal jelenleg használatban van!", 255, 255, 255, true)
+                            outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 2).."Esta bancada já está em uso!", 255, 255, 255, true)
                         else
                             openPanel() 
                             selectedObj = element
@@ -343,14 +343,14 @@ function endMinigame()
 
     local neededPercent = weaponInCraftNeedPercent
     if successPercent >= neededPercent then 
-        chat:sendLocalMeAction("elkészített egy "..inventory:getItemName(weaponInCraft).."-t.")
-        infobox:outputInfoBox("Sikeresen elkészítettél "..weaponInCraftCount.."db "..inventory:getItemName(weaponInCraft).."-t. ("..successPercent.."%)", "success")
-        outputChatBox(core:getServerPrefix("green-dark", "Gyár", 2).."Sikeresen elkészítettél "..color..weaponInCraftCount.."#ffffffdb "..color..successPercent.."%#ffffff-os "..color..inventory:getItemName(weaponInCraft).."#ffffff-t!", 255, 255, 255, true)
+        chat:sendLocalMeAction("termina de fabricar "..inventory:getItemName(weaponInCraft)..".")
+        infobox:outputInfoBox("Você fabricou "..weaponInCraftCount.."x "..inventory:getItemName(weaponInCraft).." ("..successPercent.."% qualidade)", "success")
+        outputChatBox(core:getServerPrefix("green-dark", "Fabricação", 2).."Produção: "..color..weaponInCraftCount.." #ffffffunidades | "..color..successPercent.."% — "..color..inventory:getItemName(weaponInCraft).."#ffffff.", 255, 255, 255, true)
         triggerServerEvent("weaponCraft > endWeaponCraft", resourceRoot, true, {weaponInCraft, successPercent, weaponInCraftCount})
     else
-        chat:sendLocalDoAction("elrontotta a gyárátsi folyamatot.")
-        outputChatBox(core:getServerPrefix("red-dark", "Gyár", 2).."Nem sikerült teljesítened a minigamet! Elbuktad az alapanyagokat!", 255, 255, 255, true)
-        infobox:outputInfoBox("Sajnos nem sikerült teljesítened a minigamet, így elbuktad az alapanyagokat!", "warning")
+        chat:sendLocalDoAction("estraga o processo de fabricação.")
+        outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 2).."Você falhou no minigame e perdeu os materiais!", 255, 255, 255, true)
+        infobox:outputInfoBox("Você não completou o minigame e perdeu os materiais.", "warning")
         triggerServerEvent("weaponCraft > endWeaponCraft", resourceRoot, false)
     end
     minigameInProgress = false

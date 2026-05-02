@@ -407,7 +407,7 @@ function loginDesign()
 	dxDrawImage(764/pX*sX, 444/pY*sY, 60/pX*sX, 60/pY*sY, "files/logo.png", 0, 0, 0, tocolor(R, G, B, 255));
 	dxDrawText("Mégsem",1006/pX*sX, 444/pY*sY, 1156/pX*sX, 504/pY*sY, color3, 1/pX*sX, font4, "center", "center",true, false, false, true);
 	dxDrawText("MDC Login panel",829/pX*sX, 444/pY*sY, 1156/pX*sX, 474/pY*sY, tocolor(R, G, B, 255), 1/pX*sX, font4, "left", "center",true, false, false, true);
-	dxDrawText("OriginalRoleplay",829/pX*sX, 464/pY*sY, 1156/pX*sX, 504/pY*sY, tocolor(255, 255, 255, 255), 1/pX*sX, font5, "left", "center",true, false, false, true);
+	dxDrawText("Vale do Ipiranga RP",829/pX*sX, 464/pY*sY, 1156/pX*sX, 504/pY*sY, tocolor(255, 255, 255, 255), 1/pX*sX, font5, "left", "center",true, false, false, true);
 	for i=1,3 do
 	if (i%2 == 0) then
 		alpha2 = 155
@@ -524,9 +524,9 @@ function wantedPersonUsing(button, press)
 				name = userdatas[3][1];
 				for i,v in ipairs(ids) do
 					if (faction == v) then
-						faction = "LSPD";
+						faction = "17ª DP - PCSP";
 					else	
-						faction = "SHERIFF";
+						faction = "PMESP";
 					end		
 				end	
 				local person = exports.oCore:getPlayerFromPartialName(localPlayer, name);
@@ -602,9 +602,9 @@ function wantedCarUsing(button, press)
 				number_plate = userdatas[3][1];
 				for i,v in ipairs(ids) do
 					if (faction == v) then
-						faction = "LSPD";
+						faction = "17ª DP - PCSP";
 					else	
-						faction = "SHERIFF";
+						faction = "PMESP";
 					end		
 				end	
 				getVehicleByPlateText(number_plate);

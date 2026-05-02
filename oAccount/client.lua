@@ -189,8 +189,16 @@ guiEditSetMaxLength(loginpanelEditbox, 45)
 
 addEventHandler("onClientResourceStart", resourceRoot,
 	function()
+		-- initialize export references here; all dependencies are already running by the time oAccount starts
+		infobox = exports.oInfobox
+		core = exports.oCore
+		fontscript = exports.oFont
+		if core then
+			color, r, g, b = core:getServerColor()
+		end
+
 		triggerServerEvent("checkPlayerBanState", localPlayer)
-		
+
 		fadeCamera(true)
 		setElementData(localPlayer,"user:loggedin",false)
 		setElementDimension(localPlayer, dimId)
@@ -514,14 +522,14 @@ function keyLoginV2(key, state)
 											exports.oJSON:saveDataToJSONFile({loginpanelboxok["login"][1].text, loginpanelboxok["login"][2].text}, "loginDatas", true)
 										end
 
-										triggerServerEvent("loginOnServer", root, localPlayer, user, hash("sha256", "originalRoleplayAccount"..pass.."2k20"))
+										triggerServerEvent("loginOnServer", localPlayer, user, hash("sha256", "originalRoleplayAccount"..pass.."2k20"))
 										mehetaclick = false 
 										setTimer(function() mehetaclick= true end, 1000,1)
 									end
 								else 
 									floodclick = floodclick + 1
 									if floodclick >= 6 then 
-										triggerServerEvent("kickFlooder",root,localPlayer)
+										triggerServerEvent("kickFlooder",localPlayer)
 									end
 								end
 							elseif v.name == "registerbutton" then 
@@ -550,7 +558,7 @@ function keyLoginV2(key, state)
 
 									if user and pass and string.len(user) >= 3 and string.len(pass) >= 5 and string.len(pass2) >= 5 and string.len(email) >= 5 then
 										if pass == pass2 then 
-											triggerServerEvent("registerOnServer", root, localPlayer,user, hash("sha256", "originalRoleplayAccount"..pass.."2k20"), hash("sha256", "originalRoleplayAccount"..pass2.."2k20"), email, inviteCode)
+											triggerServerEvent("registerOnServer", localPlayer, user, hash("sha256", "originalRoleplayAccount"..pass.."2k20"), hash("sha256", "originalRoleplayAccount"..pass2.."2k20"), email, invite)
 											mehetaclick = false 
 											setTimer(function() mehetaclick= true end, 1000,1)
 										else 
@@ -563,7 +571,7 @@ function keyLoginV2(key, state)
 								else 
 									floodclick = floodclick + 1
 									if floodclick >= 6 then 
-										triggerServerEvent("kickFlooder",root,localPlayer)
+										triggerServerEvent("kickFlooder",localPlayer)
 									end
 								end
 							end
@@ -1098,7 +1106,7 @@ function keyCharCreate(key, state)
 
 												pendingCharCreate = true
 												exports.oInterface:toggleHud(true)
-												triggerServerEvent("createCharacterOnServer",root,localPlayer, characterName, bornCity:gsub(" ","_"), age, height, weight,selected_nem,skins[selected_nem][selected_skin],selected_avatar,selectedStartPos)
+												triggerServerEvent("createCharacterOnServer",localPlayer, characterName, bornCity:gsub(" ","_"), age, height, weight,selected_nem,skins[selected_nem][selected_skin],selected_avatar,selectedStartPos)
 
 												setTimer(function()
 													pendingCharCreate = false
@@ -1251,7 +1259,7 @@ function charLoadAnimation()
 
 	
 
-	dxDrawText("Ipiranga Roleplay", 0, sy*0.15, sx, sy*0.15, tocolor(255, 255, 255, 100 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 14/myX*sx), "center", "center")
+	dxDrawText("Vale do Ipiranga RP", 0, sy*0.15, sx, sy*0.15, tocolor(255, 255, 255, 100 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 14/myX*sx), "center", "center")
 	dxDrawText("BEM-VINDO AO SERVIDOR!", 0, sy*0.18, sx, sy*0.18, tocolor(255, 255, 255, 255 * loadPanelAlpha), 1, fontscript:getFont("p_ba", 30/myX*sx), "center", "center")
 	dxDrawText("Carregando personagem...", 0, sy*0.21, sx, sy*0.21, tocolor(255, 255, 255, 150 * loadPanelAlpha), 1, fontscript:getFont("p_bo", 14/myX*sx), "center", "center")
 

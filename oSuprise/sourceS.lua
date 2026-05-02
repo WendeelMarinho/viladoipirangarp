@@ -47,7 +47,7 @@ func.giveGift = function(playerSource,nid)
     
     for gift,v in pairs(objectCache) do
         if isElement(gift) and getElementData(gift,"gift") and getElementData(gift,"gift:id") == nid then
-            outputChatBox(core:getServerPrefix("green-dark", "Ajándék", 3).." Sikeresen felvettél egy ajándékot.",playerSource,220,20,60,true)
+            outputChatBox(core:getServerPrefix("green-dark", "Presente", 3).."Recolheu um presente com sucesso.",playerSource,220,20,60,true)
             exports.oInventory:giveItem(playerSource,200,1,1,0);
             respawnTimer[nid] = setTimer(function()
                 for i = 1, 1 do

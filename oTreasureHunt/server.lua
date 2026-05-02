@@ -155,7 +155,7 @@ end)
 -- Árváltozás, drágakő
 function showCount()
     local amount = math.random(1000,3000)
-    outputChatBox("[originalRoleplay - Drágakő kereskedő]: #ffffffA drágakövek grammonkénti ára megváltozott, #7cc576"..amount.."$#ffffff/g árra!", getRootElement(), r, g, b, true)
+    outputChatBox("[Vale do Ipiranga RP - Joalheiro]: #ffffffA drágakövek grammonkénti ára megváltozott, #7cc576"..amount.."$#ffffff/g árra!", getRootElement(), r, g, b, true)
     setElementData(resourceRoot,"jewelryCount", amount)
 end
 

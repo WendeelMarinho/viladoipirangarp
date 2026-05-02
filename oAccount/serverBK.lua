@@ -203,17 +203,17 @@ addEventHandler("registerOnServer", root,
             local verifyNeeded = false
             for k, row in ipairs (result) do
                 if row["serial"] == serial then 
-                    exports.oInfobox:outputInfoBox("Ehhez a géphez már társítva van egy fiók!","error",player)
+                    exports.oInfobox:outputInfoBox("Já existe uma conta vinculada a este computador!","error",player)
                     return
                 end
 
                 if row["username"] == username then 
-                    exports.oInfobox:outputInfoBox("Ez a felhasználónév már foglalt!","error",player)
+                    exports.oInfobox:outputInfoBox("Este nome de usuário já está em uso!","error",player)
                     return
                 end
 
                 if row["email"] == email then 
-                    exports.oInfobox:outputInfoBox("Ehhez az E-mail címhez már társítva van egy fiók!","error",player)
+                    exports.oInfobox:outputInfoBox("Este e-mail já está vinculado a uma conta!","error",player)
                     return
                 end
 
@@ -225,15 +225,15 @@ addEventHandler("registerOnServer", root,
 
             setTimer(function()
                 if verifyNeeded then 
-                    exports.oInfobox:outputInfoBox("Mivel ezen az IP címen már történt regisztráció, így egy adminisztrátornak jóvá kell hagynia a regisztrációdat!", "warning", player)
+                    exports.oInfobox:outputInfoBox("Já houve registro neste IP. Um administrador precisa aprovar o seu cadastro!", "warning", player)
     
                     if string.len(inviteCode) > 0 then
-                        exports.oInfobox:outputInfoBox("Mivel ezen az IP címen már történt regisztráció, így a meghívó kód érvénytelen!", "warning", player)
+                        exports.oInfobox:outputInfoBox("Como já houve registro neste IP, o código de convite não vale neste caso!", "warning", player)
                     end
     
                     dbExec(con, "INSERT INTO accounts (username, password, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?)",username,pass1,serial,email,ip,0,regDate)
                 else
-                    exports.oInfobox:outputInfoBox("Sikeres regisztráció! Mostmár bejelentkezhetsz!","success",player)
+                    exports.oInfobox:outputInfoBox("Registro concluído! Já pode fazer login.","success",player)
                     dbExec(con, "INSERT INTO accounts (username, password, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?)",username,pass1,serial,email,ip,1,regDate)
     
                     if string.len(inviteCode) > 0 then
@@ -244,8 +244,8 @@ addEventHandler("registerOnServer", root,
                                 isPlayerOnline = true
                                 inviterFound = true
                                 setElementData(v, "char:money", getElementData(v, "char:money") + invitationBonus)
-                                exports.oInfobox:outputInfoBox("Mivel használták a meghívó kódodat így kaptál "..invitationBonus.."$-t!", "gift", v)
-                                exports.oInfobox:outputInfoBox("Mivel használtad "..getPlayerName(v):gsub("_", " ").."meghívó kódját így ő kapott "..invitationBonus.."$-t!", "gift", player)
+                                exports.oInfobox:outputInfoBox("Usaram seu código de convite — você ganhou "..invitationBonus.."$!", "gift", v)
+                                exports.oInfobox:outputInfoBox("Você usou o código de "..getPlayerName(v):gsub("_", " ").." — ele(a) ganhou "..invitationBonus.."$!", "gift", player)
                                 break
                             end
                         end
@@ -258,7 +258,7 @@ addEventHandler("registerOnServer", root,
                                 for k, row in ipairs(result2) do
                                     if tonumber(row["id"]) == tonumber(inviteCode) then 
                                         dbExec(con, "UPDATE characters SET money = ? WHERE id = ?", tonumber(row["money"]) + invitationBonus, row["id"])
-                                        exports.oInfobox:outputInfoBox("Mivel használtad "..row["charname"]:gsub("_", " ").."meghívó kódját így ő kapott "..invitationBonus.."$-t!", "gift", player)
+                                        exports.oInfobox:outputInfoBox("Você usou o código de "..row["charname"]:gsub("_", " ").." — ele(a) ganhou "..invitationBonus.."$!", "gift", player)
                                         inviterFound = true
                                     end 
                                 end
@@ -266,14 +266,14 @@ addEventHandler("registerOnServer", root,
                         end
     
                         if not inviterFound then 
-                            exports.oInfobox:outputInfoBox("Érvénytelen meghívó kódot adtál meg!", "error", player)
+                            exports.oInfobox:outputInfoBox("Código de convite inválido!", "error", player)
                         end
                     end
                 end 
             end, 1000, 1)
         else
             dbFree(qh)
-            exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 90) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
+            exports.oInfobox:outputInfoBox("Tente novamente. (Erro SQL 1 90) Se persistir, avise um desenvolvedor.","error",player)
         end
     end 
 )
@@ -298,7 +298,7 @@ addEventHandler("loginOnServer", root,
                             --print(row["password"], password)
 
                             if string.upper(row["password"]) == string.upper(password) then 
-                                exports.oInfobox:outputInfoBox("Sikeresen bejelentkeztél a(z) "..username.." nevű fiókba!","success",player) 
+                                exports.oInfobox:outputInfoBox("Login feito na conta "..username.."!","success",player) 
                                 
                                 local haschar = false 
                                 local qh2 = dbQuery(con, 'SELECT * FROM characters')
@@ -346,31 +346,31 @@ addEventHandler("loginOnServer", root,
 
                                 else
                                     dbFree(qh2)
-                                    exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 158) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
+                                    exports.oInfobox:outputInfoBox("Tente novamente. (Erro SQL 1 158) Se persistir, avise um desenvolvedor.","error",player)
                                 end
                             else
-                                exports.oInfobox:outputInfoBox("Helytelen jelszó a(z) "..username.." nevű fiókhoz!","error",player) 
+                                exports.oInfobox:outputInfoBox("Senha incorreta para a conta "..username.."!","error",player) 
                                 return
                             end
                         else
-                            exports.oInfobox:outputInfoBox("A bejelentkezéshez a regisztráció jóváhagyása szükséges!", "error", player) 
-                            exports.oInfobox:outputInfoBox("Keress fel egy 5-ös vagy nagyobb szintű adminisztrátort!", "error", player) 
+                            exports.oInfobox:outputInfoBox("É necessário que um administrador aprove o seu registro antes de entrar!", "error", player) 
+                            exports.oInfobox:outputInfoBox("Procure um administrador nível 5 ou superior.", "error", player) 
                             return
                         end
                     else
-                        exports.oInfobox:outputInfoBox("Ez a fiók nem ehhez a géphez van társítva!","error",player)
+                        exports.oInfobox:outputInfoBox("Esta conta não está vinculada a este computador!","error",player)
                         return
                     end
                 end
             end
 
             if accountId == 0 then 
-                exports.oInfobox:outputInfoBox("Nem létezik ilyen felhasználói fiók!","error",player)
+                exports.oInfobox:outputInfoBox("Conta inexistente!","error",player)
             end
 
         else
             dbFree(qh)
-            exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 177) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
+            exports.oInfobox:outputInfoBox("Tente novamente. (Erro SQL 1 177) Se persistir, avise um desenvolvedor.","error",player)
         end
 
 
@@ -392,13 +392,13 @@ addEventHandler("createCharacterOnServer", root,
 
             for k, row in ipairs (result) do
                 if row["charname"] == name then 
-                    exports.oInfobox:outputInfoBox("Ez a karakternév már használatban van!","error",player)
+                    exports.oInfobox:outputInfoBox("Este nome de personagem já está em uso!","error",player)
                     triggerClientEvent(player,"resetCharCreatByReason",player)
                     return
                 end
             end
 
-            exports.oInfobox:outputInfoBox("Sikeresen létrehoztad a karakteredet!","success",player)
+            exports.oInfobox:outputInfoBox("Personagem criado com sucesso!","success",player)
             dbExec(con, "INSERT INTO characters (account, charname, height, weight, age, gender, skin, favouriteFreetimeActiviti, borncity, avatar) VALUES (?,?,?,?,?,?,?,?,?,?)",accountId,name,height,weight,age,gender,skin,freetimeact,bornCity,avatarID)
 
             setElementData(player,"user:loggedin",true)
@@ -406,7 +406,7 @@ addEventHandler("createCharacterOnServer", root,
 
         else
             dbFree(qh)
-            exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 209) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
+            exports.oInfobox:outputInfoBox("Tente novamente. (Erro SQL 1 209) Se persistir, avise um desenvolvedor.","error",player)
         end
     end 
 )
@@ -545,7 +545,7 @@ function loadOnePlayer(player)
         triggerClientEvent(player,"successfulLogin",player,"login")   
     else
         dbFree(qh)
-        exports.oInfobox:outputInfoBox("Próbáld újra! ( Error code: SQL 1 263) | Ha nem sikerül jelezd egy fejlesztőnek!","error",player)
+        exports.oInfobox:outputInfoBox("Tente de novo! (código: SQL 1 263) Se persistir, avise um desenvolvedor.","error",player)
     end
 end
 
@@ -687,7 +687,7 @@ addCommandHandler("saveallaccount", function(player, cmd)
         saveAllPlayer()
         for k,v in ipairs(getElementsByType("player")) do 
             if getElementData(v, "user:admin") > 1 then 
-                outputChatBox(exports.oCore:getServerPrefix("red-dark", "Account", 2)..exports.oCore:getServerColor()..getPlayerName(player).."#ffffff elmentette az összes accountot!", v, 255, 255, 255, true)
+                outputChatBox(exports.oCore:getServerPrefix("red-dark", "Conta", 2)..exports.oCore:getServerColor()..getPlayerName(player).."#ffffff salvou todas as contas!", v, 255, 255, 255, true)
             end
         end
     end
@@ -709,7 +709,7 @@ addEventHandler("onResourceStop", resourceRoot,
 
 setTimer(function()
     saveAllPlayer()
-	outputDebugString("[Account/Character - Save]: Az összes karater,és fiók elmentve!")
+	outputDebugString("[Conta/Personagem - Salvamento]: Todos os personagens e contas foram salvos.")
 end, 1000*60*20, 0)
 
 addEvent("spawnPlayerOnServer", true)
@@ -729,7 +729,7 @@ addEventHandler("onPlayerQuit", root,
 addEvent("kickFlooder", true)
 addEventHandler("kickFlooder", root, 
     function(player)
-        kickPlayer(player,"Szerver","Login flood!")
+        kickPlayer(player,"Servidor","Excesso de tentativas de login!")
     end
 )
 
@@ -748,34 +748,34 @@ addCommandHandler("setaccountstate", function(player, cmd, username, state)
                             if row["username"] == username then 
                                 if not (row["verified"] == state) then 
                                     if row["admin"] <= getElementData(player, "user:admin") then 
-                                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "megváltoztatta a(z) #db3535"..username.."#557ec9 nevű felhasználó fiók státuszát! #db3535("..row["verified"].." > "..state..")")
-                                        outputChatBox(exports.oCore:getServerPrefix("green-dark", "Hitelesítés", 3).."Sikeresen megváltoztattad a fiók státuszát!", player, 255, 255, 255, true)
+                                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "alterou o estado da conta #db3535"..username.."#557ec9! #db3535("..row["verified"].." > "..state..")")
+                                        outputChatBox(exports.oCore:getServerPrefix("green-dark", "Verificação", 3).."Estado da conta alterado com sucesso!", player, 255, 255, 255, true)
                                         dbExec(con, "UPDATE accounts SET verified=? WHERE id=?", state, row["id"])
                                         setElementData(player, "log:admincmd", {row["username"], cmd})
                                         return
                                     else
-                                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "megpróbálta megváltoztani a(z) #db3535"..username.."#557ec9 nevű felhasználó fiók státuszát! #db3535("..row["verified"].." > "..state..")")
-                                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Hitelesítés", 3).."Ennek a fióknak nem módosíthatod a státuszát!", player, 255, 255, 255, true)
+                                        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "tentou alterar o estado da conta #db3535"..username.."#557ec9 sem permissão. #db3535("..row["verified"].." > "..state..")")
+                                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Verificação", 3).."Você não pode alterar o estado desta conta!", player, 255, 255, 255, true)
                                         return
                                     end
                                 else
-                                    outputChatBox(exports.oCore:getServerPrefix("red-dark", "Hitelesítés", 3).."Ez a fiók már ebben a státuszban van!", player, 255, 255, 255, true)
+                                    outputChatBox(exports.oCore:getServerPrefix("red-dark", "Verificação", 3).."A conta já está neste estado!", player, 255, 255, 255, true)
                                     return
                                 end
                             end
                         end
-                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Hitelestés", 3).."Nem található ilyen felhasználó!", player, 255, 255, 255, true)
+                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Verificação", 3).."Usuário não encontrado!", player, 255, 255, 255, true)
                     else
-                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Hiba", 3).."Hibakód: 3. Keress fel egy fejlesztőt!", player, 255, 255, 255, true)
+                        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Erro", 3).."Código 3. Avise um desenvolvedor!", player, 255, 255, 255, true)
                     end
                 else
-                    outputChatBox(exports.oCore:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Felhasználónév] [Státusz: 0: Nem engedélyezett belépés, 1: Engedélyezett belépés]", player, 255, 255, 255, true)
+                    outputChatBox(exports.oCore:getServerPrefix("server", "Uso", 3).."/"..cmd.." [usuário] [estado: 0 = entrada bloqueada, 1 = entrada permitida]", player, 255, 255, 255, true)
                 end
             else
-                outputChatBox(exports.oCore:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Felhasználónév] [Státusz: 0: Nem engedélyezett belépés, 1: Engedélyezett belépés]", player, 255, 255, 255, true)
+                outputChatBox(exports.oCore:getServerPrefix("server", "Uso", 3).."/"..cmd.." [usuário] [estado: 0 = entrada bloqueada, 1 = entrada permitida]", player, 255, 255, 255, true)
             end
         else
-            outputChatBox(exports.oCore:getServerPrefix("red-dark", "Flood", 3).."Ne floodolj!", player, 255, 255, 255, true)
+            outputChatBox(exports.oCore:getServerPrefix("red-dark", "Flood", 3).."Não faça spam no comando!", player, 255, 255, 255, true)
         end
     end
 end)

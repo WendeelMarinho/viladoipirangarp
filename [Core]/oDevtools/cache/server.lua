@@ -16,11 +16,11 @@ function SetCacheSettingsResource(res)
             if scriptPath and (scriptType:lower() == "client" or serverEncypt:lower() == "false" or scriptType:lower() == "shared") then
                 if string.find(serverEncypt:lower(), "false") then
                     local FROM=":"..res.."/"..scriptPath
-                    outputDebugString("Ez a script már védett (".. FROM ..")",3,0,255,0)
+                    outputDebugString("[Cache] Script já está ofuscado (".. FROM ..")",3,0,255,0)
                 else
                     xmlNodeSetAttribute(scriptNode, "cache", "false")
                     local FROM=":"..res.."/"..scriptPath
-                    outputDebugString("Sikeres levédés (".. FROM ..")",3,0,255,0)
+                    outputDebugString("[Cache] Ofuscação concluída (".. FROM ..")",3,0,255,0)
                 end
 
             end
@@ -31,7 +31,7 @@ function SetCacheSettingsResource(res)
         xmlSaveFile(xmlFile)
 		xmlUnloadFile(xmlFile)
     else
-		outputDebugString("LEVÉDÉS: Nem olvasható: meta.xml",3,220,20,20)
+		outputDebugString("[Cache] Ofuscar: meta.xml ilegível ou ausente.",3,220,20,20)
 		return false
     end
 end
@@ -47,7 +47,7 @@ end)
 addCommandHandler("cacheset", function(player,cmd,res)
     if getElementData(player, "user:admin") >= 10 then
         if not res then 
-            outputChatBox(exports["oCore"]:getServerPrefix("red-dark", "OriginalRoleplay", 3) .. " Használat: /"..cmd.." [ResourceName]",player, 255, 255, 255, true)
+            outputChatBox(exports["oCore"]:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3) .. " Uso: /"..cmd.." [NomeDoResource]",player, 255, 255, 255, true)
         else
             local resource = getResourceFromName(res)
             if resource then

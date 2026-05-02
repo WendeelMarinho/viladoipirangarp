@@ -90,6 +90,9 @@ local LOGIN_MAX_ATTEMPTS = 5
 local LOGIN_COOLDOWN_MS  = 5 * 60 * 1000
 
 local verifiedPasswordReset = {}
+local codes = {}
+local codeTimers = {}
+local codeSpamTimers = {}
 
 local invitationBonus = 5000
 
@@ -126,10 +129,15 @@ addEventHandler("checkPlayerBanState", getRootElement(),
 	function ()
         if isElement(source) then
             local serial = getPlayerSerial(source)
+            if not con then
+                triggerClientEvent(source, "receiveBanState", source, {isActive = "N"})
+                return
+            end
             dbQuery(
 				function (qh, sourcePlayer)
 					if isElement(sourcePlayer) then
-						local result, rows = dbPoll(qh, 0)[1]
+						local rows = dbPoll(qh, 0)
+						local result = rows and rows[1]
 						local banState = {isActive = "N"}
 
 						if result then
@@ -165,7 +173,7 @@ addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), fu
                 databaseAccounts[v["id"]] = v
                 triggerClientEvent(root, "recieveDatabaseDataAccounts", root, v["id"],databaseAccounts[v["id"]])
             end
-            print("Sikeresen betöltöttem ".. count .."db accountot")
+            print("[CONTAS]: ".. count .." conta(s) carregada(s).")
         end
     end, con, "SELECT * FROM accounts")
 
@@ -181,7 +189,7 @@ addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), fu
                 triggerClientEvent(root, "recieveDatabaseDataCharacter", root, v["id"],databaseCharacters[v["id"]])
             end
 
-            print("Sikeresen betöltöttem ".. count2 .."db karaktert")
+            print("[PERSONAGENS]: ".. count2 .." personagem(ns) carregado(s).")
         end
     end, con, "SELECT * FROM characters")
 
@@ -230,112 +238,88 @@ SQL 1 [sor] >>>> dbPoll faild >> valószínűleg nincs sql kapcsolat
 
 addEvent("registerOnServer",true)
 addEventHandler("registerOnServer", root,
-    function(_,username,pass1,pass2,email,inviteCode)
+    function(username,pass1,pass2,email,inviteCode)
         local player = source
         if not isElement(player) or getElementType(player) ~= "player" then return end
         local serial = getPlayerSerial(player)
         local ip = getPlayerIP(player)
+        local rt = getRealTime()
+        local regDate = string.format("%04d.%02d.%02d", rt.year + 1900, rt.month + 1, rt.monthday)
 
-        local qh = dbQuery(con, 'SELECT * FROM accounts')
-        local result = dbPoll(qh, 250)
+        dbQuery(function(qh)
+            local result = dbPoll(qh, 0)
+            if not isElement(player) then return end
 
-        local regDate = string.format("%04d.%02d.%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"))
+            if not result then
+                exports.oInfobox:outputInfoBox("Erro interno. Tente novamente.","error",player)
+                return
+            end
 
-        if result then
-
-            local verifyNeeded = false
-            local errorDuringReg = false
-            for k, row in ipairs (result) do
+            for _, row in ipairs(result) do
                 if row["serial"] == serial then
                     exports.oInfobox:outputInfoBox("Já existe uma conta associada a este computador.","error",player)
-                    errorDuringReg = true
                     return
                 end
-
                 if row["username"] == username then
                     exports.oInfobox:outputInfoBox("Este nome de usuário já está em uso.","error",player)
-                    errorDuringReg = true
                     return
                 end
-
                 if row["email"] == email then
                     exports.oInfobox:outputInfoBox("Já existe uma conta associada a este e-mail.","error",player)
-                    errorDuringReg = true
                     return
                 end
-
-                --if row["ip"] == ip then
-                --    verifyNeeded = true
-                --    break
-                --end
             end
 
-            if not errorDuringReg then
-                setTimer(function()
-                    if not errorDuringReg then
-                        --if verifyNeeded then
-                        --    exports.oInfobox:outputInfoBox("Mivel ezen az IP címen már történt regisztráció, így egy adminisztrátornak jóvá kell hagynia a regisztrációdat!", "warning", player)
+            local regSalt = generatePasswordSalt()
+            local regStored = computeSaltedPassword(pass1, regSalt)
+            dbExec(con, "INSERT INTO accounts (username, password, password_salt, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?,?)", username, regStored, regSalt, serial, email, ip, 1, regDate)
+            exports.oInfobox:outputInfoBox("Cadastro realizado! Agora você pode entrar.","success",player)
+            triggerClientEvent(player, "backToLogin", player)
 
-                        --    if string.len(inviteCode) > 0 then
-                        --        exports.oInfobox:outputInfoBox("Mivel ezen az IP címen már történt regisztráció, így a meghívó kód érvénytelen!", "warning", player)
-                        --    end
-
-                        --    dbExec(con, "INSERT INTO accounts (username, password, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?)",username,pass1,serial,email,ip,0,regDate)
-                        --else
-                            exports.oInfobox:outputInfoBox("Cadastro realizado! Agora você pode entrar.","success",player)
-                            local regSalt = generatePasswordSalt()
-                            local regStored = computeSaltedPassword(pass1, regSalt)
-                            dbExec(con, "INSERT INTO accounts (username, password, password_salt, serial, email, ip, verified, registerDate) VALUES (?,?,?,?,?,?,?,?)",username, regStored, regSalt, serial, email, ip, 1, regDate)
-                            triggerClientEvent(player,"backToLogin",player)
-
-                            if inviteCode then 
-                                if string.len(inviteCode) > 0 then
-                                    local inviterFound = false
-                                    local isPlayerOnline = false
-                                    for k, v in ipairs(getElementsByType("player")) do
-                                        if getElementData(v, "char:id") == tonumber(inviteCode) then
-                                            isPlayerOnline = true
-                                            inviterFound = true
-                                            setElementData(v, "char:money", getElementData(v, "char:money") + invitationBonus)
-                                            exports.oInfobox:outputInfoBox("Seu código de convite foi usado e você recebeu "..invitationBonus.."$!", "gift", v)
-                                            exports.oInfobox:outputInfoBox("Você usou o código de convite de "..getPlayerName(v):gsub("_", " ").." e ele recebeu "..invitationBonus.."$!", "gift", player)
-                                            break
-                                        end
+            if inviteCode and string.len(tostring(inviteCode)) > 0 then
+                local inviterFound = false
+                for _, v in ipairs(getElementsByType("player")) do
+                    if getElementData(v, "char:id") == tonumber(inviteCode) then
+                        inviterFound = true
+                        setElementData(v, "char:money", getElementData(v, "char:money") + invitationBonus)
+                        exports.oInfobox:outputInfoBox("Seu código de convite foi usado e você recebeu "..invitationBonus.."$!", "gift", v)
+                        exports.oInfobox:outputInfoBox("Você usou o código de convite de "..getPlayerName(v):gsub("_", " ").." e ele recebeu "..invitationBonus.."$!", "gift", player)
+                        break
+                    end
+                end
+                if not inviterFound then
+                    dbQuery(function(qh2)
+                        local result2 = dbPoll(qh2, 0)
+                        if result2 then
+                            for _, row in ipairs(result2) do
+                                if tonumber(row["id"]) == tonumber(inviteCode) then
+                                    dbExec(con, "UPDATE characters SET money = ? WHERE id = ?", tonumber(row["money"]) + invitationBonus, row["id"])
+                                    if isElement(player) then
+                                        exports.oInfobox:outputInfoBox("Você usou o código de convite de "..row["charname"]:gsub("_", " ").." e ele recebeu "..invitationBonus.."$!", "gift", player)
                                     end
-
-                                    if not isPlayerOnline then
-                                        local qh2 = dbQuery(con, "SELECT * FROM characters")
-                                        local result2 = dbPoll(qh2, 100)
-
-                                        if result2 then
-                                            for k, row in ipairs(result2) do
-                                                if tonumber(row["id"]) == tonumber(inviteCode) then
-                                                    dbExec(con, "UPDATE characters SET money = ? WHERE id = ?", tonumber(row["money"]) + invitationBonus, row["id"])
-                                                    exports.oInfobox:outputInfoBox("Você usou o código de convite de "..row["charname"]:gsub("_", " ").." e ele recebeu "..invitationBonus.."$!", "gift", player)
-                                                    inviterFound = true
-                                                end
-                                            end
-                                        end
-                                    end
-
-                                    if not inviterFound then
-                                        exports.oInfobox:outputInfoBox("Código de convite inválido.", "error", player)
-                                    end
+                                    return
                                 end
                             end
-                        --end
-                    end
-                end, 1000, 1)
+                        end
+                        if isElement(player) then
+                            exports.oInfobox:outputInfoBox("Código de convite inválido.", "error", player)
+                        end
+                    end, con, "SELECT id, charname, money FROM characters")
+                end
             end
-        else
-            dbFree(qh)
-            exports.oInfobox:outputInfoBox("Tente novamente! ( Error code: SQL 1 90) | Se não funcionar, avise um desenvolvedor.","error",player)
-        end
+        end, con, "SELECT serial, username, email FROM accounts")
     end
 )
 
+addEvent("kickFlooder", true)
+addEventHandler("kickFlooder", root, function()
+    local player = source
+    if not isElement(player) or getElementType(player) ~= "player" then return end
+    kickPlayer(player, "Spam de cliques detectado.")
+end)
+
 addEvent("loginOnServer",true)
-addEventHandler("loginOnServer",getRootElement(), function(_, username, password)
+addEventHandler("loginOnServer",getRootElement(), function(username, password)
     local player = source
     if not isElement(player) or getElementType(player) ~= "player" then return end
 
@@ -567,7 +551,7 @@ addEventHandler("loginOnServer", root,
 
 addEvent("createCharacterOnServer",true)
 addEventHandler("createCharacterOnServer", root,
-    function(_,name,bornCity,age,height,weight,gender,skin,avatarID,startPosition)
+    function(name,bornCity,age,height,weight,gender,skin,avatarID,startPosition)
         local player = source
         if not isElement(player) or getElementType(player) ~= "player" then return end
         local accountId = getElementData(player,"user:id")
@@ -688,8 +672,8 @@ function loadOnePlayer(player,accountId)
                 zoneName = getZoneName(posX,posY,posZ, true)
                 if zoneName == "Las Venturas" or zoneName == "Bone County" then
                     setElementPosition(player, 1523.6800537109, -1774.8623046875, 14.427187919617+0.5)
-                    outputChatBox(hex .."[Ipiranga Roleplay]#FFFFFF Las Venturas e arredores foram removidos do mapa, você foi teleportado para a prefeitura.", player, 255, 255, 255, true)
-                    outputChatBox(hex .."[Ipiranga Roleplay]#FFFFFF Se você deixou um veículo ou imóvel na região, procure um administrador. Bom jogo!", player, 255, 255, 255, true)
+                    outputChatBox(hex .."[Vale do Ipiranga RP]#FFFFFF Las Venturas e arredores foram removidos do mapa, você foi teleportado para a prefeitura.", player, 255, 255, 255, true)
+                    outputChatBox(hex .."[Vale do Ipiranga RP]#FFFFFF Se você deixou um veículo ou imóvel na região, procure um administrador. Bom jogo!", player, 255, 255, 255, true)
                 end
 
                 setElementData(player, "char:intSlot", row["interiorSlot"])
@@ -962,7 +946,7 @@ addEventHandler("onResourceStop", resourceRoot,
 
 setTimer(function()
     saveAllPlayer()
-	outputDebugString("[Account/Character - Save]: Az összes karater,és fiók elmentve!")
+	outputDebugString("[Conta/Personagem - Salvamento]: Todos os personagens e contas foram salvos.")
 end, 1000*60*20, 0)
 
 addEvent("spawnPlayerOnServer", true)
@@ -1039,10 +1023,6 @@ addCommandHandler("setaccountstate", function(player, cmd, username, state)
 end)
 
 local allowed = {{48, 57}, {97, 122}}
-
-local codes = {}
-local codeTimers = {}
-local codeSpamTimers = {}
 
 function genCode()
     local len = 10

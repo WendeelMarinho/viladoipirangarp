@@ -130,7 +130,7 @@ cardOptions = {
         {"Életkor", "age"},
         {"Neme", "sex"}, --
         {"Állampolgárság", "nationality"}, 
-        {"Kiállítás dátuma", "createDate"}, --
+        {"Data de emissão", "createDate"}, --
         {"Érvényes", "expiryDate"}, --
     },
 
@@ -139,23 +139,23 @@ cardOptions = {
         {"Életkor", "age"}, --
         {"Állampolgárság", "nationality"},
         {"Engedély típusa", "l_type"},
-        {"Kiállítás dátuma", "createDate"}, -- 
+        {"Data de emissão", "createDate"}, -- 
         {"Érvényes", "expiryDate"}, --
     },
 
     { -- fegyvertartási engedély
         {"Név", "name"}, --
-        {"Kiállító szerv", "faction"}, --
+        {"Órgão emissor", "faction"}, --
         {"Engedély", "l_type"},
-        {"Kiállítás dátuma", "createDate"}, --
+        {"Data de emissão", "createDate"}, --
         {"Érvényes", "expiryDate"}, --
     },
 
     { -- vadászati engedély
         {"Név", "name"}, --
-        {"Kiállító szerv", "faction"}, --
+        {"Órgão emissor", "faction"}, --
         {"Engedély", "l_type"},
-        {"Kiállítás dátuma", "createDate"}, --
+        {"Data de emissão", "createDate"}, --
         {"Érvényes", "expiryDate"}, --
     },
 
@@ -244,7 +244,7 @@ function openCopyCard(id, value, cardnumber)
         selectedCard["skin"] = tonumber(validValue[4])
         selectedCard["name"] = validValue[7]
         selectedCard["l_type"] = "Colt-45/Shotgun"
-        selectedCard["faction"] = "LSPD"    
+        selectedCard["faction"] = "17ª DP - Polícia Civil SP"    
         --outputChatBox(validValue[4])
         skin = dxCreateTexture(":oLicenses/files/avatars/"..selectedCard["skin"]..".png")
         dxSetShaderValue(grayLicenses2, "screenSource", skin)
@@ -257,7 +257,7 @@ function openCopyCard(id, value, cardnumber)
         selectedCard["skin"] = tonumber(validValue[4])
         selectedCard["name"] = validValue[7]
         selectedCard["l_type"] = "Róka/Medve"
-        selectedCard["faction"] = "LSSD"
+        selectedCard["faction"] = "PMESP"
         skin = dxCreateTexture(":oLicenses/files/avatars/"..selectedCard["skin"]..".png")
         dxSetShaderValue(grayLicenses2, "screenSource", skin)
     end

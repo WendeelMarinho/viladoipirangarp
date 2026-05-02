@@ -14,11 +14,11 @@ addEvent("setWhiteListEnable",true)
 addEventHandler("setWhiteListEnable",root,setWhiteListEnable)
 
 setFPSLimit(60)
-setGameType("OriginalRoleplay")
-setMapName("OriginalRoleplay")
+setGameType("Vale do Ipiranga RP")
+setMapName("Vale do Ipiranga RP")
 
 addEventHandler("onResourceStart", resourceRoot, function()
-	--outputChatBox("#e0361f[OriginalRoleplay - Whitelist]: #ffffff"..serverColor.."bela".." #ffffffmegpróbált csatlakozni. (/pendingserials, /acceptserial)", root, 255, 255, 255, true)
+	--outputChatBox("#e0361f[Vale do Ipiranga RP - Whitelist]: #ffffff"..serverColor.."bela".." #fffffftentou conectar. (/pendingserials, /acceptserial)", root, 255, 255, 255, true)
 	local players = getElementsByType("player")
 	for i = 1, #players do
 		playerIDs[i] = players[i]
@@ -34,11 +34,11 @@ addEventHandler("onPlayerConnect", getRootElement(), function(playerName, _, _, 
 	if not whitelistEnabled then return end
 	local ok, isDev = pcall(function() return exports.oAdmin:isSerialDeveloper(playerSerial) end)
 	if not (ok and isDev) then
-		cancelEvent(true, "Jelenleg fejlesztés alatt...")
+		cancelEvent(true, "Em desenvolvimento...")
 
 		for k, v in ipairs(getElementsByType("player")) do 
 			if exports.oAdmin:isPlayerDeveloper(v) then 
-				outputChatBox("#e0361f[OriginalRoleplay - Whitelist]: #ffffff"..serverColor..playerName.." #ffffffmegpróbált csatlakozni. (/pendingserials, /acceptserial)", v, 255, 255, 255, true)
+				outputChatBox("#e0361f[Vale do Ipiranga RP - Whitelist]: #ffffff"..serverColor..playerName.." #fffffftentou conectar. (/pendingserials, /acceptserial)", v, 255, 255, 255, true)
 			end 
 		end
 
@@ -82,25 +82,25 @@ addEventHandler("onPlayerSpawn", getRootElement(), function()
 end)
 
 local deathTypes = {
-	[19] = "robbanás",
-	[37] = "égés",
-	[49] = "autóbaleset",
-	[50] = "autóbaleset",
-	[51] = "robbanás",
-	[52] = "elütötték",
-	[53] = "fulladás",
-	[54] = "esés",
-	[55] = "unknown",
-	[56] = "verekedés",
-	[57] = "fegyver",
-	[59] = "tank",
-	[63] = "robbanás",
-	[0] = "verekedés"
+	[19] = "explosão",
+	[37] = "queimadura",
+	[49] = "acidente de veículo",
+	[50] = "acidente de veículo",
+	[51] = "explosão",
+	[52] = "atropelamento",
+	[53] = "afogamento",
+	[54] = "queda",
+	[55] = "desconhecido",
+	[56] = "briga",
+	[57] = "arma",
+	[59] = "tanque",
+	[63] = "explosão",
+	[0] = "briga"
 }
 
 addEventHandler("onPlayerWasted", getRootElement(), function(_, killer, weapon, bodypart, stealth)
 	if not getElementData(source, "customDeath") then
-		local deathReason = "ismeretlen"
+		local deathReason = "desconhecido"
 		if tonumber(weapon) then
 			deathReason = deathTypes[weapon]
 
@@ -109,20 +109,20 @@ addEventHandler("onPlayerWasted", getRootElement(), function(_, killer, weapon, 
 				--if weaponNames[weaponName] then
 					--weaponName = weaponNames[weaponName]
 
-					if deathReason == "autóbaleset" then
-						deathReason = "autóbaleset"
+					if deathReason == "acidente de veículo" then
+						deathReason = "acidente de veículo"
 					else
-						deathReason = "fegyver (" .. weaponName .. ")"
+						deathReason = "arma (" .. weaponName .. ")"
 					end
 				--else
 				--	deathReason = "fegyver (" .. weaponName .. ")"
 				--end
 			elseif deathReason == "unknown" then
-				deathReason = "ismeretlen"
+				deathReason = "desconhecido"
 			end
 		end
 		if bodyPart == 9 then
-			deathReason = deathReason .. " [fejlövés]"
+			deathReason = deathReason .. " [tiro na cabeça]"
 		end
         setElementData(source, "customDeath", deathReason)
     end
@@ -138,7 +138,7 @@ end)
 addCommandHandler("pendingserials", function(thePlayer)
 	if exports.oAdmin:isPlayerDeveloper(thePlayer) then
 		if #pendingSerials == 0 then
-			outputChatBox("Jelenleg nincs olyan serial amit el kellene fogadni.", thePlayer, 255, 255, 255)
+			outputChatBox("Não há seriais pendentes para aceitar.", thePlayer, 255, 255, 255)
 			return
 		end
 			
@@ -155,12 +155,12 @@ addCommandHandler("acceptserial", function(thePlayer, cmd, id)
 			if entry then
 				exports.oAdmin:addWhitelistedSerial(entry[2], entry[1])
 				table.remove(pendingSerials, tonumber(id))
-				outputChatBox("Serial hozzáadva a whitelisthez!", thePlayer, 255, 255, 255)
+				outputChatBox("Serial adicionado à whitelist!", thePlayer, 255, 255, 255)
 			else
-				outputChatBox("Nincs ilyen sorszámmal serial kérelem.", thePlayer, 255, 255, 255)
+				outputChatBox("Não existe pedido de serial com esse número.", thePlayer, 255, 255, 255)
 			end
 		else
-			outputChatBox("/elfogadserial [id]", thePlayer, 255, 255, 255)
+			outputChatBox("/acceptserial [id]", thePlayer, 255, 255, 255)
 		end
 	end
 end)
@@ -168,9 +168,9 @@ end)
 addCommandHandler("togwhitelist", function(thePlayer)
 	if exports.oAdmin:isPlayerDeveloper(thePlayer) then
 		if whitelistEnabled then
-			outputChatBox("Whitelist kikapcsolva!", thePlayer, 255, 255, 255)
+			outputChatBox("Whitelist desativada!", thePlayer, 255, 255, 255)
 		else
-			outputChatBox("Whitelist bekapcsolva!", thePlayer, 255, 255, 255)
+			outputChatBox("Whitelist ativada!", thePlayer, 255, 255, 255)
 		end
 		whitelistEnabled = not whitelistEnabled
 	end

@@ -2,7 +2,67 @@
 
 **Branch:** `main`  
 **Início:** 2026-05-01  
-**Status:** Sprint A concluída; Sprint B.2 (UI residual) concluída em 2026-05-01; **Sprint C (pré-auditoria)** documentada em 2026-05-02 (`docs/qa/pre-test-audit.md`).
+**Status:** Sprint A concluída; Sprint B.2 (UI residual) concluída em 2026-05-01; **Sprint C (pré-auditoria)** documentada em 2026-05-02 (`docs/qa/pre-test-audit.md`); **Sprint D (infraestrutura VPS)** concluída em 2026-05-02.
+
+---
+
+## Sprint D — Infraestrutura VPS / Primeiro Boot (CONCLUÍDA em 2026-05-02)
+
+### Problema raiz
+O servidor nunca tinha arrancado com sucesso no VPS Ubuntu 24.04. Quatro bugs críticos bloqueavam o boot.
+
+### Fixes aplicados
+
+#### 1. `libssl.so.1.1` em falta
+Ubuntu 24.04 só tem OpenSSL 3.0. O módulo MySQL do MTA (`x64/dbconmy.so`) requer `libssl.so.1.1`.
+```bash
+wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -O /tmp/libssl1.1.deb
+dpkg -i /tmp/libssl1.1.deb && ldconfig
+```
+Detalhe completo: `docs/infra/server-setup.md`.
+
+#### 2. ACL — `Access denied @ 'startResource'`
+`oStarter` não tinha permissão para chamar `startResource`. Fix: adicionar `resource.vila-do-ipiranga-rp` e `resource.oStarter` ao grupo `Admin` em `acl.xml` **com o servidor parado**.
+
+Regra crítica: `acl.xml` só pode ser editado com o servidor parado — o recurso `admin` chama `aclSave()` em cada `onResourceStop`.
+Detalhe completo: `docs/infra/acl-e-recursos.md`.
+
+#### 3. Conflitos de nomes de recursos (symlinks de grupo)
+Os symlinks de grupo `resources/[Carlos]`, `resources/[Booms]` e `resources/[cameratool]` expunham recursos que conflituavam com os padrão do MTA (`ajax`, `ipb`, `performancebrowser`, `helpmanager`, `glue`).
+
+Fix: remover symlinks de grupo, criar ~65 symlinks individuais excluindo os conflituantes.
+Detalhe completo: `docs/infra/acl-e-recursos.md`.
+
+#### 4. `weatherSync.lua:197` — loop de erros (350ms)
+`getRainLevel()` é uma função cliente — no servidor retorna `false`. O timer de 350ms comparava `false > 0`, gerando erro em loop.
+
+Fix aplicado em `[Core]/oCore/elements/weatherSync.lua`:
+```lua
+-- Antes:
+if getRainLevel() > 0 then
+
+-- Depois:
+local rl = getRainLevel()
+if type(rl) == "number" and rl > 0 then
+```
+
+### Estado após Sprint D
+- oMysql conecta à `orp_main` ✅
+- Todos os ~90 recursos arrancam ✅
+- Loop de erros weatherSync eliminado ✅
+- Serial do owner (`CE96EC91A956F747BA88AC47DD304A02`) inserido em `adminserials` ✅
+- Whitelist funciona — owner consegue entrar ✅
+
+### Problemas pendentes (pós-Sprint D)
+
+| Problema | Ficheiro | Causa |
+|---------|----------|-------|
+| `addAccount` / `logIn` negados para oAdmin | `oAdmin/s_admin.lua:102-105` | `resource.oAdmin` não está no grupo Admin do ACL |
+| `aclSave` / `aclGroupAddObject` negados | `oAdmin/s_admin.lua:16-23` | Mesmo — falta `resource.oAdmin` no ACL Admin |
+| `fetchRemote` negado (oCore) | `weatherSync.lua:153` | Falta permissão ACL para oCore |
+| `fetchRemote` negado (oAnticheat) | `antiCheatS.lua:996,1015` | Falta permissão ACL para oAnticheat |
+| Tabelas DB em falta (oDrugs, oMDC) | — | Schema não criado ainda |
+| `oPlant`/`oPlaneCrash` inexistentes | `oStarter/server.lua:290-291` | Recursos não presentes no projeto |
 
 ---
 
@@ -34,20 +94,6 @@ Ficheiros: `oDashboard/bugReportC.lua`, `oDashboard/openCreate.lua`, `oDashboard
 
 ---
 
-## Próxima Sprint — TD-SEC-006 ou oDashboard
+## Próxima Sprint — Fix ACL oAdmin + QA login
 
 Ver `docs/worklog/next-actions.md` para prioridade atualizada.
-
----
-
-## ECC — integração mínima no repositório (2026-05-02)
-
-Integração **aditiva** (modo mínimo): comandos e agentes com prefixo `ecc-`, memória `.cursor/memory/project-state.md`, `AGENTS.md` na raiz, documentação em `docs/cursor/ecc-integration.md`. **Sem** `hooks.json`, sem MCP, sem substituir `.cursor/rules/` nem `docs/CLAUDE.md`. Detalhe: `docs/cursor/ecc-integration.md`.
-
----
-
-## Sprint C — pré-auditoria pré-teste (CONCLUÍDA em 2026-05-02)
-
-- **Entregável:** `docs/qa/pre-test-audit.md` (grep HU first-party, categorização, integridade TD-SEC/login/`_OriginalRP`, sintaxe Lua amostrada).  
-- **Decisão:** **GO condicional** para QA local nas áreas Sprint A/B/TD-SEC; **NO-GO** para ship com UI PT-BR global sem nova fase de tradução.  
-- **Contexto Cursor:** `.cursor/context/current-sprint.md` e `.cursor/memory/project-state.md` atualizados.

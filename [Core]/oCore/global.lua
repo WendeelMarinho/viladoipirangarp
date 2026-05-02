@@ -1,6 +1,6 @@
 serverColor = "#e97619"
 serverRGB = {233, 118, 25}
-serverName = "originalRoleplay"
+serverName = "Vale do Ipiranga RP"
 colors = {
 	["red-light"] = {"#eb6c5b", 235, 108, 91},
 	["red-dark"] = {"#e0361f", 224, 54, 31},

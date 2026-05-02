@@ -68,7 +68,7 @@ function renderJobPanel()
     dxDrawRectangle(sx*0.347,sy*0.325,sx*0.305,sy*0.34,tocolor(30,30,30,140*pA))
     dxDrawRectangle(sx*0.347 + 2/myX*sx, sy*0.325 + 2/myY*sy,sx*0.305 - 4/myX*sx,sy*0.34-4/myY*sy,tocolor(35,35,35,255*pA))
     dxDrawRectangle(sx*0.347 + 2/myX*sx, sy*0.325 + 2/myY*sy,sx*0.305 - 4/myX*sx, sy*0.02,tocolor(30,30,30,255*pA))
-    dxDrawText("OriginalRoleplay - "..color.."Munkáltató", sx*0.347 + 2/myX*sx, sy*0.325 + 2/myY*sy, sx*0.347 + 2/myX*sx + sx*0.305 - 4/myX*sx, sy*0.325 + 2/myY*sy+sy*0.02, tocolor(255, 255, 255, 100*pA), 1, font:getFont("condensed", 9/myX*sx), "center", "center", false, false, false, true)
+    dxDrawText("Vale do Ipiranga RP - "..color.."Munkáltató", sx*0.347 + 2/myX*sx, sy*0.325 + 2/myY*sy, sx*0.347 + 2/myX*sx + sx*0.305 - 4/myX*sx, sy*0.325 + 2/myY*sy+sy*0.02, tocolor(255, 255, 255, 100*pA), 1, font:getFont("condensed", 9/myX*sx), "center", "center", false, false, false, true)
 
     if core:isInSlot(sx*0.64+ 2/myX*sx, sy*0.325 + 2/myY*sy,sx*0.01, sy*0.02) then
         if getKeyState("mouse1") then 
@@ -346,7 +346,7 @@ function renderJobVehicleCreatePanel()
     dxDrawRectangle(sx*0.4 + 2/myX*sx, sy*0.3 + 2/myY*sy, sx*0.2 - 4/myX*sx, sy*0.4 - 4/myY*sy, tocolor(35, 35, 35, 255*panel_alpha))
     dxDrawRectangle(sx*0.4 + 2/myX*sx, sy*0.3 + 2/myY*sy, sx*0.2 - 4/myX*sx, sy*0.02, tocolor(30, 30, 30, 255*panel_alpha))
     dxDrawText(panel_jobname, sx*0.4 + 2/myX*sx, sy*0.3 + 2/myY*sy, sx*0.4 + 2/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + 2/myY*sy + sy*0.02, tocolor(255, 255, 255, 150*panel_alpha), 1, font:getFont("condensed", 9/myX*sx), "right", "center")
-    dxDrawText("OriginalRoleplay - "..color.."Munkajármű lekérés", sx*0.4 + 6/myX*sx, sy*0.3 + 2/myY*sy, sx*0.4 + 2/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + 2/myY*sy + sy*0.02, tocolor(255, 255, 255, 150*panel_alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, false, true)
+    dxDrawText("Vale do Ipiranga RP - "..color.."Munkajármű lekérés", sx*0.4 + 6/myX*sx, sy*0.3 + 2/myY*sy, sx*0.4 + 2/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + 2/myY*sy + sy*0.02, tocolor(255, 255, 255, 150*panel_alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "center", false, false, false, true)
 
     if isElement(panel_vehElement) then 
         panel_vehname = exports.oVehicle:getModdedVehicleName(panel_vehElement)

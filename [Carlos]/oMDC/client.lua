@@ -116,7 +116,7 @@ function renderMDC()
     dxDrawRectangle(posX, posY, width, height, tocolor(35, 35, 35, 255*bgAlpha))
 
     if page > 1 then 
-        dxDrawText("Bejelentkezve mint: #ffffff"..mdcAccountDatas["user"]..color.." #"..mdcAccountDatas["id"].." | Jogosultság típusa: #ffffff"..accessTypes[mdcAccountDatas["access"]]..color.." | Szervezet: #ffffff"..factions[mdcAccountDatas["faction"]]..color.." (Kijelentkezés)", posX + sx*0.004, posY, posX + width, posY + sy*0.03, tocolor(r, g, b, 255 * bgAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
+        dxDrawText("Sessão: #ffffff"..mdcAccountDatas["user"]..color.." #"..mdcAccountDatas["id"].." | Tipo de acesso: #ffffff"..accessTypes[mdcAccountDatas["access"]]..color.." | Organização: #ffffff"..factions[mdcAccountDatas["faction"]]..color.." (sair)", posX + sx*0.004, posY, posX + width, posY + sy*0.03, tocolor(r, g, b, 255 * bgAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
         dxDrawText(mdcPageNames[page] or "MDC", posX + sx*0.004, posY + sy*0.02, posX + width, posY + sy*0.07, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 26/myX*sx), "left", "center")
 
         dxDrawRectangle(posX + width - sx*0.008, posY + sy*0.01, sx*0.0035, height - sy*0.02, tocolor(30, 30, 30, 200* bgAlpha))
@@ -152,7 +152,7 @@ function renderMDC()
     end
 
     if page == 1 then -- bejelnetkező felület 
-        dxDrawText("OriginalRoleplay", posX, posY, posX + width, posY + sy*0.03, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
+        dxDrawText("Vale do Ipiranga RP", posX, posY, posX + width, posY + sy*0.03, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
         dxDrawText("Mobile Data Computer", posX, posY + sy*0.02, posX + width, posY + sy*0.07, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 24/myX*sx), "center", "center")
 
         if core:isInSlot(posX + sx*0.002, posY + sy*0.145, sx*0.146, sy*0.045) then 
@@ -163,28 +163,28 @@ function renderMDC()
             dxDrawRectangle(posX + sx*0.002 + 2/myX*sx, posY + sy*0.145 + 2/myY*sy, sx*0.146 - 4/myX*sx, sy*0.045 - 4/myY*sy, tocolor(r, g, b, 120 * cAlpha))
         end
         
-        core:dxDrawShadowedText("Bejelentkezés", posX + sx*0.002, posY + sy*0.145, posX + sx*0.002 + sx*0.146, posY + sy*0.145 + sy*0.045, tocolor(255, 255, 255, 255 * cAlpha), tocolor(0, 0, 0, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center")
+        core:dxDrawShadowedText("Entrar", posX + sx*0.002, posY + sy*0.145, posX + sx*0.002 + sx*0.146, posY + sy*0.145 + sy*0.045, tocolor(255, 255, 255, 255 * cAlpha), tocolor(0, 0, 0, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center")
     elseif page == 2 then -- áttekintés
 
         if openType == "veh" then
             dxDrawRectangle(posX + sx*0.005, posY + sy*0.065, sx*0.37, sy*0.245, tocolor(30, 30, 30, 120 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006 + sx * 0.302, posY + sy*0.067, 115/myX*sx, sy*0.035, r, g, b, 180 * cAlpha, "Mentés", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006 + sx * 0.302, posY + sy*0.067, 115/myX*sx, sy*0.035, r, g, b, 180 * cAlpha, "Salvar", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
 
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.105, 649/myX*sx, sy*0.035, 3, 140, 252, 180 * cAlpha, "Járőr", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.142, 649/myX*sx, sy*0.035, 87, 222, 78, 180 * cAlpha, "Pihenő", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.179, 649/myX*sx, sy*0.035, 219, 42, 39, 180 * cAlpha, "Üldözés", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.216, 649/myX*sx, sy*0.035, 219, 42, 39, 180 * cAlpha, "Erősítés", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.253, 649/myX*sx, sy*0.035, 66, 66, 66, 180 * cAlpha, "Nincs szolgálatban", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.105, 649/myX*sx, sy*0.035, 3, 140, 252, 180 * cAlpha, "Patrulha", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.142, 649/myX*sx, sy*0.035, 87, 222, 78, 180 * cAlpha, "Intervalo", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.179, 649/myX*sx, sy*0.035, 219, 42, 39, 180 * cAlpha, "Perseguição", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.216, 649/myX*sx, sy*0.035, 219, 42, 39, 180 * cAlpha, "Reforço", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.253, 649/myX*sx, sy*0.035, 66, 66, 66, 180 * cAlpha, "Fora de serviço", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
 
             local unitState = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState")
-            dxDrawText("Jelenlegi állapot: "..unitState[5]..unitState[1], posX + sx*0.005, posY + sy*0.065, posX + sx*0.005 + sx*0.37, posY + sy*0.065 +  sy*0.244, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "bottom", false, false, false, true)
+            dxDrawText("Estado atual: "..unitState[5]..unitState[1], posX + sx*0.005, posY + sy*0.065, posX + sx*0.005 + sx*0.37, posY + sy*0.065 +  sy*0.244, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "bottom", false, false, false, true)
         else
             dxDrawImage(posX + ((width - 50/myX*sx) / 2) - 60/myX*sx, posY + sy*0.07, 120/myX*sx, 156.5/myY*sy, "pd_logo.png", 0, 0, 0, tocolor(255, 255, 255, 255 * cAlpha))
-            dxDrawText("Országos Rendőr-főkapitányság", posX + sx*0.005, posY, posX + sx*0.005 + sx*0.37, posY + height - 80/myX*sx, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
-            dxDrawText("Adatbázis", posX + sx*0.005, posY, posX + sx*0.005 + sx*0.37, posY + height - 30/myX*sx, tocolor(255, 255, 255, 100 * cAlpha), 0.8, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
+            dxDrawText("Polícia Civil do Estado de São Paulo", posX + sx*0.005, posY, posX + sx*0.005 + sx*0.37, posY + height - 80/myX*sx, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
+            dxDrawText("Base de dados", posX + sx*0.005, posY, posX + sx*0.005 + sx*0.37, posY + height - 30/myX*sx, tocolor(255, 255, 255, 100 * cAlpha), 0.8, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
         end
 
-        dxDrawText("Legújabb körözött személy", posX + sx*0.005, posY + sy*0.32, posX + sx*0.005 + sx*0.37, posY + sy*0.33 + sy*0.02, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
+        dxDrawText("Última pessoa em procura", posX + sx*0.005, posY + sy*0.32, posX + sx*0.005 + sx*0.37, posY + sy*0.33 + sy*0.02, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
         startY = posY + sy*0.35
         dxDrawRectangle(posX + sx*0.005, startY, sx*0.37, sy*0.078, tocolor(30, 30, 30, 120 * cAlpha))
         local v = clientMDCDatas["wanted_persons"][#clientMDCDatas["wanted_persons"]]
@@ -197,7 +197,7 @@ function renderMDC()
             end
 
             if v[6] then 
-                dxDrawText(v[1] .. " (Fokozott veszély!)", posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(237, 47, 47, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
+                dxDrawText(v[1] .. " (alto risco!)", posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(237, 47, 47, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
             else
                 dxDrawText(v[1], posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
             end
@@ -206,7 +206,7 @@ function renderMDC()
             dxDrawText(v[3]..", "..color..v[4], posX + sx*0.05 + 2/myX*sx, startY + sy*0.01, posX + sx*0.05 + 2/myX*sx + sx*0.31, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "right", "top", false, false, false, true)
         end
 
-        dxDrawText("Legújabb körözött gépjármű", posX + sx*0.005, posY + sy*0.44, posX + sx*0.005 + sx*0.37, posY + sy*0.45 + sy*0.02, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
+        dxDrawText("Último veículo em procura", posX + sx*0.005, posY + sy*0.44, posX + sx*0.005 + sx*0.37, posY + sy*0.45 + sy*0.02, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
         startY = posY + sy*0.47
         local v = clientMDCDatas["wanted_cars"][#clientMDCDatas["wanted_cars"]]
         dxDrawRectangle(posX + sx*0.005, startY, sx*0.37, sy*0.078, tocolor(30, 30, 30, 120 * cAlpha))
@@ -216,8 +216,8 @@ function renderMDC()
             dxDrawText(v[1], posX + sx*0.005 + 6/myX*sx, startY + 8/myY*sy, posX + sx*0.005 + 6/myX*sx + 110/myX*sx, startY + 8/myY*sy + 70/myY*sy, tocolor(51, 115, 232, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "center", "center")
 
             dxDrawText(v[2], posX + sx*0.075 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
-            dxDrawText("Szín: "..color..v[4], posX + sx*0.075 + 2/myX*sx, startY + sy*0.03, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
-            dxDrawText("Körözés indoka: "..color..v[3], posX + sx*0.075 + 2/myX*sx, startY + sy*0.05, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
+            dxDrawText("Cor: "..color..v[4], posX + sx*0.075 + 2/myX*sx, startY + sy*0.03, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
+            dxDrawText("Motivo da procura: "..color..v[3], posX + sx*0.075 + 2/myX*sx, startY + sy*0.05, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
 
             dxDrawText(v[5]..", "..color..v[6], posX + sx*0.05 + 2/myX*sx, startY + sy*0.01, posX + sx*0.05 + 2/myX*sx + sx*0.31, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "right", "top", false, false, false, true)
         end
@@ -230,7 +230,7 @@ function renderMDC()
         local wantedPersonsSearch = {}
         local searchText = core:getEditboxText("search2") or ""
         
-        if not (searchText == "Keresés") then
+        if not (searchText == "Buscar") then
             for k, v in ipairs(clientMDCDatas["wanted_persons"]) do 
                 if string.match(string.lower(v[1]), string.lower(searchText)) then 
                     table.insert(wantedPersonsSearch, v)
@@ -268,7 +268,7 @@ function renderMDC()
                 end
 
                 if v[6] then 
-                    dxDrawText(v[1] .. " (Fokozott veszély!)", posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(237, 47, 47, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
+                    dxDrawText(v[1] .. " (alto risco!)", posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(237, 47, 47, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
                 else
                     dxDrawText(v[1], posX + sx*0.05 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
                 end
@@ -287,10 +287,10 @@ function renderMDC()
         end
 
         if modifyedLine > 0 then 
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 232/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Körözés módosítása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006 + 234/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy, 237, 47, 47, 180 * cAlpha, "Körözés visszavonása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 232/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Editar procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006 + 234/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy, 237, 47, 47, 180 * cAlpha, "Revogar procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
         else
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 495/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Körözés kiadása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 495/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Emitir procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
         end
 
         if core:isInSlot(posX + sx*0.285 + 6/myX*sx, posY + sy*0.555, 30/myX*sx, 32/myY*sy) then
@@ -378,7 +378,7 @@ function renderMDC()
         local wantedCarsSearch = {}
         local searchText = core:getEditboxText("search3") or ""
         
-        if not (searchText == "Keresés") then
+        if not (searchText == "Buscar") then
             for k, v in ipairs(clientMDCDatas["wanted_cars"]) do 
                 if string.match(string.lower(v[1]), string.lower(searchText)) then 
                     table.insert(wantedCarsSearch, v)
@@ -411,8 +411,8 @@ function renderMDC()
                 dxDrawText(v[1], posX + sx*0.005 + 6/myX*sx, startY + 8/myY*sy, posX + sx*0.005 + 6/myX*sx + 110/myX*sx, startY + 8/myY*sy + 70/myY*sy, tocolor(51, 115, 232, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "center", "center")
 
                 dxDrawText(v[2], posX + sx*0.075 + 2/myX*sx, startY, posX + sx*0.05 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.04, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center")
-                dxDrawText("Szín: "..color..v[4], posX + sx*0.075 + 2/myX*sx, startY + sy*0.03, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
-                dxDrawText("Körözés indoka: "..color..v[3], posX + sx*0.075 + 2/myX*sx, startY + sy*0.05, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
+                dxDrawText("Cor: "..color..v[4], posX + sx*0.075 + 2/myX*sx, startY + sy*0.03, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
+                dxDrawText("Motivo da procura: "..color..v[3], posX + sx*0.075 + 2/myX*sx, startY + sy*0.05, posX + sx*0.05 + 2/myX*sx + sx*0.2, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "top", false, false, false, true)
 
                 dxDrawText(v[5]..", "..color..v[6], posX + sx*0.05 + 2/myX*sx, startY + sy*0.01, posX + sx*0.05 + 2/myX*sx + sx*0.31, startY + sy*0.055, tocolor(255, 255, 255, 100 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "right", "top", false, false, false, true)
 
@@ -427,10 +427,10 @@ function renderMDC()
         end
 
         if modifyedLineVeh > 0 then 
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 448/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Körözés módosítása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
-            core:dxDrawButton(posX + sx*0.006 + 450/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy, 237, 47, 47, 180 * cAlpha, "Körözés visszavonása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 448/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Editar procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006 + 450/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy, 237, 47, 47, 180 * cAlpha, "Revogar procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
         else
-            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 650/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Körözés kiadása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+            core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 650/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Emitir procura", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
         end
 
         local lineHeight = math.min(5 / #clientMDCDatas["wanted_cars"], 1)
@@ -496,7 +496,7 @@ function renderMDC()
         local penaltiesSearch = {}
         local searchText = core:getEditboxText("search") or ""
         
-        if not (searchText == "Keresés") then
+        if not (searchText == "Buscar") then
             for k, v in ipairs(clientMDCDatas["penalties"][penaltiesFaction]) do 
                 if string.match(string.lower(v[1]), string.lower(searchText)) then 
                     table.insert(penaltiesSearch, v)
@@ -585,7 +585,7 @@ function renderMDC()
 
             if v then 
                 dxDrawText(v[2] .. " #ffffff(#"..v[1]..")", posX + sx*0.01 + 2/myX*sx, startY, posX + sx*0.01 + 2/myX*sx + sx*0.37 - 12/myX*sx, startY + sy*0.03, tocolor(r, g, b, 255 * cAlpha), 1, font:getFont("bebasneue", 14/myX*sx), "left", "center", false, false, false, true)
-                dxDrawText("Jogosultság: "..color..accessTypes[v[5]].. "#ffffff Szervezet: "..color..(factions[v[4]] or "Ismeretlen"), posX + sx*0.01 + 2/myX*sx, startY, posX + sx*0.01 + 2/myX*sx + sx*0.34 - 12/myX*sx, startY + sy*0.03, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center", false, false, false, true)
+                dxDrawText("Acesso: "..color..accessTypes[v[5]].. "#ffffff Organização: "..color..(factions[v[4]] or "Desconhecida"), posX + sx*0.01 + 2/myX*sx, startY, posX + sx*0.01 + 2/myX*sx + sx*0.34 - 12/myX*sx, startY + sy*0.03, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center", false, false, false, true)
 
                 if core:isInSlot(posX + sx*0.35, startY, sx*0.02, sy*0.03) then
                     dxDrawText("", posX + sx*0.01 + 2/myX*sx, startY, posX + sx*0.01 + 2/myX*sx + sx*0.36 - 12/myX*sx, startY + sy*0.03, tocolor(237, 47, 47, 150 * cAlpha), 1, font:getFont("fontawesome2", 15/myX*sx), "right", "center", false, false, false, true)
@@ -597,7 +597,7 @@ function renderMDC()
             startY = startY + sy*0.032
         end
 
-        core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 650/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Járőr fiók létrehozása", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+        core:dxDrawButton(posX + sx*0.006, posY + sy*0.555, 650/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Criar conta de patrulha", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
 
         local lineHeight = math.min(12 / #clientMDCDatas["users"], 1)
         dxDrawRectangle(posX + sx*0.371, posY + sy*0.065 + 3/myY*sy, sx*0.002, scrollHeight, tocolor(35, 35, 35, 200 * cAlpha))
@@ -607,14 +607,14 @@ function renderMDC()
 
         dxDrawText(searchTypes[search_type], posX + sx*0.16, posY + sy*0.07, posX + sx*0.16 + 240/myX*sx, posY + sy*0.07 + sy*0.035, tocolor(255, 255, 255, 200 * cAlpha), 1, font:getFont("condensed", 12/myX*sx), "center", "center", false, false, false, true)
 
-        core:dxDrawButton(posX + sx*0.3, posY + sy*0.07, 100/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Keresés", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
+        core:dxDrawButton(posX + sx*0.3, posY + sy*0.07, 100/myX*sx, 32/myY*sy, r, g, b, 180 * cAlpha, "Buscar", tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), true, tocolor(0, 0, 0, 255 * cAlpha))
 
 
 
         if search_panelData then 
             
             dxDrawRectangle(posX + sx*0.006, posY + sy*0.12, 650/myX*sx, sy*0.03, tocolor(30, 30, 30, 200 * cAlpha))
-            dxDrawText("Adatok", posX + sx*0.01, posY + sy*0.12, posX + sx*0.01 + 650/myX*sx, posY + sy*0.12 + sy*0.03, tocolor(255, 255, 255, 200 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
+            dxDrawText("Dados", posX + sx*0.01, posY + sy*0.12, posX + sx*0.01 + 650/myX*sx, posY + sy*0.12 + sy*0.03, tocolor(255, 255, 255, 200 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
 
             local startY = posY + sy*0.12 + sy*0.03
             for k, v in ipairs(displaySearchDatas[search_type]) do 
@@ -637,8 +637,8 @@ function renderMDC()
                 if v[2] then
                     data = search_panelData[v[2]]
                 else
-                    if v[1] == "Körözés" then 
-                        data = "Nincs kiadott körözés"
+                    if v[1] == "Procura" then 
+                        data = "Sem procura ativa"
 
                         if search_type == "veh" then 
                             for k4, v4 in ipairs(clientMDCDatas["wanted_cars"]) do 
@@ -652,7 +652,7 @@ function renderMDC()
                                     data = "#ffffff"..v4[3] .. ": #fc4c4c"..v4[2]
 
                                     if v4[6] then 
-                                        data = data .. " [Fokozottan veszélyes!]"
+                                        data = data .. " [altamente perigoso!]"
                                     end
                                 end
                             end
@@ -665,10 +665,10 @@ function renderMDC()
                 elseif v[2] == "color" then 
                     local vehicleColor = fromJSON(data)
 
-                    data = rgbToHex(vehicleColor[1], vehicleColor[2], vehicleColor[3]).."Szín1"..rgbToHex(vehicleColor[4], vehicleColor[5], vehicleColor[6]).." Szín2"
+                    data = rgbToHex(vehicleColor[1], vehicleColor[2], vehicleColor[3]).."Cor1"..rgbToHex(vehicleColor[4], vehicleColor[5], vehicleColor[6]).." Cor2"
                 elseif v[2] == "owner" then 
                     if search_panelData["isFactionVehicle"] == 1 then 
-                        data = "Szervezeti jármű"
+                        data = "Veículo da facção"
                     end
                 elseif v[2] == "isBooked" then 
                     if data == 0 then 
@@ -677,14 +677,14 @@ function renderMDC()
                         data = "Igen"
                     end
                 elseif v[2] == "age" then 
-                    data = tostring(data) .. "#ffffff év"
+                    data = tostring(data) .. "#ffffff anos"
                 elseif v[2] == "height" then 
                     data = tostring(data) .. "#ffffff cm"
                 elseif v[2] == "weight" then 
                     data = tostring(data) .. "#ffffff kg"
                 elseif v[2] == "job" then 
                     if tonumber(data) == 0 then 
-                        data = "Munkanélküli"
+                        data = "Desempregado"
                     else
                         data = exports.oJob:getJobName(data)
                     end
@@ -692,7 +692,7 @@ function renderMDC()
                     local jaildatas = fromJSON(data)
 
                     if jaildatas[3] == false then 
-                        data = "Szabadlábon"
+                        data = "Em liberdade"
                     else
                         data = jaildatas[1][1] .. " #ffffffnap, Oka: "..color..jaildatas[1][2]
                     end
@@ -716,14 +716,14 @@ function renderMDC()
             if search_panelOthers then
                 if #search_panelOthers > 0 then
                     dxDrawRectangle(posX + sx*0.006, startY, 650/myX*sx, sy*0.03, tocolor(30, 30, 30, 200 * cAlpha))
-                    dxDrawText("Feljegyzések", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.03, tocolor(255, 255, 255, 200 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
+                    dxDrawText("Registros (MDC)", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.03, tocolor(255, 255, 255, 200 * cAlpha), 1, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
 
                     startY = startY + sy*0.03
 
                     dxDrawRectangle(posX + sx*0.006, startY, 650/myX*sx, sy*0.025, tocolor(30, 30, 30, 255 * cAlpha))
-                    dxDrawText("Időpont", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
-                    dxDrawText("Indok", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "center", "center", false, false, false, true)
-                    dxDrawText("Egyéb", posX + sx*0.01, startY, posX + sx*0.01 + 635/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "right", "center", false, false, false, true)
+                    dxDrawText("Data", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "left", "center", false, false, false, true)
+                    dxDrawText("Motivo", posX + sx*0.01, startY, posX + sx*0.01 + 650/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "center", "center", false, false, false, true)
+                    dxDrawText("Detalhes", posX + sx*0.01, startY, posX + sx*0.01 + 635/myX*sx, startY + sy*0.025, tocolor(r, g, b, 255 * cAlpha), 0.9, font:getFont("condensed", 10/myX*sx), "right", "center", false, false, false, true)
                     startY = startY + sy*0.025
 
 
@@ -763,8 +763,8 @@ function renderMDC()
             end 
         else
             dxDrawImage(posX + ((width - 50/myX*sx) / 2) - 60/myX*sx, posY + sy*0.19, 120/myX*sx, 156.5/myY*sy, "pd_logo.png", 0, 0, 0, tocolor(255, 255, 255, 255 * cAlpha))
-            dxDrawText("Nem található a keresési feltételeknek megfelelő adat az adatbázisban.", posX, posY, posX + (width - 50/myX*sx), posY + height + 130/myX*sx, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
-            dxDrawText("Próbálkozz később.", posX, posY, posX + (width - 50/myX*sx), posY + height + 180/myY*sy, tocolor(255, 255, 255, 100 * cAlpha), 0.8, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
+            dxDrawText("Nenhum registro encontrado na base.", posX, posY, posX + (width - 50/myX*sx), posY + height + 130/myX*sx, tocolor(255, 255, 255, 255 * cAlpha), 1, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
+            dxDrawText("Tente novamente mais tarde.", posX, posY, posX + (width - 50/myX*sx), posY + height + 180/myY*sy, tocolor(255, 255, 255, 100 * cAlpha), 0.8, font:getFont("condensed", 13/myX*sx), "center", "center", false, false, false, true)
         end
     end
 end
@@ -821,7 +821,7 @@ function keyMDC(key, state)
                         setElementData(getPedOccupiedVehicle(localPlayer), "mdc:vehicleLoginDatas", false)
                     end
 
-                    infobox:outputInfoBox("Sikeresen kijelentkeztél az MDC felhazsnálóból!", "success")
+                    infobox:outputInfoBox("Sessão encerrada no MDC.", "success")
                     setMDCPage(1)
                 end
             end
@@ -840,28 +840,28 @@ function keyMDC(key, state)
                     end
 
                     if not talalat then 
-                        errorMessage = "Nincs ilyen felhazsnálónévvel rendelkező MDC fiók!"
+                        errorMessage = "Não existe conta MDC com este usuário!"
                     else
                         if password == talalat[1] then 
                             if talalat[3] == 2 then 
                                 if not dashboard:isPlayerLeader(getElementData(localPlayer, "char:duty:faction") or 0) then 
-                                    errorMessage = "Nem vagy a szervezet vezetője, így nincs jogosultásod belépni ebbe a fiókba!"
+                                    errorMessage = "Sem permissão de líder para esta conta."
                                 end
                             elseif talalat[3] == 3 then 
                                 if not getElementData(localPlayer, "aclLogin") then
-                                    errorMessage = "Nem rendelkezel megfelelő jogosultságokkal a bejelentkezéshez! (Fejlesztői fiók)"
+                                    errorMessage = "Sem permissão para esta conta de desenvolvimento!"
                                 end
                                 talalat[2] = "orp"
                             end
                         else
-                            errorMessage = "Hibás jelszó a(z) "..username.." felhasználónevű MDC fiókhoz!"
+                            errorMessage = "Senha incorreta para o usuário MDC "..username.."!"
                         end
                     end
 
                     if errorMessage then 
                         infobox:outputInfoBox(errorMessage, "error")
                     else
-                        infobox:outputInfoBox("Sikeresen bejelentkeztél a(z) "..username.." felhasználónevű MDC fiókba!", "success")
+                        infobox:outputInfoBox("Login no MDC efetuado: "..username..".", "success")
 
                         mdcAccountDatas["user"] = username
                         mdcAccountDatas["access"] = talalat[3]
@@ -879,9 +879,9 @@ function keyMDC(key, state)
                     if core:isInSlot(posX + sx*0.006 + sx * 0.302, posY + sy*0.067, 115/myX*sx, sy*0.035) then
                         if string.len(core:getEditboxText("enumber")) <= 12 then
                             setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber", core:getEditboxText("enumber"))
-                            infobox:outputInfoBox("Egységazonosító sikeresen megválltoztatva!", "success")
+                            infobox:outputInfoBox("Identificação da unidade atualizada!", "success")
                         else
-                            infobox:outputInfoBox("Maximum 12 karakter hosszúságú egységazonosítót adhatsz meg!", "warning")
+                            infobox:outputInfoBox("Use até 12 caracteres na ID da unidade!", "warning")
                         end
                     end
 
@@ -889,7 +889,7 @@ function keyMDC(key, state)
                         if core:isInSlot(posX + sx*0.006, posY + sy*0.105, 649/myX*sx, sy*0.035) then 
                             local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
                             if string.len(unitNumber) > 0 then 
-                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Járőr", 3, 140, 252, "#038cfc"})
+                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Patrulha", 3, 140, 252, "#038cfc"})
                                 lastModify = getTickCount()
                             end
                         end
@@ -897,7 +897,7 @@ function keyMDC(key, state)
                         if core:isInSlot(posX + sx*0.006, posY + sy*0.142, 649/myX*sx, sy*0.035) then 
                             local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
                             if string.len(unitNumber) > 0 then 
-                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Pihenő", 87, 222, 78, "#57de4e"})
+                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Intervalo", 87, 222, 78, "#57de4e"})
                                 lastModify = getTickCount()
                             end
                         end
@@ -905,7 +905,7 @@ function keyMDC(key, state)
                         if core:isInSlot(posX + sx*0.006, posY + sy*0.179, 649/myX*sx, sy*0.035) then 
                             local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
                             if string.len(unitNumber) > 0 then 
-                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Üldözés", 219, 42, 39, "#db2a27"})
+                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Perseguição", 219, 42, 39, "#db2a27"})
                                 lastModify = getTickCount()
                             end
                         end
@@ -913,7 +913,7 @@ function keyMDC(key, state)
                         if core:isInSlot(posX + sx*0.006, posY + sy*0.216, 649/myX*sx, sy*0.035) then 
                             local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
                             if string.len(unitNumber) > 0 then 
-                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Erősítés", 219, 42, 39, "#db2a27"})
+                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Reforço", 219, 42, 39, "#db2a27"})
                                 lastModify = getTickCount()
                             end
                         end
@@ -921,7 +921,7 @@ function keyMDC(key, state)
                         if core:isInSlot(posX + sx*0.006, posY + sy*0.253, 649/myX*sx, sy*0.035) then 
                             local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
                             if string.len(unitNumber) > 0 then 
-                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Nincs szolgálatban", 66, 66, 66, "#424242"})
+                                setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Fora de serviço", 66, 66, 66, "#424242"})
                                 lastModify = getTickCount()
                             end
                         end
@@ -940,7 +940,7 @@ function keyMDC(key, state)
                     x, y, w, h = posX + sx*0.006, posY + sy*0.555, 232/myX*sx, 32/myY*sy
 
                     if core:isInSlot(posX + sx*0.006 + 234/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy) then
-                        infobox:outputInfoBox("'"..clientMDCDatas["wanted_persons"][modifyedLine][1].."' nevű személy körözése visszavonásra került!", "success")
+                        infobox:outputInfoBox("Procura revogada para '"..clientMDCDatas["wanted_persons"][modifyedLine][1].."'.", "success")
 
                         triggerServerEvent("mdc > deleteDataFromMDC", resourceRoot, "wanted_persons", clientMDCDatas["wanted_persons"][modifyedLine][7])
                         modifyedLine = 0
@@ -968,16 +968,16 @@ function keyMDC(key, state)
 
                             if modifyedLine > 0 then
                                 if name == clientMDCDatas["wanted_persons"][modifyedLine][1] and desc == clientMDCDatas["wanted_persons"][modifyedLine][2] and skinID == clientMDCDatas["wanted_persons"][modifyedLine][5] and selectedMostDanger == clientMDCDatas["wanted_persons"][modifyedLine][6] then 
-                                    infobox:outputInfoBox("Nem történt változás a körözési adatokban!", "error") 
+                                    infobox:outputInfoBox("Nenhuma alteração nos dados de procura.", "error") 
                                     return 
                                 end
                                 
-                                infobox:outputInfoBox("'"..name.."' nevű személy körözési adatai módosultak!", "success")
+                                infobox:outputInfoBox("Dados de procura de '"..name.."' atualizados!", "success")
 
                                 triggerServerEvent("mdc > modifyDataInMDC", resourceRoot, "wanted_persons", clientMDCDatas["wanted_persons"][modifyedLine][7], {name, desc, string.format("%04d. %02d. %02d. %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), mdcAccountDatas["user"], skinID, selectedMostDanger, clientMDCDatas["wanted_persons"][modifyedLine][7]})
                                 modifyedLine = 0
                             else
-                                infobox:outputInfoBox("Körözés kiadva a(z) '"..name.."' nevű személyre!", "success")
+                                infobox:outputInfoBox("Procura emitida para '"..name.."'!", "success")
                                 triggerServerEvent("mdc > addDataToMDC", resourceRoot, "wanted_persons", {name, desc, string.format("%04d. %02d. %02d. %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), mdcAccountDatas["user"], skinID, selectedMostDanger})
                             end
 
@@ -987,10 +987,10 @@ function keyMDC(key, state)
                             core:setEditboxText("kname", mdcEditboxs[3][1].text)
                             core:setEditboxText("kdesc", mdcEditboxs[3][2].text)
                         else
-                            infobox:outputInfoBox("A körözés indokának maximum "..penaltieLimits["kdesc"].." karakterből kell álnia.", "error")
+                            infobox:outputInfoBox("O motivo deve ter no máximo "..penaltieLimits["kdesc"].." caracteres.", "error")
                         end
                     else
-                        infobox:outputInfoBox("A körözött személy nevének minimum 5 és maximum "..penaltieLimits["kname"].." karakterből kell álnia.", "error")
+                        infobox:outputInfoBox("O nome deve ter entre 5 e "..penaltieLimits["kname"].." caracteres.", "error")
                     end
                 end
 
@@ -1037,7 +1037,7 @@ function keyMDC(key, state)
                     x, y, w, h = posX + sx*0.006, posY + sy*0.555, 448/myX*sx, 32/myY*sy
 
                     if core:isInSlot(posX + sx*0.006 + 450/myX*sx, posY + sy*0.555, 200/myX*sx, 32/myY*sy) then
-                        infobox:outputInfoBox("'"..clientMDCDatas["wanted_cars"][modifyedLineVeh][1].."' rendszámú gépjármű körözése visszavonásra került!", "success")
+                        infobox:outputInfoBox("Procura do veículo placa '"..clientMDCDatas["wanted_cars"][modifyedLineVeh][1].."' revogada!", "success")
 
                         triggerServerEvent("mdc > deleteDataFromMDC", resourceRoot, "wanted_cars", clientMDCDatas["wanted_cars"][modifyedLineVeh][7])
                         modifyedLineVeh = 0
@@ -1064,16 +1064,16 @@ function keyMDC(key, state)
 
                                     if modifyedLineVeh > 0 then
                                         if (plate == clientMDCDatas["wanted_cars"][modifyedLineVeh][1] and type == clientMDCDatas["wanted_cars"][modifyedLineVeh][2] and color == clientMDCDatas["wanted_cars"][modifyedLineVeh][4] and desc == clientMDCDatas["wanted_cars"][modifyedLineVeh][3]) then 
-                                            infobox:outputInfoBox("Nem történt változás a körözési adatokban!", "error") 
+                                            infobox:outputInfoBox("Nenhuma alteração nos dados de procura.", "error") 
                                             return 
                                         end
                                         
-                                        infobox:outputInfoBox("'"..plate.."' rendszámú jármű körözési adatai módosultak!", "success")
+                                        infobox:outputInfoBox("Dados de procura do veículo '"..plate.."' atualizados!", "success")
 
                                         triggerServerEvent("mdc > modifyDataInMDC", resourceRoot, "wanted_cars", clientMDCDatas["wanted_cars"][modifyedLineVeh][7], {plate, type, desc, color, string.format("%04d. %02d. %02d. %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), mdcAccountDatas["user"], clientMDCDatas["wanted_cars"][modifyedLineVeh][7]})
                                         modifyedLineVeh = 0
                                     else
-                                        infobox:outputInfoBox("Körözés kiadva a(z) '"..plate.."' rendszámú gépjárműre!", "success")
+                                        infobox:outputInfoBox("Procura emitida para o veículo placa '"..plate.."'!", "success")
                                         triggerServerEvent("mdc > addDataToMDC", resourceRoot, "wanted_cars", {plate, type, desc, color, string.format("%04d. %02d. %02d. %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute")), mdcAccountDatas["user"]})
                                     end
 
@@ -1082,16 +1082,16 @@ function keyMDC(key, state)
                                     core:setEditboxText("kjtype", mdcEditboxs[4][2].text)
                                     core:setEditboxText("kjdesc", mdcEditboxs[4][3].text)
                                 else
-                                    infobox:outputInfoBox("A körözött jármű színének minimum 3 és maximum "..penaltieLimits["kjcolor"].." karakterből kell álnia.", "error")
+                                    infobox:outputInfoBox("A cor do veículo: entre 3 e "..penaltieLimits["kjcolor"].." caracteres.", "error")
                                 end
                             else
-                                infobox:outputInfoBox("A körözött jármű rendszámának minimum 3 és maximum "..penaltieLimits["kjplate"].." karakterből kell álnia.", "error")
+                                infobox:outputInfoBox("A placa: entre 3 e "..penaltieLimits["kjplate"].." caracteres.", "error")
                             end
                         else
-                            infobox:outputInfoBox("A körözés indokának maximum "..penaltieLimits["kjdesc"].." karakterből kell álnia.", "error")
+                            infobox:outputInfoBox("O motivo deve ter no máximo "..penaltieLimits["kjdesc"].." caracteres.", "error")
                         end
                     else
-                        infobox:outputInfoBox("A körözött jármű típusának legalább 5 és maximum "..penaltieLimits["kjtype"].." karakterből kell álnia.", "error")
+                        infobox:outputInfoBox("O tipo do veículo: entre 5 e "..penaltieLimits["kjtype"].." caracteres.", "error")
                     end
                 end
 
@@ -1138,7 +1138,7 @@ function keyMDC(key, state)
                 local penaltiesSearch = {}
                 local searchText = core:getEditboxText("search") or ""
                 
-                if not (searchText == "Keresés") then
+                if not (searchText == "Buscar") then
                     for k, v in ipairs(clientMDCDatas["penalties"][penaltiesFaction]) do 
                         if string.match(string.lower(v[1]), string.lower(searchText)) then 
                             table.insert(penaltiesSearch, v)
@@ -1177,7 +1177,7 @@ function keyMDC(key, state)
                                                 break
                                             end
                                         end
-                                        infobox:outputInfoBox("A(z) '"..name.."' nevű szabályszegés törlésre került!", "success")
+                                        infobox:outputInfoBox("Infração '"..name.."' removida!", "success")
 
                                         if needScroll then 
                                             --penaltiesScroll = penaltiesScroll - 1
@@ -1201,7 +1201,7 @@ function keyMDC(key, state)
                                 if lDesc >= 5 and lName <= penaltieLimits["desc"] then 
                                     if tonumber(price) then 
                                         if tonumber(price) >= 10 and tonumber(price) <= 50000 then 
-                                            infobox:outputInfoBox("A(z) '"..name.."' nevű szabályszegés sikeresen létrehozása került!", "success")
+                                            infobox:outputInfoBox("Infração '"..name.."' cadastrada!", "success")
                                             lastAction = getTickCount()
 
                                             triggerServerEvent("mdc > addDataToMDC", resourceRoot, "penalties", {name, desc, price}, penaltiesFaction)
@@ -1210,16 +1210,16 @@ function keyMDC(key, state)
                                             core:setEditboxText("pdesc", mdcEditboxs[5][2].text)
                                             core:setEditboxText("pprice", mdcEditboxs[5][3].text)
                                         else
-                                            infobox:outputInfoBox("A büntetés értékének a 10-50000 értéktartományban kell lennie.", "error")
+                                            infobox:outputInfoBox("O valor deve estar entre 10 e 50000.", "error")
                                         end
                                     else
-                                        infobox:outputInfoBox("A büntetés értéke csak pénzösszeg lehet.", "error")
+                                        infobox:outputInfoBox("O valor da multa deve ser um número ($).", "error")
                                     end
                                 else
-                                    infobox:outputInfoBox("A szabályszegés leírásának minimum 5 és maximum "..penaltieLimits["desc"].." karakterből kell álnia.", "error")
+                                    infobox:outputInfoBox("A descrição: entre 5 e "..penaltieLimits["desc"].." caracteres.", "error")
                                 end
                             else
-                                infobox:outputInfoBox("A szabályszegés nevének minimum 5 és maximum "..penaltieLimits["name"].." karakterből kell álnia.", "error")
+                                infobox:outputInfoBox("O nome da infração: entre 5 e "..penaltieLimits["name"].." caracteres.", "error")
                             end
                         end
                     end
@@ -1239,12 +1239,12 @@ function keyMDC(key, state)
                             if v[5] == 1 then
                                 if v[4] == mdcAccountDatas["faction"] then 
                                     triggerServerEvent("mdc > deleteDataFromMDC", resourceRoot, "users", v[1])
-                                    infobox:outputInfoBox("Sikeresen töröltél egy mdc felhasználót!", "success")
+                                    infobox:outputInfoBox("Usuário MDC excluído!", "success")
                                 else
-                                    infobox:outputInfoBox("Csak a saját szervezetedbe tartozó felhasznlókat törölheted!", "error")
+                                    infobox:outputInfoBox("Só é possível remover contas da própria organização!", "error")
                                 end
                             else
-                                infobox:outputInfoBox("Ezt a fiókot nem törölheted ki!", "error")
+                                infobox:outputInfoBox("Esta conta não pode ser removida.", "error")
                             end
                         end
                     end
@@ -1257,17 +1257,17 @@ function keyMDC(key, state)
 
                     if string.len(username) >= 3 and string.len(username) <= 12 then 
                         if string.len(password) >= 3 and string.len(password) <= 12 then 
-                            infobox:outputInfoBox("Sikeresen létrehoztál egy felhasználói fiókot!", "success")
+                            infobox:outputInfoBox("Conta de usuário MDC criada!", "success")
 
                             triggerServerEvent("mdc > addDataToMDC", resourceRoot, "users", {username, password, mdcAccountDatas["faction"]})
 
                             core:setEditboxText("u_name", mdcEditboxs[6][1].text)
                             core:setEditboxText("u_pass", mdcEditboxs[6][2].text)
                         else
-                            infobox:outputInfoBox("A fiók jelszavának 3-12 karakterből kell állnia!", "error")
+                            infobox:outputInfoBox("A senha deve ter entre 3 e 12 caracteres!", "error")
                         end
                     else
-                        infobox:outputInfoBox("A fiók felhasználónevének 3-12 karakterből kell állnia!", "error")
+                        infobox:outputInfoBox("O usuário deve ter entre 3 e 12 caracteres!", "error")
                     end
                 end
             elseif page == 7 then 
@@ -1293,7 +1293,7 @@ function keyMDC(key, state)
                             getMDCData(search_type, searchValue)
                         end
                     else
-                        infobox:outputInfoBox("Ne ilyen gyorsan!", "warning")
+                        infobox:outputInfoBox("Aguarde antes de repetir esta ação.", "warning")
                     end
                 end
 
@@ -1523,7 +1523,7 @@ addEventHandler("onClientClick", root, function(key, state, _, _, _, _, _, eleme
                         if dashboard:getFactionType(faction) == 1 then 
                             if not getPedOccupiedVehicle(localPlayer) then
                                 if isElement(getElementData(element, "policePC:inUse")) then 
-                                    outputChatBox(core:getServerPrefix("red-dark", "PC", 2).."Ez a laptop jelenleg használatban van!", 255, 255, 255, true)
+                                    outputChatBox(core:getServerPrefix("red-dark", "PC", 2).."Este computador já está em uso!", 255, 255, 255, true)
                                 else
                                     setElementData(element, "policePC:inUse", localPlayer)
                                     openType = "obj"
@@ -1557,7 +1557,7 @@ addEventHandler("onClientElementDataChange", root, function(data, old, new)
             if dashboard:getFactionType(faction) == 1 then 
                 local unitNumber = getElementData(source, "mdc:unitNumber")
                 if string.len(unitNumber) > 0 then 
-                    outputChatBox(core:getServerPrefix("blue-light-2", "MDC", 2)..color..unitNumber.." #ffffffazonosítóval rendelkező egység megváltoztatta az állapotát: "..new[5]..new[1].."#ffffff.", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("blue-light-2", "MDC", 2)..color..unitNumber.." #ffffff atualizou o estado para: "..new[5]..new[1].."#ffffff.", 255, 255, 255, true)
                 end
             end
         end
@@ -1590,20 +1590,20 @@ end)
 addCommandHandler("setmdcjaror", function()
     local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
     if string.len(unitNumber) > 0 then 
-        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Járőr", 3, 140, 252, "#038cfc"})                            
+        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Patrulha", 3, 140, 252, "#038cfc"})                            
     end
 end)
 
 addCommandHandler("setmdculdozes", function()
    local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
     if string.len(unitNumber) > 0 then 
-        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Üldözés", 219, 42, 39, "#db2a27"})                            
+        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Perseguição", 219, 42, 39, "#db2a27"})                            
     end
 end)
 
 addCommandHandler("setmdcerosites", function()
     local unitNumber = getElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitNumber")
     if string.len(unitNumber) > 0 then 
-        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Erősítés", 219, 42, 39, "#db2a27"})
+        setElementData(getPedOccupiedVehicle(localPlayer), "mdc:unitState", {"Reforço", 219, 42, 39, "#db2a27"})
     end
 end)

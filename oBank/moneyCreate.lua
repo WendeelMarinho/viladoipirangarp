@@ -20,30 +20,30 @@ function startMoneyCaseOpen()
         if getElementDimension(localPlayer) == getElementDimension(openingMarker) then  
             if exports.oInventory:hasItem(163) then
                 triggerServerEvent("bank > caseOpen > start", resourceRoot)
-                chat:sendLocalMeAction("elkezdtett kinyitni egy pénzkazettát.")
+                chat:sendLocalMeAction("começa a abrir um maço de dinheiro.")
                 setElementFrozen(localPlayer, true)
                 exports.oMinigames:createMinigame(3, _, 0.05, "bank > moneyCase > success", "bank > moneyCase > unSuccess")
                 isOpenInProgress = true 
                 return true
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Pénzkazetta", 2).."A pénzkazetta kinyitásához szükséged van egy fúróra!", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Maço", 2).."Você precisa de uma furadeira para abrir o maço!", 255, 255, 255, true)
                 return false
             end
         end
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Pénzkazetta", 2).."Ezen a helyen nem nyithatod ki a pénzkazettát!", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Maço", 2).."Não é possível abrir o maço neste local!", 255, 255, 255, true)
         return false
     end
 end
 
 addEvent("bank > moneyCase > success", true)
 addEventHandler("bank > moneyCase > success", root, function()
-    infobox:outputInfoBox("Sikeresen kinyitottad a pénzkazettát!", "success")
+    infobox:outputInfoBox("Maço aberto com sucesso!", "success")
 
     local money = math.random(5000, 25000)
-    outputChatBox(core:getServerPrefix("server", "Pénzkazetta", 2).."A pénzkazetta tartalma #76de7d"..money.."$ #ffffffvolt.", 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Maço", 2).."O maço tinha #76de7d"..money.."$#ffffff.", 255, 255, 255, true)
 
-    chat:sendLocalDoAction("sikeresen kinyitotta a pénzkazettát, amely "..money.."$-t tartalmazott.")
+    chat:sendLocalDoAction("abre o maço com "..money.."$ dentro.")
     setElementFrozen(localPlayer, false)
 
     triggerServerEvent("bank > caseOpen > end", resourceRoot, money)
@@ -52,8 +52,8 @@ end)
 
 addEvent("bank > moneyCase > unSuccess", true)
 addEventHandler("bank > moneyCase > unSuccess", root, function()
-    chat:sendLocalDoAction("nem sikerült kinyitnia a pénzkazettát.")
-    infobox:outputInfoBox("Nem sikerült kinyitotnod a pénzkazettát, ezért felrobbant a biztonsági patron és festékes lett az arcod!", "warning")
+    chat:sendLocalDoAction("falha ao abrir o maço de dinheiro.")
+    infobox:outputInfoBox("Falha ao abrir o maço: o cartucho de tinta disparou e sua face ficou marcada!", "warning")
     setElementFrozen(localPlayer, false)
     triggerServerEvent("bank > caseOpen > end", resourceRoot)
     setElementData(localPlayer, "atmRob:painting", 120)

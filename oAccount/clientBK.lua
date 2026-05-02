@@ -285,7 +285,7 @@ function drawRememberRender()
 	dxDrawRectangle(panelX + 2, panelY + 2, panelW -4, panelH-4, tocolor(35, 35, 35, 255))
 	dxDrawRectangle(panelX + 2, panelY + 2, panelW - 4, 25, tocolor(30,30,30, 255))
 
-	dxDrawText("Visszalépéshez használd a vissza gombot! \nCsak a saját, általad megadott emailcímet add meg!\nSoha ne add ki senkinek a jelszavad!\nHiba esetén keress fel egy fejlesztőt!\n©Original Roleplay", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
+	dxDrawText("Visszalépéshez használd a vissza gombot! \nCsak a saját, általad megadott emailcímet add meg!\nSoha ne add ki senkinek a jelszavad!\nHiba esetén keress fel egy fejlesztőt!\n© Vale do Ipiranga RP", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
 
 	if selectedTab == 1 then
 		dxDrawText("Jelszó emlékeztető", sx/2, panelY, sx/2, panelY + 28, tocolor(255,255,255,150), 1, fonts["condensed-10"], "center", "center")
@@ -824,7 +824,7 @@ function renderLoginBack()
 
 		-- dxDrawLine(0, sy*0.5, sx, sy*0.5)
 
-		dxDrawText("ORIGINAL ROLEPLAY", sx*0.435, startY, sx*0.6, startY, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
+		dxDrawText("VALE DO IPIRANGA RP", sx*0.435, startY, sx*0.6, startY, tocolor(loginColors[1], loginColors[2], loginColors[3], 240), 1, fontscript:getFont("p_ba", 17/myX*sx), "left", "center")
 		dxDrawImage(sx*0.4, startY - sy*0.02, 50/myX*sx, 50/myX*sx, "img/logo.png", 0, 0, 0, tocolor(loginColors[1], loginColors[2], loginColors[3], 240))
 
 		startY = startY + sy*0.02

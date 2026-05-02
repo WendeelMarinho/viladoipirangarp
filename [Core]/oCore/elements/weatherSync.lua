@@ -163,12 +163,12 @@ function fetchWeather()
                 weather = "Thunderstorm"
             end
             if not weatherNames[weather] then
-                outputDebugString("ismeretlen időjárás: "..weather)
+                outputDebugString("[Clima] Descrição desconhecida da API: "..weather)
                 weather = "Cloudy"
             end
 			weatherNow = {weather, wind, temp}
-            outputDebugString("Időjárás változás: (".. weather .. ") | "..weatherNames[weather])
-            iprint("Időjárás: ",weatherNow)
+            outputDebugString("[Clima] Atualizado: (".. weather .. ") | "..weatherNames[weather])
+            iprint("[Clima] ",weatherNow)
 			triggerClientEvent(getRootElement(), "returnWeatherDatas > toClient", getRootElement(), weatherNow)
             if weatherNames[weather] == "Rain" then 
                 setRainLevel(0.3)
@@ -186,7 +186,7 @@ function fetchWeather()
                 end
             end
         else 
-            outputDebugString("API error!")
+            outputDebugString("[Clima] Erro na API de tempo.")
         end
 	end, nil, true )
 end
@@ -194,8 +194,9 @@ setTimer(fetchWeather, 60*60*1000, 0)
 addEventHandler("onResourceStart", resourceRoot, fetchWeather)
 
 setTimer(function()
-    if getRainLevel() > 0 then 
-        setRainLevel(getRainLevel())
+    local rl = getRainLevel()
+    if type(rl) == "number" and rl > 0 then
+        setRainLevel(rl)
     end
 end, 350, 0)
 

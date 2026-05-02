@@ -1,32 +1,53 @@
 # Próximas Ações
 
-**Atualizado:** 2026-05-01
+**Atualizado:** 2026-05-02
 
 ---
 
-## Imediatas (próximo commit)
+## Imediatas — Fix ACL oAdmin (bloqueia login developer e gestão de admins)
 
-- [ ] Criar branch `security/oAccount-auth-hardening` e commitar as mudanças
-- [ ] Testar fluxo de login/registro em servidor de desenvolvimento
-- [ ] Verificar que rate limiting não bloqueia admin login legítimo
+O `oAdmin` não tem permissões ACL suficientes. Sintoma: `addAccount`, `logIn`, `aclSave`, `aclGroupAddObject` negados no arranque.
+
+**Fix:**
+1. Parar o servidor
+2. Adicionar `<object name="resource.oAdmin"></object>` ao grupo `Admin` em `acl.xml`
+3. Iniciar o servidor
+
+> **Regra obrigatória:** editar `acl.xml` APENAS com o servidor parado. Ver `docs/infra/acl-e-recursos.md`.
+
+## Imediatas — QA login / registo de jogador
+
+Após fix ACL, testar:
+- [ ] Login de developer (serial em `adminserials`) → auto-login sem password
+- [ ] Registo de novo jogador (conta normal)
+- [ ] Login de jogador existente
+- [ ] Criação de personagem
+
+## Imediatas — Tabelas DB em falta
+
+Criar as tabelas ausentes para oDrugs e oMDC (ver `docs/infra/server-setup.md` para lista completa).
+
+---
 
 ## Próxima sessão — oAdmin
 
-- [ ] Migrar seriais de admin hardcoded para tabela `adminserials`
-- [ ] Auditar manipulação de grupos ACL
+- [ ] Adicionar `resource.oAdmin` ao grupo Admin em `acl.xml`
+- [ ] Verificar se `fetchRemote` precisa ser concedido a `oCore` e `oAnticheat` (meteorologia e listas negras de IP)
+- [ ] Auditar manipulação de grupos ACL em `oAdmin/s_admin.lua`
 - [ ] Revisar todas as validações de admin level
-- [ ] Branch: `security/oAdmin-serial-migration`
 
-## Backlog técnico imediato
+## Backlog técnico
 
 - [ ] `registerOnServer`: substituir `SELECT * FROM accounts` (full table scan) por queries targetadas — branch: `performance/oAccount-register-query`
-- [ ] Traduzir mensagens de rate limiting inseridas (estão em PT-BR mas os demais ainda em húngaro)
-- [ ] Auditar `oMysql` para error handling e connection drops
+- [ ] Traduzir mensagens húngaras restantes (ver `docs/translation-roadmap.md`)
+- [ ] Criar tabelas em falta: `craftingTabels`, `mdcAccounts`, `mdcWantedPersons`, `mdcWantedCars`, `mdcPenalties`
+- [ ] Remover recursos duplicados em `oStarter` (`oNewPD`, `oBillboards` aparecem duas vezes)
+- [ ] Remover referências a `oPlant` e `oPlaneCrash` do timer em `oStarter/server.lua:290-291`
 
 ## Dívidas abertas relevantes
 
 Referência: [technical-debt-report.md](../technical-debt-report.md)
 
-- TD-SEC-003: Admin serials hardcoded — próxima sprint
+- TD-SEC-003: Admin serials hardcoded — **PARCIALMENTE RESOLVIDO** (serial inserido em DB; falta migração completa)
 - TD-SEC-006: Hashing de senhas — requer migração de dados (planejar separadamente)
 - TD-ARCH-002: Element data como estado de sessão — longo prazo

@@ -1,7 +1,7 @@
 addEventHandler("onClientResourceStart", root, function(res)
 	if getResourceName(res) == "oCore" or getResourceName(res) == "oAdmin" then  
         core = exports.oCore
-        serverName = core:getServerName() or "Szerver"
+        serverName = core:getServerName() or "Servidor"
         color, r, g, b = core:getServerColor()
         serverColor = core:getServerColor()
 	end
@@ -125,7 +125,7 @@ addEventHandler("sendMessageToAdmins", localPlayer, function(player, msg, level)
    -- outputChatBox(getPlayerName(localPlayer) .. " | "..alevel)
     if alevel >= level then
         if not getElementData(localPlayer, "showAlogs") then 
-            outputChatBox(adminMessagePrefixColor.."[Adminisztrátor - LOG]: "..nameColor..getAdminNick(player)..adminMessageColor.." "..msg, r, g, b, true)
+            outputChatBox(adminMessagePrefixColor.."[Admin - LOG]: "..nameColor..getAdminNick(player)..adminMessageColor.." "..msg, r, g, b, true)
         end
     end
 end)
@@ -135,9 +135,9 @@ addCommandHandler("togalogs", function()
         setElementData(localPlayer, "showAlogs", not getElementData(localPlayer, "showAlogs"))
         
         if getElementData(localPlayer, "showAlogs") then 
-            outputChatBox(core:getServerPrefix("red-dark", "Adminisztrátor - LOG", 3).."Admin log kikapcsolva.", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Admin - LOG", 3).."Log de admin desativado.", 255, 255, 255, true)
         else
-            outputChatBox(core:getServerPrefix("green-dark", "Adminisztrátor - LOG", 3).."Admin log bekapcsolva.", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("green-dark", "Admin - LOG", 3).."Log de admin ativado.", 255, 255, 255, true)
         end
 	end
 end)
@@ -150,12 +150,12 @@ addCommandHandler("addpoint", function(cmd, pointName)
         if pointName then
             if not points[pointName] then 
                 points[pointName] = Vector3(getElementPosition(localPlayer))
-                outputChatBox(core:getServerPrefix("green-dark", "Point", 3).."Sikeresen létrehoztál egy pontot. "..color.."("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("green-dark", "Ponto", 3).."Ponto criado com sucesso. "..color.."("..pointName..")", 255, 255, 255, true)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Point", 3).. "Már van ilyen nevű pontod létrehozva! "..color.."("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Ponto", 3).. "Já existe um ponto com esse nome! "..color.."("..pointName..")", 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Pont neve]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [nome do ponto]", 255, 255, 255, true)
         end
     end
 end)
@@ -165,19 +165,19 @@ addCommandHandler("delpoint", function(cmd, pointName)
         if pointName then
             if points[pointName] then 
                 points[pointName] = false
-                outputChatBox(core:getServerPrefix("green-dark", "Point", 3).."Sikeresen töröltél egy pontot. "..color.."("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("green-dark", "Ponto", 3).."Ponto removido com sucesso. "..color.."("..pointName..")", 255, 255, 255, true)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Point", 3).. "Nincs ilyen nevű pontod létrehozva! "..color.."("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Ponto", 3).. "Não há ponto com esse nome! "..color.."("..pointName..")", 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Pont neve]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [nome do ponto]", 255, 255, 255, true)
         end
     end
 end)
 
 addCommandHandler("mypoints", function() 
     if hasPermission(localPlayer,'mypoints') then 
-        outputChatBox(color.."<=== Saját pontjaid ===>", 255, 255, 255, true)
+        outputChatBox(color.."<=== Seus pontos ===>", 255, 255, 255, true)
         for k, v in pairs(points) do 
             if v then 
                 outputChatBox(color.."~ #ffffff"..k, 255, 255, 255, true)
@@ -191,14 +191,14 @@ addCommandHandler("gotopoint", function(cmd, pointName)
         if pointName then 
             if points[pointName] then 
                 local position = points[pointName]
-                outputChatBox(core:getServerPrefix("green-dark", "Point", 3).."Sikeresen elteleportáltál a(z) "..color..position.x.."#ffffff, "..color..position.y.."#ffffff, "..color..position.z.."#ffffff pozícióra."..color.." ("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("green-dark", "Ponto", 3).."Teleportado para "..color..position.x.."#ffffff, "..color..position.y.."#ffffff, "..color..position.z.."#ffffff "..color.."("..pointName..")", 255, 255, 255, true)
 
                 triggerServerEvent("points -> setPlayerPosition", resourceRoot, {position.x, position.y, position.z})
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Point", 3).. "Nincs ilyen pontod létrehozva! "..color.."("..pointName..")", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Ponto", 3).. "Não há ponto com esse nome! "..color.."("..pointName..")", 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Pont neve]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [nome do ponto]", 255, 255, 255, true)
         end
     end
 end)
@@ -294,22 +294,22 @@ end)
 local dataNames = {
     {"Ban", "db"}, 
     {"Kick", "db"}, 
-    {"Jail", "db"}, 
-    {"Unban", "db"}, 
-    {"Unjail", "db"}, 
-    {"Kimenő PM", "db"}, 
-    {"Bejövő PM", "db"}, 
-    {"Fixveh", "db"}, 
-    {"Admin duty idő", "perc"},
-    {"Online idő", "perc"},
+    {"Prisão", "db"}, 
+    {"Desbanimento", "db"}, 
+    {"Libertação", "db"}, 
+    {"PM enviada", "db"}, 
+    {"PM recebida", "db"}, 
+    {"Fix veículo", "db"}, 
+    {"Tempo em plantão admin", "min"},
+    {"Tempo online", "min"},
 }
 
 addCommandHandler("showmydatas", function()
     if hasPermission(localPlayer,'showmydatas') then 
         outputChatBox(" ")
-        outputChatBox("<== Adminisztrátor statisztikáid: ===>", r, g, b, true)
-        outputChatBox(core:getServerPrefix("red-dark", "Adminduty Idő", 3)..color..(getElementData(localPlayer, "user:adutyTime") or 0).." #ffffffperc.", 255, 255, 255, true)
-        outputChatBox(core:getServerPrefix("red-dark", "Online idő", 3)..color..(getElementData(localPlayer, "user:adminOnlineTime") or 0).." #ffffffperc.", 255, 255, 255, true)
+        outputChatBox("<== Suas estatísticas de admin: ===>", r, g, b, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Tempo em plantão", 3)..color..(getElementData(localPlayer, "user:adutyTime") or 0).." #ffffffmin.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Tempo online", 3)..color..(getElementData(localPlayer, "user:adminOnlineTime") or 0).." #ffffffmin.", 255, 255, 255, true)
 
         local datas = getElementData(localPlayer, "user:adminDatas") 
 
@@ -351,25 +351,25 @@ addCommandHandler("crash", function()
 		local date = getStringTime()
 		local status = dxGetStatus()
 		writeToFile("["..date.."] - - - - - - - - - - - - - - - - - - - - - - - - - -")
-		writeToFile("["..date.."] - CRASH FIGYELŐ ELINDÍTVA")
-		writeToFile("["..date.."] - VIDEÓKÁRTYA: "..status["VideoCardName"].." ("..status["VideoCardRAM"].." VRAM)")
-		writeToFile("["..date.."] - ((FREE FOR MTA: "..status["VideoMemoryFreeForMTA"].."MB/"..status["VideoCardRAM"].."MB))")
-		writeToFile("["..date.."] - ((USAGE: "..status["VideoCardRAM"]-status["VideoMemoryFreeForMTA"].."MB/"..status["VideoCardRAM"].."MB))")
-		writeToFile("["..date.."] - BEÁLLÍTÁSOK:")
-		writeToFile("["..date.."] -         - ABLAKOS MÓD: "..(status["SettingWindowed"] and "Igen" or "Nem"))
-		writeToFile("["..date.."] -         - ÁRNYÉKOK: "..(status["SettingVolumetricShadows"] and "Igen" or "Nem"))
-		writeToFile("["..date.."] -         - FŰ EFFEKT: "..(status["SettingGrassEffect"] and "Igen" or "Nem"))
-		writeToFile("["..date.."] -         - HŐSÉG EFFEKT: "..(status["SettingHeatHaze"] and "Igen" or "Nem"))
-		writeToFile("["..date.."] -         - 32 BITES SZÍNEK: "..(status["Setting32BitColor"] and "Igen" or "Nem"))
-		writeToFile("["..date.."] -         - FX MINŐSÉG: "..status["SettingFXQuality"])
-		writeToFile("["..date.."] -         - LÁTÓHATÁR: "..status["SettingDrawDistance"])
-		writeToFile("["..date.."] -         - STREAM MEMORY: "..status["SettingStreamingVideoMemoryForGTA"])
-		writeToFile("["..date.."] -         - FIELD OF VIEW: "..status["SettingFOV"])
+		writeToFile("["..date.."] - MONITOR DE CRASH INICIADO")
+		writeToFile("["..date.."] - PLACA DE VÍDEO: "..status["VideoCardName"].." ("..status["VideoCardRAM"].." VRAM)")
+		writeToFile("["..date.."] - ((LIVRE PARA MTA: "..status["VideoMemoryFreeForMTA"].."MB/"..status["VideoCardRAM"].."MB))")
+		writeToFile("["..date.."] - ((USO: "..status["VideoCardRAM"]-status["VideoMemoryFreeForMTA"].."MB/"..status["VideoCardRAM"].."MB))")
+		writeToFile("["..date.."] - CONFIGURAÇÕES:")
+		writeToFile("["..date.."] -         - MODO JANELA: "..(status["SettingWindowed"] and "Sim" or "Não"))
+		writeToFile("["..date.."] -         - SOMBRAS VOLUMÉTRICAS: "..(status["SettingVolumetricShadows"] and "Sim" or "Não"))
+		writeToFile("["..date.."] -         - EFEITO GRAMA: "..(status["SettingGrassEffect"] and "Sim" or "Não"))
+		writeToFile("["..date.."] -         - EFEITO CALOR: "..(status["SettingHeatHaze"] and "Sim" or "Não"))
+		writeToFile("["..date.."] -         - CORES 32 BITS: "..(status["Setting32BitColor"] and "Sim" or "Não"))
+		writeToFile("["..date.."] -         - QUALIDADE FX: "..status["SettingFXQuality"])
+		writeToFile("["..date.."] -         - DISTÂNCIA DE VISÃO: "..status["SettingDrawDistance"])
+		writeToFile("["..date.."] -         - MEMÓRIA DE STREAMING: "..status["SettingStreamingVideoMemoryForGTA"])
+		writeToFile("["..date.."] -         - CAMPO DE VISÃO (FOV): "..status["SettingFOV"])
 		writeToFile("["..date.."] - - - - - - - - - - - - - - - - - - - - - - - - - -")
-		outputChatBox("Crash-figyelő bekapcsolva! (oAdmin/"..fileName..")", 0, 255, 0, true)
+		outputChatBox("Monitor de crash ativado! (oAdmin/"..fileName..")", 0, 255, 0, true)
 		addEventHandler("onClientElementStreamIn", root, streamDetect)
 	else
-		outputChatBox("Crash-figyelő kikapcsolva! (oAdmin/"..fileName..")", 255, 0, 0, true)
+		outputChatBox("Monitor de crash desativado! (oAdmin/"..fileName..")", 255, 0, 0, true)
 		removeEventHandler("onClientElementStreamIn", root, streamDetect)
 		fileFlush(fileHandle)
 		fileClose(fileHandle)

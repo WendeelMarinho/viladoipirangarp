@@ -27,7 +27,7 @@ addEventHandler("onResourceStart",resourceRoot, function()
                 loadPets(petID,petOwner,petName,petType,petHealth,petHunger,petThirsty,false,bestFood)
 
             end
-            print("Sikeresen betöltöttem ".. count .."db petet")
+            print("[PET]: ".. count .." pet(s) carregado(s).")
         end
     end, con, "SELECT * FROM pets")
 
@@ -44,7 +44,7 @@ function saveOnePet(pet)
     bestFood = getElementData(pet,"pet:bestFood")
 
     dbExec(con, "UPDATE pets SET owner=?, name=?, type=?, health=?, hunger=?, thirsty=? WHERE id=?",owner,name,type,hp,hunger,thirsty,id)
-    print("Sikeresen mentettem "..name.." pet adatait.")
+    print("[PET]: Dados do pet '"..tostring(name).."' salvos.")
 end 
 
 function saveAllPet(id)
@@ -127,9 +127,10 @@ function delPetByID(id,player)
 
     if not player then 
         if not petsDatas[id][8] then 
+            local removedName = petsDatas[id][3]
             petsDatas[id] = nil 
             dbExec(con, "DELETE FROM pets WHERE id=?", id)
-            print("Sikeresen töröltem "..petsDatas[id][3].." petet!")
+            print("[PET]: Pet removido: "..tostring(removedName))
         end 
     else 
         if not petsDatas[id][8] then 
@@ -182,7 +183,7 @@ function summonPet(summoner,id)
 
                 if pet[1] == id then 
                     if summonedPets[pet[1]] then return end
-                    if pet[5] <= 0 then return infobox:outputInfoBox("Halott állatot nem tudsz megidézni!", "error", summoner) end
+                    if pet[5] <= 0 then return infobox:outputInfoBox("Você não pode invocar um pet morto!", "error", summoner) end
 
                     local x,y,z = getElementPosition(summoner)
                     local int = getElementInterior(summoner)
@@ -241,8 +242,8 @@ function summonPet(summoner,id)
 
                         if getElementHealth(summonedPets[pet[1]]) <= 0 then 
                             desummonPet(summoner,pet[1])
-                            infobox:outputInfoBox("Meghalt az állatod, részletek a chatboxban!", "info", summoner)
-                            outputChatBox("[Kisállat]: #ffffffPeted életét vesztette, újraéleszteni az "..color.."(F4)#ffffff-es panelben vagy az állatorvosnál tudod!", summoner, r, g, b, true)
+                            infobox:outputInfoBox("Seu pet morreu — veja detalhes no chat.", "info", summoner)
+                            outputChatBox("[Pet]: #ffffffSeu pet morreu. Renove pelo painel "..color.."(F4)#ffffff ou com o veterinário.", summoner, r, g, b, true)
 
                             return
                         end 
@@ -299,7 +300,7 @@ function sellPetPanel(target,price,name,petID)
 
     modelID = petsDatas[petID][4]
     
-    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." el akar neked adni egy állatot, részletek a panelen! ("..price.."$)", "info", target)
+    infobox:outputInfoBox(getPlayerName(client):gsub("_", " ").." quer te vender um pet — veja o painel! ("..price.."$)", "info", target)
     triggerClientEvent(target, "makeBuy", target, client, price, petID,modelID)
 
 end 
@@ -309,7 +310,7 @@ addEventHandler("sellPetPanel",root,sellPetPanel)
 function dismissBuyPanel(target)
     setElementData(target, "pet:inTrade", false)
     setElementData(client, "pet:inTrade", false)
-    infobox:outputInfoBox("Valamilyen hiba lépett fel a vásárlás során vagy a játékos elutasította az ajánlatod így az megszakadt! Próbáld újra!","error", target)
+    infobox:outputInfoBox("Erro na venda ou o jogador recusou a proposta. Tente novamente.","error", target)
 end 
 addEvent("dismissBuyPanel",true)
 addEventHandler("dismissBuyPanel",root,dismissBuyPanel) 
@@ -323,10 +324,10 @@ function setPetAnOtherPlayer(oldOwner,newOwner,petID,price)
     syncMyPets(oldOwner)
     setElementData(newOwner,"char:money",getElementData(newOwner,"char:money") - price)
     setElementData(oldOwner,"char:money",getElementData(oldOwner,"char:money") + price)
-    infobox:outputInfoBox("Sikeresen eladtad az állatod!","success", oldOwner)
-    infobox:outputInfoBox("Sikeresen megvásároltad az állatot!","success", newOwner)
+    infobox:outputInfoBox("Você vendeu o pet com sucesso!","success", oldOwner)
+    infobox:outputInfoBox("Você comprou o pet com sucesso!","success", newOwner)
     triggerClientEvent(oldOwner,"fixTable",oldOwner,petID)
-    print("Sikeresen megtörtént a trade")
+    print("[PET]: Troca de pet concluída.")
 
 end 
 addEvent("succesTrade",true)
@@ -351,7 +352,7 @@ function warpPetInToVeh ( theVehicle, seat, jacked )
         setElementData(source,"hasWaitedToSummon",true)
 
         desummonPet(source,petID)
-        outputChatBox("[Kisállat]: #ffffffMivel beszáltál egy autóba így az állatod autómatikusan eltünt, kiszálláskor vissza fog kerülni!", thePlayer, r, g, b, true)
+        outputChatBox("[Pet]: #ffffffAo entrar no veículo seu pet foi guardado; ao sair ele volta.", source, r, g, b, true)
     end 
 end
 addEventHandler ( "onPlayerVehicleEnter", getRootElement(), warpPetInToVeh )
@@ -372,25 +373,25 @@ end
 addEventHandler ( "onPlayerVehicleExit", getRootElement(), warpPetOutOfVeh )
 
 function makePetCommand(thePlayer,cmd,target,name,skin)
-    if not target or not name or not skin then return outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Kisállat Neve] [Kisállat Típus (skin TÁBLÁZAT A FÓRUMON)]", thePlayer, r, g, b, true) end
-    if not tostring(name) then return outputChatBox("[Használat]: #ffffffA név csak betűkből álhat!", thePlayer, r, g, b, true) end
-    if not tonumber(skin) then return outputChatBox("[Használat]: #ffffffA típus csak szám lehet!", thePlayer, r, g, b, true) end
+    if not target or not name or not skin then return outputChatBox("[Uso]: #ffffff/"..cmd.." [jogador nome/ID] [nome do pet] [tipo/skin — tabela no fórum]", thePlayer, r, g, b, true) end
+    if not tostring(name) then return outputChatBox("[Uso]: #ffffffO nome só pode ter letras!", thePlayer, r, g, b, true) end
+    if not tonumber(skin) then return outputChatBox("[Uso]: #ffffffO tipo deve ser um número!", thePlayer, r, g, b, true) end
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     local targetPlayer = core:getPlayerFromPartialName(thePlayer, target)
     local aLevel = getElementData(thePlayer,"user:admin")
 
     if aLevel >= 7 then 
-        admin:sendMessageToAdmins(thePlayer, "létrehozott "..nameColor..getPlayerName(targetPlayer)..adminMessageColor.." játékos számára egy állatot! ")
-        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #fffffflétrehozott számodra egy állatot! (F4)", targetPlayer, 255, 255, 255, true)
+        admin:sendMessageToAdmins(thePlayer, "criou um pet para "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..". ")
+        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffcriou um pet para você! (F4)", targetPlayer, 255, 255, 255, true)
         makePet(getElementData(targetPlayer,"user:id"),tostring(name),tonumber(skin))
     end
 end 
 addCommandHandler("makepet",makePetCommand)
 
 function delPetCommand(thePlayer,cmd,target,id)
-    if not target or not id then return outputChatBox("[Használat]: #ffffff/"..cmd.." [TulajdonosID] [PetID]", thePlayer, r, g, b, true) end 
-    if not tonumber(id) then return outputChatBox("[Használat]: #ffffffAz ID csak szám lehet!", thePlayer, r, g, b, true) end
+    if not target or not id then return outputChatBox("[Uso]: #ffffff/"..cmd.." [IDdono] [IDpet]", thePlayer, r, g, b, true) end 
+    if not tonumber(id) then return outputChatBox("[Uso]: #ffffffO ID deve ser numérico!", thePlayer, r, g, b, true) end
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     if petsDatas[tonumber(id)] then 
@@ -399,21 +400,21 @@ function delPetCommand(thePlayer,cmd,target,id)
         local aLevel = getElementData(thePlayer,"user:admin")
 
         if aLevel >= 7 then 
-            admin:sendMessageToAdmins(thePlayer, "törölte "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..nameColor.." ("..id..")"..adminMessageColor.." idvel rendelkező állatát!")
-            outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #fffffftörölte "..id.."-idjű állatod! (F4)", targetPlayer, 255, 255, 255, true)
+            admin:sendMessageToAdmins(thePlayer, "removeu o pet "..nameColor.."("..id..")"..adminMessageColor.." de "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..".")
+            outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffremoveu seu pet ID "..id.."! (F4)", targetPlayer, 255, 255, 255, true)
             delPetByID(id,targetPlayer)
         end
     else 
-        outputChatBox("[Használat]: #ffffffa kiválasztott játékosnak nincs ilyen ID vel rendelkező állata!", thePlayer, r, g, b, true) 
+        outputChatBox("[Uso]: #ffffffo jogador não tem pet com esse ID!", thePlayer, r, g, b, true) 
     end
 end 
 addCommandHandler("delpet",delPetCommand)
 
 function changePetNameCommand(thePlayer,cmd,target,id,name)
-    if not target or not id or not name then return outputChatBox("[Használat]: #ffffff/"..cmd.." [TulajdonosID] [PetID] [Név]", thePlayer, r, g, b, true) end 
-    if not tonumber(id) then return outputChatBox("[Használat]: #ffffffAz ID csak szám lehet!", thePlayer, r, g, b, true) end
-    if not tostring(name) then return outputChatBox("[Használat]: #ffffffA név betűből állhat!", thePlayer, r, g, b, true) end
-    if not petsDatas[tonumber(id)] then return outputChatBox("[Használat]: #ffffffa kiválasztott játékosnak nincs ilyen ID vel rendelkező állata!", thePlayer, r, g, b, true) end 
+    if not target or not id or not name then return outputChatBox("[Uso]: #ffffff/"..cmd.." [IDdono] [IDpet] [nome]", thePlayer, r, g, b, true) end 
+    if not tonumber(id) then return outputChatBox("[Uso]: #ffffffO ID deve ser numérico!", thePlayer, r, g, b, true) end
+    if not tostring(name) then return outputChatBox("[Uso]: #ffffffUse apenas letras no nome!", thePlayer, r, g, b, true) end
+    if not petsDatas[tonumber(id)] then return outputChatBox("[Uso]: #ffffffo jogador não tem pet com esse ID!", thePlayer, r, g, b, true) end 
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     
@@ -421,32 +422,32 @@ function changePetNameCommand(thePlayer,cmd,target,id,name)
     local aLevel = getElementData(thePlayer,"user:admin")
 
     if aLevel >= 6 then 
-        admin:sendMessageToAdmins(thePlayer, "beállította "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..nameColor.." ("..id..")"..adminMessageColor.." idvel rendelkező állatának nevét a következőre: "..nameColor..name)
-        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffátállította "..id.."-idjű állatod nevét! (F4)", targetPlayer, 255, 255, 255, true)
+        admin:sendMessageToAdmins(thePlayer, "mudou o nome do pet "..nameColor.."("..id..")"..adminMessageColor.." de "..nameColor..getPlayerName(targetPlayer)..adminMessageColor.." para "..nameColor..name)
+        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffalterou o nome do seu pet (ID "..id..")! (F4)", targetPlayer, 255, 255, 255, true)
         changePetName(id,name)
     end 
 end 
 addCommandHandler("changepetname",changePetNameCommand)
 
 function reHealPetCommand(thePlayer,cmd,target,id)
-    if not target or not id then return outputChatBox("[Használat]: #ffffff/"..cmd.." [TulajdonosID] [PetID]", thePlayer, r, g, b, true) end 
-    if not tonumber(id) then return outputChatBox("[Használat]: #ffffffAz ID csak szám lehet!", thePlayer, r, g, b, true) end
-    if not petsDatas[tonumber(id)] then return outputChatBox("[Használat]: #ffffffa kiválasztott játékosnak nincs ilyen ID vel rendelkező állata!", thePlayer, r, g, b, true) end 
+    if not target or not id then return outputChatBox("[Uso]: #ffffff/"..cmd.." [IDdono] [IDpet]", thePlayer, r, g, b, true) end 
+    if not tonumber(id) then return outputChatBox("[Uso]: #ffffffO ID deve ser numérico!", thePlayer, r, g, b, true) end
+    if not petsDatas[tonumber(id)] then return outputChatBox("[Uso]: #ffffffo jogador não tem pet com esse ID!", thePlayer, r, g, b, true) end 
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     local targetPlayer = core:getPlayerFromPartialName(thePlayer, target)
     local aLevel = getElementData(thePlayer,"user:admin")
 
     if aLevel >= 6 then 
-        admin:sendMessageToAdmins(thePlayer, "újraélesztette "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..nameColor.." ("..id..")"..adminMessageColor.." idével rendelkező állatát!")
-        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffújraélesztette "..id.."-idjű állatodat! (F4)", targetPlayer, 255, 255, 255, true)
+        admin:sendMessageToAdmins(thePlayer, "reviveu o pet "..nameColor.."("..id..")"..adminMessageColor.." de "..nameColor..getPlayerName(targetPlayer)..adminMessageColor..".")
+        outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffreviveu seu pet (ID "..id..")! (F4)", targetPlayer, 255, 255, 255, true)
         reHealPet(player,id)
     end 
 end 
 addCommandHandler("rehealpet",reHealPetCommand)
 
 function getPlayerPetsCommand(thePlayer,cmd,target)
-    if not target then return outputChatBox("[Használat]: #ffffff/"..cmd.." [Tulajdonos]", thePlayer, r, g, b, true) end 
+    if not target then return outputChatBox("[Uso]: #ffffff/"..cmd.." [dono]", thePlayer, r, g, b, true) end 
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     local targetPlayer = core:getPlayerFromPartialName(thePlayer, target)
@@ -465,17 +466,17 @@ function getPlayerPetsCommand(thePlayer,cmd,target)
         end 
 
         if havePets then 
-            outputChatBox("--- A kiválasztott játékosnak állatainak listája:"..color.." ---", thePlayer, r, g, b, true)
+            outputChatBox("--- Lista de pets do jogador:"..color.." ---", thePlayer, r, g, b, true)
 
             for k,v in pairs(petsDatas) do 
                 if v[2] == owner then 
-                    outputChatBox("Név: "..color..v[3].."#ffffff ID: "..color..v[1], thePlayer, 255,255,255, true)
+                    outputChatBox("Nome: "..color..v[3].."#ffffff ID: "..color..v[1], thePlayer, 255,255,255, true)
                 end 
             end 
 
             havePets = false
         else 
-            outputChatBox("--- A kiválasztott játékosnak nincs egy állata sem!"..color.." ---", thePlayer, r, g, b, true)
+            outputChatBox("--- Este jogador não tem pets!"..color.." ---", thePlayer, r, g, b, true)
         end 
     end 
 
@@ -533,17 +534,17 @@ addEventHandler("onResourceStart",resourceRoot,function()
     --exports.oBone:attachElementToBone(pedBag,rehealPed,11,-0.5,0,-0.3,0,0,90)
     setElementCollisionsEnabled(pedBag,false)
     setObjectScale(pedBag,0.5)
-    setElementData(rehealPed, "ped:prefix","Maszek Állatorvos")
+    setElementData(rehealPed, "ped:prefix","Veterinário")
     setElementData(rehealPed,"ped:name","Fredy Jackson")
     setElementData(rehealPed,"rehealPed",true)
-    print("[PET-ÁLLATORVOS] Jelenlegi pozíciója "..reHealPedPos[num][1]..","..reHealPedPos[num][2]..","..reHealPedPos[num][3])
+    print("[PET-VET] Nova posição do veterinário: "..reHealPedPos[num][1]..","..reHealPedPos[num][2]..","..reHealPedPos[num][3])
 
     setTimer(function()
         num = math.random(1,10)
         setElementPosition(rehealPed,reHealPedPos[num][1],reHealPedPos[num][2],reHealPedPos[num][3])
         setElementRotation(rehealPed,0,0,reHealPedPos[num][4])
 
-        print("[PET-ÁLLATORVOS] Jelenlegi pozíciója "..reHealPedPos[num][1]..","..reHealPedPos[num][2]..","..reHealPedPos[num][3])
+        print("[PET-VET] Nova posição do veterinário: "..reHealPedPos[num][1]..","..reHealPedPos[num][2]..","..reHealPedPos[num][3])
 
     end,300000,0)
 end)
@@ -567,12 +568,12 @@ addEventHandler("onPlayerDamage",root,function(attacker,weapon,_,loss)
                 tryTimer[attacker] = nil
             end,1000,1)
         
-            outputChatBox("[Kisállat]#ffffff Valaki megütött téged! Ha mégegyszer megüt vagy valahogyan megsebez az állatod meg fogja támadni!",source,r,g,b,true)
+            outputChatBox("[Pet]#ffffff Alguém te socou! Se baterem de novo seu pet vai contra-atacar!",source,r,g,b,true)
             return  
         else 
             local dog = getElementData(source,"char:avaliblePet")
             setPedTask(dog, {"killPed", attacker, 5,1})
-            outputChatBox("[Kisállat] #ffffffAz állatod megtámadott valakit! Csak akkor hagyja abba a támadást ha a támadó elég messze ment vagy visszahívod "..color.."(F4)#ffffff!",source,r,g,b,true)
+            outputChatBox("[Pet] #ffffffSeu pet está atacando alguém! Para parar afaste-se ou use "..color.."(F4)#ffffff.",source,r,g,b,true)
 
             if not isTimer(dist[dog]) then
                 dist[dog] = setTimer(function()
@@ -601,7 +602,7 @@ addEventHandler("onPlayerDamage",root,function(attacker,weapon,_,loss)
     else 
         local dog = getElementData(source,"char:avaliblePet")
         setPedTask(dog, {"killPed", attacker, 5,1})
-        outputChatBox("[Kisállat] #ffffffAz állatod megtámadott valakit! Csak akkor hagyja abba a támadást ha a támadó elég messze ment vagy visszahívod "..color.."(F4)#ffffff!",source,r,g,b,true)
+        outputChatBox("[Pet] #ffffffSeu pet está atacando alguém! Para parar afaste-se ou use "..color.."(F4)#ffffff.",source,r,g,b,true)
 
         if not isTimer(dist[dog]) then
             dist[dog] = setTimer(function()

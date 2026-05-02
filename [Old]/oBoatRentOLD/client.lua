@@ -107,7 +107,7 @@ function rajz()
 	dxDrawText("Bérlés:", 895/pX*sX, 674/pY*sY, 1045/pX*sX, 714/pY*sY, tocolor(220, 220, 220, 255*alpha1), 1/pX*sX, font, "left","center", false,false,false,true);
 	dxDrawRectangle(1189/pX*sX, 676/pY*sY, 150/pX*sX, 34/pY*sY, tocolor(sR, sG, sB, alpha3*alpha1), false);
 	dxDrawText("Bérlés", 1189/pX*sX, 674/pY*sY, 1339/pX*sX, 714/pY*sY, tocolor(220, 220, 220, 255*alpha1), 1/pX*sX, font, "center","center", false,false,false,true);
-	dxDrawText("Original Roleplay", 895/pX*sX, 718/pY*sY, 1339/pX*sX, 758/pY*sY, tocolor(sR, sG, sB, 255*alpha1), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
+	dxDrawText("Vale do Ipiranga RP", 895/pX*sX, 718/pY*sY, 1339/pX*sX, 758/pY*sY, tocolor(sR, sG, sB, 255*alpha1), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
 	if core:isInSlot(1164/pX*sX, 547.5/pY*sY, 25/pX*sX, 25/pY*sY) then
 		rcolor = tocolor(255, 255, 255, 255*alpha1);
 		lcolor = tocolor(sR, sG, sB, 255*alpha1);

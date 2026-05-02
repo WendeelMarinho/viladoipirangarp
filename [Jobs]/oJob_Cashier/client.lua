@@ -85,7 +85,7 @@ function renderJobPanel()
     dxDrawRectangle(0, sy*0.66, sx*0.2, sy*0.045, tocolor(35, 35, 35, 255*alpha))
     dxDrawRectangle(sx*0.83, sy*0.41, sx*0.5, sy*0.3, tocolor(35, 35, 35, 255*alpha))
     --dxDrawRectangle(sx*0.03, sy*0.66, sx*0.2, sy*0.03)
-    dxDrawText("OriginalRoleplay", sx*0.03, sy*0.66, sx*0.03+sx*0.2, sy*0.66+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 15/myX*sx), "left", "center")
+    dxDrawText("Vale do Ipiranga RP", sx*0.03, sy*0.66, sx*0.03+sx*0.2, sy*0.66+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 15/myX*sx), "left", "center")
     dxDrawText("Pénztáros", sx*0.03, sy*0.685, sx*0.03+sx*0.2, sy*0.685+sy*0.02, tocolor(255, 255, 255, 230*alpha), 1, font:getFont("bebasneue", 12/myX*sx), "left", "center")
     dxDrawImage(0, sy*0.659, 45/myX*sx, 45/myY*sy, "files/logo.png", 0, 0, 0, tocolor(r, g, b, 255*alpha))
 

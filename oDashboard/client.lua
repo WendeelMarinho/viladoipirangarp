@@ -927,7 +927,7 @@ function render()
     elseif activePage == 5 then 
         if #faction_datas.factions > 0 then 
             dxDrawRectangle(sx*0.15,sy*0.22,sx*0.15,sy*0.04,tocolor(27,27,27,220*alpha_pagebg))
-                dxDrawText("Szervezeteid",sx*0.15,sy*0.22,sx*0.15+sx*0.15,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
+                dxDrawText("Suas organizações",sx*0.15,sy*0.22,sx*0.15+sx*0.15,sy*0.22+sy*0.04,tocolor(255,255,255,255*alpha_pagebg),0.7/myX*sx,fonts["bebasneue-18"],"center","center")
             dxDrawRectangle(sx*0.15,sy*0.22+sy*0.04,sx*0.15,sy*0.59,tocolor(27,27,27,100*alpha_pagebg))
             
             local startY = sy*0.22+sy*0.045
@@ -4280,9 +4280,9 @@ function getPlayerAllOwnedVehicle()
                 end
 
                 if vehEngineState == true then 
-                    vehEngineState = "Elindítva"
+                    vehEngineState = "Ligado"
                 else
-                    vehEngineState = "Leállítva"
+                    vehEngineState = "Desligado"
                 end
 
                 if areVehicleLightsOn(v) == true then 

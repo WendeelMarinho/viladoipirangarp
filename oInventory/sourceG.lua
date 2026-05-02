@@ -14,32 +14,32 @@ admin = exports.oAdmin
 
 pages = {
     {
-        name = "Tárgyak";
+        name = "Itens";
         img = "/files/images/icons/backpack.png";
         miniImg = "/files/images/miniicons/backpack.png";
         page = "bag";
     };
     {
-        name = "Kulcsok";
+        name = "Chaves";
         img = "/files/images/icons/key.png";
         miniImg = "/files/images/icons/key.png";
         page = "key";
     };
     {
-        name = "Iratok";
+        name = "Documentos";
         img = "/files/images/icons/licens.png";
         miniImg = "/files/images/icons/licens.png";
         page = "licens";
     };
 
 	{
-        name = "Széf";
+        name = "Cofre";
         img = "/files/images/icons/safe.png";
         miniImg = "/files/images/miniicons/safe.png";
         page = "object";
 	};
 	{
-        name = "Csomagtartó";
+        name = "Porta-malas";
         img = "/files/images/icons/car.png";
         miniImg = "/files/images/miniicons/car.png";
         page = "vehicle";
@@ -48,331 +48,331 @@ pages = {
 
 availableItems = {
 
-	{name = "Iphone 12", weight = 0.3, description = "Apple telefon.", stacking = false, category="bag", }, -- 1
+	{name = "Iphone 12", weight = 0.3, description = "Telefone Apple.", stacking = false, category="bag", }, -- 1
 
 	-- Ételek
-	{name = "Sült Krumpli", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 2
-	{name = "Szendvics", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 3
+	{name = "Batata frita", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 2
+	{name = "Sanduíche", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 3
 	{name = "Taco", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 4
-	{name = "Pizza szelet", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 30, objectId = 2663}, -- 5
+	{name = "Fatia de pizza", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 30, objectId = 2663}, -- 5
 	{name = "Hot-dog", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 6
 	{name = "Hamburger", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 7
-	{name = "Alma", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 8
-	{name = "Zöldalma", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 9
+	{name = "Maçã", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 8
+	{name = "Maçã verde", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 9
 	{name = "Muffin", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 10
-	{name = "Banán", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 11
-	{name = "Szőlő", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 12
-	{name = "Dinnye", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 12
-	{name = "Csokoládé", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 14
+	{name = "Banana", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 11
+	{name = "Uva", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 12
+	{name = "Melancia", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 12
+	{name = "Chocolate", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 14
 	{name = "Chips", weight = 0.05, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 15
-	{name = "Saláta", weight = 0.06, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 16
-	{name = "Dürüm", weight = 0.04, stacking = true, category="bag", eat = true, eatPercent = 25, objectId = 2663}, -- 17
-	{name = "Gyros", weight = 0.05, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 18
+	{name = "Salada", weight = 0.06, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 16
+	{name = "Durum", weight = 0.04, stacking = true, category="bag", eat = true, eatPercent = 25, objectId = 2663}, -- 17
+	{name = "Gyro", weight = 0.05, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 18
 
 	-- Italok
 	{name = "Sprite", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 19
 	{name = "Fanta", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 20
 	{name = "Coca Cola", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 21
-	{name = "Szénsavmentes víz", weight = 0.04, stacking = true, category="bag", drinkPercent = 20, drink = true}, -- 22
+	{name = "Água sem gás", weight = 0.04, stacking = true, category="bag", drinkPercent = 20, drink = true}, -- 22
 	{name = "Mountain Dew", weight = 0.025, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 23
-	{name = "Sör", weight = 0.04, stacking = true, category="bag", alcohol = true}, -- 24
-	{name = "Bor", weight = 0.04, stacking = true, category="bag", alcohol = true}, -- 25
-	{name = "Kávé", weight = 0.03, stacking = true, category="bag", drinkPercent = 50, drink = true}, -- 26
+	{name = "Cerveja", weight = 0.04, stacking = true, category="bag", alcohol = true}, -- 24
+	{name = "Vinho", weight = 0.04, stacking = true, category="bag", alcohol = true}, -- 25
+	{name = "Café", weight = 0.03, stacking = true, category="bag", drinkPercent = 50, drink = true}, -- 26
 
 	-- Fegyverek
 	{name = "AK-47", weight = 4.8,  isWeapon = true, ammo = 45, stacking = false, category="bag"}, -- 27
 	{name = "M4", weight = 3.13,  isWeapon = true, ammo = 45, stacking = false, category="bag"}, -- 28
 	{name = "Katana", weight = 6,  isWeapon = true, stacking = false, category="bag"}, -- 29
 	{name = "Desert Eagle", weight = 1.99,  isWeapon = true, ammo = 47, stacking = false, category="bag"}, -- 30
-	{name = "Baseball ütő", weight = 2,  isWeapon = true, stacking = false, category="bag"}, -- 31
-	{name = "Kés", weight = 1,  isWeapon = true, stacking = false, category="bag"}, -- 32
-	{name = "Gumibot", weight = 1,  isWeapon = true, stacking = false, category="bag"}, -- 33
-	{name = "Sörétes puska", weight = 5,  isWeapon = true, ammo = 46, stacking = false, category="bag"}, -- 34
-	{name = "Lefűrészelt csövű puska", weight = 4.5,  isWeapon = true, ammo = 46, stacking = false, category="bag"}, -- 35
+	{name = "Taco de baseball", weight = 2,  isWeapon = true, stacking = false, category="bag"}, -- 31
+	{name = "Faca", weight = 1,  isWeapon = true, stacking = false, category="bag"}, -- 32
+	{name = "Cacetete", weight = 1,  isWeapon = true, stacking = false, category="bag"}, -- 33
+	{name = "Espingarda", weight = 5,  isWeapon = true, ammo = 46, stacking = false, category="bag"}, -- 34
+	{name = "Espingarda de cano serrado", weight = 4.5,  isWeapon = true, ammo = 46, stacking = false, category="bag"}, -- 35
 	{name = "Spray", weight = 0.001,  isWeapon = true, ammo = 50, stacking = false, category="bag"}, -- 36
 	{name = "Colt-45", weight = 1.13,  isWeapon = true, ammo = 47, stacking = false, category="bag"}, -- 37
-	{name = "Mesterlövész", weight = 8,  isWeapon = true, ammo = 49, stacking = false, category="bag"}, -- 38
+	{name = "Rifle de precisão", weight = 8,  isWeapon = true, ammo = 49, stacking = false, category="bag"}, -- 38
 	{name = "P90", weight = 3,  isWeapon = true, ammo = 48, stacking = false, category="bag"}, -- 39
 	{name = "UZI", weight = 3.5,  isWeapon = true, ammo = 48, stacking = false, category="bag"}, -- 40
-	{name = "Sokkoló", weight = 1.6,  isWeapon = true, stacking = false, category="bag"}, -- 41
+	{name = "Tazer", weight = 1.6,  isWeapon = true, stacking = false, category="bag"}, -- 41
 	{name = "Tec 9", weight = 3.5,  isWeapon = true, ammo = 48, stacking = false, category="bag"}, -- 42
 	{name = "Boxer", weight = 3.5,  isWeapon = true, stacking = false, category="bag"}, -- 43
 
-	{name = "Pénzkazetta", weight = 4, stacking = false, category="bag"}, -- 44
+	{name = "Maleta de dinheiro", weight = 4, stacking = false, category="bag"}, -- 44
 
 	--Lőszerek
-	{name = "Nagykaliberű töltény", weight = 0.002, stacking = true, category="bag"}, -- 45
-	{name = "Sörétes töltény", weight = 0.003, stacking = true, category="bag"}, -- 46
-	{name = "Kiskaliberű töltény", weight = 0.002, stacking = true, category="bag"}, -- 47
-	{name = "5x9-mm töltény", weight = 0.001, stacking = true, category="bag"}, -- 48
-	{name = "Vadászpuska töltény", weight = 0.005, stacking = true, category="bag"}, -- 49
-	{name = "Spray patron", weight = 0.003, stacking = true, category="bag"}, -- 50
+	{name = "Munição grosso calibre", weight = 0.002, stacking = true, category="bag"}, -- 45
+	{name = "Munição de espingarda", weight = 0.003, stacking = true, category="bag"}, -- 46
+	{name = "Munição pequeno calibre", weight = 0.002, stacking = true, category="bag"}, -- 47
+	{name = "Munição 5x9 mm", weight = 0.001, stacking = true, category="bag"}, -- 48
+	{name = "Munição de rifle de caça", weight = 0.005, stacking = true, category="bag"}, -- 49
+	{name = "Cartucho de spray", weight = 0.003, stacking = true, category="bag"}, -- 50
 
 	-- Kulcsok
-	{name = "Jármű kulcs", weight = 0, stacking = false, category="key"}, -- 51
-	{name = "Ingatlan kulcs", weight = 0, stacking = false, category="key"}, -- 52
-	{name = "Kapu távirányító", weight = 0, stacking = false, category="key"}, -- 53
-	{name = "Széf kulcs", weight = 0, stacking = false, category="key"}, -- 54
+	{name = "Chave do veículo", weight = 0, stacking = false, category="key"}, -- 51
+	{name = "Chave de imóvel", weight = 0, stacking = false, category="key"}, -- 52
+	{name = "Controle remoto de portão", weight = 0, stacking = false, category="key"}, -- 53
+	{name = "Chave de cofre", weight = 0, stacking = false, category="key"}, -- 54
 
 	--drogok
-	{name = "Joint", weight = 0.001, stacking = true, category="bag"}, -- 55
-	{name = "Heroinos fecskendő", weight = 0.004, stacking = true, category="bag"}, -- 56
+	{name = "Baseado", weight = 0.001, stacking = true, category="bag"}, -- 55
+	{name = "Seringa de heroína", weight = 0.004, stacking = true, category="bag"}, -- 56
 	{name = "Kokain", weight = 0.001, stacking = true, category="bag"}, -- 57
-	{name = "Szárított marihuana", weight = 0.001, stacking = true, category="bag"}, -- 58
-	{name = "Marihuana mag", weight = 0.001, stacking = true, category="bag"}, -- 59
-	{name = "Kokain mag", weight = 0.001, stacking = true, category="bag"}, -- 60
-	{name = "Mák", weight = 0.001, stacking = true, category="bag"}, -- 61
-	{name = "Kokalevél", weight = 0.001, stacking = true, category="bag"}, -- 62
-	{name = "Marihuana levél", weight = 0.001, stacking = true, category="bag"}, -- 63
-	{name = "Heroin por", weight = 0.001, stacking = true, category="bag"}, -- 64
+	{name = "Maconha seca", weight = 0.001, stacking = true, category="bag"}, -- 58
+	{name = "Semente de maconha", weight = 0.001, stacking = true, category="bag"}, -- 59
+	{name = "Semente de cocaína", weight = 0.001, stacking = true, category="bag"}, -- 60
+	{name = "Papoula", weight = 0.001, stacking = true, category="bag"}, -- 61
+	{name = "Folha de coca", weight = 0.001, stacking = true, category="bag"}, -- 62
+	{name = "Folha de maconha", weight = 0.001, stacking = true, category="bag"}, -- 63
+	{name = "Heroína em pó", weight = 0.001, stacking = true, category="bag"}, -- 64
 
 	-- Iratok
-	{name = "Személyi igazolvány", weight = 0, stacking = false, category="licens"}, -- 65
-	{name = "Vezetői engedély", weight = 0, stacking = false, category="licens"}, -- 66
-	{name = "Flex", weight = 2, stacking = false, category="bag"}, -- 67
-	{name = "Fegyvertartási engedély", weight = 0, stacking = false, category="licens"}, -- 68
-	{name = "Jelvény", weight = 0, stacking = false, category="licens"}, -- 69
+	{name = "RG (identidade)", weight = 0, stacking = false, category="licens"}, -- 65
+	{name = "CNH", weight = 0, stacking = false, category="licens"}, -- 66
+	{name = "Esmerilhadeira", weight = 2, stacking = false, category="bag"}, -- 67
+	{name = "Porte de arma", weight = 0, stacking = false, category="licens"}, -- 68
+	{name = "Distintivo", weight = 0, stacking = false, category="licens"}, -- 69
 
-	{name = "Fúró", weight = 7, description = "Széfek fúrásához...", stacking = false, category="bag"}, -- 70
+	{name = "Furadeira", weight = 7, description = "Para furar cofres...", stacking = false, category="bag"}, -- 70
 
 	-- Egyéb
-	{name = "Cigaretta", weight = 0.001, stacking = false, category="bag"}, -- 71
-	{name = "Öngyujtó", weight = 0.008, stacking = false, category="bag"}, -- 72
+	{name = "Cigarro", weight = 0.001, stacking = false, category="bag"}, -- 71
+	{name = "Isqueiro", weight = 0.008, stacking = false, category="bag"}, -- 72
 	{name = "Hifi", weight = 2.3, stacking = false, category="bag"}, -- 73
-	{name = "Horgászbot", weight = 1.6, stacking = false, category="bag"}, -- 74
-	{name = "Széf", weight = 5, stacking = false, category="bag"}, -- 75
-	{name = "Gyógyszer", weight = 0.02, stacking = true, category="bag"}, -- 76
-	{name = "Bilincs", weight = 0.003, stacking = false, category="bag"}, -- 77
-	{name = "Bilincs kulcs", weight = 0.001, stacking = false, category="bag"}, -- 78
+	{name = "Vara de pesca", weight = 1.6, stacking = false, category="bag"}, -- 74
+	{name = "Cofre portátil", weight = 5, stacking = false, category="bag"}, -- 75
+	{name = "Remédio", weight = 0.02, stacking = true, category="bag"}, -- 76
+	{name = "Algemas", weight = 0.003, stacking = false, category="bag"}, -- 77
+	{name = "Chave de algemas", weight = 0.001, stacking = false, category="bag"}, -- 78
 
-	{name = "Vadászati engedély", weight = 0, stacking = false, category="licens"}, -- 79
+	{name = "Licença de caça", weight = 0, stacking = false, category="licens"}, -- 79
 
-	{name = "Morzsoló", weight = 0.06, stacking = true, category="bag"}, -- 80
-	{name = "Elsősegély csomag", weight = 0.6, stacking = true, category="bag", object = 1240}, -- 81
-	{name = "Unflip kártya", weight = 0, stacking = true, category="bag"}, -- 82
-	{name = "Rendőrségi fényjelző", weight = 1, stacking = false, category="bag"}, -- 83
-	{name = "Hőlégfúvó", weight = 0.5, stacking = false, category="bag"}, -- 84
-	{name = "Toll", weight = 0.1, stacking = false, category="bag"}, -- 85
-	{name = "Fecskendő", weight = 0, stacking = true, category="bag"}, -- 86
-	{name = "Szódabikarbóna", weight = 0.001, stacking = true, category="bag"}, -- 87
-	{name = "Cigaretta papír", weight = 0, stacking = true, category="bag"}, -- 88
-	{name = "Instant gyógyítás kártya", weight = 0, stacking = true, category="bag"}, -- 89
-	{name = "Instant Fix kártya", weight = 0, stacking = true, category="bag"}, -- 90
-	{name = "Instant tankolás kártya", weight = 0, stacking = true, category="bag"}, -- 91
+	{name = "Triturador", weight = 0.06, stacking = true, category="bag"}, -- 80
+	{name = "Kit de primeiros socorros", weight = 0.6, stacking = true, category="bag", object = 1240}, -- 81
+	{name = "Cartão para desvirar veículo", weight = 0, stacking = true, category="bag"}, -- 82
+	{name = "Giroflex policial", weight = 1, stacking = false, category="bag"}, -- 83
+	{name = "Soprador térmico", weight = 0.5, stacking = false, category="bag"}, -- 84
+	{name = "Caneta", weight = 0.1, stacking = false, category="bag"}, -- 85
+	{name = "Seringa", weight = 0, stacking = true, category="bag"}, -- 86
+	{name = "Bicarbonato de sódio", weight = 0.001, stacking = true, category="bag"}, -- 87
+	{name = "Papel de seda para cigarro", weight = 0, stacking = true, category="bag"}, -- 88
+	{name = "Cartão de cura instantânea", weight = 0, stacking = true, category="bag"}, -- 89
+	{name = "Cartão de conserto instantâneo", weight = 0, stacking = true, category="bag"}, -- 90
+	{name = "Cartão de abastecimento instantâneo", weight = 0, stacking = true, category="bag"}, -- 91
 
 	--pet kellékek
-	{name = "Eb Egészségügyi felszerelés", weight = 0.8, stacking = true, category="bag"}, -- 92
-	{name = "Itató kulacs", weight = 1, stacking = true, category="bag"}, -- 93
-	{name = "Prémium Eb Táp", weight = 1, stacking = true, category="bag"}, -- 94
-	{name = "Vegán Eb Táp", weight = 0.6, stacking = true, category="bag"}, -- 95
-	{name = "Marhahúsos Eb Táp", weight = 0.3, stacking = true, category="bag"}, -- 96
-	{name = "Sertéshúsos Eb Táp", weight = 0.3, stacking = true, category="bag"}, -- 97
-	{name = "Csirkehúsos Eb Táp", weight = 0.8, stacking = true, category="bag"}, -- 98
+	{name = "Kit veterinário para cão", weight = 0.8, stacking = true, category="bag"}, -- 92
+	{name = "Bebedouro portátil", weight = 1, stacking = true, category="bag"}, -- 93
+	{name = "Ração premium para cão", weight = 1, stacking = true, category="bag"}, -- 94
+	{name = "Ração vegana para cão", weight = 0.6, stacking = true, category="bag"}, -- 95
+	{name = "Ração com carne bovina para cão", weight = 0.3, stacking = true, category="bag"}, -- 96
+	{name = "Ração com carne suína para cão", weight = 0.3, stacking = true, category="bag"}, -- 97
+	{name = "Ração com frango para cão", weight = 0.8, stacking = true, category="bag"}, -- 98
 	--
 
 	--v2 drog
-	{name = "Mák mag", weight = 0.001, stacking = true, category="bag"}, -- 99
-	{name = "Varázsgomba mag", weight = 0.001, stacking = true, category="bag"}, -- 100
-	{name = "Varázsgomba", weight = 0.001, stacking = true, category="bag"}, -- 101
-	{name = "Ültető kanál", weight = 1.2, stacking = true, category="bag"}, -- 102
-	{name = "Termőföld", weight = 0.001, stacking = true, category="bag"}, -- 103
-	{name = "Prémium termőföld", weight = 0, stacking = true, category="bag"}, -- 104
-	{name = "Szüretelő olló", weight = 1.4, stacking = true, category="bag"}, -- 105
+	{name = "Semente de papoula", weight = 0.001, stacking = true, category="bag"}, -- 99
+	{name = "Semente de cogumelo mágico", weight = 0.001, stacking = true, category="bag"}, -- 100
+	{name = "Cogumelo mágico", weight = 0.001, stacking = true, category="bag"}, -- 101
+	{name = "Pá para plantio", weight = 1.2, stacking = true, category="bag"}, -- 102
+	{name = "Terra vegetal", weight = 0.001, stacking = true, category="bag"}, -- 103
+	{name = "Terra vegetal premium", weight = 0, stacking = true, category="bag"}, -- 104
+	{name = "Tesoura de colheita", weight = 1.4, stacking = true, category="bag"}, -- 105
 	{name = "LSD", weight = 0.001, stacking = true, category="bag"}, -- 106
-	{name = "Csomagolt Kokain", weight = 0.001, stacking = true, category="bag"}, -- 107
-	{name = "Csomagolt Heroinos Fecskendő", weight = 0.001, stacking = true, category="bag"}, -- 108
-	{name = "Csomagolt Joint", weight = 0.001, stacking = true, category="bag"}, -- 109
+	{name = "Cocaína embalada", weight = 0.001, stacking = true, category="bag"}, -- 107
+	{name = "Seringa de heroína embalada", weight = 0.001, stacking = true, category="bag"}, -- 108
+	{name = "Baseado embalado", weight = 0.001, stacking = true, category="bag"}, -- 109
 
 	--Rendőrségi dolgok
-	{name = "Rendőrségi pajzs", weight = 4.5, stacking = false, category="bag"}, -- 110
-	{name = "Faltörő kos", weight = 2, stacking = false, category="bag"}, -- 111
+	{name = "Escudo balístico (PM)", weight = 4.5, stacking = false, category="bag"}, -- 110
+	{name = "Aríete (battering ram)", weight = 2, stacking = false, category="bag"}, -- 111
 
 	-- Dobozos cigik
 	{name = "Natural American Spirit", weight = 0.2, stacking = false, category="bag"}, -- 112
 	{name = "Newport", weight = 0.2, stacking = false, category="bag"}, -- 113
 	{name = "Pall Mall", weight = 0.2, stacking = false, category="bag"}, -- 114
 
-	{name = "Prémium Jármű Protect kártya", weight = 0, description = "Prémium Item", stacking = true, category="bag"}, -- 115
+	{name = "Cartão Protect veículo (premium)", weight = 0, description = "Item premium", stacking = true, category="bag"}, -- 115
 
-	{name = "Pr", weight = 0, description = "Prémium item", stacking = true, category="bag"}, -- 116
+	{name = "Pr", weight = 0, description = "Item premium", stacking = true, category="bag"}, -- 116
 
 	-- Mesterkönyvek
-	{name = "AK-47 Mesterkönyv",skillid = 77, weight = 0, stacking = false, category="bag"}, -- 116
-	{name = "M4 Mesterkönyv",skillid = 78, weight = 0, stacking = false, category="bag"}, -- 117
-	{name = "Uzi & Tec9 Mesterkönyv",skillid = 75, weight = 0, stacking = false, category="bag"}, -- 118
-	{name = "P90 Mesterkönyv",skillid = 76, weight = 0, stacking = false, category="bag"}, -- 119
-	{name = "Sörétes puska Mesterkönyv",skillid = 72, weight = 0, stacking = false, category="bag"}, -- 120
-	{name = "Lefűrészelt csövű puska Mesterkönyv",skillid = 73, weight = 0, stacking = false, category="bag"}, -- 121
-	{name = "Colt-45 Mesterkönyv",skillid = 69, weight = 0, stacking = false, category="bag"}, -- 122
-	{name = "Hangtompítós Colt-45 Mesterkönyv",skillid = 70, weight = 0, stacking = false, category="bag"}, -- 123
-	{name = "Desert Eagle Mesterkönyv",skillid = 71, weight = 0, stacking = false, category="bag"}, -- 124
-	{name = "Mesterlövész Mesterkönyv",skillid = 79, weight = 0, stacking = false, category="bag"}, -- 125
+	{name = "Manual AK-47",skillid = 77, weight = 0, stacking = false, category="bag"}, -- 116
+	{name = "Manual M4",skillid = 78, weight = 0, stacking = false, category="bag"}, -- 117
+	{name = "Manual UZI e Tec-9",skillid = 75, weight = 0, stacking = false, category="bag"}, -- 118
+	{name = "Manual P90",skillid = 76, weight = 0, stacking = false, category="bag"}, -- 119
+	{name = "Manual espingarda",skillid = 72, weight = 0, stacking = false, category="bag"}, -- 120
+	{name = "Manual espingarda cano serrado",skillid = 73, weight = 0, stacking = false, category="bag"}, -- 121
+	{name = "Manual Colt-45",skillid = 69, weight = 0, stacking = false, category="bag"}, -- 122
+	{name = "Manual Colt-45 silenciado",skillid = 70, weight = 0, stacking = false, category="bag"}, -- 123
+	{name = "Manual Desert Eagle",skillid = 71, weight = 0, stacking = false, category="bag"}, -- 124
+	{name = "Manual rifle de precisão",skillid = 79, weight = 0, stacking = false, category="bag"}, -- 125
 
 	-- Halak
-	{name = "Ponty", weight = 1, stacking = true, category="bag"}, -- 127
-	{name = "Harcsa", weight = 1.2, stacking = true, category="bag"}, -- 128
-	{name = "Sügér", weight = 1, description = "Édésevizi hal.", stacking = true, category="bag"}, -- 129
-	{name = "Lazac", weight = 1.5, description = "Sósvizi hal.", stacking = true, category="bag"}, -- 130
-	{name = "Amur", weight = 1.3, description = "Édesvizi hal.", stacking = true, category="bag"}, -- 131
-	{name = "Angolna", weight = 2.1, description = "Édesvizi hal.", stacking = true, category="bag"}, -- 132
-	{name = "Törpeharcsa", weight = 0.75, description = "Édésevizi hal.", stacking = true, category="bag"}, -- 133
-	{name = "Zebrahal", weight = 0.5, description = "Édésevizi hal.", stacking = true, category="bag"}, -- 134
-	{name = "Béka", weight = 0.25, description = "Állat.", stacking = true, category="bag"}, -- 135
+	{name = "Carpa", weight = 1, stacking = true, category="bag"}, -- 127
+	{name = "Bagre", weight = 1.2, stacking = true, category="bag"}, -- 128
+	{name = "Perca", weight = 1, description = "Peixe de água doce.", stacking = true, category="bag"}, -- 129
+	{name = "Salmão", weight = 1.5, description = "Peixe de água salgada.", stacking = true, category="bag"}, -- 130
+	{name = "Amur", weight = 1.3, description = "Peixe de água doce.", stacking = true, category="bag"}, -- 131
+	{name = "Enguia", weight = 2.1, description = "Peixe de água doce.", stacking = true, category="bag"}, -- 132
+	{name = "Bagre-anão", weight = 0.75, description = "Peixe de água doce.", stacking = true, category="bag"}, -- 133
+	{name = "Peixe-zebra", weight = 0.5, description = "Peixe de água doce.", stacking = true, category="bag"}, -- 134
+	{name = "Sapo", weight = 0.25, description = "Animal.", stacking = true, category="bag"}, -- 135
 
 	--Szemét
-	{name = "Rozsdás konzervdoboz", weight = 0.4, description = "Vízből kifogott szemét.", stacking = true, category="bag"}, -- 136
-	{name = "Lyukas vödör", weight = 1.3, description = "Vízből kifogott szemét.", stacking = true, category="bag"}, -- 137
-	{name = "Fa", weight = 0.8, description = "Vízből kifogott szemét.", stacking = true, category="bag"}, -- 138
-	{name = "Hínár", weight = 0.2, description = "Vízből kifogott szemét.", stacking = true, category="bag"}, -- 139
+	{name = "Lata de conserve enferrujada", weight = 0.4, description = "Lixo pescado da água.", stacking = true, category="bag"}, -- 136
+	{name = "Balde furado", weight = 1.3, description = "Lixo pescado da água.", stacking = true, category="bag"}, -- 137
+	{name = "Madeira flutuante", weight = 0.8, description = "Lixo pescado da água.", stacking = true, category="bag"}, -- 138
+	{name = "Lodo / aguape", weight = 0.2, description = "Lixo pescado da água.", stacking = true, category="bag"}, -- 139
 
 	--Egyéb
-	{name = "Elhasznált föld", weight = 0.2, description = "Agyagos szürke homok...", stacking = true, category="bag"}, -- 140
-	{name = "Zacskó", weight = 0.02, description = "Hmmmm... Mire lehet jó egy ilyen?", stacking = false, category="bag"}, -- 141
+	{name = "Terra esgotada", weight = 0.2, description = "Areia cinza-argilosa...", stacking = true, category="bag"}, -- 140
+	{name = "Saco plástico", weight = 0.02, description = "Útil para... alguma coisa.", stacking = false, category="bag"}, -- 141
 
-	{name = "Ametiszt", weight = 0, description = "Drágakő", stacking = false, category="bag"}, -- 142
-	{name = "Apatit", weight = 0, description = "Drágakő", stacking = false, category="bag"}, -- 143
-	{name = "Törlőrongy", weight = 0, description = "Ha valami koszos!", stacking = false, category="bag"}, -- 144
-	{name = "Takarítószer", weight = 0, description = "Spricc-Spricc", stacking = false, category="bag"}, -- 145
+	{name = "Ametista", weight = 0, description = "Pedra preciosa", stacking = false, category="bag"}, -- 142
+	{name = "Apatita", weight = 0, description = "Pedra preciosa", stacking = false, category="bag"}, -- 143
+	{name = "Pano de limpeza", weight = 0, description = "Para quando estiver sujo!", stacking = false, category="bag"}, -- 144
+	{name = "Produto de limpeza", weight = 0, description = "Spray de limpeza.", stacking = false, category="bag"}, -- 145
 
-	{name = "Horgászengedély", weight = 0, description = "A horgászathoz elengedhetetlen irat.", stacking = false, category="licens"}, -- 146
-	{name = "Csali", weight = 0.025, description = "Csali.", stacking = true, category="bag"}, -- 147
-	{name = "Speciális csali", weight = 0.05, description = "Csali, egyéb remek tulajdonságokkal.", stacking = true, category="bag"}, -- 148
-	{name = "Jegyzet", weight = 0, description = "Megtalálhatóak rajta a rendelések.", stacking = false, category="licens"}, -- 149
+	{name = "Licença de pesca", weight = 0, description = "Documento obrigatório para pescar.", stacking = false, category="licens"}, -- 146
+	{name = "Isca", weight = 0.025, description = "Isca.", stacking = true, category="bag"}, -- 147
+	{name = "Isca especial", weight = 0.05, description = "Isca com outras propriedades.", stacking = true, category="bag"}, -- 148
+	{name = "Bilhete / anotação", weight = 0, description = "Contém pedidos anotados.", stacking = false, category="licens"}, -- 149
 
-	{name = "Vitamin", weight = 0.025, description = "Vitamin.", stacking = true, category="bag"}, -- 150
-	{name = "Golyóálló mellény", weight = 4.5, description = "A rendvédelmi szervezetek számára fontos lehet...", stacking = false, category="bag"}, -- 151
-	{name = "Kamera", weight = 1, description = "Kamera", isWeapon = true, stacking = false, category="bag"}, -- 152
-	{name = "Bírság", weight = 0.001, description = "Túl gyors voltál.", stacking = false, category="licens"}, -- 153
-	{name = "Rádió", weight = 0.25, description = "Fontos elektronikai eszköz.", stacking = false, category="bag"}, -- 154
-	{name = "Bankkártya", weight = 0.001, description = "Bankkártya.", stacking = false, category="licens"}, -- 155
+	{name = "Vitamina", weight = 0.025, description = "Vitamina.", stacking = true, category="bag"}, -- 150
+	{name = "Colete à prova de balas", weight = 4.5, description = "Útil para forças de segurança...", stacking = false, category="bag"}, -- 151
+	{name = "Câmera", weight = 1, description = "Câmera fotográfica.", isWeapon = true, stacking = false, category="bag"}, -- 152
+	{name = "Multa", weight = 0.001, description = "Você estava rápido demais.", stacking = false, category="licens"}, -- 153
+	{name = "Rádio", weight = 0.25, description = "Equipamento eletrônico importante.", stacking = false, category="bag"}, -- 154
+	{name = "Cartão bancário", weight = 0.001, description = "Cartão do banco.", stacking = false, category="licens"}, -- 155
 
-	{name = "Vargánya", weight = 0.1, description = "Gomba.", stacking = true, category="bag"}, -- 156
-	{name = "Gyilkos galóca", weight = 0.2, description = "Gomba.", stacking = true, category="bag"}, -- 157
-	{name = "Barna csiperke", weight = 0.25, description = "Gomba.", stacking = true, category="bag"}, -- 158
-	{name = "Erdei pöfeteg", weight = 0.15, description = "Gomba.", stacking = true, category="bag"}, -- 159
-	{name = "Őzláb gomba", weight = 0.35, description = "Gomba.", stacking = true, category="bag"}, -- 160
+	{name = "Cogumelo porcini", weight = 0.1, description = "Cogumelo.", stacking = true, category="bag"}, -- 156
+	{name = "Cogumelo venenoso", weight = 0.2, description = "Cogumelo.", stacking = true, category="bag"}, -- 157
+	{name = "Champignon", weight = 0.25, description = "Cogumelo.", stacking = true, category="bag"}, -- 158
+	{name = "Puffball", weight = 0.15, description = "Cogumelo.", stacking = true, category="bag"}, -- 159
+	{name = "Cogumelo pé-de-cordeiro", weight = 0.35, description = "Cogumelo.", stacking = true, category="bag"}, -- 160
 
-	{name = "Láncfűrész", weight = 5, description = "Favágáshoz elengedhetetlen.", isWeapon = true, stacking = false, category="bag"}, -- 161
-	{name = "Poroltó", weight = 3, description = "Tűzoltáshoz elengedhetetlen.", isWeapon = true, stacking = false, category="bag"}, -- 162
+	{name = "Motosserra", weight = 5, description = "Indispensável para cortar árvores.", isWeapon = true, stacking = false, category="bag"}, -- 161
+	{name = "Extintor", weight = 3, description = "Indispensável para combater incêndios.", isWeapon = true, stacking = false, category="bag"}, -- 162
 
-	{name = "Csavarbehajtó", weight = 2, description = "A barkácsolás elengedhetetlen kelléke.", stacking = false, category="bag"}, -- 163
-	{name = "Feszítővas", weight = 3, description = "Sok mindenhez jól jöhet...", stacking = false, category="bag"}, -- 164
+	{name = "Parafusadeira", weight = 2, description = "Ferramenta essencial para o DIY.", stacking = false, category="bag"}, -- 163
+	{name = "Pé-de-cabra", weight = 3, description = "Serve para várias coisas...", stacking = false, category="bag"}, -- 164
 
 	-- Vadászat
-	{name = "Medvefej", weight = 5, stacking = true, category = "bag"}, -- 165
-	{name = "Rókafej", weight = 3.75, stacking = true, category = "bag"}, -- 166
-	{name = "Medvebőr", weight = 1.25, stacking = true, category = "bag"}, -- 166
-	{name = "Rókabőr", weight = 1, stacking = true, category = "bag"}, -- 168
+	{name = "Cabeça de urso", weight = 5, stacking = true, category = "bag"}, -- 165
+	{name = "Cabeça de raposa", weight = 3.75, stacking = true, category = "bag"}, -- 166
+	{name = "Pele de urso", weight = 1.25, stacking = true, category = "bag"}, -- 166
+	{name = "Pele de raposa", weight = 1, stacking = true, category = "bag"}, -- 168
 
 	-- Bankrablás
-	{name = "Tolvajkulcs", weight = 0.1, stacking = false, category = "bag"}, -- 169
-	{name = "Fűrész", weight = 3.5, stacking = false, category = "bag"}, -- 170
+	{name = "Gazua", weight = 0.1, stacking = false, category = "bag"}, -- 169
+	{name = "Serra", weight = 3.5, stacking = false, category = "bag"}, -- 170
 
-	{name = "Cserép", weight = 2, stacking = false, category = "bag"}, -- 171
-	{name = "Teli Locsoló", weight = 4, stacking = false, category = "bag"}, -- 172
+	{name = "Vaso para plantas", weight = 2, stacking = false, category = "bag"}, -- 171
+	{name = "Regador cheio", weight = 4, stacking = false, category = "bag"}, -- 172
 
-	{name = "Drog Alapanyag - Narancssárga", weight = 0.025, stacking = true, category = "bag"}, -- 173
-	{name = "Drog Alapanyag - Sárga", weight = 0.025, stacking = true, category = "bag"}, -- 174
-	{name = "Drog Alapanyag - Lila", weight = 0.025, stacking = true, category = "bag"}, -- 175
-	{name = "Drog Alapanyag - Kék", weight = 0.025, stacking = true, category = "bag"}, -- 176
-	{name = "Drog Alapanyag - Zöld", weight = 0.025, stacking = true, category = "bag"}, -- 177
+	{name = "Matéria-prima droga — laranja", weight = 0.025, stacking = true, category = "bag"}, -- 173
+	{name = "Matéria-prima droga — amarela", weight = 0.025, stacking = true, category = "bag"}, -- 174
+	{name = "Matéria-prima droga — roxa", weight = 0.025, stacking = true, category = "bag"}, -- 175
+	{name = "Matéria-prima droga — azul", weight = 0.025, stacking = true, category = "bag"}, -- 176
+	{name = "Matéria-prima droga — verde", weight = 0.025, stacking = true, category = "bag"}, -- 177
 
 	{name = "C4", weight = 3.25, stacking = false, category = "bag"}, -- 178
 
 	-- Szerencsejáték
-	{name = "Dobókocka", weight = 0.02, stacking = false, category = "bag"}, -- 179
-	{name = "Kártyapakli", weight = 0.03, stacking = false, category = "bag"}, -- 180
-	{name = "Pénzérme", weight = 0.01, stacking = false, category = "bag"}, -- 181
+	{name = "Dado", weight = 0.02, stacking = false, category = "bag"}, -- 179
+	{name = "Baralho", weight = 0.03, stacking = false, category = "bag"}, -- 180
+	{name = "Moeda", weight = 0.01, stacking = false, category = "bag"}, -- 181
 
 	--Bankrob
-	{name = "Fogó", weight = 0.5, stacking = false, category = "bag"}, -- 182
+	{name = "Alicate", weight = 0.5, stacking = false, category = "bag"}, -- 182
 
 	-- Üzemanyag
-	{name = "Dízeles kanna", weight = 4, stacking = false, category = "bag"}, -- 183
-	{name = "Benzines kanna", weight = 4, stacking = false, category = "bag"}, -- 184
+	{name = "Galão de diesel", weight = 4, stacking = false, category = "bag"}, -- 183
+	{name = "Galão de gasolina", weight = 4, stacking = false, category = "bag"}, -- 184
 
 	-- Kincskeresés
-	{name = "Régi váza", weight = 1.2, stacking = false, category = "bag"}, -- 185
-	{name = "Díszes régi váza", weight = 1.5, stacking = false, category = "bag"}, -- 186
-	{name = "Törött váza", weight = 0.5, stacking = false, category = "bag"}, -- 187
-	{name = "Régi gyertyatartó", weight = 0.7, stacking = false, category = "bag"}, -- 188
-	{name = "Üvegpalack üzenettel 'Segítségkérés...'", weight = 0.8, stacking = false, category = "bag"}, -- 189
-	{name = "Üvegpalack üzenettel 'Az elveszett sziget...'", weight = 0.8, stacking = false, category = "bag"}, -- 190
-	{name = "Üvegpalack üzenettel 'Los Santos kincse...'", weight = 0.8, stacking = false, category = "bag"}, -- 191
-	{name = "Kincses térkép", weight = 0.1, stacking = false, category = "bag"}, -- 192
-	{name = "Homok", weight = 0.25, stacking = true, category = "bag"}, -- 193
-	{name = "Kavics", weight = 0.35, stacking = true, category = "bag"}, -- 194
+	{name = "Vaso antigo", weight = 1.2, stacking = false, category = "bag"}, -- 185
+	{name = "Vaso antigo ornamental", weight = 1.5, stacking = false, category = "bag"}, -- 186
+	{name = "Vaso quebrado", weight = 0.5, stacking = false, category = "bag"}, -- 187
+	{name = "Castiçal antigo", weight = 0.7, stacking = false, category = "bag"}, -- 188
+	{name = "Garrafa com mensagem: 'Preciso de ajuda...'", weight = 0.8, stacking = false, category = "bag"}, -- 189
+	{name = "Garrafa com mensagem: 'A ilha perdida...'", weight = 0.8, stacking = false, category = "bag"}, -- 190
+	{name = "Garrafa com mensagem: 'O tesouro de Los Santos...'", weight = 0.8, stacking = false, category = "bag"}, -- 191
+	{name = "Mapa do tesouro", weight = 0.1, stacking = false, category = "bag"}, -- 192
+	{name = "Areia", weight = 0.25, stacking = true, category = "bag"}, -- 193
+	{name = "Cascalho", weight = 0.35, stacking = true, category = "bag"}, -- 194
 
 	{name = "Rubin", weight = 0, stacking = false, category = "bag"}, -- 195
 	{name = "Smaragd", weight = 0, stacking = false, category = "bag"}, -- 196
 	{name = "Zafír", weight = 0, stacking = false, category = "bag"}, -- 197
-	{name = "Borostyánkő", weight = 0, stacking = false, category = "bag"}, -- 198
+	{name = "Âmbar (pedra)", weight = 0, stacking = false, category = "bag"}, -- 198
 
-	{name = "Taxi lámpa", weight = 0.3, stacking = false, category = "bag"}, -- 199
-	{name = "Kincsesláda", weight = 0, description = "Vajon mit rejthet?", stacking = false, category = "bag"}, -- 200
+	{name = "Luminária de táxi", weight = 0.3, stacking = false, category = "bag"}, -- 199
+	{name = "Baú do tesouro", weight = 0, description = "O que será que tem dentro?", stacking = false, category = "bag"}, -- 200
 
 	--
-	{name = "Műanyag", weight = 0.25, stacking = true, category = "bag"}, -- 201
-	{name = "Fa", weight = 0.35, stacking = true, category = "bag"}, -- 202
-	{name = "Anyag vas", weight = 0.5, stacking = true, category = "bag"}, -- 203
+	{name = "Plástico", weight = 0.25, stacking = true, category = "bag"}, -- 201
+	{name = "Madeira (recurso)", weight = 0.35, stacking = true, category = "bag"}, -- 202
+	{name = "Ferro (material)", weight = 0.5, stacking = true, category = "bag"}, -- 203
 
-	{name = "Kölni", weight = 0.1, stacking = false, category = "bag"}, -- 204
-	{name = "Húsvéti tojás", weight = 0, stacking = false, category = "bag"}, -- 205
+	{name = "Colônia", weight = 0.1, stacking = false, category = "bag"}, -- 204
+	{name = "Ovo de Páscoa", weight = 0, stacking = false, category = "bag"}, -- 205
 
-	{name = "Forgalmi engedély", weight = 0, stacking = false, category = "licens"}, -- 206
-	{name = "Forgalmi engedély: Igénylőlap", weight = 0, stacking = false, category = "licens"}, -- 207
+	{name = "Documento do veículo (CRLV)", weight = 0, stacking = false, category = "licens"}, -- 206
+	{name = "CRLV — formulário de solicitação", weight = 0, stacking = false, category = "licens"}, -- 207
 	{name = "OBD Scanner", weight = 0.4, stacking = false, category = "bag"}, -- 208
 
-	{name = "Fénymásolt papír", weight = 0, stacking = false, category = "licens"}, -- 209
-	{name = "Rendőrségi pajzs", weight = 5, stacking = false, category = "bag"}, -- 210
-	{name = "Fegyveralkatrész", weight = 0.3, stacking = true, category = "bag"}, -- 211
+	{name = "Documento fotocopiado", weight = 0, stacking = false, category = "licens"}, -- 209
+	{name = "Escudo balístico (PM)", weight = 5, stacking = false, category = "bag"}, -- 210
+	{name = "Peça de arma", weight = 0.3, stacking = true, category = "bag"}, -- 211
 
 	{name = "Whisky", weight = 0.3, stacking = true, category = "bag"}, -- 212
 	{name = "Jim Beam", weight = 0.3, stacking = true, category = "bag"}, -- 213
 	{name = "Absinth", weight = 0.3, stacking = true, category = "bag"}, -- 214
 	{name = "Corona extra", weight = 0.3, stacking = true, category = "bag"}, -- 215
 	{name = "Heineken", weight = 0.3, stacking = true, category = "bag"}, -- 216
-	{name = "Szonda", weight = 0.14, stacking = false, category = "bag"}, -- 217
+	{name = "Bafômetro / tubo para teste", weight = 0.14, stacking = false, category = "bag"}, -- 217
 
-	{name = "Csokoládé (Marihuana)", weight = 0.001, stacking = true, category = "bag"}, -- 218
-	{name = "Muffin (Marihuana)", weight = 0.001, stacking = true, category = "bag"}, -- 219
-	{name = "Marihuana csomag", weight = 0.1, stacking = true, category = "bag"}, -- 220
-	{name = "Marihuana olaj", weight = 0.1, stacking = true, category = "bag"}, -- 221
-	{name = "Ragasztó", weight = 0.14, stacking = false, category = "bag"}, -- 222
+	{name = "Chocolate (maconha)", weight = 0.001, stacking = true, category = "bag"}, -- 218
+	{name = "Muffin (maconha)", weight = 0.001, stacking = true, category = "bag"}, -- 219
+	{name = "Pacote de maconha", weight = 0.1, stacking = true, category = "bag"}, -- 220
+	{name = "Óleo de maconha", weight = 0.1, stacking = true, category = "bag"}, -- 221
+	{name = "Cola", weight = 0.14, stacking = false, category = "bag"}, -- 222
 
-	{name = "Üres Locsoló", weight = 4, stacking = false, category = "bag"}, -- 223
-	{name = "ÜRES ITEM", weight = 0.1, stacking = false, category = "licens"}, -- 224
+	{name = "Regador vazio", weight = 4, stacking = false, category = "bag"}, -- 223
+	{name = "ITEM VAZIO", weight = 0.1, stacking = false, category = "licens"}, -- 224
 
-	{name = "Esernyő (Kék)", weight = 0.1, stacking = false, category = "bag"}, -- 225
+	{name = "Guarda-chuva (azul)", weight = 0.1, stacking = false, category = "bag"}, -- 225
 
-	{name = "Csekk füzet (ORFK)", weight = 0, stacking = false, category="licens"}, -- 226
-	{name = "Csekk füzet (OMSZ)", weight = 0, stacking = false, category="licens"}, -- 227
-	{name = "Helyszíni bírság", weight = 0, stacking = false, category="licens"}, -- 228
-	{name = "Orvosi ellátás (csekk)", weight = 0, stacking = false, category="licens"}, -- 229
+	{name = "Talão de multas (Polícia Civil SP)", weight = 0, stacking = false, category="licens"}, -- 226
+	{name = "Talão guias hospitalares (SAMU 192)", weight = 0, stacking = false, category="licens"}, -- 227
+	{name = "Multa aplicada na hora", weight = 0, stacking = false, category="licens"}, -- 228
+	{name = "Atendimento médico (recibo)", weight = 0, stacking = false, category="licens"}, -- 229
 
-	{name = "Dedikált mez (Fehér - Piros)", weight = 0.1, stacking = false, category="bag"}, -- 230
-	{name = "Dedikált mez (Piros)", weight = 0.1, stacking = false, category="bag"}, -- 231
-	{name = "Dedikált mez (Fehér - Kék)", weight = 0.1, stacking = false, category="bag"}, -- 232
-	{name = "Dedikált mez (Narancssárga)", weight = 0.1, stacking = false, category="bag"}, -- 233
+	{name = "Camisa autografada (branco-vermelho)", weight = 0.1, stacking = false, category="bag"}, -- 230
+	{name = "Camisa autografada (vermelha)", weight = 0.1, stacking = false, category="bag"}, -- 231
+	{name = "Camisa autografada (branco-azul)", weight = 0.1, stacking = false, category="bag"}, -- 232
+	{name = "Camisa autografada (laranja)", weight = 0.1, stacking = false, category="bag"}, -- 233
 
-	{name = "Jármű kulcs #808080(Másolt)", weight = 0, stacking = false, category="key"}, -- 234
-	{name = "Ingatlan kulcs #808080(Másolt)", weight = 0, stacking = false, category="key"}, -- 235
+	{name = "Chave do veículo #808080(cópia)", weight = 0, stacking = false, category="key"}, -- 234
+	{name = "Chave de imóvel #808080(cópia)", weight = 0, stacking = false, category="key"}, -- 235
 
-	{name = "Új zár (Jármű)", weight = 0.01, stacking = false, category="bag"}, -- 236
-	{name = "Új zár (Ingatlan)", weight = 0.01, stacking = false, category="bag"}, -- 237
+	{name = "Troca de fechadura (veículo)", weight = 0.01, stacking = false, category="bag"}, -- 236
+	{name = "Fechadura nova (imóvel)", weight = 0.01, stacking = false, category="bag"}, -- 237
 
-	{name = "Vértasak", weight = 0.01, stacking = true, category="bag"}, -- 238
-	{name = "Olaj", weight = 2, stacking = true, category="bag"}, -- 239
-	{name = "Taktikai szemüveg", weight = 0.5, stacking = false, category="bag"}, -- 240
+	{name = "Bolsa de sangue", weight = 0.01, stacking = true, category="bag"}, -- 238
+	{name = "Óleo", weight = 2, stacking = true, category="bag"}, -- 239
+	{name = "Óculos táticos", weight = 0.5, stacking = false, category="bag"}, -- 240
 
-	{name = "Lottószelvény", weight = 0, stacking = false, category="licens"}, -- 241
+	{name = "Bilhete de loteria", weight = 0, stacking = false, category="licens"}, -- 241
   	{name = "Flashbang", weight = 0.5,isWeapon = true, stacking = true, category="bag"}, -- 242
 
-	{name = "Bengál égő", weight = 0.5, stacking = false, category="bag"}, -- 243
-	{name = "Ördög rakéta", weight = 0.5, stacking = false, category="bag"}, -- 244
-	{name = "Meteor", weight = 0.5, stacking = false, category="bag"}, -- 245
-	{name = "Villanó üst", weight = 0.5, stacking = false, category="bag"}, -- 246
-	{name = "Bomba telep", weight = 0.5, stacking = false, category="bag"}, -- 247
+	{name = "Bengala", weight = 0.5, stacking = false, category="bag"}, -- 243
+	{name = "Foguete demônio", weight = 0.5, stacking = false, category="bag"}, -- 244
+	{name = "Meteoro (fogo de artifício)", weight = 0.5, stacking = false, category="bag"}, -- 245
+	{name = "Roda de fogos", weight = 0.5, stacking = false, category="bag"}, -- 246
+	{name = "Mesa de fogos / conjunto bomba", weight = 0.5, stacking = false, category="bag"}, -- 247
 };
 
 
@@ -774,20 +774,21 @@ customItemNamesByValue = {
 	},
 
 	[209] = { -- Fénymásolt irat
-		[1] = "Fénymásolt személyi igazolvány",
-		[2] = "Fénymásolt vezetői engedély",
-		[3] = "Fénymásolt fegyvertartási engedély",
-		[4] = "Fénymásolt vadászati engedély",
-		[5] = "Fénymásolt forgalmi engedély",
+		[1] = "RG (fotocópia)",
+		[2] = "CNH (fotocópia)",
+		[3] = "Porte de arma (fotocópia)",
+		[4] = "Licença de caça (fotocópia)",
+		[5] = "CRLV (fotocópia)",
+		[6] = "Licença de pesca (fotocópia)",
 	},
 
 	[225] = {
-		[2] = "Esernyő (Narancs)",
-		[3] = "Esernyő (Piros)",
-		[4] = "Esernyő (Fekete)",
-		[5] = "Esernyő (Zöld)",
-		[6] = "Esernyő (Fehér)",
-		[7] = "Esernyő (Lila)",
+		[2] = "Guarda-chuva (laranja)",
+		[3] = "Guarda-chuva (vermelho)",
+		[4] = "Guarda-chuva (preto)",
+		[5] = "Guarda-chuva (verde)",
+		[6] = "Guarda-chuva (branco)",
+		[7] = "Guarda-chuva (roxo)",
 	}
 }
 
@@ -934,7 +935,7 @@ end
 function getItemTooltipWorldItem(item,value,count,state)
 	local name = getItemName(item,value);
 	local drawName = color..name.."#ffffff";
-	local drawWeight = "Súly: #3D7ABC"..getItemWeight(item)*count.."#ffffff kg.";
+	local drawWeight = "Peso: #3D7ABC"..getItemWeight(item)*count.."#ffffff kg.";
 	if state >= 75 and state <= 100 then
 		stateHtml = "#7cc576";
 	elseif state >= 50 and state < 75 then
@@ -944,8 +945,8 @@ function getItemTooltipWorldItem(item,value,count,state)
 	else
 		stateHtml = color;
 	end
-	local drawState = "Állapot: "..stateHtml..(state or 0).."#ffffff %";
-	local countText = "#7cc576"..count .. "#ffffff db"
+	local drawState = "Estado: "..stateHtml..(state or 0).."#ffffff %";
+	local countText = "#7cc576"..count .. "#ffffff un."
 
 	if weaponCache[item] and weaponCache[item].hotTable then
 		tooltip = {drawName,drawState,"#ffffff",drawWeight,countText}
@@ -968,7 +969,7 @@ function getItemTooltipWorldItem(item,value,count,state)
 	elseif item == 79 then
 		tooltip = {drawName,countText};
 	elseif item == 112 or item == 113 or item == 114 then
-		tooltip = {drawName,"#f68934"..(state/10).." #ffffffszál",drawWeight,countText};
+		tooltip = {drawName,"#f68934"..(state/10).." #ffffffun.",drawWeight,countText};
 	elseif item == 154 then
 		tooltip = {drawName,countText};
 	elseif item == 155 then
@@ -976,22 +977,24 @@ function getItemTooltipWorldItem(item,value,count,state)
 	elseif item == 163 or item == 164 then
 		tooltip = {drawName,"#f68934"..(state).." #ffffff%",drawWeight,countText};
 	elseif item == 183 or item == 184 then
-		tooltip = {drawName,"#f68934"..(state/10).." #ffffffl",drawWeight,countText};
+		tooltip = {drawName,"#f68934"..(state/10).." #ffffffL",drawWeight,countText};
 	elseif item == 204 then
-		tooltip = {drawName,"#f68934"..(state).." #ffffffalkalom",drawWeight,countText};
+		tooltip = {drawName,"#f68934"..(state).." #ffffffuso(s)",drawWeight,countText};
 	elseif item == 209 then
 		local data = fromJSON(value)[1]
 		valueText = "N/A"
 		if data[1] == 1 then
-			valueText = "#3D7ABCSzemélyi igazolvány másolat#ffffff"
+			valueText = "#3D7ABCCópia de RG#ffffff"
 		elseif data[1] == 2 then
-			valueText = "#3D7ABCVezetői engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de CNH#ffffff"
 		elseif data[1] == 3 then
-			valueText = "#3D7ABCFegyvertartási engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de porte de arma#ffffff"
 		elseif data[1] == 4 then
-			valueText = "#3D7ABCVadászati engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de licença de caça#ffffff"
+		elseif data[1] == 6 then
+			valueText = "#3D7ABCCópia de licença de pesca#ffffff"
 		end
-		tooltip = {drawName, drawWeight,countText}
+		tooltip = {drawName, valueText, drawWeight,countText}
 	else
 		tooltip = {drawName,drawWeight,countText};
 	end
@@ -1016,7 +1019,7 @@ function getItemTooltip(id,item,value,count,state,weaponSerial,pp,warn)
 	if pp == 1 then
 		drawName = "#FFD700[Premium] "..color..name.."#ffffff";
 	end
-	local drawWeight = "Súly: #3D7ABC"..getItemWeight(item)*count.."#ffffff kg.";
+	local drawWeight = "Peso: #3D7ABC"..getItemWeight(item)*count.."#ffffff kg.";
 
 	if state >= 75 and state <= 100 then
 		stateHtml = "#7cc576";
@@ -1027,81 +1030,81 @@ function getItemTooltip(id,item,value,count,state,weaponSerial,pp,warn)
 	else
 		stateHtml = color;
 	end
-	local drawState = "Állapot: "..stateHtml..(state or 0).."#ffffff %";
+	local drawState = "Estado: "..stateHtml..(state or 0).."#ffffff %";
 
 	if weaponCache[item] and weaponCache[item].hotTable then
-		tooltip = {drawName.." #787878["..weaponSerial.."]#ffffff",drawState,"Figyelmeztetések: "..color..warn.."#ffffff",drawWeight}
+		tooltip = {drawName.." #787878["..weaponSerial.."]#ffffff",drawState,"Alertas: "..color..warn.."#ffffff",drawWeight}
 	elseif availableItems[item].eat or availableItems[item].drink then
 		tooltip = {drawName,drawState,drawWeight}
 	elseif item == 51 or item == 52 or item == 54 or item == 53 or item == 69 or item == 234 or item == 235 then
-		tooltip = {drawName,"Azonosító: #f68934"..value.."#ffffff"}
+		tooltip = {drawName,"Identificador: #f68934"..value.."#ffffff"}
 	--elseif item == 127 then
 	--	tooltip = {drawName,"#f68934["..tostring(weaponSerial):gsub("_", " ").."] "..value.."#ffffff"};
 	--elseif item == 129 then
 	--	tooltip = {drawName,drawState};
 	elseif item == 1 then
-		tooltip = {drawName,"Telefonszám: #f68934"..value.."#ffffff",drawWeight};
+		tooltip = {drawName,"Telefone: #f68934"..value.."#ffffff",drawWeight};
 	elseif item == 68 then
-		tooltip = {drawName,"Név: #f68934"..string.sub(value,20):gsub("_", " ").."#ffffff", "Lejárat: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
+		tooltip = {drawName,"Nome: #f68934"..string.sub(value,20):gsub("_", " ").."#ffffff", "Validade: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
 	elseif item == 65 then
-		tooltip = {drawName,"Név: #f68934"..string.sub(value,23):gsub("_", " ").."#ffffff", "Lejárat: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
+		tooltip = {drawName,"Nome: #f68934"..string.sub(value,23):gsub("_", " ").."#ffffff", "Validade: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
 	elseif item == 146 then
-		tooltip = {drawName,"Név: #f68934"..string.sub(value,23):gsub("_", " ").."#ffffff", "Lejárat: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
+		tooltip = {drawName,"Nome: #f68934"..string.sub(value,23):gsub("_", " ").."#ffffff", "Validade: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
 	elseif item == 66 then
-		tooltip = {drawName,"Név: #f68934"..string.sub(value,22):gsub("_", " ").."#ffffff", "Lejárat: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
+		tooltip = {drawName,"Nome: #f68934"..string.sub(value,22):gsub("_", " ").."#ffffff", "Validade: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
 	elseif item == 79 then
-		tooltip = {drawName,"Név: #f68934"..string.sub(value,20):gsub("_", " ").."#ffffff", "Lejárat: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
+		tooltip = {drawName,"Nome: #f68934"..string.sub(value,20):gsub("_", " ").."#ffffff", "Validade: #3D7ABC"..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."."};
 	elseif item == 112 or item == 113 or item == 114 then
-		tooltip = {drawName,"#f68934"..(state/10).." #ffffffszál",drawWeight};
+		tooltip = {drawName,"#f68934"..(state/10).." #ffffffun.",drawWeight};
 	elseif item == 154 then
-		tooltip = {drawName,"Frekvencia: #f68934"..getElementData(localPlayer, "char:radioStation").."#ffffff Hz"};
+		tooltip = {drawName,"Frequência: #f68934"..getElementData(localPlayer, "char:radioStation").."#ffffff Hz"};
 	elseif item == 155 then
-		tooltip = {drawName,"Bankszámlaszám: #f68934"..value};
+		tooltip = {drawName,"Conta bancária: #f68934"..value};
 	elseif item == 163 or item == 164 then
 		tooltip = {drawName,"#f68934"..(state).." #ffffff%",drawWeight};
 	elseif item == 183 or item == 184 then
-		tooltip = {drawName,"#f68934"..(state/10).." #ffffffl",drawWeight};
+		tooltip = {drawName,"#f68934"..(state/10).." #ffffffL",drawWeight};
 	elseif item == 142 or item == 143 or item == 195 or item == 196 or item == 197 or item == 198 then
 		value = tonumber(value)
 		if value == 1 then
-			tooltip = {drawName,"#f68934? #ffffffgramm"};
+			tooltip = {drawName,"#f68934? #ffffffg"};
 		elseif value == 101 then
-			tooltip = {drawName,"#f689341 #ffffffgramm"};
+			tooltip = {drawName,"#f689341 #ffffffg"};
 		elseif value == 102 then
-			tooltip = {drawName,"#f689342 #ffffffgramm"};
+			tooltip = {drawName,"#f689342 #ffffffg"};
 		elseif value == 103 then
-			tooltip = {drawName,"#f689343 #ffffffgramm"};
+			tooltip = {drawName,"#f689343 #ffffffg"};
 		elseif value == 104 then
-			tooltip = {drawName,"#f689344 #ffffffgramm"};
+			tooltip = {drawName,"#f689344 #ffffffg"};
 		elseif value == 105 then
-			tooltip = {drawName,"#f689345 #ffffffgramm"};
+			tooltip = {drawName,"#f689345 #ffffffg"};
 		end
 	elseif item == 204 then
-		tooltip = {drawName,"#f68934"..(state).." #ffffffalkalom",drawWeight};
+		tooltip = {drawName,"#f68934"..(state).." #ffffffuso(s)",drawWeight};
 	elseif item == 209 then
 		local data = fromJSON(value)[1]
 		valueText = "N/A"
 		if data[1] == 1 then
-			valueText = "#3D7ABCSzemélyi igazolvány másolat#ffffff"
+			valueText = "#3D7ABCCópia de RG#ffffff"
 		elseif data[1] == 2 then
-			valueText = "#3D7ABCVezetői engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de CNH#ffffff"
 		elseif data[1] == 3 then
-			valueText = "#3D7ABCFegyvertartási engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de porte de arma#ffffff"
 		elseif data[1] == 4 then
-			valueText = "#3D7ABCVadászati engedély másolat#ffffff"
+			valueText = "#3D7ABCCópia de licença de caça#ffffff"
     elseif data[1] == 6 then
-      valueText = "#3D7ABCHorgász engedély másolat#ffffff"
+      valueText = "#3D7ABCCópia de licença de pesca#ffffff"
 		end
 		tooltip = {drawName, valueText, drawWeight}
 	elseif item == 84 then
-		tooltip = {drawName,"#f68934"..(value).." #fffffflap maradt",drawWeight};
+		tooltip = {drawName,"#f68934"..(value).." #fffffffolha(s) restante(s)",drawWeight};
 	elseif item == 226 or item == 227 then
-		tooltip = {drawName,"#f68934"..(value).." #fffffflap maradt"};
+		tooltip = {drawName,"#f68934"..(value).." #fffffffolha(s) restante(s)"};
 	elseif item == 228 or item == 229 then
 		value = fromJSON(value)
-		tooltip = {drawName,"#f68934"..(value["minutes"] or 0).." #ffffffperc a határidő végéig."};
+		tooltip = {drawName,"#f68934"..(value["minutes"] or 0).." #ffffffmin até o fim do prazo."};
 	elseif item == 241 then
-		tooltip = {drawName,"Szelvényszám: #f68934"..tonumber(value).."#ffffff"};
+		tooltip = {drawName,"Nº do bilhete: #f68934"..tonumber(value).."#ffffff"};
 	else
 		tooltip = {drawName,drawWeight};
 	end

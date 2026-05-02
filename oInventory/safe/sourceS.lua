@@ -23,8 +23,8 @@ function createSafeFurniture(x, y, z, rx, ry, rz, interior, dimension, player, a
 		local id = tonumber(id)
 		if id > 0 then
 			if admincreate then
-				outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen leraktál egy széfet.",player,0,0,0,true)
-				admin:sendMessageToAdmins(player, "létrehozott egy széfet. #db3535("..id..")")
+				outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Colocou um cofre com sucesso.",player,0,0,0,true)
+				admin:sendMessageToAdmins(player, "criou um cofre. #db3535("..id..")")
 			end
 			giveItem(player,54,id,1,0)
 
@@ -63,16 +63,16 @@ func.safe.delSafe = function(playerSource,cmd,id)
 				if getElementData(v,"object:dbid") and getElementData(v,"object:dbid") == id then
 					count=count+1
 					dbExec(connection,"DELETE FROM `szefek` WHERE `id` = ?",id)
-					admin:sendMessageToAdmins(playerSource, "törölt egy széfet. #db3535("..id..")")
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).." Sikeresen töröltél egy széfet.", playerSource,0,0,0,true)
+					admin:sendMessageToAdmins(playerSource, "removeu um cofre. #db3535("..id..")")
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Removeu um cofre com sucesso.", playerSource,0,0,0,true)
 					destroyElement(v);
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hibás id.", playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID inválido.", playerSource,0,0,0,true)
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [id]", playerSource,r,g,b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [id]", playerSource,r,g,b,true)
 		end
 	end
 end
@@ -97,14 +97,14 @@ func.safe.goto = function(playerSource, cmd, id)
 					setElementRotation(playerSource,rx,ry,rz)
 					setElementInterior(playerSource,interior)
 					setElementDimension(playerSource,dimension)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen elteleportáltál a(z) "..color..id.."#ffffff id-jű széf poziciójára.", playerSource,0,0,0, true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Teletransportou-se para o cofre (ID "..color..id.."#ffffff).", playerSource,0,0,0, true)
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).." Hibás id.", playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID inválido.", playerSource,0,0,0,true)
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [id]", playerSource,r,gb, true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [id]", playerSource,r,g,b,true)
 		end
 	end
 end
@@ -121,14 +121,14 @@ func.safe.debug = function(playerSource, cmd, id)
 				if getElementData(v,"object:dbid") and getElementData(v,"object:dbid") == id then
 					count=count+1
 					setElementData(v,"safe:use",false)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen debugoltad a(z) "..color..id.."#ffffff id-jű széfet.", playerSource,0,0,0, true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Depurou o cofre (ID "..color..id.."#ffffff) com sucesso.", playerSource,0,0,0, true)
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).." Hibás id.", playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID inválido.", playerSource,0,0,0,true)
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [id]", playerSource,r,g,b, true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [id]", playerSource,r,g,b, true)
 		end
 	end
 end
@@ -153,17 +153,17 @@ func.safe.move = function(playerSource, cmd, id)
 					setElementRotation(v,rx,ry,rz)
 					setElementInterior(v,interior)
 					setElementDimension(v,dimension)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen áthelyeztél egy széfet a te pozíciódra.", playerSource,0,0,0, true)
-					admin:sendMessageToAdmins(playerSource, "áthelyezett egy széfet. #db3535("..id..")")
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Moveu o cofre para a sua posição com sucesso.", playerSource,0,0,0, true)
+					admin:sendMessageToAdmins(playerSource, "moveu um cofre. #db3535("..id..")")
 
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hibás id.", playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID inválido.", playerSource,0,0,0,true)
 			end
 			
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [id]", playerSource,r,g,b, true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [id]", playerSource,r,g,b, true)
 		end
 	end
 end

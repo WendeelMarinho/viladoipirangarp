@@ -84,11 +84,11 @@ addEventHandler("onClientMarkerHit",getRootElement(),function(hitPlayer, matchD)
             local data = getElementData(oilMarker, "oilMarker.datas")
             --outputChatBox(data.name)
             if data.owner == 0 then 
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ez a olaj telep kiadó "..hex .."50000$#FFFFFF a kibérlése!",255, 255, 255, true)
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Figyelem ha kibéreled 1 heted van meghosszabítani!",255, 255, 255, true)
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF /rentoilstation",255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ez a olaj telep kiadó "..hex .."50000$#FFFFFF a kibérlése!",255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Figyelem ha kibéreled 1 heted van meghosszabítani!",255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF /rentoilstation",255, 255, 255, true)
             else
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ez a telep: "..getNameForOwnerID(data.owner) .. " tulajdonában van!",255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ez a telep: "..getNameForOwnerID(data.owner) .. " tulajdonában van!",255, 255, 255, true)
             end
         end
     end
@@ -279,7 +279,7 @@ addEventHandler("onClientKey",getRootElement(), function(key, press)
            -- outputChatBox("exit")
             local outMarker = getElementData(leaveMarker, "oilMarker.outMarkerElementData")
             local data = getElementData(outMarker, "oilMarker.datas")
-            if data.locked == 1 then outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ez az olaj telep zárva van.", 255, 255, 255, true) return end
+            if data.locked == 1 then outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ez az olaj telep zárva van.", 255, 255, 255, true) return end
             for i, v in pairs(elements) do
                 if isElement(v) then
                     destroyElement(v)
@@ -292,7 +292,7 @@ addEventHandler("onClientKey",getRootElement(), function(key, press)
             local id = getElementData(oilMarker, "oilMarker.dbId")
             local data = getElementData(oilMarker, "oilMarker.datas")
             --outputChatBox(getElementType(getOilStationById(id)))
-            if data.locked == 1 then outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ez az olaj telep zárva van.", 255, 255, 255, true) return end
+            if data.locked == 1 then outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ez az olaj telep zárva van.", 255, 255, 255, true) return end
             triggerServerEvent("teleportToOilStation", localPlayer, localPlayer, id)
            -- outputChatBox("enter")
         end
@@ -301,10 +301,10 @@ addEventHandler("onClientKey",getRootElement(), function(key, press)
             local outMarker = getElementData(leaveMarker, "oilMarker.outMarkerElementData")
             local data = getElementData(outMarker, "oilMarker.datas")
             if data.locked == 1 then 
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Sikeresen kinyitottad az olaj telepet.", 255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen kinyitottad az olaj telepet.", 255, 255, 255, true)
                 data.locked = 0
             else
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Sikeresen bezártad az olaj telepet.", 255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen bezártad az olaj telepet.", 255, 255, 255, true)
                 data.locked = 1
             end
             setElementData(outMarker, "oilMarker.datas", data)
@@ -313,14 +313,14 @@ addEventHandler("onClientKey",getRootElement(), function(key, press)
             --outputChatBox(getElementData(localPlayer, "char:id"))
             if data.owner == getElementData(localPlayer, "char:id") then 
                 if data.locked == 1 then 
-                    outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Sikeresen kinyitottad az olaj telepet.", 255, 255, 255, true)
+                    outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen kinyitottad az olaj telepet.", 255, 255, 255, true)
                     data.locked = 0
                 else
-                    outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Sikeresen bezártad az olaj telepet.", 255, 255, 255, true)
+                    outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Sikeresen bezártad az olaj telepet.", 255, 255, 255, true)
                     data.locked = 1
                 end
             else 
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ehhez a telephez nincs kulcsod!", 255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ehhez a telephez nincs kulcsod!", 255, 255, 255, true)
             end
             setElementData(oilMarker, "oilMarker.datas", data)
         end
@@ -338,15 +338,15 @@ addCommandHandler("rentoilstation",function()
                setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money") - 50000)
                 triggerServerEvent("changeOilStationOwner", localPlayer, localPlayer, data.id, oilMarker)
             else
-                outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Nincs elegendő pénzed!", 255, 255, 255, true)
+                outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Nincs elegendő pénzed!", 255, 255, 255, true)
             end
         elseif data.owner == getElementData(localPlayer, "char:id") then
             outputChatBox("újra bérlés")
         else 
-            outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Ez az olaj telep nem kiadó!", 255, 255, 255, true) 
+            outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Ez az olaj telep nem kiadó!", 255, 255, 255, true) 
         end
     else
-        outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Túl messze vagy a bejárattól!", 255, 255, 255, true)
+        outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Túl messze vagy a bejárattól!", 255, 255, 255, true)
     end
 end)
 
@@ -354,7 +354,7 @@ addEvent("createRepairMarker",true)
 addEventHandler("createRepairMarker",getRootElement(),function(stationID)
     local stationData = getElementData(getOilStationById(stationID), "oilMarker.datas")
     local wrongMachine = stationData.wrongMachineId
-    outputChatBox(hex .."[OriginalRoleplay - OilStation]#FFFFFF Figyelem meghibásodott a "..wrongMachine..". számú pumpa kérlek javítsd meg!", 255, 255, 255, true)
+    outputChatBox(hex .."[Vale do Ipiranga RP - OilStation]#FFFFFF Figyelem meghibásodott a "..wrongMachine..". számú pumpa kérlek javítsd meg!", 255, 255, 255, true)
     --outputChatBox(oilStation.oilPump[wrongMachine][2])
     if isElement(repairMarker) then destroyElement(repairMarker) end
     repairMarker = createMarker(oilStation.oilPump[wrongMachine][2],oilStation.oilPump[wrongMachine][3]+5,oilStation.oilPump[wrongMachine][4])

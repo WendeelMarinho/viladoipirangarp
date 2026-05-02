@@ -5,33 +5,33 @@ chat = exports.oChat
 color, r, g, b = core:getServerColor()
 
 mainPageTexts = {
-    {title = "Üdvözöljük!", texts = {
-        "Üdvözlünk az originalRoleplay bankban!",
+    {title = "Bem-vindo!", texts = {
+        "Bem-vindo ao banco Vale do Ipiranga RP!",
     }},
 }
 
 points = {
     --{"Áttekintés", "bank.png", hasKeyboard?},
-    {"Számlák kezelése", "creditcard.png", true, "PIN"},
-    {"Tranzakciók", "logs.png", true, "ÖSSZEG"},
-    {"Utalás", "transaction.png", true, "ÖSSZEG"},
+    {"Gerenciar contas", "creditcard.png", true, "PIN"},
+    {"Transações", "logs.png", true, "VALOR"},
+    {"Transferência", "transaction.png", true, "VALOR"},
 }
 
 controlPoints = {
-    {"PIN kód módosítása", ""}, 
-    {"Bankkártya igénylése #72b368(250$)", ""}, 
-    {"Beállítás elsődleges számlának", ""}, 
-    {"Számla törlése", ""},
+    {"Alterar código PIN", ""}, 
+    {"Solicitar cartão #72b368(250$)", ""}, 
+    {"Definir como conta principal", ""}, 
+    {"Encerrar conta", ""},
 }
 
 transactionPoints = {
-    {"Kivétel", ""}, 
-    {"Befizetés", ""},
-    {"Előzmények \ntörlése", ""},
+    {"Saque", ""}, 
+    {"Depósito", ""},
+    {"Limpar \nhistórico", ""},
 }
 transferPoints = {
-    {"Utalás", ""}, 
-    {"Előzmények \ntörlése", ""},
+    {"Transferir", ""}, 
+    {"Limpar \nhistórico", ""},
 }
 
 bankPeds = {

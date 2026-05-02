@@ -526,7 +526,7 @@ premiumItemPackages = {
 
 premiumInfos = {
     {title = "Como adquirir pontos premium", texts = {
-        serverColor.."PayPal: #ffffffVocê pode apoiar o servidor via PayPal (consulte o fórum do Ipiranga Roleplay para dados oficiais).",
+        serverColor.."PayPal: #ffffffVocê pode apoiar o servidor via PayPal (consulte o fórum do Vale do Ipiranga RP para dados oficiais).",
     }},
 
     {title = "O que dá para comprar com pontos premium?", texts = {
@@ -535,7 +535,7 @@ premiumInfos = {
         serverColor.."Slots: #ffffffNa aba "..serverColor.."'Patrimônio' #ffffffdá para comprar slot de imóvel ou veículo.",
         serverColor.."Concessionária: #ffffffVeículos por pontos premium; alguns ignoram o limite da loja.",
         "Há veículos exclusivos por pontos premium na concessionária.",
-        serverColor.."Portões: #ffffffCompra de portão conforme regras do servidor; valores no fórum do Ipiranga Roleplay.",
+        serverColor.."Portões: #ffffffCompra de portão conforme regras do servidor; valores no fórum do Vale do Ipiranga RP.",
         serverColor.."Instalação: #ffffffA colocação de portões é feita por "..serverColor.."SuperAdmin#ffffff ou "..serverColor.."ServerManager#ffffff.",
         serverColor.."Não achou o que quer? #ffffffFale com a equipe no Discord ou fórum oficial.",
     }},
@@ -549,7 +549,7 @@ premiumInfos = {
     }},
 
     {title = "Documentação de pontos premium", texts = {
-        serverColor.."Consulte o fórum ou Discord do Ipiranga Roleplay para PDFs e tabelas atualizadas.",
+        serverColor.."Consulte o fórum ou Discord do Vale do Ipiranga RP para PDFs e tabelas atualizadas.",
 
     }},
 }

@@ -730,7 +730,7 @@ function drawDetain()
         closePanel2()
        -- checkNeed = false
     end
-    exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "OriginalRoleplay")
+    exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "Vale do Ipiranga RP")
     local startY = panelY + 25
     for i=1, #seat do 
         local data = seat[i]

@@ -36,7 +36,7 @@ function createBankPeds()
     for k, v in ipairs(bankPeds) do 
         local ped = createPed(v.skin, v.pos.x, v.pos.y, v.pos.z, v.rot)
         setElementData(ped, "ped:name", v.name)
-        setElementData(ped, "ped:prefix", "Bankár")
+        setElementData(ped, "ped:prefix", "Banco")
         setElementData(ped, "isBankPed", true)
         setElementFrozen(ped, true)
 
@@ -80,7 +80,7 @@ function saveBankAccounts()
         dbExec(conn, "UPDATE bank_accounts SET money=?, isMain=?, pin=?, transactions=?, transfers=? WHERE id=?", v["money"], v["isMain"], v["pin"], (toJSON(v["transactions"]) or "[[ ]]"), (toJSON(v["transfers"]) or "[[ ]]"), v["id"])
     end
 
-    print("[BANK]: "..savedAccounts.."db bank account sikeresen mentve!")
+    print("[BANK]: "..savedAccounts.." conta(s) bancária(s) salva(s).")
 end
 
 setTimer(saveBankAccounts, core:minToMilisec(60), 0)
@@ -208,7 +208,7 @@ addEventHandler("bank > moneyToAccount", resourceRoot, function(serial, money)
         
             bankAccounts[serial][3] = bankAccounts[serial][3] + money
         
-            outputChatBox(core:getServerPrefix("server", "Bank", 2).."Sikeres tranzakció! Adó: "..color..math.floor(tax).."#ffffff$.", client, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Bank", 2).."Transação concluída! Imposto: "..color..math.floor(tax).."#ffffff$.", client, 255, 255, 255, true)
         
             triggerClientEvent(root, "bank > updateBankDatas > client", root, bankAccounts, bankLogs)
         
@@ -217,9 +217,9 @@ addEventHandler("bank > moneyToAccount", resourceRoot, function(serial, money)
             if math.abs(valtozas) >= 250000 then 
                 for k, v in ipairs(getElementsByType("player")) do 
                     if getElementData(v, "user:admin") >= 2 then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Magas banki egyenleg változás érzékelve!", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Bankszámla: "..color..serial.." #ff3929| Játékos: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Változás: "..color..valtozas, v, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Grande alteração de saldo bancário detectada!", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Conta: "..color..serial.." #ff3929| Jogador: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Variação: "..color..valtozas, v, 255, 255, 255, true)
                     end
                 end
             end
@@ -252,7 +252,7 @@ addEventHandler("bank > moneyFromAccount", resourceRoot, function(serial, money)
 
             setElementData(client, "char:money", getElementData(client, "char:money") + money)
 
-            outputChatBox(core:getServerPrefix("server", "Bank", 2).."Sikeres tranzakció! Adó: "..color..math.floor(tax).."#ffffff$.", client, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Bank", 2).."Transação concluída! Imposto: "..color..math.floor(tax).."#ffffff$.", client, 255, 255, 255, true)
 
             triggerClientEvent(root, "bank > updateBankDatas > client", root, bankAccounts, bankLogs)
 
@@ -261,9 +261,9 @@ addEventHandler("bank > moneyFromAccount", resourceRoot, function(serial, money)
             if math.abs(valtozas) >= 250000 then 
                 for k, v in ipairs(getElementsByType("player")) do 
                     if getElementData(v, "user:admin") >= 2 then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Magas banki egyenleg változás érzékelve!", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Bankszámla: "..color..serial.." #ff3929| Játékos: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Változás: "..color..valtozas, v, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Grande alteração de saldo bancário detectada!", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Conta: "..color..serial.." #ff3929| Jogador: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Variação: "..color..valtozas, v, 255, 255, 255, true)
                     end
                 end
             end
@@ -331,9 +331,9 @@ addEventHandler("bank > transferMoney", resourceRoot, function(from, to, money)
             if math.abs(valtozas) >= 250000 then 
                 for k, v in ipairs(getElementsByType("player")) do 
                     if getElementData(v, "user:admin") >= 2 then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Magas banki egyenleg változás érzékelve!", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Bankszámla: "..color..from.." #ff3929| Játékos: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Változás: "..color..valtozas, v, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Grande alteração de saldo bancário detectada!", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Conta: "..color..from.." #ff3929| Jogador: "..color..getElementData(client, "char:name").." (ID: "..getElementData(client, "playerid")..")", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Variação: "..color..valtozas, v, 255, 255, 255, true)
                     end
                 end
             end
@@ -350,9 +350,9 @@ addEventHandler("bank > transferMoney", resourceRoot, function(from, to, money)
             if math.abs(valtozas) >= 250000 then 
                 for k, v in ipairs(getElementsByType("player")) do 
                     if getElementData(v, "user:admin") >= 2 then 
-                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Magas banki egyenleg változás érzékelve!", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Bankszámla: "..color..to.." #ff3929", v, 255, 255, 255, true)
-                        outputChatBox(" #ff3929~ Változás: "..color..valtozas, v, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("red-dark", "Anticheat", 3).."#ff3929Grande alteração de saldo bancário detectada!", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Conta: "..color..to.." #ff3929", v, 255, 255, 255, true)
+                        outputChatBox(" #ff3929~ Variação: "..color..valtozas, v, 255, 255, 255, true)
                     end
                 end
             end
@@ -391,7 +391,7 @@ function addATM(player, cmd)
                 setElementData(obj, "atm:id", insertID)
             end
 
-            triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), player, "létrehozott egy ATM-et. Itt: #db3535"..getElementZoneName(player).."#557ec9 (".."#db3535#"..insertID.."#557ec9)", 8)
+            triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), player, "criou um ATM em: #db3535"..getElementZoneName(player).."#557ec9 (".."#db3535#"..insertID.."#557ec9)", 8)
             setElementData(player, "log:admincmd", {"ATM: "..insertID, cmd})
         end
     end
@@ -406,7 +406,7 @@ addEventHandler("bank > delATM", resourceRoot, function(atm)
     if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(client) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
     local id = getElementData(atm, "atm:id")
-    triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), client, "törölt egy ATM-et. Itt: #db3535"..getElementZoneName(atm).."#557ec9 (".."#db3535#"..id.."#557ec9)", 8)
+    triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), client, "removeu um ATM em: #db3535"..getElementZoneName(atm).."#557ec9 (".."#db3535#"..id.."#557ec9)", 8)
     destroyElement(atm)
     setElementData(client, "log:admincmd", {"ATM: "..id, "delatm"})
 
@@ -433,7 +433,7 @@ addEventHandler("bank > atmRob > atmFlexed", resourceRoot, function(atm)
     setElementData(atm, "atm:working", false)
     local x, y, z = getElementPosition(atm)
     atmBlips[atm] = createBlip(x, y, z, 26)
-    setElementData(atmBlips[atm], "blip:name", "Üzemen kívüli ATM")
+    setElementData(atmBlips[atm], "blip:name", "ATM fora de serviço")
 
     local colShape = createColSphere(x, y, z, 1.5)
     setElementData(atm, "atm:colShape", colShape)

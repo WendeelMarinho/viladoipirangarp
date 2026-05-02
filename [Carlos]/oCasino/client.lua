@@ -120,7 +120,7 @@ function betBuyPanelRender()
     dxDrawRectangle(sx*0.4+3/myX*sx, sy*0.4+3/myY*sy, sx*0.2-6/myX*sx, sy*0.202-6/myY*sy, tocolor(40, 40, 40, 255*alpha))
     --dxDrawRectangle(sx*0.405, sy*0.41, sx*0.1, sy*0.03)
     dxDrawText("Casino Coin Vásárlás", sx*0.435, sy*0.41, sx*0.435+sx*0.1, sy*0.41+sy*0.03, tocolor(255, 255, 255, 220*alpha), 1/myX*sx, fonts["bebasneue-15"], "left", "center")
-    dxDrawText("OriginalRoleplay", sx*0.435, sy*0.43, sx*0.435+sx*0.1, sy*0.43+sy*0.03, tocolor(255, 255, 255, 100*alpha), 0.8/myX*sx, fonts["condensed-13"], "left", "center")
+    dxDrawText("Vale do Ipiranga RP", sx*0.435, sy*0.43, sx*0.435+sx*0.1, sy*0.43+sy*0.03, tocolor(255, 255, 255, 100*alpha), 0.8/myX*sx, fonts["condensed-13"], "left", "center")
 
     dxDrawText(color..(getElementData(localPlayer, "char:cc") or 0).."#ffffffCC", sx*0.46, sy*0.43, sx*0.46+sx*0.132, sy*0.43+sy*0.03, tocolor(255, 255, 255, 100*alpha), 0.8/myX*sx, fonts["condensed-13"], "right", "center", false, false, false, true)
 

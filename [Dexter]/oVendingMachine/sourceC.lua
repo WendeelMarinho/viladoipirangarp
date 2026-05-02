@@ -63,7 +63,7 @@ function drawPanel()
     -- if getPlayerSerial(localPlayer) == "8B23EC8A49888EB7A5778CE0AF7D88A2" or getPlayerSerial(localPlayer) == "0B25976E227D03EB223B81589A372224" then
         dxDrawRectangle(panelX,panelY + 40, panelW, 55 * #items[selectedMachineType], tocolor(35,35,35,160))
         dxDrawRectangle(panelX,panelY, panelW, 40, tocolor(30,30,30,250))
-        dxDrawText(hex.."OriginalRoleplay#FFFFFF - Automata", screenX/2, panelY, screenX/2 , panelY + 40, tocolor(255,255,255,255),0.8,fontB, "center", "center", false,false,false,true)
+        dxDrawText(hex.."Vale do Ipiranga RP#FFFFFF - Automata", screenX/2, panelY, screenX/2 , panelY + 40, tocolor(255,255,255,255),0.8,fontB, "center", "center", false,false,false,true)
         for k,v in pairs(items[selectedMachineType]) do 
             if isMouseInPosition(panelX, panelY + 51 * k - 10, panelW, 50) then
                 dxDrawRectangle(panelX, panelY + 51 * k - 10, panelW, 50, tocolor(r, g, b, 220)) 

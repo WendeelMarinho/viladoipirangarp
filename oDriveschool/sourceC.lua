@@ -223,12 +223,12 @@ function drivingPanel()
             alpha = interpolateBetween(1,0,0,0,0,0,progress,"OutQuad");
         end
         if page == "menu" then
-            exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "OriginalRoleplay - "..cache.serverhex.."Autósiskola", alpha)
+            exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "Vale do Ipiranga RP - "..cache.serverhex.."Autósiskola", alpha)
         elseif page == "selector" then 
-            exports["oCore"]:drawWindow(panelX, panelY, panelW, 172, "OriginalRoleplay - "..cache.serverhex.."Autósiskola", alpha)
+            exports["oCore"]:drawWindow(panelX, panelY, panelW, 172, "Vale do Ipiranga RP - "..cache.serverhex.."Autósiskola", alpha)
         else 
             --(math.floor(100/(#question)*correctPoint))
-            exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "OriginalRoleplay - "..cache.serverhex.."Autósiskola ("..(math.floor(100/(#question)*correctPoint)).. "%)", alpha)
+            exports["oCore"]:drawWindow(panelX, panelY, panelW, panelH, "Vale do Ipiranga RP - "..cache.serverhex.."Autósiskola ("..(math.floor(100/(#question)*correctPoint)).. "%)", alpha)
         end
         if page == "selector" then
             local startY = panelY + 25

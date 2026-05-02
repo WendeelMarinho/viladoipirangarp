@@ -83,15 +83,15 @@ function checkHunger()
 		--	killPed(localPlayer)
 			setElementHealth(localPlayer, 0)
 			setElementData(localPlayer,"char:health", 0)
-			setElementData(localPlayer, "customDeath", "éhen halt")
+			setElementData(localPlayer, "customDeath", "morreu de fome")
 			setElementData(localPlayer,"char:hunger", 0, true)
 			--hungerTimer = setTimer(checkHunger, 1200000,1)
 		else
 			--hungerTimer = setTimer(checkHunger, 1200000,1)
 			setElementData(localPlayer,"char:hunger", hunger - 4, true)
 			if getElementData(localPlayer, "char:hunger") <= 20 then
-				outputChatBox(getServerPrefix("server", "OriginalRoleplay", 1).."Kezdesz éhes lenni egyél valamit, vagy össze fogsz esni.", 255, 255, 255, true)
-				exports.oInfobox:outputInfoBox("Figyelj a éhség szintedre, mert alacsony!", "warning")
+				outputChatBox(getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está com muita fome — coma algo ou vai desmaiar.", 255, 255, 255, true)
+				exports.oInfobox:outputInfoBox("Atenção: sua fome está baixa!", "warning")
 			end
 		end
 		
@@ -119,15 +119,15 @@ function checkThirst()
 	--	killPed(localPlayer)
 		setElementHealth(localPlayer, 0)
 		setElementData(localPlayer,"char:health", 0)
-		setElementData(localPlayer, "customDeath", "szomjan halt")
+		setElementData(localPlayer, "customDeath", "morreu de sede")
 		setElementData(localPlayer,"char:thirst", 0, true)
 		--thirstTimer = setTimer(checkThirst, 1200000,1)
 	else
 		--thirstTimer = setTimer(checkThirst, 1200000,1)
 		setElementData(localPlayer,"char:thirst", thirst - 4, true)
 		if getElementData(localPlayer, "char:thirst") <= 20 then
-			outputChatBox(getServerPrefix("server", "OriginalRoleplay", 1).."Kezdesz szomjas lenni igyál valamit, vagy össze fogsz esni.", 255, 255, 255, true)
-			exports.oInfobox:outputInfoBox("Figyelj a szomjúság szintedre, mert alacsony!", "warning")
+			outputChatBox(getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está com muita sede — beba algo ou vai desmaiar.", 255, 255, 255, true)
+			exports.oInfobox:outputInfoBox("Atenção: sua sede está baixa!", "warning")
 		end
 	end
 	
@@ -139,7 +139,7 @@ function lossThirst()
 		local loss = math.random(2, 4)
 		if loss > thirst then
 			setElementData(localPlayer, "char:thirst", 0)
-			setElementData(localPlayer, "customDeath", "Szomjan halt")
+			setElementData(localPlayer, "customDeath", "morreu de sede")
 			setElementHealth(localPlayer,0)
 			setElementData(localPlayer,"char:health",0)
 		else
@@ -148,8 +148,8 @@ function lossThirst()
 		end
 
 		if getElementData(localPlayer, "char:thirst") <= 20 then 
-			outputChatBox(getServerPrefix("server", "OriginalRoleplay", 1).."Figyelj a szomjúság szintedre, mert alacsony!", 255, 255, 255, true)
-			exports.oInfobox:addInfoBox("warning", "Figyelj a szomjúság szintedre, mert alacsony!")
+			outputChatBox(getServerPrefix("server", "Vale do Ipiranga RP", 1).."Atenção: sua sede está baixa!", 255, 255, 255, true)
+			exports.oInfobox:addInfoBox("warning", "Atenção: sua sede está baixa!")
 		end
 	end
 end
@@ -160,7 +160,7 @@ function lossDrowsiness()
 		local loss = math.random(2, 5)
 		if loss > drowsiness then
 			setElementData(localPlayer, "char:thirst", 0)
-			setElementData(localPlayer, "customDeath", "Szomjan halt")
+			setElementData(localPlayer, "customDeath", "morreu de sede")
 			setElementHealth(localPlayer,0)
 			setElementData(localPlayer,"char:health",0)
 		else
@@ -177,7 +177,7 @@ function lossHunger()
 		local loss = math.random(2, 4)
 		if loss > hunger then
 			setElementData(localPlayer, "char:hunger", 0)
-			setElementData(localPlayer, "customDeath", "Éhség")
+			setElementData(localPlayer, "customDeath", "fome")
 			setElementHealth(localPlayer,0)
 			setElementData(localPlayer,"char:health",0)
 		else
@@ -186,8 +186,8 @@ function lossHunger()
 		end
 
 		if getElementData(localPlayer, "char:hunger") <= 20 then 
-			outputChatBox(getServerPrefix("server", "OriginalRoleplay", 1).."Figyelj az éhség szintedre, mert alacsony!", 255, 255, 255, true)
-			exports.oInfobox:addInfoBox("warning", "Figyelj az éhség szintedre, mert alacsony!")
+			outputChatBox(getServerPrefix("server", "Vale do Ipiranga RP", 1).."Atenção: sua fome está baixa!", 255, 255, 255, true)
+			exports.oInfobox:addInfoBox("warning", "Atenção: sua fome está baixa!")
 		end
 	end
 end
@@ -195,13 +195,13 @@ end
 
 
 local bodypartNames = {
-    [3] = "Mellkason",
-    [4] = "Seggen",
-    [5] = "Bal kézen",
-    [6] = "Jobb kézen",
-    [7] = "Bal lábon",
-    [8] = "Jobb lábon",
-    [9] = "Fejen",
+    [3] = "No peito",
+    [4] = "Nas nádegas",
+    [5] = "Na mão esquerda",
+    [6] = "Na mão direita",
+    [7] = "Na perna esquerda",
+    [8] = "Na perna direita",
+    [9] = "Na cabeça",
 }
 
 addEvent("sendKillLog", true)
@@ -213,13 +213,13 @@ addEventHandler("sendKillLog", localPlayer, function(player, killer, weapon, bod
 			if killer then
 				local killer = (getElementType(killer) == "player") and killer or getVehicleOccupant(killer)
 				if getPlayerName(killer) then
-					outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(killer):gsub("_", " ").."#FFFFFF ["..getElementData(killer, "playerid").."] megölte #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF-t. ["..getWeaponNameFromID(weapon).."] ["..(bodypartNames[bodypart] or "ismeretlen").."]", 255, 255, 255, true)
+					outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(killer):gsub("_", " ").."#FFFFFF ["..getElementData(killer, "playerid").."] matou #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF. ["..getWeaponNameFromID(weapon).."] ["..(bodypartNames[bodypart] or "desconhecido").."]", 255, 255, 255, true)
 				else 
 					--outputChatBox(getElementType(killer))
-					outputChatBox("#2379cf["..date.."]: #e97619Ismeretlen [Object]#FFFFFF megölte #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."].  ("..getZoneName(x, y, z, true)..") ["..getWeaponNameFromID(weapon).."] ["..(bodypartNames[bodypart] or "ismeretlen").."]", 255, 255, 255, true)
+					outputChatBox("#2379cf["..date.."]: #e97619Desconhecido [objeto]#FFFFFF matou #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."].  ("..getZoneName(x, y, z, true)..") ["..getWeaponNameFromID(weapon).."] ["..(bodypartNames[bodypart] or "desconhecido").."]", 255, 255, 255, true)
 				end
 			else
-				outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."] meghalt (Oka: ".. getElementData(player, "customDeath")..").", 255, 255, 255, true)
+				outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."] morreu (motivo: ".. getElementData(player, "customDeath")..").", 255, 255, 255, true)
 			end
 		end
 	end
@@ -253,9 +253,9 @@ addCommandHandler("getpos", function()
 	if getElementData(localPlayer, "user:admin") > 1 then
 		local x, y, z = getElementPosition(localPlayer)
 		local rx, ry, rz = getElementRotation(localPlayer)
-		outputChatBox("Pozició: "..serverColor..x.."#ffffff, "..serverColor..y.."#ffffff, "..serverColor..z, 255, 255, 255, true)
-		outputChatBox("Rotáció: "..serverColor..rx.."#ffffff, "..serverColor..ry.."#ffffff, "..serverColor..rz, 255, 255, 255, true)
-		outputChatBox("Interior: "..serverColor..getElementInterior(localPlayer).."#ffffff Dimenzió "..serverColor..getElementDimension(localPlayer), 255, 255, 255, true)
+		outputChatBox("Posição: "..serverColor..x.."#ffffff, "..serverColor..y.."#ffffff, "..serverColor..z, 255, 255, 255, true)
+		outputChatBox("Rotação: "..serverColor..rx.."#ffffff, "..serverColor..ry.."#ffffff, "..serverColor..rz, 255, 255, 255, true)
+		outputChatBox("Interior: "..serverColor..getElementInterior(localPlayer).."#ffffff Dimensão "..serverColor..getElementDimension(localPlayer), 255, 255, 255, true)
 	end
 end)
 
@@ -279,18 +279,18 @@ addCommandHandler("pay", function(cmd, target, amount)
 					if getElementData(localPlayer, "char:money") >= amount then
 						triggerServerEvent("sendMoney", localPlayer, target, amount)
 						setElementData(localPlayer, "log:money", {getElementData(target, "char:id"), amount})
-						exports.oChat:sendLocalMeAction("átad $"..amount.."-t "..targetName.."-nak/-nek.")
-						outputChatBox("Adtál $"..amount.."-t "..targetName.."-nak/-nek.", 255, 255, 255)
+						exports.oChat:sendLocalMeAction("entrega $"..amount.." a "..targetName..".")
+						outputChatBox("Você entregou $"..amount.." a "..targetName..".", 255, 255, 255)
 					else
-						outputChatBox("Nincs elég pénzed.", 255, 255, 255)
+						outputChatBox("Você não tem dinheiro suficiente.", 255, 255, 255)
 					end
 				else
-					outputChatBox("A játékos túl messze van tőled!", 255, 255, 255)
+					outputChatBox("O jogador está longe demais de você!", 255, 255, 255)
 				end
 			end
 		end
 	else
-		outputChatBox("[Használat]: #ffffff/"..cmd.." [Játékos név/ID] [Összeg]", serverRGB[1], serverRGB[2], serverRGB[3], true)
+		outputChatBox("[Uso]: #ffffff/"..cmd.." [nome ou ID do jogador] [valor]", serverRGB[1], serverRGB[2], serverRGB[3], true)
 	end
 end)
 

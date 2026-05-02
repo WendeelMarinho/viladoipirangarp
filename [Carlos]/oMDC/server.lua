@@ -36,7 +36,7 @@ addEventHandler("onResourceStart", resourceRoot, function()
         setElementData(v, "mdc:vehicleLoginDatas", false)
         setElementData(v, "mdc:mdcInUse", false)
         setElementData(v, "mdc:unitNumber", "")
-        setElementData(v, "mdc:unitState", {"Nincs szolgálatban", 66, 66, 66, "#424242"})
+        setElementData(v, "mdc:unitState", {"Fora de serviço", 66, 66, 66, "#424242"})
     end
 
     setTimer(function()
@@ -100,12 +100,12 @@ function addDataToMDC(tableID, tableData, penaltiesFaction)
         end
 
         if tableData[6] then 
-            sendMDCChatMessage("Körözés kiadva a(z) "..color..tableData[1].."#ffffff nevű személyre. #ed2f2f[A személy fokozottan veszélyes!]")
+            sendMDCChatMessage("Procuração emitida para "..color..tableData[1].."#ffffff. #ed2f2f[Pessoa considerada altamente perigosa!]")
         else
-            sendMDCChatMessage("Körözés kiadva a(z) "..color..tableData[1].."#ffffff nevű személyre.")
+            sendMDCChatMessage("Procuração emitida para "..color..tableData[1].."#ffffff.")
         end
 
-        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Körözés kiadva", tableData[2], tableData[1])
+        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Procura emitida", tableData[2], tableData[1])
     elseif tableID == "wanted_cars" then 
         tableData[7] = 0
 
@@ -115,9 +115,9 @@ function addDataToMDC(tableID, tableData, penaltiesFaction)
             tableData[7] = insertID
         end
 
-        sendMDCChatMessage("Körözés kiadva a(z) "..color..tableData[1].."#ffffff rendszámú gépjárműre. Jármű típusa: "..color..tableData[2].."#ffffff, Jármű színe: "..color..tableData[4].."#ffffff.")
+        sendMDCChatMessage("Veículo procurado na placa "..color..tableData[1].."#ffffff. Tipo: "..color..tableData[2].."#ffffff — cor: "..color..tableData[4].."#ffffff.")
 
-        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Körözés kiadva", tableData[3], tableData[1])
+        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Procura veículo emitida", tableData[3], tableData[1])
     elseif tableID == "penalties" then 
         tableData[4] = 0
 
@@ -195,12 +195,12 @@ function deleteDataFromMDC(tableID, tableRow, penaltiesFaction)
             if tableID == "wanted_persons" or tableID == "wanted_cars" then 
                 if v[7] == tableRow then 
                     if tableID == "wanted_persons" then 
-                        sendMDCChatMessage("A(z) "..color..v[1].."#ffffff nevű személy körözése visszavonásra került.")
+                        sendMDCChatMessage("Procura revogada: "..color..v[1].."#ffffff.")
                     elseif tableID == "wanted_cars" then 
-                        sendMDCChatMessage("A(z) "..color..v[1].."#ffffff rendszámú jármű körözése visszavonásra került.")
+                        sendMDCChatMessage("Procura do veículo "..color..v[1].."#ffffff revogada.")
                     end
 
-                    dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Körözés visszavonva", "", v[1])
+                    dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Procura revogada", "", v[1])
 
                     table.remove(serverMDCDatas[tableID], k)
 
@@ -241,18 +241,18 @@ addCommandHandler("addmdcuser", function(player, cmd, username, pass, type, fact
                         table.insert(serverMDCDatas["users"], {insertID, username, pass, faction, tonumber(type)})
                         syncMDCDatas()
 
-                        outputChatBox(core:getServerPrefix("server", "MDC", 3).."Sikeresen létrehoztál egy mdc felhasználói fiókot!", player, 255, 255, 255, true)
+                        outputChatBox(core:getServerPrefix("server", "MDC", 3).."Conta MDC criada com sucesso!", player, 255, 255, 255, true)
                     
-                        sendMessageToAdmins(player, "létrehozott egy #db3535"..username.."#557ec9 nevű MDC felhasználói fiókot. (".."#db3535#"..insertID.."#557ec9) Jogosultság típusa: #db3535"..accessTypes[type])
+                        sendMessageToAdmins(player, "criou conta MDC #db3535"..username.."#557ec9 (#db3535#"..insertID.."#557ec9). Tipo: #db3535"..accessTypes[type])
                     end
                 else
-                    outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Felhasználónév] [Jelszó] [Típus: (1: Járőr), (2: Admin), (3: SystemAdmin)] [Frakció: (pd, sd, orp)]", player, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Usuário] [Senha] [Tipo: 1 Patrulha, 2 Admin, 3 Admin sistema] [Facção: pd, sd ou orp]", player, 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Felhasználónév] [Jelszó] [Típus: (1: Járőr), (2: Admin), (3: SystemAdmin)] [Frakció: (pd, sd, orp)]", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Usuário] [Senha] [Tipo: 1 Patrulha, 2 Admin, 3 Admin sistema] [Facção: pd, sd ou orp]", player, 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Felhasználónév] [Jelszó] [Típus: (1: Járőr), (2: Admin), (3: SystemAdmin)] [Frakció: (pd, sd, orp)]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Usuário] [Senha] [Tipo: 1 Patrulha, 2 Admin, 3 Admin sistema] [Facção: pd, sd ou orp]", player, 255, 255, 255, true)
         end
     end
 end)
@@ -276,13 +276,13 @@ addCommandHandler("delmdcuser", function(player, cmd, id)
 
             if talalat then 
                 dbExec(mysql, "DELETE FROM mdcAccounts WHERE id=?", id)
-                outputChatBox(core:getServerPrefix("server", "MDC", 3).."Sikeresen töröltél egy mdc felhasználói fiókot!", player, 255, 255, 255, true)
-                sendMessageToAdmins(player, "törölt a(z) #db3535"..id.."#557ec9-vel rendelkező MDC felhasználói fiókot.")
+                outputChatBox(core:getServerPrefix("server", "MDC", 3).."Conta MDC excluída com sucesso!", player, 255, 255, 255, true)
+                sendMessageToAdmins(player, "excluiu a conta MDC #db3535"..id.."#557ec9.")
             else
-                outputChatBox(core:getServerPrefix("red-dark", "MDC", 3).."Nincs ilyen ID-vel rendelkező MDC fiók.", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "MDC", 3).."Não existe conta MDC com este ID.", player, 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [ID]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID]", player, 255, 255, 255, true)
         end
     end
 end)

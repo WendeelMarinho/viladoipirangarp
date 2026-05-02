@@ -22,13 +22,13 @@ function giveTicket(player,value,type)
         if hasFreeSlot then
             if type == "orfk" then 
                 exports["oInventory"]:giveItem(player,228,value,1);
-                exports["oInfobox"]:outputInfoBox("Kaptál egy bűntetést, részletek a chatboxban.","info",player)
+                exports["oInfobox"]:outputInfoBox("Você recebeu uma multa. Veja os detalhes no chat.","info",player)
             elseif type == "omsz" then 
                 exports["oInventory"]:giveItem(player,229,value,1);
-                exports["oInfobox"]:outputInfoBox("Kaptál egy orvosi ellátási csekket, részletek a chatboxban.","info",player)
+                exports["oInfobox"]:outputInfoBox("Você recebeu taxa de atendimento médico. Detalhes no chat.","info",player)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Ticket", 2).."Ticketet kaptál, de mivel nem volt hely az inventorydban így az automatikusan be lett fizetve! "..hex.."("..inputFields["money|num-only|5"].."$)", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Ticket", 2).."Você recebeu uma multa, mas sem espaço no inventário o valor foi debitado direto."..hex.." ("..inputFields["money|num-only|5"].."$)", player, 255, 255, 255, true)
             payTicket(tonumber(inputFields["money|num-only|5"]), type)
         end
 
@@ -58,22 +58,22 @@ function giveTicket(player,value,type)
             end
 
             if benneVan then 
-                outputChatBox(core:getServerPrefix("blue-light-2", string.upper(type), 3)..hex..getPlayerName(client):gsub("_", " ").." #ffffffkiadott egy "..hex..inputFields["money|num-only|5"].."$#ffffff-os ticketet "..hex..inputFields["name|-|28"].."#ffffff-nak/nek.", player2, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("blue-light-2", string.upper(type), 3)..hex..getPlayerName(client):gsub("_", " ").." #FFFFFF aplicou uma multa de "..hex..inputFields["money|num-only|5"].."$ para "..hex..inputFields["name|-|28"].."#FFFFFF.", player2, 255, 255, 255, true)
 
-                outputChatBox(core:getServerPrefix("blue-light-2", string.upper(type), 3).."Indok: "..hex..inputFields["reason|-|28"].."#ffffff.", player2, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("blue-light-2", string.upper(type), 3).."Motivo: "..hex..inputFields["reason|-|28"].."#FFFFFF.", player2, 255, 255, 255, true)
             end
         end
 
 
         if type == "orfk" then 
-            outputChatBox(hex.."[Ticket]: #ffffff"..hex..inputFields["intezkedo"].."#ffffff büntetést szabott ki neked!",player,255,255,255,true)
+            outputChatBox(hex.."[Ticket]: #FFFFFF"..hex..inputFields["intezkedo"].."#FFFFFF registrou penalidade/multa contra você!",player,255,255,255,true)
         elseif type == "omsz" then 
-            outputChatBox(hex.."[Ticket]: #ffffff"..hex..inputFields["intezkedo"].."#ffffff ellátási díjat szabott ki neked!",player,255,255,255,true)
+            outputChatBox(hex.."[Ticket]: #FFFFFF"..hex..inputFields["intezkedo"].."#FFFFFF registrou taxa de atendimento contra você!",player,255,255,255,true)
         end
-        outputChatBox(hex.."[Ticket]: #ffffffÖsszeg: "..hex..inputFields["money|num-only|5"].."#ffffff$.",player,255,255,255,true)
+        outputChatBox(hex.."[Ticket]: #FFFFFFValor: "..hex..inputFields["money|num-only|5"].."#FFFFFF$.",player,255,255,255,true)
 
         if hasFreeSlot then
-            outputChatBox(hex.."[Ticket]: #ffffffHatáridő: "..hex.."90 #ffffffperc.",player,255,255,255,true)
+            outputChatBox(hex.."[Ticket]: #FFFFFFPrazo para quitar: "..hex.."90 #FFFFFFminutos.",player,255,255,255,true)
         end
     end 
 end 

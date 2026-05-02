@@ -4,8 +4,8 @@ local scriptcount = 3
 
 addCommandHandler("makeserverstop",function(thePlayer,cmd,time)
     if exports.oAdmin:isPlayerDeveloper(thePlayer) then
-        if not time then return outputChatBox(exports.oCore:getServerPrefix("red-dark", "Szerver", 3).."Használat: /"..cmd.." [Time(Másodpercben!)]",thePlayer,255, 255, 255, true) end 
-        if not tostring(time) then return outputChatBox(exports.oCore:getServerPrefix("red-dark", "Szerver", 3).."Invalid idő!",thePlayer,255, 255, 255, true) end 
+        if not time then return outputChatBox(exports.oCore:getServerPrefix("red-dark", "Servidor", 3).."Uso: /"..cmd.." [tempo em segundos]",thePlayer,255, 255, 255, true) end 
+        if not tostring(time) then return outputChatBox(exports.oCore:getServerPrefix("red-dark", "Servidor", 3).."Tempo inválido!",thePlayer,255, 255, 255, true) end 
         makeStop(time)
     end 
 end)
@@ -13,7 +13,7 @@ end)
 addCommandHandler("stopcountdowntimer",function(thePlayer,cmd)
     if exports.oAdmin:isPlayerDeveloper(thePlayer) then
         whenFakeStop()
-        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Szerver", 3).."Szerver leállítás visszavonva! További jó játékot kívánunk!",root,255, 255, 255, true)
+        outputChatBox(exports.oCore:getServerPrefix("red-dark", "Servidor", 3).."Reinício cancelado. Bom jogo!",root,255, 255, 255, true)
         triggerClientEvent(root,"animRequest",root,false)
     end 
 end)
@@ -52,7 +52,7 @@ end
 function kickPlayers()
     for k,v in pairs(getElementsByType("player")) do 
         if not exports.oAdmin:isPlayerDeveloper(v) then
-            kickPlayer(v,"A szerver hamarosan újraindúl!");
+            kickPlayer(v,"O servidor vai reiniciar em breve.");
             --outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Szerver", 3).."Kickelve vagy!",v, 255, 255, 255, true)
         end 
     end 
@@ -64,8 +64,8 @@ end
 
 function saveScripts()
     setTimer(function()
-        outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Szerver", 3).."Whitelist bekapcsolva!",root, 255, 255, 255, true)
-        outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Szerver", 3).."Sikeresen kickeltem mindenkit! Várakozás a mentések végbemenetelére.",root, 255, 255, 255, true)
+        outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Servidor", 3).."Whitelist ativada!",root, 255, 255, 255, true)
+        outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Servidor", 3).."Todos os jogadores foram desconectados. Aguardando salvamentos...",root, 255, 255, 255, true)
 
         --exports.oShop:saveRequest()
         --exports.oVehicle:saveRequest()
@@ -73,7 +73,7 @@ function saveScripts()
         --exports.oDashboard:saveRequest()
 
         setTimer(function()
-            outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Szerver", 3).."Sikeres mentés, a szerver készen áll a leállításra!",root, 255, 255, 255, true)
+            outputChatBox(exports.oCore:getServerPrefix("blue-light-2", "Servidor", 3).."Salvamentos concluídos. O servidor pode ser encerrado.",root, 255, 255, 255, true)
         end,3000,1)
     end,5000,1)
     

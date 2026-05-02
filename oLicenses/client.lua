@@ -27,7 +27,7 @@ function createLicensePeds()
     setElementFrozen(ped, true)
     setElementData(ped, "isLicensesPed_2", true)
     setElementData(ped, "ped:name", "Laura White")
-    setElementData(ped, "ped:prefix", "Személyi Igazolvány megújítása")
+    setElementData(ped, "ped:prefix", "Renovação de RG")
 end
 createLicensePeds()
 
@@ -48,7 +48,7 @@ local selectedCard = {
     ["bornDate"] = "0000.00.00",
     ["createDate"] = "0000.00.00",
     ["expiryDate"] = "0000.00.00",
-    ["nationality"] = "Magyar",
+    ["nationality"] = "Brasileira",
     ["skin"] = 1,
     ["l_type"] = "nan",
     ["faction"] = "nan",
@@ -117,7 +117,7 @@ function renderCard()
         --dxDrawRectangle(forgalmiX + sx*0.006, forgalmiY + sy*0.345, sx*0.1, sy*0.03, tocolor(255, 0, 0))
         --dxDrawRectangle(forgalmiX + sx*0.075, forgalmiY + sy*0.435, sx*0.1, sy*0.03, tocolor(255, 0, 0))
         if selectedCard["veh_type"] == "Automobile" then
-            selectedCard["veh_type"] = "Gépjármű"
+            selectedCard["veh_type"] = "Veículo"
         end
         dxDrawText2((selectedCard["veh_type"]), forgalmiX + sx*0.01, forgalmiY + sy*0.065, sx*0.1, sy*0.03, tocolor(87, 53, 9, 180), 1/myX*sx, fonts["font-2"], "left", "center")
         dxDrawText2(string.upper(selectedCard["plate_text"]), forgalmiX + sx*0.15, forgalmiY + sy*0.065, sx*0.06, sy*0.03, tocolor(87, 53, 9, 180), 1/myX*sx, fonts["font-2"], "right", "center")
@@ -173,7 +173,7 @@ function openCard(id, value, cardNumber)
         selectedCard["skin"] = tonumber(string.sub(value,17,19))
         selectedCard["name"] = string.sub(value,20):gsub("_", " ")
         selectedCard["l_type"] = "Colt-45/Shotgun"
-        selectedCard["faction"] = "LSPD"
+        selectedCard["faction"] = "17ª DP - Polícia Civil SP"
     elseif id == 79 then -- Vadászati engedély (felépítés 12341212 12341212 123 asdasdasdasd)  -- create   lejárat  skin     name
         selectedCard["type"] = 4
         selectedCard["createDate"] = string.sub(value,1,4).."."..string.sub(value,5,6).."."..string.sub(value,7,8)..". "
@@ -181,7 +181,7 @@ function openCard(id, value, cardNumber)
         selectedCard["skin"] = tonumber(string.sub(value,17,19))
         selectedCard["name"] = string.sub(value,20):gsub("_", " ")
         selectedCard["l_type"] = "Róka/Medve"
-        selectedCard["faction"] = "LSSD"
+        selectedCard["faction"] = "PMESP"
     elseif id == 206 then -- FORGALMI ENGEDÉLY FELÉPÍTÉS (12 12 1 12 asdasdadsadsa adsadsadsadsa asdasdasdasd asdasd asdasd 1 1 1 1 1 1 1 12345678, asdasdasdasdasdasdad) -- veh type hossz, veh name hossz, plate text hossz, other tuning hossz, | veh type, veh name, plate text, color1, color2, tuning, tuning, tuning, tuning, tuning, tuning, tuning, egyéb tuningok, expiry date, owner name
         selectedCard["type"] = 5
 

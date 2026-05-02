@@ -1,0 +1,9 @@
+<meta>
+    <info name="Vila do Ipiranga RP" author="Wendeel" type="gamemode" />
+
+    <!-- BOOTSTRAP PRINCIPAL -->
+    <script src="server.lua" type="server" />
+    <script src="client.lua" type="client" />
+
+    <!-- oStarter e carregado via startResource() em server.lua -->
+</meta>

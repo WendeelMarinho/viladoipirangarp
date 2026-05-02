@@ -4,7 +4,7 @@ local myX, myY = 1600,900
 local font = exports.oFont:getFont("p_ba", 25)
 local font2 = exports.oFont:getFont("p_m", 25)
 
-local bannerText1 = "ORIGINAL ROLEPLAY - CLOSED TEST 22DECEMBER "
+local bannerText1 = "VALE DO IPIRANGA RP - CLOSED TEST 22DECEMBER "
 local bannerText2 = "FIGYELEM! A szerver TESZT fázisban van, ahol előfordulhatnak hibák! \n Amennyiben valamilyen hibát találtál, azt kötelességed discordon jelenteni! \nKép- és videófelvétel készítése tilos!"
 
 local logoSize = 2

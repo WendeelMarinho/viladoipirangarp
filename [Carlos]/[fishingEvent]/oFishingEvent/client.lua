@@ -101,7 +101,7 @@ function renderEventPanel()
     dxDrawRectangle(sx*0.4, sy*0.7, sx*0.2, sy*0.13, tocolor(35, 35, 35, 100))
     dxDrawRectangle(sx*0.4 + 2/myX*sx, sy*0.7 + 2/myY*sy, sx*0.2 - 4/myX*sx, sy*0.13 - 4/myY*sy, tocolor(35, 35, 35, 255))
     dxDrawRectangle(sx*0.4 + 2/myX*sx, sy*0.7 + 2/myY*sy, sx*0.2 - 4/myX*sx, sy*0.02, tocolor(30, 30, 30, 255))
-    dxDrawText("OriginalRoleplay - "..color.."Horgászfesztivál", sx*0.4 + 2/myX*sx, sy*0.7 + 2/myY*sy, sx*0.4 + 2/myX*sx + sx*0.2 - 4/myX*sx, sy*0.7 + 2/myY*sy + sy*0.02, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 9/myX*sx), "center", "center", false, false, false, true)
+    dxDrawText("Vale do Ipiranga RP - "..color.."Horgászfesztivál", sx*0.4 + 2/myX*sx, sy*0.7 + 2/myY*sy, sx*0.4 + 2/myX*sx + sx*0.2 - 4/myX*sx, sy*0.7 + 2/myY*sy + sy*0.02, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 9/myX*sx), "center", "center", false, false, false, true)
 
     dxDrawRectangle(sx*0.4 + 2/myX*sx + sx*0.009, sy*0.76, sx*0.18, sy*0.03, tocolor(30, 30, 30, 255))
     dxDrawRectangle(sx*0.4 + 2/myX*sx + sx*0.009 + 2/myX*sx, sy*0.76 + 2/myY*sy, (sx*0.18 - 4/myX*sx), sy*0.03 - 4/myY*sy, tocolor(35, 35, 35, 150))

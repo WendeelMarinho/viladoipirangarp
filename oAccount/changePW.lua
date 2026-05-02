@@ -22,7 +22,7 @@ selectedInput = false
 function drawForgotPassword()
 	buttons = {}
 	
-	dxDrawText("Use o botão Voltar para retornar!\nInsira apenas o e-mail cadastrado por você!\nNunca compartilhe sua senha com ninguém!\nEm caso de problemas, contate um desenvolvedor.\n©Ipiranga Roleplay", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
+	dxDrawText("Use o botão Voltar para retornar!\nInsira apenas o e-mail cadastrado por você!\nNunca compartilhe sua senha com ninguém!\nEm caso de problemas, contate um desenvolvedor.\n© Vale do Ipiranga RP", 10/myX*sx, 10/myX*sx, _, _, tocolor(255, 255, 255, 150), 1, fontscript:getFont("p_m", 13/myX*sx))
 	if selectedTab == 1 then
 		core:drawWindow(panelX, panelY, panelW, panelH, "Recuperar Senha", 1)
 

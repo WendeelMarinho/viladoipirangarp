@@ -63,7 +63,7 @@ Tickets["orfk"]["Render"] = function(ticketData)
             if progress > 1 then 
 				if isElement(writeSound) then
 					triggerServerEvent("giveTicket", resourceRoot, ticketTarget, toJSON(inputValues), "orfk")
-					exports.oChat:sendLocalMeAction("átad egy csekket.")
+					exports.oChat:sendLocalMeAction("entrega uma multa.")
                 	destroyElement(writeSound)
 					removeEventHandler("onClientRender", root, renderTicket)
 					isTicketShowing = false
@@ -107,7 +107,7 @@ Tickets["omsz"]["Render"] = function(ticketData)
             if progress > 1 then 
 				if isElement(writeSound) then
 					triggerServerEvent("giveTicket", resourceRoot, ticketTarget, toJSON(inputValues), "omsz")
-					exports.oChat:sendLocalMeAction("átad egy csekket.")
+					exports.oChat:sendLocalMeAction("entrega uma multa.")
                 	destroyElement(writeSound)
 					removeEventHandler("onClientRender", root, renderTicket)
 					isTicketShowing = false 
@@ -326,29 +326,29 @@ function clickTicket(button, state)
 															signStart = getTickCount()
 															writeSound = playSound("files/write.mp3", true)
 														else 
-															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Adj meg legalább egy okot!", 255, 255, 255, true)
+															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Informe ao menos um motivo!", 255, 255, 255, true)
 														end
 													elseif activeTicketType == "omsz" then 
 														if string.len(inputValues["reason|-|28"]) > 3 then
 															signStart = getTickCount()
 															writeSound = playSound("files/write.mp3", true)
 														else
-															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Add meg az ellátás módját!", 255, 255, 255, true)
+															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Informe o modo de cobrança do atendimento!", 255, 255, 255, true)
 														end
 													end
 												else
-													outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Egyszerre maximum csak "..color.."100$-50.000$#ffffff között ticketelhetsz.", 255, 255, 255, true)
+													outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."O valor deve ficar entre "..color.."$100 #ffffff e "..color.."$50.000#ffffff.", 255, 255, 255, true)
 												end
 											end
 										end
 									else
-										outputChatBox(core:getServerPrefix("red-dark", "Ticket", 2).."Túl messze vagy!", 255, 255, 255, true)
+										outputChatBox(core:getServerPrefix("red-dark", "Ticket", 2).."Muito longe do alvo!", 255, 255, 255, true)
 									end
 								--else
 								--	outputChatBox(core:getServerPrefix("red-dark", "Ticket", 2).."Magadnak nem adhatsz bírságot!", 255, 255, 255, true)
 								--end
 							else
-								outputChatBox(core:getServerPrefix("red-dark", "Ticket", 2).."Nem található elkövető!", 255, 255, 255, true)
+								outputChatBox(core:getServerPrefix("red-dark", "Ticket", 2).."Jogador alvo não encontrado!", 255, 255, 255, true)
 							end
 						end
 					end

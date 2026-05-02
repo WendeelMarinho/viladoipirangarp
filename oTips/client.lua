@@ -1,17 +1,17 @@
 local hints = {
-    {"Tetszik szerverünk? Ne tartsd magadban, hívd a barátaidat is!"},
-    {"Ha munkát szeretnél felvenni, menj a városházára!"},
-    {"Vigyázz, mert ha az életerőd 10 hp pont alá csökken, akkor animba esel! "},
-    {"Ha buggot találsz akkor jelezd egy fejlesztő felé, Discord-on vagy a dashboardon keresztül. (dc.originalrp.eu)"},
-    {"Ha panaszt szeretnél tenni egy játékosra, akkor azt fórumon megteheted. (https://www.originalrp.eu/forum/)"},
-    {"Discord Szerverünk elérhetősége: https://dc.originalrp.eu"},
-    {"Fórumunk elérhetősége: www.originalrp.eu/forum/"},
-    {"Weboldalunk elérhetősége: www.originalrp.eu"},
-} 
+    {"Gostando do servidor? Chame seus amigos para jogar também!"},
+    {"Procurando emprego? Visite a prefeitura e veja as vagas disponíveis."},
+    {"Atenção: com a vida muito baixa (abaixo de ~10 HP) você pode entrar em animação de ferido."},
+    {"Encontrou um bug? Avise pela equipe no Discord ou pelo painel de denúncias do servidor."},
+    {"Denúncias sobre outros jogadores podem ser feitas pelo fórum ou Discord oficiais do Vale do Ipiranga RP."},
+    {"Novidades e avisos também aparecem no Discord do servidor."},
+    {"Leia as regras no fórum e jogue com respeito ao RP."},
+    {"Use /id ou /lvl para informações rápidas sobre jogadores próximos."},
+}
 
 function printTip()
     if (exports.oDashboard:getDashboardSettingsValue("other", 4) or true) == true then
-        outputChatBox(exports.oCore:getServerPrefix("server", "Tipp", 3)..hints[math.random(#hints)][1],255,255,255,true)
+        outputChatBox(exports.oCore:getServerPrefix("server", "Dica", 3)..hints[math.random(#hints)][1],255,255,255,true)
     end
 end
 setTimer(printTip, exports.oCore:minToMilisec(15), 0)

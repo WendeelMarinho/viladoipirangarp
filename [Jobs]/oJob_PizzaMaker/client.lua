@@ -1032,7 +1032,7 @@ function startPizzaBaking()
 		sutesIdo = sutesIdo-1;
 		if(sutesIdo == -20) then
 			killTimer(bakeTimer)
-			outputChatBox("\n"..szin.."[originalRoleplay]#FFFFFF A pizza nagyon odaégett, későn vetted ki.\n"..szin.. "[originalRoleplay] #FFFFFFMost már nincs idő újat készíteni, csomagold be és add ki.", 0, 0, 0, true)
+			outputChatBox("\n"..szin.."[Vale do Ipiranga RP]#FFFFFF A pizza nagyon odaégett, későn vetted ki.\n"..szin.. "[Vale do Ipiranga RP] #FFFFFFMost már nincs idő újat készíteni, csomagold be és add ki.", 0, 0, 0, true)
 			pizzaOut = true
 			orderText = "Becsomagolom"
 			startedWrapping = true

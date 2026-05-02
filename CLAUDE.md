@@ -1,44 +1,43 @@
-# Ipiranga Roleplay
+# Vale do Ipiranga RP — entrada `CLAUDE.md` (raiz pacote gamemode)
 
-Este ficheiro na **raiz do repositório** existe para **Claude Code**, **Cursor** e outras ferramentas que procuram `CLAUDE.md` no directório de trabalho (equivalente a expor “todo o contexto” do projecto ao agente via ficheiro standard).
+Este ficheiro existe para ferramentas (Claude Code, Cursor, outros) que procuram **`CLAUDE.md`** no directório raiz **do recurso**/trabalho.
 
-**Documentação canónica (editar aqui as regras completas):** [`docs/CLAUDE.md`](docs/CLAUDE.md)
+**Políticas, obrigações e template de auditoria recurso‑a‑recurso:** [`docs/CLAUDE.md`](docs/CLAUDE.md) — este é o ficheiro canónico para seguir sempre.
 
 ---
 
-## Leitura mínima por sessão
+## Base de conhecimento (rápido)
+
+| | |
+|--|--|
+| Arquitectura | [`docs/architecture-overview.md`](docs/architecture-overview.md) |
+| Mapa recursos / `oStarter` | [`docs/resource-map.md`](docs/resource-map.md) |
+| Eventos cliente/servidor | [`docs/event-flow.md`](docs/event-flow.md) |
+| Base de dados | [`docs/database-architecture.md`](docs/database-architecture.md) |
+| Segurança | [`docs/security-audit.md`](docs/security-audit.md) · [`docs/security/security-log.md`](docs/security/security-log.md) |
+| Performance | [`docs/performance-analysis.md`](docs/performance-analysis.md) |
+| Deploy | [`docs/deployment-guide.md`](docs/deployment-guide.md) · [`docs/infra/server-setup.md`](docs/infra/server-setup.md) |
+| Falhas típicas | [`docs/troubleshooting.md`](docs/troubleshooting.md) |
+| Índice `docs/` | [`docs/README.md`](docs/README.md) |
+
+---
+
+## Leitura mínima sessão operacional
 
 | Ficheiro | Nota |
 |----------|------|
-| [`docs/worklog/current-sprint.md`](docs/worklog/current-sprint.md) | Sprint / estado |
-| [`docs/worklog/next-actions.md`](docs/worklog/next-actions.md) | Próximos passos |
-| [`.cursor/context/current-sprint.md`](.cursor/context/current-sprint.md) | Contexto Cursor (espelho operacional) |
-| [`.cursor/context/architecture.md`](.cursor/context/architecture.md) | Dependências e exports críticos |
+| [`docs/worklog/current-sprint.md`](docs/worklog/current-sprint.md) | Estado sprint |
+| [`docs/worklog/next-actions.md`](docs/worklog/next-actions.md) | Fila próximos passos |
+| [`.cursor/context/architecture.md`](.cursor/context/architecture.md) | Exports críticos & element data |
 
-**Regras Cursor adicionais:** [`.cursor/rules/project-rules.md`](.cursor/rules/project-rules.md) · [`.cursor/rules/security.md`](.cursor/rules/security.md) · [`.cursor/rules/translation.md`](.cursor/rules/translation.md)
-
----
-
-## Resumo executivo (não substitui `docs/CLAUDE.md`)
-
-- Não quebrar **exports** nem **nomes de eventos** sem migração coordenada.
-- Handlers **cliente → servidor:** validar `source` como jogador (`isElement`, `getElementType`).
-- **SQL** sempre parametrizado (`?`).
-- **Schema DB** e mudanças destrutivas só com aprovação explícita.
-
-→ **Detalhe, padrões de código e ordem de refatoração:** abrir [`docs/CLAUDE.md`](docs/CLAUDE.md).
+**Regras extras Cursor:** `.cursor/rules/project-rules.md` · `.cursor/rules/security.md` · `.cursor/rules/translation.md`
 
 ---
 
-## Pasta local `.ai/` (opcional, não versionada)
+## Resumo de regras (não substitui `docs/CLAUDE.md`)
 
-O [`.gitignore`](.gitignore) ignora `.ai/` e `.claude/`. Se quiseres notas só na tua máquina, cria por exemplo:
+- Handlers **client → server**: validar `source`.
+- SQL parametrizado; schema apenas com aprovação explícita.
+- Não quebrar **exports**/nomes de eventos sem migração planeado.
 
-```
-.ai/
-  context.md          # resumo do que estás a fazer
-  current-focus.md    # ficheiro actual
-  next-actions.md     # espelho opcional de docs/worklog/next-actions.md
-```
-
-Nada disso entra no `git clone`; o repositório “oficial” continua a ser `docs/` + `.cursor/context/`.
+Pastas opcionais locais ignoradas pelo git (notas próprias): `.ai/` (ver texto longo em `docs/CLAUDE.md`).

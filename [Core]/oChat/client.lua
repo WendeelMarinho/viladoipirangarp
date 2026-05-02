@@ -89,16 +89,16 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 
 				if windows[1] and windows[2] then
 					if distance < 5 then
-						outputChatBox(getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 5 and distance < 10 then
-						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 10 and distance < 13 then
-						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 13 and distance < 17 then
-						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					end
 				else
@@ -123,16 +123,16 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 
 				if canSee then
 					if distance < 5 then
-						outputChatBox(getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 5 and distance < 10 then
-						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 10 and distance < 13 then
-						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 13 and distance < 17 then
-						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					end
 				end
@@ -168,7 +168,7 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 				if distance < 12 then
 					setElementData(player, "animation:emoji", "xd", false)
 					setElementData(player, "animation:start", getTickCount(), false)
-					outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." szakad a röhögéstől.", 194, 162, 218)
+					outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." não para de rir.", 194, 162, 218)
 				end
 			elseif string.lower(msg) == "love" then
 				setElementData(player, "animation:emoji", "love", false)
@@ -190,31 +190,31 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
         setElementData(player, "animation:start", getTickCount(), false)
 			else
 				if distance < 5 then
-					outputChatBox(getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				elseif distance > 5 and distance < 10 then
-					outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				elseif distance > 10 and distance < 13 then
-					outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				elseif distance > 13 and distance < 17 then
-					outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." mondja: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				end
 			end
 		end
 	elseif type == 2 then
-		outputChatBox(getPlayerName(player):gsub("_", " ").." mondja (járműben): "..firstUpper(msg), 255, 255, 255, true)
+		outputChatBox(getPlayerName(player):gsub("_", " ").." diz (no veículo): "..firstUpper(msg), 255, 255, 255, true)
 	elseif type == 3 then
 		if distance < 10 then
-			outputChatBox(getPlayerName(player):gsub("_", " ").." ordítja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox(getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 10 and distance < 15 then
-			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." ordítja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 15 and distance < 18 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." ordítja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 18 and distance < 20 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." ordítja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
 		end
 
 		--if not getPedOccupiedVehicle(player) then
@@ -222,10 +222,10 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 		--end
 	elseif type == 4 then
 		if distance < 1 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." suttogja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." sussurra: "..firstUpper(msg), 255, 255, 255, true)
 			playSound("files/pszt.wav")
 		elseif distance > 1 and distance < 2 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." suttogja: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." sussurra: "..firstUpper(msg), 255, 255, 255, true)
 			setSoundVolume(playSound("files/pszt.wav"), 0.5)
 		end
 	elseif type == 5 then
@@ -254,60 +254,60 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 		if string.len(adminname) > 2 then
 			if (getElementData(player, "user:admin") or 0) > 2 then
 				outputChatBox(" ")
-				outputChatBox(admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).." - Felhívás] "..getElementData(player, "user:adminnick").." ~ #ffffff"..msg, 255, 255, 255, true)
+				outputChatBox(admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).." - Chamado público] "..getElementData(player, "user:adminnick").." ~ #ffffff"..msg, 255, 255, 255, true)
 				outputChatBox(" ")
 
-				exports.oInfobox:outputInfoBox(getElementData(player, "user:adminnick").." felhívást hozott létre. Részletek a chatboxban.", "info")
+				exports.oInfobox:outputInfoBox(getElementData(player, "user:adminnick").." abriu um chamado público. Veja o chat.", "info")
 			end
 		end
 	elseif type == 9 then
 		if getElementData(player, "user:idgAs") then
-			outputChatBox(core:getServerPrefix("red-dark", "Adminsegéd Chat", 3)..admin:getAdminColor(getElementData(player, "user:admin")).."[Ideiglenes AdminSegéd] "..getElementData(player, "char:name")..": #ffffff"..msg, 255, 0, 0, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Chat ajudante", 3)..admin:getAdminColor(getElementData(player, "user:admin")).."[Ajudante temporário] "..getElementData(player, "char:name")..": #ffffff"..msg, 255, 0, 0, true)
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Adminsegéd Chat", 3)..admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getElementData(player, "user:adminnick")..": #ffffff"..msg, 255, 0, 0, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Chat ajudante", 3)..admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getElementData(player, "user:adminnick")..": #ffffff"..msg, 255, 0, 0, true)
 		end
 	elseif type == 10 then
 		outputChatBox(core:getServerPrefix("red-dark", "Admin Chat", 3)..admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getElementData(player, "user:adminnick")..": #ffffff"..msg, 255, 0, 0, true)
 	elseif type == 11 then
 		outputChatBox(" ")
-		outputChatBox(core:getServerColor().."[Adminisztrátor - Felhívás] ~ #ffffff"..msg, 255, 255, 255, true)
+		outputChatBox(core:getServerColor().."[Administrador - Chamado público] ~ #ffffff"..msg, 255, 255, 255, true)
 		outputChatBox(" ")
 
-		exports.oInfobox:outputInfoBox("Adminisztrátor felhívást hoztak létre. Részletek a chatboxban.", "info")
+		exports.oInfobox:outputInfoBox("Administrador abriu um chamado público. Veja o chat.", "info")
 	elseif type == 12 then
-		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." megpróbálja "..msg.." és sikerül neki.", 80, 191, 110)
+		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." tenta "..msg.." e consegue.", 80, 191, 110)
 	elseif type == 13 then
-		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." megpróbálja "..msg.." és nem sikerül neki.", 204, 84, 78)
+		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." tenta "..msg.." e não consegue.", 204, 84, 78)
 	elseif type == 14 then
 		outputChatBox(admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getPlayerName(player):gsub("_", " ")..": #ffffff(( "..msg.." )) ", 255, 255, 255, true)
 	elseif type == 15 then
 		if distance < 5 then
-			outputChatBox(getPlayerName(player):gsub("_", " ").." mondja (telefonban): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox(getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 5 and distance < 10 then
-			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." mondja (telefonban): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 10 and distance < 13 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." mondja (telefonban): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 13 and distance < 17 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." mondja (telefonban): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		end
 	elseif type == 16 then
 		if not (player == localPlayer) then
 			if distance < 5 then
-				outputChatBox(getPlayerName(player):gsub("_", " ").." rádióban mondja: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox(getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			elseif distance > 5 and distance < 10 then
-				outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." rádióban mondja: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			elseif distance > 10 and distance < 13 then
-				outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." rádióban mondja: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			elseif distance > 13 and distance < 17 then
-				outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." rádióban mondja: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			end
 		end
 	elseif type == 17 then
-		outputChatBox("(("..getPlayerName(player):gsub("_", " ")..")) Megaphone <O: "..firstUpper(msg), 235, 146, 52, true)
+		outputChatBox("(("..getPlayerName(player):gsub("_", " ")..")) Megafone <O: "..firstUpper(msg), 235, 146, 52, true)
 	elseif type == 18 then
 		outputChatBox(">> "..getPlayerName(player):gsub("_", " ").." "..msg, 131, 98, 162)
 
@@ -386,7 +386,7 @@ function chatMessage(_, ...)
 			local msg = table.concat({...}, " ")
 			if not (msg:sub(0, 1) == "/") then
 				if isPedDead(localPlayer) then return end
-        if getElementData(localPlayer,"cuff:cuffed") then return outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Megbilincselve nem rádiózhatsz!", 255, 255, 255, true) end
+        if getElementData(localPlayer,"cuff:cuffed") then return outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Algemado você não pode usar o rádio!", 255, 255, 255, true) end
 
 				if exports.oInventory:hasItem(154) then
 					if tonumber(getElementData(localPlayer, "char:radioStation")) > 0 then
@@ -399,16 +399,16 @@ function chatMessage(_, ...)
 									lastRadioInteraction = getTickCount()
 								end
 							else
-								outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Üzenet]", 255, 255, 255, true)
+								outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [mensagem]", 255, 255, 255, true)
 							end
 						else
-							outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Üzenet]", 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [mensagem]", 255, 255, 255, true)
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Nincs beállítva a rádiód frekvenciája (/tuneradio)!", 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Nenhuma frequência do rádio definida (/tuneradio)!", 255, 255, 255, true)
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Nincs nálad rádió!", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Você não tem um rádio!", 255, 255, 255, true)
 				end
 
 			end
@@ -427,8 +427,8 @@ addEventHandler("onClientRender", getRootElement(), function()
 				local posX, posY = interface:getInterfaceElementData(13, "posX"), interface:getInterfaceElementData(13, "posY")
 				local w, h = interface:getInterfaceElementData(13, "width"), interface:getInterfaceElementData(13, "height")
 
-				dxDrawText("(( OOC Chat (Eltüntetés: /togooc) ))", sx*posX + 1, sy*posY + 1, 0, 0, tocolor(0, 0, 0), 1, "default-bold")
-				dxDrawText("(( OOC Chat (Eltüntetés: /togooc) ))", sx*posX, sy*posY, 0, 0, tocolor(255, 255, 255), 1, "default-bold")
+				dxDrawText("(( Chat OOC (ocultar: /togooc) ))", sx*posX + 1, sy*posY + 1, 0, 0, tocolor(0, 0, 0), 1, "default-bold")
+				dxDrawText("(( Chat OOC (ocultar: /togooc) ))", sx*posX, sy*posY, 0, 0, tocolor(255, 255, 255), 1, "default-bold")
 				for i, v in ipairs(oocTable) do
 					if i > countOOCChatLines() then
 						table.remove(oocTable, i)
@@ -461,7 +461,7 @@ addCommandHandler("clearchat", clearChat)
 
 function clearOOC()
 	oocTable = {}
-	outputChatBox(core:getServerPrefix("server", "clear", 1).."OOC Chat sikeresen kiűrítve!", 255, 255, 255, true)
+	outputChatBox(core:getServerPrefix("server", "clear", 1).."Chat OOC limpo!", 255, 255, 255, true)
 end
 addCommandHandler("clearooc", clearOOC)
 addCommandHandler("cooc", clearOOC)
@@ -541,7 +541,7 @@ function renderRPLOG()
     dxDrawRectangle(sx*0.2 + 2/myX*sx, sy*0.25 + 2/myY*sy, sx*0.6 - 4/myX*sx, sy*0.402 - 4/myY*sy, tocolor(35, 35, 35, 255))
 
 	if #rpLOG == 0 then
-		dxDrawText("Nincs megjeleníthető adat! :(", sx*0.4, sy*0.25, sx*0.6, sy*0.65, tocolor(255, 59, 59, 200), 1/myX*sx, fonts:getFont("condensed", 15), "center", "center")
+		dxDrawText("Sem dados para exibir! :(", sx*0.4, sy*0.25, sx*0.6, sy*0.65, tocolor(255, 59, 59, 200), 1/myX*sx, fonts:getFont("condensed", 15), "center", "center")
 	else
 		local lineHeight = math.min(18 / #rpLOG, 1)
 
@@ -558,11 +558,11 @@ function renderRPLOG()
 				local prefix = ""
 
 				if v[2] == 1 or v[2] == 2 then
-					prefix = prefix .. "mondja: "
+					prefix = prefix .. "diz: "
 				elseif v[2] == 3 then
-					prefix = prefix .. "ordítja: "
+					prefix = prefix .. "grita: "
 				elseif v[2] == 4 then
-					prefix = prefix .. "suttogja: "
+					prefix = prefix .. "sussurra: "
 				elseif v[2] == 5 then
 					prefix = "OOC: "
 				elseif v[2] == 6 then
@@ -570,15 +570,15 @@ function renderRPLOG()
 				elseif v[2] == 7 then
 					prefix = "* "
 				elseif v[2] == 8 or v[2] == 11 then
-					prefix = "ADMIN FELHÍVÁS: "
+					prefix = "CHAMADO ADMIN: "
 				elseif v[2] == 12 then
-					prefix = "SIKERÜL NEKI: "
+					prefix = "CONSEGUE: "
 				elseif v[2] == 13 then
-					prefix = "NEM SIKERÜL NEKI: "
+					prefix = "NÃO CONSEGUE: "
 				elseif v[2] == 16 then
-					prefix = prefix .. "rádióban mondja: "
+					prefix = prefix .. "fala no rádio: "
 				elseif v[2] == 17 then
-					prefix = "Megaphone <O: "
+					prefix = "Megafone <O: "
 				elseif v[2] == 18 then
 					prefix = "** "
 				end
@@ -606,11 +606,11 @@ function renderRPLOG()
 				local prefix = "#ffffff"
 
 				if v[2] == 1 or v[2] == 2 then
-					prefix = prefix .. "mondja: "
+					prefix = prefix .. "diz: "
 				elseif v[2] == 3 then
-					prefix = prefix .. "ordítja: "
+					prefix = prefix .. "grita: "
 				elseif v[2] == 4 then
-					prefix = prefix .. "suttogja: "
+					prefix = prefix .. "sussurra: "
 				elseif v[2] == 5 then
 					prefix = "#fc7358OOC: "
 				elseif v[2] == 6 then
@@ -618,15 +618,15 @@ function renderRPLOG()
 				elseif v[2] == 7 then
 					prefix = "#ff3366* "
 				elseif v[2] == 8 or v[2] == 11 then
-					prefix = "#ffaa33ADMIN FELHÍVÁS: "
+					prefix = "#ffaa33CHAMADO ADMIN: "
 				elseif v[2] == 12 then
-					prefix = "#50bf6eSIKERÜL NEKI: "
+					prefix = "#50bf6eCONSEGUE: "
 				elseif v[2] == 13 then
-					prefix = "#cc544eNEM SIKERÜL NEKI: "
+					prefix = "#cc544eNÃO CONSEGUE: "
 				elseif v[2] == 16 then
-					prefix = prefix .. "rádióban mondja: "
+					prefix = prefix .. "fala no rádio: "
 				elseif v[2] == 17 then
-					prefix = "#eb9234Megaphone <O: "
+					prefix = "#eb9234Megafone <O: "
 				elseif v[2] == 18 then
 					prefix = "#8362a2** "
 				end
@@ -648,7 +648,7 @@ addCommandHandler("getrplog", function(cmd, id)
 					triggerServerEvent("rpLOG > getPlayerRPLogs", resourceRoot, getElementData(player, "char:id"))
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "RP-LOG", 2).."/"..cmd.." [Player ID]", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "RP-LOG", 2).."/"..cmd.." [ID do personagem]", 255, 255, 255, true)
 			end
 		else
 			rplogShowing = false
@@ -676,6 +676,6 @@ addEventHandler("rpLOG > sendPlayerRPLogs", root, function(table)
 	scrollMenu = 0
 	rplogShowing = true
 	core:deleteEditbox("rplog-search")
-	core:createEditbox(sx*0.2, sy*0.66, sx*0.6, sy*0.03, "rplog-search", "Keresés...", "text")
+	core:createEditbox(sx*0.2, sy*0.66, sx*0.6, sy*0.03, "rplog-search", "Buscar...", "text")
 	addEventHandler("onClientRender", root, renderRPLOG)
 end)

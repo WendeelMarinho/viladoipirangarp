@@ -33,7 +33,7 @@ function renderJunkyardPanel()
     --dxDrawRectangle(sx*0.4+2/myX*sx, sy*0.36, sx*0.2-6/myX*sx, sy*0.1, tocolor(30, 30, 30, 255))
     dxDrawImage(sx*0.5-35/myX*sx, sy*0.38, 70/myX*sx, 70/myY*sy, "files/crane.png", 0, 0, 0, tocolor(r, g, b, 100*alpha))
     dxDrawText("Junkyard", sx*0.4+2/myX*sx, sy*0.36, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.36+sy*0.1, tocolor(255, 255, 255, 255*alpha), 0.8/myX*sx, fonts["bebasneue-35"], "center", "center")
-    --dxDrawText("Original Roleplay", sx*0.4+2/myX*sx, sy*0.36, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.36+sy*0.1, tocolor(r, g, b, 255), 0.35/myX*sx, fonts["bebasneue-35"], "center", "top")
+    --dxDrawText("Vale do Ipiranga RP", sx*0.4+2/myX*sx, sy*0.36, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.36+sy*0.1, tocolor(r, g, b, 255), 0.35/myX*sx, fonts["bebasneue-35"], "center", "top")
     dxDrawText("Willowfield", sx*0.4+2/myX*sx, sy*0.36, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.36+sy*0.09, tocolor(255, 255, 255, 255*alpha), 0.4/myX*sx, fonts["bebasneue-35"], "center", "bottom")
 
     local occupiedVeh = getPedOccupiedVehicle(localPlayer)
@@ -54,10 +54,10 @@ function renderJunkyardPanel()
     if price then 
         price = price * 0.4
         price = math.floor(price)
-        dxDrawText("Ezt a járművet \n"..color..price.."$#ffffff-ért zúzathatod be!", sx*0.4+2/myX*sx, sy*0.48, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.48+sy*0.09, tocolor(255, 255, 255, 255*alpha), 0.75/myX*sx, fonts["condensed-15"], "center", "top", false, false, false, true)
+        dxDrawText("Desmanche deste veículo\npor "..color..price.."$#ffffff.", sx*0.4+2/myX*sx, sy*0.48, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.48+sy*0.09, tocolor(255, 255, 255, 255*alpha), 0.75/myX*sx, fonts["condensed-15"], "center", "top", false, false, false, true)
 
     else
-        dxDrawText("Ezt a járművet \nnem zúzathatod be!", sx*0.4+2/myX*sx, sy*0.48, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.48+sy*0.09, tocolor(255, 255, 255, 255*alpha), 0.75/myX*sx, fonts["condensed-15"], "center", "top", false, false, false, true)
+        dxDrawText("Este veículo\nnão pode ser desmontado!", sx*0.4+2/myX*sx, sy*0.48, sx*0.4+2/myX*sx+sx*0.2-6/myX*sx, sy*0.48+sy*0.09, tocolor(255, 255, 255, 255*alpha), 0.75/myX*sx, fonts["condensed-15"], "center", "top", false, false, false, true)
 
     end
 
@@ -68,7 +68,7 @@ function renderJunkyardPanel()
     if clickCount == 0 then 
         dxDrawText("Zúzatás", sx*0.4+10/myX*sx, sy*0.555, sx*0.4+10/myX*sx+sx*0.2-6/myX*sx, sy*0.555+sy*0.04, tocolor(255, 255, 255, 255*alpha), 0.7/myX*sx, fonts["condensed-15"], "left", "center")
     else
-        dxDrawText("Biztosan be szeretnéd zúzatni a járműved?", sx*0.4+10/myX*sx, sy*0.555, sx*0.4+10/myX*sx+sx*0.2-6/myX*sx, sy*0.555+sy*0.04, tocolor(255, 255, 255, 255*alpha), 0.7/myX*sx, fonts["condensed-15"], "left", "center")
+        dxDrawText("Confirmar desmanche do veículo?", sx*0.4+10/myX*sx, sy*0.555, sx*0.4+10/myX*sx+sx*0.2-6/myX*sx, sy*0.555+sy*0.04, tocolor(255, 255, 255, 255*alpha), 0.7/myX*sx, fonts["condensed-15"], "left", "center")
     end
 end
 
@@ -100,16 +100,16 @@ function keyJunkyardPanel(key, state)
                             price = price * 0.4
                             price = math.floor(price)
                             triggerServerEvent("junkyard > destroyVeh", resourceRoot, occupiedVeh, price)
-                            exports.oInfobox:outputInfoBox("Sikeresen bezúzatad a járművedet!", "success")
+                            exports.oInfobox:outputInfoBox("Veículo enviado para desmanche!", "success")
                         else
-                            exports.oInfobox:outputInfoBox("Ezt a járművet nem zúzathatod be!", "error")
+                            exports.oInfobox:outputInfoBox("Este veículo não pode ser desmanchado!", "error")
                         end
                     end
                 else
-                    exports.oInfobox:outputInfoBox("Csak a saját járművedet zúzathatod be!", "error")
+                    exports.oInfobox:outputInfoBox("Só pode desmanchar seus próprios veículos!", "error")
                 end
             else
-                exports.oInfobox:outputInfoBox("Frakció járművet nem zúzhatsz be!", "error")
+                exports.oInfobox:outputInfoBox("Não é possível desmanchar veículos de facção!", "error")
             end
         end
     end

@@ -67,7 +67,7 @@ function rajz()
 	dxDrawRectangle(rectangleX/pX*sX, 323/pY*sY, 299/pX*sX, 60/pY*sY, tocolor(32, 32, 32, 255*alpha2), false);
 	dxDrawRectangle(rectangleX/pX*sX, 717/pY*sY, 299/pX*sX, 40/pY*sY, tocolor(32, 32, 32, 255*alpha2), false);
 	dxDrawText("Mégsem", rectangleX/pX*sX, 717/pY*sY, (rectangleX+299)/pX*sX, 757/pY*sY, tocolor(R1, G1, B1, 255*alpha2), 1/pX*sX, font, "center","center", false,false,false,true);	
-	dxDrawText("Járműkölcsönző", rectangleX/pX*sX, 323/pY*sY, (rectangleX+299)/pX*sX, 383/pY*sY, tocolor(220, 220, 220, 255*alpha2), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
+	dxDrawText("Locadora de veículos", rectangleX/pX*sX, 323/pY*sY, (rectangleX+299)/pX*sX, 383/pY*sY, tocolor(220, 220, 220, 255*alpha2), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
 	for i = 1, #rentcars do
 	if (i%2 == 0) then
 		alpha = 150;
@@ -107,7 +107,7 @@ function rajz()
 	dxDrawText("Bérlés:", 895/pX*sX, 674/pY*sY, 1045/pX*sX, 714/pY*sY, tocolor(220, 220, 220, 255*alpha1), 1/pX*sX, font, "left","center", false,false,false,true);
 	dxDrawRectangle(1189/pX*sX, 676/pY*sY, 150/pX*sX, 34/pY*sY, tocolor(sR, sG, sB, alpha3*alpha1), false);
 	dxDrawText("Bérlés", 1189/pX*sX, 674/pY*sY, 1339/pX*sX, 714/pY*sY, tocolor(220, 220, 220, 255*alpha1), 1/pX*sX, font, "center","center", false,false,false,true);
-	dxDrawText("Original Roleplay", 895/pX*sX, 718/pY*sY, 1339/pX*sX, 758/pY*sY, tocolor(sR, sG, sB, 255*alpha1), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
+	dxDrawText("Vale do Ipiranga RP", 895/pX*sX, 718/pY*sY, 1339/pX*sX, 758/pY*sY, tocolor(sR, sG, sB, 255*alpha1), 1/pX*sX, fontscript, "center","center", false,false,false,true);	
 	if core:isInSlot(1164/pX*sX, 547.5/pY*sY, 25/pX*sX, 25/pY*sY) then
 		rcolor = tocolor(255, 255, 255, 255*alpha1);
 		lcolor = tocolor(sR, sG, sB, 255*alpha1);
@@ -227,7 +227,7 @@ function kattint(button, key)
 						osszeg1 = ido * rentcars[kivalasztottkocsi][2];									
 					end
 				else	
-					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nem adtad meg a kikölcsönözni kívánt járművet!", 0, 0, 0,true);	
+					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Indique o veículo que deseja alugar!", 0, 0, 0,true);	
 				end		
 			elseif core:isInSlot(1164/pX*sX, 547.5/pY*sY, 25/pX*sX, 25/pY*sY) then
 				if not (vehID == 0) then
@@ -236,7 +236,7 @@ function kattint(button, key)
 						osszeg1 = ido * rentcars[kivalasztottkocsi][2];												
 					end
 				else	
-					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nem adtad meg a kikölcsönözni kívánt járművet!", 0, 0, 0,true);
+					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Indique o veículo que deseja alugar!", 0, 0, 0,true);
 				end	
 			elseif core:isInSlot(1189/pX*sX, 676/pY*sY, 150/pX*sX, 34/pY*sY) then
 				if not(vehID == 0) then
@@ -247,17 +247,17 @@ function kattint(button, key)
 							if not(van) then
 								triggerServerEvent("sikeresebb", resourceRoot, localPlayer, vehID, ido, osszeg1, kivalasztottkocsi);	
 							else
-								outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Már van kölcsönzött járműved", 0, 0, 0,true);	
+								outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Você já possui um veículo alugado!", 0, 0, 0,true);	
 							end	
 							leave();
 						else
-							outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nincs elegendő pénzed,hogy megvedd!", 0, 0, 0,true);	
+							outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Dinheiro insuficiente para alugar!", 0, 0, 0,true);	
 						end	
 					else
 						outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nem adtad meg,hogy mennyi időre szeretnéd kibérelni!", 0, 0, 0,true);	
 					end
 				else
-					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nem választottál ki járművet!", 0, 0, 0,true);		
+					outputChatBox(core:getServerPrefix("server", "CarRent", 3).."Nenhum veículo selecionado!", 0, 0, 0,true);		
 				end	
 			end	
 		end	

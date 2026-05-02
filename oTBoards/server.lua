@@ -14,7 +14,7 @@ addEventHandler("onResourceStart", resourceRoot,
                     loadSpeedCam(row)
                 end) 
             end
-			outputDebugString(query_lines .. " db kressztábla betöltése sikeresen megtörtént!")
+			outputDebugString("[TRÂNSITO]: "..query_lines.." painel(is) / placa(s) carregado(s).")
         end, connection, "SELECT * FROM `trafficboards`")
     end
 )
@@ -65,7 +65,7 @@ function createTrafficBoards(table1, type, sourceElement)
                 local id = tonumber(row["id"])
                 local syntax = exports.oCore:getServerPrefix("server", "orange", 1)
                 local green = exports.oCore:getServerColor() 
-                outputChatBox(syntax .. "Sikeresen létrehoztál egy kressztáblát, #ID: "..green..id, sourceElement, 255,255,255,true)
+                outputChatBox(syntax .. "Painel/placa de trânsito criado. #ID: "..green..id, sourceElement, 255,255,255,true)
                 loadSpeedCam(row)
             end) 
         end

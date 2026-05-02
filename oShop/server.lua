@@ -89,13 +89,13 @@ function saveShops()
             dbExec(connection, "UPDATE shops SET items = ?, owner = ?, money = ?, orders = ? WHERE id = ?", items, owner, money, orders, shopID)
          end
     end
-    print("[SHOP]: Boltok sikeresen mentve.")
+    print("[LOJA]: Lojas salvas com sucesso.")
 end
 setTimer(saveShops, 60000*5, 0)
 
 function saveRequest()
     saveShops()
-	outputDebugString("[oServerStop]: oShop sikeres mentés.",3);
+	outputDebugString("[oServerStop]: oShop — salvamento concluído.",3);
 end 
 
 addEvent("setShopPedItems", true)
@@ -128,7 +128,7 @@ addEventHandler("shop > buyShopItem", resourceRoot, function(itemID, price, type
 
                 inventory:giveItem(client, itemID, (itemDefValue[itemID] or 1), 1, 0)
 
-                outputChatBox(core:getServerPrefix("green-dark", "Bolt", 2).."Sikeres vásárlás!", client, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("green-dark", "Loja", 2).."Compra realizada com sucesso!", client, 255, 255, 255, true)
 
                 if (type or "") == "business" then 
                     local items = shopBusinessDatas[shopElement].items--getElementData(shopElement, "shop:ped:items")
@@ -140,11 +140,11 @@ addEventHandler("shop > buyShopItem", resourceRoot, function(itemID, price, type
                     triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, shopBusinessDatas[shopElement])
                 end
             else
-               outputChatBox(core:getServerPrefix("red-dark", "Bolt", 2).."Nincs az inventorydban elegendő hely! (Slot)", client, 255, 255, 255, true)
+               outputChatBox(core:getServerPrefix("red-dark", "Loja", 2).."Não há slots livres suficientes no inventário!", client, 255, 255, 255, true)
                triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, shopBusinessDatas[shopElement])
             end
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Bolt", 2).."Nincs az inventorydban elegendő hely! (Súly)", client, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Loja", 2).."Peso do inventário excedido — não cabe mais nada!", client, 255, 255, 255, true)
             triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, shopBusinessDatas[shopElement])
         end
     end 
@@ -178,15 +178,15 @@ end)
                     local pX,pY,pZ = getElementPosition(player)
 
                     if result[1]["private"] then
-                        exports.oAdmin:sendMessageToAdmins(player, "létrehozott egy ELADÓ boltot. (Itt: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
+                        exports.oAdmin:sendMessageToAdmins(player, "criou uma LOJA À VENDA. (Em: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
                     else
-                        exports.oAdmin:sendMessageToAdmins(player, "létrehozott egy boltot. (Itt: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
+                        exports.oAdmin:sendMessageToAdmins(player, "criou uma loja. (Em: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
                     end
                 end
             end, connection, "SELECT * FROM shops WHERE id=LAST_INSERT_ID()")
 
         else 
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Név] [Skin] [Biznisz (0, 1)] [Ára]",player,255,255,255,true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Nome] [Skin] [Negócio (0, 1)] [Preço]",player,255,255,255,true)
         end
     end 
 )]]
@@ -203,9 +203,9 @@ addEventHandler("shop > makeShop", resourceRoot, function(name,skin,pos,private,
             local pX,pY,pZ = getElementPosition(player)
 
             if result[1]["private"] then
-                exports.oAdmin:sendMessageToAdmins(player, "létrehozott egy ELADÓ boltot. (Itt: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
+                exports.oAdmin:sendMessageToAdmins(player, "criou uma LOJA À VENDA. (Em: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
             else
-                exports.oAdmin:sendMessageToAdmins(player, "létrehozott egy boltot. (Itt: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
+                exports.oAdmin:sendMessageToAdmins(player, "criou uma loja. (Em: #db3535"..getZoneName(pX,pY,pZ).."#557ec9, ID: #db3535"..result[1]["id"].."#557ec9)")
             end
         end
     end, connection, "SELECT * FROM shops WHERE id=LAST_INSERT_ID()")
@@ -229,7 +229,7 @@ addCommandHandler("delshop",
                             shopBusinessDatas[v] = false
 
                             local eX,eY,eZ = getElementPosition(v)
-                            exports.oAdmin:sendMessageToAdmins(player, "törölt egy boltot. (Itt: #db3535"..getZoneName(eX,eY,eZ).."#557ec9, ID: #db3535"..id.."#557ec9)")
+                            exports.oAdmin:sendMessageToAdmins(player, "removeu uma loja. (Em: #db3535"..getZoneName(eX,eY,eZ).."#557ec9, ID: #db3535"..id.."#557ec9)")
 
                             if getElementData(v, "shop:deliveryArea") then 
                                 destroyElement(getElementData(v, "shop:deliveryArea"))
@@ -241,7 +241,7 @@ addCommandHandler("delshop",
                     end
                 end 
             else
-                outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [ID]",player,255,255,255,true) 
+                outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID]",player,255,255,255,true) 
             end
         end
     end 
@@ -325,9 +325,9 @@ addEventHandler("shop > business > buyShop", resourceRoot, function(shopElement)
         shopBusinessDatas[shopElement].owner = charID
         setElementData(client, "char:money", getElementData(client, "char:money") - shopBusinessDatas[shopElement].cost)
         triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, shopBusinessDatas[shop])
-        outputChatBox(core:getServerPrefix("green-dark", "Bolt", 2).."Sikeresen megvásároltad a boltot!", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("green-dark", "Loja", 2).."Comprou a loja com sucesso!", client, 255, 255, 255, true)
     else 
-        outputChatBox(core:getServerPrefix("red-dark", "Bolt", 2).."Neked már van boltod!", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Loja", 2).."Você já possui uma loja!", client, 255, 255, 255, true)
         triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, false)
     end
 end)
@@ -453,7 +453,7 @@ addEventHandler("shop > business > sellShop", resourceRoot, function(shop)
     setElementData(shop, "shop:owner", 0)
     setElementData(client, "char:money", getElementData(client, "char:money") + shopBusinessDatas[shop].cost)
     
-    outputChatBox(core:getServerPrefix("green-dark", "Bolt", 2).."Sikeresenn eladtad a boltodat! Kaptál érte: "..color..shopBusinessDatas[shop].cost.."#ffffff$-t.", client, 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("green-dark", "Loja", 2).."Vendeu a loja com sucesso! Recebeu "..color..shopBusinessDatas[shop].cost.."#ffffff$.", client, 255, 255, 255, true)
 
     triggerClientEvent(client, "shop > sendShopBusinessDataToClient", client, shopBusinessDatas[shop])
 end)

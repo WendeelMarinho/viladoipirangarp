@@ -348,14 +348,14 @@ function checkRain()
                 setElementData(localPlayer, "char:sick", getElementData(localPlayer, "char:sick") + 1)
                 if getElementData(localPlayer, "char:sick") >= 50 then 
                     if isTimer(warningTimer) then return end
-                    outputChatBox(exports["oCore"]:getServerPrefix("server", "OriginalRoleplay", 1).."Meg betegedtél, keress fel egy orvost!", 255, 255, 255, true)
+                    outputChatBox(exports["oCore"]:getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está doente — procure um médico!", 255, 255, 255, true)
 				    exports.oInfobox:outputInfoBox("Meg betegedtél, keress fel egy orvost!", "warning")
                     warningTimer = setTimer(function() end, 5*60*1000, 1)
                 end
             else 
                 warningCounter = warningCounter + 1
                 if warningCounter < 10 then
-                    outputChatBox(exports["oCore"]:getServerPrefix("server", "OriginalRoleplay", 1).."Meg betegedtél, keress fel egy orvost 10 perced van hogy kezeljenek!", 255, 255, 255, true)
+                    outputChatBox(exports["oCore"]:getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está gravemente doente — procure um médico em até 10 minutos!", 255, 255, 255, true)
 				    exports.oInfobox:outputInfoBox("Meg betegedtél, keress fel egy orvost 10 perced van hogy kezeljenek!", "warning")
                 else 
                     setElementHealth(localPlayer, 0)

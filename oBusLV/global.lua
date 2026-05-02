@@ -5,7 +5,7 @@ bus_stops = {
     {name = "Las Venturas Mechanic Shop", pos = Vector3(1621.2932128906, 2179.8549804688, 10.8203125)},
     {name = "Las Venturas, Blackfield", pos = Vector3(1016.2034301758, 1411.5899658203, 10.8203125)},
     {name = "Las Venturas, Old Venturas Strip", pos = Vector3(2580.4714355469, 2121.95703125, 10.8203125)},
-    {name = "Las Venturas, Sheriff Department", pos = Vector3(2391.8093261719, 2422.1052246094, 10.8203125)},
+    {name = "Las Venturas — Posto PMESP", pos = Vector3(2391.8093261719, 2422.1052246094, 10.8203125)},
     {name = "Las Venturas, LVA Freight Depot", pos = Vector3(1324.5610351562, 1186.7001953125, 10.8203125)},
     {name = "Las Payadas", pos = Vector3(-249.35801696777, 2673.8046875, 62.6875), rot = 90},
     {name = "Fort Carson", pos = Vector3(-239.3999786377, 1205.5333251953, 19.7421875), rot = 180},

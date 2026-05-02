@@ -183,7 +183,7 @@ szamok = {
 
 kedvenc_tevekenyseg = {"Esportes","Caminhada","Pesca","Ouvir música","Dirigir","Jardinagem","Trabalho","Ajudar pessoas","Atirar","Comer ou beber","Motociclismo","Navegar","Ciclismo","Viajar","Fazer compras"}
 loading_texts = {
-	"Para não perder nossas novidades, siga nossas redes sociais! Procure por Ipiranga Roleplay.",
+	"Para não perder nossas novidades, siga nossas redes sociais! Procure por Vale do Ipiranga RP.",
 	"Quer conversar ou tirar dúvidas? Junte-se ao nosso servidor do Discord!",
 	"Quer entrar em uma organização ou registrar uma reclamação? Acesse nosso fórum!",
 	"Quer apoiar o servidor? Confira nosso site para saber como contribuir!",

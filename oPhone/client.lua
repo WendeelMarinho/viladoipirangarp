@@ -120,7 +120,7 @@ function drawPhone()
 
 					dxDrawText(core:getDate("dayname")..", "..core:getDate("monthname").." "..core:getDate("monthday")..".", phoneX, phoneY+sy*0.08, phoneX+phoneW, phoneY+sy*0.08+sy*0.08, homeScreenFontColors[phones[activePhone]["bg"]][1], 1/myX*sx, fonts["ui-medium-9"], "center", "bottom")
 
-					dxDrawText("Csúsztassa el a feloldáshoz.", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-(sx*0.005*2), phoneY+sy*0.015+phoneH-(sy*0.015*3), homeScreenFontColors[phones[activePhone]["bg"]][2], 0.9/myX*sx, fonts["ui-medium-9"], "center", "bottom")
+					dxDrawText("Deslize para desbloquear.", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-(sx*0.005*2), phoneY+sy*0.015+phoneH-(sy*0.015*3), homeScreenFontColors[phones[activePhone]["bg"]][2], 0.9/myX*sx, fonts["ui-medium-9"], "center", "bottom")
 				elseif page == 2 then
 					gridPositions = {}
 
@@ -204,7 +204,7 @@ function drawPhone()
 													dxDrawText("Los Santos", v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.015, v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005,  v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.015, tocolor(255, 255, 255, 255), 0.6/myX*sx, fonts["ui-heavy-15"], "left", "center")
 													dxDrawText(math.floor(weather[3]).."°", v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.025, v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.025, tocolor(255, 255, 255, 255), 0.65/myX*sx, fonts["ui-medium-30"], "left", "top")
 
-													dxDrawText((math.floor(weather[2]*100)/100).."km/h", v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.07, v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.07, tocolor(255, 255, 255, 255), 0.5/myX*sx, fonts["ui-heavy-15"], "left", "center")
+													dxDrawText((math.floor(weather[2]*100)/100).." km/h", v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.07, v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.005, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.07, tocolor(255, 255, 255, 255), 0.5/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 													dxDrawImage(v[1]+((6/appSizeX)/myX*sx*appSizeX) + sx*0.06, v[2]+(6/appSizeY)/myY*sy+4/myY*sy + sy*0.01, 60/myX*sx, 60/myY*sy, "files/weatherIcons/"..(weatherIcons[weather[1]] or "sun_1")..".png")
 												end
@@ -329,22 +329,22 @@ function drawPhone()
 				elseif page == 3 then
 					if contactState == 1 then
 						dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-						dxDrawText("Kontaktok", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+						dxDrawText("Contatos", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 						if core:isInSlot(phoneX+sx*0.07, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Hozzáadás", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+							dxDrawText("Adicionar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 						else
-							dxDrawText("Hozzáadás", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+							dxDrawText("Adicionar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 						end
 
 						if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						else
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						end
 
 						roundedRectangle(phoneX+sx*0.0145, phoneY+sy*0.085, phoneW-sx*0.03, phoneH/12, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-						dxDrawText("Saját", phoneX+sx*0.04, phoneY+sy*0.09, phoneX+sx*0.04+sx*0.1, phoneY+sy*0.09+sy*0.02, uiColors[phones[activePhone]["theme"]]["text"], 0.8/myX*sx, fonts["ui-medium-11"], "left", "center")
+						dxDrawText("Este número", phoneX+sx*0.04, phoneY+sy*0.09, phoneX+sx*0.04+sx*0.1, phoneY+sy*0.09+sy*0.02, uiColors[phones[activePhone]["theme"]]["text"], 0.8/myX*sx, fonts["ui-medium-11"], "left", "center")
 						dxDrawText(activePhone, phoneX+sx*0.04, phoneY+sy*0.105, phoneX+sx*0.04+sx*0.1, phoneY+sy*0.105+sy*0.02, uiColors[phones[activePhone]["theme"]]["text-light"], 0.65/myX*sx, fonts["ui-thin-11"], "left", "center")
 						dxDrawImage(phoneX+sx*0.0155+4/myX*sx, phoneY+sy*0.085+3/myY*sy, 30/myX*sx, 30/myY*sy, "files/avatars/small/1.png")
 
@@ -386,13 +386,13 @@ function drawPhone()
 									if actionNow[1] == i+contactPointer then
 										if actionNow[4] == "del" then
 											roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], phoneH/12, tocolor(219, 57, 57, 255*actionNow[2]), tocolor(219, 57, 57, 255*actionNow[2]))
-											dxDrawText("Törlés", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(219, 57, 57, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
+											dxDrawText("Excluir", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(219, 57, 57, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
 										elseif actionNow[4] == "call" then
 											roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], phoneH/12, tocolor(102, 186, 102, 255*actionNow[2]), tocolor(102, 186, 102, 255*actionNow[2]))
-											dxDrawText("Hívás", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(102, 186, 102, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
+											dxDrawText("Ligar", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(102, 186, 102, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
 										elseif actionNow[4] == "sms" then
 											roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], phoneH/12, tocolor(102, 186, 102, 255*actionNow[2]), tocolor(102, 186, 102, 255*actionNow[2]))
-											dxDrawText("Hívás", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(102, 186, 102, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
+											dxDrawText("SMS", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(102, 186, 102, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
 										end
 
 										if actionNow[2] >= 1 then
@@ -400,7 +400,7 @@ function drawPhone()
 												table.remove(phones[activePhone]["contacts"], i+contactPointer)
 											elseif actionNow[4] == "call" then
 												startCalling(phones[activePhone]["contacts"][i+contactPointer][2])
-												chat:sendLocalMeAction("felhív valakit.")
+												chat:sendLocalMeAction("liga para alguém.")
 											end
 											actionNow = {false, 0, getTickCount(), false}
 										end
@@ -427,18 +427,18 @@ function drawPhone()
 						dxDrawRectangle(phoneX+phoneW-sx*0.0133, phoneY+sy*0.145 + ((phoneH-sy*0.185)*(lineHeight*contactPointer/7)), sx*0.001, (phoneH-sy*0.185)*lineHeight, tocolor(39, 123, 209, 200))
 					elseif contactState == 2 then
 						dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-						dxDrawText("Kontakt hozzáadása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+						dxDrawText("Novo contato", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 						if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						else
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						end
 
 						--[[if core:isInSlot(phoneX+sx*0.012, phoneY+sy*0.17, sx*0.105, sy*0.03) then
-							dxDrawText("Avatar beállítása", phoneX+sx*0.015, phoneY+sy*0.17, phoneX+sx*0.015+sx*0.105, phoneY+sy*0.17+sy*0.03, tocolor(39, 123, 209, 255), 0.9/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Alterar avatar", phoneX+sx*0.015, phoneY+sy*0.17, phoneX+sx*0.015+sx*0.105, phoneY+sy*0.17+sy*0.03, tocolor(39, 123, 209, 255), 0.9/myX*sx, fonts["ui-medium-9"], "center", "center")
 						else
-							dxDrawText("Avatar beállítása", phoneX+sx*0.015, phoneY+sy*0.17, phoneX+sx*0.015+sx*0.105, phoneY+sy*0.17+sy*0.03, tocolor(39, 123, 209, 220), 0.9/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Alterar avatar", phoneX+sx*0.015, phoneY+sy*0.17, phoneX+sx*0.015+sx*0.105, phoneY+sy*0.17+sy*0.03, tocolor(39, 123, 209, 220), 0.9/myX*sx, fonts["ui-medium-9"], "center", "center")
 						end]]
 
 						--dxDrawRectangle(phoneX+sx*0.017, phoneY+sy*0.4, phoneW-sx*0.035, sy*0.03, tocolor(255, 0, 0))
@@ -447,22 +447,22 @@ function drawPhone()
 						dxDrawText("?", phoneX+sx*0.04, phoneY+sy*0.1, phoneX+sx*0.04+100/myX*sx, phoneY+sy*0.1+100/myY*sy, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-heavy-50"], "center", "center")
 
 						if core:isInSlot(phoneX+sx*0.017, phoneY+sy*0.4, phoneW-sx*0.035, sy*0.03) then
-							dxDrawText("Hozzáadás", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 255), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Adicionar", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 255), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
 						else
-							dxDrawText("Hozzáadás", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 220), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Adicionar", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 220), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
 						end
 
 						if activeEditbox == "addContact-name" then
 							if string.len(editboxs["addContact-name"]) > 0 then
 								dxDrawText(editboxs["addContact-name"], phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Név", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Nome", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						else
 							if string.len(editboxs["addContact-name"]) > 0 then
 								dxDrawText(editboxs["addContact-name"], phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Név", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Nome", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						end
 						dxDrawLine(phoneX+sx*0.0145, phoneY+sy*0.25, phoneX+sx*0.0145+phoneW-sx*0.03, phoneY+sy*0.25, uiColors[phones[activePhone]["theme"]]["bar"], 2)
@@ -471,26 +471,26 @@ function drawPhone()
 							if string.len(editboxs["addContact-phone"]) > 0 then
 								dxDrawText(editboxs["addContact-phone"], phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Telefonszám", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Número", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						else
 							if string.len(editboxs["addContact-phone"]) > 0 then
 								dxDrawText(editboxs["addContact-phone"], phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Telefonszám", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Número", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.26+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						end
 						dxDrawLine(phoneX+sx*0.0145, phoneY+sy*0.285, phoneX+sx*0.0145+phoneW-sx*0.03, phoneY+sy*0.285, uiColors[phones[activePhone]["theme"]]["bar"], 2)
 					end
 				elseif page == 4 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Beállítások", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Ajustes", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					--dxDrawImage(phoneX, phoneY, phoneW, phoneH, "files/options.png")
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					local startY = phoneY+sy*0.09
@@ -542,12 +542,12 @@ function drawPhone()
 					end
 				elseif page == 5 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Háttérkép beállítása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Papel de parede", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					dxDrawImage(phoneX+sx*0.037, phoneY+sy*0.13, phoneW/2, phoneH/2, "files/backgrounds/"..optionBG..".png")
@@ -566,18 +566,18 @@ function drawPhone()
 					end
 
 					if core:isInSlot(phoneX+sx*0.005, phoneY+phoneH-sy*0.055, phoneW-sx*0.01, sy*0.03) then
-						dxDrawText("Mentés", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-sx*0.01, phoneY+sy*0.015+phoneH-(sy*0.015*3), tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-bold-15"], "center", "bottom")
+						dxDrawText("Salvar", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-sx*0.01, phoneY+sy*0.015+phoneH-(sy*0.015*3), tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-bold-15"], "center", "bottom")
 					else
-						dxDrawText("Mentés", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-sx*0.01, phoneY+sy*0.015+phoneH-(sy*0.015*3), tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-bold-15"], "center", "bottom")
+						dxDrawText("Salvar", phoneX+sx*0.005, phoneY+sy*0.015, phoneX+sx*0.005+phoneW-sx*0.01, phoneY+sy*0.015+phoneH-(sy*0.015*3), tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-bold-15"], "center", "bottom")
 					end
 				elseif page == 6 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Csengőhang beállítása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Toque de chamada", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					local startY = phoneY+sy*0.09
@@ -592,7 +592,7 @@ function drawPhone()
 							end
 
 							if phones[activePhone]["ringstone"] == i then
-								dxDrawText(i.." #277bd1(Jelenlegi)", phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
+								dxDrawText(i.." #277bd1(atual)", phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
 							else
 								dxDrawText(i, phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
 							end
@@ -647,18 +647,18 @@ function drawPhone()
 					dxDrawText(math.floor(phones[activePhone]["ringstone-volume"]*100).."%", phoneX+sx*0.0145, phoneY+phoneH-sy*0.045, phoneX+sx*0.0145+phoneW-sx*0.03, phoneY+phoneH-sy*0.045+sy*0.03, uiColors[phones[activePhone]["theme"]]["text"], 0.82/myX*sx, fonts["ui-medium-9"], "center", "center")
 				elseif page == 7 then -- Hívás
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Telefon", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Telefone", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					if core:isInSlot(phoneX+sx*0.07, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Hívásnapló", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Histórico", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					else
-						dxDrawText("Hívásnapló", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Histórico", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					end
 
 					local startX = phoneX+sx*0.0225
@@ -705,17 +705,17 @@ function drawPhone()
 						dxDrawImage(phoneX+phoneW/2-25/myX*sx+14/myX*sx, phoneY+phoneH-sy*0.15+14/myY*sy, 22/myX*sx, 22/myY*sy, "files/call_icon.png", 135, 0, 0, uiColors[phones[activePhone]["theme"]]["text"])
 
 						dxDrawText(getContactName(calledNumber), phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-medium-20"], "center", "center")
-						dxDrawText("Hívás folyamatban", phoneX, phoneY+sy*0.12, phoneX+phoneW, phoneY+sy*0.12+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
+						dxDrawText("Chamando...", phoneX, phoneY+sy*0.12, phoneX+phoneW, phoneY+sy*0.12+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
 					elseif callingState == 2 then
 						--outputChatBox("asd")
 						--print(calledNumber)
 						--print(isHiddenNumber)
 						if getElementData(talkingPlayer,"phone:isHidden") then
-							dxDrawText("Rejtett Szám", phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-medium-20"], "center", "center")
+							dxDrawText("Número oculto", phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-medium-20"], "center", "center")
 						else
 							dxDrawText(getContactName(calledNumber), phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-medium-20"], "center", "center")
 						end
-						dxDrawText("Bejövő hívás", phoneX, phoneY+sy*0.13, phoneX+phoneW, phoneY+sy*0.13+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-thin-15"], "center", "center")
+						dxDrawText("Chamada recebida", phoneX, phoneY+sy*0.13, phoneX+phoneW, phoneY+sy*0.13+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-thin-15"], "center", "center")
 
 						if core:isInSlot(phoneX+phoneW/2-75/myX*sx, phoneY+phoneH-sy*0.15, 50/myX*sx, 50/myY*sy) then
 							dxDrawImage(phoneX+phoneW/2-75/myX*sx, phoneY+phoneH-sy*0.15, 50/myX*sx, 50/myY*sy, "files/dot.png", 0, 0, 0, tocolor(227, 48, 48, 200))
@@ -733,11 +733,11 @@ function drawPhone()
 					elseif callingState == 3 then
 
 						if getElementData(talkingPlayer,"phone:isHidden") then
-							dxDrawText("Rejtett szám", phoneX, phoneY+sy*0.03, phoneX+phoneW, phoneY+sy*0.03+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-medium-20"], "center", "center")
+							dxDrawText("Número oculto", phoneX, phoneY+sy*0.03, phoneX+phoneW, phoneY+sy*0.03+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-medium-20"], "center", "center")
 						else
 							dxDrawText(getContactName(calledNumber), phoneX, phoneY+sy*0.03, phoneX+phoneW, phoneY+sy*0.03+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-medium-20"], "center", "center")
 						end
-						dxDrawText("Hívásban", phoneX, phoneY+sy*0.03, phoneX+phoneW, phoneY+sy*0.03+sy*0.1, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
+						dxDrawText("Em chamada", phoneX, phoneY+sy*0.03, phoneX+phoneW, phoneY+sy*0.03+sy*0.1, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
 
 						dxDrawText(string.format("%02d:%02d:%02d", startCallTime[1], startCallTime[2], startCallTime[3]), phoneX, phoneY+sy*0.075, phoneX+phoneW, phoneY+sy*0.075+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.6/myX*sx, fonts["ui-thin-15"], "center", "center")
 
@@ -835,25 +835,25 @@ function drawPhone()
 						dxDrawImage(phoneX+phoneW/2-25/myX*sx+14/myX*sx, phoneY+phoneH-sy*0.08+14/myY*sy, 22/myX*sx, 22/myY*sy, "files/call_icon.png", 135, 0, 0, tocolor(220, 220, 220, 255))
 					elseif callingState == 4 then
 						dxDrawText(getContactName(calledNumber), phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-medium-20"], "center", "center")
-						dxDrawText("Ez a szám jelenleg \n nem kapcsolható...", phoneX, phoneY+sy*0.185, phoneX+phoneW, phoneY+sy*0.185+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
+						dxDrawText("Este número não pode\n ser contatado agora...", phoneX, phoneY+sy*0.185, phoneX+phoneW, phoneY+sy*0.185+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
 					elseif callingState == 5 then
 						dxDrawText(getContactName(calledNumber), phoneX, phoneY+sy*0.15, phoneX+phoneW, phoneY+sy*0.15+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.7/myX*sx, fonts["ui-medium-20"], "center", "center")
-						dxDrawText("Ez a szám jelenleg \n foglalt!", phoneX, phoneY+sy*0.185, phoneX+phoneW, phoneY+sy*0.185+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
+						dxDrawText("Este número está\n ocupado!", phoneX, phoneY+sy*0.185, phoneX+phoneW, phoneY+sy*0.185+sy*0.05, callingScreenColos[phones[activePhone]["bg"]], 0.8/myX*sx, fonts["ui-thin-15"], "center", "center")
 					end
 				elseif page == 9 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Hívásnapló", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Histórico de chamadas", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					if core:isInSlot(phoneX+sx*0.07, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Hívásnapló kiürítése", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Limpar histórico", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					else
-						dxDrawText("Hívásnapló kiürítése", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Limpar histórico", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					end
 
 					local startY = phoneY+sy*0.09
@@ -890,10 +890,10 @@ function drawPhone()
 								if actionNow[1] == i+contactPointer then
 									if actionNow[4] == "calllogs_del" then
 										roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], sy*0.03, tocolor(219, 57, 57, 255*actionNow[2]), tocolor(219, 57, 57, 255*actionNow[2]))
-										dxDrawText("Törlés", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+sy*0.03, tocolor(219, 57, 57, 255), 0.65/myX*sx, fonts["ui-medium-11"], "right", "center")
+										dxDrawText("Excluir", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+sy*0.03, tocolor(219, 57, 57, 255), 0.65/myX*sx, fonts["ui-medium-11"], "right", "center")
 									elseif actionNow[4] == "callogs_call" then
 										roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], sy*0.03, tocolor(102, 186, 102, 255*actionNow[2]), tocolor(102, 186, 102, 255*actionNow[2]))
-										dxDrawText("Hívás", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+sy*0.03, tocolor(102, 186, 102, 255), 0.65/myX*sx, fonts["ui-medium-11"], "right", "center")
+										dxDrawText("Ligar", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+sy*0.03, tocolor(102, 186, 102, 255), 0.65/myX*sx, fonts["ui-medium-11"], "right", "center")
 									end
 
 									if actionNow[2] >= 1 then
@@ -902,7 +902,7 @@ function drawPhone()
 											phones[activePhone]["calls"] = ReverseTable(revers)
 										elseif actionNow[4] == "callogs_call" then
 											startCalling(v[1])
-											chat:sendLocalMeAction("felhív valakit.")
+											chat:sendLocalMeAction("liga para alguém.")
 										end
 										actionNow = {false, 0, getTickCount(), false}
 									end
@@ -938,18 +938,18 @@ function drawPhone()
 					dxDrawRectangle(phoneX+phoneW-sx*0.0133, phoneY+sy*0.09 + ((phoneH-sy*0.133)*(lineHeight*callLogsPointer/11)), sx*0.001, (phoneH-sy*0.133)*lineHeight, tocolor(39, 123, 209, 200))
 				elseif page == 10 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Hírdetés feladása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Publicar anúncio", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.07, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Hírdetés feladása", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Publicar anúncio", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					else
-						dxDrawText("Hírdetés feladása", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+						dxDrawText("Publicar anúncio", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 					end
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					roundedRectangle(phoneX+sx*0.0145, phoneY+sy*0.09, phoneW-sx*0.03, sy*0.2, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
@@ -966,18 +966,18 @@ function drawPhone()
 						end
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.415, phoneW-sx*0.03, sy*0.03, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-						dxDrawText("Egy hírdetés feladásának ára 150$!", phoneX+sx*0.015, phoneY+sy*0.415, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.415+sy*0.03, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
+						dxDrawText("Publicar custa US$150!", phoneX+sx*0.015, phoneY+sy*0.415, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.415+sy*0.03, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.45, phoneW-sx*0.03, sy*0.03, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-						dxDrawText("Hírdetéseket csak 5 percenként\n adhatsz fel!", phoneX+sx*0.015, phoneY+sy*0.45, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.45+sy*0.03, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
+						dxDrawText("Só pode publicar a cada\n5 minutos!", phoneX+sx*0.015, phoneY+sy*0.45, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.45+sy*0.03, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
 				elseif page == 11 then -- időjárás
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Időjárás", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Tempo", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					local weather = core:getSyncedWeather()
@@ -985,7 +985,7 @@ function drawPhone()
 					--dxDrawImage(phoneX+ phoneW/2 - 50/myX*sx, phoneY+sy*0.08, 100/myX*sx, 100/myY*sy, "files/dot.png", 0, 0, 0, tocolor(39, 123, 209, 50))
 					dxDrawText("Los Santos", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.075, uiColors[phones[activePhone]["theme"]]["text-title"], 0.8/myX*sx, fonts["ui-medium-15"], "center", "bottom")
 					dxDrawText(math.floor(weather[3]).."°C", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.13, tocolor(39, 123, 209, 255), 0.65/myX*sx, fonts["ui-thin-30"], "center", "bottom")
-					dxDrawText("Szél: "..(math.floor(weather[2]*100)/100).."km/h", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.16, tocolor(39, 123, 209, 255), 0.35/myX*sx, fonts["ui-thin-30"], "center", "bottom")
+					dxDrawText("Vento: "..(math.floor(weather[2]*100)/100).." km/h", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.16, tocolor(39, 123, 209, 255), 0.35/myX*sx, fonts["ui-thin-30"], "center", "bottom")
 					--dxDrawText("Szél: "..(math.floor(weather[2]*100)/100).."km/h", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.22, tocolor(39, 123, 209, 255), 0.65/myX*sx, fonts["ui-heavy-15"], "center", "bottom")
 					--dxDrawText(math.floor(weather[3]).."°", 10, 22, 50, 50, tocolor(255, 255, 255, 255), 0.65/myX*sx, fonts["ui-medium-30"], "left", "top")
 
@@ -1025,17 +1025,17 @@ function drawPhone()
 					dxDrawText("Price: 375$", phoneX+sx*0.0145, phoneY+sy*0.3, phoneX+sx*0.0145+phoneW-sx*0.03, phoneY+sy*0.3+sy*0.045, tocolor(220, 220, 220, 255), 0.6/myX*sx, fonts["ui-bold-15"], "right", "center")
 				elseif page == 13 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Biztonsági beállítások", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Segurança", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.09, phoneW-sx*0.03, sy*0.11, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-					dxDrawText("Telefonszám megjelenítése", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "top")
-					dxDrawText("Ennek az opciónak a kikapcsolásával elkerülheted, a telefonszámod megjelenítését a feladott hírdetésekben.", phoneX+sx*0.0175, phoneY+sy*0.115, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.115+sy*0.11, uiColors[phones[activePhone]["theme"]]["text-light"], 0.8/myX*sx, fonts["ui-medium-9"], "left", "top", false, true)
+					dxDrawText("Mostrar número nos anúncios", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "top")
+					dxDrawText("Ao desativar, seu número não aparece nos classificados publicados.", phoneX+sx*0.0175, phoneY+sy*0.115, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.115+sy*0.11, uiColors[phones[activePhone]["theme"]]["text-light"], 0.8/myX*sx, fonts["ui-medium-9"], "left", "top", false, true)
 
 					local buttonColor
 					local state = phones[activePhone]["phoneNumber-showing"]
@@ -1055,15 +1055,15 @@ function drawPhone()
 
 					if state then
 						dxDrawImage(phoneX+sx*0.11, phoneY+sy*0.17, 30/myX*sx, 30/myY*sy, "files/switch.png", 180, 0, 0, buttonColor)
-						dxDrawText("Bekapcsolva", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
+						dxDrawText("Ativado", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
 					else
 						dxDrawImage(phoneX+sx*0.11, phoneY+sy*0.17, 30/myX*sx, 30/myY*sy, "files/switch.png", 0, 0, 0, buttonColor)
-						dxDrawText("Kikapcsolva", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
+						dxDrawText("Desativado", phoneX+sx*0.0175, phoneY+sy*0.095, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1, uiColors[phones[activePhone]["theme"]]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
 					end
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.09+sy*0.115, phoneW-sx*0.03, sy*0.10, uiColors[phones[activePhone]["theme"] ]["bar"], uiColors[phones[activePhone]["theme"] ]["bar"])
-					dxDrawText("Saját hívóazonosító\nelrejtése", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.115, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.15+sy*0.115, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "top")
-					dxDrawText("Ez az opcíó lehetővé teszi hogy rejtett számra válts át!", phoneX+sx*0.0175, phoneY+sy*0.115+sy*0.132, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.115+sy*0.15+sy*0.115, uiColors[phones[activePhone]["theme"] ]["text-light"], 0.8/myX*sx, fonts["ui-medium-9"], "left", "top", false, true)
+					dxDrawText("Ocultar identificador\nde chamadas", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.115, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.15+sy*0.115, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "top")
+					dxDrawText("Permite ligar com número oculto.", phoneX+sx*0.0175, phoneY+sy*0.115+sy*0.132, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.115+sy*0.15+sy*0.115, uiColors[phones[activePhone]["theme"] ]["text-light"], 0.8/myX*sx, fonts["ui-medium-9"], "left", "top", false, true)
 
 					local buttonColor
 					local state = phones[activePhone]["hiddenNumber"]
@@ -1083,27 +1083,27 @@ function drawPhone()
 
 					if state then
 						dxDrawImage(phoneX+sx*0.11, phoneY+sy*0.17+sy*0.105, 30/myX*sx, 30/myY*sy, "files/switch.png", 180, 0, 0, buttonColor)
-						dxDrawText("Bekapcsolva", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.105, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1+sy*0.105, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
+						dxDrawText("Ativado", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.105, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1+sy*0.105, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
 					else
 						dxDrawImage(phoneX+sx*0.11, phoneY+sy*0.17+sy*0.105, 30/myX*sx, 30/myY*sy, "files/switch.png", 0, 0, 0, buttonColor)
-						dxDrawText("Kikapcsolva", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.105, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1+sy*0.105, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
+						dxDrawText("Desativado", phoneX+sx*0.0175, phoneY+sy*0.095+sy*0.105, phoneX+sx*0.0175+phoneW-sx*0.03, phoneY+sy*0.095+sy*0.1+sy*0.105, uiColors[phones[activePhone]["theme"] ]["text"], 0.57/myX*sx, fonts["ui-heavy-15"], "left", "bottom")
 					end
 				elseif page == 14 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
 
 					if smsState == 1 then
-						dxDrawText("Üzenetek", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+						dxDrawText("SMS", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 						if core:isInSlot(phoneX+sx*0.07, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Üzenet írása", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+							dxDrawText("Escrever", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 						else
-							dxDrawText("Üzenet írása", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
+							dxDrawText("Escrever", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "right", "center")
 						end
 
 						if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						else
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						end
 
 						local tableRealDataCount = 0
@@ -1151,7 +1151,7 @@ function drawPhone()
 												if actionNow[1] == k then
 													if actionNow[4] == "del" then
 														roundedRectangle(phoneX+sx*0.0145, startY, (phoneW-sx*0.03)*actionNow[2], phoneH/12, tocolor(219, 57, 57, 255*actionNow[2]), tocolor(219, 57, 57, 255*actionNow[2]))
-														dxDrawText("Törlés", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(219, 57, 57, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
+														dxDrawText("Excluir", phoneX+sx*0.0145, startY, phoneX+sx*0.0145+(phoneW-sx*0.035), startY+phoneH/12, tocolor(219, 57, 57, 255), 0.8/myX*sx, fonts["ui-medium-11"], "right", "center")
 													end
 
 													if actionNow[2] >= 1 then
@@ -1196,9 +1196,9 @@ function drawPhone()
 						dxDrawText(getContactName(openedMessagePage), phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 						if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						else
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						end
 
 						local startY = phoneY + sy*0.095
@@ -1267,11 +1267,11 @@ function drawPhone()
 						--	dxDrawText("", phoneX+sx*0.0155, phoneY+sy*0.412, phoneX+sx*0.0155+phoneW-sx*0.034, phoneY+sy*0.412+sy*0.065, tocolor(39, 123, 209, 100), 0.5/myX*sx, fonts["fontawesome2"], "right", "top", false, true)
 						end
 					elseif smsState == 3 then
-						dxDrawText("Üzenet írása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+						dxDrawText("Nova mensagem", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 						if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						else
-							dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+							dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 						end
 
 
@@ -1279,22 +1279,22 @@ function drawPhone()
 						dxDrawText("", phoneX+sx*0.04, phoneY+sy*0.1, phoneX+sx*0.04+100/myX*sx, phoneY+sy*0.1+100/myY*sy, tocolor(39, 123, 209, 255), 1/myX*sx, fonts["fontawesome2"], "center", "center")
 
 						if core:isInSlot(phoneX+sx*0.017, phoneY+sy*0.4, phoneW-sx*0.035, sy*0.03) then
-							dxDrawText("Üzenet küldése", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 255), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Enviar", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 255), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
 						else
-							dxDrawText("Üzenet küldése", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 220), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
+							dxDrawText("Enviar", phoneX+sx*0.017, phoneY+sy*0.4, phoneX+sx*0.017+phoneW-sx*0.035, phoneY+sy*0.4+sy*0.03, tocolor(39, 123, 209, 220), 0.95/myX*sx, fonts["ui-medium-9"], "center", "center")
 						end
 
 						if activeEditbox == "sms-phoneNumber" then
 							if string.len(editboxs["sms-phoneNumber"]) > 0 then
 								dxDrawText(editboxs["sms-phoneNumber"], phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Telefonszám", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Número", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						else
 							if string.len(editboxs["sms-phoneNumber"]) > 0 then
 								dxDrawText(editboxs["sms-phoneNumber"], phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							else
-								dxDrawText("Telefonszám", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
+								dxDrawText("Número", phoneX+sx*0.015, phoneY+sy*0.225, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.225+sy*0.03, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "center")
 							end
 						end
 						dxDrawLine(phoneX+sx*0.0145, phoneY+sy*0.25, phoneX+sx*0.0145+phoneW-sx*0.03, phoneY+sy*0.25, uiColors[phones[activePhone]["theme"]]["bar"], 2)
@@ -1303,13 +1303,13 @@ function drawPhone()
 							if string.len(editboxs["sms-message"]) > 0 then
 								dxDrawText(editboxs["sms-message"], phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
 							else
-								dxDrawText("Üzenet", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
+								dxDrawText("Mensagem", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 255), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
 							end
 						else
 							if string.len(editboxs["sms-message"]) > 0 then
 								dxDrawText(editboxs["sms-message"], phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
 							else
-								dxDrawText("Üzenet", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
+								dxDrawText("Mensagem", phoneX+sx*0.015, phoneY+sy*0.26, phoneX+sx*0.015+sx*0.1, phoneY+sy*0.345, tocolor(170, 170, 170, 200), 0.9/myX*sx, fonts["ui-medium-11"], "left", "top", false, true)
 							end
 						end
 
@@ -1323,12 +1323,12 @@ function drawPhone()
 					end
 				elseif page == 15 then
 					dxDrawRectangle(phoneX + sx*0.011, phoneY+sy*0.011, phoneW-sy*0.038, phoneH-sy*0.024, uiColors[phones[activePhone]["theme"]]["bg"])
-					dxDrawText("Értesítési hang beállítása", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
+					dxDrawText("Som de notificação", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					local startY = phoneY+sy*0.09
@@ -1343,7 +1343,7 @@ function drawPhone()
 							end
 
 							if phones[activePhone]["notsound"] == i then
-								dxDrawText(i.." #277bd1(Jelenlegi)", phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
+								dxDrawText(i.." #277bd1(atual)", phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
 							else
 								dxDrawText(i, phoneX+sx*0.018, startY, phoneX+sx*0.018+sx*0.1, startY+sy*0.025, uiColors[phones[activePhone]["theme"]]["text"], 0.7/myX*sx, fonts["ui-medium-11"], "left", "center", false, false, false, true)
 							end
@@ -1401,19 +1401,19 @@ function drawPhone()
 					dxDrawText("Taxi", phoneX+sx*0.015, phoneY+sy*0.055, phoneX+sx*0.015+phoneW/2, phoneY+sy*0.055+sy*0.028, uiColors[phones[activePhone]["theme"]]["text-title"], 0.7/myX*sx, fonts["ui-heavy-15"], "left", "center")
 
 					if core:isInSlot(phoneX+sx*0.015, phoneY+sy*0.038, phoneW/2, sy*0.02) then
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 255), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					else
-						dxDrawText("Vissza", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
+						dxDrawText("Voltar", phoneX+sx*0.015, phoneY+sy*0.038, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.038+sy*0.02, tocolor(39, 123, 209, 220), 0.8/myX*sx, fonts["ui-medium-9"], "left", "center")
 					end
 
 					--dxDrawImage(phoneX+ phoneW/2 - 50/myX*sx, phoneY+sy*0.08, 100/myX*sx, 100/myY*sy, "files/dot.png", 0, 0, 0, tocolor(39, 123, 209, 50))
-					dxDrawText("Szabad taxik: ", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.075, uiColors[phones[activePhone]["theme"]]["text-title"], 0.8/myX*sx, fonts["ui-medium-15"], "center", "bottom")
+					dxDrawText("Táxis disponíveis: ", phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.075, uiColors[phones[activePhone]["theme"]]["text-title"], 0.8/myX*sx, fonts["ui-medium-15"], "center", "bottom")
 					dxDrawText(availableTaxis, phoneX, phoneY+sy*0.055, phoneX+phoneW, phoneY+sy*0.055+sy*0.13, tocolor(235, 172, 63, 255), 0.65/myX*sx, fonts["ui-thin-30"], "center", "bottom")
 
-					local taxiText = "Taxi hívása"
+					local taxiText = "Chamar táxi"
 
 					if getElementData(localPlayer, "faction:taxi:isCalledTaxi") then
-						taxiText = "Taxi visszamondása"
+						taxiText = "Cancelar táxi"
 					end
 
 					if core:isInSlot(phoneX+sx*0.017, phoneY+sy*0.3, phoneW-sx*0.035, sy*0.03) then
@@ -1423,10 +1423,10 @@ function drawPhone()
 					end
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.415, phoneW-sx*0.03, sy*0.03, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-						dxDrawText("A taxis a hívásod koordinátáját\n kapja meg!", phoneX+sx*0.015, phoneY+sy*0.415, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.415+sy*0.03, tocolor(235, 172, 63, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
+						dxDrawText("O motorista recebe a localização\n do seu chamado!", phoneX+sx*0.015, phoneY+sy*0.415, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.415+sy*0.03, tocolor(235, 172, 63, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
 
 					roundedRectangle(phoneX+sx*0.015, phoneY+sy*0.45, phoneW-sx*0.03, sy*0.03, uiColors[phones[activePhone]["theme"]]["bar"], uiColors[phones[activePhone]["theme"]]["bar"])
-						dxDrawText("Ameddig nem érkezik meg addig ne \n menj messzire!", phoneX+sx*0.015, phoneY+sy*0.45, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.45+sy*0.03, tocolor(235, 172, 63, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
+						dxDrawText("Não se afaste até o táxi chegar!", phoneX+sx*0.015, phoneY+sy*0.45, phoneX+sx*0.015+phoneW-sx*0.03, phoneY+sy*0.45+sy*0.03, tocolor(235, 172, 63, 255), 0.8/myX*sx, fonts["ui-medium-9"], "center", "center")
 				end
 
 				if page >= 3 then
@@ -1549,8 +1549,8 @@ function clickPhone(key, state)
 						if isSizeable then
 							phones[activePhone]["apps"][sizeingPanel[1]][2] = k
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Telefon", 2).."Nincs hely a widget nagyobbításához!", 255, 255, 255, true)
-							infobox:outputInfoBox("Nincs hely a widget nagyobbításához!", "error")
+							outputChatBox(core:getServerPrefix("red-dark", "Telefone", 2).."Sem espaço para ampliar o widget!", 255, 255, 255, true)
+							infobox:outputInfoBox("Sem espaço para ampliar o widget!", "error")
 						end
 					end
 
@@ -1821,11 +1821,11 @@ function clickPhone(key, state)
 							editboxs["sms"] = ""
 							usedGPSButton = false
 
-							infobox:outputInfoBox("Az SMS továbbítása folyamatban van!", "success")
+							infobox:outputInfoBox("Enviando SMS...", "success")
 
 							smsPointer = smsPointer + 1
 						else
-							infobox:outputInfoBox("Az SMS-nek minimum 5 karakterből kell állnia!", "error")
+							infobox:outputInfoBox("A mensagem deve ter no mínimo 5 caracteres!", "error")
 						end
 					end
 				end
@@ -1899,14 +1899,14 @@ function clickPhone(key, state)
 				local startY = phoneY+sy*0.09
 				for k, v in ipairs(options) do
 					if core:isInSlot(phoneX+sx*0.11, startY+4/myY*sy, 30/myX*sx, 30/myY*sy) then
-						if v.name == "Háttérkép" then
+						if v.name == "Papel de parede" then
 							page = 5
 							optionBG = phones[activePhone]["bg"]
-						elseif v.name == "Csengőhang" then
+						elseif v.name == "Toque" then
 							page = 6
-						elseif v.name == "Értesítési hang" then
+						elseif v.name == "Som de alerta" then
 							page = 15
-						elseif v.name == "Biztonság" then
+						elseif v.name == "Segurança" then
 							page = 13
 						elseif v.name == "Dark Mode" then
 							if phones[activePhone]["theme"] == "dark" then
@@ -2005,7 +2005,7 @@ function clickPhone(key, state)
 				if core:isInSlot(phoneX+phoneW/2-25/myX*sx, phoneY+phoneH-sy*0.095, 50/myX*sx, 50/myY*sy) then
 					if string.len(tostring(numberText)) >= 3 then
 						startCalling(numberText)
-						chat:sendLocalMeAction("felhív valakit.")
+						chat:sendLocalMeAction("liga para alguém.")
 					end
 				end
 
@@ -2032,7 +2032,7 @@ function clickPhone(key, state)
 							killTimer(callingTimer)
 						end
 						phones[activePhone]["calls"][lastLogIndex][3] = 3
-						chat:sendLocalMeAction("letette a telefont.")
+						chat:sendLocalMeAction("desliga o telefone.")
 					end
 				elseif callingState == 2 then
 					if core:isInSlot(phoneX+phoneW/2-75/myX*sx, phoneY+phoneH-sy*0.15, 50/myX*sx, 50/myY*sy) then
@@ -2053,7 +2053,7 @@ function clickPhone(key, state)
 							killTimer(callingTimer)
 						end
 						phones[activePhone]["calls"][lastLogIndex][3] = 3
-						chat:sendLocalMeAction("letette a telefont.")
+						chat:sendLocalMeAction("desliga o telefone.")
 					end
 
 					if core:isInSlot(phoneX+phoneW/2+25/myX*sx, phoneY+phoneH-sy*0.15, 50/myX*sx, 50/myY*sy) then
@@ -2065,7 +2065,7 @@ function clickPhone(key, state)
 							destroyElement(sound)
 						end
 						phones[activePhone]["calls"][lastLogIndex][3] = 1
-						chat:sendLocalMeAction("felvette a telefont.")
+						chat:sendLocalMeAction("atende o telefone.")
 					end
 				elseif callingState == 3 then
 					if isCalled911 then
@@ -2079,7 +2079,7 @@ function clickPhone(key, state)
 											selectedFactionId = v[2]
 											selectedServiceName = v[1]
 											menu911 = 2
-											table.insert(talkingTexts, {"Üdvözlöm miben segíthetek?", 1})
+											table.insert(talkingTexts, {"Alô, em que posso ajudar?", 1})
 											editboxs["phone-calling"] = ""
 										else
 											exports.oFactionScripts:addFactionCall(v[3], v[2], localPlayer)
@@ -2099,9 +2099,9 @@ function clickPhone(key, state)
 												killTimer(callingTimer)
 											end
 											phones[activePhone]["calls"][lastLogIndex][3] = 2
-											chat:sendLocalMeAction("letette a telefont.")
+											chat:sendLocalMeAction("desliga o telefone.")
 
-											infobox:outputInfoBox("Sikeresen értesítetted a(z) "..v[1].."-(e)t.", "success")
+											infobox:outputInfoBox("Contato notificado: "..v[1]..".", "success")
 										end
 										--[[exports.oFactionScripts:addFactionCall(v[3], v[2], localPlayer)
 
@@ -2121,14 +2121,14 @@ function clickPhone(key, state)
 											killTimer(callingTimer)
 										end
 										phones[activePhone]["calls"][lastLogIndex][3] = 2
-										chat:sendLocalMeAction("letette a telefont.")
+										chat:sendLocalMeAction("desliga o telefone.")
 
 										infobox:outputInfoBox("Sikeresen értesítetted a(z) "..v[1].."-(e)t.", "success")]]
 									end
 									startY = startY + (sy*0.05)
 								end
 							else
-								infobox:outputInfoBox("Interiorból nem tudod értesíteni őket!", "warning")
+								infobox:outputInfoBox("Não é possível chamar serviços de dentro deste interior!", "warning")
 							end
 						elseif menu911 == 2 then
 							if core:isInSlot(phoneX+sx*0.0145, phoneY+phoneH-sy*0.13, phoneW-sx*0.03, sy*0.04) then
@@ -2150,7 +2150,7 @@ function clickPhone(key, state)
 										if menu911 == 2 then
 											activeEditbox = false
 											setTimer(function()
-											table.insert(talkingTexts, {"Köszönöm a leírást az egységeink úton vannak!", 1})
+											table.insert(talkingTexts, {"Obrigado. Unidades a caminho!", 1})
 											end,1500,1)
 											setTimer(function()
 
@@ -2173,9 +2173,9 @@ function clickPhone(key, state)
 													killTimer(callingTimer)
 												end
 												phones[activePhone]["calls"][lastLogIndex][3] = 2
-												chat:sendLocalMeAction("letette a telefont.")
+												chat:sendLocalMeAction("desliga o telefone.")
 
-												infobox:outputInfoBox("Sikeresen értesítetted a(z) "..selectedServiceName.."-(e)t.", "success")
+												infobox:outputInfoBox("Serviço notificado: "..selectedServiceName..".", "success")
 												selectedServiceName = false
 												selectedType = false
 												selectedFactionId = false
@@ -2233,7 +2233,7 @@ function clickPhone(key, state)
 							menu911 = 1
 						end
 						phones[activePhone]["calls"][lastLogIndex][3] = 2
-						chat:sendLocalMeAction("letette a telefont.")
+						chat:sendLocalMeAction("desliga o telefone.")
 						editboxs["phone-calling"] = ""
 					end
 				end
@@ -2268,15 +2268,15 @@ function clickPhone(key, state)
 									triggerServerEvent("phone > addNews", resourceRoot, editboxs["addNews-text"], 0)
 								end
 								editboxs["addNews-text"] = ""
-								infobox:outputInfoBox("Sikeresen feladtál egy hírdetést!", "success")
+								infobox:outputInfoBox("Anúncio publicado!", "success")
 							else
-								infobox:outputInfoBox("Csak 5 percenként adhatsz fel hírdetést!", "warning")
+								infobox:outputInfoBox("Só pode publicar um anúncio a cada 5 minutos!", "warning")
 							end
 						else
-							infobox:outputInfoBox("A hírdetésednek minimum 10 karakterből kell állnia!", "error")
+							infobox:outputInfoBox("O anúncio precisa de no mínimo 10 caracteres!", "error")
 						end
 					else
-						infobox:outputInfoBox("Nincs elegendő pénzed a hírdetés feladásához! (150$)", "error")
+						infobox:outputInfoBox("Dinheiro insuficiente para o anúncio! ($150)", "error")
 					end
 				end
 			elseif page == 11 then -- Időjárás
@@ -2307,15 +2307,15 @@ function clickPhone(key, state)
 									triggerServerEvent("phone > addNews", resourceRoot, editboxs["addNews-text"], 0, "dw")
 								end
 								editboxs["addNews-text"] = ""
-								infobox:outputInfoBox("Sikeresen feladtál egy hírdetést!", "success")
+								infobox:outputInfoBox("Anúncio publicado!", "success")
 							else
-								infobox:outputInfoBox("Csak 5 percenként adhatsz fel hírdetést!", "warning")
+								infobox:outputInfoBox("Só pode publicar um anúncio a cada 5 minutos!", "warning")
 							end
 						else
-							infobox:outputInfoBox("A hírdetésednek minimum 10 karakterből kell állnia!", "error")
+							infobox:outputInfoBox("O anúncio precisa de no mínimo 10 caracteres!", "error")
 						end
 					else
-						infobox:outputInfoBox("Nincs elegendő pénzed a hírdetés feladásához! (375$)", "error")
+						infobox:outputInfoBox("Dinheiro insuficiente para o anúncio! ($375)", "error")
 					end
 				end
 			elseif page == 13 then
@@ -2395,8 +2395,8 @@ function clickPhone(key, state)
 								local posX, posY, posZ = getElementPosition(localPlayer)
 								editboxs["sms"] = "(GPS): "..posX .. ", "..posY
 							else
-								outputChatBox(core:getServerPrefix("red-dark", "Telefon", 2).."Interiorban nem küldhetsz GPS koordinátát!", 255, 255, 255, true)
-								infobox:outputInfoBox("Interiorban nem küldhetsz GPS koordinátát!", "error")
+								outputChatBox(core:getServerPrefix("red-dark", "Telefone", 2).."Não é possível enviar GPS de dentro deste interior!", 255, 255, 255, true)
+								infobox:outputInfoBox("Não é possível enviar GPS de dentro deste interior!", "error")
 							end
 						end
 					end
@@ -2416,8 +2416,8 @@ function clickPhone(key, state)
 								if string.match(v[2], "GPS") then
 									if getElementDimension(localPlayer) == 0 and getElementInterior(localPlayer) == 0 then
 										if getPedOccupiedVehicle(localPlayer) then
-											infobox:outputInfoBox("Sikeresen beállítottad a GPS-t a megadott koordinátára!", "success")
-											outputChatBox(core:getServerPrefix("green-dark", "Telefon", 2).."Beállítottad a GPS-t a megadott koordinátára!", 255, 255, 255, true)
+											infobox:outputInfoBox("GPS marcado nas coordenadas!", "success")
+											outputChatBox(core:getServerPrefix("green-dark", "Telefone", 2).."GPS marcado nas coordenadas informadas!", 255, 255, 255, true)
 
 											local firstVesszo = string.find(v[2], ",", 2)
 											--print(firstVesszo)
@@ -2456,10 +2456,10 @@ function clickPhone(key, state)
 
 								smsState = 1
 							else
-								infobox:outputInfoBox("Az üzenetnek minimum 5 karakterből kell állnia!", "error")
+								infobox:outputInfoBox("A mensagem precisa de no mínimo 5 caracteres!", "error")
 							end
 						else
-							infobox:outputInfoBox("Nem megfelelő a telefonszám!", "error")
+							infobox:outputInfoBox("Número de telefone inválido!", "error")
 						end
 					end
 
@@ -2471,8 +2471,8 @@ function clickPhone(key, state)
 								local posX, posY, posZ = getElementPosition(localPlayer)
 								editboxs["sms-message"] = "(GPS): "..posX .. ", "..posY
 							else
-								outputChatBox(core:getServerPrefix("red-dark", "Telefon", 2).."Interiorban nem küldhetsz GPS koordinátát!", 255, 255, 255, true)
-								infobox:outputInfoBox("Interiorban nem küldhetsz GPS koordinátát!", "error")
+								outputChatBox(core:getServerPrefix("red-dark", "Telefone", 2).."Não é possível enviar GPS de dentro deste interior!", 255, 255, 255, true)
+								infobox:outputInfoBox("Não é possível enviar GPS de dentro deste interior!", "error")
 							end
 						end
 					end
@@ -2579,7 +2579,7 @@ function clickPhone(key, state)
 										if menu911 == 2 then
 											activeEditbox = false
 											setTimer(function()
-											table.insert(talkingTexts, {"Köszönöm a leírást az egységeink úton vannak!", 1})
+											table.insert(talkingTexts, {"Obrigado. Unidades a caminho!", 1})
 											end,1500,1)
 											setTimer(function()
 
@@ -2602,9 +2602,9 @@ function clickPhone(key, state)
 													killTimer(callingTimer)
 												end
 												phones[activePhone]["calls"][lastLogIndex][3] = 2
-												chat:sendLocalMeAction("letette a telefont.")
+												chat:sendLocalMeAction("desliga o telefone.")
 
-												infobox:outputInfoBox("Sikeresen értesítetted a(z) "..selectedServiceName.."-(e)t.", "success")
+												infobox:outputInfoBox("Serviço notificado: "..selectedServiceName..".", "success")
 												selectedServiceName = false
 												selectedType = false
 												selectedFactionId = false
@@ -2692,7 +2692,7 @@ function setPhoneVisible(phoneNumber, slot)
 
 			exports["oInventory"]:setPhoneActive(slot, -1)
 			phoneSlotInventory = 0
-			chat:sendLocalMeAction("elrakott egy telefont.")
+			chat:sendLocalMeAction("guardou o celular.")
 			removeEventHandler("onClientRender", root, drawPhone)
 			removeEventHandler("onClientKey", root, clickPhone)
 			phoneShow = false
@@ -2738,7 +2738,7 @@ function setPhoneVisible(phoneNumber, slot)
 				["fontawesome2"] = exports.oFont:getFont("fontawesome2", 20),
 			}
 			exports["oInventory"]:setPhoneActive(slot, slot)
-			chat:sendLocalMeAction("elővett egy telefont.")
+			chat:sendLocalMeAction("pegou o celular.")
 			page = 1
 			callingState = 1
 			contactState = 1
@@ -2894,7 +2894,7 @@ addEventHandler("phone > getBackPhoneCallingData", root, function(value, player,
 				local date = string.format("%04d-%02d-%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute"))
 				table.insert(phones[activePhone]["calls"], {callingNumber, date, 1})
 				lastLogIndex = #phones[activePhone]["calls"]
-				chat:sendLocalDoAction("csörög a telefonja.")
+				chat:sendLocalDoAction("o celular toca.")
 				isCalled911 = false
 			end
 			activeEditbox = false
@@ -2917,7 +2917,7 @@ addEventHandler("phone > getBackPhoneCallingData", root, function(value, player,
 			if isTimer(callStopTimer) then
 				killTimer(callStopTimer)
 			end
-			chat:sendLocalDoAction("letette a telefont.")
+			chat:sendLocalDoAction("abaixa o telefone.")
 			activeEditbox = false
 		elseif value == "accept" then
 			if isElement(sound) then

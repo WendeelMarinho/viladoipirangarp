@@ -29,14 +29,14 @@ func.trash.createTrash = function(playerSource,cmd)
 			local query, query_lines,id = dbPoll(qh, 0)
 			local id = tonumber(id)
 			if id > 0 then
-				outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen leraktál egy kukát.",playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Colocou uma lixeira com sucesso.",playerSource,0,0,0,true)
 				local position = {x,y,z,rx,ry,rz,interior,dimension};
 				local trash = createObject(1359,position[1],position[2],position[3]-0.38,position[4],position[5],position[6]);
 				setElementInterior(trash,position[7]);
 				setElementDimension(trash,position[8]);
 				setElementData(trash,"object:dbid",id);
 				trashCache[trash] = true;
-				admin:sendMessageToAdmins(playerSource, "létrehozott egy kukát. #db3535("..id..")")
+				admin:sendMessageToAdmins(playerSource, "criou uma lixeira. #db3535("..id..")")
 			end
 		end,connection,"INSERT INTO `bins` SET `pos` = ?",toJSON({x,y,z,rx,ry,rz,interior,dimension}))
 	end
@@ -55,16 +55,16 @@ func.trash.delTrash = function(playerSource,cmd,id)
 				if getElementData(v,"object:dbid") and getElementData(v,"object:dbid") == id then
 					count=count+1
 					dbExec(connection,"DELETE FROM `bins` WHERE `id` = ?",id)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen töröltél egy kukát.", playerSource,0,0,0,true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Removeu uma lixeira com sucesso.", playerSource,0,0,0,true)
 					destroyElement(v);
-					admin:sendMessageToAdmins(playerSource, "kitörölt egy kukát. #db3535("..id..")")
+					admin:sendMessageToAdmins(playerSource, "removeu uma lixeira. #db3535("..id..")")
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hibás id.", playerSource,0,0,0,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID inválido.", playerSource,0,0,0,true)
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [id]", playerSource,r,g,b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [id]", playerSource,r,g,b,true)
 		end
 	end
 end

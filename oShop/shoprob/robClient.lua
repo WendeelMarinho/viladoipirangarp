@@ -65,10 +65,10 @@ setTimer(function()
                                         end 
                                     end, 2500, 0)
                                 else
-                                    outputChatBox(core:getServerPrefix("red-dark", "Boltrablás", 2).."Minimum "..color.."2db #ffffffrendvédelmi tagnak online kell lennie ahhoz, hogy elkezdhesd a boltrablást.", 255, 255, 255, true)
+                                    outputChatBox(core:getServerPrefix("red-dark", "Roubo à loja", 2).."É necessário no mínimo "..color.."2 #ffffffpoliciais em plantão para iniciar o roubo.", 255, 255, 255, true)
                                 end
                             else
-                                outputChatBox(core:getServerPrefix("red-dark", "Boltrablás", 2).."A boltot csak illegális frakció tagjaként tudod kirabolni!", 255, 255, 255, true)
+                                outputChatBox(core:getServerPrefix("red-dark", "Roubo à loja", 2).."Só membros de facção ilegal podem assaltar a loja!", 255, 255, 255, true)
                             end
                         end
                     end

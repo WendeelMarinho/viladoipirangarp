@@ -61,7 +61,7 @@ func.createInterior = function(playerSource, cmd, intid, inttype, cost, custom, 
 					local query, query_lines,id = dbPoll(qh, 0)
 					local id = tonumber(id)
 					if id > 0 then
-						sendMessageToAdmins(playerSource, "létrehozott egy interior #db3535"..name.." #557ec9néven. #db3535("..id..")")
+						sendMessageToAdmins(playerSource, "criou um interior chamado #db3535"..name.."#557ec9. #db3535("..id..")")
 						setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 						local data = {
 							id = id;
@@ -87,8 +87,8 @@ func.createInterior = function(playerSource, cmd, intid, inttype, cost, custom, 
 				end,func.dbConnect:getDBConnection(),"INSERT INTO interiors SET x = ?, y = ?, z = ?, interiorx = ?, interiory = ?, interiorz = ?, name = ?, type = ?, cost = ?, interior = ?, interiorwithin = ?, dimensionwithin = ?, owner = ?, custom = ?, interiorID = ?",x, y, z, ix, iy, iz, name, inttype, cost, interiorid, marker_int, marker_dim, 0, custom, intid)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/" .. cmd .. " [interiorid] [tipus] [ár] [egyedi: >=1 igen, 0 nem] [név]", playerSource,61,122,188,true)
-			outputChatBox(core:getServerPrefix("server", "Típusok", 3).." [0 - ház] [1 - biznisz] [2 - önkormányzati] [3 - bérház #D23131(Nem használható!)#FFFFFF ] [4 - Garázs]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/" .. cmd .. " [interior ID] [tipo] [preço] [personalizado: >=1 sim, 0 não] [nome]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Tipos", 3).." [0 - casa] [1 - negócio] [2 - municipal] [3 - prédio #D23131(não usado!)#FFFFFF ] [4 - Garagem]", playerSource,61,122,188,true)
 		end
 	end
 end
@@ -106,7 +106,7 @@ func.deleteInterior = function (playerSource, cmd, id)
 						dbQuery(function(qh)
 							local res, rows, err = dbPoll(qh, 0)
 							if rows > 0 then
-								sendMessageToAdmins(playerSource, "kitörölte a(z) #db3535"..getElementData(v,"name").." #557ec9névvel rendelkező interiort. #db3535("..id..")")
+								sendMessageToAdmins(playerSource, "removeu o interior #db3535"..getElementData(v,"name").."#557ec9. #db3535("..id..")")
 
 								setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 								local other = getElementData(v,"other")
@@ -121,7 +121,7 @@ func.deleteInterior = function (playerSource, cmd, id)
 				end
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/".. cmd .." [ID]",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/".. cmd .." [ID]",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -180,7 +180,7 @@ function processRentedInteriors()
 
 				if currentTime + 600 >= getElementData(v, "renewalTime") then
 					if isElement(playerSource) then 
-						outputChatBox(serverSyntax .." Nem hosszabbítottad meg az ingatlanod!",playerSource, 255, 255, 255, true)
+						outputChatBox(serverSyntax .." Você não renovou o seu imóvel!",playerSource, 255, 255, 255, true)
 					end
 
 					resetInterior(getElementData(v,"dbid"))
@@ -188,7 +188,7 @@ function processRentedInteriors()
 				elseif getElementData(v, "renewalTime") - dayTimeDuration <= currentTime then
 					if isElement(playerSource) then
 						local remaining = math.floor((getElementData(v, "renewalTime")  - currentTime) % dayTimeDuration / 3600) + 1
-						outputChatBox(serverSyntax .." Hamarosan lejár a(z) "..color..getElementData(v, "name").." #ffffffnévvel rendelkező ingatlanod bérlési ideje. (".. remaining .." óra) Meghosszabbítani a /rent parancsal tudod!",playerSource, 255, 255, 255, true)
+						outputChatBox(serverSyntax .." O arrendamento do imóvel "..color..getElementData(v, "name").." #ffffffexpira em breve (~".. remaining .." h). Renove com #ffffff/rent.",playerSource, 255, 255, 255, true)
 					end
 				end
 			end
@@ -352,10 +352,10 @@ addEventHandler("renewalInterior", getRootElement(), function(interiorId, player
 		local renewalTime = getRealTime().timestamp + 2678400
 		setElementData(markerElement, "renewalTime", renewalTime)
 		dbExec(func.dbConnect:getDBConnection(), "UPDATE interiors SET renewalTime = ? WHERE id = ?", renewalTime, interiorId)
-		outputChatBox(serverSyntax.. " Sikeresen meghosszabítottad az ingatlanod (".. formatDate("Y-m-d", "'", tostring(renewalTime))..") ".. price.." $-ért", player, 255,255,255,true)
+		outputChatBox(serverSyntax.. " Renovação confirmada até ".. formatDate("Y-m-d", "'", tostring(renewalTime))..". ".. price.." $.", player, 255,255,255,true)
 		setElementData(player,"char:money", getElementData(player,"char:money")-price)
 	else 
-		outputChatBox(serverSyntax.. " Még nem tudod meghosszabítani!", player, 255,255,255,true)
+		outputChatBox(serverSyntax.. " Ainda não pode renovar o arrendamento.", player, 255,255,255,true)
 	end
 end)
 
@@ -412,9 +412,9 @@ addEventHandler("lockIntToClient",getRootElement(),function(playerSource,id,lock
 
 	if getElementData(playerSource, "user:aduty") then 
 		if lock == 1 then 
-			triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), playerSource, "bezárta egy ingatlan ajtaját. #db3535("..id..")")
+			triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), playerSource, "fechou a porta de um imóvel. #db3535("..id..")")
 		else
-			triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), playerSource, "kinyitotta egy ingatlan ajtaját. #db3535("..id..")")
+			triggerClientEvent(getRootElement(), "sendMessageToAdmins", getRootElement(), playerSource, "abriu a porta de um imóvel. #db3535("..id..")")
 		end
 	end
 end)
@@ -596,14 +596,14 @@ func.changeInteriorName = function(playerSource,cmd,id,...)
 			end
 			
 			if count == 0 then
-				outputChatBox(serverSyntax.." Hibás interior id.",playerSource,61,122,188,true)
+				outputChatBox(serverSyntax.." ID de interior inválido.",playerSource,61,122,188,true)
 			else
-				sendMessageToAdmins(playerSource, "megváltoztatta a(z) #db3535"..newName.." #557ec9névvel rendelkező interior nevét. Régi név:#db3535 "..oldName.."#557ec9. #db3535("..id..")")
+				sendMessageToAdmins(playerSource, "mudou o nome do interior para #db3535"..newName.."#557ec9 (antes: #db3535"..oldName.."#557ec9). #db3535("..id..")")
 				setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 				dbExec(func.dbConnect:getDBConnection(), "UPDATE `interiors` SET `name` = ? WHERE id = ?",name,id)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [id] [Név]",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [id] [Nome]",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -628,14 +628,14 @@ func.setInteriorCost = function(playerSource,cmd,id,cost)
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Hibás interior id.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."ID de interior inválido.",playerSource,61,122,188,true)
 			else
-				sendMessageToAdmins(playerSource, "megváltoztatta a(z) #db3535"..name.." #557ec9névvel rendelkező interior alapárát. #db3535 "..oldCost.."$ #557ec9>#db3535 "..cost.."$#557ec9. #db3535("..id..")")
+				sendMessageToAdmins(playerSource, "mudou o preço base do interior #db3535"..name.."#557ec9 de #db3535"..oldCost.."$ #557ec9para #db3535"..cost.."$#557ec9. #db3535("..id..")")
 				setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 				dbExec(func.dbConnect:getDBConnection(), "UPDATE `interiors` SET `cost` = ? WHERE id = ?",cost,id)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [InteriorID] [Összeg]",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [InteriorID] [Valor]",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -649,10 +649,10 @@ func.getInteriorCost = function(playerSource)
 			local theIntElement = getElementData(playerSource,"int:Marker")
 			if getElementData(theIntElement,"isIntMarker") then
 				local cost = getElementData(theIntElement,"cost")
-				outputChatBox(core:getServerPrefix("server", "Interior", 3).." Ennek az interior-nak az alapára #7cc576"..cost.."#ffffff $.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("server", "Interior", 3).."Preço base deste interior: #7cc576"..cost.."#ffffff $.",playerSource,61,122,188,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Nem állsz interior markerben.",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Você não está no marcador de interior.",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -668,7 +668,7 @@ addCommandHandler("getinteriorcost",func.getInteriorCost)
 				local id = getElementData(marker,"dbid")
 				local inttype = getElementData(marker,"inttype")
 				setElementData(playerSource,"char:money",getElementData(playerSource,"char:money")+(cost/2))
-				outputChatBox(core:getServerPrefix("green-dark", "Interior", 3).." Sikeresen eladóvá tetted az ingatlanodat, így megkaptad az alapárának a felét, ami #7cc576"..(cost/2).."#ffffff$.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("green-dark", "Interior", 3).."Imóvel colocado à venda; você recebeu metade do preço base: #7cc576"..(cost/2).."#ffffff$.",playerSource,61,122,188,true)
 				exports.oInventory:takeAllItem(52, id)
 				dbExec(func.dbConnect:getDBConnection(), "UPDATE `interiors` SET `owner` = ? WHERE id = ?",0,id)
 				local color = {61,122,188,150};
@@ -697,11 +697,11 @@ addCommandHandler("getinteriorcost",func.getInteriorCost)
 				setElementData(playerSource,"isInIntMarker",false)
 				setElementData(playerSource,"int:Marker",nil)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Ennek az interiornak nem te vagy a tulajdonosa.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Não és o proprietário deste interior.",playerSource,61,122,188,true)
 			end
 		end
 	else
-		outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Nem állsz interior markerben.",playerSource,61,122,188,true)
+		outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Você não está no marcador de interior.",playerSource,61,122,188,true)
 	end
 end
 addCommandHandler("sellproperty",func.sellProperty)]]
@@ -717,10 +717,10 @@ func.adminSell = function(playerSource)
 				if owner > 0 then
 					local id = getElementData(marker,"dbid")
 					local inttype = getElementData(marker,"inttype")
-					outputChatBox(core:getServerPrefix("green-dark", "Interior", 3).." Sikeresen eladóvá tettél egy ingatlant.",playerSource,61,122,188,true)
+					outputChatBox(core:getServerPrefix("green-dark", "Interior", 3).."Imóvel marcado como à venda (admin).",playerSource,61,122,188,true)
 
 					local intName = getElementData(marker, "name")
-					sendMessageToAdmins(playerSource, "eladóvá tette a(z) #db3535"..(intName or "nan").." #557ec9nevű ingatlant. Előző tulajdonos: #db3535"..(getElementData(marker, "ownerName") or "nan").."#557ec9. #db3535("..(id or 0)..") ")
+					sendMessageToAdmins(playerSource, "colocou à venda o imóvel #db3535"..(intName or "nan").."#557ec9. Antigo dono: #db3535"..(getElementData(marker, "ownerName") or "nan").."#557ec9. #db3535("..(id or 0)..") ")
 					setElementData(playerSource, "log:admincmd", {"Int "..id, "asellint"})
 					dbExec(func.dbConnect:getDBConnection(), "UPDATE `interiors` SET `owner` = ? WHERE `id` = ?",0,id)
 					exports.oInventory:takeAllItem(52, tonumber(id))
@@ -752,7 +752,7 @@ func.adminSell = function(playerSource)
 				end
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Nem állsz interior markerben.",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Você não está no marcador de interior.",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -775,15 +775,15 @@ func.gotoHouse = function(playerSource,cmd,id)
 						setElementDimension(playerSource,getElementDimension(v))
 
 						local intName = getElementData(v, "name")
-						sendMessageToAdmins(playerSource, "odateleportált a(z) #db3535"..intName.." #557ec9nevű ingatlanhoz. #db3535("..id..")")
+						sendMessageToAdmins(playerSource, "teleportou-se para o imóvel #db3535"..intName.."#557ec9. #db3535("..id..")")
 					end
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Hibás interior id.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."ID de interior inválido.",playerSource,61,122,188,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/ "..cmd.." [ID]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/ "..cmd.." [ID]", playerSource,61,122,188,true)
 		end
 	end
 end
@@ -818,7 +818,7 @@ func.setInteriorId = function(playerSource,cmd,reID)
 							setElementData(theInteriorElement,"z",iz)
 							dbExec(func.dbConnect:getDBConnection(), "UPDATE interiors SET interiorx = ?, interiory = ?, interiorz = ?, interior = ?, interiorID = ? WHERE id = ?",ix,iy,iz,interiorid,reID,dbid)
 							
-							sendMessageToAdmins(playerSource, "megváltoztatt a(z) #db3535"..getElementData(theInteriorElement,"name").." #557ec9nevű ingatlan belsejét. #db3535("..getElementData(theInteriorElement,"dbid")..")")
+							sendMessageToAdmins(playerSource, "alterou o interior do imóvel #db3535"..getElementData(theInteriorElement,"name").."#557ec9. #db3535("..getElementData(theInteriorElement,"dbid")..")")
 							setElementData(playerSource, "log:admincmd", {"Int "..interiorid, cmd})
 
 							if mappedInteriorObjectCache[dbid] then
@@ -850,14 +850,14 @@ func.setInteriorId = function(playerSource,cmd,reID)
 							end
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Ennek az interiornak a belsejét, nem módosíthatod.",playerSource,61,122,188,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Não pode alterar o interior deste imóvel.",playerSource,61,122,188,true)
 					end
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Nem állsz interior marker-ben.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."Você não está no marcador de interior.",playerSource,61,122,188,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/ "..cmd.." [ID]",playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/ "..cmd.." [ID]",playerSource,61,122,188,true)
 		end
 	end
 end
@@ -885,19 +885,19 @@ func.setInteriorExit = function(playerSource,cmd,id)
 							setElementData(v,"z",newZ-1.45)
 							dbExec(func.dbConnect:getDBConnection(), "UPDATE interiors SET interiorx = ?, interiory = ?, interiorz = ?, interior = ? WHERE id = ?",newX,newY,newZ,newInt,id)
 							
-							sendMessageToAdmins(playerSource, "megváltoztatt a(z) #db3535"..getElementData(v,"name").." #557ec9nevű ingatlan kilépési pozícióját. #db3535("..getElementData(v,"dbid")..")")
+							sendMessageToAdmins(playerSource, "alterou a saída do imóvel #db3535"..getElementData(v,"name").."#557ec9. #db3535("..getElementData(v,"dbid")..")")
 							setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 						else
-							outputChatBox(serverSyntax.." Ennek az interiornak a belépőjét, nem módosíthatod.",playerSource,61,122,188,true)
+							outputChatBox(serverSyntax.." Não pode alterar a entrada deste interior.",playerSource,61,122,188,true)
 						end
 					end
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Hibás interior id.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."ID de interior inválido.",playerSource,61,122,188,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/ "..cmd.." [id]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/ "..cmd.." [id]", playerSource,61,122,188,true)
 		end
 	end
 end
@@ -924,19 +924,19 @@ func.setInteriorEntrance = function(playerSource,cmd,id)
 							setElementData(v,"z",newZ-1.45)
 							dbExec(func.dbConnect:getDBConnection(), "UPDATE interiors SET x = ?, y = ?, z = ?, interior = ? WHERE id = ?",newX,newY,newZ,newInt,id)
 							
-							sendMessageToAdmins(playerSource, "megváltoztatt a(z) #db3535"..getElementData(v,"name").." #557ec9nevű ingatlan belépési pozícióját. #db3535("..getElementData(v,"dbid")..")")
+							sendMessageToAdmins(playerSource, "alterou a entrada do imóvel #db3535"..getElementData(v,"name").."#557ec9. #db3535("..getElementData(v,"dbid")..")")
 							setElementData(playerSource, "log:admincmd", {"Int "..id, cmd})
 						else
-							outputChatBox(serverSyntax.." Ennek az interiornak a belépőjét, nem módosíthatod.",playerSource,61,122,188,true)
+							outputChatBox(serverSyntax.." Não pode alterar a entrada deste interior.",playerSource,61,122,188,true)
 						end
 					end
 				end
 			end
 			if count == 0 then
-				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).." Hibás interior id.",playerSource,61,122,188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Interior", 3).."ID de interior inválido.",playerSource,61,122,188,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/ "..cmd.." [id]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/ "..cmd.." [id]", playerSource,61,122,188,true)
 		end
 	end
 end
@@ -992,7 +992,7 @@ function isPlayerAdmin(player)
 		end
 	end
 end
-local weekDays = {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"}
+local weekDays = {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"}
 function formatDate(format, escaper, timestamp)
 	escaper = escaper or "'"
 	escaper = string.sub(escaper, 1, 1)

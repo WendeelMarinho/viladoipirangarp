@@ -131,9 +131,9 @@ function drawPanel()
 	dxDrawLine(sx*0.2,0,sx*0.2,sy*0.9,tocolor(r,g,b,200*a), 2)
 
 	--if selectedFactionID > 0 then 
-		--dxDrawText(color.."ORIGINAL ROLEPLAY#dcdcdc - SZERVEZETI JÁRMŰKERESKEDÉS",0,0,sx*0.2,0+sy*0.095,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-13"],"center","center",false,false,false,true)
+		--dxDrawText(color.."VALE DO IPIRANGA RP#dcdcdc - SZERVEZETI JÁRMŰKERESKEDÉS",0,0,sx*0.2,0+sy*0.095,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-13"],"center","center",false,false,false,true)
 	--else
-		dxDrawText(color.."ORIGINAL ROLEPLAY#dcdcdc - JÁRMŰKERESKEDÉS",0,0,sx*0.2,0+sy*0.095,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-13"],"center","center",false,false,false,true)
+		dxDrawText(color.."VALE DO IPIRANGA RP#dcdcdc - JÁRMŰKERESKEDÉS",0,0,sx*0.2,0+sy*0.095,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-13"],"center","center",false,false,false,true)
 	--end
 	dxDrawLine(sx*0.005,sy*0.095,sx*0.01+sx*0.185,sy*0.095,tocolor(220,220,220,100*a), 2)
 

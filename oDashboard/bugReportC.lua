@@ -210,7 +210,7 @@ function renderBugListPanel()
     dxDrawRectangle(sx*0.25+2/myX*sx, sy*0.25+2/myY*sy, sx*0.5-4/myX*sx, sy*0.5-4/myY*sy, tocolor(35, 35, 35, 255*alpha))
 
     dxDrawText("Bug Reports", sx*0.25+10/myX*sx, sy*0.25+10/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+10/myY*sy+sy*0.03, tocolor(r, g, b, 255*alpha), 1, font:getFont("bebasneue", 17/myX*sx), "left", "center")
-    dxDrawText("Nesta lista aparecem todos os bugs reportados pelos jogadores no Ipiranga Roleplay.", sx*0.25+10/myX*sx, sy*0.25+35/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+35/myY*sy+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
+    dxDrawText("Nesta lista aparecem todos os bugs reportados pelos jogadores no Vale do Ipiranga RP.", sx*0.25+10/myX*sx, sy*0.25+35/myY*sy, sx*0.25+10/myX*sx+sx*0.1, sy*0.25+35/myY*sy+sy*0.03, tocolor(255, 255, 255, 255*alpha), 1, font:getFont("condensed", 9/myX*sx), "left", "top")
 
     local startY = sy*0.33
     for i = 1, 8 do 

@@ -34,7 +34,7 @@ vehicle_show_camera = {
     [5] = {1749.6381835938,-2273.1118164062,28.201000213623,1750.4226074219,-2273.6723632812,27.935474395752},
 }
 
-carshop_names = {"Járműkereskedés", "Szervezeti járműkereskedés", "Kerékpár kereskedés", "Hajókereskedés", "Helikopter kereskedés"}
+carshop_names = {"Concessionária", "Concessionária (facção)", "Bike shop", "Marina", "Heliporto"}
 carshopBlipIDs = {8, 8, 33, 32, 61}
 testDrives = {"Vidék", "Város", "Tesztpálya"}
 
@@ -396,7 +396,7 @@ vehicles = {
         },
 
         {
-            category_name = "Egyéb járművek",
+            category_name = "Demais veículos",
             category_cars = {
                 {"", 483, 70000, 30, 122, "", _, "Hátsó kerék", _, 5, 1970, 1500},
                 {"", 468, 45000, 100, 177, "", _, "Hátsó kerék", _, 0, 2000, 2000},   
@@ -404,7 +404,7 @@ vehicles = {
         },
 
         {
-            category_name = "Prémium járművek",
+            category_name = "Veículos premium",
             category_cars = {
                 {"", 451, 0, false, 250, "", _, "Hátsó kerék", _, 5, 1992, 25000}, 
                 {"", 409, 0, false, 177, "", _, "Hátsó kerék", _, 5, 2010, 15000}, 
@@ -418,7 +418,7 @@ vehicles = {
 
     [2] = { -- Faction carshop
         {
-            category_name = "Összes jármű",
+            category_name = "Todos os veículos",
             category_cars = {
                 --{"", 598, 100000, false, 258, "", _, "Hátsó kerék", _, 5, 2007, 0, 0.85, 0.73, allowedFactions = {1}},
                 -- PD - ID: 1
@@ -429,7 +429,7 @@ vehicles = {
 
                 {"", 490, 100000, false, 258, "", _, "Hátsó kerék", _, 5, 2012, 0, allowedFactions = {1}},
                 {"", 416, 180000, false, 258, "", _, "Hátsó kerék", _, 5, 2013, 0, allowedFactions = {1}, pj = 1},
-                -- OMSZ - ID: 19
+                -- SAMU / saúde (legado OMSZ em IDs) — facção DB ID: 19
                 {"", 416, 180000, false, 258, "", _, "Hátsó kerék", _, 5, 2013, 0, allowedFactions = {19}, pj = 0},
                 {"", 596, 120000, false, 258, "", _, "Hátsó kerék", _, 5, 2015, 0, allowedFactions = {19}, pj = 0},
                 {"", 597, 105000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {19}, pj = 1},
@@ -437,18 +437,18 @@ vehicles = {
                 {"", 525, 300000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {1, 70}},
                 {"", 525, 300000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {3}, pj = 2},
 
-                -- NAV ID: 70
+                -- Receita Federal BR (facção modelo p/ legado NAV) — DB ID: 70
                 {"", 597, 105000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {70}, pj = 2},
                 {"", 416, 180000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {70}, pj = 2},
 
 
-                -- CIVIL PD
+                -- Polícia civil + Receita modelo (IDs 1 e 70)
                 {"", 492, 220000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {1, 70}},
                 {"", 579, 230000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {1, 70}},
                 {"", 507, 75000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {1, 70}},
 
 
-                -- Sörmaffia ID: 55, Teenager Homeboys ID: 59, Ganton Gangsters ID: 56, Maxikói frakció ID: 61, LC MOB: 64
+                -- Facções exemplo (IDs legado ORP — renomeáveis na BD): 55 Beer/maior, 59 Homeboys, 56 Ganton, 61 Mexico-style, 64 LC MOB
                 {"", 400, 200000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {55, 56, 59, 64, 67}},
                 {"", 445, 200000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {1, 55, 56, 59, 61, 64, 67, 70}},
                 {"", 442, 700000, false, 258, "", _, "Hátsó kerék", _, 5, 2010, 0, allowedFactions = {55, 56, 59, 61, 64, 67}},
@@ -462,7 +462,7 @@ vehicles = {
 
     [3] = { -- Kerékpár kereskedés
         {
-            category_name = "Kerékpárok",
+            category_name = "Bicicletas",
             category_cars = {
                 {"", 509, 250, false, 25, "", 0, "", 0, "Nincs", 2020, 1000},
                 {"", 481, 350, false, 25, "", 0, "", 0, "Nincs", 2020, 1000},
@@ -473,7 +473,7 @@ vehicles = {
 
     [4] = { --Hajó bolt
         {
-            category_name = "Hajók",
+            category_name = "Embarcações",
             category_cars = {
                 {"", 454, 1250000, 5, 25, "", 0, "", 0, 0, 2014, 11500},
                 {"", 473, 100000, 100, 100, "", 0, "", 0, 0, 2020, 2000},
@@ -485,7 +485,7 @@ vehicles = {
 
     [5] = { --Helikopter bolt
         {
-            category_name = "Helikopterek",
+            category_name = "Helicópteros",
             category_cars = {
                 {"", 487, 1525000, 20, 200, "", 0, "", 0, 5, 2020, 15000},
                 {"", 469, 1800000, 5, 200, "", 0, "", 0, 0, 2018, 17000},
@@ -501,7 +501,7 @@ faction_vehicles = {
 
 function createAllVehicleTable()
     local deliveryVehicles = {
-        category_name = "Áruszállításra alkalmas járművek",
+        category_name = "Veículos de carga / utilitários",
         category_cars = {},
     }
 
@@ -516,12 +516,12 @@ function createAllVehicleTable()
     table.insert(vehicles[1], 1, deliveryVehicles)
 
     local allVehicles = {
-        category_name = "Összes jármű",
+        category_name = "Todos os veículos",
         category_cars = {},
     }
 
     for k, v in ipairs(vehicles[1]) do
-        if not (v.category_name == "Áruszállításra alkalmas járművek") then
+        if not (v.category_name == "Veículos de carga / utilitários") then
             for k2, v2 in ipairs(v.category_cars) do 
                 table.insert(allVehicles.category_cars, v2)
             end 
@@ -544,8 +544,8 @@ vehicle_default_colors = {
     {179, 68, 156},
 }
 
-vehicleDataPoints = {"Végsebesség", "Üzemanyag típusa", "Üzemanyag tartály kapacitása", "Meghajtás", "Csomagtartó kapacitása", "Ajtók száma", "Gyártási év", "Áruszállítás"}
-vehicleDataLineNames = {"Gyorsulás", "Irányíthatóság", "Fékezés"}
+vehicleDataPoints = {"Velocidade máx.", "Combustível", "Tanque (L)", "Tração", "Porta-malas", "Portas", "Ano modelo", "Cap. carga"}
+vehicleDataLineNames = {"Aceleração", "Estabilidade", "Frenagem"}
 
 borderWalls = {
     {1164.7900390625, -1777.5139160156, 14.5, 0},

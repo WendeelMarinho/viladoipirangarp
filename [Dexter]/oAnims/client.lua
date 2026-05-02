@@ -304,7 +304,7 @@ function drawAnimPanel()
       --if isInSlot(panelX + 5, panelY - 28, 24, 24) then 
       --dxDrawRectangle(panelX-110, panelY, 200, panelH, tocolor(0,0,0,150))
 
-      dxDrawText("Original Roleplay - Animpanel", screenX/2, panelY, screenX/2, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "center", "center")
+      dxDrawText("Vale do Ipiranga RP - Animpanel", screenX/2, panelY, screenX/2, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "center", "center")
       if selectedMenu == 1 then 
         if activeButton == "favorites" then
           create_tooltip("Kedvencek")
@@ -546,10 +546,10 @@ function animationClick(button,state)
       elseif data[1] == "addFav" then 
         local id = data[2]
         if table.find(favList, animationList[tonumber(data[2])][1]) then
-          outputChatBox(hex .. "[OriginalRoleplay]#FFFFFF Ez az animáció már a kedvencekhez lett adva!",255,255,255,true)
+          outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Ez az animáció már a kedvencekhez lett adva!",255,255,255,true)
           return
         end
-        outputChatBox(hex .. "[OriginalRoleplay]#FFFFFF Sikeresen hozzáadta a kiválasztott elemet a kedvencekbe!",255,255,255,true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Sikeresen hozzáadta a kiválasztott elemet a kedvencekbe!",255,255,255,true)
         table.insert(favList, {animationList[tonumber(data[2])][1], true})
       elseif data[1] == "favorites" then 
         selectedMenu = 2    
@@ -566,7 +566,7 @@ function animationClick(button,state)
         end
       elseif data[1] == "removeFav" then 
         local id = data[2]
-        outputChatBox(hex .. "[OriginalRoleplay]#FFFFFF Sikeresen eltávolítottad a kedvencekből!",255,255,255,true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Sikeresen eltávolítottad a kedvencekből!",255,255,255,true)
         table.remove(favList,id)
       end
     end

@@ -9,10 +9,10 @@ addEventHandler("traffipax > moneyminus", resourceRoot, function(money)
 
     if not lastTicket[client] then 
         lastTicket[client] = getTickCount()
-        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Gyorshajtás", money .. "$", vehPlate)
+        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Excesso de velocidade", money .. "$", vehPlate)
     elseif getTickCount() - lastTicket[client] > 3600000 then 
         lastTicket[client] = getTickCount()
-        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Gyorshajtás", money .. "$", vehPlate)
+        dbExec(mysql, "INSERT INTO mdclogs SET reason=?, other=?, owner=?", "Excesso de velocidade", money .. "$", vehPlate)
     end
     
     setElementData(client, "char:money", getElementData(client, "char:money")-money)
@@ -29,10 +29,10 @@ addEventHandler("traffipax > moneyminus", resourceRoot, function(money)
             local faction = getElementData(v, "char:duty:faction") or 0
             if faction > 0 then 
                 if exports.oDashboard:getFactionType(faction) == 1 then
-                    outputChatBox(core:getServerPrefix("server", "Körözött jármű", 3).."Egy körözött jármű haladt át az egyik ellenörzőponton!", v, 255, 255, 255, true)
-                    outputChatBox(core:getServerPrefix("server", "Körözött jármű", 3).."Helyszín: "..color..""..getZoneName(getElementPosition(client)), v, 255, 255, 255, true)
-                    outputChatBox(core:getServerPrefix("server", "Körözött jármű", 3).."Rendszáma: "..color..""..vehPlate.." #ffffffTípusa: "..color..""..exports.oVehicle:getModdedVehName(getElementModel(getPedOccupiedVehicle(client))), v, 255, 255, 255, true)
-                    outputChatBox(core:getServerPrefix("server", "Körözött jármű", 3).."Körözés indoka: "..color..""..reason, v, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo procurado", 3).."Veículo procurado detectado num ponto de monitoramento!", v, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo procurado", 3).."Local: "..color..""..getZoneName(getElementPosition(client)), v, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo procurado", 3).."Placa: "..color..""..vehPlate.." #ffffff modelo: "..color..""..exports.oVehicle:getModdedVehName(getElementModel(getPedOccupiedVehicle(client))), v, 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "Veículo procurado", 3).."Motivo: "..color..""..reason, v, 255, 255, 255, true)
                     
                     if isElement(blip) then 
                         for k, v in pairs(getElementsByType("blip")) do 
@@ -46,7 +46,7 @@ addEventHandler("traffipax > moneyminus", resourceRoot, function(money)
 
                     pos = Vector3(getElementPosition(client))
                     blip = createBlip(pos.x, pos.y, pos.z, 5)
-                    setElementData(blip, "blip:name", "Körözött jármű")
+                    setElementData(blip, "blip:name", "Veículo procurado")
                     setElementData(blip, "blip:owner:id", getElementData(client, "char:id"))
                     attachElementToElement(blip, client)  
 

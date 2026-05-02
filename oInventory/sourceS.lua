@@ -234,7 +234,7 @@ addEventHandler("deleteWorldItem", getRootElement(), function(player, worldItemE
 		if state then
 			giveItem(player, itemId, itemValue, itemCount, 0, itemState)
 			setPedAnimation(player, "CARRY", "liftup", 1500, false, false, false, false)
-			chat:sendLocalMeAction(player, "felvesz egy tárgyat a földről.")
+			chat:sendLocalMeAction(player, "apanha um item do chão.")
 			dbExec(connection, "DELETE FROM worlditems WHERE id = ?", id)
 			for k,v in ipairs(getElementsByType("object")) do
 				if getElementData(v, "isWorldItem") then
@@ -276,17 +276,17 @@ addEventHandler("placeWorldItem", getRootElement(), function(player, itemData, w
 				if loadedWorldItems(result) then
 					if isElement(player) then
 						setPedAnimation(player, "CARRY", "putdwn", 1500, false, false, false, false)
-						chat:sendLocalMeAction(player, "lerak egy tárgyat a földre.")
+						chat:sendLocalMeAction(player, "larga um item no chão.")
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hiba történt keress fel egy fejlesztőt @275(loadedWorldItems nil id: ".. result.id..")!", player, 220,20,60,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Erro interno — avise um desenvolvedor @275(loadedWorldItems nil id: ".. result.id..")!", player, 220,20,60,true)
 				end
 			elseif result == nil then
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hiba történt keress fel egy fejlesztőt @282(result nil)!", player, 220,20,60,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Erro interno — avise um desenvolvedor @282(result nil)!", player, 220,20,60,true)
 			end
 		end,connection, "INSERT INTO worlditems (itemId, itemState, itemValue, itemCount, owner, ownerName, position, objectId) VALUES(?, ?, ?, ?, ?, ?, ?, ?); SELECT * FROM worlditems ORDER BY id DESC LIMIT 1", itemId, itemState, itemValue, itemCount, owner, ownerName, position, objectId)
 	else
-		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hiba történt keress fel egy fejlesztőt @251(ItemData nil)!", player, 220,20,60,true)
+		outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Erro interno — avise um desenvolvedor @251(ItemData nil)!", player, 220,20,60,true)
 	end
 end)
 
@@ -446,7 +446,7 @@ func.checkBuggedItems = function(playerSource)
 				end
 			end
 			if bugged > 0 then
-				--outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Neked "..color..bugged.."#ffffff hibás tárgyad volt. Ebből "..color..fixed.."#ffffff lett visszaállítva.",playerSource,220,20,60,true);
+				--outputChatBox(core:getServerPrefix("server", "Inventário", 3).."Neked "..color..bugged.."#ffffff hibás tárgyad volt. Ebből "..color..fixed.."#ffffff lett visszaállítva.",playerSource,220,20,60,true);
 				triggerClientEvent(playerSource,"setItems",playerSource,playerSource,1,itemCache[owner])
 			end
 		end
@@ -463,12 +463,12 @@ func.checkPlayerInventory = function(playerSource,cmd,target)
 			local targetPlayer,targetPlayerName = core:getPlayerFromPartialName(playerSource,target);
 			if targetPlayer then
 				if getElementData(targetPlayer,"user:loggedin") then
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen lecsekkoltattad az elbuggolt itemjeit "..color..getElementData(targetPlayer,"char:name").."#ffffff -nak/nek.",playerSource,220,20,60,true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Verificação concluída (itens travados/corrompidos) de "..color..getElementData(targetPlayer,"char:name").."#ffffff.",playerSource,220,20,60,true)
 					func.checkBuggedItems(targetPlayer);
 				end
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [ID/Név]",playerSource,r,g,b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [ID/nome]",playerSource,r,g,b,true)
 		end
 	end
 end
@@ -591,7 +591,7 @@ func.itemTransfer = function(element,movedElement,data,weaponProgress)
 	if itemCache[elementOwner][getTypeElement(element,tonumber(data.item))[1]][tonumber(data["slot"])] then
 		local weight = getElementItemsWeight(movedElement)
 		if weight + (getItemWeight(data.item) * data.count) > getTypeElement(movedElement,data.item)[3] then
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválaszott elem inventoryja nem bír el több tárgyat.", source,220,20,60, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."O elemento selecionado não suporta mais peso no inventário.", source,220,20,60, true)
 			return
 		end
 
@@ -617,31 +617,31 @@ func.itemTransfer = function(element,movedElement,data,weaponProgress)
 					attachWeapon(movedElement,data.item,data.id,data.value)
 				end
 
-				chat:sendLocalMeAction(source, "átadott egy tárgyat "..getElementData(movedElement,"char:name"):gsub("_", " ").." -nak/nek. ("..getItemName(data.item, data.value)..")")
+				chat:sendLocalMeAction(source, "entrega um item a "..getElementData(movedElement,"char:name"):gsub("_", " ").." ("..getItemName(data.item, data.value)..")")
 				setPedAnimation(source,"DEALER","DEALER_DEAL",3000,false,false,false,false)
 				setPedAnimation(movedElement,"DEALER","DEALER_DEAL",3000,false,false,false,false)
 				triggerClientEvent(movedElement,"refreshItem",movedElement,movedElement,itemCache[movedOwner][getTypeElement(movedElement,tonumber(data.item))[1]][tonumber(slot)],"create",weaponProgress)
 			elseif getElementType(movedElement) == "vehicle" and movedElement ~= source then
-				chat:sendLocalMeAction(source, "berakott egy tárgyat a jármű csomagtartójába. ("..getItemName(data.item)..")")
+				chat:sendLocalMeAction(source, "coloca um item no porta-malas do veículo. ("..getItemName(data.item)..")")
 				if weaponCache[data.item] and weaponCache[data.item].isBack then
 					detachWeapon(source,data.item,data.id)
 				end
 				setElementData(movedElement,"inventory:items",itemCache[movedOwner]);
 			elseif getElementType(element) == "vehicle" and movedElement == source then
-				chat:sendLocalMeAction(source, "kivett egy tárgyat a jármű csomagtartójából. ("..getItemName(data.item)..")")
+				chat:sendLocalMeAction(source, "retira um item do porta-malas do veículo. ("..getItemName(data.item)..")")
 				triggerClientEvent(source,"refreshItem",source,source,itemCache[movedOwner][getTypeElement(source,tonumber(data.item))[1]][tonumber(slot)],"create")
 				if weaponCache[data.item] and weaponCache[data.item].isBack then
 					attachWeapon(movedElement,data.item,data.id,data.value)
 				end
 				setElementData(element,"inventory:items",itemCache[elementOwner]);
 			elseif getElementType(movedElement) == "object" and movedElement ~= source then
-				chat:sendLocalMeAction(source, "berakott egy tárgyat a széfbe. ("..getItemName(data.item)..")")
+				chat:sendLocalMeAction(source, "coloca um item no cofre. ("..getItemName(data.item)..")")
 				if weaponCache[data.item] and weaponCache[data.item].isBack then
 					detachWeapon(source,data.item,data.id)
 				end
 				setElementData(movedElement,"inventory:items",itemCache[movedOwner]);
 			elseif getElementType(element) == "object" and movedElement == source then
-				chat:sendLocalMeAction(source, "kivett egy tárgyat a széfből. ("..getItemName(data.item)..")")
+				chat:sendLocalMeAction(source, "retira um item do cofre. ("..getItemName(data.item)..")")
 				triggerClientEvent(source,"refreshItem",source,source,itemCache[movedOwner][getTypeElement(source,tonumber(data.item))[1]][tonumber(slot)],"create")
 				if weaponCache[data.item] and weaponCache[data.item].isBack then
 					attachWeapon(movedElement,data.item,data.id,data.value)
@@ -650,7 +650,7 @@ func.itemTransfer = function(element,movedElement,data,weaponProgress)
 			end
 			triggerClientEvent(source,"refreshItem",source,element,data,"delete",data["id"])
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott elem inventoryjában nincs több szabad slot.",source,220,20,60,true);
+			outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Não há mais slots livres neste inventário.",source,220,20,60,true);
 		end
 	end
 end
@@ -848,17 +848,17 @@ func.takePlayerItem = function(playerSource,cmd,target,item)
 				if targetPlayer then
 					if hasItem(targetPlayer,tonumber(item)) then
 						takeItem(targetPlayer,tonumber(item))
-						outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen elvettél "..color..getElementData(targetPlayer,"char:name").."#ffffff -tól/től egy "..color..getItemName(item).."#ffffff -t.",playerSource,220,20,60,true)
-						outputChatBox(core:getServerPrefix("server", "Inventory", 3)..color..getElementData(playerSource,"user:anick").."#ffffff elvett tőled egy "..color..getItemName(item).."#ffffff -t.",targetPlayer,220,20,60,true)
+						outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Removeu com sucesso de "..color..getElementData(targetPlayer,"char:name").."#ffffff um(a) "..color..getItemName(item).."#ffffff.",playerSource,220,20,60,true)
+						outputChatBox(core:getServerPrefix("server", "Inventário", 3)..color..getElementData(playerSource,"user:anick").."#ffffff removeu de você: "..color..getItemName(item).."#ffffff.",targetPlayer,220,20,60,true)
 
-						admin:sendMessageToAdmins(playerSource, "elvett egy #db3535"..getItemName(item).." #557ec9-t #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9-tól/től.")
+						admin:sendMessageToAdmins(playerSource, "removeu #db3535"..getItemName(item).." #557ec9 de #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9.")
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválaszott játékosnál nincs ilyen item.",playerSource,220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."O jogador selecionado não tem esse item.",playerSource,220,20,60,true)
 					end
 				end
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [ID/Név] [item]",playerSource,r, g, b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [ID/nome] [item]",playerSource,r, g, b,true)
 		end
 	end
 end
@@ -954,7 +954,7 @@ function giveItem(playerSource,item,value,count,dutyitem,state,slot,weaponserial
 		giveItemCounter[playerSource] = giveItemCounter[playerSource] + 1
 
 		if giveItemCounter[playerSource] > 15 then 
-			print("INVENTORY BUGOLTATÁS: ", getPlayerSerial(playerSource))
+			print("[INVENTÁRIO] Spam de giveItem / possível exploit — serial: ", getPlayerSerial(playerSource))
 			kickPlayer(playerSource, "inventory")
 		end
 	else 
@@ -1190,25 +1190,25 @@ func.givePlayerItem = function(playerSource,cmd,target,item,value,count,dutyitem
 						if state then
 							local weight = getElementItemsWeight(targetPlayer)
 							if weight + (getItemWeight(item) * count) > getTypeElement(targetPlayer,item)[3] then
-								outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválaszott játékos nem bír el több tárgyat.", playerSource,220,20,60, true)
+								outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."O jogador selecionado não aguenta mais itens.", playerSource,220,20,60, true)
 								return
 							end
 
 							giveItem(targetPlayer,item,value,count,dutyitem,itemstate,slot,wserial,targetPlayer,ppitem);
-							admin:sendMessageToAdmins(playerSource, "adott #db3535"..getItemName(tonumber(item),tostring(value)).." #557ec9-ból/ből #db3535"..tonumber(count).."#557ec9db-ot #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9-nak/nek.")
+							admin:sendMessageToAdmins(playerSource, "deu #db3535"..getItemName(tonumber(item),tostring(value)).." #557ec9 (#db3535"..tonumber(count).."#557ec9×) para #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9.")
 
-							outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen adtál "..color..getElementData(targetPlayer,"char:name").."#ffffff -nak/nek "..color..count.."#ffffff darab "..color..getItemName(item,value).."#ffffff-t.",playerSource,220,20,60,true)
-							outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen kaptál "..color..getElementData(playerSource,"user:adminnick").."#ffffff -től/től "..color..count.."#ffffff darab "..color..getItemName(item,value).."#ffffff-t.",targetPlayer,220,20,60,true)
+							outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Deu "..color..count.."#ffffff× "..color..getItemName(item,value).."#ffffff para "..color..getElementData(targetPlayer,"char:name").."#ffffff.",playerSource,220,20,60,true)
+							outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Recebeu "..color..count.."#ffffff× "..color..getItemName(item,value).."#ffffff de "..color..getElementData(playerSource,"user:adminnick").."#ffffff.",targetPlayer,220,20,60,true)
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).." A kiválasztott játékosnak nincs több szabad slotja.",playerSource,220,20,60,true)
+							outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).." O jogador selecionado não tem mais slots livres.",playerSource,220,20,60,true)
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Hibás item id.",playerSource,220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."ID de item inválido.",playerSource,220,20,60,true)
 					end
 				end
 			end
 		else
-			outputChatBox("Használat: #ffffff /"..cmd.." [ID/Név] [item] [értek] [darab] [duty: 0 - nem, 1 - igen]",playerSource,r, g, b,true)
+			outputChatBox("Uso: #ffffff /"..cmd.." [ID/nome] [item] [valor] [quantidade] [duty: 0=não, 1=sim]",playerSource,r, g, b,true)
 		end
 	end
 end
@@ -1224,13 +1224,15 @@ func.givePlayerGun = function(playerSource,cmd,target,item,ammo)
 				if getElementData(targetPlayer,"user:loggedin") then
 					ammo = tonumber(ammo)
 					if type(tonumber(item)) == "number" then
-						if weaponCache[tonumber(item)] and weaponCache[tonumber(item)].ammo > 0 then
-							giveItem(targetPlayer,tonumber(item),1,1,0);
+						local wid = tonumber(item)
+						if weaponCache[wid] and weaponCache[wid].ammo > 0 then
+							giveItem(targetPlayer,wid,1,1,0);
 							if ammo > 0 then
-								giveItem(targetPlayer,weaponCache[tonumber(item)].ammo,1,ammo,0);
+								giveItem(targetPlayer,weaponCache[wid].ammo,1,ammo,0);
 							end
-							outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen Sikeresen adtál "..color..getElementData(targetPlayer,"char:name").."#ffffff -nak/nek "..color..availableItems[k].name.."#ffffff-t "..color..ammo.."#ffffff darab lőszerrel.",playerSource,220,20,60,true)
-							outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen kaptál "..color..getElementData(playerSource,"user:adminnick").."#ffffff -től/től "..color..availableItems[k].name.."#ffffff-t "..color..ammo.."#ffffff darab lőszerrel.",targetPlayer,220,20,60,true)
+							local wshowname = getItemName(wid, 1)
+							outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Deu "..color..wshowname.."#ffffff + "..color..ammo.."#ffffff munição para "..color..getElementData(targetPlayer,"char:name").."#ffffff.",playerSource,220,20,60,true)
+							outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Recebeu "..color..wshowname.."#ffffff + "..color..ammo.."#ffffff munição de "..color..getElementData(playerSource,"user:adminnick").."#ffffff.",targetPlayer,220,20,60,true)
 						end
 					else
 						for k,v in pairs(availableItems) do
@@ -1242,8 +1244,8 @@ func.givePlayerGun = function(playerSource,cmd,target,item,ammo)
 										giveItem(targetPlayer,weaponCache[k].ammo,1,ammo,0);
 									end
 
-									outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen Sikeresen adtál "..color..getElementData(targetPlayer,"char:name").."#ffffff -nak/nek "..color..availableItems[k].name.."#ffffff-t "..color..ammo.."#ffffff darab lőszerrel.",playerSource,220,20,60,true)
-									outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen kaptál "..color..getElementData(playerSource,"user:adminnick").."#ffffff -től/től "..color..availableItems[k].name.."#ffffff-t "..color..ammo.."#ffffff darab lőszerrel.",targetPlayer,220,20,60,true)
+									outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Deu "..color..availableItems[k].name.."#ffffff + "..color..ammo.."#ffffff munição para "..color..getElementData(targetPlayer,"char:name").."#ffffff.",playerSource,220,20,60,true)
+									outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Recebeu "..color..availableItems[k].name.."#ffffff + "..color..ammo.."#ffffff munição de "..color..getElementData(playerSource,"user:adminnick").."#ffffff.",targetPlayer,220,20,60,true)
 
 								end
 							end
@@ -1252,7 +1254,7 @@ func.givePlayerGun = function(playerSource,cmd,target,item,ammo)
 				end
 			end
 		else
-			outputChatBox("Használat: #ffffff /"..cmd.." [ID/Név] [fegyver(item vagy név)] [töltény]",playerSource,r, g, b,true)
+			outputChatBox("Uso: #ffffff /"..cmd.." [ID/nome] [arma (item ou nome)] [munição]",playerSource,r, g, b,true)
 		end
 	end
 end
@@ -1263,12 +1265,12 @@ function checkPlayerInventory(targetPlayer, item, count)
 	if state then
 		local weight = getElementItemsWeight(targetPlayer)
 		if weight + (getItemWeight(item) * count) > getTypeElement(targetPlayer,item)[3] then
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválaszott játékos nem bír el több tárgyat.", playerSource,220,20,60, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."O jogador selecionado não aguenta mais itens.", playerSource,220,20,60, true)
 			return false
 		end
 		return true
 	else
-		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).." A kiválasztott játékosnak nincs több szabad slotja.",playerSource,220,20,60,true)
+		outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).." O jogador selecionado não tem mais slots livres.",playerSource,220,20,60,true)
 		return false
 	end
 end
@@ -1291,8 +1293,8 @@ func.setItemWarn = function(playerSource,cmd,target,itemdbid)
 								if itemCache[owner]["bag"][i]["pp"] == 1 then
 									itemCache[owner]["bag"][i]["warn"] = itemCache[owner]["bag"][i]["warn"] + 1;
 
-									outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).." Sikeresen raktál egy figyelmeztetést "..color..itemdbid.."#ffffff azonosítóval ellátott fegyverre. "..color.."("..itemCache[owner]["bag"][i]["warn"].."/3)",playerSource,0,0,0,true)
-									outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).." Kaptál egy figyelmeztetést "..color..itemdbid.."#ffffff azonosítóval ellátott fegyveredre. "..color.."("..itemCache[owner]["bag"][i]["warn"].."/3)",targetPlayer,0,0,0,true)
+									outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).." Advertência registada na arma DBID "..color..itemdbid.."#ffffff. "..color.."("..itemCache[owner]["bag"][i]["warn"].."/3)",playerSource,0,0,0,true)
+									outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).." Aviso na sua arma DBID "..color..itemdbid.."#ffffff: "..color.."("..itemCache[owner]["bag"][i]["warn"].."/3)",targetPlayer,0,0,0,true)
 
 									if itemCache[owner]["bag"][i]["warn"] >= 3 then
 										deleteItem(targetPlayer,itemCache[owner]["bag"][i],true,targetPlayer)
@@ -1301,7 +1303,7 @@ func.setItemWarn = function(playerSource,cmd,target,itemdbid)
 										triggerClientEvent(targetPlayer,"refreshItem",targetPlayer,targetPlayer,itemCache[owner]["bag"][i],"create")
 									end
 								else
-									outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).." Csak prémium fegyverre rakhatsz figyelmeztetést.",playerSource,0,0,0,true)
+									outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).." Só pode advertir arma premium.",playerSource,0,0,0,true)
 								end
 
 								a = a + 1;
@@ -1311,12 +1313,12 @@ func.setItemWarn = function(playerSource,cmd,target,itemdbid)
 					end
 
 					if a == 0 then
-						outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).." Nem rendelkezik ilyen adatbázis azonosítóval ilyen fegyver.",playerSource,0,0,0,true)
+						outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).." Não há arma premium com esse ID no inventário.",playerSource,0,0,0,true)
 					end
 				end
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [ID/Név] [itemDBID]",playerSource,r, g, b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [ID/nome] [itemDBID]",playerSource,r, g, b,true)
 		end
 	end
 end
@@ -1563,36 +1565,35 @@ addCommandHandler("givelicense",function(playerSource, cmd, id, type)
 				if getElementData(targetPlayer,"user:loggedin") then
 					local pSlotState, pSlotID = getFreeSlot(targetPlayer, 68)
 					if pSlotState then
-						local licnesname = "nan"
+						local licenseType = tonumber(type)
+						local licensename = "Documento"
 
-						local type = tonumber(type)
-
-						if type == 1 then
-							licensename = "Személyi Igazolvány"
-						elseif type == 2 then
-							licensename = "Vezetői Engedély"
-						elseif type == 3 then
-							licensename = "Fegyvertartási Engedély"
-						elseif type == 4 then
-							licensename = "Vadászati Engedély"
-						elseif type == 6 then
-							licensename = "Horgászengedély"
+						if licenseType == 1 then
+							licensename = "RG"
+						elseif licenseType == 2 then
+							licensename = "CNH"
+						elseif licenseType == 3 then
+							licensename = "Porte de arma"
+						elseif licenseType == 4 then
+							licensename = "Licença de caça"
+						elseif licenseType == 6 then
+							licensename = "Licença de pesca"
 						end
 
-						createLicense(targetPlayer, tonumber(type))
-						outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen adtál egy "..licensename.."-t "..string.gsub(getPlayerName(targetPlayer), "_", " ").."#ffffff -nak/nek. ",playerSource,61,122,188,true)
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 1).."Kaptál egy "..licensename.."-t "..getElementData(playerSource,"user:adminnick").."#ffffff -tól/től. ",targetPlayer,61,122,188,true)
+						createLicense(targetPlayer, licenseType)
+						outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Entregou "..licensename.." para "..string.gsub(getPlayerName(targetPlayer), "_", " ").."#ffffff.",playerSource,61,122,188,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 1).."Recebeu "..licensename.." de "..getElementData(playerSource,"user:adminnick").."#ffffff.",targetPlayer,61,122,188,true)
 
-						admin:sendMessageToAdmins(playerSource, "adott egy #db3535"..licensename.." #557ec9-t #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9-nak/nek.")
+						admin:sendMessageToAdmins(playerSource, "entregou #db3535"..licensename.." #557ec9 para #db3535"..string.gsub(getPlayerName(targetPlayer), "_", " ").."#557ec9.")
 
 						setElementData(playerSource, "log:admincmd", {getElementData(targetPlayer, "char:id"), cmd})
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott játékos nincs bejelentkezve.", playerSource,61,122,188,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."O jogador alvo não está logado.", playerSource,61,122,188,true)
 				end
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).." /"..cmd.." [ID] [Típus (1-Személyi, 2-Vezetői engedély, 3-Fegyvertartási engedély, 4-Vadászati engedély, 6-Horgászengedély)]", playerSource,61,122,188,true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).." /"..cmd.." [ID] [tipo: 1=RG, 2=CNH, 3=porte, 4=caça, 6=pesca]", playerSource,61,122,188,true)
 		end
 	end
 end)
@@ -1614,14 +1615,14 @@ func.achangeLock = function(playerSource,cmd,typ,arg)
 					if dbid and dbid > 0 then
 						item = 51;
 						value = tonumber(dbid);
-						outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen changelock-oltál egy járművet. "..color.."("..dbid..")",playerSource,220,20,60,true)
-						admin:sendMessageToAdmins(playerSource, "changelock-olt egy járművet. #db3535("..dbid..")")
+						outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Troca de fechadura (veículo) OK "..color.."("..dbid..")",playerSource,220,20,60,true)
+						admin:sendMessageToAdmins(playerSource, "troca de fechadura em veículo. #db3535("..dbid..")")
 
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Ezt a járművet nem changelock-olhatod.",playerSource,220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Não pode trocar fechadura deste veículo.",playerSource,220,20,60,true)
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nem ülsz járműben.",playerSource,220,20,60,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Você não está em um veículo.",playerSource,220,20,60,true)
 				end
 			elseif typ == "interior" then
 				if getElementData(playerSource, "isInIntMarker") then
@@ -1629,12 +1630,12 @@ func.achangeLock = function(playerSource,cmd,typ,arg)
 					if getElementData(interior,"isIntMarker") then
 						item = 52;
 						value = tonumber(getElementData(interior,'dbid'));
-						outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen changelock-oltál egy interiort. "..color.."("..value..")", playerSource,220,20,60, true)
-						admin:sendMessageToAdmins(playerSource, "changelock-olt egy interiort. #db3535("..value..")")
+						outputChatBox(core:getServerPrefix("green-dark", "Inventário", 3).."Troca de fechadura (interior) OK "..color.."("..value..")", playerSource,220,20,60, true)
+						admin:sendMessageToAdmins(playerSource, "troca de fechadura em interior. #db3535("..value..")")
 
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nem állsz interior markerben.",playerSource,220,20,60,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Você não está no marcador de interior.",playerSource,220,20,60,true)
 				end
 			end
 			if item > 0 then
@@ -1644,7 +1645,7 @@ func.achangeLock = function(playerSource,cmd,typ,arg)
 				giveItem(playerSource,item,value,1,0)
 			end
 		else
-			outputChatBox("Használat:#ffffff /"..cmd.." [tipus: vehicle,interior] [ha mindenkitől elvegye: all]",playerSource,r, g, b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [tipo: vehicle,interior] [all = todos]",playerSource,r, g, b,true)
 		end
 	end
 end
@@ -1824,7 +1825,7 @@ addEvent("doorState", true)
 addEventHandler("doorState", getRootElement(), func.doorState)
 
 func.itemmsgtoadmins = function(playerSource,item,value,count)
-	admin:sendMessageToAdmins(playerSource, "adott #db3535"..getItemName(tonumber(item),tostring(value)).." #557ec9-ból/ből #db3535"..tonumber(count).."#557ec9db-ot #db3535"..string.gsub(getPlayerName(playerSource), "_", " ").."#557ec9-nak/nek.")
+	admin:sendMessageToAdmins(playerSource, "deu #db3535"..getItemName(tonumber(item),tostring(value)).." #557ec9 (#db3535"..tonumber(count).."#557ec9×) para #db3535"..string.gsub(getPlayerName(playerSource), "_", " ").."#557ec9.")
 end
 addEvent("itemmsgtoadmins", true)
 addEventHandler("itemmsgtoadmins", getRootElement(), func.itemmsgtoadmins)
@@ -1877,16 +1878,17 @@ addEvent("deleteAllExisitingItemWithValue",true)
 addEventHandler("deleteAllExisitingItemWithValue",getRootElement(),deleteAllExisitingItemWithValue)
 
 
-addCommandHandler("elkoboz", function(thePlayer, cmd, target, type)
+addCommandHandler("elkoboz", function(thePlayer, cmd, target, seizureType)
 	if getElementData(thePlayer, "char:duty:faction") == 1 then 
-		if target and type then 
+		if target and seizureType then 
+			local t = string.lower(seizureType)
 			local target = exports.oCore:getPlayerFromPartialName(thePlayer, target)
 			if target then
 				local px, py, pz = getElementPosition(thePlayer)
 				local tx, ty, tz = getElementPosition(target)
 				local distance = getDistanceBetweenPoints3D(px, py, pz, tx, ty, tz)
 				if distance < 1 then
-					if type == "fegyver" then 	
+					if t == "fegyver" or t == "arma" then 	
 						if hasItem(target, 27) or hasItem(target, 28) or hasItem(target, 29) or hasItem(target, 30) or hasItem(target, 31) or hasItem(target, 32) or hasItem(target, 33) or hasItem(target, 34) or hasItem(target, 35) or hasItem(target, 36) or hasItem(target, 37) or hasItem(target, 38) or hasItem(target, 39) or hasItem(target, 40) or hasItem(target, 41) or hasItem(target, 42) or hasItem(target, 43) then 
 							local categories = {
 								["bag"] = true,
@@ -1906,17 +1908,19 @@ addCommandHandler("elkoboz", function(thePlayer, cmd, target, type)
 									end
 								end
 							end
+							local tgt = getPlayerName(target):gsub("_", " ")
 							if elkobzottszam == 1 then 
-								exports.oChat:sendLocalMeAction(thePlayer, "fegyvernek minősülő tárgyat koboz el "..getPlayerName(target):gsub("_", " ").." célszemélytől.")
+								exports.oChat:sendLocalMeAction(thePlayer, "apreende um item classificado como arma de "..tgt..".")
 							elseif elkobzottszam > 1 then 
-								exports.oChat:sendLocalMeAction(thePlayer, "fegyvernek minősülő tárgyakat koboz el "..getPlayerName(target):gsub("_", " ").." célszemélytől.")
+								exports.oChat:sendLocalMeAction(thePlayer, "apreende itens classificados como arma de "..tgt..".")
 							end
-							outputChatBox(core:getServerPrefix("blue-light-2", "Elkobzás", 3).."Sikeresen elkoboztál "..color..""..elkobzottszam.." #ffffffdarab fegyvernek minősülő tárgyat, "..color..getPlayerName(target):gsub("_", " ").." #ffffffnevű célszemélytől.", thePlayer, 255, 255, 255, true)
-							outputChatBox(core:getServerPrefix("blue-light-2", "Elkobzás", 3).."Elkobzásra került tőled "..color..""..elkobzottszam.." #ffffffdarab fegyvernek minősülő tárgy, "..color..getPlayerName(thePlayer):gsub("_", " ").." #ffffffnevű rendvédelmi tag által.", target, 255, 255, 255, true)
+							local qtyLabel = elkobzottszam == 1 and "item classificado como arma" or "itens classificados como arma"
+							outputChatBox(core:getServerPrefix("blue-light-2", "Apreensão", 3).."Você apreendeu com sucesso "..color..""..elkobzottszam.." #ffffff"..qtyLabel.." de "..color..tgt.."#ffffff.", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("blue-light-2", "Apreensão", 3).."Foram apreendidos de você "..color..""..elkobzottszam.." #ffffff"..qtyLabel.." por "..color..getPlayerName(thePlayer):gsub("_", " ").."#ffffff (forças da ordem).", target, 255, 255, 255, true)
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Elkobzás", 3).."A célszemély nem rendelkezik fegyvernek minősülő tárggyal!", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("red-dark", "Apreensão", 3).."O alvo não possui itens classificados como arma!", thePlayer, 255, 255, 255, true)
 						end
-					elseif type == "drog" then 
+					elseif t == "drog" or t == "droga" or t == "drogas" then 
 						if hasItem(target, 55) or hasItem(target, 56) or hasItem(target, 57) or hasItem(target, 58) or hasItem(target, 59) or hasItem(target, 60) or hasItem(target, 61) or hasItem(target, 62) or hasItem(target, 63) or hasItem(target, 64) then
 							local categories = {
 								["bag"] = true,
@@ -1936,23 +1940,25 @@ addCommandHandler("elkoboz", function(thePlayer, cmd, target, type)
 									end
 								end
 							end
+							local tgt2 = getPlayerName(target):gsub("_", " ")
 							if elkobzottszam == 1 then 
-								exports.oChat:sendLocalMeAction(thePlayer, "kábítószer gyanús terméket koboz el "..getPlayerName(target):gsub("_", " ").." célszemélytől.")
+								exports.oChat:sendLocalMeAction(thePlayer, "apreende um produto suspeito de droga de "..tgt2..".")
 							elseif elkobzottszam > 1 then 
-								exports.oChat:sendLocalMeAction(thePlayer, "kábítószer gyanús termékeket koboz el "..getPlayerName(target):gsub("_", " ").." célszemélytől.")
+								exports.oChat:sendLocalMeAction(thePlayer, "apreende produtos suspeitos de droga de "..tgt2..".")
 							end
-							outputChatBox(core:getServerPrefix("blue-light-2", "Elkobzás", 3).."Sikeresen elkoboztál "..color..""..elkobzottszam.." #ffffffdarab kábítószer gyanús terméket, "..color..getPlayerName(target):gsub("_", " ").." #ffffffnevű célszemélytől.", thePlayer, 255, 255, 255, true)
-							outputChatBox(core:getServerPrefix("blue-light-2", "Elkobzás", 3).."Elkobzásra került tőled "..color..""..elkobzottszam.." #ffffffdarab kábítószer gyanús termék, "..color..getPlayerName(thePlayer):gsub("_", " ").." #ffffffnevű rendvédelmi tag által.", target, 255, 255, 255, true)
+							local qtyLabel2 = elkobzottszam == 1 and "produto suspeito de droga" or "produtos suspeitos de droga"
+							outputChatBox(core:getServerPrefix("blue-light-2", "Apreensão", 3).."Você apreendeu com sucesso "..color..""..elkobzottszam.." #ffffff"..qtyLabel2.." de "..color..tgt2.."#ffffff.", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("blue-light-2", "Apreensão", 3).."Foram apreendidos de você "..color..""..elkobzottszam.." #ffffff"..qtyLabel2.." por "..color..getPlayerName(thePlayer):gsub("_", " ").."#ffffff (forças da ordem).", target, 255, 255, 255, true)
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Elkobzás", 3).."A célszemély nem rendelkezik kábítószer gyanús tárggyal!", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("red-dark", "Apreensão", 3).."O alvo não possui itens suspeitos relacionados a drogas!", thePlayer, 255, 255, 255, true)
 						end
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Elkobzás", 3).."Túl távol vagy tőle: "..color..getPlayerName(target):gsub("_", " "), thePlayer, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Apreensão", 3).."Você está longe demais de: "..color..getPlayerName(target):gsub("_", " "), thePlayer, 255, 255, 255, true)
 				end
 			end
 		else 
-			outputChatBox(core:getServerPrefix("red-dark", "Elkobzás", 3).."A használathoz /elkoboz [ID] [Típus: fegyver/drog]", thePlayer, 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Apreensão", 3).."Uso: #ffffff/elkoboz [ID] #ffffff[Tipo:#ffffff arma ou droga#ffffff — válido também:#ffffff fegyver, drog]", thePlayer, 255, 255, 255, true)
 		end
 	end
 end)

@@ -6,86 +6,86 @@ dashboard = exports.oDashboard
 vehicle = exports.oVehicle 
 
 accessTypes = {
-    "Általános",
+    "Geral",
     "Admin",
-    "Rendszer admin",
+    "Admin de sistema",
 }
 
 factions = {
-    ["pd"] = "ORFK",
-    ["sd"] = "Sheriff Department",
-    ["orp"] = "Adminisztrátor",
+    ["pd"] = "Polícia Civil - 17ª DP (Ipiranga)",
+    ["sd"] = "Polícia Militar - PMESP",
+    ["orp"] = "Administrador",
 }
 
 mdcEditboxs = {
-    [1] = { -- Bejelentkező felület
-        {x = 0.002, y = 0.065, w = 0.146, h = 0.035, name = "user", text = "Felhasználónév", type = "text", maxFontScale = 0.4},
-        {x = 0.002, y = 0.105, w = 0.146, h = 0.035, name = "pass", text = "Jelszó", type = "password", maxFontScale = 0.1},
+    [1] = { -- Login
+        {x = 0.002, y = 0.065, w = 0.146, h = 0.035, name = "user", text = "Nome de usuário", type = "text", maxFontScale = 0.4},
+        {x = 0.002, y = 0.105, w = 0.146, h = 0.035, name = "pass", text = "Senha", type = "password", maxFontScale = 0.1},
     },
 
-    [2] = { -- Áttekintés
-        {x = 0.006, y = 0.067, w = 0.3, h = 0.035, name = "enumber", text = "Egységazonosító", type = "text", maxFontScale = 0.4, openType = "veh"},
+    [2] = { -- Visão geral
+        {x = 0.006, y = 0.067, w = 0.3, h = 0.035, name = "enumber", text = "Identificação da unidade", type = "text", maxFontScale = 0.4, openType = "veh"},
     },
 
-    [3] = { -- Körözött személyek
-        {x = 0.006, y = 0.474, w = 0.245, h = 0.035, name = "kname", text = "Körözött személy neve", type = "text", maxFontScale = 0.4},
-        {x = 0.006, y = 0.51, w = 0.245, h = 0.035, name = "kdesc", text = "Körözés indoka", type = "text", maxFontScale = 0.4},
+    [3] = { -- Pessoas procuradas
+        {x = 0.006, y = 0.474, w = 0.245, h = 0.035, name = "kname", text = "Nome da pessoa procurada", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.51, w = 0.245, h = 0.035, name = "kdesc", text = "Motivo da procuração", type = "text", maxFontScale = 0.4},
 
-        {x = 0.155, y = 0.023, w = 0.195, h = 0.035, name = "search2", text = "Keresés", type = "text", maxFontScale = 0.4},
+        {x = 0.155, y = 0.023, w = 0.195, h = 0.035, name = "search2", text = "Buscar", type = "text", maxFontScale = 0.4},
     },
 
-    [4] = { -- Körözött járművek
-        {x = 0.006, y = 0.474, w = 0.12, h = 0.035, name = "kjplate", text = "Körözött jármű rendszáma", type = "text", maxFontScale = 0.4},
-        {x = 0.160, y = 0.474, w = 0.18, h = 0.035, name = "kjtype", text = "Körözött jármű típusa", type = "text", maxFontScale = 0.4},
-        {x = 0.220, y = 0.51, w = 0.12, h = 0.035, name = "kjcolor", text = "Körözött jármű színe", type = "text", maxFontScale = 0.4},
-        {x = 0.006, y = 0.51, w = 0.18, h = 0.035, name = "kjdesc", text = "Körözés indoka", type = "text", maxFontScale = 0.4},
+    [4] = { -- Veículos procurados
+        {x = 0.006, y = 0.474, w = 0.12, h = 0.035, name = "kjplate", text = "Placa do veículo", type = "text", maxFontScale = 0.4},
+        {x = 0.160, y = 0.474, w = 0.18, h = 0.035, name = "kjtype", text = "Tipo do veículo", type = "text", maxFontScale = 0.4},
+        {x = 0.220, y = 0.51, w = 0.12, h = 0.035, name = "kjcolor", text = "Cor do veículo", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.51, w = 0.18, h = 0.035, name = "kjdesc", text = "Motivo da procuração", type = "text", maxFontScale = 0.4},
 
-        {x = 0.155, y = 0.023, w = 0.195, h = 0.035, name = "search3", text = "Keresés", type = "text", maxFontScale = 0.4},
+        {x = 0.155, y = 0.023, w = 0.195, h = 0.035, name = "search3", text = "Buscar", type = "text", maxFontScale = 0.4},
     },
 
-    [5] = { -- Szabálysértések
-        {x = 0.13, y = 0.023, w = 0.22, h = 0.035, name = "search", text = "Keresés", type = "text", maxFontScale = 0.4},
+    [5] = { -- Infrações / multas
+        {x = 0.13, y = 0.023, w = 0.22, h = 0.035, name = "search", text = "Buscar", type = "text", maxFontScale = 0.4},
 
-        {x = 0.006, y = 0.474, w = 0.28, h = 0.035, name = "pname", text = "Szabálysértés megnevezése", type = "text", maxFontScale = 0.4},
-        {x = 0.006, y = 0.51, w = 0.28, h = 0.035, name = "pdesc", text = "Szabálysértés leírása", type = "text", maxFontScale = 0.4},
-        {x = 0.006, y = 0.547, w = 0.28, h = 0.035, name = "pprice", text = "Szabálysértés bűntetése", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.474, w = 0.28, h = 0.035, name = "pname", text = "Nome da infração", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.51, w = 0.28, h = 0.035, name = "pdesc", text = "Descrição da infração", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.547, w = 0.28, h = 0.035, name = "pprice", text = "Valor da multa ($)", type = "text", maxFontScale = 0.4},
     },
 
-    [6] = { -- Felhasználói fiókok 
-        {x = 0.006, y = 0.474, w = 0.365, h = 0.035, name = "u_name", text = "Fiók felhasználóneve", type = "text", maxFontScale = 0.4},
-        {x = 0.006, y = 0.51, w = 0.365, h = 0.035, name = "u_pass", text = "Fiók jelszava", type = "password", maxFontScale = 0.1},
+    [6] = { -- Contas de usuário
+        {x = 0.006, y = 0.474, w = 0.365, h = 0.035, name = "u_name", text = "Nome de usuário da conta", type = "text", maxFontScale = 0.4},
+        {x = 0.006, y = 0.51, w = 0.365, h = 0.035, name = "u_pass", text = "Senha da conta", type = "password", maxFontScale = 0.1},
     },
 
-    [7] = { -- Keresés
-        {x = 0.006, y = 0.07, w = 0.15, h = 0.035, name = "search_value", text = "Név/Rendszám", type = "text", maxFontScale = 0.4},
+    [7] = { -- Busca no banco
+        {x = 0.006, y = 0.07, w = 0.15, h = 0.035, name = "search_value", text = "Nome / placa", type = "text", maxFontScale = 0.4},
     },
 }
 
 displaySearchDatas = {
     ["veh"] = {
-        {"Rendszám", "plateText"},
-        {"Modell", "model"},
-        {"Tulajdonos", "owner"},
-        {"Szín", "color"},
-        {"Lefoglalva", "isBooked"},
-        {"Körözés"},
+        {"Placa", "plateText"},
+        {"Modelo", "model"},
+        {"Dono", "owner"},
+        {"Cor", "color"},
+        {"Apreendido", "isBooked"},
+        {"Procura"},
     },
 
     ["char"] = {
-        {"Név", "charname"},
-        {"Kép", "skin"},
-        {"Munka", "job"},
-        {"Életkor", "age"},
-        {"Magasság", "height"},
-        {"Súly", "weight"},
-        {"Börtön", "pdJailDatas"},
-        {"Körözés"},
+        {"Nome", "charname"},
+        {"Aparência", "skin"},
+        {"Emprego", "job"},
+        {"Idade", "age"},
+        {"Altura", "height"},
+        {"Peso", "weight"},
+        {"Prisão", "pdJailDatas"},
+        {"Procura"},
     },
 }
 
 searchTypes = {
-    ["veh"] = "Jármű",
-    ["char"] = "Személy",
+    ["veh"] = "Veículo",
+    ["char"] = "Pessoa",
 }
 
 mdcPageDatas = {
@@ -100,16 +100,16 @@ mdcPageDatas = {
 
 mdcPageNames = {
     [1] = "Login",
-    [2] = "Áttekintés",
-    [3] = "Körözött személyek",
-    [4] = "Körözött járművek",
-    [5] = "Szabálysértések",
-    [6] = "Felhasználók",
-    [7] = "Keresés",
+    [2] = "Painel",
+    [3] = "Pessoas procuradas",
+    [4] = "Veículos procurados",
+    [5] = "Infrações",
+    [6] = "Usuários",
+    [7] = "Consulta",
 }
 
 penaltieFactions = {
-    {"pd", "Országos Rendőr-főkapitányság", 14, 163, 237},
+    {"pd", "Polícia Civil do Estado de São Paulo", 14, 163, 237},
     --{"sd", "Los Santos County Shreffi's Department", 186, 158, 82},
 }
 

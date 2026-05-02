@@ -109,7 +109,7 @@ function renderInventory()
 		startX = startX + 25/myX*sx
 	end
 
-	dxDrawText("OriginalRoleplay - #ffffffInventory", invPosX, invPosY, invPosX + invW, invPosY+sy*0.023, tocolor(r, g, b, 255 * inventoryAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center", false, false, false, true)
+	dxDrawText("Vale do Ipiranga RP - #ffffffInventory", invPosX, invPosY, invPosX + invW, invPosY+sy*0.023, tocolor(r, g, b, 255 * inventoryAlpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center", false, false, false, true)
 
 	for k, v in ipairs(inventorySlots) do 
 		if core:isInSlot(v[1], v[2], v[3], v[4]) then 

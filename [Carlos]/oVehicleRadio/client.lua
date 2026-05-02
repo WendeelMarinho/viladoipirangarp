@@ -331,7 +331,7 @@ function renderRadio()
             end
         else
             dxDrawImage(positions["big"][1]+120/myX*sx, positions["big"][2]+10/myY*sy, 110/myX*sx, 110/myY*sy, "files/logo.png", 0, 0, 0, tocolor(r, g, b, 100*a))
-            dxDrawText("ORIGINAL ROLEPLAY \n VEHICLE AUDIO SYSTEM", positions["big"][1]+120/myX*sx, positions["big"][2]+120/myY*sy, positions["big"][1]+240/myX*sx, positions["big"][2]+120/myY*sy+sy*0.01, tocolor(r, g, b, 200*a), 0.65/myX*sx, fonts["condensed-16"], "center", "center")
+            dxDrawText("VALE DO IPIRANGA RP \n VEHICLE AUDIO SYSTEM", positions["big"][1]+120/myX*sx, positions["big"][2]+120/myY*sy, positions["big"][1]+240/myX*sx, positions["big"][2]+120/myY*sy+sy*0.01, tocolor(r, g, b, 200*a), 0.65/myX*sx, fonts["condensed-16"], "center", "center")
         end
 
         dxDrawRectangle(positions["big"][1], positions["big"][2]+sy*0.203, sx*0.25, sy*0.1, tocolor(40, 40, 40, 255*a))
@@ -379,7 +379,7 @@ function renderRadio()
         dxDrawText("A rádió ki van kapcsolva!", positions["big"][1]+115/myX*sx, positions["big"][2]+148/myY*sy, positions["big"][1]+115/myX*sx+sx*0.173, positions["big"][2]+148/myY*sy+sy*0.033, tocolor(255, 255, 255, 255*a), 0.85/myX*sx, fonts["condensed-11"], "left", "center", true)
 
         dxDrawImage(positions["big"][1]+120/myX*sx, positions["big"][2]+2/myY*sy, 110/myX*sx, 110/myY*sy, "files/logo.png", 0, 0, 0, tocolor(r, g, b, 100*a))
-        dxDrawText("ORIGINAL ROLEPLAY \n VEHICLE AUDIO SYSTEM", positions["big"][1]+120/myX*sx, positions["big"][2]+115/myY*sy, positions["big"][1]+240/myX*sx, positions["big"][2]+115/myY*sy+sy*0.01, tocolor(r, g, b, 200*a), 0.75/myX*sx, fonts["condensed-16"], "center", "center")
+        dxDrawText("VALE DO IPIRANGA RP \n VEHICLE AUDIO SYSTEM", positions["big"][1]+120/myX*sx, positions["big"][2]+115/myY*sy, positions["big"][1]+240/myX*sx, positions["big"][2]+115/myY*sy+sy*0.01, tocolor(r, g, b, 200*a), 0.75/myX*sx, fonts["condensed-16"], "center", "center")
     end
 
     if radioMoveing then 

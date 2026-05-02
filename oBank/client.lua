@@ -137,7 +137,7 @@ function panelRender()
     end
 
     if panelType == 1 then 
-        --core:drawWindow(sx*0.25, sy*0.25, sx*0.5, sy*0.5, "OriginalRoleplay - Bank", alpha)
+        --core:drawWindow(sx*0.25, sy*0.25, sx*0.5, sy*0.5, "Vale do Ipiranga RP - Bank", alpha)
         dxDrawRectangle(sx*0.3, sy*0.3, sx*0.4, sy*0.4, tocolor(30, 30, 30, 150*alpha))
         dxDrawRectangle(sx*0.3+2/myX*sx, sy*0.3+2/myY*sy, sx*0.4-4/myX*sx, sy*0.4-4/myY*sy, tocolor(35, 35, 35, 255*alpha))
 
@@ -214,7 +214,7 @@ function panelRender()
             end
             dxDrawRectangle(sx*0.4035, sy*0.3+4/myY*sy, sx*0.2945, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.4035, sy*0.3+4/myY*sy+sy*0.04, sx*0.2945, sy*0.108, tocolor(32, 32, 32, 255*alpha))
-            dxDrawText("Bankszámláid "..color.."("..#bankDatas["accounts"].."/10)", sx*0.4035, sy*0.3+4/myY*sy, sx*0.4035+sx*0.2945, sy*0.3+4/myY*sy+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+            dxDrawText("Suas contas "..color.."("..#bankDatas["accounts"].."/10)", sx*0.4035, sy*0.3+4/myY*sy, sx*0.4035+sx*0.2945, sy*0.3+4/myY*sy+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
 
             local startY = sy*0.3+4/myY*sy+sy*0.045
             for i = 1, 4 do 
@@ -244,7 +244,7 @@ function panelRender()
                     dxDrawRectangle(sx*0.403+5/myX*sx, startY, sx*0.0015, sy*0.023, color2)
 
                     if v[2] then 
-                        dxDrawText(pintext.." #ffffff"..v[1]..color.." [Elsődleges]", sx*0.403+15/myX*sx, startY, sx*0.403+15/myX*sx+sx*0.1, startY+sy*0.023, tocolor(180, 180, 180, 255*alpha), 0.7/myX*sx, font:getFont("condensed", 14), "left", "center", false, false, false, true)
+                        dxDrawText(pintext.." #ffffff"..v[1]..color.." [Principal]", sx*0.403+15/myX*sx, startY, sx*0.403+15/myX*sx+sx*0.1, startY+sy*0.023, tocolor(180, 180, 180, 255*alpha), 0.7/myX*sx, font:getFont("condensed", 14), "left", "center", false, false, false, true)
                     else
                         dxDrawText(pintext.." #ffffff"..v[1], sx*0.403+15/myX*sx, startY, sx*0.403+15/myX*sx+sx*0.1, startY+sy*0.023, tocolor(180, 180, 180, 255*alpha), 0.7/myX*sx, font:getFont("condensed", 14), "left", "center", false, false, false, true)
                     end
@@ -267,9 +267,9 @@ function panelRender()
             dxDrawRectangle(sx*0.4035, sy*0.455, sx*0.2945, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.4035, sy*0.455+sy*0.04, sx*0.2945, sy*0.116, tocolor(32, 32, 32, 255*alpha))
             if selectedAccount > 0 then 
-                dxDrawText("Kezelés: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.4035, sy*0.455, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+                dxDrawText("Gerenciar: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.4035, sy*0.455, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
             else
-                dxDrawText("Kezelés", sx*0.4035, sy*0.455, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
+                dxDrawText("Gerenciar", sx*0.4035, sy*0.455, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
             end
 
             local startY = sy*0.455+sy*0.045
@@ -290,7 +290,7 @@ function panelRender()
                     if delState == 0 then 
                         text = v[1]
                     else
-                        text = "Biztosan törölni szeretnéd?" 
+                        text = "Tem certeza que deseja encerrar?" 
                     end
                 else
                     text = v[1]
@@ -314,13 +314,13 @@ function panelRender()
 
             if selectedAccount <= 0 then 
                 dxDrawRectangle(sx*0.4035, sy*0.455+sy*0.04, sx*0.2945, sy*0.116, tocolor(32, 32, 32, 220*alpha))
-                dxDrawText("Nincs kiválasztva számla!", sx*0.4035, sy*0.455+sy*0.04, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04+sy*0.11, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
+                dxDrawText("Nenhuma conta selecionada!", sx*0.4035, sy*0.455+sy*0.04, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04+sy*0.11, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
                 dxDrawText("", sx*0.4035, sy*0.455+sy*0.04, sx*0.4035+sx*0.2945, sy*0.455+sy*0.04+sy*0.08, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("fontawesome2", 30), "center", "center")
             end
 
             dxDrawRectangle(sx*0.4035, sy*0.614, sx*0.2945, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.4035, sy*0.614+sy*0.04, sx*0.2945, sy*0.04, tocolor(32, 32, 32, 255*alpha))
-            dxDrawText("Új bankszámla igénylése", sx*0.4035, sy*0.614, sx*0.4035+sx*0.2945, sy*0.614+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
+            dxDrawText("Abrir nova conta corrente", sx*0.4035, sy*0.614, sx*0.4035+sx*0.2945, sy*0.614+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
 
             if core:isInSlot(sx*0.4035+5/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.291, sy*0.03) then 
                 dxDrawRectangle(sx*0.4035+5/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.291, sy*0.03, tocolor(r, g, b, 100*alpha))
@@ -328,7 +328,7 @@ function panelRender()
                 dxDrawRectangle(sx*0.4035+5/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.291, sy*0.03, tocolor(40, 40, 40, 200*alpha))
             end
             dxDrawRectangle(sx*0.4035+5/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.001, sy*0.03, tocolor(r, g, b, 220*alpha))
-            dxDrawText("Új bankszámla igénylése #72b368(500$)", sx*0.4035+35/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.4035+35/myX*sx+sx*0.291, sy*0.614+sy*0.04+5/myY*sy+sy*0.03, tocolor(220, 220, 220, 255*alpha), 0.8/myX*sx, font:getFont("condensed", 12), "left", "center", false, false, false, true)
+            dxDrawText("Abertura de conta #72b368($500)", sx*0.4035+35/myX*sx, sy*0.614+sy*0.04+5/myY*sy, sx*0.4035+35/myX*sx+sx*0.291, sy*0.614+sy*0.04+5/myY*sy+sy*0.03, tocolor(220, 220, 220, 255*alpha), 0.8/myX*sx, font:getFont("condensed", 12), "left", "center", false, false, false, true)
             dxDrawText("", sx*0.4035, sy*0.614+sy*0.04+5/myY*sy, sx*0.4035+40/myX*sx, sy*0.614+sy*0.04+5/myY*sy+sy*0.03, tocolor(220, 220, 220, 255*alpha), 0.7/myX*sx, font:getFont("fontawesome2", 14), "center", "center", false, false, false, true)
 
         elseif selectedMenu == 2 then 
@@ -342,11 +342,11 @@ function panelRender()
             dxDrawRectangle(sx*0.498, sy*0.455, sx*0.2, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.498, sy*0.455+sy*0.04, sx*0.2, sy*0.201, tocolor(32, 32, 32, 255*alpha))
             if selectedAccount > 0 then 
-                dxDrawText("Tranzakciók: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+                dxDrawText("Transações: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
             else
-                dxDrawText("Tranzakciók", sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+                dxDrawText("Transações", sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
 
-                dxDrawText("Nincs kiválasztva számla!", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.15, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
+                dxDrawText("Nenhuma conta selecionada!", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.15, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
                 dxDrawText("", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.13, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("fontawesome2", 30), "center", "center")
             end
 
@@ -402,7 +402,7 @@ function panelRender()
             
             dxDrawRectangle(sx*0.4035, sy*0.455, sx*0.0925, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.4035, sy*0.455+sy*0.04, sx*0.0925, sy*0.201, tocolor(32, 32, 32, 255*alpha))
-            dxDrawText("Műveletek", sx*0.4035, sy*0.455, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
+            dxDrawText("Operações", sx*0.4035, sy*0.455, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
             local startY = sy*0.455+sy*0.04+5/myY*sy
             for k, v in ipairs(transactionPoints) do
                 local color1 = tocolor(40, 40, 40, 200*alpha)
@@ -428,7 +428,7 @@ function panelRender()
 
             if selectedAccount <= 0 then 
                 dxDrawRectangle(sx*0.4035, sy*0.455+sy*0.04, sx*0.0925, sy*0.201, tocolor(32, 32, 32, 220*alpha))
-                dxDrawText("Nincs \nkiválasztva \nszámla!", sx*0.4035, sy*0.455+sy*0.04, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04+sy*0.201, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "center")
+                dxDrawText("Nenhuma\nconta\nselecionada!", sx*0.4035, sy*0.455+sy*0.04, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04+sy*0.201, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "center")
             end
         elseif selectedMenu == 3 then 
             if selectedAccountSerial then 
@@ -438,11 +438,11 @@ function panelRender()
             dxDrawRectangle(sx*0.498, sy*0.455, sx*0.2, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.498, sy*0.455+sy*0.04, sx*0.2, sy*0.201, tocolor(32, 32, 32, 255*alpha))
             if selectedAccount > 0 then 
-                dxDrawText("Utalások: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+                dxDrawText("Transferências: "..color..bankDatas["accounts"][selectedAccount][1], sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
             else
-                dxDrawText("Utalások", sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
+                dxDrawText("Transferências", sx*0.498, sy*0.455, sx*0.498+sx*0.2, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center", false, false, false, true)
 
-                dxDrawText("Nincs kiválasztva számla!", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.15, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
+                dxDrawText("Nenhuma conta selecionada!", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.15, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("bebasneue", 25), "center", "bottom")
                 dxDrawText("", sx*0.498, sy*0.455+sy*0.04, sx*0.498+sx*0.2, sy*0.455+sy*0.04+sy*0.13, tocolor(219, 48, 48, 255*alpha), 0.9/myX*sx, font:getFont("fontawesome2", 30), "center", "center")
             end
 
@@ -499,7 +499,7 @@ function panelRender()
             
             dxDrawRectangle(sx*0.4035, sy*0.455, sx*0.0925, sy*0.04, tocolor(29, 29, 29, 255*alpha))
             dxDrawRectangle(sx*0.4035, sy*0.455+sy*0.04, sx*0.0925, sy*0.201, tocolor(32, 32, 32, 255*alpha))
-            dxDrawText("Műveletek", sx*0.4035, sy*0.455, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
+            dxDrawText("Operações", sx*0.4035, sy*0.455, sx*0.4035+sx*0.0925, sy*0.455+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, font:getFont("bebasneue", 14), "center", "center")
             local startY = sy*0.455+sy*0.04+5/myY*sy
             for k, v in ipairs(transferPoints) do
                 local color1 = tocolor(40, 40, 40, 200*alpha)
@@ -542,16 +542,16 @@ function panelRender()
 
                 dxDrawRectangle(sx*0.582, sy*0.71+8/myY*sy, sx*0.06, sy*0.015, tocolor(40, 40, 40, 220*alpha))
                 if core:isInSlot(sx*0.582, sy*0.71+8/myY*sy, sx*0.06, sy*0.015) then 
-                    dxDrawText("Utalás", sx*0.582, sy*0.71+8/myY*sy, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015, tocolor(r, g, b, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
+                    dxDrawText("Transferir", sx*0.582, sy*0.71+8/myY*sy, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015, tocolor(r, g, b, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
                 else
-                    dxDrawText("Utalás", sx*0.582, sy*0.71+8/myY*sy, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015, tocolor(220, 220, 220, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
+                    dxDrawText("Transferir", sx*0.582, sy*0.71+8/myY*sy, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015, tocolor(220, 220, 220, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
                 end
 
                 dxDrawRectangle(sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.06, sy*0.015, tocolor(40, 40, 40, 220*alpha))
                 if core:isInSlot(sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.06, sy*0.015) then 
-                    dxDrawText("Mégsem", sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015+sy*0.017, tocolor(222, 71, 71, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
+                    dxDrawText("Cancelar", sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015+sy*0.017, tocolor(222, 71, 71, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
                 else
-                    dxDrawText("Mégsem", sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015+sy*0.017, tocolor(220, 220, 220, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
+                    dxDrawText("Cancelar", sx*0.582, sy*0.71+8/myY*sy+sy*0.017, sx*0.582+sx*0.06, sy*0.71+8/myY*sy+sy*0.015+sy*0.017, tocolor(220, 220, 220, 255*alpha), 0.65/myX*sx, font:getFont("condensed", 12), "center", "center")
                 end
             end
         end 
@@ -624,9 +624,9 @@ function panelRender()
             dxDrawRectangle(sx*0.442+2/myX*sx, sy*0.64, sx*0.1125, sy*0.03, tocolor(40, 40, 40, 200*alpha))
 
             if core:isInSlot(sx*0.442+2/myX*sx, sy*0.64, sx*0.1125, sy*0.03) then 
-                dxDrawText("Belépés", sx*0.442+2/myX*sx, sy*0.64, sx*0.442+2/myX*sx+sx*0.1125, sy*0.64+sy*0.03, tocolor(r, g, b, 255*alpha), 0.9/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Entrar", sx*0.442+2/myX*sx, sy*0.64, sx*0.442+2/myX*sx+sx*0.1125, sy*0.64+sy*0.03, tocolor(r, g, b, 255*alpha), 0.9/myX*sx, fonts["condensed-12"], "center", "center")
             else
-                dxDrawText("Belépés", sx*0.442+2/myX*sx, sy*0.64, sx*0.442+2/myX*sx+sx*0.1125, sy*0.64+sy*0.03, tocolor(220, 220, 220, 255*alpha), 0.9/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Entrar", sx*0.442+2/myX*sx, sy*0.64, sx*0.442+2/myX*sx+sx*0.1125, sy*0.64+sy*0.03, tocolor(220, 220, 220, 255*alpha), 0.9/myX*sx, fonts["condensed-12"], "center", "center")
             end
 
             local starts = ""
@@ -666,15 +666,15 @@ function panelRender()
             dxDrawRectangle(sx*0.442+2/myX*sx, sy*0.651, sx*0.1125, sy*0.02, tocolor(40, 40, 40, 200*alpha))
 
             if core:isInSlot(sx*0.442+2/myX*sx, sy*0.63, sx*0.1125, sy*0.02) then 
-                dxDrawText("Pénz kivétele", sx*0.442+2/myX*sx, sy*0.63, sx*0.442+2/myX*sx+sx*0.1125, sy*0.63+sy*0.02, tocolor(r, g, b, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Sacar dinheiro", sx*0.442+2/myX*sx, sy*0.63, sx*0.442+2/myX*sx+sx*0.1125, sy*0.63+sy*0.02, tocolor(r, g, b, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
             else
-                dxDrawText("Pénz kivétele", sx*0.442+2/myX*sx, sy*0.63, sx*0.442+2/myX*sx+sx*0.1125, sy*0.63+sy*0.02, tocolor(220, 220, 220, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Sacar dinheiro", sx*0.442+2/myX*sx, sy*0.63, sx*0.442+2/myX*sx+sx*0.1125, sy*0.63+sy*0.02, tocolor(220, 220, 220, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
             end
 
             if core:isInSlot(sx*0.442+2/myX*sx, sy*0.651, sx*0.1125, sy*0.02) then 
-                dxDrawText("Bezárás", sx*0.442+2/myX*sx, sy*0.651, sx*0.442+2/myX*sx+sx*0.1125, sy*0.651+sy*0.02, tocolor(222, 71, 71, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Fechar", sx*0.442+2/myX*sx, sy*0.651, sx*0.442+2/myX*sx+sx*0.1125, sy*0.651+sy*0.02, tocolor(222, 71, 71, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
             else
-                dxDrawText("Bezárás", sx*0.442+2/myX*sx, sy*0.651, sx*0.442+2/myX*sx+sx*0.1125, sy*0.651+sy*0.02, tocolor(220, 220, 220, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
+                dxDrawText("Fechar", sx*0.442+2/myX*sx, sy*0.651, sx*0.442+2/myX*sx+sx*0.1125, sy*0.651+sy*0.02, tocolor(220, 220, 220, 255*alpha), 0.75/myX*sx, fonts["condensed-12"], "center", "center")
             end
 
 
@@ -682,7 +682,7 @@ function panelRender()
             dxDrawText(moneytext.."$", sx*0.442+2/myX*sx, sy*0.3+6/myY*sy, sx*0.442+2/myX*sx+sx*0.1125, sy*0.3+6/myY*sy+sy*0.04, tocolor(220, 220, 220, 255*alpha), 1/myX*sx, fonts["condensed-17"], "center", "center")
             dxDrawRectangle(sx*0.442+2/myX*sx, sy*0.3435+6/myY*sy, sx*0.1125, sy*0.025, tocolor(40, 40, 40, 200*alpha))
             if bankAccounts[selectedATMSerial] then 
-                dxDrawText("Egyenleg: "..color..bankAccounts[selectedATMSerial][3].."#dcdcdc$", sx*0.442+2/myX*sx, sy*0.3435+6/myY*sy, sx*0.442+2/myX*sx+sx*0.1125, sy*0.3435+6/myY*sy+sy*0.025, tocolor(220, 220, 220, 255*alpha), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
+                dxDrawText("Saldo: "..color..bankAccounts[selectedATMSerial][3].."#dcdcdc$", sx*0.442+2/myX*sx, sy*0.3435+6/myY*sy, sx*0.442+2/myX*sx+sx*0.1125, sy*0.3435+6/myY*sy+sy*0.025, tocolor(220, 220, 220, 255*alpha), 0.8/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
             end
         end
     end
@@ -740,13 +740,13 @@ function panelKey(key, state)
                             if countPlayerAccounts() <= 9 then 
                                 if getElementData(localPlayer, "char:money") >= 500 then 
                                     triggerServerEvent("bank > createNewBankAccount", resourceRoot, 0)
-                                    infobox:outputInfoBox("Sikeresen igényeltél egy bankszámlát!", "success")
+                                    infobox:outputInfoBox("Conta bancária aberta!", "success")
                                     lastInteraction = getTickCount()
                                 else
-                                    infobox:outputInfoBox("Nincs elegendő pénzed az igényléshez!", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente para abrir a conta!", "error")
                                 end
                             else
-                                infobox:outputInfoBox("Elérted a maximálisan nyitható számlák számát!", "error")
+                                infobox:outputInfoBox("Limite máximo de contas atingido!", "error")
                             end
                         end
                     end
@@ -761,29 +761,29 @@ function panelKey(key, state)
                                             triggerServerEvent("bank > modifyPin", resourceRoot, bankDatas["accounts"][selectedAccount][1], pintext)
                                             lastInteraction = getTickCount()
                                             pintext = ""
-                                            infobox:outputInfoBox("Sikeresen módosítottad a számlád PIN kódját!", "success")
+                                            infobox:outputInfoBox("PIN da conta atualizado!", "success")
                                         else
-                                            infobox:outputInfoBox("Nem megfelelő PIN formátum!", "error")
+                                            infobox:outputInfoBox("Formato de PIN inválido!", "error")
                                         end
                                     elseif k == 2 then -- bankkártya igénylés
                                         if getElementData(localPlayer, "char:money") >= 250 then 
                                             --if (not exports.oInventory:hasItem(155, bankDatas["accounts"][selectedAccount][1])) then 
                                                 triggerServerEvent("bank > giveCreditCard", resourceRoot, bankDatas["accounts"][selectedAccount][1])
                                                 lastInteraction = getTickCount()
-                                                infobox:outputInfoBox("Sikeresen igényeltél egy bankkártyát!", "success")
+                                                infobox:outputInfoBox("Cartão solicitado!", "success")
                                             --else
                                             --    infobox:outputInfoBox("Már van bankkártyád ehhez a számlához!", "error")
                                             --end
                                         else
-                                            infobox:outputInfoBox("Nincs elegendő pénzed!", "error")
+                                            infobox:outputInfoBox("Dinheiro insuficiente!", "error")
                                         end
                                     elseif k == 3 then -- beállítás elsődlegesnek
                                         if not bankDatas["accounts"][selectedAccount][2] then 
                                             triggerServerEvent("bank > setToMainAccount", resourceRoot, bankDatas["accounts"][selectedAccount][1], playerHasMainAccount())
                                             lastInteraction = getTickCount()
-                                            infobox:outputInfoBox("Sikeresen beállítottad az alapértelmezett számlád!", "success")
+                                            infobox:outputInfoBox("Conta principal definida!", "success")
                                         else
-                                            infobox:outputInfoBox("Már ez az elsődleges számlád!", "error")
+                                            infobox:outputInfoBox("Esta já é sua conta principal!", "error")
                                         end
                                     elseif k == 4 then -- törlés 
                                         delState = delState + 1
@@ -793,7 +793,7 @@ function panelKey(key, state)
                                             triggerServerEvent("bank > delBankAccount", resourceRoot, bankDatas["accounts"][selectedAccount][5], bankDatas["accounts"][selectedAccount][1])
                                             selectedAccountSerial = 0
                                             lastInteraction = getTickCount()
-                                            infobox:outputInfoBox("Sikeresen töröltél egy bankszámlát!", "success")
+                                            infobox:outputInfoBox("Conta encerrada/excluída!", "success")
 
                                             if bankDatasPointer > 0 then 
                                                 bankDatasPointer = bankDatasPointer - 1
@@ -817,23 +817,23 @@ function panelKey(key, state)
                                     if k == 1 then -- kivétel 
                                         if (tonumber(pintext) or 0) > 0 then 
                                             if bankDatas["accounts"][selectedAccount][3] >= tonumber(pintext) then 
-                                                infobox:outputInfoBox("Sikeres tranzakció", "success")
+                                                infobox:outputInfoBox("Transação concluída!", "success")
                                                 triggerServerEvent("bank > moneyFromAccount", resourceRoot, bankDatas["accounts"][selectedAccount][1], tonumber(pintext))
                                                 pintext = ""
                                                 lastInteraction = getTickCount()
                                             else
-                                                infobox:outputInfoBox("Nincs ennyi pénz a bankszámládon!", "error")
+                                                infobox:outputInfoBox("Saldo insuficiente na conta!", "error")
                                             end
                                         end
                                     elseif k == 2 then -- befizetés
                                         if (tonumber(pintext) or 0) > 0 then 
                                             if getElementData(localPlayer, "char:money") >= tonumber(pintext) then 
-                                                infobox:outputInfoBox("Sikeres tranzakció", "success")
+                                                infobox:outputInfoBox("Transação concluída!", "success")
                                                 lastInteraction = getTickCount()
                                                 triggerServerEvent("bank > moneyToAccount", resourceRoot, bankDatas["accounts"][selectedAccount][1], tonumber(pintext))
                                                 pintext = ""
                                             else
-                                                infobox:outputInfoBox("Nincs ennyi pénz nállad!", "error")
+                                                infobox:outputInfoBox("Dinheiro em mão insuficiente!", "error")
                                             end
                                         end
                                     elseif k == 3 then -- előzmények törlése
@@ -878,19 +878,19 @@ function panelKey(key, state)
                                                 utalasShowing = false 
                                                 pintext = ""
                                                 transferTo = {"", "", "", ""}
-                                                infobox:outputInfoBox("Sikeres tranzakció!", "success")
+                                                infobox:outputInfoBox("Transação concluída!", "success")
                                             else
-                                                infobox:outputInfoBox("Nincs ennyi pénz a számládon!", "error")
+                                                infobox:outputInfoBox("Saldo insuficiente na conta!", "error")
                                             end
                                         end
                                     else
-                                        infobox:outputInfoBox("Nem utalhatsz a saját számládra!", "error")
+                                        infobox:outputInfoBox("Não é possível transferir para a própria conta!", "error")
                                     end
                                 else
-                                    infobox:outputInfoBox("Nem létezik ilyen számla!", "error")
+                                    infobox:outputInfoBox("Conta não encontrada!", "error")
                                 end 
                             else
-                                infobox:outputInfoBox("Hibás formátum!", "error")
+                                infobox:outputInfoBox("Formato incorreto!", "error")
                             end
                         end
                         
@@ -975,10 +975,10 @@ function panelKey(key, state)
 
                     if core:isInSlot(sx*0.442+2/myX*sx, sy*0.64, sx*0.1125, sy*0.03) then 
                         if tostring(pintext) == tostring(bankAccounts[selectedATMSerial][5]) then 
-                            infobox:outputInfoBox("Sikeres belépés!", "success")
+                            infobox:outputInfoBox("Acesso ao caixa eletrônico liberado!", "success")
                             atmState = 2
                         else
-                            infobox:outputInfoBox("Hibás PIN-kód!", "error")
+                            infobox:outputInfoBox("PIN incorreto!", "error")
                         end
                     end
                 elseif atmState == 2 then 
@@ -1019,10 +1019,10 @@ function panelKey(key, state)
                             if tonumber(moneytext) <= tonumber(bankAccounts[selectedATMSerial][3]) then 
                                 triggerServerEvent("bank > moneyFromAccount", resourceRoot, selectedATMSerial, tonumber(moneytext))
                                 moneytext = ""
-                                infobox:outputInfoBox("Sikeres tranzakció!", "success")
-                                chat:sendLocalMeAction("kivett pénzt az ATM-ből.")
+                                infobox:outputInfoBox("Transação concluída!", "success")
+                                chat:sendLocalMeAction("saca dinheiro no caixa eletrônico.")
                             else
-                                infobox:outputInfoBox("Nincs ennyi pénz a számládon!", "error")
+                                infobox:outputInfoBox("Saldo insuficiente na conta!", "error")
                             end
                         end
                     end
@@ -1152,7 +1152,7 @@ function closePanel()
     removeEventHandler("onClientKey", root, panelKey)
 
     if selectedATMSerial then 
-        chat:sendLocalMeAction("kivett egy bankkártyát az ATM-ből.")
+        chat:sendLocalMeAction("retira o cartão do caixa eletrônico.")
     end
     selectedATMSerial = false
     activePed = false
@@ -1173,9 +1173,9 @@ addEventHandler("onClientClick", root, function(key, state, _, _, _, _, _, eleme
                 end
             elseif getElementData(element, "atm:id") then 
                 if getElementData(element, "atm:working") then
-                    outputChatBox(core:getServerPrefix("server", "ATM", 2).."Húzz rá egy bankkártyát!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "ATM", 2).."Use o cartão no caixa eletrônico!", 255, 255, 255, true)
                 else
-                    outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Ez az ATM üzemen kívül van!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Este caixa está fora de serviço!", 255, 255, 255, true)
                 end
             end
         end
@@ -1192,9 +1192,9 @@ function openATM(serial, object)
             panelType = 2
             atmState = 1
             selectedATMSerial = serial  
-            chat:sendLocalMeAction("behelyzett egy bankkártyát az ATM-be.")
+            chat:sendLocalMeAction("insere o cartão no caixa eletrônico.")
         else
-            infobox:outputInfoBox("Nincs ilyen bankszámla létrehozva!", "error")
+            infobox:outputInfoBox("Esta conta bancária não existe!", "error")
         end
     end
 end
@@ -1212,12 +1212,12 @@ addCommandHandler("nearbyatms", function(cmd)
             end
 
             if #nearbyATMS > 0 then
-                outputChatBox(core:getServerPrefix("server", "ATM", 2).."Közeledben lévő ATM-ek:", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("server", "ATM", 2).."Caixas eletrônicos próximos:", 255, 255, 255, true)
                 for k, v in ipairs(nearbyATMS) do 
-                    outputChatBox(core:getServerPrefix("server", "ATM", 3).."ID: "..color..getElementData(v, "atm:id").."#ffffff, Távolság: "..color..math.floor(core:getDistance(localPlayer, v)).."#ffffff yard.", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("server", "ATM", 3).."ID: "..color..getElementData(v, "atm:id").."#ffffff — distância: "..color..math.floor(core:getDistance(localPlayer, v)).."#FFFFFF m.", 255, 255, 255, true)
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Nincs a közeledben egyetlen ATM sem. ", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Nenhum caixa eletrônico por perto.", 255, 255, 255, true)
             end
         end
     end
@@ -1237,10 +1237,10 @@ addCommandHandler("delatm", function(cmd, id)
             if volt then 
                 triggerServerEvent("bank > delATM", resourceRoot, volt)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Nincs ilyen azonosítóval rendelkező ATM.", 255, 255, 255, true)
+                                    outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Não existe caixa com este ID.", 255, 255, 255, true)
             end
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [ID]", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID]", 255, 255, 255, true)
         end
     end
 end)
@@ -1310,10 +1310,10 @@ addEventHandler("onClientKey", root, function(key, state)
 
                                         if not getElementData(flexObj, "atm:robStart") then 
                                             setElementData(flexObj, "atm:robStart", true)
-                                            triggerServerEvent("factionScripts > cctv > sendMessage", root, core:getServerPrefix("blue-light-2", "ATM Rablás", 3).."Elkezdtek rabolni egy ATM-et, itt: "..color..getZoneName(getElementPosition(localPlayer)).."#ffffff.")
+                                            triggerServerEvent("factionScripts > cctv > sendMessage", root, core:getServerPrefix("blue-light-2", "Assalto ATM", 3).."Roubo a caixa eletrônico em andamento: "..color..getZoneName(getElementPosition(localPlayer)).."#ffffff.")
                                             local pos = Vector3(getElementPosition(localPlayer))
                                             blip = createBlip(pos.x, pos.y, pos.z, 26)
-                                            setElementData(blip, "blip:name", "ATM rablás")
+                                                setElementData(blip, "blip:name", "Assalto a ATM")
 
                                         end
 
@@ -1343,10 +1343,10 @@ addEventHandler("onClientKey", root, function(key, state)
                                         end, 1000, 0)                    
                                         break
                                     else
-                                        outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Nincs fent elég rendvédelmi tag. (2)", 255, 255, 255, true)
+                                        outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Policiais em serviço insuficientes no servidor (mín. 2).", 255, 255, 255, true)
                                     end
                                 else
-                                    outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Csak illegális frakció tagjaként tudod elkezdeni a rablást.", 255, 255, 255, true)
+                                    outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Só facções ilegais podem iniciar o assalto ao caixa.", 255, 255, 255, true)
                                 end
                             end
                         end
@@ -1373,7 +1373,7 @@ function renderATMRobPanel()
 
     if casettes > 0 then
         dxDrawRectangle(sx*0.5 - sx*0.13/2,  sy*0.8, sx*0.13, sy*0.08, tocolor(30, 30, 30, 200))
-        dxDrawText("Pénzkazetták: "..color..casettes.."#ffffffdb \n A kazetta kivételéhez\n nyomd meg az "..color.."[E] #ffffffgombot.", sx*0.5 - sx*0.13/2,  sy*0.8, sx*0.5 - sx*0.13/2 + sx*0.13,  sy*0.8 + sy*0.08, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
+        dxDrawText("Pacotes de dinheiro: "..color..casettes.."#ffffff \n Para retirar um pacote\n pressione "..color.."[E]#ffffff.", sx*0.5 - sx*0.13/2,  sy*0.8, sx*0.5 - sx*0.13/2 + sx*0.13,  sy*0.8 + sy*0.08, tocolor(255, 255, 255, 255), 0.85/myX*sx, fonts["condensed-12"], "center", "center", false, false, false, true)
         dxDrawRectangle(sx*0.5 - sx*0.13/2,  sy*0.8 + sy*0.078, sx*0.13 * (casettes/4), sy*0.002, tocolor(r, g, b, 255))
     end
 end
@@ -1385,7 +1385,7 @@ function removeMoneyCasette()
     if casettes > 0 then 
         if not isPickUp then 
             if exports.oInventory:getAllItemWeight() + 4 <= 20 then
-                chat:sendLocalMeAction("elkezd kivenni egy pénzkazettát az ATM-ből.")
+                chat:sendLocalMeAction("remove um maço de dinheiro do caixa.")
                 exports.oInventory:giveItem(44, 1, 1, 0)
                 setElementData(localPlayer, "atmRob:hasMoneyCaset", true)
                 isPickUp = true
@@ -1394,13 +1394,13 @@ function removeMoneyCasette()
                 triggerServerEvent("bank > atmRob > setPedAnimation", resourceRoot, "rob_bank", "cat_safe_rob")    
 
                 setTimer(function()
-                    chat:sendLocalDoAction("kivett egy pénzkazettát.")
+                    chat:sendLocalDoAction("remove um maço de dinheiro do caixa.")
                     triggerServerEvent("bank > atmRob > setPedAnimation", resourceRoot, "", "")    
                     isPickUp = false
                     setElementFrozen(localPlayer, false)
                 end, 15000, 1)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Nem fér el nálad a pénzkazetta!", 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "ATM", 2).."Sem espaço no inventário para o maço!", 255, 255, 255, true)
             end
         end
     end
@@ -1495,7 +1495,7 @@ addEventHandler("onClientRender", root, function()
                     else
                         dxDrawImage(drawX - 25 - 1, drawY - 60 - 1, 50 + 2, 50 + 2, "files/warn.png", 0, 0, 0, tocolor(0, 0, 0, 255))
                         dxDrawImage(drawX - 25, drawY - 60, 50, 50, "files/warn.png", 0, 0, 0, tocolor(237, 73, 62, 255))
-                        core:dxDrawShadowedText("Üzemen kívül!", drawX - 100, drawY, drawX - 100 + 200, drawY + 10, tocolor(237, 73, 62, 255), tocolor(0, 0, 0, 255), 1, fonts["condensed-12"], "center", "center")
+                        core:dxDrawShadowedText("Fora de serviço!", drawX - 100, drawY, drawX - 100 + 200, drawY + 10, tocolor(237, 73, 62, 255), tocolor(0, 0, 0, 255), 1, fonts["condensed-12"], "center", "center")
                     end
                 end
             end
