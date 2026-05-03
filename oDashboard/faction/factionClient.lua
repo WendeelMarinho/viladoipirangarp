@@ -393,7 +393,6 @@ local dutyOverlayFont = exports.oFont:getFont("condensed", math.max(10, math.flo
 
 addEventHandler("onClientElementDataChange", root, function(key, old, new)
     if source == localPlayer and key == "char:duty:faction" then
-        -- Atualizar fonte se necessário
         dutyOverlayFont = exports.oFont:getFont("condensed", math.max(10, math.floor(11/900*sy)))
     end
 end)
@@ -405,33 +404,26 @@ local function renderDutyBadge()
     local fname = getFactionName(fid) or "Em Serviço"
     local ftype = getFactionType(fid) or 0
 
-    -- Cor por tipo de facção
     local br, bg_, bb
-    if     ftype == 1 then br,bg_,bb = 60,120,220    -- azul polícia
-    elseif ftype == 2 then br,bg_,bb = 220,60,60     -- vermelho saúde
-    elseif ftype == 3 then br,bg_,bb = 220,180,60    -- dourado legal
-    else                   br,bg_,bb = 180,60,220    -- roxo outros
+    if     ftype == 1 then br,bg_,bb = 60,120,220
+    elseif ftype == 2 then br,bg_,bb = 220,60,60
+    elseif ftype == 3 then br,bg_,bb = 220,180,60
+    else                   br,bg_,bb = 180,60,220
     end
 
-    local bx = sx - px(190)
-    local by = py(14)
-    local bw = px(178)
-    local bh = py(28)
+    local bw = 178/myX*sx
+    local bh = 28/myY*sy
+    local bx = sx - bw - 6/myX*sx
+    local by = 14/myY*sy
 
-    -- Fundo arredondado simulado
-    dxDrawRectangle(bx,         by,         bw,    bh,    tocolor(10, 10, 10, 200))
-    dxDrawRectangle(bx,         by,         bw,    py(2), tocolor(br, bg_, bb, 255))
-    -- Barra colorida lateral
-    dxDrawRectangle(bx,         by + py(2), px(3), bh - py(2), tocolor(br, bg_, bb, 220))
+    dxDrawRectangle(bx,               by,              bw,           bh,           tocolor(10, 10, 10, 200))
+    dxDrawRectangle(bx,               by,              bw,           2/myY*sy,     tocolor(br, bg_, bb, 255))
+    dxDrawRectangle(bx,               by + 2/myY*sy,   3/myX*sx,     bh - 2/myY*sy, tocolor(br, bg_, bb, 220))
 
-    -- Ícone "●" + texto
-    dxDrawText("●", bx + px(6), by + py(2), bx + px(22), by + bh,
-        tocolor(br, bg_, bb, 255), 1, dutyOverlayFont, "left", "center")
-    dxDrawText("EM SERVIÇO", bx + px(22), by + py(2), bx + bw - px(6), by + bh,
-        tocolor(255, 255, 255, 240), 1, dutyOverlayFont, "left", "center")
-    dxDrawText(fname, bx + px(22), by + py(14), bx + bw - px(6), by + bh + py(4),
-        tocolor(br + 50 > 255 and 255 or br + 50, bg_ + 50 > 255 and 255 or bg_ + 50, bb + 50 > 255 and 255 or bb + 50, 200),
-        0.85, dutyOverlayFont, "left", "center")
+    dxDrawText("●",        bx + 6/myX*sx,  by + 2/myY*sy, bx + 22/myX*sx,      by + bh, tocolor(br, bg_, bb, 255),  1,    dutyOverlayFont, "left",   "center")
+    dxDrawText("EM SERVIÇO", bx + 22/myX*sx, by + 2/myY*sy, bx + bw - 6/myX*sx, by + bh, tocolor(255, 255, 255, 240), 1,    dutyOverlayFont, "left",   "center")
+    dxDrawText(fname,      bx + 22/myX*sx, by + 14/myY*sy, bx + bw - 6/myX*sx, by + bh + 4/myY*sy,
+        tocolor(math.min(br+50,255), math.min(bg_+50,255), math.min(bb+50,255), 200), 0.85, dutyOverlayFont, "left", "center")
 end
 
 addEventHandler("onClientRender", root, renderDutyBadge)
