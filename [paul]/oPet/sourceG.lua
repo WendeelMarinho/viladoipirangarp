@@ -30,41 +30,41 @@ function getDogCastByID(modellID)
     if modellID == 269 then 
         return "Boxer"
 	elseif modellID == 270 then 
-        return "Fekete Pitbull"
+        return "Pitbull preto"
 	elseif modellID == 271 then 
-		return "Barna Pitbull"
+		return "Pitbull castanho"
 	elseif modellID == 300 then 
 		return "Bull Terrier"
 	elseif modellID == 311 then 
-		return "Dalmata"
+		return "Dálmata"
 	elseif modellID == 293 then 
 		return "Doberman"
 	elseif modellID == 9 then 
-		return "Malac"
+		return "Porco"
 	elseif modellID == 1 then 
-		return "Szibériai Husky"
+		return "Husky siberiano"
     end 
 end 
 
 function getDogBestFoodByID(FoodID)
     if FoodID == 1 then 
-        return "Vegán Eb Táp"
+        return "Ração vegana"
     elseif FoodID == 2 then 
-        return "Marhahúsos Eb Táp"
+        return "Ração com carne de vaca"
     elseif FoodID == 3 then 
-        return "Sertéshúsos Eb Táp"
+        return "Ração com carne de porco"
     elseif FoodID == 4 then 
-        return "Csirkehúsos Eb Táp"
+        return "Ração com frango"
     else 
-        return "Ismeretlen Eledel"
+        return "Alimento desconhecido"
     end 
 end 
 
 function getAnimalType(modellID)
 	if modellID == 9 then 
-		return "Disznó"
+		return "Porco"
 	else 
-		return "Kutya"
+		return "Cão"
 	end 
 end 
 

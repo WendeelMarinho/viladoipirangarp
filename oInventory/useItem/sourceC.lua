@@ -45,7 +45,7 @@ func.useItem = function(slot,data)
 		if not isTimer(usespam) then
 			if data.count == 1 then
 				if getElementData(localPlayer,"char:hunger") < 100 then
-					chat:sendLocalMeAction("eszik egy "..getItemName(data.item).." -t.")
+					chat:sendLocalMeAction("come um(a) "..getItemName(data.item)..".")
 					triggerServerEvent("eatingAnimation",localPlayer,localPlayer,"food",data.item)
 					--func.setItemCount(slot,data.count-1)
 					func.setItemState(slot, data.state - availableItems[data.item].eatPercent)
@@ -58,19 +58,19 @@ func.useItem = function(slot,data)
 						killTimer(usespam)
 					end,4200, 1)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nem vagy éhes.",246,137,52,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não está com fome.",246,137,52,true)
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Csak akkor eheted meg ha csak egy van belőle egy sloton.",246,137,52,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Só pode comer se houver apenas um no slot.",246,137,52,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Várj pár másodpercet.",246,137,52,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Aguarde alguns segundos.",246,137,52,true)
 		end
 	elseif availableItems[data.item].drink then
 		if not isTimer(usespam) then
 			if data.count == 1 then
 				if getElementData(localPlayer,"char:thirst") < 100 then
-					chat:sendLocalMeAction("iszik egy "..getItemName(data.item).." -t.")
+					chat:sendLocalMeAction("bebe um(a) "..getItemName(data.item)..".")
 					triggerServerEvent("eatingAnimation",localPlayer,localPlayer,"drink",data.item)
 
 					func.setItemState(slot, data.state - availableItems[data.item].drinkPercent)
@@ -81,18 +81,18 @@ func.useItem = function(slot,data)
 						killTimer(usespam)
 					end,1700,1)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nem vagy szomjas.",246,137,52,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não está com sede.",246,137,52,true)
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Csak akkor ihatod meg ha csak egy van belőle egy sloton.",246,137,52,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Só pode beber se houver apenas um no slot.",246,137,52,true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Várj pár másodpercet.",246,137,52,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Aguarde alguns segundos.",246,137,52,true)
 		end
 	elseif availableItems[data.item].skill then
 		triggerServerEvent("setPlayerStat",localPlayer,localPlayer,availableItems[data.item].skill)
-		exports["chat"]:takeMessage("me","kiolvasott egy könyvet.")
-		outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Sikeresen megtanultad a következőt: #f68934"..getItemName(data.item).."#ffffff.",220,20,60,true)
+		exports["chat"]:takeMessage("me","leu um livro.")
+		outputChatBox(core:getServerPrefix("green-dark", "Inventory", 3).."Você aprendeu com sucesso: #f68934"..getItemName(data.item).."#ffffff.",220,20,60,true)
 		func.setItemCount(slot,data.count-1)
 	elseif data.item == 44 then -- pénzkazetta
 		if exports.oBank:startMoneyCaseOpen() then
@@ -107,39 +107,39 @@ func.useItem = function(slot,data)
 			if exports.oDrugs:useDrug("joint") then
 				func.setItemCount(slot,data.count-1)
 
-				chat:sendLocalMeAction("elszívott egy füves cigit.")
+				chat:sendLocalMeAction("fumou um cigarro de maconha.")
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Nincs nálad öngyújtó.", 61, 122, 188, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Você não tem um isqueiro.", 61, 122, 188, true)
 		end
 	elseif data.item == 56 then
 		if exports.oDrugs:useDrug("heroin") then
 			func.setItemCount(slot,data.count-1)
 
-			chat:sendLocalMeAction("injekciót ad magának egy heroinos fecskendővel.")
+			chat:sendLocalMeAction("se aplica uma injeção com uma seringa de heroína.")
 		end
 	elseif data.item == 57 then
 		if exports.oDrugs:useDrug("cocaine") then
 			func.setItemCount(slot,data.count-1)
 
-			chat:sendLocalMeAction("felszívott egy kis kokaint.")
+			chat:sendLocalMeAction("cheirou um pouco de cocaína.")
 		end
 	elseif data.item == 106 then
 		if exports.oDrugs:useDrug("speed") then
 			func.setItemCount(slot,data.count-1)
 
-			chat:sendLocalMeAction("bekapott egy lsd tablettát.")
+			chat:sendLocalMeAction("engoliu um comprimido de LSD.")
 		end
 	elseif data.item == 65 then
 		if cache.inventory.active.identity == -1 or cache.inventory.active.identity == slot then
 			local state = exports.oLicenses:toggleCard(65, data.value, data.dbid)
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy személyi igazolványt.")
+				chat:sendLocalMeAction("guarda um documento de identidade.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy személyi igazolványt.")
+				chat:sendLocalMeAction("pega um documento de identidade.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -148,11 +148,11 @@ func.useItem = function(slot,data)
 			local state = exports.oLicenses:toggleCard(66, data.value, data.dbid)
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy vezetői engedélyt.")
+				chat:sendLocalMeAction("guarda uma carteira de motorista.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy vezetői engedélyt.")
+				chat:sendLocalMeAction("pega uma carteira de motorista.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -161,11 +161,11 @@ func.useItem = function(slot,data)
 			local state = exports.oLicenses:toggleCard(68, data.value, data.dbid)
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy fegyver engedélyt.")
+				chat:sendLocalMeAction("guarda uma licença de arma.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy fegyver engedélyt.")
+				chat:sendLocalMeAction("pega uma licença de arma.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -174,12 +174,12 @@ func.useItem = function(slot,data)
 			if getElementData(localPlayer, "badgeInUse") then
 				setElementData(localPlayer, "badgeInUse", false)
 				setElementData(localPlayer, "badgeText", "nan")
-				chat:sendLocalMeAction("levesz egy jelvényt.")
+				chat:sendLocalMeAction("tira um distintivo.")
 				cache.inventory.active.badge = -1
 			else
 				setElementData(localPlayer, "badgeInUse", true)
 				setElementData(localPlayer, "badgeText", data.value)
-				chat:sendLocalMeAction("felvesz egy jelvényt.")
+				chat:sendLocalMeAction("coloca um distintivo.")
 				cache.inventory.active.badge = slot
 			end
 
@@ -193,7 +193,7 @@ func.useItem = function(slot,data)
 		if not isTimer(usespam) then
 			func.setItemCount(slot,data.count-1)
 
-			chat:sendLocalMeAction("elszív egy cigarettát.")
+			chat:sendLocalMeAction("fuma um cigarro.")
 
 			if not getPedOccupiedVehicle(localPlayer) then
 				triggerServerEvent("eatingAnimation",localPlayer,localPlayer,"smoke",data.item)
@@ -220,14 +220,14 @@ func.useItem = function(slot,data)
 
 				if placeEnabled then
 					func.setItemCount(slot,data.count-1)
-					chat:sendLocalMeAction("lerak egy hifit.")
+					chat:sendLocalMeAction("coloca um hifi.")
 					triggerServerEvent("createHifi", resourceRoot)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Hifi", 2).."Már van a közeledben elhelyezett hifi!", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Hifi", 2).."Já há um hifi colocado perto de você!", 255, 255, 255, true)
 				end
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Hifi", 2).."Védett helyen nem helyezheted le a hifit!", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Hifi", 2).."Você não pode colocar o hifi em um local protegido!", 255, 255, 255, true)
 		end
 	elseif data.item == 74 then
 		if (cache.inventory.active.weapon == slot) or (cache.inventory.active.weapon  == -1) then
@@ -239,11 +239,11 @@ func.useItem = function(slot,data)
 				end, 500, 1)
 
 				if getElementData(localPlayer, "hasFishingRod") then
-					chat:sendLocalMeAction("elrak egy horgászbotot.")
+					chat:sendLocalMeAction("guarda uma vara de pesca.")
 					cache.inventory.active.weapon  = -1
 				else
 					if not getPedOccupiedVehicle(localPlayer) then
-						chat:sendLocalMeAction("elővesz egy horgászbotot.")
+						chat:sendLocalMeAction("pega uma vara de pesca.")
 						cache.inventory.active.weapon  = slot
 					else
 						return
@@ -258,7 +258,7 @@ func.useItem = function(slot,data)
 			if getElementHealth(localPlayer) < 95 then
 				setElementHealth(localPlayer, getElementHealth(localPlayer) + 35)
 				setElementData(localPlayer, "char:health", getElementHealth(localPlayer))
-				chat:sendLocalMeAction("bevett egy gyógyszert.")
+				chat:sendLocalMeAction("tomou um remédio.")
 
 				func.setItemCount(slot,data.count-1)
 
@@ -268,20 +268,20 @@ func.useItem = function(slot,data)
 					end
 				end, core:minToMilisec(5), 1)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Gyógyszer", 3).."Nincs szükséged gyógyszerre.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Remédio", 3).."Você não precisa de remédio.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Gyógyszer", 3).."Csak "..core:getServerColor().."5 #ffffffpercenként használhatsz gyógyszert.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Remédio", 3).."Você só pode usar remédio a cada "..core:getServerColor().."5 #ffffffminutos.", 255, 255, 255, true)
 		end
 	elseif data.item == 79 then
 		if cache.inventory.active.identity == -1 or cache.inventory.active.identity == slot then
 			local state = exports.oLicenses:toggleCard(79, data.value, data.dbid)
 			if not state then
-				chat:sendLocalMeAction("elrak egy vadászati engedélyt.")
+				chat:sendLocalMeAction("guarda uma licença de caça.")
 				setElementData(localPlayer, "active:itemValue", false)
 				cache.inventory.active.identity = -1
 			else
-				chat:sendLocalMeAction("elővesz egy vadászati engedélyt.")
+				chat:sendLocalMeAction("pega uma licença de caça.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 				cache.inventory.active.identity = slot
 			end
@@ -290,11 +290,11 @@ func.useItem = function(slot,data)
 		if cache.inventory.active.identity == -1 or cache.inventory.active.identity == slot then
 			local state = exports.oLicenses:toggleCard(146, data.value, data.dbid)
 			if not state then
-				chat:sendLocalMeAction("elrak egy horgász engedélyt.")
+				chat:sendLocalMeAction("guarda uma licença de pesca.")
 				setElementData(localPlayer, "active:itemValue", false)
 				cache.inventory.active.identity = -1
 			else
-				chat:sendLocalMeAction("elővesz egy horgász engedélyt.")
+				chat:sendLocalMeAction("pega uma licença de pesca.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 				cache.inventory.active.identity = slot
 			end
@@ -309,12 +309,12 @@ func.useItem = function(slot,data)
 				triggerServerEvent("inv > unflipVehicle", resourceRoot, getPedOccupiedVehicle(localPlayer))
 
 				setElementData(localPlayer, "lastFixCardUse", getTickCount())
-				chat:sendLocalMeAction("felhasznált egy unflip kártya.")
+				chat:sendLocalMeAction("usou um cartão unflip.")
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Unflip kártya", 2).."Ez a művelet csak vezető ülésben működik.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Cartão Unflip", 2).."Esta operação só funciona no assento do motorista.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Prémium kártya", 2).."Az előző használat óta nem telt még el "..color.."2 #ffffffperc.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão Premium", 2).."Ainda não se passaram "..color.."2 #ffffffminutos desde o último uso.", 255, 255, 255, true)
 		end
 	elseif data.item == 83 then
 		if isTimer(policeLight_timer) then return end
@@ -322,7 +322,7 @@ func.useItem = function(slot,data)
 		if getPedOccupiedVehicleSeat(localPlayer) >= 2 then return end
 		if data.state == 2 then
 			if exports.oFactionScripts:removePoliceLightFromOccupiedVehicle() then
-				chat:sendLocalMeAction("levett a jármű tetejéről egy rendőrségi villogót.")
+				chat:sendLocalMeAction("removeu do teto do veículo um giroflex policial.")
 				func.setItemState(slot, 1)
 				policeLight_timer = setTimer(function()
 					if isTimer(policeLight_timer) then killTimer(policeLight_timer) end
@@ -330,7 +330,7 @@ func.useItem = function(slot,data)
 			end
 		else
 			if exports.oFactionScripts:applyPoliceLightToOccupiedVehicle() then
-				chat:sendLocalMeAction("feltett a jármű tetejére egy rendőrségi villogót.")
+				chat:sendLocalMeAction("colocou no teto do veículo um giroflex policial.")
 				func.setItemState(slot, 2)
 				policeLight_timer = setTimer(function()
 					if isTimer(policeLight_timer) then killTimer(policeLight_timer) end
@@ -339,7 +339,7 @@ func.useItem = function(slot,data)
 		end
 	elseif data.item == 89 then
 		if getElementData(localPlayer, "playerInDead") then
-			outputChatBox(core:getServerPrefix("red-dark", "Gyógyítás kártya", 2).."Ez a kártya halál közben nem használható.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão de Cura", 2).."Este cartão não pode ser usado durante a morte.", 255, 255, 255, true)
 			return
 		end
 
@@ -349,9 +349,9 @@ func.useItem = function(slot,data)
 			triggerServerEvent("inv > userInstantHealCard", resourceRoot)
 
 			setElementData(localPlayer, "lastFixCardUse", getTickCount())
-			chat:sendLocalMeAction("felhasznált egy instant gyógyítás kártyát.")
+			chat:sendLocalMeAction("usou um cartão de cura instantânea.")
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Prémium kártya", 2).."Az előző használat óta nem telt még el "..color.."2 #ffffffperc.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão Premium", 2).."Ainda não se passaram "..color.."2 #ffffffminutos desde o último uso.", 255, 255, 255, true)
 		end
 	elseif data.item == 90 then
 		if not getPedOccupiedVehicle(localPlayer) then return end
@@ -363,12 +363,12 @@ func.useItem = function(slot,data)
 				triggerServerEvent("inv > fixVehicle", resourceRoot, getPedOccupiedVehicle(localPlayer))
 
 				setElementData(localPlayer, "lastFixCardUse", getTickCount())
-				chat:sendLocalMeAction("felhasznált egy prémium szerelőládát.")
+				chat:sendLocalMeAction("usou uma caixa de ferramentas premium.")
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Szerelőláda", 2).."Ez a művelet csak vezető ülésben működik.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Caixa de Ferramentas", 2).."Esta operação só funciona no assento do motorista.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Prémium kártya", 2).."Az előző használat óta nem telt még el "..color.."2 #ffffffperc.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão Premium", 2).."Ainda não se passaram "..color.."2 #ffffffminutos desde o último uso.", 255, 255, 255, true)
 		end
 	elseif data.item == 200 then
 		if not isTimer(usespam) then
@@ -398,8 +398,8 @@ func.useItem = function(slot,data)
 									count = math.random(1,giftDrop[k][i].maxcount);
 								end
 								triggerServerEvent("giveItem", resourceRoot, localPlayer, giftDrop[k][i].id,1,count,0)
-								chat:sendLocalMeAction("kibontott egy ajándékot.")
-								outputChatBox(core:getServerPrefix("green-dark", "Ajándék", 3).."Sikeresen nyitottál "..color..count.."#ffffff darab "..color..getItemName(giftDrop[k][i].id).." -t#ffffff.", 255, 255, 255, true)
+								chat:sendLocalMeAction("abriu um presente.")
+								outputChatBox(core:getServerPrefix("green-dark", "Presente", 3).."Você abriu com sucesso "..color..count.."#ffffff unidade(s) de "..color..getItemName(giftDrop[k][i].id).."#ffffff.", 255, 255, 255, true)
 								gived = true;
 							end
 						end
@@ -419,8 +419,8 @@ func.useItem = function(slot,data)
 										count = math.random(1,giftDrop[k][i].maxcount);
 									end
 									triggerServerEvent("giveItem", resourceRoot, localPlayer, giftDrop[k][i].id,1,count,0)
-									chat:sendLocalMeAction("kibontott egy ajándékot.")
-									outputChatBox(core:getServerPrefix("green-dark", "Ajándék", 3).."Sikeresen nyitottál "..color..count.."#ffffff darab "..color..getItemName(giftDrop[k][i].id).." -t#ffffff.", 255, 255, 255, true)
+									chat:sendLocalMeAction("abriu um presente.")
+									outputChatBox(core:getServerPrefix("green-dark", "Presente", 3).."Você abriu com sucesso "..color..count.."#ffffff unidade(s) de "..color..getItemName(giftDrop[k][i].id).."#ffffff.", 255, 255, 255, true)
 									gived = true;
 								end
 							end
@@ -488,8 +488,8 @@ func.useItem = function(slot,data)
 									count = math.random(1,giftDrop[k][i].maxcount);
 								end
 								triggerServerEvent("giveItem", resourceRoot, localPlayer, giftDrop[k][i].id,1,count,0)
-								chat:sendLocalMeAction("kibontott egy húsvéti tojást.")
-								outputChatBox(core:getServerPrefix("green-dark", "Easter", 2).."Sikeresen nyitottál "..color..count.."#ffffff darab "..color..getItemName(giftDrop[k][i].id).." -t#ffffff.", 255, 255, 255, true)
+								chat:sendLocalMeAction("abriu um ovo de Páscoa.")
+								outputChatBox(core:getServerPrefix("green-dark", "Easter", 2).."Você abriu com sucesso "..color..count.."#ffffff unidade(s) de "..color..getItemName(giftDrop[k][i].id).."#ffffff.", 255, 255, 255, true)
 								gived = true;
 							end
 						end
@@ -509,8 +509,8 @@ func.useItem = function(slot,data)
 										count = math.random(1,giftDrop[k][i].maxcount);
 									end
 									triggerServerEvent("giveItem", resourceRoot, localPlayer, giftDrop[k][i].id,1,count,0)
-									chat:sendLocalMeAction("kibontott egy húsvéti tojást.")
-									outputChatBox(core:getServerPrefix("green-dark", "Easter", 2).."Sikeresen nyitottál "..color..count.."#ffffff darab "..color..getItemName(giftDrop[k][i].id).." -t#ffffff.", 255, 255, 255, true)
+									chat:sendLocalMeAction("abriu um ovo de Páscoa.")
+									outputChatBox(core:getServerPrefix("green-dark", "Easter", 2).."Você abriu com sucesso "..color..count.."#ffffff unidade(s) de "..color..getItemName(giftDrop[k][i].id).."#ffffff.", 255, 255, 255, true)
 									gived = true;
 								end
 							end
@@ -529,12 +529,12 @@ func.useItem = function(slot,data)
 				triggerServerEvent("inv > fuelVehicle", resourceRoot, getPedOccupiedVehicle(localPlayer))
 
 				setElementData(localPlayer, "lastFixCardUse", getTickCount())
-				chat:sendLocalMeAction("felhasznált egy instant tankolás kártyát.")
+				chat:sendLocalMeAction("usou um cartão de abastecimento instantâneo.")
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Instant tankolás kártya", 2).."Ez a művelet csak vezető ülésben működik.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Cartão Abastecimento Instantâneo", 2).."Esta operação só funciona no assento do motorista.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Prémium kártya", 2).."Az előző használat óta nem telt még el "..color.."2 #ffffffperc.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão Premium", 2).."Ainda não se passaram "..color.."2 #ffffffminutos desde o último uso.", 255, 255, 255, true)
 		end
 	elseif data.item >= 112 and data.item <= 114 then
 		if data.count == 1 then 
@@ -546,9 +546,9 @@ func.useItem = function(slot,data)
 
 			triggerServerEvent("giveItem", resourceRoot, localPlayer, 71, 1, 1, 0)
 
-			chat:sendLocalMeAction("kihúzott egy szál cigarettát egy "..getItemName(data.item).." dobozból.")
+			chat:sendLocalMeAction("tirou um cigarro de uma caixa de "..getItemName(data.item)..".")
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Csak akkor használhatod ha csak egy van belőle egy sloton.",246,137,52,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Só pode usar se houver apenas um no slot.",246,137,52,true)
 		end
 	elseif data.item == 115 then
 		if not getPedOccupiedVehicle(localPlayer) then return end
@@ -559,64 +559,64 @@ func.useItem = function(slot,data)
 
 				setElementData(getPedOccupiedVehicle(localPlayer), "veh:protected", 1)
 
-				outputChatBox(core:getServerPrefix("green-dark", "Prémium Jármű Protect Kártya", 2).."Sikeresen leprotectelted a járművet.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("green-dark", "Cartão Protect de Veículo Premium", 2).."Você protegeu o veículo com sucesso.", 255, 255, 255, true)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Prémium Jármű Protect Kártya", 2).."Ez a jármű már protectes.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Cartão Protect de Veículo Premium", 2).."Este veículo já está protegido.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Prémium Jármű Protect Kártya", 2).."Ez a művelet csak vezető ülésben működik.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Cartão Protect de Veículo Premium", 2).."Esta operação só funciona no assento do motorista.", 255, 255, 255, true)
 		end
 	elseif data.item == 117 then
-		if ( getPedStat ( localPlayer, 77 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 77 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 77, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 118 then
-		if ( getPedStat ( localPlayer, 78 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 78 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 78, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 119 then
-		if ( getPedStat ( localPlayer, 75 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 75 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 75, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 120 then
-		if ( getPedStat ( localPlayer, 76 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 76 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 76, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 121 then
-		if ( getPedStat ( localPlayer, 72 ) == 1000 ) and ( getPedStat ( localPlayer, 74 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 72 ) == 1000 ) and ( getPedStat ( localPlayer, 74 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 72, 1000)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 74, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 122 then
-		if ( getPedStat ( localPlayer, 73 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 73 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 73, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 123 then
-		if ( getPedStat ( localPlayer, 69 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 69 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 69, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 124 then
-		if ( getPedStat ( localPlayer, 70 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 70 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 70, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 125 then
-		if ( getPedStat ( localPlayer, 71 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 71 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 71, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 126 then
-		if ( getPedStat ( localPlayer, 79 ) == 1000 ) then exports.oInfobox:outputInfoBox('Már maximális statisztikával rendelkezel ennek a fegyvernek a kezeléséből!','error') return end
+		if ( getPedStat ( localPlayer, 79 ) == 1000 ) then exports.oInfobox:outputInfoBox('Você já possui a estatística máxima no manuseio desta arma!','error') return end
 		func.setItemCount(slot,data.count-1)
 		triggerServerEvent("skillBook > updateSkill", resourceRoot, localPlayer, 79, 1000)
-		outputChatBox(core:getServerPrefix("green-dark", "Mesterkönyv", 2).."Sikeresen felhasználtál egy "..getItemName(data.item).."et.", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("green-dark", "Livro Mestre", 2).."Você usou com sucesso um(a) "..getItemName(data.item)..".", 255, 255, 255, true)
 	elseif data.item == 149 then
 		exports.oJob_Newspaper:showNote()
 	elseif data.item == 150 then
@@ -635,15 +635,15 @@ func.useItem = function(slot,data)
 					end
 				end, core:minToMilisec(5), 1)
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Vitamin", 3).."Nincs szükséged vitaminra.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Vitamina", 3).."Você não precisa de vitamina.", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Vitamin", 3).."Csak "..core:getServerColor().."5 #ffffffpercenként használhatsz vitamint.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Vitamina", 3).."Você só pode usar vitamina a cada "..core:getServerColor().."5 #ffffffminutos.", 255, 255, 255, true)
 		end
 	elseif data.item == 151 then
 		triggerServerEvent("inv > setPedArmor", resourceRoot, 100)
 
-		chat:sendLocalMeAction("felvett egy golyóálló mellényt.")
+		chat:sendLocalMeAction("colocou um colete à prova de balas.")
 
 		func.setItemCount(slot,data.count-1)
 	elseif data.item == 171 then -- új drogrendszerhez ez már nem kell
@@ -673,30 +673,30 @@ func.useItem = function(slot,data)
 	elseif data.item == 179 then
 		if lastLuckyGame + 4000 < getTickCount() then
 			lastLuckyGame = getTickCount()
-			chat:sendLocalMeAction("dobott egy dobókockával. A dobás eredménye: "..math.random(1, 6)..".")
+			chat:sendLocalMeAction("jogou um dado. O resultado foi: "..math.random(1, 6)..".")
 			triggerServerEvent("inv > playLuckGameSound", resourceRoot, "dice.mp3", getElementPosition(localPlayer))
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Dobókocka", 3).."Csak "..core:getServerColor().."4 #ffffffmásodpercenként dobhatsz a dobókockával.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Dado", 3).."Você só pode jogar o dado a cada "..core:getServerColor().."4 #ffffffsegundos.", 255, 255, 255, true)
 		end
 	elseif data.item == 180 then
 		if lastLuckyGame + 4000 < getTickCount() then
 			lastLuckyGame = getTickCount()
 
 			local cardValues = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q"}
-			chat:sendLocalMeAction("kihúzott egy lapot egy pakliból. A húzott lap: "..cardValues[math.random(#cardValues)]..".")
+			chat:sendLocalMeAction("comprou uma carta de um baralho. A carta: "..cardValues[math.random(#cardValues)]..".")
 			triggerServerEvent("inv > playLuckGameSound", resourceRoot, "card.mp3", getElementPosition(localPlayer))
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Dobókocka", 3).."Csak "..core:getServerColor().."4 #ffffffmásodpercenként húzhatsz kártyát a pakliból.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Dado", 3).."Você só pode comprar uma carta a cada "..core:getServerColor().."4 #ffffffsegundos.", 255, 255, 255, true)
 		end
 	elseif data.item == 181 then
 		if lastLuckyGame + 4000 < getTickCount() then
 			lastLuckyGame = getTickCount()
 
-			local coinValues = {"fej", "írás"}
-			chat:sendLocalMeAction("feldobott egy pénzérmét: "..coinValues[math.random(#coinValues)]..".")
+			local coinValues = {"cara", "coroa"}
+			chat:sendLocalMeAction("jogou uma moeda: "..coinValues[math.random(#coinValues)]..".")
 			triggerServerEvent("inv > playLuckGameSound", resourceRoot, "coin.wav", getElementPosition(localPlayer))
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Dobókocka", 3).."Csak "..core:getServerColor().."4 #ffffffmásodpercenként dobhatod fel a pénzérmét.", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Dado", 3).."Você só pode jogar a moeda a cada "..core:getServerColor().."4 #ffffffsegundos.", 255, 255, 255, true)
 		end
 	elseif data.item == 183 or data.item == 184 then
 		if lastFuelCan + 1000 < getTickCount() then
@@ -718,13 +718,13 @@ func.useItem = function(slot,data)
 
 				func.setItemState(slot, getElementData(localPlayer, "availableFuelInCan") * 10)
 
-				chat:sendLocalMeAction("eltett egy üzemanyag kannát.")
+				chat:sendLocalMeAction("guardou um galão de combustível.")
 			else
 				exports.oFuel:createFuelMarker()
 				setElementData(localPlayer, "petrolCanType", fuelType)
 				setElementData(localPlayer, "availableFuelInCan", tonumber(data.state) / 10)
 				cache.inventory.active.weapon = slot
-				chat:sendLocalMeAction("elővett egy üzemanyag kannát.")
+				chat:sendLocalMeAction("pegou um galão de combustível.")
 			end
 		end
 	elseif data.item == 199 then
@@ -733,7 +733,7 @@ func.useItem = function(slot,data)
 		if getPedOccupiedVehicleSeat(localPlayer) > 0 then return end
 		if data.state == 2 then
 			if exports.oFactionScripts:removeTaxiLightFromOccupiedVehicle() then
-				chat:sendLocalMeAction("levett a jármű tetejéről egy taxi lámpát.")
+				chat:sendLocalMeAction("removeu do teto do veículo uma luz de táxi.")
 				func.setItemState(slot, 1)
 				policeLight_timer = setTimer(function()
 					if isTimer(policeLight_timer) then killTimer(policeLight_timer) end
@@ -741,7 +741,7 @@ func.useItem = function(slot,data)
 			end
 		else
 			if exports.oFactionScripts:applyTaxiLightToOccupiedVehicle() then
-				chat:sendLocalMeAction("feltett a jármű tetejére egy taxi lámpát.")
+				chat:sendLocalMeAction("colocou no teto do veículo uma luz de táxi.")
 				func.setItemState(slot, 2)
 				policeLight_timer = setTimer(function()
 					if isTimer(policeLight_timer) then killTimer(policeLight_timer) end
@@ -754,11 +754,11 @@ func.useItem = function(slot,data)
 
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy forgalmi engedélyt.")
+				chat:sendLocalMeAction("guarda um documento de veículo.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy forgalmi engedélyt.")
+				chat:sendLocalMeAction("pega um documento de veículo.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -767,10 +767,10 @@ func.useItem = function(slot,data)
 			local value = data.value
 			func.setItemCount(slot,data.count-1)
 			triggerServerEvent("giveItem", resourceRoot, localPlayer, 206, value, 1, 0)
-			outputChatBox(core:getServerPrefix("green-dark", "Forgalmi Engedély", 2).."Sikeresen kiváltottál egy Forgalmi Engedélyt!", 255, 255, 255, true)
-			exports.oInfobox:outputInfoBox("Kiváltottál egy Forgalmi Engedélyt!", "success")
+			outputChatBox(core:getServerPrefix("green-dark", "Licença de Veículo", 2).."Você resgatou uma Licença de Veículo com sucesso!", 255, 255, 255, true)
+			exports.oInfobox:outputInfoBox("Você resgatou uma Licença de Veículo!", "success")
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Forgalmi Engedély", 2).."A forgalmi engedélyt a városházán igényelheted meg!", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Licença de Veículo", 2).."A licença de veículo deve ser solicitada na prefeitura!", 255, 255, 255, true)
 		end
 	elseif data.item == 208 then
 		local occupiedVeh = getPedOccupiedVehicle(localPlayer)
@@ -779,7 +779,7 @@ func.useItem = function(slot,data)
 		if occupiedVeh then
 			if getElementData(localPlayer, "char:money") >= 500 then
 				if getElementData(occupiedVeh, "veh:isFactionVehice") == 1 then
-					outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Frakció járműnél ez a lehetőség nem érhető el!", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Esta opção não está disponível para veículos de organização!", 255, 255, 255, true)
 				else
 					local ownerID = getElementData(occupiedVeh, "veh:owner")
 					local ownerName, element = false
@@ -801,23 +801,23 @@ func.useItem = function(slot,data)
 
 							toggleControl("enter_exit", false)
 
-							chat:sendLocalMeAction("bedugja az OBD Scanner csatlakozóját a járműbe.")
-							chat:sendLocalMeAction("bekapcsolja az OBD Scanner-t.")
+							chat:sendLocalMeAction("conectou o OBD Scanner no veículo.")
+							chat:sendLocalMeAction("ligou o OBD Scanner.")
 
 							setTimer(function()
-								chat:sendLocalDoAction("a scanneren elindul egy program.")
+								chat:sendLocalDoAction("um programa iniciou no scanner.")
 							end, 1500, 1)
 
 							setTimer(function()
-								chat:sendLocalDoAction("a program lekéri a jármű adatait.")
+								chat:sendLocalDoAction("o programa está obtendo os dados do veículo.")
 							end, 4000, 1)
 
 							setTimer(function()
-								chat:sendLocalDoAction("a program a végére ért, az OBD Scanner automatikusan kikapcsolt.")
+								chat:sendLocalDoAction("o programa terminou, o OBD Scanner desligou automaticamente.")
 							end, 9000, 1)
 
 							setTimer(function()
-								chat:sendLocalMeAction("kihúzza az OBD Scanner csatlakozóját a járműből.")
+								chat:sendLocalMeAction("desconectou o OBD Scanner do veículo.")
 
 								pdaInUse = false
 								toggleControl("enter_exit", true)
@@ -926,45 +926,45 @@ func.useItem = function(slot,data)
 
 								local itemValue = vehTypeLenght .. vehNameLength .. plateTextLength .. otherTuningsLength .. vehType .. vehName .. plateText .. vehColor1 .. vehColor2 .. tunings .. otherTunings .. expiry .. ownerName
 
-								outputChatBox(core:getServerPrefix("green-dark", "OBD Scanner", 2).."Elkészítettél egy igénylőlapot!", 255, 255, 255, true)
+								outputChatBox(core:getServerPrefix("green-dark", "OBD Scanner", 2).."Você criou um formulário de requerimento!", 255, 255, 255, true)
 
 								triggerServerEvent("giveItem", resourceRoot, localPlayer, 207, itemValue, 1, 0)
 							end, 10000, 1)
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."A jármű állapota nem megfelelő!", 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Estado do veículo inadequado!", 255, 255, 255, true)
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Csak akkor készíthető el a forgalmi engedély ha a jármű tulajdonosa a közeledben tartózkodik!", 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."O documento do veículo só pode ser emitido se o proprietário estiver próximo!", 255, 255, 255, true)
 					end
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Nincs nálad elegendő pénz!(500)", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Você não tem dinheiro suficiente! (500)", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Nem ülsz járműben!", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "OBD Scanner", 2).."Você não está em um veículo!", 255, 255, 255, true)
 		end
 	elseif data.item == 67 then
 		if cache.inventory.active.weapon == slot then
 			cache.inventory.active.weapon = -1
 			triggerServerEvent("flexInUse", localPlayer, localPlayer)
 			setElementData(localPlayer, "char:flexInUse", false)
-			chat:sendLocalMeAction("elrak egy flexet.")
+			chat:sendLocalMeAction("guarda um flex.")
 		elseif cache.inventory.active.weapon == -1 then
 			cache.inventory.active.weapon = slot
 			triggerServerEvent("flexInUse", localPlayer, localPlayer)
 			setElementData(localPlayer, "char:flexInUse", true)
-			chat:sendLocalMeAction("elővesz egy flexet.")
+			chat:sendLocalMeAction("pega um flex.")
 		end
 	elseif data.item == 209 then
 		if cache.inventory.active.identity == -1 or cache.inventory.active.identity == slot then
 			local state = exports.oPrinter:toggleCopyCard(209, data.value)
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy fénymásolt papírt.")
+				chat:sendLocalMeAction("guarda uma cópia de documento.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy fénymásolt papírt.")
+				chat:sendLocalMeAction("pega uma cópia de documento.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -974,7 +974,7 @@ func.useItem = function(slot,data)
 		Block, Anim = getPedAnimation(localPlayer)
 		if Block then return end
 		if not isTimer(usespam) then
-			chat:sendLocalMeAction("iszik egy "..getItemName(data.item).." -t.")
+			chat:sendLocalMeAction("bebe um(a) "..getItemName(data.item)..".")
 			triggerServerEvent("eatingAnimation",localPlayer,localPlayer,"drink",data.item)
 			func.setItemCount(slot,data.count-1)
 			local level = getElementData(localPlayer, "char:alcoholLevel") or 0
@@ -990,7 +990,7 @@ func.useItem = function(slot,data)
 				killTimer(usespam)
 			end,1700,1)
 		else
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Várj pár másodpercet.",246,137,52,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Aguarde alguns segundos.",246,137,52,true)
 		end
 	elseif data.item == 218 then
 		--outputChatBox("as")
@@ -1004,21 +1004,21 @@ func.useItem = function(slot,data)
 
 					if not state then
 						cache.inventory.active.identity = -1
-						chat:sendLocalMeAction("elrak egy csekkfüzetet.")
+						chat:sendLocalMeAction("guarda um talão de cheques.")
 						setElementData(localPlayer, "active:itemValue", false)
 					else
 						if not (cache.inventory.active.identity == slot) then
 							cache.inventory.active.identity = slot
 							cache.inventory.active.csekkfuzet = data
-							chat:sendLocalMeAction("elővesz egy csekkfüzetet.")
+							chat:sendLocalMeAction("pega um talão de cheques.")
 							setElementData(localPlayer, "active:itemValue", data.value)
 						end
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Ezt az itemet csak szolgálatban használhatod!", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Você só pode usar este item em serviço!", 255, 255, 255, true)
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Ezt az itemet csak szolgálatban használhatod!", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Você só pode usar este item em serviço!", 255, 255, 255, true)
 			end
 		end
 	elseif data.item == 227 then
@@ -1028,18 +1028,18 @@ func.useItem = function(slot,data)
 
 				if not state then
 					cache.inventory.active.identity = -1
-					chat:sendLocalMeAction("elrak egy csekkfüzetet.")
+					chat:sendLocalMeAction("guarda um talão de cheques.")
 					setElementData(localPlayer, "active:itemValue", false)
 				else
 					if not (cache.inventory.active.identity == slot) then
 						cache.inventory.active.identity = slot
 						cache.inventory.active.csekkfuzet = data
-						chat:sendLocalMeAction("elővesz egy csekkfüzetet.")
+						chat:sendLocalMeAction("pega um talão de cheques.")
 						setElementData(localPlayer, "active:itemValue", data.value)
 					end
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Ezt az itemet csak szolgálatban használhatod!", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Você só pode usar este item em serviço!", 255, 255, 255, true)
 			end
 		end
 	elseif data.item == 228 then
@@ -1048,11 +1048,11 @@ func.useItem = function(slot,data)
 
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy bírságot.")
+				chat:sendLocalMeAction("guarda uma multa.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elővesz egy bírságot.")
+				chat:sendLocalMeAction("pega uma multa.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -1062,11 +1062,11 @@ func.useItem = function(slot,data)
 
 			if not state then
 				cache.inventory.active.identity = -1
-				chat:sendLocalMeAction("elrak egy ellátási díjról szóló csekket.")
+				chat:sendLocalMeAction("guarda um cheque de taxa de atendimento.")
 				setElementData(localPlayer, "active:itemValue", false)
 			else
 				cache.inventory.active.identity = slot
-				chat:sendLocalMeAction("elrak egy ellátási díjról szóló csekket.")
+				chat:sendLocalMeAction("guarda um cheque de taxa de atendimento.")
 				setElementData(localPlayer, "active:itemValue", data.value)
 			end
 		end
@@ -1077,15 +1077,15 @@ func.useItem = function(slot,data)
 			if vehicle then
 				if getElementData(vehicle, "veh:owner") == playerID then
 					func.setItemCount(slot,data.count-1)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 2).."Sikeresen lecserélted a zárat a jarműveden! (Minden másolt, és másnál lévő eredeti kulcs törlődött, az egyetlen kulcsot megkaptad!)", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 2).."Você trocou a fechadura do seu veículo! (Todas as cópias e chaves originais em outros jogadores foram removidas; você ficou com a única chave.)", 255, 255, 255, true)
 					triggerServerEvent("deleteAllExisitingItemWithValue",localPlayer,51,getElementData(vehicle,("veh:id")))
 					triggerServerEvent("deleteAllExisitingItemWithValue",localPlayer,234,getElementData(vehicle,("veh:id")))
 					triggerServerEvent("giveItem", resourceRoot, localPlayer, 51, getElementData(vehicle,("veh:id")), 1, 0)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Ez nem a te járműved!",220,20,60,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Este veículo não é seu (dono IC).",220,20,60,true)
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nem ülsz járműben!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Não estás dentro de um veículo.",220,20,60,true)
 			end
 		end
 	elseif data.item == 237 then
@@ -1103,7 +1103,7 @@ func.useItem = function(slot,data)
 
 				if isInMarker then
 					func.setItemCount(slot,data.count-1)
-					outputChatBox(core:getServerPrefix("green-dark", "Inventory", 2).."Sikeresen lecserélted a zárat az ingatlanodon! (Minden másolt, és másnál lévő eredeti kulcs törlődött, az egyetlen kulcsot megkaptad!)", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("green-dark", "Inventário", 2).."Você trocou a fechadura do seu imóvel! (Todas as cópias e chaves originais em outros jogadores foram removidas; você ficou com a única chave.)", 255, 255, 255, true)
 					triggerServerEvent("deleteAllExisitingItemWithValue",localPlayer,52,getElementData(intimarker,("dbid")))
 					triggerServerEvent("deleteAllExisitingItemWithValue",localPlayer,235,getElementData(intimarker,("dbid")))
 					triggerServerEvent("giveItem", resourceRoot, localPlayer, 52, getElementData(intimarker,("dbid")), 1, 0)
@@ -1115,7 +1115,7 @@ func.useItem = function(slot,data)
 			veh = getElementData(col,"col:oilVeh")
 
 			if getElementData(veh,"veh:distanceToOilChange") == 0 then
-				outputChatBox(color.."[Olaj]#ffffff Sikeresen feltöltötted a jármű olajszintjét a maximumra.",255,255,255,true)
+				outputChatBox(color.."[Óleo]#ffffff Você abasteceu o nível de óleo do veículo ao máximo.",255,255,255,true)
 				takeItem(data.item)
 				setElementData(veh,"veh:distanceToOilChange",15000)
 				setElementData(veh,"oilLamp",false)
@@ -1125,12 +1125,12 @@ func.useItem = function(slot,data)
 	elseif data.item == 240 then
 		if not getElementData(localPlayer,"char:goggleUser") then
 			exports.oGoggle:getUpGoggle(localPlayer)
-			chat:sendLocalMeAction("felvesz egy taktikai szemüveget.")
+			chat:sendLocalMeAction("coloca um óculos tático.")
 			setElementData(localPlayer, "active:itemValue", data.value)
 			cache.inventory.active.goggle = slot
 		else
 			exports.oGoggle:takeDownGoggle(localPlayer)
-			chat:sendLocalMeAction("levesz egy taktikai szemüveget.")
+			chat:sendLocalMeAction("tira um óculos tático.")
 			setElementData(localPlayer, "active:itemValue", false)
 			cache.inventory.active.goggle = -1
 
@@ -1139,12 +1139,12 @@ func.useItem = function(slot,data)
 		if getElementData(localPlayer,"isInWaterMarker") then 
 				takeItem(data.item)
 				triggerServerEvent("giveItem", resourceRoot, localPlayer, 172, 100, 1, 0)
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Sikeresen újratöltötted a locsolód!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Você recarregou seu regador com sucesso!",220,20,60,true)
 		end 
 	elseif data.item == 243 then 
 		if not getPedOccupiedVehicle(localPlayer) then
 			if not fireworkSpam then
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Ez az event item jelenleg nem elérhető!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Este item de evento não está disponível no momento!",220,20,60,true)
 
 				fireworkSpam = true 
 				--[[takeItem(data.item)
@@ -1154,14 +1154,14 @@ func.useItem = function(slot,data)
 					fireworkSpam = false
 				end,5000,1)
 			else 
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Várj pár másodpercet!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Aguarde alguns segundos!",220,20,60,true)
 			end 
 		end
 	elseif data.item == 244 then 
 		if not getPedOccupiedVehicle(localPlayer) then
 			if not fireworkSpam then
 				fireworkSpam = true
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Ez az event item jelenleg nem elérhető!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Este item de evento não está disponível no momento!",220,20,60,true)
 
 				--[[takeItem(data.item) 
 				makeFireWork(localPlayer,2)
@@ -1170,14 +1170,14 @@ func.useItem = function(slot,data)
 					fireworkSpam = false
 				end,5000,1)
 			else 
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Várj pár másodpercet!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Aguarde alguns segundos!",220,20,60,true)
 			end 
 		end
 	elseif data.item == 245 then 
 		if not getPedOccupiedVehicle(localPlayer) then
 			if not fireworkSpam then
 				fireworkSpam = true
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Ez az event item jelenleg nem elérhető!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Este item de evento não está disponível no momento!",220,20,60,true)
 
 				--[[takeItem(data.item) 
 				makeFireWork(localPlayer,3)
@@ -1186,14 +1186,14 @@ func.useItem = function(slot,data)
 					fireworkSpam = false
 				end,5000,1)
 			else 
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Várj pár másodpercet!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Aguarde alguns segundos!",220,20,60,true)
 			end 
 		end
 	elseif data.item == 246 then 
 		if not getPedOccupiedVehicle(localPlayer) then
 			if not fireworkSpam then
 				fireworkSpam = true
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Ez az event item jelenleg nem elérhető!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Este item de evento não está disponível no momento!",220,20,60,true)
 
 				--[[takeItem(data.item) 
 				makeFireWork(localPlayer,4)
@@ -1202,14 +1202,14 @@ func.useItem = function(slot,data)
 					fireworkSpam = false
 				end,5000,1)
 			else 
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Várj pár másodpercet!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Aguarde alguns segundos!",220,20,60,true)
 			end 
 		end
 	elseif data.item == 247 then 
 		if not getPedOccupiedVehicle(localPlayer) then
 			if not fireworkSpam then
 				fireworkSpam = true
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Ez az event item jelenleg nem elérhető!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Este item de evento não está disponível no momento!",220,20,60,true)
 
 				--[[takeItem(data.item) 
 				setElementFrozen(localPlayer,true)
@@ -1229,13 +1229,13 @@ func.useItem = function(slot,data)
 					fireworkSpam = false
 				end,5000,1)
 			else 
-				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Várj pár másodpercet!",220,20,60,true)
+				outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Aguarde alguns segundos!",220,20,60,true)
 			end 
 		end
 	elseif weaponCache[data.item] then
 		--outputChatBox("nem használhatod a fegyvert mert a kurva anyád")
 		if data.state <= 0 then
-			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott fegyver használhatatlan.",220,20,60,true)
+			outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A arma selecionada está inutilizável.",220,20,60,true)
 		else
 			if cache.inventory.active.weapon == slot then
 				cache.inventory.active.weapon = -1
@@ -1327,21 +1327,21 @@ addCommandHandler("tuneradio", function(cmd, station)
 			if lastRadioInteraction + 500 < getTickCount() then
 				if protectedHzS[station] then
 					if not exports.oDashboard:isPlayerFactionMember(protectedHzS[station]) then
-						outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Ez egy védett frekvencia, melyet nincs jogosultságod használni! "..color.."("..station..")", 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Esta é uma frequência protegida que você não tem permissão para usar! "..color.."("..station..")", 255, 255, 255, true)
 						return
 					end
 				end
 
-				exports.oChat:sendLocalMeAction("átállítja a rádiója frekvenciáját.")
+				exports.oChat:sendLocalMeAction("ajusta a frequência do seu rádio.")
 				setElementData(localPlayer, "char:radioStation", station)
 				lastRadioInteraction = getTickCount()
-				outputChatBox(core:getServerPrefix("green-dark", "Rádió", 2).."Sikeresen beállítottad a rádiód frekvenciáját. "..color.."("..station..")", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("green-dark", "Rádio", 2).."Você configurou a frequência do seu rádio com sucesso. "..color.."("..station..")", 255, 255, 255, true)
 			end
 		else
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Frekvencia]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [Frequência]", 255, 255, 255, true)
 		end
 	else
-		outputChatBox(core:getServerPrefix("red-dark", "Rádió", 2).."Nincs nálad rádió!", 255, 255, 255, true)
+		outputChatBox(core:getServerPrefix("red-dark", "Rádio", 2).."Você não tem um rádio!", 255, 255, 255, true)
 	end
 end)
 
@@ -1438,7 +1438,7 @@ function weaponHot(weaponID)
 
 				setElementHealth(localPlayer, getElementHealth(localPlayer) - 3)
 				setElementData(localPlayer, "char:health", getElementHealth(localPlayer))
-				outputChatBox(core:getServerPrefix("red-dark", "Fegyver", 3).."A fegyver túlmelegedett és megégetted magadat.", 255, 255, 255, true)
+				outputChatBox(core:getServerPrefix("red-dark", "Arma", 3).."A arma superaqueceu e você se queimou.", 255, 255, 255, true)
 
 				local newValue = math.random(1, 10)
 
@@ -1531,7 +1531,7 @@ end)
 addEventHandler("onClientKey", getRootElement(), function(button,state)
 	--if  then
 		if button == "c" and state and getElementData(localPlayer, "activePoliceShield") then
-			outputChatBox(core:getServerPrefix("red-dark", "Shield", 3).."Rendőrségi pajzsban nem tudsz le guggolni!", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("red-dark", "Shield", 3).."Você não pode se agachar com o escudo policial!", 255, 255, 255, true)
 			cancelEvent()
 
 		end

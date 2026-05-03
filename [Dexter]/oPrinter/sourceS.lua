@@ -90,7 +90,7 @@ addCommandHandler("nearbyprinters", function(player,cmd ,nearby)
             --if getElementData(v.ojbectElement, "object:isPrinter") then 
                 local x,y,z = getElementPosition(v.objectElement)
                 if getDistanceBetweenPoints3D(px,py,pz,x,y,z) <= nearby then 
-                    outputChatBox(exports["oCore"]:getServerPrefix("red-dark", "Printer", 3).."* Azonosító: "..k .." | Távolság: ".. math.floor(getDistanceBetweenPoints3D(px,py,pz,x,y,z)) .. " Yard",player,220,20,60,true)  
+                    outputChatBox(exports["oCore"]:getServerPrefix("red-dark", "Printer", 3).."* ID: "..k .." | Distância: ".. math.floor(getDistanceBetweenPoints3D(px,py,pz,x,y,z)) .. " Yard",player,220,20,60,true)
                     count = count + 1
                 end
             --end

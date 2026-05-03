@@ -404,7 +404,7 @@ function keyDrugCraft(key, state)
                                         table.remove(craftItems, k2)
                                         setElementData(v, "drug:craft:tableItems", craftItems)
                                     else
-                                        outputChatBox(core:getServerPrefix("red-dark", "Drog készítés", 3).."Nincs elég hely az inventorydban!", 255, 255, 255, true)
+                                        outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 3).."Inventário cheio — sem espaço suficiente!", 255, 255, 255, true)
                                     end
                                 end
         
@@ -439,10 +439,10 @@ function keyDrugCraft(key, state)
                                                 triggerServerEvent("drug > setPedAnimationServer", resourceRoot, "shop", "shp_serve_loop")
                                                 exports.oMinigames:createMinigame(1, 25, 48500, "drugcraft > endDrogCraft > success", "drugcraft > endDrogCraft > unSuccess")
                                             else
-                                                outputChatBox(core:getServerPrefix("red-dark", "Drog készítés", 3).."Nincs elég hely az inventorydban!", 255, 255, 255, true)
+                                                outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 3).."Inventário cheio — sem espaço suficiente!", 255, 255, 255, true)
                                             end
                                         else
-                                            outputChatBox(core:getServerPrefix("red-dark", "Drog készítés", 3).."Nem vagy illegális szervezet tagja!", 255, 255, 255, true)
+                                            outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 3).."Você não é membro de uma organização ilegal!", 255, 255, 255, true)
                                         end
                                     end
                                 end
@@ -458,7 +458,7 @@ end
 addEvent("drugcraft > endDrogCraft > success", true)
 addEventHandler("drugcraft > endDrogCraft > success", root, function()
     triggerServerEvent("drug > setPedAnimationServer", resourceRoot, "", "")
-    exports.oInfobox:outputInfoBox("Sikeresen elkészítetted a kiválasztott drogot!", "success")
+    exports.oInfobox:outputInfoBox("Droga fabricada com sucesso!", "success")
 
     inventory:giveItem(crafts[activeSelectedCraft].endItem[1], 1, crafts[activeSelectedCraft].endItem[2], 0)
     outputChatBox(core:getServerPrefix("green-dark", "Drog készítés", 3).."Készítettél "..color..crafts[activeSelectedCraft].endItem[2].."#ffffffdb "..color..inventory:getItemName(crafts[activeSelectedCraft].endItem[1]).."#ffffff-(e)t.", 255, 255, 255, true)
@@ -473,7 +473,7 @@ end)
 addEvent("drugcraft > endDrogCraft > unSuccess", true)
 addEventHandler("drugcraft > endDrogCraft > unSuccess", root, function()
     triggerServerEvent("drug > setPedAnimationServer", resourceRoot, "", "")
-    exports.oInfobox:outputInfoBox("Nem sikerült elkészítened a kiválasztott drogot!", "error")
+    exports.oInfobox:outputInfoBox("Falha ao fabricar a droga!", "error")
     exports.oChat:sendLocalDoAction("nem sikerült elkészítenie a drogot.")
 
     setElementData(activeCraftTable, "drug:craft:inUse", false)
@@ -507,7 +507,7 @@ function collectPlant(id, qualityLevel, potObj)
         end
         triggerServerEvent("drugs > destroyPlant", resourceRoot, potObj)
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Szüretelés", 3).."Nincs nálad elég hely a növény szüreteléséhez!", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Colheita", 3).."Inventário cheio — sem espaço para colher a planta!", 255, 255, 255, true)
     end
 end
 
@@ -534,7 +534,7 @@ function addItemToCraftTable(obj, itemID, itemCount)
             setElementData(obj, "drug:craft:tableItems", tableItems)
             return true
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Drog készítés", 3).."Nem fér több alapanyag az asztalba!", 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Fabricação", 3).."A mesa não comporta mais ingredientes!", 255, 255, 255, true)
             return false  
         end
     else
@@ -609,8 +609,8 @@ function renderDrugSeedBuyPanel()
 
     dxDrawRectangle(sx*0.4, sy*0.5-height/2, sx*0.2, height, tocolor(30, 30, 30, 200*alpha))
     dxDrawRectangle(sx*0.4+2/myX*sx, sy*0.5-height/2+2/myY*sy, sx*0.2-4/myX*sx, height-4/myY*sy, tocolor(35, 35, 35, 255*alpha))
-    dxDrawText("Akció: "..bonus.."$",sx*0.495+2/myX*sx - 1, sy*0.49-height/2+2/myY*sy + 1,_,_, tocolor(0,0,0,200*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center",false,false,false,true)
-    dxDrawText("Akció: "..color..bonus.."#ffffff$",sx*0.495+2/myX*sx, sy*0.49-height/2+2/myY*sy,_,_, tocolor(255,255,255,200*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center",false,false,false,true)
+    dxDrawText("Bônus: "..bonus.."$",sx*0.495+2/myX*sx - 1, sy*0.49-height/2+2/myY*sy + 1,_,_, tocolor(0,0,0,200*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center",false,false,false,true)
+    dxDrawText("Bônus: "..color..bonus.."#ffffff$",sx*0.495+2/myX*sx, sy*0.49-height/2+2/myY*sy,_,_, tocolor(255,255,255,200*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center",false,false,false,true)
     local startY = sy*0.5-height/2 + 4/myY*sy
     for k, v in ipairs(shop_items) do 
         local defA = 255 
@@ -630,7 +630,7 @@ function renderDrugSeedBuyPanel()
 
         if v[3] > drugBuyLevel then 
             dxDrawRectangle(sx*0.4+3/myX*sx, startY, sx*0.2-6/myX*sx, sy*0.045, tocolor(30, 30, 30, 240*alpha))
-            dxDrawText("Elérhető a(z) ".. v[3]..". szinttől", sx*0.4+3/myX*sx, startY, sx*0.4+3/myX*sx+sx*0.2-10/myX*sx, startY+sy*0.045, tocolor(255, 54, 54, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center")
+            dxDrawText("Disponível a partir do nível ".. v[3], sx*0.4+3/myX*sx, startY, sx*0.4+3/myX*sx+sx*0.2-10/myX*sx, startY+sy*0.045, tocolor(255, 54, 54, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center")
         else
             local hasAccess = true 
 
@@ -643,13 +643,13 @@ function renderDrugSeedBuyPanel()
 
             if hasAccess then
                 if core:isInSlot(sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052, startY+4/myY*sy, sx*0.05, sy*0.045-8/myY*sy) then 
-                    core:dxDrawShadowedText("Vásárlás", sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052, startY+4/myY*sy, sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052+sx*0.05, startY+4/myY*sy+sy*0.045-8/myY*sy, tocolor(r, g, b, 255*alpha), tocolor(0, 0, 0, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
+                    core:dxDrawShadowedText("Comprar", sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052, startY+4/myY*sy, sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052+sx*0.05, startY+4/myY*sy+sy*0.045-8/myY*sy, tocolor(r, g, b, 255*alpha), tocolor(0, 0, 0, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
                 else
-                    core:dxDrawShadowedText("Vásárlás", sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052, startY+4/myY*sy, sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052+sx*0.05, startY+4/myY*sy+sy*0.045-8/myY*sy, tocolor(255, 255, 255, 255*alpha), tocolor(0, 0, 0, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
+                    core:dxDrawShadowedText("Comprar", sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052, startY+4/myY*sy, sx*0.4+3/myX*sx+sx*0.2-6/myX*sx-sx*0.052+sx*0.05, startY+4/myY*sy+sy*0.045-8/myY*sy, tocolor(255, 255, 255, 255*alpha), tocolor(0, 0, 0, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "center", "center")
                 end
             else
                 dxDrawRectangle(sx*0.4+3/myX*sx, startY, sx*0.2-6/myX*sx, sy*0.045, tocolor(30, 30, 30, 240*alpha))
-                dxDrawText("Csak illegális szervezetek számára érhető el!", sx*0.4+3/myX*sx, startY, sx*0.4+3/myX*sx+sx*0.2-10/myX*sx, startY+sy*0.045, tocolor(255, 54, 54, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center")
+                dxDrawText("Exclusivo para organizações ilegais!", sx*0.4+3/myX*sx, startY, sx*0.4+3/myX*sx+sx*0.2-10/myX*sx, startY+sy*0.045, tocolor(255, 54, 54, 255*alpha), 1, font:getFont("condensed", 10/myX*sx), "right", "center")
             end
         end
 
@@ -746,7 +746,7 @@ function drugBuyPanelKey(key, state)
                                         --exports.oMinigames:createMinigame(1, 25, 48500, "drugcraft > endDrogCraft > success", "drugcraft > endDrogCraft > unSuccess")
                                     end
                                 else 
-                                    exports.oInfobox:outputInfoBox("Nincs elegendő hely az inventorydban! (Súly)", "error")
+                                    exports.oInfobox:outputInfoBox("Inventário cheio — sem espaço suficiente! (Peso)", "error")
                                 end
                             else
 
@@ -762,7 +762,7 @@ function drugBuyPanelKey(key, state)
                                 local price = (v[2] - bonusforPrice) or v[2]
                                 local price = math.floor(price) or v[2]
 
-                                exports.oInfobox:outputInfoBox("Nincs nálad elegendő pénz a vásárláshoz! ("..price.."$)", "error")
+                                exports.oInfobox:outputInfoBox("Dinheiro insuficiente para a compra! ("..price.."$)", "error")
                             end
                         end
                     end
@@ -849,7 +849,7 @@ function addDrugDealerExperience(ped, itemID, itemCount)
 
             return true
         else
-            exports.oInfobox:outputInfoBox("Elérted a maximális szintet!", "warning")
+            exports.oInfobox:outputInfoBox("Você atingiu o nível máximo!", "warning")
             return false 
         end
     else

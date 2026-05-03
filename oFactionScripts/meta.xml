@@ -1,0 +1,37 @@
+<meta>
+    <info author="VilaDev" name="oFactionScripts" version="1.0.0"
+          description="Scripts de gameplay para facções: algemas, grab, revivificação, stinger, RBS, mangueira, dolly." />
+
+    <script src="global.lua"  type="shared" />
+    <script src="server.lua"  type="server" />
+    <script src="client.lua"  type="client" />
+
+    <!-- Exports chamados por usedButton.lua (client-side) -->
+    <export function="cuffPlayer"               type="client" />
+    <export function="grabPlayer"               type="client" />
+    <export function="unleashPlayer"            type="client" />
+    <export function="startPlayerRevivification" type="client" />
+    <export function="getStingerFromVeh"        type="client" />
+    <export function="getSpeedcamFromVehicle"   type="client" />
+    <export function="showRBSPanel"             type="client" />
+    <export function="pickUpRBS"                type="client" />
+    <export function="connectHose"              type="client" />
+    <export function="connectHoseToVeh"         type="client" />
+    <export function="unConnectHoseFromVeh"     type="client" />
+    <export function="unConnectHose"            type="client" />
+    <export function="attachDollyToPlayer"      type="client" />
+    <export function="pickupDrum"               type="client" />
+    <export function="takeDownDrum"             type="client" />
+    <export function="pickupFuelDrum"           type="client" />
+    <export function="takeDownFuelDrum"         type="client" />
+
+    <!-- Exports server chamados por oWanted/oTerritory -->
+    <export function="isInLawEnforcementDuty"  type="server" />
+    <export function="isInMedicalDuty"         type="server" />
+    <export function="getCuffedBy"             type="server" />
+
+    <include resource="oDashboard" />
+    <include resource="oCore" />
+    <include resource="oInfobox" />
+    <include resource="oInventory" />
+</meta>

@@ -3386,7 +3386,7 @@ function onClientClick(button, state, absoluteX, absoluteY, worldX, worldY, worl
 
 					if cDiff > 0 then
 						if getElementData(localPlayer, "char:money") < cDiff then
-							exports.oInfobox:outputInfoBox("Nincs elég pénzed!", "error")
+							exports.oInfobox:outputInfoBox("Dinheiro insuficiente!", "error")
 							canSave = true
 							return
 						end
@@ -3648,7 +3648,7 @@ function onClientClick(button, state, absoluteX, absoluteY, worldX, worldY, worl
 								setElementData(localPlayer, "char:pp", getElementData(localPlayer, "char:pp") - prices["furnitures"][model])
 								ppCount[model] = (ppCount[model] or 0) + 1
 							else
-								exports.oInfobox:outputInfoBox("Nincs elég prémium pontod! ("..prices["furnitures"][model].."PP)", "error")
+								exports.oInfobox:outputInfoBox("Pontos premium insuficientes! ("..prices["furnitures"][model].."PP)", "error")
 								furnitures[placingFurniture] = nil
 								destroyElement(placingFurniture)
 							end

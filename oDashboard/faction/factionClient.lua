@@ -368,15 +368,15 @@ addEventHandler("onClientMarkerLeave", root, function(player, mdim)
 end)
 
 addEventHandler("onClientElementDataChange", root, function(key, old, new)
-    if source == localPlayer then 
-        if key == "char:name" then 
+    if source == localPlayer then
+        if key == "char:name" then
             local factions = getPlayerAllFactions()
 
             for k, v in pairs(factions) do
                 --outputChatBox(v)
-                for k2, v2 in pairs(client_factionMember_list[v]) do 
-                    if v2[1] == getElementData(localPlayer, "char:id") then 
-                        if not (v2[3] == new) then 
+                for k2, v2 in pairs(client_factionMember_list[v]) do
+                    if v2[1] == getElementData(localPlayer, "char:id") then
+                        if not (v2[3] == new) then
                             v2[3] = new
                             triggerServerEvent("faction > updatePlayerName", resourceRoot, v, getElementData(localPlayer, "char:id"), new, old)
                         end
@@ -387,3 +387,51 @@ addEventHandler("onClientElementDataChange", root, function(key, old, new)
         end
     end
 end)
+
+-- ─── Overlay de serviço (/duty badge) ────────────────────────────────────────
+local dutyOverlayFont = exports.oFont:getFont("condensed", math.max(10, math.floor(11/900*sy)))
+
+addEventHandler("onClientElementDataChange", root, function(key, old, new)
+    if source == localPlayer and key == "char:duty:faction" then
+        -- Atualizar fonte se necessário
+        dutyOverlayFont = exports.oFont:getFont("condensed", math.max(10, math.floor(11/900*sy)))
+    end
+end)
+
+local function renderDutyBadge()
+    local fid = getElementData(localPlayer, "char:duty:faction") or 0
+    if fid == 0 then return end
+
+    local fname = getFactionName(fid) or "Em Serviço"
+    local ftype = getFactionType(fid) or 0
+
+    -- Cor por tipo de facção
+    local br, bg_, bb
+    if     ftype == 1 then br,bg_,bb = 60,120,220    -- azul polícia
+    elseif ftype == 2 then br,bg_,bb = 220,60,60     -- vermelho saúde
+    elseif ftype == 3 then br,bg_,bb = 220,180,60    -- dourado legal
+    else                   br,bg_,bb = 180,60,220    -- roxo outros
+    end
+
+    local bx = sx - px(190)
+    local by = py(14)
+    local bw = px(178)
+    local bh = py(28)
+
+    -- Fundo arredondado simulado
+    dxDrawRectangle(bx,         by,         bw,    bh,    tocolor(10, 10, 10, 200))
+    dxDrawRectangle(bx,         by,         bw,    py(2), tocolor(br, bg_, bb, 255))
+    -- Barra colorida lateral
+    dxDrawRectangle(bx,         by + py(2), px(3), bh - py(2), tocolor(br, bg_, bb, 220))
+
+    -- Ícone "●" + texto
+    dxDrawText("●", bx + px(6), by + py(2), bx + px(22), by + bh,
+        tocolor(br, bg_, bb, 255), 1, dutyOverlayFont, "left", "center")
+    dxDrawText("EM SERVIÇO", bx + px(22), by + py(2), bx + bw - px(6), by + bh,
+        tocolor(255, 255, 255, 240), 1, dutyOverlayFont, "left", "center")
+    dxDrawText(fname, bx + px(22), by + py(14), bx + bw - px(6), by + bh + py(4),
+        tocolor(br + 50 > 255 and 255 or br + 50, bg_ + 50 > 255 and 255 or bg_ + 50, bb + 50 > 255 and 255 or bb + 50, 200),
+        0.85, dutyOverlayFont, "left", "center")
+end
+
+addEventHandler("onClientRender", root, renderDutyBadge)

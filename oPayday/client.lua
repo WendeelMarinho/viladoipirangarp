@@ -61,11 +61,13 @@ function getPayment()
     end
 
     outputChatBox("")
-    outputChatBox(core:getServerPrefix("server", "Fizetés", 2).."Megérkezett a fizetésed!", 255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("server", "Jármű adó", 3).." "..vehTax..color.."$", 255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("server", "Ingatlan adó", 3).." "..intTax..color.."$", 255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("server", "Banki kamat", 3).." "..interest..color.."$ #ffffff(Az összes számla kamatja összesen)", 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Salário", 2).."Seu salário chegou!", 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Imposto de veículo", 3).." "..vehTax..color.."$", 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Imposto de imóvel", 3).." "..intTax..color.."$", 255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server", "Juros bancários", 3).." "..interest..color.."$ #ffffff(soma dos juros de todas as contas)", 255, 255, 255, true)
     triggerServerEvent("payday > getPaymentOnServer", resourceRoot, dashboard:getPlayerAllFactions(), vehTax+intTax)
+    triggerServerEvent("payday > reportActivity", localPlayer, getElementData(localPlayer, "rp:activityScore") or 0)
+    setElementData(localPlayer, "rp:activityScore", 0)
 end
 
 function startTimer()

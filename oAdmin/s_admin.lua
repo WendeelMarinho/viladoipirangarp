@@ -119,7 +119,7 @@ addEventHandler("onResourceStart", resourceRoot, function()
 end)
 
 addCommandHandler("fixveh", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'fixveh') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -155,7 +155,7 @@ addCommandHandler("fixveh", function(thePlayer, cmd, target)
 end)
 
 addCommandHandler("unflip", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'unflip') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -186,7 +186,7 @@ addCommandHandler("unflip", function(thePlayer, cmd, target)
 end)
 
 function setSkin(thePlayer, cmd, target, id)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setskin') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -209,7 +209,7 @@ end
 addCommandHandler("setskin", setSkin)
 
 addCommandHandler("sethp", function(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'sethp') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -231,7 +231,7 @@ addCommandHandler("sethp", function(thePlayer, cmd, target, value)
 	end
 end)
 addCommandHandler("setdrunken", function(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setdrunken') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -253,7 +253,7 @@ addCommandHandler("setdrunken", function(thePlayer, cmd, target, value)
 end)
 
 addCommandHandler("setarmor", function(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setarmor') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -276,7 +276,7 @@ addCommandHandler("setarmor", function(thePlayer, cmd, target, value)
 end)
 
 addCommandHandler("sethunger", function(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'sethunger') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -298,7 +298,7 @@ addCommandHandler("sethunger", function(thePlayer, cmd, target, value)
 end)
 
 addCommandHandler("setthirst", function(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setthirst') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -320,7 +320,7 @@ addCommandHandler("setthirst", function(thePlayer, cmd, target, value)
 end)
 
 function givePMoney(thePlayer, cmd, target, type, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'givemoney') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -349,7 +349,7 @@ end
 addCommandHandler("givemoney",givePMoney)
 
 function setPMoney(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setmoney') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -372,7 +372,7 @@ end
 addCommandHandler("setmoney",setPMoney)
 
 function givePP(thePlayer, cmd, target, type, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'givepp') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -401,7 +401,7 @@ end
 addCommandHandler("givepp", givePP)
 
 function setPP(thePlayer, cmd, target, value)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setpp') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -422,7 +422,7 @@ end
 addCommandHandler("setpp", setPP)
 
 addCommandHandler("goto", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'goto') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -448,7 +448,7 @@ addCommandHandler("goto", function(thePlayer, cmd, target)
 end)
 
 addCommandHandler("sgoto", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'sgoto') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -472,7 +472,7 @@ addCommandHandler("sgoto", function(thePlayer, cmd, target)
 end)
 
 addCommandHandler("vhspawn", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'vhspawn') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -501,7 +501,7 @@ addCommandHandler("vhspawn", function(thePlayer, cmd, target)
 end)
 
 addCommandHandler("gethere", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'gethere') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -675,10 +675,10 @@ addCommandHandler("sethelper", function(player, cmd, targetId)
 				if admin == 0 then
 					if not idgAs then 
 						setElementData(target, "user:idgAs", true)
-						outputChatBox(color..getElementData(player, "user:adminnick").." #ffffffkinevezte "..color..getPlayerName(target).." #ffffffideiglenes adminsegéddé!", root, 255, 255, 255, true)
+						outputChatBox(color..getElementData(player, "user:adminnick").." #ffffffpromoveu você a assistente admin temporário!", root, 255, 255, 255, true)
 					else
 						setElementData(target, "user:idgAs", false)
-						outputChatBox(color..getElementData(player, "user:adminnick").." #ffffffelvette "..color..getPlayerName(target).." #ffffffideiglenes adminsegédjét!", root, 255, 255, 255, true)
+						outputChatBox(color..getElementData(player, "user:adminnick").." #ffffffremoveu o assistente admin temporário!", root, 255, 255, 255, true)
 					end
 				else 
 					outputChatBox(core:getServerPrefix("server", "Admin", 1)..color.." Não pode nomear uma admin principal como ajudante temporário!", player, 255, 255, 255, true)
@@ -689,7 +689,7 @@ addCommandHandler("sethelper", function(player, cmd, targetId)
 end)
 
 addCommandHandler("setplayername", function(thePlayer, cmd, target, ...)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if not hasPermission(thePlayer,'setplayername') then return end
 	if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -713,7 +713,7 @@ addCommandHandler("setplayername", function(thePlayer, cmd, target, ...)
 end)
 
 addCommandHandler("findchar", function(thePlayer, cmd, id)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if not hasPermission(thePlayer,'findchar') then return end
 	if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -733,7 +733,7 @@ addCommandHandler("findchar", function(thePlayer, cmd, id)
 end)
 
 addCommandHandler("findid", function(thePlayer, cmd, charname)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if not hasPermission(thePlayer,'findid') then return end
 	if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -752,7 +752,7 @@ addCommandHandler("findid", function(thePlayer, cmd, charname)
 end)
 
 addCommandHandler("vanish", function(thePlayer)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 
 	if hasPermission(thePlayer,'vanish') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
@@ -768,7 +768,7 @@ addCommandHandler("vanish", function(thePlayer)
 end)
 
 function kick(thePlayer, cmd, target, ...)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 
 	if hasPermission(thePlayer,'kick') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
@@ -797,7 +797,7 @@ function kick(thePlayer, cmd, target, ...)
 					setElementData(thePlayer, "user:adminDatas", playerStats)
 				else
 					outputChatBox(core:getServerPrefix("red-dark", "Admin", 2).."Nincs jogosultságod ehhez.", thePlayer, r, g, b, true)
-					outputChatBox(core:getServerPrefix("red-dark", "Admin", 2)..color..getPlayerName(thePlayer).." #ffffffmegbróbáld kickelni téged.", target, r, g, b, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Admin", 2)..color..getPlayerName(thePlayer).." #fffffftentou te kickar.", target, r, g, b, true)
 				end
 			end
 		else
@@ -808,7 +808,7 @@ end
 addCommandHandler("akick", kick)
 
 addCommandHandler("freeze", function(player,cmd,target)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	
 	if hasPermission(player,'freeze') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
@@ -836,7 +836,7 @@ addCommandHandler("freeze", function(player,cmd,target)
 end)
 
 addCommandHandler("unfreeze", function(player,cmd,target)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	if hasPermission(player,'unfreeze') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -924,7 +924,7 @@ addEventHandler("onElementDataChange",root,function(key,old,new)  --ha reconolt 
 end)
 
 addCommandHandler("srecon", function(player,cmd,target)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	if hasPermission(player,'srecon') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -963,7 +963,7 @@ addCommandHandler("srecon", function(player,cmd,target)
 end)
 
 function slap(player,cmd,target)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	if hasPermission(player,'slap') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -985,7 +985,7 @@ end
 addCommandHandler("slap", slap)
 
 function setInt(player, cmd, target, intID)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	if hasPermission(player,'setint') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1006,7 +1006,7 @@ end
 addCommandHandler("setint", setInt)
 
 function setDim(player, cmd, target, dimID)
-	if not isPlayerInAdminDuty(player) then return end
+	if not isPlayerInAdminDuty(player) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", player, 255, 255, 255, true) return end
 	if hasPermission(player,'setdim') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1216,7 +1216,7 @@ function adminUnJail(player,cmd,target)
 					removeElementData(target,"adminJail.Reason")
 					removeElementData(target,"adminJail.Time")
 					--outputChatBox(core:getServerPrefix("red-dark", "UnJail", 3)..color..getElementData(player,"user:adminnick").." #ffffffkiszedte a börtönből "..color..getPlayerName(target):gsub("_", " ").."#ffffff játékost.",root,255,255,255,true)
-					sendMessageToAdmins(player, "kivette jailből "..nameColor..getPlayerName(target):gsub("_", " ")..adminMessageColor.." nevű játékost.")
+					sendMessageToAdmins(player, "soltou o jogador "..nameColor..getPlayerName(target):gsub("_", " ")..adminMessageColor.." do jail.")
 
 					setElementData(player, "log:admincmd", {getElementData(target, "char:id"), cmd})
 
@@ -1225,10 +1225,10 @@ function adminUnJail(player,cmd,target)
 
 					setElementData(player, "user:adminDatas", playerStats)
 				else 
-					outputChatBox(color.."Ezt a játékos nincs jogod kiszedni adminjailből!",player,255,255,255,true)
+					outputChatBox(color.."Você não tem permissão para soltar este jogador do adminjail!",player,255,255,255,true)
 				end
-			else 
-				outputChatBox(color.."Ez a játékos nincs adminjailben!",player,255,255,255,true)
+			else
+				outputChatBox(color.."Este jogador não está em adminjail!",player,255,255,255,true)
 			end
 		else 
 			outputChatBox("[Uso]: #ffffff/"..cmd.." [Játékos ID]",player,r,g,b,true)
@@ -1328,7 +1328,7 @@ addCommandHandler("aban", function(player, cmd, targetPlayer, duration, ...)
 
 						if getElementData(player, "user:admin") <= 4 then
 							if duration > 24 or duration == 0 then
-								outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Maximum 1 napra tudsz bannolni!", player, 255, 255, 255, true)
+								outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Maximum 1 napra tudsz bannolni!", player, 255, 255, 255, true)
 								return
 							end
 						end
@@ -1351,14 +1351,14 @@ addCommandHandler("aban", function(player, cmd, targetPlayer, duration, ...)
 						dbQuery(function(qh)
 							local result, numAffect = dbPoll(qh, 0)
 							if numAffect > 0 then 
-								outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."A kiválasztott játékos már bannolva van!", player, 255, 255, 255, true)
-							else 
+								outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."O jogador selecionado já está banido!", player, 255, 255, 255, true)
+							else
 								dbQuery(function(qh, target)
-									if isElement(target) then 
+									if isElement(target) then
 										kickPlayer(target, adminName, "Indok: "..reason .. " | Időtartam: "..durationName)
 									end
-									outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..getPlayerName(target):gsub("_", " ").." #ffffffnevű játékost. ("..color.. durationName .."#ffffff)", root, 255, 255, 255, true)
-									outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
+									outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3)..color..getElementData(player, "user:adminnick").." #ffffffbaniu o jogador "..color..getPlayerName(target):gsub("_", " ").."#ffffff. ("..color.. durationName .."#ffffff)", root, 255, 255, 255, true)
+									outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
 									dbFree(qh)
 								end, {target}, conn, "INSERT INTO bans2 (playerSerial, playerName, playerAccountId, banReason, adminName, banTimestamp, expireTimestamp, isActive) VALUES (?,?,?,?,?,?,?,'Y'); UPDATE accounts SET suspended = 'Y' WHERE id = ?", targetSerial, playerUsername, accountId, reason, adminName, currentTime, expireTime, accountId)
 							end
@@ -1378,12 +1378,12 @@ addCommandHandler("aban", function(player, cmd, targetPlayer, duration, ...)
 						end, 1000 * 60, 1 )
 
 						setElementData(player, "user:adminDatas", playerStats)
-					else 
-						outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Ezt a játékost nem tilthatod ki ugyanis magasabb rangú mint te!", player, 255, 255, 255, true)
-						outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3)..color..getElementData(player, "user:adminnick").."#ffffff nevű adminisztrátor megpróbált kitiltani a szerverről.", target, 255, 255, 255, true)
+					else
+						outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Você não pode banir este jogador pois ele tem cargo superior ao seu!", player, 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3)..color..getElementData(player, "user:adminnick").."#ffffff tentou te banir do servidor.", target, 255, 255, 255, true)
 					end
-				else 
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Magadat nem tilthatod ki a szerverről!", player, 255, 255, 255, true)
+				else
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Você não pode banir a si mesmo do servidor!", player, 255, 255, 255, true)
 				end
 			end
 		end
@@ -1420,10 +1420,10 @@ addCommandHandler("aunban", function(player, cmd, targetData)
 					end
 					dbExec(conn, "UPDATE accounts SET suspended = 'N' WHERE id = ?", accountId)
 					if isElement(player) then 
-						outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Sikeresen feloldottad a kiválasztott játékosról a tiltást.", player, 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Banimento do jogador selecionado removido com sucesso.", player, 255, 255, 255, true)
 					end
 				elseif isElement(player) then 
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."A kiválasztott Account ID-n nincs kitiltás!", player, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Não há banimento para o Account ID selecionado!", player, 255, 255, 255, true)
 				end
 			end, {player}, conn, "SELECT * FROM bans2 WHERE ?? = ? AND isActive = 'Y'",unbanType, targetData)
 		end
@@ -1474,11 +1474,11 @@ addCommandHandler("oban", function(player, cmd, targetPlayer, duration, ...)
 									dbQuery(function(qh)
 										local result, numAffect = dbPoll(qh, 0)
 										if numAffect > 0 then 
-											outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3).."A kiválasztott játékos már bannolva van!", player, 255, 255, 255, true)
-										else 
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3).."O jogador selecionado já está banido!", player, 255, 255, 255, true)
+										else
 											dbExec(conn, "INSERT INTO bans2 (playerSerial, playerName, playerAccountId, banReason, adminName, banTimestamp, expireTimestamp, isActive) VALUES (?,?,?,?,?,?,?,'Y')",data.serial, data.username, accountId, reason, adminNick, currentTime, expireTime)
-											outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..targetPlayer:gsub("_", " ").." #ffffffnevű játékost. ("..color.. durationName .."#ffffff)", root, 255, 255, 255, true)
-											outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3)..color..getElementData(player, "user:adminnick").." #ffffffbaniu o jogador "..color..targetPlayer:gsub("_", " ").."#ffffff. ("..color.. durationName .."#ffffff)", root, 255, 255, 255, true)
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
 											dbExec(conn, "UPDATE accounts SET suspended = 'N' WHERE id = ?", accountId)
 											setElementData(player, "log:admincmd", {accountId, cmd})
 											local playerStats = getElementData(player, "user:adminDatas") or {0, 0, 0, 0, 0, 0, 0, 0}
@@ -1490,7 +1490,7 @@ addCommandHandler("oban", function(player, cmd, targetPlayer, duration, ...)
 							end, {accountId},conn, "SELECT * FROM accounts WHERE id = ?", accountId)
 						end
 					else 
-						outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3).."Nincs ilyen játékos regisztrálva.", player, 255, 255, 255, true)
+						outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3).."Nenhum jogador registrado com esse nome.", player, 255, 255, 255, true)
 					end
 				end,conn, "SELECT * FROM characters WHERE charname = ?", targetPlayer)
 			end
@@ -1511,8 +1511,8 @@ function banPlayerFromPlayerId(player, cmd, target, year, month, day, ...)
 
 				if playeradmin < getElementData(player, "user:admin") then
 					if highRiskCMD[player] then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Csak 1 percenként használhatod ezt a parancsot!", player, 255, 255, 255, true) return end
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..getPlayerName(target).." #ffffffnevű játékost.", root, 255, 255, 255, true)
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..getPlayerName(target).." #ffffffnevű játékost.", root, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
 
 					local playerUsername = getElementData(target, "user:name")
 					local playerUserId = getElementData(target, "user:id")
@@ -1544,8 +1544,8 @@ function banPlayerFromPlayerId(player, cmd, target, year, month, day, ...)
 	
 					setElementData(player, "user:adminDatas", playerStats)
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Ezt a játékost nem tilthatod ki ugyanis magasabb rangú mint te!", player, 255, 255, 255, true)
-					outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3)..color..getElementData(player, "user:adminnick").."#ffffff nevű adminisztrátor megpróbált kitiltani a szerverről.", target, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Ezt a játékost nem tilthatod ki ugyanis magasabb rangú mint te!", player, 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3)..color..getElementData(player, "user:adminnick").."#ffffff nevű adminisztrátor megpróbált kitiltani a szerverről.", target, 255, 255, 255, true)
 				end
 			end
         else
@@ -1587,12 +1587,12 @@ function banPlayerFromPlayerId(player, cmd, target_name, year, month, day, ...)
 
 											exports.oAccount:createBan(username, accountID, serial, adminName, year, month, day, realtime.hour, realtime.minute, realtime.second, reason)
 
-											outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..target_name:gsub("_", " ").." #ffffffnevű játékost.", root, 255, 255, 255, true)
-											outputChatBox(core:getServerPrefix("red-dark", "Offline - Kitiltás", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3)..color..getElementData(player, "user:adminnick").." #ffffffkitiltotta "..color..target_name:gsub("_", " ").." #ffffffnevű játékost.", root, 255, 255, 255, true)
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento Offline", 3).."Indok: "..color..reason, root, 255, 255, 255, true)
 
 											setElementData(player, "log:admincmd", {target_name, cmd})
 										else
-											outputChatBox(core:getServerPrefix("red-dark", "Kitiltás", 3).."Ezt a játékost nem tilthatod ki ugyanis magasabb rangú mint te!", player, 255, 255, 255, true)
+											outputChatBox(core:getServerPrefix("red-dark", "Banimento", 3).."Ezt a játékost nem tilthatod ki ugyanis magasabb rangú mint te!", player, 255, 255, 255, true)
 										end
 										break
 									end
@@ -1666,7 +1666,7 @@ end
 addCommandHandler("unban", unbanPlayer)]]
 
 addCommandHandler("fixbones", function(thePlayer, cmd, target)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'fixbones') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1675,8 +1675,8 @@ addCommandHandler("fixbones", function(thePlayer, cmd, target)
 			if target then
 				setElementData(target, "char:bones", {["head"] = 0, ["body"] = 0, ["l_leg"] = 0, ["r_leg"] = 0, ["r_arm"] = 0, ["l_arm"] = 0})
 
-				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffmeggyógyította a csontjaidat.", target, 255, 255, 255, true)
-				sendMessageToAdmins(thePlayer, "meggyógyította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos csontjait. ")
+				outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffcurou seus ossos.", target, 255, 255, 255, true)
+				sendMessageToAdmins(thePlayer, "curou os ossos do jogador "..nameColor..getPlayerName(target)..adminMessageColor..".")
 				setElementData(thePlayer, "log:admincmd", {getElementData(target, "char:id"), cmd})
 			end
 		else
@@ -1686,7 +1686,7 @@ addCommandHandler("fixbones", function(thePlayer, cmd, target)
 end)
 
 addCommandHandler("ojail", function(thePlayer, cmd, charName, time, ...)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'ojail') then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1703,7 +1703,7 @@ addCommandHandler("ojail", function(thePlayer, cmd, charName, time, ...)
 					if v["charname"] == charName then 
 						talalt = true
 						if not fromJSON(v["adminJailDatas"])[1] then
-							outputChatBox(core:getServerPrefix("red-dark", "OfflineJail", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffbebörtönözte "..color..charName:gsub("_", " ").."#ffffff játékost.",root,255,255,255,true)
+							outputChatBox(core:getServerPrefix("red-dark", "OfflineJail", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffprendeu o jogador "..color..charName:gsub("_", " ").."#ffffff em jail offline.",root,255,255,255,true)
 							outputChatBox(core:getServerPrefix("red-dark", "OfflineJail", 3).."Indok: "..color..reason.." #ffffff| Idő: "..color..time.."#ffffff perc.",root,255,255,255,true)
 
 							dbExec(conn, "UPDATE characters SET adminJailDatas = ? WHERE id = ?", toJSON({true, reason, time, getElementData(thePlayer, "user:adminnick"), time, getElementData(thePlayer, "user:admin")}), v["id"])
@@ -1715,7 +1715,7 @@ addCommandHandler("ojail", function(thePlayer, cmd, charName, time, ...)
 			
 							setElementData(thePlayer, "user:adminDatas", playerStats)
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Ez a játékos már jailben van!", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Este jogador já está em jail!", thePlayer, 255, 255, 255, true)
 						end
 						break
 					end
@@ -1735,7 +1735,7 @@ end)
 
 
 addCommandHandler("setvehoil", function(thePlayer, cmd, target,oil)
-	if not isPlayerInAdminDuty(thePlayer) then return end
+	if not isPlayerInAdminDuty(thePlayer) then outputChatBox(core:getServerPrefix("red-dark", "Admin", 3).."Usa /aduty para entrar em serviço admin antes deste comando.", thePlayer, 255, 255, 255, true) return end
 	if hasPermission(thePlayer,'setvehoil') then 
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1748,13 +1748,13 @@ addCommandHandler("setvehoil", function(thePlayer, cmd, target,oil)
 						local veh = getPedOccupiedVehicle(target)
 					
 						if veh then 
-							outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffbeállította a járműved olajszintjét a következőre: "..color..""..oil..".", target, 255, 255, 255, true)
-							sendMessageToAdmins(thePlayer, "beállította "..nameColor..getPlayerName(target)..adminMessageColor.." játékos autójának olajszintjét a következőre: "..oil..".")
+							outputChatBox(core:getServerPrefix("server", "Admin", 1)..color..getElementData(thePlayer, "user:adminnick").." #ffffffdefiniu o nível de óleo do seu veículo para: "..color..""..oil..".", target, 255, 255, 255, true)
+							sendMessageToAdmins(thePlayer, "definiu o nível de óleo do veículo de "..nameColor..getPlayerName(target)..adminMessageColor.." para: "..oil..".")
 							setElementData(veh, "veh:distanceToOilChange", oil)
 							setElementData(veh,"oilLamp",false)
 
 						else 
-							outputChatBox(core:getServerPrefix("red-dark", "Admin", 2).."A játékos nincs autóban!", thePlayer, 255, 255, 255, true)
+							outputChatBox(core:getServerPrefix("red-dark", "Admin", 2).."O jogador não está num veículo!", thePlayer, 255, 255, 255, true)
 						end
 					end
 				else 

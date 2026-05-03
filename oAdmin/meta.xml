@@ -4,8 +4,10 @@
     <script src="g_admin.lua" type="shared" cache="false"></script>
     <script src="c_commands.lua" type="client" cache="false"></script>
     <script src="c_admin.lua" type="client" cache="false"></script>
+    <script src="hub/c_adminHub.lua" type="client" cache="false"></script>
     <script src="playerstats.lua" type="client" cache="false"></script>
     <script src="s_admin.lua" type="server" cache="false"></script>
+    <script src="hub/s_adminHub.lua" type="server" cache="false"></script>
     <script src="ajail.lua" type="client" cache="false"></script>
     <script src="logs/c_logs.lua" type="client" cache="false"></script>
     <script src="logs/s_logs.lua" type="server" cache="false"></script>

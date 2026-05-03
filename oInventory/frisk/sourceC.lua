@@ -9,9 +9,9 @@ local screen = {guiGetScreenSize()}
 local posW, posH = itemSize*column + margin*(column+1) , itemSize * row + (1+row)*margin
 local pos = {screen[1]/2 -posW/2,screen[2]/2 - posH/2}
 local friskTable = {
-	{"backpack","Tárgyak","bag"},
-	{"key","Kulcsok","key"},
-	{"licens","Iratok","licens"},
+	{"backpack","Itens","bag"},
+	{"key","Chaves","key"},
+	{"licens","Documentos","licens"},
 }
 
 local friskMove = false
@@ -52,24 +52,24 @@ function friskPlayer(player)
 									openFrisk(player)
 									targetElement = player
 									isAdminFrisk = false
-									chat:sendLocalMeAction("megmotozza "..getPlayerName(player):gsub("_"," ").." -t.")
+									chat:sendLocalMeAction("revistou "..getPlayerName(player):gsub("_"," ")..".")
 								else
 									closeFrisk()
 								end
 							else
-								outputChatBox(core:getServerPrefix("red-dark", "Motozás", 2).."A kiválasztott játékosnak nincs feltéve a keze.",61, 122, 188,true)
+								outputChatBox(core:getServerPrefix("red-dark", "Revista", 2).."O jogador selecionado não está com as mãos levantadas.",61, 122, 188,true)
 							end
 						else
-							outputChatBox(core:getServerPrefix("red-dark", "Motozás", 2).."A kiválasztott játékos túl messze van tőled.",61, 122, 188,true)
+							outputChatBox(core:getServerPrefix("red-dark", "Revista", 2).."O jogador selecionado está longe demais de você.",61, 122, 188,true)
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Motozás", 2).."Magadat nem motozhatod meg.",61, 122, 188,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Revista", 2).."Você não pode revistar a si mesmo.",61, 122, 188,true)
 					end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Motozás", 2).."A kiválasztott játékos meg van halva.",61, 122, 188,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Revista", 2).."O jogador selecionado está morto.",61, 122, 188,true)
 				end
 			else
-				outputChatBox(core:getServerPrefix("red-dark", "Motozás", 2).."A kiválasztott játékos nincs bejelentkezve.",61, 122, 188,true)
+				outputChatBox(core:getServerPrefix("red-dark", "Revista", 2).."O jogador selecionado não está logado.",61, 122, 188,true)
 			end
 		end
 	end
@@ -78,7 +78,7 @@ end
 func["friskAdmin"] = function(cmd, id)
 	if getElementData(localPlayer, "user:admin") >= 2 then
 		if not (id) then
-			outputChatBox(core:getServerPrefix("server", "Használat", 3).."#ffffff/"..cmd.." [ID]", 255, 255, 255, true)
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."#ffffff/"..cmd.." [ID]", 255, 255, 255, true)
 		else
 			local targetPlayer, targetPlayerName = core:getPlayerFromPartialName(getLocalPlayer(), id)	
 			if targetPlayer then
@@ -93,7 +93,7 @@ func["friskAdmin"] = function(cmd, id)
 						end
 					--end
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Motozás", 3).."A kiválasztott játékos nincs bejelentkezve.",61, 122, 188,true)
+					outputChatBox(core:getServerPrefix("red-dark", "Revista", 3).."O jogador selecionado não está logado.",61, 122, 188,true)
 				end
 			end
 		end
@@ -121,7 +121,7 @@ func["friskRender"] = function()
 
 			dxDrawRectangle(pos[1], pos[2], posW, posH + 30,tocolor(32,32,32,255))
 
-			dxDrawText("Készpénz: "..color..convertNumber(getElementData(targetElement,"char:money")).."#ffffff $", pos[1], pos[2], pos[1]+posW-5, pos[2]+235, tocolor(255,255,255,255), 1, font:getFont("condensed", 13), "right", "bottom", true, true, true, true)
+			dxDrawText("Dinheiro: "..color..convertNumber(getElementData(targetElement,"char:money")).."#ffffff $", pos[1], pos[2], pos[1]+posW-5, pos[2]+235, tocolor(255,255,255,255), 1, font:getFont("condensed", 13), "right", "bottom", true, true, true, true)
 
 			for k,v in ipairs(friskTable) do
 				if core:isInSlot(pos[1]-20+(k*25),pos[2]+215, 20, 20) then

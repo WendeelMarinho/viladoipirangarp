@@ -1,6 +1,6 @@
 # Architecture overview — Vale do Ipiranga RP / MTA:SA
 
-**Versão:** 1.0 · **Atualização:** 2026-05-02
+**Versão:** 1.1 · **Atualização:** 2026-05-03
 
 ---
 
@@ -46,6 +46,7 @@ flowchart LR
 | **Bootstrap gamemode** | `vila-do-ipiranga-rp/meta.xml` + `server.lua` → `oStarter` |
 | **Core services** | `oMysql`, `oCore`, `oChat`, `oAnticheat*`, loaders, shaders master |
 | **Domain** | Conta/inventário/veículos/banco/dashboard/jobs/maps — centenas de recursos |
+| **Gameplay sistemas premium** | `oWanted` (procurados 5★), `oTerritory` (dominação zonas), `oFactionHQ` (HQ facção), `oFactionScripts` (mecânicas RP) — adicionados 2026-05-03 |
 | **Presentation (client)** | Scripts `client/` por recurso, DX UI, shaders, replace model |
 
 ---

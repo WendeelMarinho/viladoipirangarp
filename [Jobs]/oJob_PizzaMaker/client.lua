@@ -254,8 +254,8 @@ function render()
 			if (not startedMaking) then
 				core:dxDrawButton(sx*0.83+5/myX*sx, sy*0.677, 250/myX*sx-10/myX*sx, sy*0.03, r, g, b, 200, orderText, tocolor(255, 255, 255, 255), 0.5/myX*sx, fonts["condensed-20"], true, tocolor(0, 0, 0, 100))
 			elseif(startedMaking) then
-				dxDrawText("Ennyi ideje készíted: "..color..makingTime.." #dcdcdcmásodperc", sx*0.83+5/myX*sx, sy*0.665, sx*0.83+5/myX*sx+250/myX*sx-10/myX*sx, sy*0.665+sy*0.025, tocolor(220, 220, 220, 245), 0.5/myX*sx, fonts["condensed-20"], "left", "center", false, false, false, true);
-				dxDrawText("Elvárt készítési idő: "..color..elvartIdo.." #dcdcdcmásodperc", sx*0.83+5/myX*sx, sy*0.69, sx*0.83+5/myX*sx+250/myX*sx-10/myX*sx, sy*0.69+sy*0.025, tocolor(220, 220, 220, 245), 0.5/myX*sx, fonts["condensed-20"], "left", "center", false, false, false, true);
+				dxDrawText("Tempo preparando: "..color..makingTime.." #dcdcdcsegundo(s)", sx*0.83+5/myX*sx, sy*0.665, sx*0.83+5/myX*sx+250/myX*sx-10/myX*sx, sy*0.665+sy*0.025, tocolor(220, 220, 220, 245), 0.5/myX*sx, fonts["condensed-20"], "left", "center", false, false, false, true);
+				dxDrawText("Tempo esperado: "..color..elvartIdo.." #dcdcdcsegundo(s)", sx*0.83+5/myX*sx, sy*0.69, sx*0.83+5/myX*sx+250/myX*sx-10/myX*sx, sy*0.69+sy*0.025, tocolor(220, 220, 220, 245), 0.5/myX*sx, fonts["condensed-20"], "left", "center", false, false, false, true);
 			end	
 
 			if(orderNow == true) then

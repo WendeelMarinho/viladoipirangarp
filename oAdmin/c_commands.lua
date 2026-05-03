@@ -106,4 +106,4 @@ function tableContains(table, element)
     return false
   end
 
-  hasPermission(localPlayer,'showplayers')
+	hasPermission(localPlayer, "showplayers", true)

@@ -327,7 +327,7 @@ end)
 addCommandHandler("delcrafting", function(player, cmd, id)
     if getElementData(player, "user:admin") >= 7 then 
         if not id then 
-            outputChatBox(core:getServerPrefix("red-dark", "Használat", 3).."/"..cmd.." [ID]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Uso", 3).."/"..cmd.." [ID]", player, 255, 255, 255, true)
         else
             id = tonumber(id)
 
@@ -338,7 +338,7 @@ addCommandHandler("delcrafting", function(player, cmd, id)
                 triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "törölte a(z) #db3535"..id.." #557ec9ID-vel rendelkező drogkészítő asztalt.", 8)
                 dbExec(conn, "DELETE FROM craftingTabels WHERE id=?", id)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Hiba", 3).."Nincs ilyen ID-vel rendelkező drogkészítő asztal!", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Erro", 3).."Nenhuma mesa de fabricação encontrada com este ID!", player, 255, 255, 255, true)
             end
         end
     end

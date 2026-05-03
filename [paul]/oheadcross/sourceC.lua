@@ -13,9 +13,9 @@ function toggleHeadMove()
 	serverName = exports["ocore"]:getServerName()
     value["disabled"] = not value["disabled"]
     if not value["disabled"] then
-        outputChatBox(h.."["..serverName.."] #ffffffSikeresen bekapcsoltad a fejmozgatást!", 246,137,52,true)
+        outputChatBox(h.."["..serverName.."] #ffffffAnimação de cabeça ativada com sucesso!", 246,137,52,true)
     else
-        outputChatBox(h.."["..serverName.."] #ffffffSikeresen kikapcsolatd a fejmozgatást!", 246,137,52,true)
+        outputChatBox(h.."["..serverName.."] #ffffffAnimação de cabeça desativada com sucesso!", 246,137,52,true)
     end
 end
 addCommandHandler("togglehead", toggleHeadMove)

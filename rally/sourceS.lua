@@ -45,7 +45,7 @@ function endMark(source)
     if source then 
         if players[source] then
             players[source] = nil
-            outputChatBox("#b52424[Rally]: #ffffffSikeresen teljesítetted a pályát, az időd: "..minute.." perc // "..sec.." másodperc.",source,255,255,255,true)
+            outputChatBox("#b52424[Rally]: #ffffffVocê completou o circuito! Tempo: "..minute.." min // "..sec.." segundos.",source,255,255,255,true)
             setElementPosition(getPedOccupiedVehicle(source),2369.1787109375, -652.55444335938, 127.61670684814)
 
             for k,v in pairs(getElementsByType("player")) do 

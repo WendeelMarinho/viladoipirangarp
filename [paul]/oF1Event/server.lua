@@ -54,7 +54,7 @@ addEventHandler("onColShapeHit",root,function(player,md)
                                 setTimer(function()
                                     removePedFromVehicle(player)
                                     setElementPosition(player,3981.9970703125,-2905.537109375,7.1796875) 
-                                    outputChatBox(core:getServerPrefix("red-dark", "F1 Event", 3).."Sikeresen teljesítetted az eventet, várj a további utasításokig itt!", player, 255, 255, 255, true)
+                                    outputChatBox(core:getServerPrefix("red-dark", "F1 Event", 3).."Você completou o evento! Aguarde as próximas instruções.", player, 255, 255, 255, true)
                                     triggerClientEvent(root,"insertPlayerToTable",root,utf8.gsub(getPlayerName(player),"_"," "),getElementData(player,"F1CurrentTime"))
                                 end,5000,1)
 
@@ -97,7 +97,7 @@ function makeCountdown(thePlayer,cmd)
 
     if aLevel >= 7 then 
         admin:sendMessageToAdmins(thePlayer, "létrehozott egy visszaszámlálást az F1 Eventhez!")
-        outputChatBox(core:getServerPrefix("red-dark", "F1 Event", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffSikeresen elindítottad a visszaszámlálást!", thePlayer, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "F1 Event", 3)..color..getElementData(thePlayer, "user:adminnick").." #ffffffContagem regressiva iniciada com sucesso!", thePlayer, 255, 255, 255, true)
         triggerClientEvent(root,"startCountdown",root)
         for k,v in pairs(serverSideRacers) do 
             if isTimer(playerF1Timer[v[2]]) then killTimer(playerF1Timer[v[2]]) end

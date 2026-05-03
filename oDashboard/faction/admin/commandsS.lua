@@ -39,6 +39,9 @@ addCommandHandler("addplayertofaction", addPlayerToFaction)
 addCommandHandler("giveplayerfaction", addPlayerToFaction)
 addCommandHandler("addtofaction", addPlayerToFaction)
 addCommandHandler("setplayerfaction",addPlayerToFaction)
+addCommandHandler("setfaccao", addPlayerToFaction)
+addCommandHandler("definirfaccao", addPlayerToFaction)
+addCommandHandler("adicionarfaccao", addPlayerToFaction)
 
 function getPlayerFactions(player, command, target)
     if exports["oAdmin"]:hasPermission(player,"getplayerfactions") then 
@@ -66,6 +69,8 @@ function getPlayerFactions(player, command, target)
 end
 addCommandHandler("getplayerfactions", getPlayerFactions)
 addCommandHandler("getfactions", getPlayerFactions)
+addCommandHandler("listarfaccoes", getPlayerFactions)
+addCommandHandler("faccoesjogador", getPlayerFactions)
 
 function removePlayerFromFaction(player, command, target, factionID)
     if exports["oAdmin"]:hasPermission(player,"removeplayerfromfaction") then 
@@ -108,6 +113,8 @@ function removePlayerFromFaction(player, command, target, factionID)
 end 
 addCommandHandler("removeplayerfromfaction", removePlayerFromFaction)
 addCommandHandler("removefromfaction", removePlayerFromFaction)
+addCommandHandler("removerfaccao", removePlayerFromFaction)
+addCommandHandler("removerdafaccao", removePlayerFromFaction)
 
 function removePlayerFromAllFaction(player, command, target)
     if exports["oAdmin"]:hasPermission(player,"removeplayerfromallfaction") then 
@@ -139,6 +146,7 @@ function removePlayerFromAllFaction(player, command, target)
 end
 addCommandHandler("removeplayerfromallfaction", removePlayerFromAllFaction)
 addCommandHandler("removefromallfaction", removePlayerFromAllFaction)
+addCommandHandler("removerdetodasfaccoes", removePlayerFromAllFaction)
 
 function setPlayerFactionLeader(player, cmd, target, targetFaction) 
     if exports["oAdmin"]:hasPermission(player,"setfactionleader") then 
@@ -194,6 +202,34 @@ function setPlayerFactionLeader(player, cmd, target, targetFaction)
     end
 end
 addCommandHandler("setfactionleader", setPlayerFactionLeader)
+addCommandHandler("liderfac", setPlayerFactionLeader)
+addCommandHandler("definirliderfac", setPlayerFactionLeader)
+
+--- Lista no chat todos os IDs de facção carregados (tabela `factions` / `server_faction_list`).
+function listFactionIds(player, command)
+    if not exports["oAdmin"]:hasPermission(player, "setfactionleader", true) then
+        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Este comando exige nível de admin 7 (ou ACL dev) e permissão setfactionleader.", player, 255, 255, 255, true)
+        return
+    end
+    if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end
+
+    outputChatBox(core:getServerPrefix("server", "Facção", 3).."IDs e nomes (uso em /setfactionleader [jogador] [id]):", player, 255, 255, 255, true)
+    local count = 0
+    for _, v in pairs(server_faction_list) do
+        if v and type(v) == "table" and v[1] then
+            count = count + 1
+            local t = tonumber(v[3]) or 0
+            local typeLabel = faction_types[t] or ("tipo " .. tostring(t))
+            outputChatBox(color .. "#" .. v[1] .. " #ffffff— " .. tostring(v[2] or "?") .. " " .. color .. "(" .. typeLabel .. ")", player, 255, 255, 255, true)
+        end
+    end
+    if count == 0 then
+        outputChatBox(core:getServerPrefix("red-dark", "Facção", 3).."Nenhuma facção carregada (tabela `factions` vazia ou recurso oDashboard sem dados). Cria facções pelo painel admin ou insere na DB.", player, 255, 255, 255, true)
+    end
+end
+addCommandHandler("listfactionids", listFactionIds)
+addCommandHandler("idsfaccoes", listFactionIds)
+addCommandHandler("listarfaccoesids", listFactionIds)
 
 function addMoneyToFaction(player, cmd, factionID, money)
     if exports["oAdmin"]:hasPermission(player,"givefactionmoney") then 
@@ -211,6 +247,7 @@ function addMoneyToFaction(player, cmd, factionID, money)
     end
 end
 addCommandHandler("givefactionmoney", addMoneyToFaction)
+addCommandHandler("dardinheirofaccao", addMoneyToFaction)
 
 function removeMoneyToFaction(player, cmd, factionID, money)
     if exports["oAdmin"]:hasPermission(player,"removefactionmoney") then 
@@ -228,3 +265,4 @@ function removeMoneyToFaction(player, cmd, factionID, money)
     end
 end
 addCommandHandler("removefactionmoney", removeMoneyToFaction)
+addCommandHandler("retirardinheirofaccao", removeMoneyToFaction)

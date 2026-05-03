@@ -311,7 +311,7 @@ addEventHandler("onClientTryToDownloadImage", getResourceRootElement(),
 						outputChatBox(color.."[Graffiti]: #ffffffElőször illeszd be az URL-linket!", 255, 255, 255, true)
 					end
 				else
-					outputChatBox(color.."[Graffiti]: #ffffffVárnod kell "..color.. 3 - math.floor(deltaTime / 1000) .. " másodpercet#ffffff a következő letöltésig.", 255, 255, 255, true)
+					outputChatBox(color.."[Graffiti]: #ffffffVocê precisa esperar "..color.. 3 - math.floor(deltaTime / 1000) .. " segundo(s)#ffffff para a próxima descarga.", 255, 255, 255, true)
 				end
 			else
 				outputChatBox(color.."[Graffiti]: #ffffffEgy letöltés már folyamatban van!", 255, 255, 255, true)

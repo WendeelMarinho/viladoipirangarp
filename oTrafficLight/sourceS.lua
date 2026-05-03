@@ -4,8 +4,8 @@ local color, r, g, b = core:getServerColor()
 -- oCity-main maps ba vannak a táblák manuálisan lerakva 
 
 function trafficlight_sendTicket(element)
-    outputChatBox(core:getServerPrefix("server").."Átmentél egy piroslámpán!", element ,255, 255, 255, true)
-    outputChatBox(core:getServerPrefix("server").."Büntetésed ".. color .."35$#FFFFFF!", element ,255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server").."Você avançou um sinal vermelho!", element ,255, 255, 255, true)
+    outputChatBox(core:getServerPrefix("server").."Multa: ".. color .."35$#FFFFFF!", element ,255, 255, 255, true)
     setElementData(element, "char:money", getElementData(element, "char:money")-35)
 end
 

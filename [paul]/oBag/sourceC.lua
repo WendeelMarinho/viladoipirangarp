@@ -38,7 +38,7 @@ function attachBag(attacker,element)
             exports["oInfobox"]:outputInfoBox("Számodra ez nem engedélyezett.","error")
         end 
     else 
-        exports["oInfobox"]:outputInfoBox("Nincs nálad erre alkalmas item!","error")
+        exports["oInfobox"]:outputInfoBox("Você não tem um item adequado para isso!","error")
     end
 end 
 

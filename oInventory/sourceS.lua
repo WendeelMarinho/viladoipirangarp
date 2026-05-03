@@ -863,6 +863,8 @@ func.takePlayerItem = function(playerSource,cmd,target,item)
 	end
 end
 addCommandHandler("takeitem",func.takePlayerItem)
+addCommandHandler("retiraritem", func.takePlayerItem)
+addCommandHandler("removeritem", func.takePlayerItem)
 
 
 --[[addCommandHandler("asdasd2",function(playerSource)
@@ -1213,6 +1215,7 @@ func.givePlayerItem = function(playerSource,cmd,target,item,value,count,dutyitem
 	end
 end
 addCommandHandler("giveitem",func.givePlayerItem)
+addCommandHandler("daritem", func.givePlayerItem)
 
 func.givePlayerGun = function(playerSource,cmd,target,item,ammo)
 	if exports["oAdmin"]:hasPermission(playerSource,"giveitem") then
@@ -1259,6 +1262,7 @@ func.givePlayerGun = function(playerSource,cmd,target,item,ammo)
 	end
 end
 addCommandHandler("givegun",func.givePlayerGun)
+addCommandHandler("dararma", func.givePlayerGun)
 
 function checkPlayerInventory(targetPlayer, item, count)
 	local state,slot = getFreeSlot(targetPlayer,item)
@@ -1555,7 +1559,7 @@ function createLicense(player, type)
 	end
 end
 
-addCommandHandler("givelicense",function(playerSource, cmd, id, type)
+local function adminGiveLicense(playerSource, cmd, id, type)
 	if exports["oAdmin"]:hasPermission(playerSource,"givelincese") then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(playerSource) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
@@ -1596,16 +1600,29 @@ addCommandHandler("givelicense",function(playerSource, cmd, id, type)
 			outputChatBox(core:getServerPrefix("server", "Uso", 3).." /"..cmd.." [ID] [tipo: 1=RG, 2=CNH, 3=porte, 4=caça, 6=pesca]", playerSource,61,122,188,true)
 		end
 	end
-end)
---------------
+end
+
+addCommandHandler("givelicense", adminGiveLicense)
+addCommandHandler("darlicenca", adminGiveLicense)
 
 
 func.achangeLock = function(playerSource,cmd,typ,arg)
 	if exports["oAdmin"]:hasPermission(playerSource,"changelock") then
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(playerSource) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
-		typ = tostring(typ)
-		if typ and typ == "vehicle" or typ == "interior" then
+		local rawTyp = typ and string.lower((tostring(typ):gsub("^%s+", ""):gsub("%s+$", ""))) or ""
+		local typAliases =
+		{
+			["vehicle"] = "vehicle", ["interior"] = "interior",
+			["veiculo"] = "vehicle", ["carro"] = "vehicle",
+			["imovel"] = "interior",
+		}
+		typ = typAliases[rawTyp] or rawTyp
+
+		arg = arg and string.lower((tostring(arg):gsub("^%s+", ""):gsub("%s+$", ""))) or ""
+		local revokeAllOthers = (arg == "all" or arg == "todos")
+
+		if typ == "vehicle" or typ == "interior" then
 			local item = -1
 			local value = -1
 			if typ == "vehicle" then
@@ -1619,7 +1636,7 @@ func.achangeLock = function(playerSource,cmd,typ,arg)
 						admin:sendMessageToAdmins(playerSource, "troca de fechadura em veículo. #db3535("..dbid..")")
 
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Não pode trocar fechadura deste veículo.",playerSource,220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Não é possível trocar a fechadura: o veículo não tem ID na base (ex.: spawn temporário). Use um veículo persistido (com ID na DB). Comandos: /changelock ou /trocarfechadura.",playerSource,220,20,60,true)
 					end
 				else
 					outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Você não está em um veículo.",playerSource,220,20,60,true)
@@ -1639,17 +1656,23 @@ func.achangeLock = function(playerSource,cmd,typ,arg)
 				end
 			end
 			if item > 0 then
-				if arg == "all" then
+				if revokeAllOthers then
 					takeAllItem(item,value)
 				end
 				giveItem(playerSource,item,value,1,0)
 			end
 		else
-			outputChatBox("Uso:#ffffff /"..cmd.." [tipo: vehicle,interior] [all = todos]",playerSource,r, g, b,true)
+			outputChatBox("Uso:#ffffff /"..cmd.." [tipo: "..color.."vehicle#ffffff | "..color.."veiculo#ffffff | "..color.."interior#ffffff | "..color.."imovel#ffffff] ["..color.."opcional:#ffffff "..color.."all#ffffff | "..color.."todos#ffffff — remover chaves iguais de todos]",playerSource,r, g, b,true)
+		end
+	else
+		if getElementData(playerSource, "user:loggedin") then
+			outputChatBox(core:getServerPrefix("red-dark", "Inventário", 3).."Você precisa de nível de administrador ≥ 7 (/changelock ou /trocarfechadura) e serial verificado na tabela adminserials.", playerSource, 220, 20, 60, true)
 		end
 	end
 end
 addCommandHandler("changelock",func.achangeLock)
+addCommandHandler("trocarfechadura", func.achangeLock)
+addCommandHandler("mudarfechadura", func.achangeLock)
 
 function takeDutyItems(playerSource)
 	local categories = {
@@ -1962,3 +1985,16 @@ addCommandHandler("elkoboz", function(thePlayer, cmd, target, seizureType)
 		end
 	end
 end)
+
+--- Lista compacta { { id, name }, ... } para painéis admin (ex.: Admin Hub).
+function getItemCatalogMini()
+	local o = {}
+	for id, def in pairs(availableItems) do
+		local nid = tonumber(id)
+		if nid and def and def.name then
+			o[#o + 1] = { nid, def.name }
+		end
+	end
+	table.sort(o, function(a, b) return a[1] < b[1] end)
+	return o
+end

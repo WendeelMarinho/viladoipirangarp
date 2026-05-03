@@ -44,7 +44,7 @@ function drawWindowControlPanel()
         local stateText = ""
 
         if windowStates[i] then 
-            stateText = "#9cd64bleengedve"
+            stateText = "#9cd64baberto"
         else
             stateText = "#eb4646fechado"
         end

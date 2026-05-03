@@ -316,7 +316,7 @@ function createAlarm(bank)
         for k, v in ipairs(getElementsByType("player")) do 
             if exports.oDashboard:getFactionType(getElementData(v, "char:duty:faction")) == 1 then 
                 outputChatBox(" ", v)
-                outputChatBox(core:getServerPrefix("blue-light-2", "Központ", 3).."Minden egységnek! Itt a központ! A(z) "..color..bankNames[bank].. " #ffffffrablása folyamatban!", v, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("blue-light-2", "Central", 3).."Todas as unidades! A(z) "..color..bankNames[bank].. " #ffffffassalto em andamento!", v, 255, 255, 255, true)
                 outputChatBox(" ", v)
             end
         end
@@ -332,7 +332,7 @@ addEvent("bankrob > sendIronDetectorMessage", true)
 addEventHandler("bankrob > sendIronDetectorMessage", resourceRoot, function(bank)
     for k, v in ipairs(getElementsByType("player")) do 
         if exports.oDashboard:getFactionType(getElementData(v, "char:duty:faction")) == 1 then 
-            outputChatBox(core:getServerPrefix("blue-light-2", "Központ", 3).."Itt a központ! A(z) "..color..bankNames[bank].. " #fffffffémdetektora illegális tárgyat érzékelt, egy a bank területére lépő személynél!", v, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("blue-light-2", "Central", 3).."Central! O detector de metais do "..color..bankNames[bank].. " #ffffffdetectou um objeto ilegal em uma pessoa entrando no banco!", v, 255, 255, 255, true)
         end
     end
 end)

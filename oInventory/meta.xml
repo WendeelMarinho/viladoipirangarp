@@ -383,6 +383,7 @@
     <export function="loadItems" type="server"></export>
     <export function="findCard" type="server"></export>
     <export function="transferCardMoney" type="server"></export>
+    <export function="getItemCatalogMini" type="server"></export>
     <export function="setCardPinCode" type="server"></export>
     <export function="findPlayerCardsByDbid" type="server"></export>
     <export function="syncItems" type="server"></export>

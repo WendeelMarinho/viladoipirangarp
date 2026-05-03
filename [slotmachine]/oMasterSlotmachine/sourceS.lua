@@ -57,7 +57,7 @@ addEventHandler("placeMachine", getRootElement(), function(playerElement, object
         local result, numAffect, lastInsertID = dbPoll(qh, 0)
         if result then 
             loadAutomata(lastInsertID)
-            outputChatBox(core:getServerPrefix("server").."Sikeresen létrehoztál egy Slot gépet (ID: "..lastInsertID .." | Típus: ".. typeName[type] ..")",playerElement, 0, 0, 0, true);
+            outputChatBox(core:getServerPrefix("server").."Máquina caça-níqueis criada com sucesso (ID: "..lastInsertID .." | Tipo: ".. typeName[type] ..")",playerElement, 0, 0, 0, true);
         end
     end,{type},connection, "INSERT INTO gamemachine (position, objID, type, interior, dimension) VALUES (?, ?, ?, ?, ?)", toJSON({x,y,z,rotX,rotY,rotZ}), objectId, type, interior, dimension)
 end)
@@ -70,5 +70,5 @@ addEventHandler("deleteMachine",getRootElement(),function(playerElement, id)
             destroyElement(v)
         end
     end
-    outputChatBox(core:getServerPrefix("server").."Sikeresen törölted a kiválasztott automatát",playerElement, 0, 0, 0, true);
+    outputChatBox(core:getServerPrefix("server").."Máquina removida com sucesso",playerElement, 0, 0, 0, true);
 end)

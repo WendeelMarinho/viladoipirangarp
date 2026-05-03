@@ -20,14 +20,14 @@ function sellDrugItem(ped, itemID, itemCount)
                     startCamera = {getCameraMatrix()}
                     return true
                 else
-                    outputChatBox(pedName.." mondja: Ha ennyit szívnék, akkor már rég megdöglöttem volna. Ennyi cucc nem kell még a rendőröknek sem.", 255, 255, 255, true)
+                    outputChatBox(pedName.." diz: Se eu fumasse tanto assim já tinha esticado o pernil faz tempo. Até os cana não querem tanta parada.", 255, 255, 255, true)
                     return false
                 end
             else
                 return false
             end
         else
-            outputChatBox(pedName.." mondja: Jól vagy? Mégis miért vennék tőled ilyet? Takarodj innen az értéktelen cuccaiddal együtt...", 255, 255, 255, true)
+            outputChatBox(pedName.." diz: Tá bom? Por que eu compraria isso de você? Sai fora daqui com essa bugiaria toda...", 255, 255, 255, true)
             return false
         end
 
@@ -43,11 +43,11 @@ local panelText = 1
 local minigameShowing = false
 local minigameStarted = false
 local panelTexts = {
-    "Csá tesó. Mit hoztál ma nekem? Oh egy kis {#itemName}...",
-    "Ezért most neked nagyjából {#price}$-t tudok adni...",
+    "E aí, mano. O que você trouxe hoje? Ah, um pouco de {#itemName}...",
+    "Por isso, posso te dar mais ou menos {#price}$...",
     "",
-    "Na akkor ezért a cuccért {#price}$-t tudok most neked adni.",
-    "Kössz a cuccot. Pá",
+    "Então, por essa parada aqui, consigo te dar {#price}$.",
+    "Valeu pela mercadoria. Até mais.",
 }
 
 local priceMultiplier = 0
@@ -116,11 +116,11 @@ function drawTalkingAnimation()
 
     if not lastText then
         if minigameShowing then 
-            dxDrawText("Ha nem vagy megelégedve a kínált árral akkor a lenti minigame segítségével finomíthatsz az áron!", 0, sy - sy*0.15, sx, sy - sy*0.1, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 12/myX*sx), "center", "center")
-            dxDrawText("Akkor engedd fel a "..color.."[Space] #ffffffgombot, amikor a fehér vonal a zöld mezőbe ér!", 0, sy - sy*0.05, sx, sy, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 12/myX*sx), "center", "center", false, false, false, true)
+            dxDrawText("Se não estiver satisfeito com o preço oferecido, use o minigame abaixo para melhorar o valor!", 0, sy - sy*0.15, sx, sy - sy*0.1, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 12/myX*sx), "center", "center")
+            dxDrawText("Solte o "..color.."[Space] #ffffffquando a linha branca chegar na área verde!", 0, sy - sy*0.05, sx, sy, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 12/myX*sx), "center", "center", false, false, false, true)
 
             if not minigameStarted then
-                dxDrawText("A minigame kezdéséhez tartsd lenyomva a [Space] gombot.", 0, sy - sy*0.15, sx, sy, tocolor(r, g, b, 255 * openAnimation[1]), 1, font:getFont("bebasneue", 18/myX*sx), "center", "center")
+                dxDrawText("Para iniciar o minigame, mantenha o [Space] pressionado.", 0, sy - sy*0.15, sx, sy, tocolor(r, g, b, 255 * openAnimation[1]), 1, font:getFont("bebasneue", 18/myX*sx), "center", "center")
             else
                 if spaceState then
                     cursorPos = interpolateBetween(cursorPos, 0, 0, 1, 0, 0, (getTickCount() - cursorStart) / 5000, "InOutQuad")
@@ -263,7 +263,7 @@ function closePanel()
         setElementFrozen(localPlayer, false)
         showCursor(false)
 
-        outputChatBox(core:getServerPrefix("server", "Dealer", 2).."Sikeresen eladtál a dealernek "..color..sellItemDatas[2].."#ffffffdb "..color..inventory:getItemName(sellItemDatas[1]).."#ffffff-et #7de05e"..generatedPrice.."$#ffffff-ért.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Dealer", 2).."Você vendeu para o dealer "..color..sellItemDatas[2].."#ffffff unidades de "..color..inventory:getItemName(sellItemDatas[1]).."#ffffff por #7de05e"..generatedPrice.."$#ffffff.", 255, 255, 255, true)
         setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money") + generatedPrice)
         generatedPrice = 0
         panelText = 1

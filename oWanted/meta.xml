@@ -1,0 +1,20 @@
+<meta>
+    <info author="VilaDev" name="oWanted" version="1.0.0"
+          description="Sistema de procurados (wanted) com estrelas, bounty, notificação policial e integração MDC." />
+
+    <script src="global.lua"  type="shared" />
+    <script src="server.lua"  type="server" />
+    <script src="client.lua"  type="client" />
+
+    <!-- API pública para outros recursos adicionarem crimes -->
+    <export function="addCrime"        type="server" />
+    <export function="clearWanted"     type="server" />
+    <export function="getWantedLevel"  type="server" />
+    <export function="isWanted"        type="server" />
+    <export function="getBounty"       type="server" />
+
+    <include resource="oDashboard" />
+    <include resource="oCore" />
+    <include resource="oInfobox" />
+    <include resource="oFactionScripts" />
+</meta>

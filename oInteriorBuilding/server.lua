@@ -65,7 +65,7 @@ registerEvent("intiEdit:buyPPFurniture", getRootElement(),
 
 					dbExec(connection, "UPDATE interior_datas SET unlockedPP=? WHERE interiorId=?", text, intiId)
 				else
-					exports.oInfobox:outputInfoBox("Nincs elég prémium pontod! (" .. prices["furnitures"][2332] .. "PP)", "error", player)
+					exports.oInfobox:outputInfoBox("Pontos premium insuficientes! (" .. prices["furnitures"][2332] .. "PP)", "error", player)
 				end
 			end
 		end
@@ -89,7 +89,7 @@ registerEvent("intiEdit:placeSafe", getRootElement(),
 
 					--addPPLog(getElementData(player, "dbid"), "Bútorvásárlás (Széf)", prices["furnitures"][2332])
 				else
-					exports.oInfobox:outputInfoBox("Nincs elég prémium pontod! (" .. prices["furnitures"][2332] .. "PP)", "error", player)
+					exports.oInfobox:outputInfoBox("Pontos premium insuficientes! (" .. prices["furnitures"][2332] .. "PP)", "error", player)
 				end
 			end
 		end
@@ -197,7 +197,7 @@ registerEvent("intiEdit:saveInterior", getRootElement(),
 								removeElementData(player, "currentCustomInterior")
 								removeElementData(player, "intiEditBefore")
 							else
-								exports.oInfobox:outputInfoBox("Nincs elég pénzed!", "error", player)
+								exports.oInfobox:outputInfoBox("Dinheiro insuficiente!", "error", player)
 							end
 						end
 					end

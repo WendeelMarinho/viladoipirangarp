@@ -128,8 +128,8 @@ local objID = 1776
 addCommandHandler("createautomata",function(cmd, type)
     if getElementData(localPlayer, "user:admin") >= 7 then 
         if not type then 
-            outputChatBox(core:getServerPrefix("server", "vendingMachine", 3).."Használat: ".. cmd.." [Típus]", 0, 0, 0, true);
-            outputChatBox(core:getServerPrefix("server", "vendingMachine", 3).."Típus: 1 = Étel | 2 = Ital | 3 = Kávé", 0, 0, 0, true);
+            outputChatBox(core:getServerPrefix("server", "vendingMachine", 3).."Uso: ".. cmd.." [Tipo]", 0, 0, 0, true);
+            outputChatBox(core:getServerPrefix("server", "vendingMachine", 3).."Tipo: 1 = Comida | 2 = Bebida | 3 = Café", 0, 0, 0, true);
         else
             type = tonumber(type)
             if type == 1 then 
@@ -191,7 +191,7 @@ addCommandHandler("nearbyautomata", function(cmd, distance)
             if getElementData(v, "vendingMachine.isMachine") then 
                 local tx,ty,tz = getElementPosition(v)
                 if getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz) <= distance then 
-                    outputChatBox(hex.."*#FFFFFF Azonosító: "..hex.. getElementData(v, "vendingMachine.Id") .."#FFFFFF | Távolság: "..hex..math.floor(getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz)), 255, 255, 255, true)
+                    outputChatBox(hex.."*#FFFFFF ID: "..hex.. getElementData(v, "vendingMachine.Id") .."#FFFFFF | Distância: "..hex..math.floor(getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz)), 255, 255, 255, true)
                     count = count + 1
                 end
             end

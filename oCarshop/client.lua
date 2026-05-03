@@ -267,44 +267,44 @@ function drawPanel()
 				dataY = dataY + 0.03
 			end
 		else
-			dxDrawText("Ez a jármű nem engedélyezett a kiválasztott frakció számára!", 0, sy*0.65, sx*0.2, sy*0.65+sy*0.25, tocolor(194, 29, 29, 255*a), 0.9/myX*sx, fonts["condensed-18"], "center", "center", false, true)
+			dxDrawText("Este veículo não é permitido para a organização selecionada!", 0, sy*0.65, sx*0.2, sy*0.65+sy*0.25, tocolor(194, 29, 29, 255*a), 0.9/myX*sx, fonts["condensed-18"], "center", "center", false, true)
 		end
 	end
 	
 	
 	if vehicleColorType == "custom" then
 		if vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3] == 0 then
-			dxDrawText('Ára: #49aade'..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
+			dxDrawText('Preço:#49aade'..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
 		else
 			if vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12] == 0 then
-				dxDrawText('Ára:  '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc + "..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]*0.3).."#dcdcdc$",sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
+				dxDrawText('Preço: '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc + "..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]*0.3).."#dcdcdc$",sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
 			else
-				dxDrawText('Ára:  '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc + "..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]*0.3).."#dcdcdc$ | #49aade"..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
+				dxDrawText('Preço: '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc + "..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]*0.3).."#dcdcdc$ | #49aade"..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),0.9/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
 			end
 		end
 	else
 		if vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3] == 0 then 
-			dxDrawText('Ára: #49aade'..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
+			dxDrawText('Preço:#49aade'..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
 		else
 			if vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12] == 0 then
-				dxDrawText('Ára:  '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc$",sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)	
+				dxDrawText('Preço: '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc$",sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)	
 			else
-				dxDrawText('Ára:  '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc$ | #49aade"..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)	
+				dxDrawText('Preço: '..color..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][3]).."#dcdcdc$ | #49aade"..comma_value(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12])..'#cdcdcdPP',sx*0.88,sy*0.915,sx*0.88+sx*0.115,sy*0.915+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)	
 			end
 		end
 	end
 
     if not vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][4] then 
-        dxDrawText('Limit:  '..color.."Nincs",sx*0.88,sy*0.95,sx*0.88+sx*0.115,sy*0.95+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
+        dxDrawText('Limite:  '..color.."Sem limite",sx*0.88,sy*0.95,sx*0.88+sx*0.115,sy*0.95+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
     else
         dxDrawText('Limit:  '..color..getVehicleCount(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2]).."#dcdcdc/"..tostring(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][4]),sx*0.88,sy*0.95,sx*0.88+sx*0.115,sy*0.95+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-12"],"right","center",false,false,false,true)
     end
 
     if core:isInSlot(0,sy*0.94,sx*0.115,sy*0.025) then 
-        dxDrawText("Megvásárlás", sx*0.018,sy*0.97,sx*0.018+sx*0.115,sy*0.91+sy*0.025,tocolor(greenR, greenG, greenB,255*a),1/myX*sx,fonts["condensed-11"],"left","center",false,false,false,true)
+        dxDrawText("Comprar",sx*0.018,sy*0.97,sx*0.018+sx*0.115,sy*0.91+sy*0.025,tocolor(greenR, greenG, greenB,255*a),1/myX*sx,fonts["condensed-11"],"left","center",false,false,false,true)
             dxDrawImage(sx*0.002,sy*0.94,20/myX*sx,20/myY*sy,"files/buy.png",0,0,0,tocolor(greenR, greenG, greenB,255*a))
     else
-        dxDrawText("Megvásárlás", sx*0.018,sy*0.97,sx*0.018+sx*0.115,sy*0.91+sy*0.025,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-11"],"left","center",false,false,false,true)
+        dxDrawText("Comprar",sx*0.018,sy*0.97,sx*0.018+sx*0.115,sy*0.91+sy*0.025,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-11"],"left","center",false,false,false,true)
             dxDrawImage(sx*0.002,sy*0.94,20/myX*sx,20/myY*sy,"files/buy.png",0,0,0,tocolor(220,220,220,255*a))
     end
 
@@ -583,11 +583,11 @@ function pedClick(button, state, _, _, _, _, _, element)
 								end
 
 								if #factionsWherePlayerIsLeader == 0 then 
-									outputChatBox(core:getServerPrefix("red-dark", "Járműkereskedés", 3).."Nem vagy egyetlen szervezet vezetője sem!", 255, 255, 255, true)
+									outputChatBox(core:getServerPrefix("red-dark", "Concessionária", 3).."Você não é líder de nenhuma organização!", 255, 255, 255, true)
 								else
 									setElementFrozen(localPlayer, true)
 									setElementAlpha(localPlayer, 150)
-									outputChatBox(core:getServerPrefix("server", "Járműkereskedés", 3).."Válaszd ki, hogy melyik szervezet számára szeretnéd a járművet vásárolni!", 255, 255, 255, true)
+									outputChatBox(core:getServerPrefix("server", "Concessionária", 3).."Selecione para qual organização deseja comprar o veículo!", 255, 255, 255, true)
 									renderChooser = true
 									addEventHandler("onClientRender", root, renderFactionChooser)
 									addEventHandler("onClientKey", root, chooserKey)
@@ -638,13 +638,13 @@ function carshopInteraction(key, state)
 					if shopType == 1 then
 						triggerServerEvent("makeTestveh", resourceRoot, {2840.0612792969, -2054.8725585938, 10.495502471924+3, 359.90957641602}, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2], vehicleColor)
 						addEventHandler("onClientVehicleExit", resourceRoot, exitTestVehicle)
-						infobox:outputInfoBox("Elkezdted a tesztvezetést! Befejezéshez szállj ki a járműből!","info")
+						infobox:outputInfoBox("Você iniciou o test drive! Para terminar, saia do veículo!","info")
 						showCarshop()
 						createBorderWalls()
 
 						return 
 					else
-						infobox:outputInfoBox("Ez a funkció ebben a típusú kereskedésben nem érhető el!","error")
+						infobox:outputInfoBox("Esta função não está disponível neste tipo de concessionária!","error")
 					end
 				end]]
 
@@ -662,12 +662,12 @@ function carshopInteraction(key, state)
 							if tableContains(vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle].allowedFactions, selectedFactionID) then 
 								triggerServerEvent("buyCarshopVehicleToFaction", resourceRoot, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2], vehicleColor, selectedFactionID, price[1], price[2], shopType, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle].pj or 0)
 								showCarshop()
-								infobox:outputInfoBox("Sikeresen megvásároltad a kiválasztott járművet!","success")
+								infobox:outputInfoBox("Veículo adquirido com sucesso!","success")
 							else
 								infobox:outputInfoBox("Nem engedélyezett!","warning")
 							end
 						else
-							infobox:outputInfoBox("Nincs elegendő pénz a frakció számláján vásárláshoz! ("..comma_value(price[1]).."$)", "error")
+							infobox:outputInfoBox("Saldo insuficiente na conta da organização! ("..comma_value(price[1]).."$)", "error")
 						end
 						return 
 					end
@@ -682,7 +682,7 @@ function carshopInteraction(key, state)
 							triggerServerEvent("buyCarshopVehicle", resourceRoot, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2], vehicleColor, 0, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][12], shopType, city)
 							showCarshop()
 						else
-							infobox:outputInfoBox("Nincs szabad jármű slotod!", "error")
+							infobox:outputInfoBox("Você não tem slot de veículo disponível!", "error")
 						end
 
 					elseif core:isInSlot(sx * 0.5+6, sy * 0.563 - sy * 0.1 / 2 + 6, sx * 0.1-12, sy * 0.04-16) then
@@ -697,7 +697,7 @@ function carshopInteraction(key, state)
 										triggerServerEvent("buyCarshopVehicle", resourceRoot, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2], vehicleColor, price[1], 0, shopType, city)
 										showCarshop()
 									else
-										infobox:outputInfoBox("Ez a jarmű limites!", "error")
+										infobox:outputInfoBox("Este veículo atingiu o limite máximo!", "error")
 									end
 								else
 									local price = countVehiclePrice()
@@ -707,10 +707,10 @@ function carshopInteraction(key, state)
 									showCarshop()
 								end
 							else
-								infobox:outputInfoBox("Nincs szabad jármű slotod!", "error")
+								infobox:outputInfoBox("Você não tem slot de veículo disponível!", "error")
 							end
 						else
-							infobox:outputInfoBox("Ez a jármű csak prémiumpontból vásárolható!", "error")
+							infobox:outputInfoBox("Este veículo só pode ser comprado com pontos premium!", "error")
 						end
 					end
 				end
@@ -740,7 +740,7 @@ function carshopInteraction(key, state)
 						if core:isInSlot(sx*0.45,startY,320/myX*sx,180/myY*sy) then 
 							triggerServerEvent("makeTestveh", resourceRoot, i, vehicles[shopType][selectedVehicleCategory].category_cars[selectedVehicle][2], vehicleColor[1], vehicleColor[2], vehicleColor[3], localPlayer)
 							addEventHandler("onClientVehicleExit", resourceRoot, exitTestVehicle)
-							infobox:outputInfoBox("Elkezdted a tesztvezetést! Befejezéshez szálj ki a járműből!","info")
+							infobox:outputInfoBox("Você iniciou o test drive! Para terminar, saia do veículo!","info")
 							showCarshop()
 						end
 						startY = startY + sy*0.21
@@ -856,7 +856,7 @@ end
 	if getElementData(localPlayer, "carshop:inTest") then 
 		if getElementData(localPlayer,"carshop:testveh") == source then 
 			triggerServerEvent("deleteTestveh", resourceRoot)
-			infobox:outputInfoBox("Befejezted a tesztvezetést!","info")
+			infobox:outputInfoBox("Test drive encerrado!","info")
 			showCarshop()
 			removeEventHandler("onClientVehicleExit", resourceRoot, exitTestVehicle)
 

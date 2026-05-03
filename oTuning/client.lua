@@ -186,7 +186,7 @@ function renderTuningPanel()
                                 infobox:outputInfoBox("Ez a rendszám már használatban van!", "error")
                             end
                         else
-                            infobox:outputInfoBox("Nincs elegendő prémium pontod! {#colorcode}1.000PP", "error")
+                            infobox:outputInfoBox("Pontos premium insuficientes! {#colorcode}1.000PP", "error")
                         end
 
                         toggleCustomPlateTextpanel()
@@ -871,9 +871,9 @@ function tuningKey(key, state)
                                     end
                                 else
                                     if priceType == 1 then 
-                                        infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                        infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                     elseif priceType == 2 then 
-                                        infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                        infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                     end
                                 end
                             end
@@ -933,9 +933,9 @@ function tuningKey(key, state)
                                     end
                                 else
                                     if priceType == 1 then 
-                                        infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                        infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                     elseif priceType == 2 then 
-                                        infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                        infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                     end
                                 end
                             end
@@ -967,9 +967,9 @@ function tuningKey(key, state)
                                 end, loadingTime, 1)
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif tunings[selectedTuning].tunings[selectedAlTuning].title == "Spoiler" then 
@@ -1000,9 +1000,9 @@ function tuningKey(key, state)
                                 end, loadingTime, 1)
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif (tunings[selectedTuning].tunings[selectedAlTuning].isCustomTuning or false) then 
@@ -1052,9 +1052,9 @@ function tuningKey(key, state)
                                 end, loadingTime, 1)
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif tunings[selectedTuning].tunings[selectedAlTuning].title == "Neon" then 
@@ -1087,9 +1087,9 @@ function tuningKey(key, state)
                                 end, loadingTime, 1)
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         end
@@ -1129,9 +1129,9 @@ function tuningKey(key, state)
                                 end, loadingTime, 1)
                             else 
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif tunings[selectedTuning].tunings[selectedAlTuning].title == "Meghajtás" then  
@@ -1179,9 +1179,9 @@ function tuningKey(key, state)
                                 end
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif tunings[selectedTuning].tunings[selectedAlTuning].title == "Airride" then
@@ -1215,9 +1215,9 @@ function tuningKey(key, state)
                                 end
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif tunings[selectedTuning].tunings[selectedAlTuning].title == "Variáns" then 
@@ -1252,9 +1252,9 @@ function tuningKey(key, state)
                                 end
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif (tunings[selectedTuning].tunings[selectedAlTuning].title == "Egyedi duda") then 
@@ -1291,9 +1291,9 @@ function tuningKey(key, state)
                                 end
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         elseif (tunings[selectedTuning].tunings[selectedAlTuning].title == "Supercharger") then 
@@ -1329,9 +1329,9 @@ function tuningKey(key, state)
                                 end
                             else
                                 if priceType == 1 then 
-                                    infobox:outputInfoBox("Nincs elegendő készpénzed! ("..price.."$)", "error")
+                                    infobox:outputInfoBox("Dinheiro insuficiente! ("..price.."$)", "error")
                                 elseif priceType == 2 then 
-                                    infobox:outputInfoBox("Nincs elegendő prémium pontod! ("..price.."PP)", "error")
+                                    infobox:outputInfoBox("Pontos premium insuficientes! ("..price.."PP)", "error")
                                 end
                             end
                         end

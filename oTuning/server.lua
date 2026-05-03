@@ -249,7 +249,7 @@ addEventHandler("tuning > setCustomPlateText", resourceRoot, function(vehicle, p
     local result = dbPoll(qh, 200)
     
     if #result <= 0 then 
-        infobox:outputInfoBox("Sikeresen megváltoztattad a járműved rendszámát!", "success", client)
+        infobox:outputInfoBox("Placa do veículo alterada com sucesso!", "success", client)
         setElementData(client, "char:pp", getElementData(client, "char:pp")-1000)
         setVehiclePlateText(vehicle, plateText)
     else

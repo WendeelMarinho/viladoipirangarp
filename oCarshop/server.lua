@@ -130,9 +130,9 @@ function buyVehicle(modelId, color, price_dollar, price_premium, shopType, city)
                     setTimer(function()
                         inventory:giveItem(owner, 51, getElementData(veh, "veh:id"), 1, 0) 
                     end,1000,1)
-                    infobox:outputInfoBox("Sikeresen megvásároltad a kiválasztott járművet!","success",client)
+                    infobox:outputInfoBox("Veículo adquirido com sucesso!","success",client)
                 else
-                    infobox:outputInfoBox("Nincs elegendő készpénzed a vásárláshoz! ("..price_dollar.."$)","error",client)
+                    infobox:outputInfoBox("Dinheiro insuficiente para a compra! ("..price_dollar.."$)","error",client)
                 end
             elseif (price_premium > 0) then
                 if (price_premium <= getElementData(client,'char:pp')) then
@@ -146,9 +146,9 @@ function buyVehicle(modelId, color, price_dollar, price_premium, shopType, city)
                     setTimer(function()
                         inventory:giveItem(owner, 51, getElementData(veh, "veh:id"), 1, 0)
                     end,1000,1)
-                    infobox:outputInfoBox("Sikeresen megvásároltad a kiválasztott járművet!","success",client)
+                    infobox:outputInfoBox("Veículo adquirido com sucesso!","success",client)
                 else
-                    infobox:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz! ("..price_premium.."PP)","error",client)
+                    infobox:outputInfoBox("Pontos premium insuficientes para a compra! ("..price_premium.."PP)","error",client)
                 end
             end
 

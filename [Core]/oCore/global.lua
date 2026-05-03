@@ -101,19 +101,19 @@ function getPlayerFromPartialName(thePlayer, nick, nomsg, type)
 	elseif #playerTbl == 0 then
 		if nomsg then return end
 		if type == 1 then
-			outputChatBox("[Játékos]: #ffffffNem található a játékos.", thePlayer, 244, 40, 40, true)
+			outputChatBox("[Jogador]: #ffffffJogador não encontrado.", thePlayer, 244, 40, 40, true)
 		else
-			outputChatBox("[Játékos]: #ffffffNem található a játékos.", 244, 40, 40, true)
+			outputChatBox("[Jogador]: #ffffffJogador não encontrado.", 244, 40, 40, true)
 		end
 	else
 		if nomsg then return end
 		if type == 1 then
-			outputChatBox(serverColor..#playerTbl.." #ffffffjátékos található ezzel a névrészlettel:", thePlayer, 255, 255, 255, true)
+			outputChatBox(serverColor..#playerTbl.." #ffffffjogador(es) encontrado(s) com esse nome:", thePlayer, 255, 255, 255, true)
 			for k, v in ipairs(playerTbl) do
 				outputChatBox(serverColor..v[3].." - "..v[2], thePlayer, 247, 147, 30, true)
 			end
 		else
-			outputChatBox(serverColor..#playerTbl.." #ffffffjátékos található ezzel a névrészlettel:", 255, 255, 255, true)
+			outputChatBox(serverColor..#playerTbl.." #ffffffjogador(es) encontrado(s) com esse nome:", 255, 255, 255, true)
 			for k, v in ipairs(playerTbl) do
 				outputChatBox(serverColor..v[3].." - "..v[2], 247, 147, 30, true)
 			end

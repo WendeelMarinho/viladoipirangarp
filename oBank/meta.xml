@@ -21,4 +21,7 @@
     <export function="countInterest" type="client"></export>
     <export function="getPlayerAllBankMoney" type="client"></export>
     <export function="startMoneyCaseOpen" type="client"></export>
+    <export function="getMainBankAccountForChar" type="server"></export>
+    <export function="adminHubAdjustBankBalance" type="server"></export>
+    <export function="adminHubSetBankBalance" type="server"></export>
 </meta>

@@ -29,7 +29,7 @@ local type = false
 addCommandHandler("createslotmachine", function(cmd, type)
     if getElementData(localPlayer, "user:admin") >= 7 then 
         if not type then 
-            outputChatBox(core:getServerPrefix("server").."Használat: /".. cmd.." [Típus]", 0, 0, 0, true)
+            outputChatBox(core:getServerPrefix("server").."Uso: /".. cmd.." [Tipo]", 0, 0, 0, true)
         else
             
 
@@ -85,13 +85,13 @@ addCommandHandler("nearbyslotmachines", function(cmd, distance)
             if getElementData(v, "slotMachine.isMachine") then 
                 local tx,ty,tz = getElementPosition(v)
                 if getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz) <= distance then 
-                    outputChatBox(hex.."*#FFFFFF Azonosító: "..hex.. getElementData(v, "slotMachine.Id") .."#FFFFFF | Távolság: "..hex..math.floor(getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz)) .. " Yard#FFFFFF | Típus: "..hex..typeName[getElementData(v, "slotMachine.type")], 255, 255, 255, true)
+                    outputChatBox(hex.."*#FFFFFF ID: "..hex.. getElementData(v, "slotMachine.Id") .."#FFFFFF | Distância: "..hex..math.floor(getDistanceBetweenPoints3D(px,py,pz,tx,ty,tz)) .. " Yard#FFFFFF | Tipo: "..hex..typeName[getElementData(v, "slotMachine.type")], 255, 255, 255, true)
                     count = count + 1
                 end
             end
         end
         if count == 0 then 
-            outputChatBox(core:getServerPrefix("server").."Nincs a közeledben Slot gép (".. distance .." Yard)", 0, 0, 0, true);
+            outputChatBox(core:getServerPrefix("server").."Não há máquina caça-níqueis por perto (".. distance .." Yard)", 0, 0, 0, true);
         end
     end
 end)

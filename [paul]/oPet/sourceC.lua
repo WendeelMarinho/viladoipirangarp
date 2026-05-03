@@ -34,7 +34,7 @@ function renderPanel()
         alpha4 = interpolateBetween(100, 0, 0, 0, 0, 0, (getTickCount() - menuAnimationTick)/1000, "InOutQuad")
     end
 
-    core:drawWindow(sx*0.29, sy*0.15,sx*0.425, sy*0.65, "Saját Állataid", alpha2)
+    core:drawWindow(sx*0.29, sy*0.15,sx*0.425, sy*0.65, "Seus animais", alpha2)
     --dxDrawRectangle(sx*0.29, sy*0.15,sx*0.425, sy*0.65,tocolor(56,52,68,255))
     dxDrawText("#"..(count), sx*0.71 - 1, sy*0.1625 + 1,_,_, tocolor(0, 0, 0, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
     dxDrawText("#ffffff##e3721f"..(count), sx*0.71, sy*0.1625,_,_, tocolor(255, 255, 255, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
@@ -45,8 +45,8 @@ function renderPanel()
         --dxDrawCircle(sx*0.5,sy*0.45, 25 , 1, loadingCounter, tocolor(227, 114, 31,alpha), tocolor(255,255,255,0), 1024)
         dxDrawImage(sx*0.475,sy*0.398,sx*0.05,sy*0.09,"files/loading.png",loadingCounter,0,0,tocolor(227, 114, 31,alpha))
 
-        dxDrawText("Petek betöltése..", sx*0.525 - 1, sy*0.5 + 1,_,_, tocolor(0, 0, 0, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
-        dxDrawText("Petek betöltése..", sx*0.525, sy*0.5,_,_, tocolor(255, 255, 255, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
+        dxDrawText("A carregar pets...", sx*0.525 - 1, sy*0.5 + 1,_,_, tocolor(0, 0, 0, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
+        dxDrawText("A carregar pets...", sx*0.525, sy*0.5,_,_, tocolor(255, 255, 255, alpha), 0.00035*sx, font, "right", "center",false,false,false,true)
     else 
         if not sellPanel then 
             if count > 0 then 
@@ -54,13 +54,13 @@ function renderPanel()
                 dxDrawRectangle(sx*0.2975, sy*0.75,sx*0.195, sy*0.035, tocolor(40, 40, 40, alpha))
                 dxDrawText((count).."/"..maxPet, sx*0.49 - 1, sy*0.768 + 1,_,_, tocolor(0, 0, 0, alpha), 0.0005*sx, font, "right", "center",false,false,false,true)
                 dxDrawText("#e3721f"..(count).."#ffffff/"..maxPet, sx*0.49, sy*0.768,_,_, tocolor(255, 255, 255, alpha), 0.0005*sx, font, "right", "center",false,false,false,true)
-                dxDrawText("+ Slot Vásárlása (100PP)", sx*0.299 - 1, sy*0.769 + 1,_,_, tocolor(0,0,0, alpha), 0.0005*sx, font, "left", "center",false,false,false,true)
-                dxDrawText("#e3721f+#ffffff Slot Vásárlása #6eacf0(100PP)", sx*0.299, sy*0.769,_,_, tocolor(255,255,255, alpha), 0.0005*sx, font, "left", "center",false,false,false,true)
+                dxDrawText("+ Comprar slot (100PP)", sx*0.299 - 1, sy*0.769 + 1,_,_, tocolor(0,0,0, alpha), 0.0005*sx, font, "left", "center",false,false,false,true)
+                dxDrawText("#e3721f+#ffffff Comprar slot #6eacf0(100PP)", sx*0.299, sy*0.769,_,_, tocolor(255,255,255, alpha), 0.0005*sx, font, "left", "center",false,false,false,true)
                 --dxDrawText("100PP", sx*0.35 - 1, sy*0.757 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "left", "center",false,false,false,true)
                 --dxDrawText("#6eacf0100PP", sx*0.35, sy*0.757,_,_, tocolor(255,255,255, alpha), 0.0003*sx, font, "left", "center",false,false,false,true)
             else 
-                dxDrawText("Még nincsen egy állatod se!", sx*0.505, sy*0.37,_,_, tocolor(255,255,255, alpha), 0.0005*sx, font, "center", "center",false,false,false,true)
-                dxDrawText("Látogass el a #e3721fplázába#ffffff és a #e3721fkisállat kereskedőnél#ffffff válassz egy neked tetsző állatot.\nHa megvetted itt fogod őt/őket megtalálni!", sx*0.505, sy*0.4,_,_, tocolor(255,255,255, alpha), 0.00035*sx, font, "center", "center",false,false,false,true)
+                dxDrawText("Ainda não tens nenhum animal!", sx*0.505, sy*0.37,_,_, tocolor(255,255,255, alpha), 0.0005*sx, font, "center", "center",false,false,false,true)
+                dxDrawText("Vai à #e3721fpraça#ffffff e fala com o #e3721fvendedor de animais#ffffff para escolheres um.\nDepois de comprares, encontras o pet aqui neste painel (F4).", sx*0.505, sy*0.4,_,_, tocolor(255,255,255, alpha), 0.00035*sx, font, "center", "center",false,false,false,true)
 
             end 
 
@@ -77,11 +77,11 @@ function renderPanel()
                     local name = v[3]
                     local coloredname = v[3]
                     if v[5] <= 0 then 
-                        name = v[3].." [HALOTT]"
-                        coloredname = v[3].." #6b6b6b[HALOTT]"
+                        name = v[3].." [MORTO]"
+                        coloredname = v[3].." #6b6b6b[MORTO]"
                     elseif v[5] < 20 then 
-                        name = v[3].." [SÉRÜLT]"
-                        coloredname = v[3].." #c92a2a[SÉRÜLT]"
+                        name = v[3].." [FERIDO]"
+                        coloredname = v[3].." #c92a2a[FERIDO]"
                     end 
 
                     dxDrawText(name,sx*0.6 - 1, sy*0.2125 + 1,_,_, tocolor(0,0,0, alpha), 0.00055*sx, font, "center", "center",false,false,false,true)
@@ -90,8 +90,8 @@ function renderPanel()
                     dxDrawText(getDogCastByID(v[4]),sx*0.6 - 1, sy*0.229 + 1,_,_, tocolor(0, 0, 0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
                     dxDrawText(getDogCastByID(v[4]),sx*0.6, sy*0.229,_,_, tocolor(145, 145, 145, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
 
-                    dxDrawText("Kedvenc étel: "..getDogBestFoodByID(v[9]),sx*0.605 - 1, sy*0.46 + 1,_,_, tocolor(0, 0, 0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
-                    dxDrawText("Kedvenc étel: "..getDogBestFoodByID(v[9]),sx*0.605, sy*0.46,_,_, tocolor(145, 145, 145, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    dxDrawText("Comida preferida: "..getDogBestFoodByID(v[9]),sx*0.605 - 1, sy*0.46 + 1,_,_, tocolor(0, 0, 0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    dxDrawText("Comida preferida: "..getDogBestFoodByID(v[9]),sx*0.605, sy*0.46,_,_, tocolor(145, 145, 145, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
 
 
                     dxDrawRectangle(sx*0.53, sy*0.47,sx*0.07,sy*0.02,tocolor(25,25,25,alpha))
@@ -123,9 +123,9 @@ function renderPanel()
                     exports.oCore:dxDrawButton(sx*0.55, sy*0.75,sx*0.05,sy*0.025,121, 242, 126,alpha4, "Spawn", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
                     exports.oCore:dxDrawButton(sx*0.62, sy*0.75,sx*0.05,sy*0.025,245, 81, 81,alpha4, "Despawn", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
 
-                    exports.oCore:dxDrawButton(sx*0.585, sy*0.65,sx*0.05,sy*0.025,245, 81, 81,alpha, "Újraélesztés", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
-                    dxDrawText("Ennek a műveletnek az ára 250PP",sx*0.61 - 1, sy*0.685 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
-                    dxDrawText("Ennek a műveletnek az ára #6eacf0250PP",sx*0.61, sy*0.685,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    exports.oCore:dxDrawButton(sx*0.585, sy*0.65,sx*0.05,sy*0.025,245, 81, 81,alpha, "Ressuscitar", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
+                    dxDrawText("Custo desta ação: 250PP",sx*0.61 - 1, sy*0.685 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    dxDrawText("Custo desta ação: #6eacf0250PP",sx*0.61, sy*0.685,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
 
 
                     newName = exports.oCore:getEditboxText("petName") or ""
@@ -135,12 +135,12 @@ function renderPanel()
                     dxDrawText(textHossz.."/15",sx*0.678, sy*0.543,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "right", "center",false,false,false,true)
 
 
-                    dxDrawText("Átnevezés",sx*0.556 - 1, sy*0.545 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "right", "center",false,false,false,true)
-                    dxDrawText("Átnevezés",sx*0.556, sy*0.545,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "right", "center",false,false,false,true)
+                    dxDrawText("Renomear",sx*0.556 - 1, sy*0.545 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "right", "center",false,false,false,true)
+                    dxDrawText("Renomear",sx*0.556, sy*0.545,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "right", "center",false,false,false,true)
 
-                    exports.oCore:dxDrawButton(sx*0.65, sy*0.59,sx*0.03,sy*0.025,227, 114, 31,alpha4, "Vásárlás", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
-                    dxDrawText("Ennek a műveletnek az ára 100PP",sx*0.573 - 1, sy*0.597 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
-                    dxDrawText("Ennek a műveletnek az ára #6eacf0100PP",sx*0.573, sy*0.597,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    exports.oCore:dxDrawButton(sx*0.65, sy*0.59,sx*0.03,sy*0.025,227, 114, 31,alpha4, "Confirmar", tocolor(255, 255, 255, alpha), 0.0003*sx, font, false, tocolor(0, 0, 0, alpha3))
+                    dxDrawText("Custo desta ação: 100PP",sx*0.573 - 1, sy*0.597 + 1,_,_, tocolor(0,0,0, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
+                    dxDrawText("Custo desta ação: #6eacf0100PP",sx*0.573, sy*0.597,_,_, tocolor(240,240,240, alpha), 0.0003*sx, font, "center", "center",false,false,false,true)
 
                     dxDrawImage(sx*0.695 - 1, sy*0.2 + 1,sx*0.0125,sy*0.025,"files/sell.png",0,0,0,tocolor(0,0,0,alpha))
                     dxDrawImage(sx*0.695, sy*0.2,sx*0.0125,sy*0.025,"files/sell.png",0,0,0,tocolor(255,255,255,alpha))
@@ -160,14 +160,14 @@ function renderPanel()
 
         else 
         
-            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Állat eladás", alpha2)
+            core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Vender animal", alpha2)
             dxDrawRectangle(sx*0.4035, sy*0.48, sx*0.1925, sy*0.03, tocolor(27, 27, 27, (alpha-55)))
             dxDrawRectangle(sx*0.4035, sy*0.515, sx*0.1925, sy*0.03, tocolor(27, 27, 27, (alpha-55)))
 
 
 
-            core:dxDrawButton(sx*0.407, sy*0.56, sx*0.09, sy*0.03, 76, 173, 88, alpha4, "Eladás", tocolor(255, 255, 255, alpha), 0.0004*sx, font, true, tocolor(0, 0, 0, alpha3))
-            core:dxDrawButton(sx*0.5025, sy*0.56, sx*0.09, sy*0.03, 189, 49, 49, alpha4, "Mégsem", tocolor(255, 255, 255, alpha), 0.0004*sx, font, true, tocolor(0, 0, 0, alpha3))
+            core:dxDrawButton(sx*0.407, sy*0.56, sx*0.09, sy*0.03, 76, 173, 88, alpha4, "Vender", tocolor(255, 255, 255, alpha), 0.0004*sx, font, true, tocolor(0, 0, 0, alpha3))
+            core:dxDrawButton(sx*0.5025, sy*0.56, sx*0.09, sy*0.03, 189, 49, 49, alpha4, "Cancelar", tocolor(255, 255, 255, alpha), 0.0004*sx, font, true, tocolor(0, 0, 0, alpha3))
         end 
 
     end 
@@ -190,12 +190,12 @@ function renderBuyPanel()
         alpha,alpha2 = interpolateBetween(255, 150, 0, 0, 0, 0, (getTickCount() - menuAnimationTick)/1000, "InOutQuad")
     end
 
-    core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Állat vétel", 1)
-    dxDrawText(getPlayerName(trader).." el akar adni neked egy állatot!!\nFajtája: "..getDogCastByID(dogModelID).."\nÁra: "..dogPrice.."$",sx*0.5 - 1, sy*0.51 + 1,_,_, tocolor(0,0,0, 255), 0.00035*sx, font, "center", "center",false,false,false,true)
-    dxDrawText(getPlayerName(trader).." el akar adni neked egy állatot!!\nFajtája: "..getDogCastByID(dogModelID).."\nÁra: #7cc576"..dogPrice.."$",sx*0.5, sy*0.51,_,_, tocolor(240,240,240, 255), 0.00035*sx, font, "center", "center",false,false,false,true)
+    core:drawWindow(sx*0.4, sy*0.45, sx*0.2, sy*0.15, "Comprar animal", 1)
+    dxDrawText(getPlayerName(trader).." quer vender-te um animal!\nRaça: "..getDogCastByID(dogModelID).."\nPreço: "..dogPrice.."$",sx*0.5 - 1, sy*0.51 + 1,_,_, tocolor(0,0,0, 255), 0.00035*sx, font, "center", "center",false,false,false,true)
+    dxDrawText(getPlayerName(trader).." quer vender-te um animal!\nRaça: "..getDogCastByID(dogModelID).."\nPreço: #7cc576"..dogPrice.."$",sx*0.5, sy*0.51,_,_, tocolor(240,240,240, 255), 0.00035*sx, font, "center", "center",false,false,false,true)
 
-    core:dxDrawButton(sx*0.407, sy*0.56, sx*0.09, sy*0.03, 76, 173, 88, 150, "Elfogadás", tocolor(255, 255, 255, 255), 0.0004*sx, font, true, tocolor(0, 0, 0, 100))
-    core:dxDrawButton(sx*0.5025, sy*0.56, sx*0.09, sy*0.03, 189, 49, 49, 150, "Mégsem", tocolor(255, 255, 255, 255), 0.0004*sx, font, true, tocolor(0, 0, 0, 100))
+    core:dxDrawButton(sx*0.407, sy*0.56, sx*0.09, sy*0.03, 76, 173, 88, 150, "Aceitar", tocolor(255, 255, 255, 255), 0.0004*sx, font, true, tocolor(0, 0, 0, 100))
+    core:dxDrawButton(sx*0.5025, sy*0.56, sx*0.09, sy*0.03, 189, 49, 49, 150, "Recusar", tocolor(255, 255, 255, 255), 0.0004*sx, font, true, tocolor(0, 0, 0, 100))
 end 
 
 local buyPanel = false
@@ -220,7 +220,7 @@ function makeBuy(player, price, id,modelID)
     checkTimer = setTimer(function()
         if exports.oCore:getDistance(localPlayer, trader) > 7 then 
             dismissTrade()
-            exports.oInfobox:outputInfoBox("Túl messzire mentél a kiválasztott játékostól így a vásárlás megszakadt!","error")
+            exports.oInfobox:outputInfoBox("Afastaste-te demais do jogador; a compra foi cancelada.","error")
         end
     end, 150, 0)
 end 
@@ -243,8 +243,8 @@ end
 
 
 function acceptTrade()
-    if getElementData(localPlayer,"char:maxPets") <= BuyerCount then return exports.oInfobox:outputInfoBox("Nincs elegendő slotod a vásárláshoz!","error") end
-    if getElementData(localPlayer,"char:money") < tonumber(dogPrice) then return exports.oInfobox:outputInfoBox("Nincs nálad elég pénz a vásárláshoz ("..tonumber(dogPrice).."$)","error") end
+    if getElementData(localPlayer,"char:maxPets") <= BuyerCount then return exports.oInfobox:outputInfoBox("Não tens slots suficientes para comprar!","error") end
+    if getElementData(localPlayer,"char:money") < tonumber(dogPrice) then return exports.oInfobox:outputInfoBox("Não tens dinheiro suficiente ("..tonumber(dogPrice).."$).","error") end
 
     removeEventHandler("onClientRender",root,renderBuyPanel)
     triggerServerEvent("succesTrade",resourceRoot,trader,localPlayer,dogID,dogPrice)
@@ -285,7 +285,7 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                             if firstClick then 
                                 ped = createPed(v[4],0,0,0)
                                 priew = exports.oPreview:createObjectPreview(ped,0,0,120,sx*0.528,sy*0.11,sx*0.15,sy*0.3,false,true)
-                                editBox = exports.oCore:createEditbox(sx*0.53, sy*0.55,sx*0.15,sy*0.04, "petName", "Kedvenced Új Neve", "text", true, {20, 20, 20, 255}, 0.3,15)
+                                editBox = exports.oCore:createEditbox(sx*0.53, sy*0.55,sx*0.15,sy*0.04, "petName", "Novo nome do pet", "text", true, {20, 20, 20, 255}, 0.3,15)
 
                                 firstClick = false 
                             else 
@@ -299,7 +299,7 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                 newName = exports.oCore:getEditboxText("petName")
                 textHossz = string.len(newName)
 
-                if getElementData(localPlayer,"char:pp") < 100 then return exports.oInfobox:outputInfoBox("Nincs elegendő ppd! (100PP)","error") end
+                if getElementData(localPlayer,"char:pp") < 100 then return exports.oInfobox:outputInfoBox("Não tens PP suficientes! (100PP)","error") end
 
                 if textHossz > 2 then 
                     if not buySpam then 
@@ -314,7 +314,7 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                         end,500,1)
                     end 
                 else 
-                    exports.oInfobox:outputInfoBox("Túl rövid a név! (Minimum 2 karakter)","error")
+                    exports.oInfobox:outputInfoBox("Nome muito curto! (mínimo 2 caracteres)","error")
 
                 end 
             elseif isInSlot(sx*0.55, sy*0.75,sx*0.05,sy*0.025) then 
@@ -330,8 +330,8 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                                 local currentTask = getElementData(animalElement, "ped.task.1")
                                 if not currentTask then
                                     setPedTask(animalElement, {"walkFollowElement", localPlayer, 3})
-                                    exports.oInfobox:outputInfoBox("Sikeresen lehívtad az állatod,részletek a chatboxban!","success")
-                                    outputChatBox("#e3721f[Kisállat]#ffffff Sikeresen lehívtad a peted, további funkciókat rá kattintva érhetsz el!",255,255,255,true)
+                                    exports.oInfobox:outputInfoBox("Chamaste o pet com sucesso; detalhes no chat.","success")
+                                    outputChatBox("#e3721f[Pet]#ffffff Pet spawnado. Clica nele para mais opções.",255,255,255,true)
                                 end
                             end
                         end,1000,1)
@@ -348,7 +348,7 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                     if not buySpam then 
 
                         triggerServerEvent("desummonPet",localPlayer,localPlayer,petID)
-                        exports.oInfobox:outputInfoBox("Sikeresen visszahívtad az állatod!","success")
+                        exports.oInfobox:outputInfoBox("Recolheste o pet com sucesso!","success")
 
                         buySpam = true 
 
@@ -358,8 +358,8 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                     end 
                 end 
             elseif isInSlot(sx*0.585, sy*0.65,sx*0.05,sy*0.025) then 
-                if myPets[petID][5] > 0 then return exports.oInfobox:outputInfoBox("Ez az állat nem halott!!","error") end
-                if getElementData(localPlayer,"char:pp") < 250 then return exports.oInfobox:outputInfoBox("Nincs elegendő ppd! (250PP)","error") end
+                if myPets[petID][5] > 0 then return exports.oInfobox:outputInfoBox("Este animal não está morto!","error") end
+                if getElementData(localPlayer,"char:pp") < 250 then return exports.oInfobox:outputInfoBox("Não tens PP suficientes! (250PP)","error") end
 
                     if not buySpam then 
                         myPets[petID][5] = 100
@@ -380,8 +380,8 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
 
                 if ped then destroyElement(ped) end
 
-                playerEditBox = exports.oCore:createEditbox(sx*0.4035, sy*0.48, sx*0.1925, sy*0.03, "playerName", "Játékos ID-je:", "text", true, {35, 35, 35, 200}, 0.3,30)
-                priceEditBox = exports.oCore:createEditbox(sx*0.4035, sy*0.515, sx*0.1925, sy*0.03, "price", "Ára:", "text", true, {35, 35, 35, 200}, 0.3,15)
+                playerEditBox = exports.oCore:createEditbox(sx*0.4035, sy*0.48, sx*0.1925, sy*0.03, "playerName", "ID do jogador:", "text", true, {35, 35, 35, 200}, 0.3,30)
+                priceEditBox = exports.oCore:createEditbox(sx*0.4035, sy*0.515, sx*0.1925, sy*0.03, "price", "Preço ($):", "text", true, {35, 35, 35, 200}, 0.3,15)
             elseif isInSlot(sx*0.5025, sy*0.56, sx*0.09, sy*0.03) then 
                 if sellPanel then 
                     sellPanel = false 
@@ -398,22 +398,22 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
                     local px,py,pz = getElementPosition(localPlayer)
                     local tx,ty,tz = getElementPosition(target)
 
-                    if not tonumber(player) then return exports.oInfobox:outputInfoBox("Csak szám adható meg ID-nek.","error") end
-                    if not tonumber(price) then return exports.oInfobox:outputInfoBox("Csak szám adható meg árnak.","error") end
-                    if target == localPlayer then return exports.oInfobox:outputInfoBox("Magadnak nem adhatod el!","error") end
-                    if exports.oCore:getDistance(localPlayer, target) > 7 then return exports.oInfobox:outputInfoBox("Túl messze vagy a kiválasztott játékostól!","error") end
-                    exports.oInfobox:outputInfoBox("Sikeresen elküldted "..getPlayerName(target).."-nak/nek az ajánlatod!","success")
+                    if not tonumber(player) then return exports.oInfobox:outputInfoBox("O ID do jogador tem de ser um número.","error") end
+                    if not tonumber(price) then return exports.oInfobox:outputInfoBox("O preço tem de ser um número.","error") end
+                    if target == localPlayer then return exports.oInfobox:outputInfoBox("Não podes vender a ti próprio!","error") end
+                    if exports.oCore:getDistance(localPlayer, target) > 7 then return exports.oInfobox:outputInfoBox("Estás demasiado longe desse jogador!","error") end
+                    exports.oInfobox:outputInfoBox("Enviaste a proposta a "..getPlayerName(target):gsub("_", " ").." com sucesso!","success")
                     triggerServerEvent("sellPetPanel",resourceRoot,target,price,myPets[petID][3],petID)
                     closePanel()
                 end 
             elseif isInSlot(sx*0.2975, sy*0.75,sx*0.07, sy*0.035) then 
-                    if getElementData(localPlayer,"char:pp") < 100 then return exports.oInfobox:outputInfoBox("Nincs elegendő ppd! (100PP)","error") end
+                    if getElementData(localPlayer,"char:pp") < 100 then return exports.oInfobox:outputInfoBox("Não tens PP suficientes! (100PP)","error") end
                     triggerServerEvent("takePetPP",resourceRoot,localPlayer,100)
                     setElementData(localPlayer,"char:maxPets",getElementData(localPlayer,"char:maxPets") + 1)
                     maxPet = getElementData(localPlayer,"char:maxPets")
-                    exports.oInfobox:outputInfoBox("Sikeres pet slot bővítés, részletek a chatboxban!","success")
+                    exports.oInfobox:outputInfoBox("Compraste um slot de pet; detalhes no chat.","success")
 
-                    outputChatBox("#e3721f[Kisállat - Slot]#ffffff Sikeresen vásároltál egy kisállat slotot, jelenlegi slotjaid száma #e3721f("..maxPet..")",255,255,255,true)
+                    outputChatBox("#e3721f[Pet - Slot]#ffffff Compraste um slot. Slots atuais: #e3721f("..maxPet..")",255,255,255,true)
             end 
 
 
@@ -567,7 +567,7 @@ end
 --shoppanel 
 
 local shopPed = createPed(73,shopX,shopY,shopZ,sRot)
-setElementData(shopPed, "ped:prefix","Állatkereskedő")
+setElementData(shopPed, "ped:prefix","Vendedor de animais")
 setElementData(shopPed,"ped:name","Jack Anders")
 
 local dogs = {{269,6000},{270,6000},{271,6000},{300,6000},{311,6000},{293,6000},{1,6000}}
@@ -592,7 +592,7 @@ function renderShopPanel()
         Shopalpha4,Shopalpha5 = interpolateBetween(150, 200, 0, 0, 0, 0, (getTickCount() - menuAnimationTick2)/1000, "InOutQuad")
     end
 
-    core:drawWindow(sx*0.31, sy*0.3,sx*0.35, sy*0.33, "Állatkereskedés", Shopalpha2)
+    core:drawWindow(sx*0.31, sy*0.3,sx*0.35, sy*0.33, "Loja de animais", Shopalpha2)
     dxDrawRectangle(sx*0.315, sy*0.33,sx*0.2, sy*0.287,tocolor(25,25,25,Shopalpha))
 
     local shopPet = 0
@@ -620,8 +620,8 @@ function renderShopPanel()
                 dxDrawText(v[2].."PP",sx*0.51 - 1, sy*0.352 + sy*0.0405*(shopPet - scrolvalue2 - 1) + 1,_,_, tocolor(0, 0, 0, Shopalpha), 0.00055*sx, font, "right", "center",false,false,false,true)
                 dxDrawText(v[2].."PP",sx*0.51, sy*0.352 + sy*0.0405*(shopPet - scrolvalue2 - 1),_,_, tocolor(110, 172, 240, Shopalpha), 0.00055*sx, font, "right", "center",false,false,false,true)
 
-                exports.oCore:dxDrawButton(sx*0.53,sy*0.57,sx*0.11,sy*0.02,121, 242, 126,Shopalpha4, "Vásárlás", tocolor(255, 255, 255, Shopalpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
-                exports.oCore:dxDrawButton(sx*0.53,sy*0.596,sx*0.11,sy*0.02,189, 49, 49, Shopalpha4, "Kilépés", tocolor(255, 255, 255, Shopalpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
+                exports.oCore:dxDrawButton(sx*0.53,sy*0.57,sx*0.11,sy*0.02,121, 242, 126,Shopalpha4, "Comprar", tocolor(255, 255, 255, Shopalpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
+                exports.oCore:dxDrawButton(sx*0.53,sy*0.596,sx*0.11,sy*0.02,189, 49, 49, Shopalpha4, "Sair", tocolor(255, 255, 255, Shopalpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
 
             end
 
@@ -640,7 +640,7 @@ function openShopPanel()
     setTimer(function()
     customShopPet = createPed(dogs[selectedRow2][1],0,0,0)
     shopPW = exports.oPreview:createObjectPreview(customShopPet,0,0,120,sx*0.51,sy*0.21,sx*0.15,sy*0.3,false,true)
-    shopName = exports.oCore:createEditbox(sx*0.53,sy*0.525,sx*0.11,sy*0.04, "shopName", "Add meg a nevét", "text", true, {20, 20, 20, 255}, 0.3,15)
+    shopName = exports.oCore:createEditbox(sx*0.53,sy*0.525,sx*0.11,sy*0.04, "shopName", "Nome do pet", "text", true, {20, 20, 20, 255}, 0.3,15)
     end,1000,1)
 
     dist = setTimer(function()
@@ -694,20 +694,20 @@ function panelClick ( button, state, absoluteX, absoluteY, worldX, worldY, world
 
                 for k,v in pairs(badWords) do
                     if string.find(petName,badWords[k][1]) then 
-                        exports.oInfobox:outputInfoBox("Ezt a nevet gondold át mégegyszer!","error")
+                        exports.oInfobox:outputInfoBox("Escolhe outro nome!","error")
                         return
                     end 
                 end 
                 --if string.find(petName,"fasz") or string.find(petName,"geci") or string.find(petName,"asd") or string.find(petName,"Fasz") or string.find(petName,"pöcs") or string.find(petName,"noki") or string.find(petName,"szar") or string.find(petName,"Geci") or string.find(petName,"Asd") or string.find(petName,"Noki") or string.find(petName,"pina") or string.find(petName,"Pina") then return exports.oInfobox:outputInfoBox("Ezt a nevet gondold át mégegyszer!","error") end
-                if pp < dogs[selectedRow2][2] then return exports.oInfobox:outputInfoBox("Nincs elég prémiumpontod a vásárláshoz! ("..dogs[selectedRow2][2].."PP)","error") end 
-                if petName == "" then return exports.oInfobox:outputInfoBox("Valahogyan el kell nevezned az állatod vásárlás előtt!","error") end  
-                if getElementData(localPlayer,"char:maxPets") <= getElementData(localPlayer,"ownedPet") then return exports.oInfobox:outputInfoBox("Nincs elegendő slotod a vásárláshoz!","error") end
+                if pp < dogs[selectedRow2][2] then return exports.oInfobox:outputInfoBox("Não tens PP suficientes! ("..dogs[selectedRow2][2].."PP)","error") end 
+                if petName == "" then return exports.oInfobox:outputInfoBox("Dá um nome ao pet antes de comprar!","error") end  
+                if getElementData(localPlayer,"char:maxPets") <= getElementData(localPlayer,"ownedPet") then return exports.oInfobox:outputInfoBox("Não tens slots suficientes para comprar!","error") end
 
                 triggerServerEvent("takePetPP",localPlayer,localPlayer,dogs[selectedRow2][2])
-                outputChatBox("#e3721f[Kisállatkereskedés]#ffffff Sikeresen vásároltál egy állatot #6eacf0"..dogs[selectedRow2][2].."#ffffff PP ért!",255,255,255,true)
-                outputChatBox("#e3721f[Kisállatkereskedés]#ffffff Érdemes erről a chatboxról egy printscreent csinálnod ha későbbiekben valamiért bizonyítanod kell a vásárlást!",255,255,255,true)
+                outputChatBox("#e3721f[Loja de animais]#ffffff Compraste um pet por #6eacf0"..dogs[selectedRow2][2].."#ffffff PP.",255,255,255,true)
+                outputChatBox("#e3721f[Loja de animais]#ffffff Guarda um print deste chat se precisares de provar a compra mais tarde.",255,255,255,true)
                 triggerServerEvent("makePet",localPlayer,getElementData(localPlayer,"user:id"),petName,dogs[selectedRow2][1])
-                exports.oInfobox:outputInfoBox("Sikeres vásárlás, részletek a chatboxban!","success")
+                exports.oInfobox:outputInfoBox("Compra concluída; vê o chat.","success")
                 closeShopPanel()
             elseif isInSlot(sx*0.53,sy*0.596,sx*0.11,sy*0.02) then 
                 closeShopPanel()
@@ -735,7 +735,7 @@ function renderHealPanel()
             healeralpha,healeralpha2,healeralpha3 = interpolateBetween(255, 1, 150, 0, 0, 0, (getTickCount() - menuAnimationTick3)/1000, "InOutQuad")
         end
 
-        core:drawWindow(sx*0.38, sy*0.28,sx*0.21, sy*0.361, "Állatorvos", healeralpha2)
+        core:drawWindow(sx*0.38, sy*0.28,sx*0.21, sy*0.361, "Veterinário", healeralpha2)
         dxDrawRectangle(sx*0.385, sy*0.308,sx*0.2, sy*0.287,tocolor(25,25,25,healeralpha))
 
         local healPet = 0
@@ -744,17 +744,17 @@ function renderHealPanel()
             if healPet <= maxshow3 and (healPet > scrolvalue3) then 
                 if v[5] <= 0 then 
                     dxDrawRectangle(sx*0.3875, sy*0.315 + sy*0.04*(healPet - scrolvalue3 - 1),sx*0.195, sy*0.035, tocolor(40, 40, 40, healeralpha))
-                    dxDrawText(v[3].." [HALOTT]",sx*0.39 - 1, sy*0.3325 + sy*0.04*(healPet - scrolvalue3 - 1) + 1,_,_, tocolor(0,0,0, healeralpha), 0.00055*sx, font, "left", "center",false,false,false,true)
-                    dxDrawText(v[3].." #6b6b6b[HALOTT]",sx*0.39, sy*0.3325 + sy*0.04*(healPet - scrolvalue3 - 1),_,_, tocolor(255,255,255, healeralpha), 0.00055*sx, font, "left", "center",false,false,false,true)
-                    exports.oCore:dxDrawButton(sx*0.53,sy*0.3225 + sy*0.04*(healPet - scrolvalue3 - 1),sx*0.05,sy*0.02,121, 242, 126,healeralpha3, "Vásárlás", tocolor(255, 255, 255, healeralpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
+                    dxDrawText(v[3].." [MORTO]",sx*0.39 - 1, sy*0.3325 + sy*0.04*(healPet - scrolvalue3 - 1) + 1,_,_, tocolor(0,0,0, healeralpha), 0.00055*sx, font, "left", "center",false,false,false,true)
+                    dxDrawText(v[3].." #6b6b6b[MORTO]",sx*0.39, sy*0.3325 + sy*0.04*(healPet - scrolvalue3 - 1),_,_, tocolor(255,255,255, healeralpha), 0.00055*sx, font, "left", "center",false,false,false,true)
+                    exports.oCore:dxDrawButton(sx*0.53,sy*0.3225 + sy*0.04*(healPet - scrolvalue3 - 1),sx*0.05,sy*0.02,121, 242, 126,healeralpha3, "Tratamento", tocolor(255, 255, 255, healeralpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
 
                 end
             end 
         end 
-        dxDrawText("A vásárlás elindít egy minigamet, a játék\nsikerének megfelelően történik az újraélesztés.\nAz újraélesztés ára 60000$!",sx*0.3875 - 1, sy*0.616 + 1,_,_, tocolor(0,0,0, healeralpha), 0.0003*sx, font, "left", "center",false,false,false,true)
-        dxDrawText("A vásárlás elindít egy #e3721fminigamet#ffffff, a játék\nsikerének megfelelően történik az újraélesztés.\nAz újraélesztés ára #79f27e60000$!",sx*0.3875, sy*0.616,_,_, tocolor(255,255,255, healeralpha), 0.0003*sx, font, "left", "center",false,false,false,true)
+        dxDrawText("Isto inicia um minijogo; conforme o resultado,\no pet pode ser ressuscitado.\nCusto da ressurreição: 60000$!",sx*0.3875 - 1, sy*0.616 + 1,_,_, tocolor(0,0,0, healeralpha), 0.0003*sx, font, "left", "center",false,false,false,true)
+        dxDrawText("Isto inicia um #e3721fminijogo#ffffff; conforme o resultado,\né feita a ressurreição.\nCusto: #79f27e60000$!",sx*0.3875, sy*0.616,_,_, tocolor(255,255,255, healeralpha), 0.0003*sx, font, "left", "center",false,false,false,true)
 
-        exports.oCore:dxDrawButton(sx*0.535,sy*0.615,sx*0.05,sy*0.02,189, 49, 49, healeralpha3, "Kilépés", tocolor(255, 255, 255, healeralpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
+        exports.oCore:dxDrawButton(sx*0.535,sy*0.615,sx*0.05,sy*0.02,189, 49, 49, healeralpha3, "Sair", tocolor(255, 255, 255, healeralpha), 0.0003*sx, font, false, tocolor(0, 0, 0, 100))
     end 
 end 
 
@@ -831,7 +831,7 @@ function HealpanelClick ( button, state, absoluteX, absoluteY, worldX, worldY, w
                     if v[5] <= 0 then 
                         if isInSlot(sx*0.53,sy*0.3225 + sy*0.04*(healPet - scrolvalue3 - 1),sx*0.05,sy*0.02) then 
                             price = 60000
-                            if getElementData(localPlayer,"char:money") < price then return exports.oInfobox:outputInfoBox("Nincs nálad elég pénz! ("..price.."$)","error") end
+                            if getElementData(localPlayer,"char:money") < price then return exports.oInfobox:outputInfoBox("Não tens dinheiro suficiente! ("..price.."$)","error") end
 
                                 petID = v[1]
                                 createMinigame(1, 8, 18000,"successMinigame","unsuccessMinigame",petID,price)
@@ -853,9 +853,9 @@ addEventHandler ( "onClientClick", root, HealpanelClick )
 function makePetSound(petID)
     local type = getAnimalType(myPets[petID][4])
 
-    if type == "Kutya" then 
+    if type == "Cão" then 
         playSound("files/wuff.mp3",false)
-    elseif type == "Disznó" then 
+    elseif type == "Porco" then 
         playSound("files/pig.mp3",false)
     end 
 end 
@@ -1372,11 +1372,11 @@ function createMinigame(type, successCount, time, successEvent, unsuccessEvent,e
         minigameValues = {avaibleCharacters[math.random(#avaibleCharacters)], 0, 0, getTickCount()}
         addEventHandler("onClientKey", root, cancelKeys)
 
-        outputChatBox(core:getServerPrefix("server", "Minigame", 2).."Tartsd lenyomva a képernyő közepén látható billentyűt.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Minigame", 2).."Mantém premida a tecla indicada no centro da tela.", 255, 255, 255, true)
     elseif type == 2 then 
         minigameValues = {"", 0, 0, getTickCount()}
 
-        outputChatBox(core:getServerPrefix("server", "Minigame", 2).."Kattinst a szürke négyzetekre.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Minigame", 2).."Clica nos quadrados cinzentos.", 255, 255, 255, true)
         addEventHandler("onClientKey", root, minigame2Keys)
     elseif type == 3 then 
         local values = {-0.3, -0.25, -0.2, -0.1, 0.1, 0.2, 0.25, 0.3}
@@ -1407,7 +1407,7 @@ function endMinigame(type)
 
         triggerServerEvent("reHealPet",localPlayer,localPlayer,petID)
         minigameActive = false
-        exports.oInfobox:outputInfoBox("Az állatorvos sikeresen újraélesztette a kisállatod! ("..price.."$)","success")
+        exports.oInfobox:outputInfoBox("O veterinário ressuscitou o pet! ("..price.."$)","success")
         triggerServerEvent("takePetMoney",localPlayer,localPlayer,price)
         healPets[petID] = nil 
         myPets[petID][5] = 100
@@ -1417,7 +1417,7 @@ function endMinigame(type)
 
     elseif type == "unseccessful" then 
         local halfPrice = price/2
-        exports.oInfobox:outputInfoBox("Sajnos nem sikerült a minigame így az állatorvos nem tudja feléleszteni az állatod az összeg fele így is levonásra kerűlt! ("..halfPrice.."$)","error")
+        exports.oInfobox:outputInfoBox("Falhaste o minijogo; o vet não ressuscita o pet. Foi cobrada metade do valor. ("..halfPrice.."$)","error")
         minigameActive = false
         triggerServerEvent("takePetMoney",localPlayer,localPlayer,price/2)
 
@@ -1456,6 +1456,6 @@ addEventHandler("onClientPlayerWasted",root,function()
         local petID = getElementData(pet ,"pet:id")
         triggerServerEvent("desummonPet",source ,source ,petID)
         setElementData(source ,"hasSummonedPet",false)
-        exports.oInfobox:outputInfoBox("Mivel meghaltál az állatod automatikusan visszahívásra kertült!","info")
+        exports.oInfobox:outputInfoBox("Morreste; o pet foi recolhido automaticamente.","info")
     end 
 end)

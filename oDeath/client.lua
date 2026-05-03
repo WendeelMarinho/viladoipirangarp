@@ -174,11 +174,11 @@ addEventHandler("onClientPlayerWasted", localPlayer, function(killer, weapon, bo
             showChat(false)
             exports.oInterface:toggleHud(true)
             setCameraShakeLevel(0)
-            damageText = "Ismeretlen"
-            if stealth then 
-                damageText = "elvágták a torkát"
+            damageText = "Desconhecido"
+            if stealth then
+                damageText = "cortaram sua garganta"
             else
-                damageText = "Ismeretlen"
+                damageText = "Desconhecido"
             end
 
             triggerServerEvent("startDeath > onServer", resourceRoot, localPlayer, damageText)
@@ -207,7 +207,7 @@ function renderBloodBar()
     local blood = getElementData(localPlayer, "char:blood") or 100
 
     dxDrawRectangle(sx*0.45, sy*0.89, sx*0.1, sy*0.04, tocolor(30, 30, 30, 200))
-    core:dxDrawShadowedText("Vérszinted: "..blood.."%", sx*0.4+2.5/myX*sx, sy*0.9+3/myY*sy, sx*0.4+2.5/myX*sx+sx*0.2-5/myX*sx, sy*0.9+3/myY*sy+sy*0.02-6/myY*sy, tocolor(227, 59, 59, 255), tocolor(0, 0, 0, 255), 0.75/myX*sx, fonts["condensed-15"], "center", "center")
+    core:dxDrawShadowedText("Nível de sangue: "..blood.."%", sx*0.4+2.5/myX*sx, sy*0.9+3/myY*sy, sx*0.4+2.5/myX*sx+sx*0.2-5/myX*sx, sy*0.9+3/myY*sy+sy*0.02-6/myY*sy, tocolor(227, 59, 59, 255), tocolor(0, 0, 0, 255), 0.75/myX*sx, fonts["condensed-15"], "center", "center")
 end
 
 addEvent("endAnim->onClient", true)
@@ -280,8 +280,8 @@ function destroyInjuredRoom()
 end
 
 -- Commands
-exports.oAdmin:addAdminCMD("ahelp", 2, "Játékos újraélesztése")
-exports.oAdmin:addAdminCMD("asegit", 2, "Játékos újraélesztése")
+exports.oAdmin:addAdminCMD("ahelp", 2, "Ressuscitar jogador")
+exports.oAdmin:addAdminCMD("asegit", 2, "Ressuscitar jogador")
 
  -- betegség rendszer
 local rainTimer = false
@@ -349,14 +349,14 @@ function checkRain()
                 if getElementData(localPlayer, "char:sick") >= 50 then 
                     if isTimer(warningTimer) then return end
                     outputChatBox(exports["oCore"]:getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está doente — procure um médico!", 255, 255, 255, true)
-				    exports.oInfobox:outputInfoBox("Meg betegedtél, keress fel egy orvost!", "warning")
+				    exports.oInfobox:outputInfoBox("Você está doente — procure um médico!", "warning")
                     warningTimer = setTimer(function() end, 5*60*1000, 1)
                 end
             else 
                 warningCounter = warningCounter + 1
                 if warningCounter < 10 then
                     outputChatBox(exports["oCore"]:getServerPrefix("server", "Vale do Ipiranga RP", 1).."Você está gravemente doente — procure um médico em até 10 minutos!", 255, 255, 255, true)
-				    exports.oInfobox:outputInfoBox("Meg betegedtél, keress fel egy orvost 10 perced van hogy kezeljenek!", "warning")
+				    exports.oInfobox:outputInfoBox("Você está gravemente doente — procure um médico, você tem 10 minutos para ser tratado!", "warning")
                 else 
                     setElementHealth(localPlayer, 0)
                     setElementData(localPlayer,"char:health", 0)

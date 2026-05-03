@@ -82,7 +82,7 @@ function getNearbyTrafficBoards(cmd)
                 if id > 0 then
                     local model = getElementModel(v)
                     local type = getElementData(v, "TrafficBoards.type") or 0
-                    outputChatBox(syntax.."Model: "..green..model..white..", ID: "..green..id..white..", Típus: "..green..type..white..", Távolság: "..green..math.floor(dist)..white.." yard", 255,255,255,true)
+                    outputChatBox(syntax.."Model: "..green..model..white..", ID: "..green..id..white..", Tipo: "..green..type..white..", Distância: "..green..math.floor(dist)..white.." yard", 255,255,255,true)
                     hasVeh = true
                 end
             end
@@ -99,7 +99,7 @@ addCommandHandler("getntb", getNearbyTrafficBoards)
 function createTrafficBoard(cmd, type)
     if not type then
         local syntax = core:getServerPrefix("server", "orange", 1)
-        outputChatBox(syntax .. "/"..cmd.." [Típus]", 255,255,255,true)
+        outputChatBox(syntax .. "/"..cmd.." [Tipo]", 255,255,255,true)
         return
     elseif tonumber(type) == nil then
         local syntax = core:getServerPrefix("server", "orange", 1)
@@ -195,7 +195,7 @@ function getNearbyTrafficBoards(cmd)
                 if id > 0 then
                     local model = getElementModel(v)
                     local type = getElementData(v, "TrafficBoards.type") or 0
-                    outputChatBox(syntax.."Model: "..green..model..white..", ID: "..green..id..white..", Típus: "..green..type..white..", Távolság: "..green..math.floor(dist)..white.." yard", 255,255,255,true)
+                    outputChatBox(syntax.."Model: "..green..model..white..", ID: "..green..id..white..", Tipo: "..green..type..white..", Distância: "..green..math.floor(dist)..white.." yard", 255,255,255,true)
                     hasVeh = true
                 end
             end

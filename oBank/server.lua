@@ -471,3 +471,42 @@ addEventHandler("bank > caseOpen > end", resourceRoot, function(money)
         setElementData(client, "char:money", getElementData(client, "char:money") + money) 
     end
 end)
+
+--- Conta principal (ou primeira) do personagem — para Admin Hub / ferramentas.
+function getMainBankAccountForChar(charId)
+	charId = tonumber(charId)
+	if not charId then return false, 0, false end
+	local fallback
+	for serial, acc in pairs(bankAccounts) do
+		if acc and acc[2] == charId then
+			if acc[4] == 1 then
+				return serial, acc[3], acc[1]
+			end
+			if not fallback then fallback = { serial, acc[3], acc[1] } end
+		end
+	end
+	if fallback then return fallback[1], fallback[2], fallback[3] end
+	return false, 0, false
+end
+
+function adminHubAdjustBankBalance(serial, delta)
+	serial = tostring(serial or "")
+	if serial == "" or not bankAccounts[serial] then return false, "Conta inválida." end
+	delta = tonumber(delta)
+	if not delta or delta == 0 then return false, "Valor inválido." end
+	local n = (bankAccounts[serial][3] or 0) + math.floor(delta)
+	if n < 0 then return false, "Saldo bancário ficaria negativo." end
+	bankAccounts[serial][3] = n
+	triggerClientEvent(root, "bank > updateBankDatas > client", root, bankAccounts, bankLogs)
+	return true, n
+end
+
+function adminHubSetBankBalance(serial, value)
+	serial = tostring(serial or "")
+	if serial == "" or not bankAccounts[serial] then return false, "Conta inválida." end
+	value = tonumber(value)
+	if not value or value < 0 then return false, "Valor inválido." end
+	bankAccounts[serial][3] = math.floor(value)
+	triggerClientEvent(root, "bank > updateBankDatas > client", root, bankAccounts, bankLogs)
+	return true, bankAccounts[serial][3]
+end

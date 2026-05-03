@@ -200,7 +200,7 @@ function clientMarkerHit(thePlayer, matchingDimension)
 					if getElementData(source, "isIntMarker") then
 						if getElementData(source,"custom") > 0 then
 							if intOwner == getElementData(localPlayer, "char:id") then 
-								outputChatBox(core:getServerPrefix("server", "Interior szerkesztés", 2).."Az interior szerkesztéséhez használd a "..color.."/szerkesztes#ffffff parancsot.", 255, 255, 255, true)
+								outputChatBox(core:getServerPrefix("server", "Edição de interior", 2).."Az interior szerkesztéséhez használd a "..color.."/szerkesztes#ffffff parancsot.", 255, 255, 255, true)
 							end 
 						end
 					end
@@ -291,7 +291,7 @@ addCommandHandler("szerkesztes",
 					triggerServerEvent("editInterior", localPlayer, marker)
 					editTick = getTickCount()
 				else
-					outputChatBox(core:getServerPrefix("red-dark", "Interior szerkesztés", 2).."Ezt a parancsot csak 5 másodpercenként használhatod.", 255, 255, 255, true)
+					outputChatBox(core:getServerPrefix("red-dark", "Edição de interior", 2).."Este comando só pode ser usado a cada 5 segundos.", 255, 255, 255, true)
 				end
 			end
 		end

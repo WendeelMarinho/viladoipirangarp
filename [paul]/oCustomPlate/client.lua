@@ -1,7 +1,7 @@
 local ped = createPed(187, 1504.6188964844, -1774.9859619141, 14.427187919617, 180)
 setElementFrozen(ped, true)
 setElementData(ped, "ped:name", "Paul Griffiths")
-setElementData(ped, "ped:prefix", "Egyedi rendszám")
+setElementData(ped, "ped:prefix", "Placa personalizada")
 
 local sx, sy = guiGetScreenSize()
 local myX, myY = 1768, 992
@@ -31,7 +31,7 @@ function renderPanel()
         dxDrawRectangle(sx*0.4 + 4/myX*sx, sy*0.33 + 4/myY*sy, sx*0.2 - 8/myX*sx, sy*0.29, tocolor(30, 30, 30, 220 * panelAlpha))
 
 
-        dxDrawText("Saját járművek", sx*0.4 + 4/myX*sx, sy*0.33 + 4/myY*sy, sx*0.4 + 4/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + sy*0.01, tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
+        dxDrawText("Meus veículos", sx*0.4 + 4/myX*sx, sy*0.33 + 4/myY*sy, sx*0.4 + 4/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + sy*0.01, tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
         dxDrawText("( "..vehCount.." )", sx*0.57 + 4/myX*sx, sy*0.33 + 4/myY*sy, sx*0.4 + 4/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + sy*0.01, tocolor(r, g, b, 255 * panelAlpha), 1, font:getFont("bebasneue", 15/myX*sx), "center", "center")
 
 --        local lineHeight = math.min(maxshow / vehCount, 1) 
@@ -60,7 +60,7 @@ function renderPanel()
             end 
         end     
 
-        core:dxDrawButton(sx*0.4 + 4/myX*sx, sy*0.66, sx*0.2 - 8/myX*sx, sy*0.035, r, g, b, 220 * panelAlpha, "Rendszám módosítása", tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), false, tocolor(0, 0, 0, 100 * panelAlpha))
+        core:dxDrawButton(sx*0.4 + 4/myX*sx, sy*0.66, sx*0.2 - 8/myX*sx, sy*0.035, r, g, b, 220 * panelAlpha, "Alterar placa", tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), false, tocolor(0, 0, 0, 100 * panelAlpha))
         dxDrawText(infotext, sx*0.4 + 6/myX*sx, sy*0.6 + 4/myY*sy, sx*0.4 + 4/myX*sx + sx*0.2 - 8/myX*sx, sy*0.6 + sy*0.02, tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), "right", "center", false, false, true, true)
 
         editboxtext = core:getEditboxText("nplate")
@@ -72,7 +72,7 @@ function renderPanel()
 
             dxDrawText("#6eacf0500PP #ffffff& #7cc57675.000$", sx*0.4 + 4/myX*sx, sy*0.55 + 4/myY*sy, sx*0.4 + 4/myX*sx + sx*0.2 - 8/myX*sx, sy*0.3 + sy*0.01, tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("bebasneue", 13/myX*sx), "center", "center",false,false,false,true)
             core:dxDrawButton(sx*0.435 + 4/myX*sx, sy*0.455, sx*0.13 - 8/myX*sx, sy*0.035, 110, 172, 240, 220 * panelAlpha, "PP", tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), false, tocolor(0, 0, 0, 100 * panelAlpha))
-            core:dxDrawButton(sx*0.435 + 4/myX*sx, sy*0.491, sx*0.13 - 8/myX*sx, sy*0.035, 124, 197, 118, 220 * panelAlpha, "Készpénz", tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), false, tocolor(0, 0, 0, 100 * panelAlpha))
+            core:dxDrawButton(sx*0.435 + 4/myX*sx, sy*0.491, sx*0.13 - 8/myX*sx, sy*0.035, 124, 197, 118, 220 * panelAlpha, "Dinheiro", tocolor(255, 255, 255, 255 * panelAlpha), 1, font:getFont("condensed", 11/myX*sx), false, tocolor(0, 0, 0, 100 * panelAlpha))
 
     end 
 
@@ -102,16 +102,16 @@ if panel and not buypanel then
         if textHossz >= 3 then
             if textHossz < 7 then
                 if checkPlateText(editboxtext) then 
-                    infotext = "#f55742Ez a rendszám már használatban van!"
+                    infotext = "#f55742Esta placa já está em uso!"
                 else
-                    infotext = "#74cf6dMegfelelő rendszám!"
+                    infotext = "#74cf6dPlaca válida!"
                 end
             else
-                infotext = "#f55742Ez a rendszám hosszú!"
+                infotext = "#f55742Esta placa é muito longa!"
             end
         else
             if textHossz > 0 then
-                infotext = "#f55742Ez a rendszám rövid!"
+                infotext = "#f55742Esta placa é muito curta!"
             else
                 infotext = ""
             end
@@ -123,7 +123,7 @@ end
 function openPanel()
     addEventHandler("onClientRender", root, renderPanel)
     addEventHandler("onClientKey", root, panelKey)
-     core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Egyedi rendszám", "text", true, {32, 32, 32, 255}, 0.4)
+     core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Placa personalizada", "text", true, {32, 32, 32, 255}, 0.4)
     panel = true 
 
     for k,v in pairs(getElementsByType("vehicle")) do 
@@ -180,7 +180,7 @@ end
 function closeBuyPanel()
     if buypanel then 
         buypanel = false 
-        core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Egyedi rendszám", "text", true, {32, 32, 32, 255}, 0.4)
+        core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Placa personalizada", "text", true, {32, 32, 32, 255}, 0.4)
     end 
 end 
 
@@ -228,24 +228,24 @@ function ClickFunction ( button, state, absoluteX, absoluteY, worldX, worldY, wo
                 if textHossz >= 3 then    
                     triggerServerEvent("takePP",localPlayer,localPlayer,500)
                     triggerServerEvent("setVehPlate",localPlayer,setVeh,editboxtext)
-                    exports["oInfobox"]:outputInfoBox("Sikeresen beállítottad járműved új rendszámát!","success")
+                    exports["oInfobox"]:outputInfoBox("Placa do veículo atualizada com sucesso!","success")
                     buypanel = false
-                    core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Egyedi rendszám", "text", true, {32, 32, 32, 255}, 0.4)
+                    core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Placa personalizada", "text", true, {32, 32, 32, 255}, 0.4)
                 end
             else 
-                exports["oInfobox"]:outputInfoBox("Nincs elegendő prémium pontod a vásárláshoz!","error")
+                exports["oInfobox"]:outputInfoBox("Pontos premium insuficientes para a compra!","error")
             end 
         elseif isInSlot(sx*0.435 + 4/myX*sx, sy*0.491, sx*0.13 - 8/myX*sx, sy*0.035) then 
             if getElementData(localPlayer,"char:money") >= 75000 then 
                 if textHossz >= 3 then
                     triggerServerEvent("takeMoney",localPlayer,localPlayer,500)
                     triggerServerEvent("setVehPlate",localPlayer,setVeh,editboxtext)
-                    exports["oInfobox"]:outputInfoBox("Sikeresen beállítottad járműved új rendszámát!","success")
+                    exports["oInfobox"]:outputInfoBox("Placa do veículo atualizada com sucesso!","success")
                     buypanel = false
-                    core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Egyedi rendszám", "text", true, {32, 32, 32, 255}, 0.4)
+                    core:createEditbox(sx*0.4 + 4/myX*sx, sy*0.625, sx*0.2 - 8/myX*sx, sy*0.035, "nplate", "Placa personalizada", "text", true, {32, 32, 32, 255}, 0.4)
                 end 
             else 
-                exports["oInfobox"]:outputInfoBox("Nincs elegendő pénzed a vásárláshoz!","error")
+                exports["oInfobox"]:outputInfoBox("Dinheiro insuficiente para a compra!","error")
             end 
         end 
     end 

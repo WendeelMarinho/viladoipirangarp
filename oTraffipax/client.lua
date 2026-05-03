@@ -69,7 +69,7 @@ function checkAtlepes(limit, veh, difference, message)
         local vehicleplayers = getVehicleOccupants(veh)
 
         outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Átlépted a sebességhatárt!", 255, 255, 255, true)
-        outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Sebbességed: "..color..carspeed .." #ffffffkm/h | Sebességhatár: "..color..speedlimit.." #ffffffkm/h | Átlépés mértéke: "..color..atlepes.." #ffffffkm/h.", 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("server", "Traffipax", 3).."Sua velocidade: "..color..carspeed .." #ffffffkm/h | Limite: "..color..speedlimit.." #ffffffkm/h | Excesso: "..color..atlepes.." #ffffffkm/h.", 255, 255, 255, true)
         
 
         if not (getVehicleType(veh) == "Quad" or getVehicleType(veh) == "Bike" or getVehicleType(veh) == "BMX") then 

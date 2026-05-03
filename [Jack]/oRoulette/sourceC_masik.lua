@@ -131,7 +131,7 @@ addCommandHandler("nearbyroulette",
 				outputChatBox(core:getServerPrefix('blue-dark2', 'Rulett', 3).."#ffffffKözeledben lévő asztalok (" .. maxDistance .. " yard):", 255, 255, 255, true)
 
 				for i, v in ipairs(nearbyList) do
-					outputChatBox("    * #e58904Azonosító: #ffffff" .. v[1] .. " - " .. math.floor(v[2] * 1000) / 1000 .. " yard", 255, 255, 255, true)
+					outputChatBox("    * #e58904ID: #ffffff" .. v[1] .. " - " .. math.floor(v[2] * 1000) / 1000 .. " yard", 255, 255, 255, true)
 				end
 			else
 				outputChatBox(core:getServerPrefix('red-dark', 'Rulett', 3).."#ffffffNincs egyetlen asztal sem a közeledben.", 255, 255, 255, true)

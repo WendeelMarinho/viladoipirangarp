@@ -16,8 +16,8 @@ addEventHandler("inventory > copyKey", resourceRoot, function(item)
     if getFreeSlot(client, giveItemId) then 
         setElementData(client, "char:money", getElementData(client, "char:money") - 500)
         giveItem(client, giveItemId, item.value, 1, 0)
-        outputChatBox(core:getServerPrefix("green-dark", "Kulcsmásolás", 3).."Sikeresen lemásoltattál egy "..getItemName(item.item).."ot. "..color.." (500$)", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("green-dark", "Cópia de chave", 3).."Você copiou uma "..getItemName(item.item)..". "..color.." (500$)", client, 255, 255, 255, true)
     else
-        outputChatBox(core:getServerPrefix("red-dark", "Kulcsmásolás", 3).."Nincs szabad slotod.", client, 255, 255, 255, true)
+        outputChatBox(core:getServerPrefix("red-dark", "Cópia de chave", 3).."Inventário sem espaço livre.", client, 255, 255, 255, true)
     end
 end)

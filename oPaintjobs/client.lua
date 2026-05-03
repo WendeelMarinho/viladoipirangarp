@@ -213,7 +213,7 @@ addCommandHandler("setpj", function(cmd, num)
                     outputChatBox(core:getServerPrefix("green-dark", "Paintjob", 2).."Paintjob sikeresen megváltoztatva!", 255, 255, 255, true)
                     triggerServerEvent("paintjob > sendAdminLog", resourceRoot, getPedOccupiedVehicle(localPlayer))
                 else 
-                    outputChatBox(core:getServerPrefix("red-dark", "Paintjob", 2).."Erre a járműre nincsen ilyen azonosítóval rendelkező paintjob!", 255, 255, 255, true)
+                    outputChatBox(core:getServerPrefix("red-dark", "Paintjob", 2).."Este veículo não possui um paintjob com esse identificador!", 255, 255, 255, true)
                 end
            
             --engineApplyShaderToWorldTexture(shader, "*")

@@ -1,0 +1,18 @@
+<meta>
+    <info author="VilaDev" name="oFactionHQ" version="1.0.0"
+          description="HQ exclusiva por facção: portões, ponto de munição, spawn de veículos. Admin: /hqsetup /hqgate /hqammo /hqveh" />
+
+    <script src="global.lua"  type="shared" />
+    <script src="server.lua"  type="server" />
+    <script src="client.lua"  type="client" />
+
+    <export function="canOpenGate"       type="server" />
+    <export function="isInFactionHQ"     type="server" />
+    <export function="getHQByFaction"    type="server" />
+
+    <include resource="oDashboard" />
+    <include resource="oCore" />
+    <include resource="oInfobox" />
+    <include resource="oInventory" />
+    <include resource="oVehicle" />
+</meta>

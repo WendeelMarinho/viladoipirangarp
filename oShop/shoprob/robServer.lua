@@ -17,7 +17,7 @@ addEventHandler("shoprob > startShopRob", resourceRoot, function(ped)
 
     for k, v in ipairs(getElementsByType("player")) do 
         if exports.oDashboard:getFactionType(getElementData(v, "char:duty:faction")) == 1 then 
-            outputChatBox(core:getServerPrefix("blue-light-2", "Központ", 3).."Figyelem! Boltrablás folyamatban "..color..zoneName.." #ffffffterületén!", v, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("blue-light-2", "Central", 3).."Atenção! Assalto a loja em andamento na área de "..color..zoneName.."#ffffff!", v, 255, 255, 255, true)
         end
     end
 end)

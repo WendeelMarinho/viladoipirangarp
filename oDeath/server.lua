@@ -55,8 +55,8 @@ function savePlayerLife(player, cmd, target)
                     local bones = toJSON( {["head"] = 0, ["body"] = 0, ["l_leg"] = 0, ["r_leg"] = 0, ["r_arm"] = 0, ["l_arm"] = 0} )
                     setElementData(target, "char:bones", bones)
 
-                    sendMessageToAdmins(player, "felsegítette #db3535"..getPlayerName(target):gsub("_", " ").. "#557ec9 nevű játékost.")
-                    outputChatBox(core:getServerPrefix("server", "original", 1) .. color .. getPlayerName(player):gsub("_", " ") .. " #fffffffelsegített téged!", target, 255, 255, 255, true)
+                    sendMessageToAdmins(player, "levantou o jogador #db3535"..getPlayerName(target):gsub("_", " ").. "#557ec9.")
+                    outputChatBox(core:getServerPrefix("server", "original", 1) .. color .. getPlayerName(player):gsub("_", " ") .. " #ffffffte levantou!", target, 255, 255, 255, true)
                     return
                 elseif getElementData(target, "playerInDead") then 
                     local targetPos = Vector3(getElementPosition(target))
@@ -77,17 +77,17 @@ function savePlayerLife(player, cmd, target)
                     
                     setElementData(target, "usedBlood", false)
 
-                    sendMessageToAdmins(player, "felélesztette #db3535"..getPlayerName(target):gsub("_", " ").. "#557ec9 nevű játékost.")
-                    outputChatBox(core:getServerPrefix("server", "original", 1) .. color .. getPlayerName(player):gsub("_", " ") .. " #fffffffelélesztett téged!", target, 255, 255, 255, true)
+                    sendMessageToAdmins(player, "ressuscitou o jogador #db3535"..getPlayerName(target):gsub("_", " ").. "#557ec9.")
+                    outputChatBox(core:getServerPrefix("server", "original", 1) .. color .. getPlayerName(player):gsub("_", " ") .. " #ffffffte ressuscitou!", target, 255, 255, 255, true)
                     return
                 end
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Hiba", 3).."Hiba, jelentsd egy fejlesztőnek!", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Erro", 3).."Erro, reporte a um desenvolvedor!", player, 255, 255, 255, true)
             end
 
-            outputChatBox(core:getServerPrefix("red-dark", "Felsegítés", 3) .. "A játékos nincs megsérülve és nem is halott. ", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Levantar", 3) .. "O jogador não está ferido e também não está morto.", player, 255, 255, 255, true)
         else
-            outputChatBox(core:getServerPrefix("red-dark", "Használat", 3) .. "/"..cmd.. " [Target]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("red-dark", "Uso", 3) .. "/"..cmd.. " [Target]", player, 255, 255, 255, true)
         end
     end
 end
@@ -116,7 +116,7 @@ function animStart(player)
 
     for k, v in ipairs(getElementsByType("player")) do 
         if (getElementData(v, "user:admin") or 0) >= 2 then 
-            outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."] animba esett.", v, 255, 255, 255, true)
+            outputChatBox("#2379cf["..date.."]: #e97619"..getPlayerName(player):gsub("_", " ").."#FFFFFF ["..getElementData(player, "playerid").."] entrou em animação (inconsciente).", v, 255, 255, 255, true)
         end
     end
 end

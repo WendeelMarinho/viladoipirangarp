@@ -1,8 +1,99 @@
-# Sprint Atual — Phase 2: Localização PT-BR
+# Sprint Atual — Phase 3: Facções Reais + Localização Completa
 
 **Branch:** `main`  
 **Início:** 2026-05-01  
-**Status:** Sprint A concluída; Sprint B.2 (UI residual) concluída em 2026-05-01; **Sprint C (pré-auditoria)** documentada em 2026-05-02 (`docs/qa/pre-test-audit.md`); **Sprint D (infraestrutura VPS)** concluída em 2026-05-02.
+**Status:** Sprints A–F concluídas. Próximo: configuração in-game + integrações de código.
+
+---
+
+## Sprint F — Localização PT-BR completa + Facções (CONCLUÍDA em 2026-05-03)
+
+### Localização (37+ recursos traduzidos)
+
+Todos os textos visíveis ao jogador em **húngaro** foram traduzidos e tropicalizados para **português brasileiro** nos seguintes recursos:
+
+| Recursos | Strings traduzidas |
+|----------|-------------------|
+| `oDeath` | Levantar, ressuscitar, mensagens de doença |
+| `oCarshop` | Preço, comprar, slots, mensagens de compra |
+| `oPaintjobs` | Logs de admin, erros de paintjob |
+| `[paul]/oCustomPlate` | Painel de placa, validações, NPC |
+| `oDrugs` (client + dealer + server) | Fabricação, colheita, diálogos do dealer, minigame |
+| `oSkinshop` | 4 mensagens infobox |
+| `oTrafficLight` | Multa de sinal vermelho |
+| `oSuprise` | Mensagens de presente (evento) |
+| `oInventory` (múltiplos) | Scanner OBD, chave, baú, revista |
+| `oInteriorBuilding` | Dinheiro insuficiente, PP |
+| `oTuning` | 20+ mensagens de erro |
+| `[paul]/oBag`, `oheadcross`, `oF1Event` | Mensagens de item/evento |
+| `[slotmachine]/oMasterSlotmachine` | ID, distância, tipo |
+| `[Core]/oCore/global.lua` | Busca de jogadores |
+| `oAdmin/s_admin.lua` | Ban, jail, kick, admin logs |
+| `oTraffipax` | Velocidade, limite, excesso |
+| `oShop/shoprob` + `oBankrob` | Alertas de assalto |
+| `oQuitmessage` | Mensagem de saída próxima |
+| `oBorder/BK` | Aviso portão 10s |
+| `oGraffiti` | Cooldown |
+| `rally` | Tempo de circuito |
+| `oInteriors` | Edição de interior, cooldown |
+| `[Jobs]/oJob_PizzaMaker` | Labels do timer |
+| `oTBoards`, `[Dexter]/*`, `[Jack]/oRoulette/*` | ID, distância, tipo |
+
+### Facções reais de São Paulo criadas no DB
+
+10 facções baseadas em organizações **reais de São Paulo** inseridas em `orp_main.factions`:
+
+| ID | Nome | Tipo | Cor |
+|----|------|------|-----|
+| 74 | PMESP — Polícia Militar do Estado de SP | 1 — Segurança | Azul |
+| 80 | PCSP — Polícia Civil do Estado de SP | 1 — Segurança | Azul |
+| 75 | SAMU 192 | 2 — Saúde | Vermelho |
+| 81 | Corpo de Bombeiros Militar do Estado de SP | 2 — Saúde | Vermelho |
+| 76 | Prefeitura de São Paulo | 3 — Legal/Governo | Dourado |
+| 82 | OAB-SP — Ordem dos Advogados do Brasil | 3 — Legal | Dourado |
+| 77 | PCC — Primeiro Comando da Capital | 4 — Gangue | Roxo |
+| 83 | CV — Comando Vermelho | 4 — Gangue | Roxo |
+| 78 | Família Lombardi — Cosa Nostra SP | 5 — Máfia | Roxo escuro |
+| 79 | Yakuza São Paulo — Yamaguchi-gumi BR | 5 — Máfia | Roxo escuro |
+
+Cores por tipo: atribuídas automaticamente pelo `factionClient.lua` via campo `type` — **não há colunas de cor no DB**.
+
+---
+
+---
+
+## Sprint E — Sistemas Premium (CONCLUÍDA em 2026-05-03)
+
+Implementação de três novos sistemas de gameplay mais reescrita/criação do `oFactionScripts`.  
+Documentação completa: [`docs/features/sistemas-premium.md`](../features/sistemas-premium.md).
+
+### Recursos criados
+
+| Recurso | Ficheiros | Estado |
+|---------|-----------|--------|
+| `oFactionScripts` | global + server + client + meta | ✅ Código + symlink + manifesto |
+| `oWanted` | global + server + client + meta | ✅ Código + symlink + manifesto |
+| `oTerritory` | global + server + client + meta | ✅ Código + symlink + manifesto |
+| `oFactionHQ` | global + server + client + meta | ✅ Código + symlink + manifesto |
+
+### Tabelas DB criadas (`orp_main`)
+- `wanted_active` — procurados ativos com nível, bounty e crimes
+- `territories` — zonas capturáveis (8 zonas pré-seed)
+- `faction_hq` — sede de facção com portões, munição e veículos
+
+### Fixes aplicados nesta sessão
+| Ficheiro | Bug | Fix |
+|----------|-----|-----|
+| `oTerritory/server.lua` | `not x == 0` (precedência incorreta) | `(x or 0) ~= 0` |
+| `oTerritory/server.lua` | `goto`/`::continue::` incompatível Lua 5.1 | Extraído para função local `tickTerritory()` |
+| `oAdmin/hub/c_adminHub.lua` | Overlap 12px hint bar / field strip | `targetEditY` +16px |
+
+### Estado pós-Sprint E
+- 4 recursos novos com symlinks em `mods/deathmatch/resources/` ✅
+- Manifesto `oStarter` atualizado (posições 176–178) ✅
+- 0 erros de sintaxe Lua (`luac5.1 -p`) ✅
+- ACL sem alteração necessária (`resource.*` wildcard) ✅
+- **Pendente:** configuração in-game (ver `docs/worklog/next-actions.md`)
 
 ---
 
@@ -40,7 +131,6 @@ Fix aplicado em `[Core]/oCore/elements/weatherSync.lua`:
 ```lua
 -- Antes:
 if getRainLevel() > 0 then
-
 -- Depois:
 local rl = getRainLevel()
 if type(rl) == "number" and rl > 0 then
@@ -52,17 +142,6 @@ if type(rl) == "number" and rl > 0 then
 - Loop de erros weatherSync eliminado ✅
 - Serial do owner (`CE96EC91A956F747BA88AC47DD304A02`) inserido em `adminserials` ✅
 - Whitelist funciona — owner consegue entrar ✅
-
-### Problemas pendentes (pós-Sprint D)
-
-| Problema | Ficheiro | Causa |
-|---------|----------|-------|
-| `addAccount` / `logIn` negados para oAdmin | `oAdmin/s_admin.lua:102-105` | `resource.oAdmin` não está no grupo Admin do ACL |
-| `aclSave` / `aclGroupAddObject` negados | `oAdmin/s_admin.lua:16-23` | Mesmo — falta `resource.oAdmin` no ACL Admin |
-| `fetchRemote` negado (oCore) | `weatherSync.lua:153` | Falta permissão ACL para oCore |
-| `fetchRemote` negado (oAnticheat) | `antiCheatS.lua:996,1015` | Falta permissão ACL para oAnticheat |
-| Tabelas DB em falta (oDrugs, oMDC) | — | Schema não criado ainda |
-| `oPlant`/`oPlaneCrash` inexistentes | `oStarter/server.lua:290-291` | Recursos não presentes no projeto |
 
 ---
 
@@ -94,6 +173,6 @@ Ficheiros: `oDashboard/bugReportC.lua`, `oDashboard/openCreate.lua`, `oDashboard
 
 ---
 
-## Próxima Sprint — Fix ACL oAdmin + QA login
+## Próxima Sprint — Configuração in-game + Integrações
 
 Ver `docs/worklog/next-actions.md` para prioridade atualizada.

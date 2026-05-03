@@ -11,7 +11,7 @@ func.click = function(button, state, absoluteX, absoluteY, worldX, worldY, world
     if button == "right" and state == "down" then
         if clickedElement and getElementData(clickedElement,"gift") then
             if getElementData(localPlayer,"user:admin") >= 2 and getElementData(localPlayer,"user:admin") <= 8 then
-                outputChatBox(core:getServerPrefix("green-dark", "Ajándék", 3).."Adminisztrátorként nem vehetsz fel ajándékot, jutalmat kapsz az event végén.",220,20,60,true)
+                outputChatBox(core:getServerPrefix("green-dark", "Presente", 3).."Como administrador, você não pode pegar presentes — receberá uma recompensa ao fim do evento.",220,20,60,true)
             else
                 local playerX,playerY,playerZ = getElementPosition(localPlayer);
                 local targetX,targetY,targetZ = getElementPosition(clickedElement);
@@ -20,7 +20,7 @@ func.click = function(button, state, absoluteX, absoluteY, worldX, worldY, world
                         setElementData(clickedElement,"gift:pickup",localPlayer);
                         triggerServerEvent("givePlayerGift",localPlayer,localPlayer,getElementData(clickedElement,"gift:id"));
                     else
-                        outputChatBox(core:getServerPrefix("green-dark", "Ajándék", 3).."Ezt már valaki felvette.",220,20,60,true)
+                        outputChatBox(core:getServerPrefix("green-dark", "Presente", 3).."Alguém já pegou este presente.",220,20,60,true)
                     end
                 end
             end

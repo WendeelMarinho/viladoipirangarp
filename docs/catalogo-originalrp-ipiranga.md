@@ -19,7 +19,7 @@ Abaixo está o que o gamemode **oferece como produto RP**, independentemente dos
 | **Veículos** | Dono/sync/lógica de veículos (`oVehicle`), concessionárias (~`oCarshop`), tuning (`oTuning`), pinturas (`oPaintjobs`), combustível/recarga Tesla (`oFuel`, `oTeslaCharger`), drive assist Tesla, traffipax (radares), placas/markers extras, handling custom (`oHandling`), extras visuais (`oVehicleExtras`), tempomat; painel para portas/comp. por modelo (**`oCVEH`** — interação modelo-a-modelo no veículo). |
 | **Imóveis / interiores** | Interiores compráveis e edificação (`oInteriors`, `oInteriorBuilding`, `oGNIproperty`). |
 | **Roleplay mundo aberto** | Morte/revive (`oDeath`), dano ao osso (`oBoneDamage`/`oBone`), pesca (`oFishing`), drogas/minigames, caça ao tesouro (`oTreasureHunt`), animações (`oAnims`). |
-| **Forças de ordem / facções** | Script agregador (`oFactionScripts`), MDC (`oMDC`), mapas HQ (vários `*Map`), skins de facções (`oFKSkins_*`, `oNAVSkins`). |
+| **Forças de ordem / facções** | Script agregador (`oFactionScripts`) — algemas/grab/revivificação; sistema procurados (`oWanted`) — 5★, bounty, blip; dominação territórios (`oTerritory`) — captura tempo-real, income horário; HQ de facção (`oFactionHQ`) — portões, munição, veículos serviço; MDC (`oMDC`), mapas HQ (vários `*Map`), skins (`oFKSkins_*`, `oNAVSkins`). |
 | **Admin / anti-cheat** | Painel admin (`oAdmin`), logs (`oLogs`), antichet (`oAnticheat`, `oAnticheat2`), proteções client (`oSkinProtect`), verificação/rede (`oVerify`). |
 | **Mapas mundo** | Construções custom (hospitais, delegacias, lojas de carros, tuning, trabalhos etc.) através de dezenas de recursos tipo `*[Map]*` ligados pelo `oStarter`. |
 | **Shaders visuais** | Pacote principal (`oShaders`) + módulos Bloom, Depth,água HD, reflexos veículos, paleta, motion blur, vinheta, neve, FXAA, etc. |
@@ -132,8 +132,11 @@ Ao fim há um `restartResource` retardado (~10 s) sobre `oInventory`, `oSpeedo`,
 | 93 | `oCasino` | Apostas casino interior |
 | 94 | `oTuning` | Neon airride peças tuning veículo |
 | 95 | `oQuitmessage` | Mensagem saída jogador |
-| 96 | `oFactionScripts` | Scripts agregados facções |
-| 97 | `oInteraction` | Interação E objectos portas |
+| 96 | `oFactionScripts` | Scripts gameplay facções: algemas, grab, revivificação (+ 13 stubs) — **reimplementado 2026-05-03** |
+| 97 | `oWanted` | ★ **NOVO** Sistema procurados 5 estrelas: crimes, bounty, blip policial, decaimento automático |
+| 98 | `oTerritory` | ★ **NOVO** Dominação de territórios: captura tempo-real, contestado, income horário banco facção |
+| 99 | `oFactionHQ` | ★ **NOVO** HQ exclusiva por facção: portões canOpenGate, ponto munição, spawn veículos serviço |
+| 100 | `oInteraction` | Interação E objectos portas |
 | 98 | `oBoneDamage` | Dano localizado por osso |
 | 99 | `oFishing` | Pesca minigame |
 | 100 | `oPhone` | Telemóvel SMS chamadas apps |

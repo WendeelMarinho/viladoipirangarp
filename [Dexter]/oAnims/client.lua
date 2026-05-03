@@ -13,7 +13,7 @@ addCommandHandler("StopAnim",stopAnim)
 bindKey("space","down",stopAnim)
 
 function listAnims()
-  outputChatBox(core:getServerPrefix("server", "Animációk", 2).."/daps(1-2), /heil, /salute, /dance(1-10), /strip(1-2), /sit(1-5),",255,255,255,true)
+  outputChatBox(core:getServerPrefix("server", "Animações", 2).."/daps(1-2), /heil, /salute, /dance(1-10), /strip(1-2), /sit(1-5),",255,255,255,true)
   outputChatBox("/lay(1-2), /gsign(1-5), /rap(1-3), /cry, /puke, /vomit, /shove, /dive,",255,255,255,true)
   outputChatBox("/laugh, /plant, /grab, /putdown, /cpr, /slapass, /bitchslap,",255,255,255,true)
   outputChatBox("/cheer(1-3), /fixcar, /startrace, /carchat, /copcome, /handsup(1-2),",255,255,255,true)
@@ -78,117 +78,116 @@ local currentOffset = 0
 local font = dxCreateFont("Roboto.ttf", 14)
 
 local animDesc = {
-  ["fall"] = "Háton fekvés a földön, széttárt kezekkel és lábakkal",
-  ["fallfront"] = "Hason fekvés a földön, széttárt kezekkel és lábakkal",
-  ["what"] = "Kezek felemelése ismételve, majd lépegetés egy helyben",
-  ["dive"] = "Előre vetődés a földön, majd hason fekve maradás",
-  ["shocked"] = "Meglepődés, majd a kéz szájra tétele és úgy maradás",
-  ["bitchslap"] = "Örömlányás verés a földre térdelve, kéz csapkodással",
-  ["shove"] = "Legugolás majd az ajtónak feszülés oldalasan",
-  ["grabbottle"] = "Üveg kivétele a pult alól, láb felemeléssel",
-  ["tired"] = "Kezek térde tétele, madj enyhén előre dőlve kifáradás",
-  ["carchat"] = "Enyhén előre dőlés, majd kéz kocsira tétele és beszéd",
-  ["startrace"] = "Bal kéz felemelése, majd verseny indítása lecsapással",
-  ["laugh"] = "Jobb kéz meglendítése, majd hosszas nevetés/röhögés",
-  ["drag"] = "Jobb kéz szájra tétele majd cigaretta/egyéb szívás",
-  ["smokelean"] = "Falnak dőlés, majd bal kézzel cigaretta szívás",
-  ["aim"] = "Jobb kézzel előre célzás, majd úgy maradás",
-  ["aim2"] = "Horgász animáció",
-  ["hailcab"] = "Stoppolás",
-  ["crouchcome"] = "Gugolás és magad fele terelés",
-  ["surrender"] = "Kéz feltétel mind 2 kéz",
-  ["puke"] = "Oldalra fordulás, majd rókázás előre dőlve",
-  ["cry"] = "Bal kéz arcra tétele, majd hosszas sírás",
-  ["mourn"] = "Fej előre lógatása, majd gyászolás",
-  ["beg"] = "Viszakozás valamitől, majd kézfeltétel",
-  ["drink"] = "Jobb kézzel való ivás majd abbahagyás",
-  ["heil"] = "Bal kéz kiemelése a magasba majd úgy maradás",
-  ["lightup"] = "Öngyűjtó gyújtás bal és jobb kézzel",
-  ["fu"] = "Bemutatás az adott félnek jobb kézzel",
-  ["fu2"] = "Bemutatás az adott félnek jobb kézzel",
-  ["photograph"] = "Fényképezés",
-  ["vomit"] = "Hányás",
-  ["plant"] = "El ültetés",
-  ["grab"] = "Felvesz valamit a földről",
-  ["putdown"] = "Lerak valamit a földre",
-  ["roadcross"] = "Jobbra balra figyelés",
-  ["roadcross2"] = "Jobbra balra figyelés",
-  ["roadcross3"] = "Jobbra balra figyelés",
-  ["scratch"] = "Nemi szerv vakargatás jobb és bal kézzel",
-  ["hailtaxi"] = "Gépjármű stoppolás jobb kézzel, kissé elhajolva",
-  ["handsup"] = "Kezek feltétele fej mellé, majd úgy maradás",
-  ["handsup2"] = "Kezek feltétele fej mellé, majd úgy maradás",
-  ["leanidle"] = "Falnak dőlés csípőre tett kézzel",
-  ["copidle"] = "Magad előtt össze kulcsolt kézzel körbe tekintés",
-  ["fixcar"] = "Gépjármű alá befekés háton, majd szerelése",
-  ["slapass"] = "Fenékre csapás bal kézzel kisebb erővel",
-  ["wank"] = "Maszturbáció jobb kézzel kissé begörnyedve",
-  ["piss"] = "Pisilés jobb kézzel, széttárt lábakkal",
-  ["idle"] = "Várakozás, jobb kézzel ismétlődő fejbiccentéssel",
-  ["lean"] = "Falnak dőlés csípőre tett bal kézzel",
-  ["leanleft"] = "Falnak dőlés csípőre tett jobb kézzel és a bal lábbal keresztezve",
-  ["shake"] = "Várakozás, mind a két kézzel csipőre téve ismételve",
-  ["think"] = "Gondolkodás kezeit egymásra téve ismételve",
-  ["wait"] = "Egyszerű várakozás, összekulcsolt kezekkel",
-  ["copstop"] = "Gépjárműnek való 'megálj'-jelzés előröl, ismételve",
-  ["copleft"] = "Gépjárműn átirányítása bal oldalra ismételve",
-  ["copcome"] = "Gépjárműnek való haladás engedélyezés ismételve",
-  ["copaway"] = "Gépjármű elküldése az adott helyszínről",
-  ["cpr"] = "Újraélesztés összekulcsolt kezekkel, letérdeve",
-  ["crouch"] = "Gugolás",
-  ["cover"] = "Legugolva, védi a fejét tarkóra tett kézzel",
-  ["daps"] = "Kezelés az adott féllel ismételve",
-  ["daps2"] = "Kezelés az adott féllel magadhoz húzva az illetőt",
-  ["salute"] = "Tisztelgés",
-  ["walk"] = "Sétálás megállás nélkül",
-  ["win"] = "Győzelem nyilvánítás/kikiáltás",
-  ["bat"] = "Baseball ütő megtartása/lengetése",
-  ["sit"] = "Leülés",
-  ["sit2"] = "Leülés",
-  ["sit3"] = "Leülés",
-  ["sit4"] = "Leülés",
-  ["sit5"] = "Leülés",
-  ["strip"] = "Sztriptíz tánc a földön/állva",
-  ["strip2"] = "Sztriptíz tánc a földön/térdelve",
-  ["lay"] = "Földön fekvés nyugalmi állapotban",
-  ["lay2"] = "Földön fekvés nyugalmi állapotban",
-  ["cheer"] = "Éljenezés az adott szituációnak",
-  ["dance"] = "Táncolás",
-  ["dance2"] = "Táncolás",
-  ["dance3"] = "Táncolás",
-  ["dance4"] = "Táncolás",
-  ["dance5"] = "Táncolás",
-  ["dance6"] = "Táncolás",
-  ["dance7"] = "Táncolás",
-  ["dance8"] = "Táncolás",
-  ["dance9"] = "Táncolás",
-  ["dance10"] = "Táncolás",
-  ["crack"] = "Önkívületi állapot kimutatása",
-  ["crack2"] = "Önkívületi állapot kimutatása",
-  ["crack3"] = "Önkívületi állapot kimutatása",
-  ["crack4"] = "Önkívületi állapot kimutatása",
-  ["gsign"] = "Két kézzel való gesztikulálás",
-  ["gsign2"] = "Két kézzel való gesztikulálás",
-  ["gsign3"] = "Két kézzel való gesztikulálás",
-  ["gsign4"] = "Két kézzel való gesztikulálás",
-  ["gsign5"] = "Két kézzel való gesztikulálás",
-  ["rap"] = "Rappelés az adott szituációban",
-  ["rap2"] = "Rappelés az adott szituációban",
-  ["rap3"] = "Rappelés az adott szituációban",
-  ["cheer"] = "Éljenzés",
-  ["cheer2"] = "Éljenzés",
-  ["cheer3"] = "Éljenzés",
-  ["carphone"] = "Kocsiban telefonálás",
-  ["carphone2"] = "Kocsiban telefonálás",
-  ["fixing"] = "Javítás",
-  ["smoke"] = "Cigarettázás", 
-  ["smoke2"] = "Cigarettázás", 
-  ["smoke3"] = "Cigarettázás", 
-  ["surrender"] = "Térdelés hátratett kezekkel", 
-  ["surrender2"] = "Félelemtől összekuporodva a kezedet a tarkódra helyezed", 
-  ["surrender3"] = "Tarkóra teszi a kezét", 
-  ["sign"] = "Crip Gang Sign", 
-  ["sign2"] = "Crip Gang Sign2", 
+  ["fall"] = "Deitado de costas no chão, braços e pernas abertos",
+  ["fallfront"] = "Deitado de bruços no chão, braços e pernas abertos",
+  ["what"] = "Levanta os braços várias vezes e pisa no mesmo sítio",
+  ["dive"] = "Lança-se para a frente e fica de bruços",
+  ["shocked"] = "Surpresa — mão na boca e mantém",
+  ["bitchslap"] = "Tapa forte ajoelhado no chão",
+  ["shove"] = "Agacha e empurra a porta com o corpo",
+  ["grabbottle"] = "Puxa algo de baixo do balcão",
+  ["tired"] = "Mãos nos joelhos, fadiga inclinado para a frente",
+  ["carchat"] = "Inclinado sobre o capô fingindo telefonar no carro",
+  ["startrace"] = "Braço esquerdo no ar e largada imaginária",
+  ["laugh"] = "Gesticula risada forte",
+  ["drag"] = "Mão perto da boca — fumar",
+  ["smokelean"] = "Encostado à parede, fuma com a mão esquerda",
+  ["aim"] = "Mira à frente com a mão direita",
+  ["aim2"] = "Pose de pesca",
+  ["hailcab"] = "Parar táxi / carona",
+  ["crouchcome"] = "Agachado intimando aproximação",
+  ["surrender"] = "Mãos erguidas ou render-se em pé",
+  ["puke"] = "Virar de lado e vomitar inclinado",
+  ["cry"] = "Choro com mão no rosto",
+  ["mourn"] = "Postura de luto, cabeça baixa",
+  ["beg"] = "Mendigar com as mãos",
+  ["drink"] = "Beber com a mão direita",
+  ["heil"] = "Braço esquerdo erguido alto",
+  ["lightup"] = "Acende isqueiro",
+  ["fu"] = "Insulto com a mão direita",
+  ["fu2"] = "Insulto (variação)",
+  ["photograph"] = "Tirar foto / câmara",
+  ["vomit"] = "Vomitar",
+  ["plant"] = "Enterrar / plantar objeto (RP)",
+  ["grab"] = "Apanhar objeto do chão",
+  ["putdown"] = "Largar objeto no chão",
+  ["roadcross"] = "Olhar pelos lados e atravessar",
+  ["roadcross2"] = "Olhar pelos lados (var. 2)",
+  ["roadcross3"] = "Olhar pelos lados (var. 3)",
+  ["scratch"] = "Coça-se (humor RP)",
+  ["hailtaxi"] = "Chamar táxi com o braço",
+  ["handsup"] = "Mãos ao lado da cabeça",
+  ["handsup2"] = "Mãos ao lado da cabeça (alt.)",
+  ["leanidle"] = "Encostado, mão na cintura",
+  ["copidle"] = "Olhar em volta com mãos entrelaçadas",
+  ["fixcar"] = "Debaixo do carro como mecânico",
+  ["slapass"] = "Palma nas nádegas",
+  ["wank"] = "Gesto adulto (NSFW RP)",
+  ["piss"] = "Urinar em pé",
+  ["idle"] = "Espera com acenos de cabeça",
+  ["lean"] = "Encostado à parede",
+  ["leanleft"] = "Encostado à parede com pernas cruzadas",
+  ["shake"] = "Espera com mãos na cintura",
+  ["think"] = "Pensativo com mãos junto",
+  ["wait"] = "Espera com mãos entrelaçadas",
+  ["copstop"] = "Sinal de parar para viatura",
+  ["copleft"] = "Instruir veículo virar à esquerda",
+  ["copcome"] = "Autorizar viatura aproximar-se",
+  ["copaway"] = "Dispersar viatura do local",
+  ["cpr"] = "RCP com mãos entrelaçadas ajoelhado",
+  ["crouch"] = "Agachar",
+  ["cover"] = "Proteger cabeça agachado",
+  ["daps"] = "Toca mãos cumprimentando",
+  ["daps2"] = "Abraço de mãos próximo",
+  ["salute"] = "Continência / saudação",
+  ["walk"] = "Caminhar animado",
+  ["win"] = "Comemoração de vitória",
+  ["bat"] = "Taco de baseball",
+  ["sit"] = "Sentado",
+  ["sit2"] = "Sentado (var. 2)",
+  ["sit3"] = "Sentado (var. 3)",
+  ["sit4"] = "Sentado (var. 4)",
+  ["sit5"] = "Sentado (var. 5)",
+  ["strip"] = "Dança sensual",
+  ["strip2"] = "Dança sensual ajoelhado",
+  ["lay"] = "Deitar relaxado",
+  ["lay2"] = "Deitar relaxado (alt.)",
+  ["cheer"] = "Torcer vibrar aplaudir",
+  ["dance"] = "Dançar",
+  ["dance2"] = "Dançar (2)",
+  ["dance3"] = "Dançar (3)",
+  ["dance4"] = "Dançar (4)",
+  ["dance5"] = "Dançar (5)",
+  ["dance6"] = "Dançar (6)",
+  ["dance7"] = "Dançar (7)",
+  ["dance8"] = "Dançar (8)",
+  ["dance9"] = "Dançar (9)",
+  ["dance10"] = "Dançar (10)",
+  ["crack"] = "Pose de droga/overdose (RP)",
+  ["crack2"] = "Pose droga (2)",
+  ["crack3"] = "Pose droga (3)",
+  ["crack4"] = "Pose droga (4)",
+  ["gsign"] = "Gesto gangue ambas as mãos",
+  ["gsign2"] = "Gesto gangue (2)",
+  ["gsign3"] = "Gesto gangue (3)",
+  ["gsign4"] = "Gesto gangue (4)",
+  ["gsign5"] = "Gesto gangue (5)",
+  ["rap"] = "Estilo rapper / freestyle",
+  ["rap2"] = "Rapper (2)",
+  ["rap3"] = "Rapper (3)",
+  ["cheer2"] = "Vibração / torcida",
+  ["cheer3"] = "Vibração (3)",
+  ["carphone"] = "Telefone dentro do veículo",
+  ["carphone2"] = "Telefone no carro (alt.)",
+  ["fixing"] = "Reparar / arranjar",
+  ["smoke"] = "Fumar",
+  ["smoke2"] = "Fumar (2)",
+  ["smoke3"] = "Fumar (3)",
+  ["surrender"] = "Ajoelhado mãos para trás",
+  ["surrender2"] = "Medo curvado com mãos na nuca",
+  ["surrender3"] = "Mãos na nuca",
+  ["sign"] = "Sinal de gangue",
+  ["sign2"] = "Sinal de gangue (alt.)",
 
 
 
@@ -213,8 +212,8 @@ addEventHandler("onClientResourceStart",getResourceRootElement(getThisResource()
 end)
 
 local mainCategory = {
-  {"Táncolás"},
-  {"Bandás"},
+  {"Dança"},
+  {"Gangue"},
 }
 
 bindKey("F2","down", function()
@@ -291,10 +290,10 @@ function drawAnimPanel()
       dxDrawRectangle(panelX, panelY, panelW, panelH, tocolor(32, 32, 32,150*alpha))
       if getElementData(localPlayer, "player:animation") then 
         if activeButton == "stopAnim" then 
-          dxDrawText("Animáció leállítása", panelX, panelY, panelX + panelW - 35, panelY - 30, tocolor(r,g,b,255*alpha), 0.85, font, "right", "center")
+          dxDrawText("Parar animação", panelX, panelY, panelX + panelW - 35, panelY - 30, tocolor(r,g,b,255*alpha), 0.85, font, "right", "center")
           dxDrawImageSection(panelX + panelW - 24 - 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/stop.png", 0, 0, 0, tocolor(r, g, b,255*alpha))
         else 
-          dxDrawText("Animáció leállítása", panelX, panelY, panelX + panelW - 35, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "right", "center")
+          dxDrawText("Parar animação", panelX, panelY, panelX + panelW - 35, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "right", "center")
           dxDrawImageSection(panelX + panelW - 24 - 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/stop.png", 0, 0, 0, tocolor(255, 255, 255,255*alpha))
         end
         --dxDrawRectangle(panelX + panelW - 180 - 5, panelY - 28, 180, 24, tocolor(255, 0, 0, 150))
@@ -304,10 +303,10 @@ function drawAnimPanel()
       --if isInSlot(panelX + 5, panelY - 28, 24, 24) then 
       --dxDrawRectangle(panelX-110, panelY, 200, panelH, tocolor(0,0,0,150))
 
-      dxDrawText("Vale do Ipiranga RP - Animpanel", screenX/2, panelY, screenX/2, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "center", "center")
+      dxDrawText("Vale do Ipiranga RP — Painel de animações (F2)", screenX/2, panelY, screenX/2, panelY - 30, tocolor(255,255,255,255*alpha), 0.85, font, "center", "center")
       if selectedMenu == 1 then 
         if activeButton == "favorites" then
-          create_tooltip("Kedvencek")
+          create_tooltip("Favoritos")
           dxDrawImageSection(panelX + 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/starfull.png", 0, 0, 0, tocolor(r,g,b,255*alpha))
         else
           dxDrawImageSection(panelX + 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/star.png", 0, 0, 0, tocolor(255,255,255,255*alpha))
@@ -342,7 +341,7 @@ function drawAnimPanel()
               end
             end
             buttons["addFav:"..k + currentOffset] = {x + panelW - 24 - 5, y+8, 24, 24}
-            dxDrawText("/"..v[1] .." - " .. (animDesc[v[1]] or "ismeretlen"), x + 5, y+ 5, x + 5, y + 32 + 5,tocolor(255,255,255,255*alpha),0.75, font, "left", "center")
+            dxDrawText("/"..v[1] .." - " .. (animDesc[v[1]] or "desconhecida"), x + 5, y+ 5, x + 5, y + 32 + 5,tocolor(255,255,255,255*alpha),0.75, font, "left", "center")
           end
           y = y + 32 + 1
         end
@@ -354,10 +353,10 @@ function drawAnimPanel()
           dxDrawRectangle(panelX + panelW + 3, panelY - 2 + (listSize / #animationList) * math.min(currentOffset, #animationList - 10), 5, (listSize / #animationList) * 10, tocolor(r,g,b, 255*alpha))
         end
       -- dxDrawRectangle(panelX,panelY + panelH +10, 200, 25, tocolor(32, 32, 32, 160*alpha))
-        drawInput("search|20", "Keresés", panelX, panelY + panelH + 10, 200, 25, font, 0.85, tocolor(32, 32, 32, 160*alpha), alpha)
+        drawInput("search|20", "Pesquisar", panelX, panelY + panelH + 10, 200, 25, font, 0.85, tocolor(32, 32, 32, 160*alpha), alpha)
     elseif selectedMenu == 2 then 
       if activeButton == "favoritesBack" then
-        create_tooltip("Vissza")
+        create_tooltip("Voltar")
         dxDrawImageSection(panelX + 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/starfull.png", 0, 0, 0, tocolor(r,g,b,255*alpha))
       else
         dxDrawImageSection(panelX + 5, panelY - 28, 24, 24, 0, 7, 261, 250, "files/img/star.png", 0, 0, 0, tocolor(255,255,255,255*alpha))
@@ -382,7 +381,7 @@ function drawAnimPanel()
               end
             end
             buttons["anims:".. k + currentOffset..":"..v[1]] = {x,y+5, panelW - 24 - 24, 32}
-            dxDrawText("/"..v[1] .." - " .. (animDesc[v[1]] or "ismeretlen"), x + 5, y+ 5, x + 5, y + 32 + 5,tocolor(255,255,255,255*alpha),0.75, font, "left", "center")
+            dxDrawText("/"..v[1] .." - " .. (animDesc[v[1]] or "desconhecida"), x + 5, y+ 5, x + 5, y + 32 + 5,tocolor(255,255,255,255*alpha),0.75, font, "left", "center")
             if activeButton == "removeFav:"..k + currentOffset then
               dxDrawImageSection(x + panelW - 24 - 5, y+8, 24, 24, 0, 7, 261, 250, "files/img/starfull.png", 0, 0, 0, tocolor(r,g,b,255*alpha))
             else 
@@ -400,7 +399,7 @@ function drawAnimPanel()
           dxDrawRectangle(panelX + panelW + 3, panelY - 2 + (listSize / #favList) * math.min(currentOffset, #favList - 10), 5, (listSize / #favList) * 10, tocolor(r,g,b, 255*alpha))
         end
       else
-        dxDrawText("Nincs egyetlen kedvenc animáció kiválasztva!",screenX/2, panelY, screenX/2, panelY + 150,tocolor(255,255,255,255*alpha),0.75, font, "center", "center")
+        dxDrawText("Nenhuma animação favorita selecionada.",screenX/2, panelY, screenX/2, panelY + 150,tocolor(255,255,255,255*alpha),0.75, font, "center", "center")
       end
     end
 
@@ -546,10 +545,10 @@ function animationClick(button,state)
       elseif data[1] == "addFav" then 
         local id = data[2]
         if table.find(favList, animationList[tonumber(data[2])][1]) then
-          outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Ez az animáció már a kedvencekhez lett adva!",255,255,255,true)
+          outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Esta animação já está nos favoritos!",255,255,255,true)
           return
         end
-        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Sikeresen hozzáadta a kiválasztott elemet a kedvencekbe!",255,255,255,true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Animação adicionada aos favoritos!",255,255,255,true)
         table.insert(favList, {animationList[tonumber(data[2])][1], true})
       elseif data[1] == "favorites" then 
         selectedMenu = 2    
@@ -566,7 +565,7 @@ function animationClick(button,state)
         end
       elseif data[1] == "removeFav" then 
         local id = data[2]
-        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Sikeresen eltávolítottad a kedvencekből!",255,255,255,true)
+        outputChatBox(hex .. "[Vale do Ipiranga RP]#FFFFFF Animação removida dos favoritos!",255,255,255,true)
         table.remove(favList,id)
       end
     end

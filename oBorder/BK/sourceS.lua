@@ -62,7 +62,7 @@ addEventHandler("sikeres", root,
 				if (hatarkapu[kapu][10] == -60) then
 					setElementData(localPlayer, "char:money",pMoney-osszeg);
 					setElementData(stop, "moving", true);
-					outputChatBox(core:getServerPrefix("red-dark", "Határ", 3).. "A határkapu 10 másodpercen belül automatikussan be fog záródni!",client , 0, 0, 0, true);		
+					outputChatBox(core:getServerPrefix("red-dark", "Határ", 3).. "O portão da fronteira fechará automaticamente em 10 segundos!",client , 0, 0, 0, true);
 
 					local occupiedVeh = getPedOccupiedVehicle(client)
 

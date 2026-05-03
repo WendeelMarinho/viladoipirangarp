@@ -104,19 +104,19 @@ function buySkin()
                 --outputChatBox(getElementModel(localPlayer).." "..selectedSkinData[1]) 
                 if not (tonumber(getElementModel(localPlayer)) == tonumber(selectedSkinData[1])) then 
                     if selectedSkinData[3] == 0 or dashboard:isPlayerFactionMember(selectedSkinData[3]) then
-                        info:outputInfoBox("Sikeres kinézetvásárlás!","success")
+                        info:outputInfoBox("Visual adquirido com sucesso!","success")
                         triggerServerEvent("buySkinOnServerSide", resourceRoot, localPlayer, selectedSkinData[1],selectedSkinData[2])
                     else
-                        info:outputInfoBox("Ezt a kinézetet nem vásárolhatod meg!","warning")
+                        info:outputInfoBox("Você não pode adquirir este visual!","warning")
                     end
                 else
-                    info:outputInfoBox("Már ez a kinézet van rajtad!","warning")
+                    info:outputInfoBox("Você já está usando este visual!","warning")
                 end
             else
-                info:outputInfoBox("Nincs elegendő pénzed a vásárláshoz! ("..selectedSkinData[2].."$)","error")
+                info:outputInfoBox("Dinheiro insuficiente para a compra! ("..selectedSkinData[2].."$)","error")
             end 
         else
-            info:outputInfoBox("Szolgálatban nem tudsz kinézetet vásárolni!", "warning")
+            info:outputInfoBox("Não é possível trocar o visual enquanto estiver em serviço!", "warning")
         end
     end
 end

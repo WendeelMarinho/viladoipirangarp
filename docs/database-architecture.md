@@ -1,6 +1,6 @@
 # Database architecture — `orp_main`
 
-**Atualização:** 2026-05-02  
+**Atualização:** 2026-05-03  
 **Canonical schema dump:** [`../orp_main.sql`](../orp_main.sql) *(raiz pacote gamemode)* · migrações adicionais (se existirem): `sql/migrations/`.
 
 ---
@@ -44,6 +44,18 @@ Descrição apenas **semantic** derivada dos nomes; validar sempre colunas com `
 Lista completa alfabética extraída 2026-05-02 a partir dos `CREATE TABLE` no dump:
 
 accounts, actionbaritems, adminserials, atms, bank_accounts, bans, bans2, bins, blockedserials, bugreports, characters, craftingtabels, elevators, factions, fuelstations, gates, interiors, interior_datas, interior_objects, items, logpp, lottery, mdcaccounts, mdclogs, mdcpenalties, mdcwantedcars, mdcwantedpersons, pendingpps, pets, phonemessages, plants, plants_containers, plants_orders, pots, printers, roulettes, serial_change, shops, szefek, teslachargers, trafficboards, usedcarshops, vehicles, vendingmachines, verifedplayers, worlditems
+
+### Tabelas adicionadas em 2026-05-03 (Sistemas Premium)
+
+| Tabela | Recurso | Função |
+|--------|---------|--------|
+| `wanted_active` | `oWanted` | Procurados ativos: char_id, nível (1–5), bounty, crimes JSON, timestamps |
+| `territories` | `oTerritory` | Zonas capturáveis: coordenadas, raio, dono, income, cooldown, min_members |
+| `faction_hq` | `oFactionHQ` | Sede de facção: portões JSON, coordenadas munição, spawns veículos JSON |
+
+Schema completo destas tabelas: [`docs/features/sistemas-premium.md`](features/sistemas-premium.md).
+
+**Dados seed em `territories`:** 8 zonas pré-configuradas (Idlewood, Grove Street, Playa del Seville, Jefferson, LV Strip, Tierra Robada, Blueberry, Palomino Creek).
 
 ---
 

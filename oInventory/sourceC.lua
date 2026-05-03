@@ -81,9 +81,9 @@ cache = {
 		items = {},
 		page = "bag",
 		categories = {
-			{"bag","Tárgyak"},
-			{"key","Kulcsok"},
-			{"licens","Iratok"},
+			{"bag","Itens"},
+			{"key","Chaves"},
+			{"licens","Documentos"},
 		},
 	},
 	inventory = {
@@ -934,7 +934,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 			--		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Ezt a tárgyat nem mozgathatod.",220,20,60,true)
 			--	else
 					if (getTypeElement(cache.inventory.element,cache.inventory.hoverItem["item"])[1] == "bag" and (cache.inventory.active.weapon == cache.inventory.hoverSlot or cache.inventory.active.ammo == cache.inventory.hoverSlot or cache.inventory.active.phone == cache.inventory.hoverSlot or cache.inventory.active.goggle == cache.inventory.hoverSlot )) or (getTypeElement(cache.inventory.element,cache.inventory.hoverItem["item"])[1] == "licens" and (cache.inventory.active.card == cache.inventory.hoverSlot or cache.inventory.active.identity == cache.inventory.hoverSlot or cache.inventory.active.badge == cache.inventory.hoverSlot)) then
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott tárgy használatban van.",220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O item selecionado está em uso.",220,20,60,true)
 					else
 						cache.inventory.movedSlot = cache.inventory.hoverSlot
 						cache.inventory.movedItem = cache.inventory.hoverItem
@@ -982,7 +982,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 									playSound("files/sounds/move.mp3")
 									func.updateSlot(cache.inventory.movedSlot,cache.inventory.hoverSlot,cache.inventory.movedItem)
 								else
-									outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott sloton, már van egy tárgy.",220,20,60,true)
+									outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O slot selecionado já contém um item.",220,20,60,true)
 								end
 							else
 								amount = tonumber(amount) or 0;
@@ -992,7 +992,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 											func.updateSlot(cache.inventory.movedSlot,cache.inventory.hoverSlot,cache.inventory.movedItem)
 											playSound("files/sounds/move.mp3")
 										else
-											outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott sloton, már van egy tárgy.",220,20,60,true)
+											outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O slot selecionado já contém um item.",220,20,60,true)
 										end
 									else
 										if cache.inventory.movedItem["count"] >= amount then
@@ -1001,7 +1001,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 												func.setItemCount(cache.inventory.movedSlot,cache.inventory.movedItem["count"] - amount);
 												playSound("files/sounds/move.mp3")
 											else
-												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott sloton, már van egy tárgy.",220,20,60,true)
+												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O slot selecionado já contém um item.",220,20,60,true)
 											end
 										end
 									end
@@ -1034,22 +1034,22 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 									if weaponCache[item] then
 										value = cache.inventory.movedItem["weaponserial"].." ("..cache.inventory.movedItem["state"].."%)"
 									elseif item == 1 then
-										value = "Telefonszám: "..value
+										value = "Número: "..value
 									elseif availableItems[item].eatPercent or availableItems[item].drinkPercent then
 										value = cache.inventory.movedItem["state"].." %"
 									elseif item == 69 then
 										value = value
 									elseif item == 65 then
-										value = "Név: "..string.sub(value,23):gsub("_", " ").." | Érvényes: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."-ig"
+										value = "Nome: "..string.sub(value,23):gsub("_", " ").." | Válido até: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16)
 									elseif item == 66 then
-										value = "Név: "..string.sub(value,22):gsub("_", " ").." | Érvényes: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."-ig"
+										value = "Nome: "..string.sub(value,22):gsub("_", " ").." | Válido até: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16)
 									elseif item == 68 then
-										value = "Név: "..string.sub(value,20):gsub("_", " ").." | Érvényes: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16).."-ig"
+										value = "Nome: "..string.sub(value,20):gsub("_", " ").." | Válido até: "..string.sub(value,9,12).."."..string.sub(value,13,14).."."..string.sub(value,15,16)
 									else
 										value = ""
 									end
 
-									chat:sendLocalMeAction("felmutat egy tárgyat: "..getItemName(item,cache.inventory.movedItem["value"])..".");
+									chat:sendLocalMeAction("mostra um item: "..getItemName(item,cache.inventory.movedItem["value"])..".");
 									setElementData(localPlayer, "inventory:showedItem", {item, cache.inventory.movedItem["value"], value})
 
 									setTimer(function()
@@ -1067,7 +1067,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 									if getElementType(clickedElement) == "player" then
 										if getElementData(clickedElement,"user:loggedin") and clickedElement ~= cache.inventory.element then
 											if cache.inventory.movedItem["item"] == 44 or cache.inventory.movedItem["item"] == 228 or cache.inventory.movedItem["item"] == 229 then
-												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Ezt az itemet nem adhatod át!", 255, 255, 255, true)
+												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Você não pode transferir este item!", 255, 255, 255, true)
 											else
 												local playerX,playerY,playerZ = getElementPosition(localPlayer)
 												local targetX,targetY,targetZ = getElementPosition(clickedElement)
@@ -1079,13 +1079,13 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 													if getDistanceBetweenPoints3D(playerX,playerY,playerZ,targetX,targetY,targetZ) < 4 then
 														if cache.inventory.movedItem["duty"] == 0 then
 															if getElementData(localPlayer, "playerInAnim") then
-																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Animba nem tudod át húzni a tárgyat!",220,20,60,true)
+																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode transferir o item enquanto estiver inconsciente!",220,20,60,true)
 																cache.inventory.itemMove = false
 																cache.inventory.movedSlot = -1
 																return
 															end
 															if getElementData(clickedElement, "playerInAnim") then
-																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott játékos animban van így nem tudsz tárgyat átadni neki!",220,20,60,true)
+																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O jogador selecionado está inconsciente, você não pode transferir itens para ele!",220,20,60,true)
 																cache.inventory.itemMove = false
 																cache.inventory.movedSlot = -1
 																return
@@ -1095,7 +1095,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																deleteCraftitem(cache.inventory.movedItem.id)
 															end
 														else
-															outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Szolgálati eszközzel ezt nem teheted meg.",220,20,60,true)
+															outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode fazer isso com um item de serviço.",220,20,60,true)
 														end
 													end
 												end
@@ -1107,7 +1107,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 											if not (getVehicleType(clickedElement) == "BMX") then
 												if not getElementData(clickedElement, "renteltcar") then
 													if cache.inventory.movedItem["item"] == 44 or cache.inventory.movedItem["item"] == 228 or cache.inventory.movedItem["item"] == 229 then
-														outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Ezt az itemet nem teheted be a csomagtartóba!", 255, 255, 255, true)
+														outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Você não pode colocar este item no bagageiro!", 255, 255, 255, true)
 													else
 														local playerX,playerY,playerZ = getElementPosition(localPlayer)
 														local targetX,targetY,targetZ = getElementPosition(clickedElement)
@@ -1128,10 +1128,10 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																		--	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott tárgyat csak és kizárólag egy másik játékosnak tudod átadni.",220,20,60,true)
 																		--end
 																	else
-																		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Szolgálati eszközzel ezt nem teheted meg.",220,20,60,true)
+																		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode fazer isso com um item de serviço.",220,20,60,true)
 																	end
 																else
-																	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott jármű csomagtartója zárva van.",220,20,60,true)
+																	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O bagageiro do veículo selecionado está trancado.",220,20,60,true)
 																end
 															end
 														end
@@ -1166,7 +1166,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																		--printing = true
 																		if isTimer(printerTimer) then
 																			killTimer(printerTimer)
-																			chat:sendLocalMeAction("kihúzza a lapot a nyomtatóból")
+																			chat:sendLocalMeAction("retirou a folha da impressora")
 																			triggerServerEvent("printerAnim", localPlayer, localPlayer, false)
 																		end
 																	end
@@ -1195,28 +1195,28 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																		--printing = true
 																		if isTimer(printerTimer) then
 																			killTimer(printerTimer)
-																			chat:sendLocalMeAction("kihúzza a lapot a nyomtatóból")
+																			chat:sendLocalMeAction("retirou a folha da impressora")
 																			triggerServerEvent("printerAnim", localPlayer, localPlayer, false)
 																		end
 																	end
 																end, 500,0)
 															end
 															triggerServerEvent("printerAnim", localPlayer, localPlayer, true, clickedElement)
-															chat:sendLocalMeAction("elkezd fénymásolni egy dokumentumot (".. getItemName(cache.inventory.movedItem["item"], cache.inventory.movedItem["value"])..")")
+															chat:sendLocalMeAction("começou a fotocopiar um documento (".. getItemName(cache.inventory.movedItem["item"], cache.inventory.movedItem["value"])..")")
 
 															--outputChatBox(cache.inventory.movedItem["value"])
 															setElementData(clickedElement, "printer:isUsing", true)
 														else
-															outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Ezt az itemet nem tudod le fénymásolni!",220,20,60,true)
+															outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode fotocopiar este item!",220,20,60,true)
 														end
 													end
 												end
 											else
-												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Ez a nyomtató már használatban van!",220,20,60,true)
+												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Esta impressora já está em uso!",220,20,60,true)
 											end
 										elseif getElementData(clickedElement,"object:dbid") and getElementData(clickedElement,"object:dbid") > 0 then
 											if cache.inventory.movedItem["item"] == 44 or cache.inventory.movedItem["item"] == 228 or cache.inventory.movedItem["item"] == 229 then
-												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Ezt az itemet nem teheted be széfbe!", 255, 255, 255, true)
+												outputChatBox(core:getServerPrefix("red-dark", "Inventory", 2).."Você não pode colocar este item no cofre!", 255, 255, 255, true)
 											else
 												local playerX,playerY,playerZ = getElementPosition(localPlayer)
 												local targetX,targetY,targetZ = getElementPosition(clickedElement)
@@ -1228,14 +1228,14 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 													if getDistanceBetweenPoints3D(playerX,playerY,playerZ,targetX,targetY,targetZ) < 4 then
 														if getElementModel(clickedElement) == 1359 then
 															if cache.inventory.element == localPlayer then
-																chat:sendLocalMeAction("kidobott egy tárgyat a szemetesbe. ("..getItemName(cache.inventory.movedItem["item"])..")")
+																chat:sendLocalMeAction("jogou um item no lixo. ("..getItemName(cache.inventory.movedItem["item"])..")")
 
 																func.deleteItem(cache.inventory.movedSlot)
 															end
 														elseif getElementModel(clickedElement) == 2332 then
 															if hasItem(54,getElementData(clickedElement,"object:dbid")) then
 																if cache.inventory.movedItem["item"] == 54 and tonumber(cache.inventory.movedItem["value"]) == tonumber(getElementData(clickedElement,"object:dbid")) then
-																	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A széfbe nem rakhatod bele a kulcsát.",220,20,60,true)
+																	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode colocar a chave do cofre dentro dele.",220,20,60,true)
 																else
 																	if cache.inventory.movedItem["duty"] == 0 then
 																		--if cache.inventory.movedItem.item ~= 120 then
@@ -1247,11 +1247,11 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																		--	outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott tárgyat csak és kizárólag egy másik játékosnak tudod átadni.",220,20,60,true)
 																		--end
 																	else
-																		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Szolgálati eszközzel ezt nem teheted meg.",220,20,60,true)
+																		outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode fazer isso com um item de serviço.",220,20,60,true)
 																	end
 																end
 															else
-																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nincs kulcsod ehhez a széfhez.",220,20,60,true)
+																outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não tem a chave deste cofre.",220,20,60,true)
 															end
 														end
 													end
@@ -1281,7 +1281,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 													if exports.oLicenses:playerHasValidLicense(79) then
 														exports.oMarket:sellAnimalItem(cache.inventory.movedItem.item, cache.inventory.movedItem.count, cache.inventory.movedItem, getElementData(clickedElement, "animalPriceMultiplier"))
 													else
-														outputChatBox(core:getServerPrefix("red-dark", "Vadászat", 3).."Nincs nálad érvényes vadászengedély.", 255, 255, 255, true)
+														outputChatBox(core:getServerPrefix("red-dark", "Caça", 3).."Você não tem uma licença de caça válida.", 255, 255, 255, true)
 													end
 												elseif getElementData(clickedElement, "treasureHunt:antiqueStore") then
 													if cache.inventory.movedItem.count == 1 then
@@ -1289,7 +1289,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 															func.deleteItem(cache.inventory.movedSlot)
 														end
 													else
-														outputChatBox(core:getServerPrefix("red-dark", "Régiségkereskedő", 3).."Csak akkor adható le ha nincs összestackelve.", 255, 255, 255, true)
+														outputChatBox(core:getServerPrefix("red-dark", "Antiquário", 3).."Só pode ser entregue se não estiver empilhado.", 255, 255, 255, true)
 													end
 												elseif getElementData(clickedElement, "treasureHunt:jewelryStore") then
 													if tonumber(cache.inventory.movedItem.value) == 101 or tonumber(cache.inventory.movedItem.value) == 102 or tonumber(cache.inventory.movedItem.value) == 103 or tonumber(cache.inventory.movedItem.value) == 104 or tonumber(cache.inventory.movedItem.value) == 105 then
@@ -1310,7 +1310,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 														exports.oTreasureHunt:sellJewelryItem(cache.inventory.movedItem.item, cache.inventory.movedItem.count*szorzo*(cache.inventory.movedItem.value - 100), cache.inventory.movedItem)
 														func.deleteItem(cache.inventory.movedSlot)
 													else
-														outputChatBox(core:getServerPrefix("red-dark", "Drágakő kereskedő", 3).."Csak olyan drágakő adható el, amelyet a szakértő felbecsült! (Bayside, piros ikon)", 255, 255, 255, true)
+														outputChatBox(core:getServerPrefix("red-dark", "Joalheiro", 3).."Só pode ser vendida uma pedra preciosa que foi avaliada pelo especialista! (Bayside, ícone vermelho)", 255, 255, 255, true)
 													end
 												elseif getElementData(clickedElement, "treasureHunt:jew") then
 													if tonumber(cache.inventory.movedItem.item) == 142 or tonumber(cache.inventory.movedItem.item) == 143 or tonumber(cache.inventory.movedItem.item) == 195 or tonumber(cache.inventory.movedItem.item) == 196 or tonumber(cache.inventory.movedItem.item) == 197 or tonumber(cache.inventory.movedItem.item) == 198 then
@@ -1318,7 +1318,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 															if getElementData(localPlayer,"char:money") >= 300 then
 																if not getElementData(localPlayer,"jewInProgress") then	
 																	setElementData(localPlayer,"jewInProgress",true)
-																	outputChatBox("Peter (Drágakő szakértő) mondja: Hmm, szép darab, máris megnézem milyen súlyban lehet...", 255, 255, 255, true)
+																	outputChatBox("Peter (Especialista em Pedras) diz: Hmm, uma bela peça, vou ver o peso agora...", 255, 255, 255, true)
 																	local deletedItemID = tonumber(cache.inventory.movedItem.item) 
 																	func.deleteItem(cache.inventory.movedSlot)
 																	setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money")-300)
@@ -1326,31 +1326,31 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 																	valuesetTimer = setTimer(function()
 																		giveItem(tonumber(deletedItemID), tonumber(jewAmount), 1, 0)
 																		if jewAmount >= 103 then
-																			outputChatBox("Peter (Drágakő szakértő) mondja: Tessék ez egy szép darab volt.", 255, 255, 255, true)
+																			outputChatBox("Peter (Especialista em Pedras) diz: Aqui está, foi uma bela peça.", 255, 255, 255, true)
 																			setElementData(localPlayer,"jewInProgress",false)
 																		else
-																			outputChatBox("Peter (Drágakő szakértő) mondja: Nem a legnagyobb, de valaki biztos megveszi.", 255, 255, 255, true)
+																			outputChatBox("Peter (Especialista em Pedras) diz: Não é a maior, mas alguém certamente vai comprar.", 255, 255, 255, true)
 																			setElementData(localPlayer,"jewInProgress",false)
 																		end
 																	end, 5000,1)
 																else
-																	outputChatBox(core:getServerPrefix("red-dark", "Drágakő kereskedő", 3).."Egyszerre csak egyet!", 255, 255, 255, true)
+																	outputChatBox(core:getServerPrefix("red-dark", "Joalheiro", 3).."Apenas um de cada vez!", 255, 255, 255, true)
 																end
 															else
-																outputChatBox(core:getServerPrefix("red-dark", "Drágakő kereskedő", 3).."Nincs elegendő pénzed! (300$)", 255, 255, 255, true)
+																outputChatBox(core:getServerPrefix("red-dark", "Joalheiro", 3).."Você não tem dinheiro suficiente! (300$)", 255, 255, 255, true)
 															end
 														end
 													else
-														outputChatBox("Peter (Drágakő szakértő) mondja: Nekem csak drágakövet hozzál...", 255, 255, 255, true)
+														outputChatBox("Peter (Especialista em Pedras) diz: Me traga apenas pedras preciosas...", 255, 255, 255, true)
 													end
 												elseif getElementData(clickedElement, "lucky:ped") then
 													if getElementData(resourceRoot,"lotto_winnercode") then
 														if tonumber(cache.inventory.movedItem.item) == 241 then
 															if tonumber(cache.inventory.movedItem.value) == tonumber(getElementData(resourceRoot,"lotto_winnercode")) then
-																outputChatBox(core:getServerPrefix("green-dark", "Lottózó", 3).."Gratulálunk! Te voltál a szerencsés, aki megnyerte a nyereményt!", 255, 255, 255, true)
+																outputChatBox(core:getServerPrefix("green-dark", "Loteria", 3).."Parabéns! Você foi o sortudo que ganhou o prêmio!", 255, 255, 255, true)
 																setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money")+50000)
 															else
-																outputChatBox(core:getServerPrefix("red-dark", "Lottózó", 3).."Ez most sajnos nem sikerült!", 255, 255, 255, true)
+																outputChatBox(core:getServerPrefix("red-dark", "Loteria", 3).."Desta vez, infelizmente não foi!", 255, 255, 255, true)
 																func.deleteItem(cache.inventory.movedSlot)
 															end
 														end
@@ -1370,9 +1370,9 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 														if getElementData(localPlayer, "char:money") >= money then
 															triggerServerEvent("ticket > payTicket", root, money, "orfk")
 															func.deleteItem(cache.inventory.movedSlot)
-															outputChatBox(core:getServerPrefix("green-dark", "Ticket", 3).."Sikeresen befizettél egy bírságot. "..color.." ("..money.."$)", 255, 255, 255, true)
+															outputChatBox(core:getServerPrefix("green-dark", "Ticket", 3).."Você pagou uma multa com sucesso. "..color.." ("..money.."$)", 255, 255, 255, true)
 														else
-															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Nincs nálad elegendő pénz. "..color.." ("..money.."$)", 255, 255, 255, true)
+															outputChatBox(core:getServerPrefix("red-dark", "Ticket", 3).."Você não tem dinheiro suficiente. "..color.." ("..money.."$)", 255, 255, 255, true)
 														end
 													end
 												elseif getElementData(clickedElement, "inventory:copyPed") then
@@ -1381,7 +1381,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 															triggerServerEvent("inventory > copyKey", resourceRoot, cache.inventory.movedItem)
 														end
 													else
-														outputChatBox(core:getServerPrefix("red-dark", "Kulcsmásolás", 3).."Csak kulcsokat másoltathatsz le.", 255, 255, 255, true)
+														outputChatBox(core:getServerPrefix("red-dark", "Cópia de Chave", 3).."Você só pode copiar chaves.", 255, 255, 255, true)
 													end
 												end
 											end
@@ -1432,7 +1432,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 											if cache.inventory.page ~= "vehicle" then
 												if not isTimer(cache.inventory.dummyTimer) then
 													cache.inventory.dummyTimer = setTimer(function() killTimer(cache.inventory.dummyTimer) end,2000,1)
-													chat:sendLocalMeAction("belenézett egy széfbe.");
+													chat:sendLocalMeAction("olhou para dentro de um cofre.");
 													if not cache.inventory.show then
 														cache.inventory.gui = guiCreateEdit(-1000,-1000,0,0,"",false)
 														guiEditSetMaxLength(cache.inventory.gui,4)
@@ -1460,10 +1460,10 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 												end
 											end
 										else
-											outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott széf használatban van.",220,20,60,true)
+											outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O cofre selecionado está em uso.",220,20,60,true)
 										end
 									else
-										outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Nincs kulcsod ehhez a széfhez.",220,20,60,true)
+										outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não tem a chave deste cofre.",220,20,60,true)
 									end
 								end
 							end
@@ -1474,7 +1474,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 					if not isPedInVehicle(localPlayer) then
 						--if notDropItems[]
 						if isTimer(placeTimer) or isTimer(upTimer) then
-							outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Várj egy kicsit!",220,20,60,true)
+							outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Aguarde um momento!",220,20,60,true)
 							return
 						end
 						local yard = getDistanceBetweenPoints3D(Vector3(getElementPosition(localPlayer)), Vector3(getElementPosition(clickedElement)))
@@ -1485,7 +1485,7 @@ func.click = function(button,state,absoluteX,absoluteY,worldX,worldY,worldZ,clic
 							end
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Járműbe ülve nem veheted fel!",220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."Você não pode pegar isso dentro de um veículo!",220,20,60,true)
 					end
 				end
 			end
@@ -1628,7 +1628,7 @@ function openVehicleInventory(vehicle)
 									if cache.inventory.page ~= "object" then
 										if not isTimer(cache.inventory.dummyTimer) then
 											cache.inventory.dummyTimer = setTimer(function() killTimer(cache.inventory.dummyTimer) end,2000,1)
-											chat:sendLocalMeAction("belenézett egy jármű csomagtartójába.");
+											chat:sendLocalMeAction("olhou para o bagageiro de um veículo.");
 											if not cache.inventory.show then
 												cache.inventory.gui = guiCreateEdit(-1000,-1000,0,0,"",false)
 												guiEditSetMaxLength(cache.inventory.gui,4)
@@ -1660,12 +1660,12 @@ function openVehicleInventory(vehicle)
 										end
 									end
 								else
-									outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott jármű csomagtartója használatban van.",220,20,60,true)
+									outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O bagageiro do veículo selecionado está em uso.",220,20,60,true)
 								end
 							end
 						end
 					else
-						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."A kiválasztott jármű csomagtartója zárva van.",220,20,60,true)
+						outputChatBox(core:getServerPrefix("red-dark", "Inventory", 3).."O bagageiro do veículo selecionado está trancado.",220,20,60,true)
 					end
 				end
 			end
@@ -2178,8 +2178,8 @@ local listWheel = 0
 local selectedItemInList = 1
 
 local itemListButtons = {
-	{"Item kérése"},
-	{"(50db) Ammo kérése"},
+	{"Solicitar Item"},
+	{"Solicitar Ammo (50un)"},
 }
 
 func.renderItemlist = function()
@@ -2212,7 +2212,7 @@ func.renderItemlist = function()
 			dxDrawImage(listPos[1] + 2/myX*screen[1], listPos[2] + listBox[2] + 4/myY*screen[2], 50/myX*screen[1], 50/myY*screen[2], getItemImage(selectedItemInList))
 
 			dxDrawText(color.."("..selectedItemInList..") #ffffff"..getItemName(selectedItemInList), listPos[1] + 2/myX*screen[1] + 55/myX*screen[1], listPos[2] + listBox[2] + 4/myY*screen[2], listPos[1] + 2/myX*screen[1] + 55/myX*screen[1] + screen[1]*0.1, listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.03, tocolor(255, 255, 255, 255), 1, font:getFont("bebasneue", 15/myX*screen[1]), "left", "center", false, false, false, true)
-			dxDrawText("Súly: "..getItemWeight(selectedItemInList).."kg", listPos[1] + 2/myX*screen[1] + 55/myX*screen[1], listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.03, listPos[1] + 2/myX*screen[1] + 55/myX*screen[1] + screen[1]*0.1, listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.03 + screen[2]*0.015, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 10/myX*screen[1]), "left", "center", false, false, false, true)
+			dxDrawText("Peso: "..getItemWeight(selectedItemInList).."kg", listPos[1] + 2/myX*screen[1] + 55/myX*screen[1], listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.03, listPos[1] + 2/myX*screen[1] + 55/myX*screen[1] + screen[1]*0.1, listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.03 + screen[2]*0.015, tocolor(255, 255, 255, 100), 1, font:getFont("condensed", 10/myX*screen[1]), "left", "center", false, false, false, true)
 
 			local startX = listPos[1] + 2/myX*screen[1]
 			for k, v in ipairs(itemListButtons) do
@@ -2287,12 +2287,12 @@ function itemListClick(key, state)
 				if core:isInSlot(startX, listPos[2] + listBox[2] + 4/myY*screen[2] + screen[2]*0.055, bWidth, screen[2]*0.04) then
 					if k == 1 then
 						giveItem(selectedItemInList, 1, 1, 0)
-						exports.oInfobox:outputInfoBox('Sikeressen lehívtál egy '..getItemName(selectedItemInList)..'!','success')
+						exports.oInfobox:outputInfoBox('Você solicitou com sucesso um '..getItemName(selectedItemInList)..'!','success')
 						sendMessagetoAdmins(selectedItemInList, 1, 1)
 					elseif k == 2 then
 						if weaponCache[selectedItemInList] or (weaponCache[selectedItemInList].ammo > 0) then
 							giveItem(weaponCache[selectedItemInList].ammo, 1, 50, 0)
-							exports.oInfobox:outputInfoBox('Sikeressen lehívtál 50db '..getItemName(weaponCache[selectedItemInList].ammo)..'!','success')
+							exports.oInfobox:outputInfoBox('Você solicitou com sucesso 50x '..getItemName(weaponCache[selectedItemInList].ammo)..'!','success')
 							sendMessagetoAdmins(weaponCache[selectedItemInList].ammo, 1, 50)
 						end
 					end

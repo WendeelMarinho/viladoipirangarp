@@ -61,7 +61,7 @@ function keyButton(key, state)
 						setElementData(localPlayer, "char:money", getElementData(localPlayer, "char:money") - 150)
 						setElementPosition(localPlayer, 698.74816894531, -1358.8454589844, 26.414087295532)
 					else
-						exports.oInfobox:outputInfoBox("Nincs elegendő pénzed!", "error")
+						exports.oInfobox:outputInfoBox("Dinheiro insuficiente!", "error")
 					end
 				else
 					exports.oInfobox:outputInfoBox("Jelenleg nincs nyitva a mozi!", "error")

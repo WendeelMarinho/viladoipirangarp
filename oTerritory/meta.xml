@@ -1,0 +1,17 @@
+<meta>
+    <info author="VilaDev" name="oTerritory" version="1.0.0"
+          description="Dominação de territórios para gangues e máfias. Capture, defenda, receba renda no payday." />
+
+    <script src="global.lua"  type="shared" />
+    <script src="server.lua"  type="server" />
+    <script src="client.lua"  type="client" />
+
+    <export function="getTerritoryOwner"      type="server" />
+    <export function="getPlayerTerritory"     type="server" />
+    <export function="getAllTerritories"       type="server" />
+    <export function="getTerritoryPaydayBonus" type="server" />
+
+    <include resource="oDashboard" />
+    <include resource="oCore" />
+    <include resource="oPhone" />
+</meta>

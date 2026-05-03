@@ -19,6 +19,7 @@ adminCMD = {
     {command = 'gethere', permission = 2, shortDescription = 'Trazer jogador até ti'},
     {command = 'setadminnick', permission = 7, shortDescription = 'Alterar apelido de admin'},
     {command = 'aduty', permission = 2, shortDescription = 'Entrar/sair de serviço admin'},
+    {command = 'adminhub', permission = 2, shortDescription = 'Abrir painel Admin Hub (economia, CC, PP, itens)'},
     {command = 'setadminlevel', permission = 7, shortDescription = 'Definir nível de administrador'},
 
     {command = 'findchar', permission = 2, shortDescription = 'Procurar nome do personagem pelo Char ID'},
@@ -41,6 +42,7 @@ adminCMD = {
     {command = 'removefactionmoney', permission = 7, shortDescription = 'Retirar dinheiro da facção'},
     {command = 'givefactionmoney', permission = 7, shortDescription = 'Dar dinheiro à facção'},
     {command = 'setfactionleader', permission = 7, shortDescription = 'Dar cargo de líder na facção'},
+    {command = 'listfactionids', permission = 7, shortDescription = 'Listar IDs e nomes das facções no chat'},
     {command = 'removeplayerfromallfaction', permission = 6, shortDescription = 'Remover jogador de todas as facções'},
     {command = 'removeplayerfromfaction', permission = 6, shortDescription = 'Remover jogador de uma facção'},
     {command = 'getplayerfactions', permission = 4, shortDescription = 'Ver facções do jogador'},
@@ -117,7 +119,21 @@ adminCMD = {
     {command = 'getplayerserial', permission = 7, shortDescription = 'Obter serial MTA do jogador'},
 }
 
-function hasPermission(element, permission)
+--- silentIfDenied: true = não enviar outputChatBox (ex.: hub que já devolve mensagem ao cliente)
+function hasPermission(element, permission, silentIfDenied)
+    if silentIfDenied == nil then silentIfDenied = false end
+
+    local function notify(msg)
+        if silentIfDenied then return end
+        if not isElement(element) or getElementType(element) ~= "player" then return end
+        local ok, prefix = pcall(function()
+            return exports.oCore:getServerPrefix("red-dark", "Admin", 3)
+        end)
+        if ok and prefix then
+            outputChatBox(prefix .. msg, element, 255, 255, 255, true)
+        end
+    end
+
     local function isDev()
         if localPlayer then
             return getElementData(element, "aclLogin") == true
@@ -125,19 +141,27 @@ function hasPermission(element, permission)
         return adminSerialsCache[getPlayerSerial(element)] ~= nil
     end
 
-    if ((getElementData(element, "user:admin") or 0) > 1) then
-        for k, o in pairs(adminCMD) do
-            if (o.command == permission) then
-                if (o.permission <= getElementData(element, "user:admin")) then
+    local level = getElementData(element, "user:admin") or 0
+
+    if level > 1 then
+        for _, o in ipairs(adminCMD) do
+            if o.command == permission then
+                if o.permission <= level then
                     return true
                 elseif isDev() then
                     return true
                 else
+                    notify("Comando /" .. tostring(permission) .. ": requer nível admin " .. o.permission .. " (o teu nível: " .. level .. ").")
                     return false
                 end
             end
         end
+        notify("Permissão '" .. tostring(permission) .. "' não está registada no oAdmin (adminCMD).")
+        return false
     elseif isDev() then
         return true
+    else
+        notify("Sem acesso a comandos admin (nível " .. level .. "). Contas developer (ACL) mantêm acesso.")
+        return false
     end
 end

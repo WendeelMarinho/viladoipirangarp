@@ -10,6 +10,6 @@ local reasons = {
 addEventHandler("onClientPlayerQuit", root, function(reason)
     local dis = exports.oCore:getDistance(localPlayer, source)
     if dis < 20 then 
-        outputChatBox("[Kilépés]: #ffffff"..getPlayerName(source):gsub("_", " ").." #f03629kilépett a közeledben #ffffff"..math.floor(dis).."#f03629 yard távolságban. #ffffff("..reasons[reason]..")", 240, 54, 41, true)
+        outputChatBox("[Saída]: #ffffff"..getPlayerName(source):gsub("_", " ").." #f03629saiu perto de você #ffffff"..math.floor(dis).."#f03629 yard de distância. #ffffff("..reasons[reason]..")", 240, 54, 41, true)
     end
 end)

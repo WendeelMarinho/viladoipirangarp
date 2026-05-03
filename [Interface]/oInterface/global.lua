@@ -18,7 +18,7 @@ defaultWidgets = {
     {"Nome do jogador", 0.41,0.895,0.17,0.03,false,false,true,0,0,0,0},
     {"Info da placa de vídeo", 0.21,0.74,0.150,0.150,false,false,true,0,0,0,0},
     --{"Hora", 0.8,0.09+0.02,0.045,0.03,false,false,true,0,0,0,0},
-    {"Telefon", 0.85,0.25,0.145,0.51,false,true,true,0,0,0,0},
+    {"Telefone", 0.85,0.25,0.145,0.51,false,true,true,0,0,0,0},
     --{"Arma", 0.87,0.14,0.128,0.115,false,true,true,0,0,0,0},
     {"Munição", 0.87,0.14+0.02,0.128,0.150,false,true,true,0,0,0,0},
     {"OOC Chat", 0.015, 0.39, 0.2, 0.25, true, true, false, 0.3, 0.3, 0.05, 0.06},
