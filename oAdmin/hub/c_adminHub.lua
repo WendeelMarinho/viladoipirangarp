@@ -343,6 +343,7 @@ local function drawPanel(alpha)
 		cy = cy + py(26)
 		core:dxDrawButton(cx, cy, px(132), L.rowH + 2, p.positive[1], p.positive[2], p.positive[3], math.floor(255 * alpha), "Dar +CC", T(p.text, 255 * alpha), 0.84, fontBody, false, tocolor(0, 0, 0, 95))
 		core:dxDrawButton(cx + px(142), cy, px(132), L.rowH + 2, p.danger[1], p.danger[2], p.danger[3], math.floor(255 * alpha), "Retirar CC", T(p.text, 255 * alpha), 0.84, fontBody, false, tocolor(0, 0, 0, 95))
+		core:dxDrawButton(cx + px(284), cy, px(150), L.rowH + 2, 58, 118, 210, math.floor(255 * alpha), "Definir CC", T(p.text, 255 * alpha), 0.84, fontBody, false, tocolor(0, 0, 0, 95))
 	elseif tabIndex == 3 then
 		dxDrawText("Pontos premium (nível 8)", cx, cy, cx + cw, cy + py(24), T(p.text, 245 * alpha), 1, fontSmall, "left", "center")
 		cy = cy + py(28)
@@ -570,6 +571,9 @@ function hubClick(button, state, absoluteX, absoluteY)
 			triggerServerEvent("adminHub > giveCC", resourceRoot, tgt, 1, amt)
 		elseif core:isInSlot(fieldX + px(142), rowY, px(132), L.rowH + 2) then
 			triggerServerEvent("adminHub > giveCC", resourceRoot, tgt, 2, amt)
+		elseif core:isInSlot(fieldX + px(284), rowY, px(150), L.rowH + 2) then
+			local v = getSetNum()
+			if v then triggerServerEvent("adminHub > setCC", resourceRoot, tgt, v) end
 		end
 	elseif tabIndex == 3 then
 		local rowY = L.bodyY + py(28)

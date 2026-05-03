@@ -209,6 +209,38 @@ addEventHandler("adminHub > giveCC", resourceRoot, function(partial, mode, amoun
 	triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, true, "CC definido: " .. newv)
 end)
 
+addEvent("adminHub > setCC", true)
+addEventHandler("adminHub > setCC", resourceRoot, function(partial, value)
+	if client ~= source then return end
+	local admin = client
+	refreshColor()
+	local ok, err = adminGate(admin)
+	if not ok then
+		triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, false, err)
+		return
+	end
+	if not exports.oAdmin:hasPermission(admin, "givemoney", true) then
+		triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, false, "Casino Coin: usa o mesmo nível que givemoney.")
+		return
+	end
+	local target, terr = resolveTarget(admin, partial)
+	if not target then
+		triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, false, terr)
+		return
+	end
+	value = tonumber(value)
+	if value == nil or value < 0 then
+		triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, false, "Valor inválido.")
+		return
+	end
+	local newv = math.floor(value)
+	setElementData(target, "char:cc", newv)
+	outputChatBox(core:getServerPrefix("server", "Admin", 1) .. color .. getElementData(admin, "user:adminnick") .. " #ffffffdefiniu os teus Casino Coins para " .. newv .. ".", target, 255, 255, 255, true)
+	sendMessageToAdmins(admin, "definiu CC de " .. (getElementData(target, "char:name") or "?") .. " para " .. newv .. ".", 7)
+	setElementData(admin, "log:admincmd", { getElementData(target, "char:id"), "adminhub_setcc" })
+	triggerClientEvent(admin, "adminHub > actionResult", resourceRoot, true, "CC definido: " .. newv)
+end)
+
 addEvent("adminHub > giveItem", true)
 addEventHandler("adminHub > giveItem", resourceRoot, function(partial, item, value, count, duty)
 	if client ~= source then return end

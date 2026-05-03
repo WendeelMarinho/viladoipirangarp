@@ -692,7 +692,7 @@ function render()
         dxDrawRectangle(sx*0.435,sy*0.22+sy*0.04,sx*0.46,sy*0.103,tocolor(27,27,27,100*alpha_pagebg))
 
         local startY = sy*0.265
-        for i=1, #vagyonTargyak do 
+        for i=1, #patrimonioItens do 
             local color = tocolor(21,21,21,220*alpha_pagebg)
             local color2 = tocolor(r,g,b,255*alpha_pagebg)
 
@@ -721,12 +721,12 @@ function render()
                 color3 = "#3d7abc"  
             end
 
-            dxDrawText(vagyonTargyak[i][1],sx*0.44,startY,sx*0.435+sx*0.458,startY+sy*0.03,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"left","center")
+            dxDrawText(patrimonioItens[i][1],sx*0.44,startY,sx*0.435+sx*0.458,startY+sy*0.03,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"left","center")
 
             if i == 3 then 
                 dxDrawText(color3..elotag.." #ffffff"..convertNumber(exports.oBank:getPlayerAllBankMoney(),numbers,color3)[2]..utotag,sx*0.44,startY,sx*0.435+sx*0.454,startY+sy*0.03,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
             else
-                dxDrawText(color3..elotag.." #ffffff"..convertNumber(getElementData(localPlayer,vagyonTargyak[i][2]),numbers,color3)[2]..utotag,sx*0.44,startY,sx*0.435+sx*0.454,startY+sy*0.03,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
+                dxDrawText(color3..elotag.." #ffffff"..convertNumber(getElementData(localPlayer,patrimonioItens[i][2]),numbers,color3)[2]..utotag,sx*0.44,startY,sx*0.435+sx*0.454,startY+sy*0.03,tocolor(220,220,220,255*alpha_pagebg),0.65/myX*sx,fonts["bebasneue-18"],"right","center",false,false,false,true)
             end
 
             startY = startY + sy*0.0325

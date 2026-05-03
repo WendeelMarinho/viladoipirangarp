@@ -39,11 +39,11 @@ userStats = {
     {"Serial", "user:serial"},
 }
 
-vagyonTargyak = {
+patrimonioItens = {
     {"Dinheiro (mão)", "char:money"},
     {"Casino Coin", "char:cc"},
     {"Saldo bancário", "_bankmoney"},
- --   {"Prémium Pont", "char:pp"},
+    {"Pontos Premium", "char:pp"},
 }
 
 adminPrefix = {"AS","A1","A2","A3","FA","SA","</>","T"}
@@ -405,32 +405,32 @@ premiumCategories = {
         {id = 42, price = 7300, count = 1, value = 4}, 
         {id = 42, price = 7000, count = 1, value = 5}, 
     }},
-    {name = "Outros itens", items = { -- 94, 104, 101, 
-        -- Prémium kártyák
-        {id = 82, price = 500, count = 1, value = 1},    
-        {id = 89, price = 500, count = 1, value = 1},    
-        {id = 90, price = 750, count = 1, value = 1},    
-        {id = 91, price = 500, count = 1, value = 1}, 
-        {id = 115, price = 1500, count = 1, value = 1}, 
+    {name = "Outros itens", items = { -- 94, 104, 101,
+        -- Cartões premium
+        {id = 82, price = 500, count = 1, value = 1},
+        {id = 89, price = 500, count = 1, value = 1},
+        {id = 90, price = 750, count = 1, value = 1},
+        {id = 91, price = 500, count = 1, value = 1},
+        {id = 115, price = 1500, count = 1, value = 1},
 
-        -- Mesyterkönyvek
-        {id = 117, price = 4500, count = 1, value = 1}, 
-        {id = 118, price = 5000, count = 1, value = 1}, 
-        {id = 119, price = 3500, count = 1, value = 1}, 
-        {id = 120, price = 4000, count = 1, value = 1}, 
-        {id = 121, price = 3000, count = 1, value = 1}, 
-        {id = 122, price = 3200, count = 1, value = 1}, 
-        {id = 123, price = 3500, count = 1, value = 1}, 
-        {id = 125, price = 4000, count = 1, value = 1}, 
-        {id = 126, price = 5000, count = 1, value = 1}, 
+        -- Livros mestres
+        {id = 117, price = 4500, count = 1, value = 1},
+        {id = 118, price = 5000, count = 1, value = 1},
+        {id = 119, price = 3500, count = 1, value = 1},
+        {id = 120, price = 4000, count = 1, value = 1},
+        {id = 121, price = 3000, count = 1, value = 1},
+        {id = 122, price = 3200, count = 1, value = 1},
+        {id = 123, price = 3500, count = 1, value = 1},
+        {id = 125, price = 4000, count = 1, value = 1},
+        {id = 126, price = 5000, count = 1, value = 1},
 
-        -- drogok
-        {id = 55, price = 200, count = 1, value = 1},    
-        {id = 56, price = 200, count = 1, value = 1},    
-        {id = 57, price = 200, count = 1, value = 1},    
-        {id = 58, price = 150, count = 1, value = 1},   
+        -- Drogas
+        {id = 55, price = 200, count = 1, value = 1},
+        {id = 56, price = 200, count = 1, value = 1},
+        {id = 57, price = 200, count = 1, value = 1},
+        {id = 58, price = 150, count = 1, value = 1},
 
-        -- egyebek
+        -- Outros
         {id = 94, price = 500, count = 1, value = 1},
         {id = 101, price = 700, count = 1, value = 1},
         {id = 104, price = 750, count = 1, value = 1},
