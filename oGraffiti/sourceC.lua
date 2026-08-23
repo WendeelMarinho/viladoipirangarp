@@ -99,32 +99,32 @@ local loadImagePanel = {
 }
 
 local panelMenu = {
-	{"Új", tocolor(r, g, b), "new"},
-	{"Vissza", tocolor(61, 146, 191, 230), "undo"},
-	{"Előre", tocolor(61, 146, 191, 230), "redo"},
-	{"Mentés", tocolor(89, 171, 87), "save"},
-	{"Színválasztás", tocolor(201, 191, 95, 230), "palette", false,
+	{"Novo", tocolor(r, g, b), "new"},
+	{"Desfazer", tocolor(61, 146, 191, 230), "undo"},
+	{"Refazer", tocolor(61, 146, 191, 230), "redo"},
+	{"Salvar", tocolor(89, 171, 87), "save"},
+	{"Selecionar cor", tocolor(201, 191, 95, 230), "palette", false,
 		activeWhen = function()
 			if colorData.isActive then
 				return true
 			end
 		end
 	},
-	{"Vastagság állítás", tocolor(91, 189, 138, 230), "brushsize", false,
+	{"Tamanho do pincel", tocolor(91, 189, 138, 230), "brushsize", false,
 		activeWhen = function()
 			if brushData.isActive then
 				return true
 			end
 		end
 	},
-	{"Mentett graffitik", tocolor(139, 132, 240), "savedgraffitis", 10,
+	{"Graffitis salvos", tocolor(139, 132, 240), "savedgraffitis", 10,
 		activeWhen = function()
 			if savedGraffitisMenu.isActive then
 				return true
 			end
 		end
 	},
-	{"Kép feltöltése URL-alapján", tocolor(150, 220, 242), "url_image", 11,
+	{"Carregar imagem por URL", tocolor(150, 220, 242), "url_image", 11,
 		activeWhen = function()
 			if loadImagePanel.isActive then
 				return true
@@ -232,7 +232,7 @@ addCommandHandler("nearbygraffitis",
 				adminMode = false 
 			else 
 				adminMode = true 
-				outputChatBox(color.."[Graffiti]: #ffffffKözeledben lévő graffitik megjelenítve!", 255, 255, 255, true)
+				outputChatBox(color.."[Graffiti]: #ffffffGraffitis próximos exibidos!", 255, 255, 255, true)
 			end 
 
 		end 
@@ -303,9 +303,9 @@ addEventHandler("onClientTryToDownloadImage", getResourceRootElement(),
 						if fileExtension and fileExtension == ".png" or fileExtension == ".jpg" or fileExtension == ".jpeg" or fileExtension == ".bmp" then
 							triggerServerEvent("onTryToDownloadClientImage", localPlayer, path)
 							loadImagePanel.playerCanDownload = false
-							outputChatBox(color.."[Graffiti]: #ffffffA letöltés megkezdődött kérlek várj!", 255, 255, 255, true)
+							outputChatBox(color.."[Graffiti]: #ffffffDownload iniciado, aguarde!", 255, 255, 255, true)
 						else
-							outputChatBox(color.."[Graffiti]: #ffffffA megadott link nem megfelelő!", 255, 255, 255, true)
+							outputChatBox(color.."[Graffiti]: #ffffffO link fornecido não é válido!", 255, 255, 255, true)
 						end
 					else
 						outputChatBox(color.."[Graffiti]: #ffffffElőször illeszd be az URL-linket!", 255, 255, 255, true)
@@ -314,7 +314,7 @@ addEventHandler("onClientTryToDownloadImage", getResourceRootElement(),
 					outputChatBox(color.."[Graffiti]: #ffffffVocê precisa esperar "..color.. 3 - math.floor(deltaTime / 1000) .. " segundo(s)#ffffff para a próxima descarga.", 255, 255, 255, true)
 				end
 			else
-				outputChatBox(color.."[Graffiti]: #ffffffEgy letöltés már folyamatban van!", 255, 255, 255, true)
+				outputChatBox(color.."[Graffiti]: #ffffffJá há um download em andamento!", 255, 255, 255, true)
 			end
 		end
 	end
@@ -349,9 +349,9 @@ addEventHandler("onClientReceiveDownloadedImage", getRootElement(),
 				destroyElement(theImage)
 			end
 			
-			outputChatBox(color.."[Graffiti]: #ffffffA kiválasztott kép elmentve, megtalálhatod a 'Mentett graffitik' között.", 255, 255, 255, true)
+			outputChatBox(color.."[Graffiti]: #ffffffImagem selecionada salva, pode encontrá-la em 'Graffitis salvos'.", 255, 255, 255, true)
 		else
-			outputChatBox(color.."#e56b6b[Graffiti]: #ffffffEz a kép nem elérhető!", 255, 255, 255, true)
+			outputChatBox(color.."#e56b6b[Graffiti]: #ffffffEsta imagem não está disponível!", 255, 255, 255, true)
 		end
 		
 		loadImagePanel.playerCanDownload = true
@@ -793,10 +793,10 @@ addEventHandler("onClientClick", getRootElement(),
 
 								cleanGraffiti(fileName)
 							else
-								outputChatBox(color.."[Graffiti]: #ffffffMár van egy takarítási folyamatod elkezdve.", 255, 255, 255, true)
+								outputChatBox(color.."[Graffiti]: #ffffffVocê já tem uma limpeza em andamento.", 255, 255, 255, true)
 							end
 						else
-							outputChatBox(color.."[Graffiti]: #ffffffJárműböl űlve nem lehet.", 255, 255, 255, true)
+							outputChatBox(color.."[Graffiti]: #ffffffNão é possível fazer isso dentro de um veículo.", 255, 255, 255, true)
 						end
 					end
 				end
@@ -982,9 +982,9 @@ function renderTheEditor()
 	if colorData.isActive then
 		dxDrawText(color.."Graffiti #ffffff- #ccccccColorpicker", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
 	elseif savedGraffitisMenu.isActive then
-		dxDrawText(color.."Graffiti - #ccccccMentett graffitik", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
+		dxDrawText(color.."Graffiti - #ccccccGraffitis salvos", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
 	elseif loadImagePanel.isActive then
-		dxDrawText(color.."Graffiti - #ccccccKépfeltöltés", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
+		dxDrawText(color.."Graffiti - #ccccccCarregar imagem", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
 	else
 		dxDrawText(color.."Graffiti", panelPosX + marginOffset, panelPosY + 5, panelPosX + panelWidth, panelPosY + headerSize + 7, tocolor(255, 255, 255), 0.8, mainFont, "left", "center", false, false, false, true)
 	end
@@ -1148,7 +1148,7 @@ function renderTheEditor()
 				end
 			end
 		else
-			dxDrawText("Még nincs egy elmentett graffitid se!\n☹", paintAreaPosX, paintAreaPosY, paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(255, 255, 255), 1.0, mainFont, "center", "center")
+			dxDrawText("Você ainda não tem nenhum graffiti salvo!\n☹", paintAreaPosX, paintAreaPosY, paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(255, 255, 255), 1.0, mainFont, "center", "center")
 		end
 		
 		--> Scrollbar
@@ -1197,8 +1197,8 @@ function renderTheEditor()
 					dots = "."
 				end
 
-				dxDrawText("Letöltés folyamatban" .. dots, paintAreaPosX - marginOffset - 1, paintAreaPosY - (menuSize * 9) + 1, paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(0, 0, 0), 0.8, mainFont, "center", "center", false, false, false, true)
-				dxDrawText("Letöltés folyamatban" .. dots, paintAreaPosX - marginOffset, paintAreaPosY - (menuSize * 9), paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(255, 255, 255), 0.8, mainFont, "center", "center", false, false, false, true)
+				dxDrawText("Download em andamento" .. dots, paintAreaPosX - marginOffset - 1, paintAreaPosY - (menuSize * 9) + 1, paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(0, 0, 0), 0.8, mainFont, "center", "center", false, false, false, true)
+				dxDrawText("Download em andamento" .. dots, paintAreaPosX - marginOffset, paintAreaPosY - (menuSize * 9), paintAreaPosX + paintAreaWidth, paintAreaPosY + paintAreaHeight, tocolor(255, 255, 255), 0.8, mainFont, "center", "center", false, false, false, true)
 				
 				if waitingProgress > 1 then
 					loadImagePanel.downloadingDotsTick = getTickCount()

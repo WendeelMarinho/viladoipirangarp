@@ -15,6 +15,7 @@ bindKey("m", "down", showcs)
 
 local hungerTimer = false
 local thirstTimer = false
+local staffResfrenteReplyTimer = false
 
 addEventHandler("onClientElementDataChange", localPlayer, function(theKey, oldValue, newValue)
 	if getElementType(source) == "player" then
@@ -265,6 +266,178 @@ addCommandHandler("getcampos", function()
 		outputChatBox(serverColor.."Camera Matrix: #ffffff"..x..","..y..","..z..","..lx..","..ly..","..lz,255,255,255,true)
 	end
 end)
+
+addEvent("oCore>staffResfrenteResult", true)
+addEventHandler("oCore>staffResfrenteResult", resourceRoot, function(success, resName, et, mid, hx, hy, hz)
+	if isTimer(staffResfrenteReplyTimer) then
+		killTimer(staffResfrenteReplyTimer)
+		staffResfrenteReplyTimer = false
+	end
+	if not success then
+		outputChatBox(
+			serverColor .. "[Recurso]#ffffff " .. tostring(resName or "Erro desconhecido."),
+			255,
+			200,
+			100,
+			true
+		)
+		return
+	end
+	local modelStr = (mid and mid > 0) and (" | modelo " .. tostring(mid)) or ""
+	outputChatBox(
+		serverColor
+			.. "[Recurso]#ffffff "
+			.. tostring(resName or "?")
+			.. " #aaaaaa| "
+			.. tostring(et or "?")
+			.. modelStr
+			.. " #aaaaaa| hit "
+			.. string.format("%.1f %.1f %.1f", tonumber(hx) or 0, tonumber(hy) or 0, tonumber(hz) or 0),
+		255,
+		255,
+		255,
+		true
+	)
+	local clip = tostring(resName or "(sem recurso)")
+	setClipboard(clip)
+	outputChatBox(serverColor .. "[Clipboard]#ffffff Nome copiado: " .. clip, 255, 255, 255, true)
+	local oc = getResourceFromName("oChat")
+	if oc and getResourceState(oc) == "running" then
+		triggerServerEvent("oChat > staffResfrenteLog", getResourceRootElement(oc), clip, tostring(et or "?"), hx or 0, hy or 0, hz or 0)
+	end
+end)
+
+--[[ /resfrente — mesmo caminho que /getpos (executeCommandHandler directo no chatbox).
+    includeWorldModelInformation: montanhas / colisão só do mapa SA devolvem world model ID (não é recurso MTA). ]]
+function runStaffResourceInFrontRaycast()
+	if not (getElementData(localPlayer, "user:admin") > 1) then
+		outputChatBox(serverColor .. "[Staff]#ffffff Comando só para admin nível > 1 (como /getpos).", 255, 255, 255, true)
+		return
+	end
+	local camX, camY, camZ, lookX, lookY, lookZ = getCameraMatrix()
+	local reach = 280
+	local farX = camX + (lookX - camX) * reach
+	local farY = camY + (lookY - camY) * reach
+	local farZ = camZ + (lookZ - camZ) * reach
+	local hit,
+		hx,
+		hy,
+		hz,
+		hitElement,
+		_nx,
+		_ny,
+		_nz,
+		_mat,
+		_lit,
+		_piece,
+		worldModelId = processLineOfSight(
+			camX,
+			camY,
+			camZ,
+			farX,
+			farY,
+			farZ,
+			true,
+			true,
+			true,
+			true,
+			true,
+			false,
+			false,
+			false,
+			localPlayer,
+			true,
+			false
+		)
+	if not hit then
+		outputChatBox(serverColor .. "[Mapa]#ffffff Nada detetado nessa direção (~" .. tostring(reach) .. " m).", 255, 255, 255, true)
+		return
+	end
+	if hitElement and isElement(hitElement) then
+		outputChatBox(serverColor .. "[Recurso]#ffffff A consultar o servidor…", 200, 200, 255, true)
+		local et = getElementType(hitElement)
+		local mid = tonumber(getElementModel(hitElement)) or 0
+		local int = getElementInterior(hitElement)
+		local dim = getElementDimension(hitElement)
+		local ox, oy, oz = getElementPosition(hitElement)
+		if isTimer(staffResfrenteReplyTimer) then
+			killTimer(staffResfrenteReplyTimer)
+		end
+		staffResfrenteReplyTimer = setTimer(function()
+			staffResfrenteReplyTimer = false
+			outputChatBox(
+				serverColor
+					.. "[resfrente]#ffffff Sem resposta do servidor: o host provavelmente ainda tem oCore antigo (sem resolve por dados). Copia client.lua+server.lua, restart oCore e reconecta.",
+				255,
+				180,
+				80,
+				true
+			)
+		end, 6500, 1)
+		triggerServerEvent(
+			"oCore>staffResfrenteResolve",
+			resourceRoot,
+			tostring(et or "object"),
+			mid,
+			int,
+			dim,
+			ox,
+			oy,
+			oz,
+			hx or 0,
+			hy or 0,
+			hz or 0
+		)
+		return
+	end
+	local wm = tonumber(worldModelId) or 0
+	if wm > 0 then
+		local line = "World model SA #" .. tostring(wm) .. " (colisão do mapa base / LOD — não é object de recurso)."
+		outputChatBox(serverColor .. "[Mapa]#ffffff " .. line, 255, 255, 255, true)
+		outputChatBox(
+			serverColor
+				.. "[Mapa]#ffffff Hit ~ "
+				.. string.format("%.1f, %.1f, %.1f", hx or 0, hy or 0, hz or 0)
+				.. " — Pesquisa o ID em listas SA ou removeWorldModel no mapa.",
+			255,
+			255,
+			255,
+			true
+		)
+		setClipboard("worldmodel:" .. tostring(wm))
+		local oc = getResourceFromName("oChat")
+		if oc and getResourceState(oc) == "running" then
+			triggerServerEvent("oChat > staffResfrenteLog", getResourceRootElement(oc), "worldmodel:" .. tostring(wm), "world", hx or 0, hy or 0, hz or 0)
+		end
+		return
+	end
+	outputChatBox(
+		serverColor
+			.. "[Mapa]#ffffff Colisão sem elemento nem world model útil. Hit ~ "
+			.. string.format("%.1f, %.1f, %.1f", hx or 0, hy or 0, hz or 0),
+		255,
+		255,
+		255,
+		true
+	)
+end
+
+local function runStaffResourceInFrontRaycastSafe()
+	local ok, err = pcall(runStaffResourceInFrontRaycast)
+	if not ok then
+		outputChatBox(
+			serverColor .. "[resfrente]#ffffff Erro interno: " .. tostring(err) .. " (F8 / debugscript 3)",
+			255,
+			80,
+			80,
+			true
+		)
+	end
+end
+
+addCommandHandler("recursoafrente", runStaffResourceInFrontRaycastSafe)
+addCommandHandler("resfrente", runStaffResourceInFrontRaycastSafe)
+addCommandHandler("frontresource", runStaffResourceInFrontRaycastSafe)
 
 addCommandHandler("pay", function(cmd, target, amount)
 	local amount = tonumber(amount)

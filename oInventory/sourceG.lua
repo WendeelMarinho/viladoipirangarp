@@ -48,9 +48,9 @@ pages = {
 
 availableItems = {
 
-	{name = "Iphone 12", weight = 0.3, description = "Telefone Apple.", stacking = false, category="bag", }, -- 1
+	{name = "iPhone 12", weight = 0.3, description = "Telefone Apple.", stacking = false, category="bag", }, -- 1
 
-	-- Ételek
+	-- Comida
 	{name = "Batata frita", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 50, objectId = 2663}, -- 2
 	{name = "Sanduíche", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 3
 	{name = "Taco", weight = 0.01, stacking = true, category="bag", eat = true, eatPercent = 35, objectId = 2663}, -- 4
@@ -69,7 +69,7 @@ availableItems = {
 	{name = "Durum", weight = 0.04, stacking = true, category="bag", eat = true, eatPercent = 25, objectId = 2663}, -- 17
 	{name = "Gyro", weight = 0.05, stacking = true, category="bag", eat = true, eatPercent = 20, objectId = 2663}, -- 18
 
-	-- Italok
+	-- Bebidas
 	{name = "Sprite", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 19
 	{name = "Fanta", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 20
 	{name = "Coca Cola", weight = 0.02, stacking = true, category="bag", drinkPercent = 25, drink = true}, -- 21
@@ -79,7 +79,7 @@ availableItems = {
 	{name = "Vinho", weight = 0.04, stacking = true, category="bag", alcohol = true}, -- 25
 	{name = "Café", weight = 0.03, stacking = true, category="bag", drinkPercent = 50, drink = true}, -- 26
 
-	-- Fegyverek
+	-- Armas
 	{name = "AK-47", weight = 4.8,  isWeapon = true, ammo = 45, stacking = false, category="bag"}, -- 27
 	{name = "M4", weight = 3.13,  isWeapon = true, ammo = 45, stacking = false, category="bag"}, -- 28
 	{name = "Katana", weight = 6,  isWeapon = true, stacking = false, category="bag"}, -- 29
@@ -100,7 +100,7 @@ availableItems = {
 
 	{name = "Maleta de dinheiro", weight = 4, stacking = false, category="bag"}, -- 44
 
-	--Lőszerek
+	-- Munições
 	{name = "Munição grosso calibre", weight = 0.002, stacking = true, category="bag"}, -- 45
 	{name = "Munição de espingarda", weight = 0.003, stacking = true, category="bag"}, -- 46
 	{name = "Munição pequeno calibre", weight = 0.002, stacking = true, category="bag"}, -- 47
@@ -108,16 +108,16 @@ availableItems = {
 	{name = "Munição de rifle de caça", weight = 0.005, stacking = true, category="bag"}, -- 49
 	{name = "Cartucho de spray", weight = 0.003, stacking = true, category="bag"}, -- 50
 
-	-- Kulcsok
+	-- Chaves
 	{name = "Chave do veículo", weight = 0, stacking = false, category="key"}, -- 51
 	{name = "Chave de imóvel", weight = 0, stacking = false, category="key"}, -- 52
 	{name = "Controle remoto de portão", weight = 0, stacking = false, category="key"}, -- 53
 	{name = "Chave de cofre", weight = 0, stacking = false, category="key"}, -- 54
 
-	--drogok
+	-- Drogas (uso sujeito a regras RP / staff)
 	{name = "Baseado", weight = 0.001, stacking = true, category="bag"}, -- 55
 	{name = "Seringa de heroína", weight = 0.004, stacking = true, category="bag"}, -- 56
-	{name = "Kokain", weight = 0.001, stacking = true, category="bag"}, -- 57
+	{name = "Cocaína", weight = 0.001, stacking = true, category="bag"}, -- 57
 	{name = "Maconha seca", weight = 0.001, stacking = true, category="bag"}, -- 58
 	{name = "Semente de maconha", weight = 0.001, stacking = true, category="bag"}, -- 59
 	{name = "Semente de cocaína", weight = 0.001, stacking = true, category="bag"}, -- 60
@@ -373,6 +373,11 @@ availableItems = {
 	{name = "Meteoro (fogo de artifício)", weight = 0.5, stacking = false, category="bag"}, -- 245
 	{name = "Roda de fogos", weight = 0.5, stacking = false, category="bag"}, -- 246
 	{name = "Mesa de fogos / conjunto bomba", weight = 0.5, stacking = false, category="bag"}, -- 247
+
+	{name = "Rastreador GPS (veículo)", weight = 0.15, description = "Instala no teu veículo para localização após furto.", stacking = true, category="bag"}, -- 248
+	{name = "Detector de rastreador", weight = 0.12, description = "Remove um GPS instalado dentro de um carro roubado.", stacking = true, category="bag"}, -- 249
+
+	{name = "Jornal IC (edição)", weight = 0.08, description = "Edição impressa com artigo IC (valor = JSON).", stacking = false, category="bag"}, -- 250
 };
 
 

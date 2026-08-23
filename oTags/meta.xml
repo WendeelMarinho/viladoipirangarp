@@ -1,0 +1,9 @@
+<meta>
+	<info author="Ipiranga RP" name="oTags" version="1.0.0" type="script" description="Tags IC (nametag, chat, ranks futuros)" />
+	<script src="global.lua" type="shared" />
+	<script src="server.lua" type="server" />
+	<script src="client.lua" type="client" />
+	<export function="getPlayerTag" type="server" />
+	<export function="setPlayerTag" type="server" />
+	<export function="removePlayerTag" type="server" />
+</meta>

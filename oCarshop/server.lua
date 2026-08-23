@@ -183,7 +183,7 @@ function buyVehicles(modelId, color, ownerFaction, price_dollar, price_premium, 
             warpPedIntoVehicle(client, veh)
 
             exports.oDashboard:setFactionBankMoney(ownerFaction, price_dollar, "remove")
-            exports.oDashboard:outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." vett egy "..factionLogNameColor..vehicle:getModdedVehicleName(veh)..factionLogMessageColor.." nevű járművet a(z) "..factionLogNameColor..exports.oDashboard:getFactionName(ownerFaction)..factionLogMessageColor.." nevű frakcióba.")
+            exports.oDashboard:outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." comprou um "..factionLogNameColor..vehicle:getModdedVehicleName(veh)..factionLogMessageColor.." para a facção "..factionLogNameColor..exports.oDashboard:getFactionName(ownerFaction)..factionLogMessageColor..".")
 
             inventory:giveItem(client, 51, getElementData(veh, "veh:id"), 1, 0)
         end

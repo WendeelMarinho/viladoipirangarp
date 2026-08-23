@@ -2,6 +2,8 @@
 
 **Atualizado:** 2026-05-03
 
+**Manual vivo (features + melhorias, jogador e admin, HTML):** `docs/features/manual-features-e-melhorias-ipiranga.html` — atualizar este ficheiro quando novos sistemas ou comandos forem entregues.
+
 ---
 
 ## ALTA PRIORIDADE — Fase 4: Novos Sistemas (implementação)
@@ -73,34 +75,15 @@ Faction IDs (da DB — todos criados em 2026-05-03):
 
 ## ALTA PRIORIDADE — Integrações de código (programador)
 
-### 1. `oGate` + `oFactionHQ` (portões de HQ)
+### 1. `oGate` + `oFactionHQ` (portões de HQ) ✅ CONCLUÍDO (2026-05-03)
 
-Em `oGate/server.lua`, antes de abrir um portão, verificar:
-```lua
--- Adicionar no handler que decide se abre o portão:
-if exports.oFactionHQ:canOpenGate(player, gateID) then
-    -- abrir portão
-end
-```
+### 2. `oDeath` + `oWanted` (morte por policial → regista crime) ✅ CONCLUÍDO (2026-05-06)
 
-### 2. `oDeath` + `oWanted` (morte por policial → regista crime)
+Implementado via `onPlayerWasted` em `oDeath/server.lua`. Se killer for policial em serviço, chama `exports.oWanted:addCrime(dead, "homicidio")`.
 
-Em `oDeath/server.lua`, no handler de morte/kill:
-```lua
--- Quando jogador morto por policial:
-local killer = ... -- quem matou
-if exports.oFactionScripts:isInLawEnforcementDuty(killer) then
-    exports.oWanted:addCrime(deadPlayer, "homicidio")
-end
-```
+### 3. `oWanted` + `oFactionScripts` (prisão → limpa wanted) ✅ CONCLUÍDO (2026-05-03)
 
-### 3. `oWanted` + `oFactionScripts` (prisão → limpa wanted)
-
-Em `oFactionScripts/server.lua`, quando criminal é detido na cela:
-```lua
-triggerServerEvent("oWanted > arrest", resourceRoot, criminalPlayer)
--- ou diretamente:
-exports.oWanted:clearWanted(criminalPlayer, officerPlayer)
+Implementado via comando `/prender` em `oFactionScripts/server.lua`.
 ```
 
 ---
@@ -147,13 +130,20 @@ As seguintes funções retornam "em desenvolvimento" e precisam de implementaç�
 
 ## BAIXA PRIORIDADE — Backlog técnico
 
-- [ ] Traduzir mensagens húngaras em `oPayday/client.lua` ("Fizetés", "Jármű adó", "Ingatlan adó", "Banki kamat") e `oPayday/server.lua` ("Fizetésed")
+- [x] Traduzir mensagens húngaras em `oPayday` — JÁ ESTAVA TRADUZIDO ✅
+- [x] Criar tabelas em falta: `craftingTabels` — JÁ EXISTIA NO DB ✅
+- [x] Traduzir `oDrugs/server.lua` (létrehozott, törölte) ✅ (2026-05-06)
+- [x] Traduzir `oGraffiti/sourceC.lua` (menu, mensagens) ✅ (2026-05-06)
+- [x] Traduzir `oInventory/frisk/sourceS.lua` ✅ (2026-05-06)
+- [x] Traduzir `oInventory/safe/sourceC.lua` e `trash/sourceC.lua` ✅ (2026-05-06)
+- [x] Traduzir `oCarshop/client.lua` e `server.lua` ✅ (2026-05-06)
+- [x] Symlinks criados para `oWelcome` e `oRank` ✅ (2026-05-06)
 - [ ] `registerOnServer` em `oAccount`: substituir `SELECT * FROM accounts` por query targetada
-- [ ] Criar tabelas em falta: `craftingTabels` (para oDrugs)
 - [ ] Remover recursos duplicados em `oStarter` (`oNewPD` aparece 2× no manifesto)
 - [ ] Remover referências a `oPlant` e `oPlaneCrash` do timer retardado em `oStarter/server.lua:290-291`
 - [ ] `fetchRemote` para `oCore` e `oAnticheat` (meteorologia e listas negras de IP)
 - [ ] Verificar `dutyPos` de facção 74 — coordenadas `[[216.8,-40.8,1001.8,14,3]]` precisam de confirmação in-game
+- [ ] Iniciar `oWelcome` e `oRank` (symlinks criados, mas server precisa restart ou `/startresource`)
 
 ## Dívidas abertas relevantes
 

@@ -72,20 +72,36 @@ function generateRandomASCIIString(chars)
 	return str
 end
 
-addEventHandler("onResourceStop", root, function(resource)
-	for k, v in ipairs(getElementsByType("player")) do 
+--[[ Ao reiniciar o oCore, exports.oCore:getServerPrefix falha — evitar erro e concat com boolean. ]]
+local function announceResourceLifecycle(resource, verbPt)
+	local resName = tostring(getResourceName(resource))
+	for _, v in ipairs(getElementsByType("player")) do
 		if getElementData(v, "aclLogin") then
-			outputChatBox(core:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3)..color..tostring(getResourceName(resource)).." #ffffffrecurso parado.",v,255,255,255,true) 
+			local col = "#e97619"
+			local okc, c = pcall(function()
+				return exports.oCore:getServerColor()
+			end)
+			if okc and type(c) == "string" then
+				col = c
+			end
+			local okp, pfx = pcall(function()
+				return exports.oCore:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3)
+			end)
+			if okp and type(pfx) == "string" then
+				outputChatBox(pfx .. col .. resName .. " #ffffff" .. verbPt, v, 255, 255, 255, true)
+			else
+				outputChatBox("[Ipiranga] " .. resName .. " " .. verbPt, v, 255, 200, 100, true)
+			end
 		end
 	end
+end
+
+addEventHandler("onResourceStop", root, function(resource)
+	announceResourceLifecycle(resource, "recurso parado.")
 end)
 
 addEventHandler("onResourceStart", root, function(resource)
-	for k, v in ipairs(getElementsByType("player")) do 
-		if getElementData(v, "aclLogin") then
-			outputChatBox(core:getServerPrefix("red-dark", "Vale do Ipiranga RP", 3)..color..tostring(getResourceName(resource)).." #ffffffrecurso iniciado.",v,255,255,255,true) 
-		end
-	end
+	announceResourceLifecycle(resource, "recurso iniciado.")
 end)
 
 function developerJoin(player)
@@ -406,7 +422,7 @@ function setPP(thePlayer, cmd, target, value)
 		if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(thePlayer) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
 		local value = tonumber(value)
-		if target and value and type then
+		if target and value then
 			local target = core:getPlayerFromPartialName(thePlayer, target)
 			if target then
 				setElementData(target, "char:pp", value)

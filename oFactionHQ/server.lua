@@ -1,6 +1,6 @@
 -- ─── oFactionHQ / server.lua ─────────────────────────────────────────────────
 
-local conn      = exports.oMysql:getDBConnection()
+local conn
 local dashboard = exports.oDashboard
 local core      = exports.oCore
 local infobox   = exports.oInfobox
@@ -12,6 +12,7 @@ local hqData      = {}
 local ammoCooldowns = {}
 
 addEventHandler("onResourceStart", resourceRoot, function()
+    conn = exports.oMysql:getDBConnection()
     color, r, g, b = core:getServerColor()
     loadHQs()
 end)
@@ -52,6 +53,15 @@ function canOpenGate(player, gateID)
         end
     end
     return false  -- portão não pertence a nenhuma HQ registrada
+end
+
+function isHQGate(gateID)
+    for _, hq in pairs(hqData) do
+        for _, gid in ipairs(hq.gate_ids) do
+            if gid == gateID then return true end
+        end
+    end
+    return false
 end
 
 function isInFactionHQ(player)

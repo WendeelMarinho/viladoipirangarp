@@ -1,6 +1,6 @@
 function createCarshops()
     for k,v in ipairs(carshops) do
-        local blipName = carshop_names[v[7]] or "Járműkereskedés"
+        local blipName = carshop_names[v[7]] or "Concessionária"
         local ped = createPed(v[6],v[1],v[2],v[3],v[4])
         setElementData(ped,"ped:name",v[5]) 
         setElementData(ped,"ped:prefix",blipName)
@@ -191,7 +191,7 @@ function drawPanel()
 
 	dxDrawLine(sx*0.005,sy*0.6,sx*0.01+sx*0.185,sy*0.6,tocolor(220,220,220,100*a), 2)
 
-	dxDrawText("Jármű adatai",0,sy*0.605,sx*0.2,sy*0.605+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-11"],"center","center",false,false,false,true)
+	dxDrawText("Dados do veículo",0,sy*0.605,sx*0.2,sy*0.605+sy*0.03,tocolor(220,220,220,255*a),1/myX*sx,fonts["condensed-11"],"center","center",false,false,false,true)
 
 	if selectedFactionID == 0 then 
 		local dataY = 0.65
@@ -354,7 +354,7 @@ function drawPanel()
 
 	else
 		dxDrawImage(sx*0.802,sy*0.007,42/myX*sx,40/myY*sy,"files/logo.png",0,0,0,tocolor(r, g, b, 255*a))
-		dxDrawText("Frakció egyenleg: #7ecc7a"..comma_value(exports.oDashboard:getFactionMoney(selectedFactionID)).." #cdcdcd$",sx*0.832,sy*0.018,_,_,tocolor(220,220,220,255*a), 0.9/myX*sx, fonts["condensed-12"], _, _, false, false, false, true)
+		dxDrawText("Saldo da facção: #7ecc7a"..comma_value(exports.oDashboard:getFactionMoney(selectedFactionID)).." #cdcdcd$",sx*0.832,sy*0.018,_,_,tocolor(220,220,220,255*a), 0.9/myX*sx, fonts["condensed-12"], _, _, false, false, false, true)
 	end
 
 	local realStartY = sy*0.5 - sy*0.405/2

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual de features e melhorias — Ipiranga RP (jogador &amp; administração)</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #243044;
+      --text: #e8ecf1;
+      --muted: #9aa7b8;
+      --accent: #3d9eef;
+      --accent2: #5ecf8c;
+      --warn: #e8b044;
+      --danger: #e85d5d;
+      --border: #2d3a4d;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    header.hero {
+      padding: 2.5rem 2rem;
+      background: linear-gradient(145deg, var(--surface) 0%, #152028 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    header.hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    header.hero p.lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 58ch;
+    }
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      color: var(--accent2);
+    }
+
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .toc h2 {
+      margin: 0 0 1rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .toc ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      columns: 2;
+      column-gap: 2rem;
+    }
+    @media (max-width: 640px) {
+      .toc ul { columns: 1; }
+    }
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .toc a:hover { text-decoration: underline; }
+
+    section {
+      margin-bottom: 2.75rem;
+      scroll-margin-top: 1rem;
+    }
+    section > h2 {
+      font-size: 1.35rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    section > h3 {
+      font-size: 1.1rem;
+      margin: 1.75rem 0 0.65rem;
+      color: var(--accent2);
+    }
+
+    p { margin: 0 0 1rem; color: var(--text); }
+    ul, ol { margin: 0 0 1rem; padding-left: 1.35rem; color: var(--text); }
+    li { margin-bottom: 0.35rem; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      vertical-align: middle;
+      margin-right: 0.35rem;
+    }
+    .badge-user { background: rgba(61, 158, 239, 0.25); color: #8ec8ff; border: 1px solid rgba(61, 158, 239, 0.45); }
+    .badge-admin { background: rgba(232, 176, 68, 0.2); color: #f5d78a; border: 1px solid rgba(232, 176, 68, 0.45); }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--surface);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+      border-left-width: 4px;
+    }
+    .callout.admin {
+      border-left-color: var(--warn);
+    }
+    .callout strong { color: var(--accent2); }
+
+    table.cmd {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 1rem 0;
+      background: var(--surface);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    table.cmd th,
+    table.cmd td {
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    table.cmd th {
+      background: var(--surface2);
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    table.cmd tr:last-child td { border-bottom: none; }
+    table.cmd code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      color: #a8d8ff;
+      background: rgba(0,0,0,0.25);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    code.inline {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      background: rgba(0,0,0,0.35);
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      color: #c5e8ff;
+    }
+
+    footer.doc-foot {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .doc-foot kbd {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: rgba(0,0,0,0.35);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Manual de features e melhorias — Ipiranga RP</h1>
+      <p class="lead">Este é o <strong>manual vivo</strong> do pacote <strong>Vila do Ipiranga RP</strong>: destaca os sistemas mais relevantes para jogadores e administração, resume a <strong>Fase 4</strong> (social, crime estruturado, justiça IC) e lista <strong>pendências</strong> alinhadas ao <code class="inline">docs/worklog/next-actions.md</code>. Texto em PT-BR.</p>
+      <p class="hero-sub">Actualiza este ficheiro HTML sempre que entrarem novos recursos, comandos ou fluxos operacionais — mantém-se como referência única “player + staff”.</p>
+    </header>
+
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ul>
+        <li><a href="#meta-doc">Este manual (como manter)</a></li>
+        <li><a href="#destaques">Destaques do gamemode</a></li>
+        <li><a href="#visao">Fase 4 — visão geral</a></li>
+        <li><a href="#jogador-tags">oTags</a></li>
+        <li><a href="#jogador-chat3">oChat3</a></li>
+        <li><a href="#jogador-welcome">oWelcome</a></li>
+        <li><a href="#jogador-rank">oRank</a></li>
+        <li><a href="#jogador-cartheft">oCarTheft</a></li>
+        <li><a href="#jogador-heist">oHeist</a></li>
+        <li><a href="#jogador-reputation">oReputation</a></li>
+        <li><a href="#jogador-evidence">oEvidence</a></li>
+        <li><a href="#jogador-tribunal">oTribunal</a></li>
+        <li><a href="#jogador-elections">oElections</a></li>
+        <li><a href="#jogador-media">oMedia</a></li>
+        <li><a href="#admin-geral">Administração — visão geral</a></li>
+        <li><a href="#admin-comandos">Tabela de comandos admin</a></li>
+        <li><a href="#integracao">Integrações e arranque</a></li>
+        <li><a href="#proximas">Próximas melhorias e trabalho pendente</a></li>
+        <li><a href="#docs-relacionados">Documentação relacionada</a></li>
+      </ul>
+    </nav>
+
+    <section id="meta-doc">
+      <h2>Este manual — como manter</h2>
+      <ul>
+        <li><strong>O quê:</strong> um único HTML legível no browser com camadas <span class="badge badge-user">jogador</span> e <span class="badge badge-admin">admin</span>.</li>
+        <li><strong>Quando editar:</strong> após cada feature entregue, mudança de comandos, nova ordem no <code class="inline">oStarter</code>, ou decisão de roadmap relevante para quem joga ou gere o servidor.</li>
+        <li><strong>Onde espelhar detalhe técnico:</strong> roadmap e especificações em <code class="inline">docs/features/roadmap-fase4.md</code>; fila de trabalho em <code class="inline">docs/worklog/next-actions.md</code>; catálogo amplo em <code class="inline">docs/catalogo-originalrp-ipiranga.md</code>; pacote “premium” base em <code class="inline">docs/features/sistemas-premium.md</code>.</li>
+      </ul>
+    </section>
+
+    <section id="destaques">
+      <h2>Destaques do gamemode</h2>
+      <p>Resumo derivado do catálogo do servidor e da documentação dos sistemas enterprise/premium. O servidor em produção carrega o que o <code class="inline">oStarter</code> inicia (e recursos com symlink em <code class="inline">mods/deathmatch/resources/</code>).</p>
+
+      <h3>Núcleo OriginalRP (produto RP)</h3>
+      <ul>
+        <li><strong>Conta e personagem:</strong> <code class="inline">oAccount</code>, <code class="inline">oSync</code>, whitelist (<code class="inline">oWL</code> / <code class="inline">oCore</code>), <code class="inline">oDashboard</code>, níveis (<code class="inline">oLvl</code>), licenças (<code class="inline">oLicenses</code>).</li>
+        <li><strong>Comunicação e UI:</strong> chat RP (<code class="inline">oChat</code>), telefone (<code class="inline">oPhone</code>), HUD/radar/velocímetro (<code class="inline">oHud</code>, <code class="inline">oRadar</code>, <code class="inline">oSpeedo</code>), inventário DX (<code class="inline">oInventory</code>), nametags (<code class="inline">oNametag</code>).</li>
+        <li><strong>Economia:</strong> salários (<code class="inline">oPayday</code>), banco (<code class="inline">oBank</code>), lojas e mercado (<code class="inline">oShop</code>, <code class="inline">oMarket</code>), trabalhos (<code class="inline">oJob</code>, <code class="inline">oJob_*</code>), multas (<code class="inline">oTicket</code>).</li>
+        <li><strong>Veículos:</strong> posse e sync (<code class="inline">oVehicle</code>), concessionárias (<code class="inline">oCarshop</code>), tuning e pinturas (<code class="inline">oTuning</code>, <code class="inline">oPaintjobs</code>), combustível (<code class="inline">oFuel</code>), handling (<code class="inline">oHandling</code>) — e <strong><code class="inline">oCVEH</code></strong>, painel por modelo para portas e componentes no veículo.</li>
+        <li><strong>Facções e mundo aberto:</strong> <code class="inline">oFactionScripts</code> (algemas, grab, reviver médico), <code class="inline">oDeath</code>, interiores/imóveis (<code class="inline">oInteriors</code>), mapas custom ligados pelo starter.</li>
+      </ul>
+
+      <h3>Sistemas premium recentes (facções &amp; ilegalidade estruturada)</h3>
+      <ul>
+        <li><strong><code class="inline">oFactionScripts</code>:</strong> gameplay de facção — algemas (item 77), grab com attach sincronizado, reviver com kit (81) e animação ~8 s; exports como <code class="inline">isInLawEnforcementDuty</code> / <code class="inline">isInMedicalDuty</code> para integrações.</li>
+        <li><strong><code class="inline">oWanted</code>:</strong> níveis 1★–5★, crimes tipados (<code class="inline">fuga_policial</code>, <code class="inline">homicidio</code>, etc.), bounty, decaimento automático nos níveis mais baixos, HUD e blip para polícia em serviço, persistência em DB.</li>
+        <li><strong><code class="inline">oTerritory</code>:</strong> captura de zonas em tempo real, estado contestado, rendimento horário para facção.</li>
+        <li><strong><code class="inline">oFactionHQ</code>:</strong> HQ por facção — portões, ponto de munição, spawn de viaturas de serviço (configuração in-game via comandos admin; ver pendências abaixo).</li>
+      </ul>
+      <div class="callout admin">
+        <strong>Staff:</strong> estes quatro recursos estão integrados no código e na ordem do starter; falta <strong>configuração completa in-game</strong> (HQ por facção, territórios, e algumas integrações listadas em <code class="inline">next-actions.md</code>).
+      </div>
+    </section>
+
+    <section id="visao">
+      <h2>Fase 4 — visão geral</h2>
+      <p>A <strong>Fase 4</strong> agrupa sistemas sociais, criminalidade estruturada, progressão, justiça IC e conteúdos civis. Os recursos arrancam na ordem definida pelo <code class="inline">oStarter</code> (dependências entre scripts).</p>
+      <ul>
+        <li><strong>Social / UX:</strong> tags IC, chat estendido (Twitter IC, Deep Web, proximidade), boas-vindas, rankings.</li>
+        <li><strong>Economia ilegal:</strong> furto de veículos (gazua, chop, seguro, GPS), assaltos a pontos fixos (ATM, lojas, joalharia).</li>
+        <li><strong>Legal / meta:</strong> reputação por facção, evidências forenses, tribunal (OAB), eleições municipais, jornal IC.</li>
+      </ul>
+      <div class="callout">
+        <strong>Dica:</strong> Mensagens ao jogador são em <strong>PT-BR</strong>. Painéis seguem convenções do servidor (ex.: <strong>Backspace</strong> para fechar onde aplicável, cursor em pares com painéis DX).
+      </div>
+    </section>
+
+    <section id="jogador-tags">
+      <h2><span class="badge badge-user">Jogador</span> oTags</h2>
+      <p>Sistema de <strong>tags IC</strong> (facções, eventos, raridade), sincronização com personagem e impacto visual no nome / chat conforme integrações.</p>
+      <ul>
+        <li>Nametag e prefixos cooperam com <strong>oChat</strong> / <strong>oRank</strong> (badge de ranking quando configurado).</li>
+        <li>Administradores gerem tags via comandos dedicados (ver secção Admin).</li>
+      </ul>
+    </section>
+
+    <section id="jogador-chat3">
+      <h2><span class="badge badge-user">Jogador</span> oChat3</h2>
+      <p>Extensões ao chat: <strong>Twitter IC</strong>, <strong>Deep Web</strong> (zonas e item de dispositivo), tons de proximidade, sussurros e teclas que não conflituam com outros painéis.</p>
+      <ul>
+        <li>Uso de <strong>Y</strong> / teclas conforme bind do servidor para Twitter e fluxos IC.</li>
+        <li>Deep Web com requisitos de localização ou item encriptado (ver recurso e infobox no jogo).</li>
+      </ul>
+    </section>
+
+    <section id="jogador-welcome">
+      <h2><span class="badge badge-user">Jogador</span> oWelcome</h2>
+      <p>Ecrã de boas-vindas no login (notícias, dicas, atalhos), opção de não voltar a mostrar e reabertura por comando.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/welcome</code></td><td>Reabre o painel de boas-vindas (se aplicável).</td></tr>
+          <tr><td><code>/ajuda</code></td><td>Atalhos de ajuda associados ao fluxo de onboarding.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="jogador-rank">
+      <h2><span class="badge badge-user">Jogador</span> oRank</h2>
+      <p>Rankings por categorias, cache no servidor, temporada ativa e estatísticas persistidas.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando / ação</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/rank</code></td><td>Abre a UI de rankings (pódio, categorias, “Minhas stats”).</td></tr>
+        </tbody>
+      </table>
+      <p>Outros sistemas (furto, assaltos, média, etc.) incrementam estatísticas via servidor — não é necessário comando para “submeter” pontos.</p>
+    </section>
+
+    <section id="jogador-cartheft">
+      <h2><span class="badge badge-user">Jogador</span> oCarTheft</h2>
+      <p>Roubo de veículos privados com <strong>gazua</strong> (item <strong>169</strong> — nome no inventário pode variar), alarme, modo seguro após falhas, <strong>chop shop</strong>, <strong>seguro</strong>, GPS e detector.</p>
+      <h3>Itens principais</h3>
+      <ul>
+        <li><strong>169</strong> — gazua / ferramenta de arrombamento (uma tentativa por uso).</li>
+        <li><strong>248</strong> — rastreador GPS (instalar no <em>teu</em> veículo).</li>
+        <li><strong>249</strong> — detector de rastreador (dentro de veículo roubado).</li>
+      </ul>
+      <h3>Como jogar (resumo)</h3>
+      <ol>
+        <li>Aproxima-te do veículo alheio (não facção / não temporário / não protegido) e usa <strong>clique direito</strong> para pedir arrombamento (validação no servidor).</li>
+        <li>Completa o minijogo (faixa verde + <strong>Espaço</strong>); falhas podem disparar alarme e, após várias falhas, <strong>modo seguro</strong> temporário no veículo.</li>
+        <li>Com sucesso, conduz até um <strong>desmantelamento</strong> autorizado e usa <code class="inline">/desmantelar</code> (minijogo longo no cliente).</li>
+        <li><strong>Seguro:</strong> após o veículo ser processado no chop, o dono pode usar <code class="inline">/seguro</code> para ver sinistros e reclamar (UI com <strong>Backspace</strong> para fechar).</li>
+      </ol>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/seguro</code></td><td>Painel de sinistros / reclamação de seguro.</td></tr>
+          <tr><td><code>/desmantelar</code></td><td>Inicia fluxo de chop no ponto válido (condutor, veículo roubado pelo teu personagem).</td></tr>
+          <tr><td><code>/instalarrastreador</code></td><td>Ajudante para instalar GPS no teu veículo próximo.</td></tr>
+          <tr><td><code>/detectorrastreador</code></td><td>Usa o detector estando dentro do carro roubado.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout admin">
+        <strong>Admin:</strong> <code class="inline">/addchopshop [org_id] [nome]</code> — regista chop na posição actual (interior/dimensão). Ver tabela admin abaixo.
+      </div>
+    </section>
+
+    <section id="jogador-heist">
+      <h2><span class="badge badge-user">Jogador</span> oHeist</h2>
+      <p>Assaltos a <strong>locais fixos</strong> (ATM, loja de conveniência, joalharia) com fases de minijogo (<strong>hacking</strong> e <strong>furadeira</strong>), grupo mínimo conforme o local, cooldown por local e alerta à polícia.</p>
+      <ul>
+        <li>Aproxima-te do marcador no mundo e pressiona <strong>E</strong> para iniciar (és o <strong>líder</strong> da sessão).</li>
+        <li>Tipos diferentes exigem número mínimo de assaltantes por perto (fora de serviço policial).</li>
+        <li>Cancelar minijogo: <strong>Backspace</strong> (onde aplicável).</li>
+      </ul>
+      <p><strong>Início do assalto:</strong> aproxima-te do marcador cilíndrico no mapa e pressiona <strong>E</strong>. O líder executa os minijogos (hack / furadeira) quando o servidor enviar cada fase.</p>
+      <div class="callout admin">
+        <strong>Admin:</strong> <code class="inline">/addheistspot [tipo atm|store|jewelry] [reward_min] [reward_max] [cooldown_min] [min_players] [alerta 1-5] [nome…]</code>
+      </div>
+    </section>
+
+    <section id="jogador-reputation">
+      <h2><span class="badge badge-user">Jogador</span> oReputation</h2>
+      <p>Reputação por personagem e por <strong>facção</strong>, entre <strong>−100</strong> e <strong>+100</strong>. Alterações automáticas exemplo: prisão com agente em duty ajusta reputação com a facção da lei.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/reputacao</code></td><td>Abre o painel com reputações registadas (Backspace fecha).</td></tr>
+        </tbody>
+      </table>
+      <div class="callout admin">
+        <strong>Admin:</strong> <code class="inline">/repadmin add [nick ou char_id] [faction_id] [delta]</code> ou <code class="inline">set ... [valor]</code>
+      </div>
+    </section>
+
+    <section id="jogador-evidence">
+      <h2><span class="badge badge-user">Jogador</span> oEvidence</h2>
+      <p>Registo forense no mundo: relatos de testemunhas, vestígios ligados a alarmes / assaltos (hooks automáticos) e investigação policial.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Quem</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/testemunho [nota…]</code></td><td>Qualquer jogador</td><td>Regista relato na posição actual. Opcional: <code class="inline">/testemunho nickParcial Nota…</code> se houver suspeito próximo.</td></tr>
+          <tr><td><code>/investigar</code></td><td>Polícia em serviço</td><td>Lista evidências activas num raio (~42 m), mesma dimensão/interior.</td></tr>
+          <tr><td><code>/indiciar [char_id]</code></td><td>Polícia em serviço</td><td>Se o suspeito estiver <strong>online</strong>, reforça wanted por crime organizado; regista evidência administrativa.</td></tr>
+          <tr><td><code>/evidencias</code></td><td>Ajuda</td><td>Resumo de comandos (cliente).</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="jogador-tribunal">
+      <h2><span class="badge badge-user">Jogador</span> oTribunal</h2>
+      <p>Fluxo IC mínimo: advogados da <strong>OAB (facção 82)</strong> pedem revisão para reclusos <strong>procurados</strong> e <strong>online</strong>; veredito por administrador.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Quem</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/tribunal pedir [char_id]</code></td><td>Membro OAB</td><td>Cria pedido aberto se o recluso estiver online e wanted.</td></tr>
+          <tr><td><code>/tribunalajuda</code></td><td>Todos</td><td>Lista comandos resumidos.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout admin">
+        <strong>Admin (nível ≥ 6):</strong> <code class="inline">/tribunal lista</code>, <code class="inline">/tribunal absolver [id_sessão]</code>, <code class="inline">/tribunal culpar [id_sessão]</code>. Absolvição limpa wanted <strong>sem</strong> pagamento de bounty nem ganho de reputação de prisão.
+      </div>
+    </section>
+
+    <section id="jogador-elections">
+      <h2><span class="badge badge-user">Jogador</span> oElections</h2>
+      <p>Eleições municipais em <strong>ciclo campanha → votação → encerramento</strong>. Vencedor é anunciado no chat; promoção automática a cargo na Prefeitura (facção <strong>76</strong>) pode exigir passo manual do staff.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td><code>/eleicao info</code></td><td>Estado da volta, candidatos e votos.</td></tr>
+          <tr><td><code>/eleicao candidatar</code></td><td>Inscreve-te na campanha activa.</td></tr>
+          <tr><td><code>/eleicao desistir</code></td><td>Remove candidatura na campanha.</td></tr>
+          <tr><td><code>/eleicao votar [char_id]</code></td><td>Vota num candidato (uma vez por volta).</td></tr>
+          <tr><td><code>/eleicaoajuda</code></td><td>Ajuda resumida.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout admin">
+        <strong>Admin (nível ≥ 7):</strong> <code class="inline">/eleicao iniciar [horasCampanha] [horasVoto]</code> — se omitires números, usam-se por defeito <strong>72 h</strong> de campanha e <strong>24 h</strong> de votação.
+      </div>
+    </section>
+
+    <section id="jogador-media">
+      <h2><span class="badge badge-user">Jogador</span> oMedia</h2>
+      <p>Publicação de notícias IC: mensagem global no chat e cópia física no inventário (<strong>item 250 — Jornal IC</strong>), com cooldown entre publicações.</p>
+      <table class="cmd">
+        <thead><tr><th>Comando</th><th>Formato</th></tr></thead>
+        <tbody>
+          <tr><td><code>/publicarnoticia</code></td><td><code>Título -- corpo da notícia</code> (espaço, dois hífens, espaço, como separador)</td></tr>
+          <tr><td><code>/midiaajuda</code></td><td>Lembrete de uso.</td></tr>
+        </tbody>
+      </table>
+      <p>O valor do item guarda JSON (título, corpo, autor, ids e tempo) para leitura/tooltip conforme o inventário.</p>
+    </section>
+
+    <section id="admin-geral">
+      <h2><span class="badge badge-admin">Administração</span> Visão geral</h2>
+      <p>Estes comandos complementam o RP e a operação do servidor. Os níveis de admin (<code class="inline">user:admin</code>) indicados são os usados nos scripts desta fase; confirma sempre a tua ACL interna e o <code class="inline">guia-administracao-completo.md</code>.</p>
+      <ul>
+        <li><strong>Nível 6:</strong> vereditos de tribunal (<code class="inline">absolver</code> / <code class="inline">culpar</code>).</li>
+        <li><strong>Nível 7:</strong> chop shop, pontos de heist, eleições, reputação admin, entre outros.</li>
+      </ul>
+      <p><strong>Bases de dados:</strong> cada recurso cria ou usa tabelas próprias (<code class="inline">CREATE TABLE IF NOT EXISTS</code>). Mantém cópias de segurança antes de alterações manuais.</p>
+    </section>
+
+    <section id="admin-comandos">
+      <h2><span class="badge badge-admin">Administração</span> Tabela resumo de comandos</h2>
+      <table class="cmd">
+        <thead>
+          <tr><th>Comando</th><th>Nível típico</th><th>Recurso</th><th>Notas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/createtag</code>, <code>/givetag</code>, <code>/removetag</code>, <code>/listtags</code></td><td>Staff tags</td><td>oTags</td><td>Gestão de tags IC (ajusta conforme recurso).</td></tr>
+          <tr><td><code>/addchopshop [org_id] [nome]</code></td><td>≥ 7</td><td>oCarTheft</td><td>Posição, interior e dimensão actuais.</td></tr>
+          <tr><td><code>/addheistspot [tipo] [min] [max] [cd] [minP] [alerta] [nome…]</code></td><td>≥ 7</td><td>oHeist</td><td>Tipo: <code>atm</code>, <code>store</code>, <code>jewelry</code>.</td></tr>
+          <tr><td><code>/repadmin add|set …</code></td><td>≥ 7</td><td>oReputation</td><td>Manipula reputação por facção.</td></tr>
+          <tr><td><code>/tribunal lista | absolver | culpar</code></td><td>≥ 6</td><td>oTribunal</td><td>IDs de sessão listados em <code>lista</code>.</td></tr>
+          <tr><td><code>/eleicao iniciar [hCamp] [hVoto]</code></td><td>≥ 7</td><td>oElections</td><td>Só uma volta activa de cada vez.</td></tr>
+        </tbody>
+      </table>
+      <p>Para <strong>HQ de facção</strong> (nível típico 6): <code class="inline">/hqsetup</code>, <code class="inline">/hqammo</code>, <code class="inline">/hqgate</code>, <code class="inline">/hqveh</code> — ver lista de facções e passos em <code class="inline">docs/worklog/next-actions.md</code>.</p>
+    </section>
+
+    <section id="integracao">
+      <h2>Integrações e arranque</h2>
+      <ul>
+        <li><strong>oStarter:</strong> ordem canónica inclui <code class="inline">oTags</code> → <code class="inline">oChat3</code> → <code class="inline">oWelcome</code> → <code class="inline">oRank</code> → <code class="inline">oVehicle</code> → <code class="inline">oCarTheft</code> → <code class="inline">oHeist</code> → … → <code class="inline">oReputation</code> antes de <code class="inline">oWanted</code> → <code class="inline">oEvidence</code> → <code class="inline">oTribunal</code> → <code class="inline">oElections</code> → <code class="inline">oMedia</code> → …</li>
+        <li><strong>oWanted + oReputation:</strong> prisão (clear wanted normal) aplica deltas de reputação; absolvição judicial usa modo tribunal sem bounty/rep de prisão.</li>
+        <li><strong>oHeist / oCarTheft → oEvidence:</strong> eventos geram registos forenses automáticos (assalto / alarme).</li>
+        <li><strong>oRank:</strong> stats como <code class="inline">carros_roubados</code>, <code class="inline">roubos_realizados</code>, <code class="inline">eleicoes_vencidas</code>, <code class="inline">noticias_publicadas</code>, etc., conforme cada recurso.</li>
+        <li><strong>Premium:</strong> <code class="inline">oFactionScripts</code> → <code class="inline">oWanted</code> → <code class="inline">oTerritory</code> → <code class="inline">oFactionHQ</code> → <code class="inline">oInteraction</code> (ordem documentada em <code class="inline">sistemas-premium.md</code>).</li>
+      </ul>
+      <p><strong>Symlinks:</strong> em <code class="inline">mods/deathmatch/resources/</code> existem ligações simbólicas para vários recursos da pasta <code class="inline">vila-do-ipiranga-rp</code> — útil para deploy e ACL.</p>
+    </section>
+
+    <section id="proximas">
+      <h2>Próximas melhorias e trabalho pendente</h2>
+      <p>Sim — há trabalho explícito na fila operacional e técnica. Lista condensada a partir de <code class="inline">docs/worklog/next-actions.md</code> (2026-05-03); detalhes e SQL exemplificativo ficam no Markdown.</p>
+
+      <h3>Alta prioridade — configuração in-game</h3>
+      <ul>
+        <li><strong>HQ por facção:</strong> para cada facção com HQ: <code class="inline">/hqsetup</code>, <code class="inline">/hqammo</code>, <code class="inline">/hqgate</code>, <code class="inline">/hqveh</code> (IDs 74–83 documentados no next-actions).</li>
+        <li><strong>Territórios:</strong> validar zonas seed com <code class="inline">/tp</code>; ajustar <code class="inline">allowed_types</code> / <code class="inline">min_members</code> na DB se necessário para testes ou regras de captura.</li>
+      </ul>
+
+      <h3>Alta prioridade — integrações de código</h3>
+      <ul>
+        <li><strong>oGate + oFactionHQ:</strong> antes de abrir portão, validar <code class="inline">exports.oFactionHQ:canOpenGate(player, gateID)</code>.</li>
+        <li><strong>oDeath + oWanted:</strong> morte por policial em duty → registar crime (ex.: homicídio) via exports.</li>
+        <li><strong>oFactionScripts + oWanted:</strong> ao prender na cela — disparar limpeza de wanted / pagamento de bounty conforme API do recurso.</li>
+      </ul>
+
+      <h3>Média prioridade</h3>
+      <ul>
+        <li><strong>ACL oAdmin:</strong> garantir <code class="inline">resource.oAdmin</code> no grupo Admin em <code class="inline">acl.xml</code> (servidor parado).</li>
+        <li><strong>QA login/registo</strong> após o fix ACL.</li>
+        <li><strong>Stubs oFactionScripts:</strong> stinger, speedcam móvel, RBS/mangueiras/tambores — muitos ainda “em desenvolvimento”.</li>
+      </ul>
+
+      <h3>Evolução de produto (roadmap / enterprise)</h3>
+      <ul>
+        <li>Aprofundar <strong>oReputation</strong> (efeitos em preços/acesso), <strong>oEvidence</strong> (mais tipos de vestígio), <strong>oTribunal</strong> (sala/interior, tempos IC), <strong>oElections</strong> (promoção automática na facção 76 quando API estável no dashboard), <strong>oMedia</strong> (rádio IC, vínculo a profissão).</li>
+      </ul>
+
+      <h3>Baixa prioridade / backlog técnico</h3>
+      <ul>
+        <li>Traduzir restos húngaros em <code class="inline">oPayday</code>; optimizar queries em <code class="inline">oAccount</code>; limpar duplicados <code class="inline">oNewPD</code> no starter; remover referências a recursos inexistentes no timer retardado; dívidas TD-SEC/TD-ARCH referenciadas no next-actions.</li>
+      </ul>
+    </section>
+
+    <section id="docs-relacionados">
+      <h2>Documentação relacionada</h2>
+      <ul>
+        <li><code class="inline">docs/features/roadmap-fase4.md</code> — especificação e decisões da Fase 4.</li>
+        <li><code class="inline">docs/worklog/next-actions.md</code> — próximas acções e checklist staff/dev.</li>
+        <li><code class="inline">docs/catalogo-originalrp-ipiranga.md</code> — mapa de features e ordem do starter.</li>
+        <li><code class="inline">docs/features/sistemas-premium.md</code> — Wanted, Territory, FactionHQ, FactionScripts.</li>
+        <li><code class="inline">docs/guia-do-jogador.md</code> / <code class="inline">docs/guia-administracao-completo.md</code> — guias longos para jogador e administração.</li>
+      </ul>
+    </section>
+
+    <footer class="doc-foot">
+      <p><strong>Vila do Ipiranga RP</strong> — manual vivo de features e melhorias. Ficheiro: <kbd>docs/features/manual-features-e-melhorias-ipiranga.html</kbd>. Última revisão editorial deste HTML: <strong>2026-05-03</strong>. Roadmap e backlog: ver secção “Documentação relacionada” acima.</p>
+    </footer>
+  </div>
+</body>
+</html>

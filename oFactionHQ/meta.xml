@@ -7,6 +7,7 @@
     <script src="client.lua"  type="client" />
 
     <export function="canOpenGate"       type="server" />
+    <export function="isHQGate"          type="server" />
     <export function="isInFactionHQ"     type="server" />
     <export function="getHQByFaction"    type="server" />
 

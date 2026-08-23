@@ -9,9 +9,8 @@ addCommandHandler("makeveh", function(player, cmd, modelId, target, isFactionVeh
         if not exports.oAnticheat:checkPlayerVerifiedAdminStatus(player) then return end -- ellenőrzi, hogy a játékos szerepel e a verified admin listában és ha nem akkor kickeli visszaélés miatt
 
 
-        if tonumber(modelId) and tonumber(target) and tonumber(isFactionVehicle) then
-
-            isFactionVehicle = tonumber(isFactionVehicle)
+        isFactionVehicle = tonumber(isFactionVehicle)
+        if tonumber(modelId) and isFactionVehicle ~= nil then
 
             if isFactionVehicle > 1 then isFactionVehicle = 0 end
             if not tonumber(colorR) then colorR = 255 end
@@ -28,15 +27,17 @@ addCommandHandler("makeveh", function(player, cmd, modelId, target, isFactionVeh
 
             local color = {colorR,colorG,colorB}
 
-            local target, targetName = target
-
+            local targetName
             if isFactionVehicle == 1 then
-                if not (exports.oDashboard:isRealFaction(tonumber(target))) then
+                if not tonumber(target) or not (exports.oDashboard:isRealFaction(tonumber(target))) then
                     outputChatBox(core:getServerPrefix("red-dark", "Veículo", 3).."Não existe facção com esse ID!", player, 255, 255, 255, true)
                     return
                 end
             else
                 target, targetName = core:getPlayerFromPartialName(player, target)
+                if not target then
+                    return
+                end
             end
 
             if tonumber(modelId) then

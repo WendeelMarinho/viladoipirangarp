@@ -23,7 +23,8 @@
     <export function="getServerName" type="shared"></export>
     <export function="getServerColor" type="shared"></export>
     <export function="getColor" type="shared"></export>
-    <export function="getServerPrefix" type="shared"></export>
+	<export function="getServerPrefix" type="shared"></export>
+	<export function="runStaffResourceInFrontRaycast" type="client"></export>
     <export function="getNetworkConnection" type="client"></export>
     <export function="getDate" type="shared"></export>
     <export function="minToMilisec" type="shared"></export>

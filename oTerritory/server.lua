@@ -1,6 +1,6 @@
 -- ─── oTerritory / server.lua ─────────────────────────────────────────────────
 
-local conn      = exports.oMysql:getDBConnection()
+local conn
 local dashboard = exports.oDashboard
 local core      = exports.oCore
 local color, r, g, b = core:getServerColor()
@@ -11,6 +11,7 @@ local color, r, g, b = core:getServerColor()
 local territories = {}
 
 addEventHandler("onResourceStart", resourceRoot, function()
+    conn = exports.oMysql:getDBConnection()
     color, r, g, b = core:getServerColor()
     loadTerritories()
     setTimer(captureTick, CAPTURE_TICK_MS, 0)
@@ -245,8 +246,9 @@ end
 
 addEventHandler("onElementDataChange", root, function(key, old, new)
     if key == "user:loggedin" and new == true then
+        local player = source
         setTimer(function()
-            if isElement(source) then syncAll() end
+            if isElement(player) then syncAll() end
         end, 800, 1)
     end
 end)

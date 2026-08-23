@@ -1,0 +1,19 @@
+<meta>
+	<info author="Ipiranga RP" name="oIpirangaVIP" version="1.0.0" type="script" description="VIP e Sócios — subscrições, salário horário, exports" />
+	<include resource="oMysql" />
+	<include resource="oCore" />
+	<include resource="oAnticheat" />
+	<include resource="oVehicle" />
+	<include resource="oLogs" />
+	<include resource="dude_scripts" />
+	<script src="vip_socio_config.lua" type="shared" />
+	<script src="server.lua" type="server" />
+	<script src="vip_commands.lua" type="server" />
+	<export function="isVipLineActive" type="server" />
+	<export function="getPlayerVipTierId" type="server" />
+	<export function="getPlayerSocioTierId" type="server" />
+	<export function="getVipTierRank" type="server" />
+	<export function="getSocioTierRank" type="server" />
+	<export function="grantSubscription" type="server" />
+	<min_mta_version server="1.5.9" />
+</meta>

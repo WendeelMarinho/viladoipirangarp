@@ -42,10 +42,13 @@ addEventHandler("onElementDataChange", root, function(key, old, new)
                 local factions = getPlayerAllFactions(player)
 
                 for k, v in ipairs(factions) do 
-                    for k2, v2 in pairs(server_factionMembers_list[v]) do 
-                        if v2[1] == getElementData(player, "char:id") then 
-                            server_factionMembers_list[v][k2][7] = string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute"))
-                            break
+                    local mem = server_factionMembers_list[v]
+                    if type(mem) == "table" then
+                        for k2, v2 in pairs(mem) do 
+                            if v2[1] == getElementData(player, "char:id") then 
+                                mem[k2][7] = string.format("%04d.%02d.%02d %02d:%02d", core:getDate("year"), core:getDate("month"), core:getDate("monthday"), core:getDate("hour"), core:getDate("minute"))
+                                break
+                            end
                         end
                     end
 
@@ -85,7 +88,7 @@ addEventHandler("faction_admin > createFaction", resourceRoot, function(player, 
     table.insert(server_faction_list, insertID, {insertID, factionDatas["name"], factionDatas["type"], factionDatas["allowedSkins"], factionDatas["allowedItems"], {}, {{"Posto padrão", 0, 1}}, {{"Plantão padrão", {}, {}}}, 0, createDate, {}, "Descrição padrão"})
     table.insert(server_factionMembers_list, insertID, {})
 
-    triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "criou a facção #db3535" ..factionDatas["name"].." #557ec9, tipo: #db3535"..faction_types[factionDatas["type"]].."#557ec9. #db3535[DBID: "..insertID.."]")
+    exports.oAdmin:sendMessageToAdmins(player, "criou a facção #db3535" ..factionDatas["name"].." #557ec9, tipo: #db3535"..faction_types[factionDatas["type"]].."#557ec9. #db3535[DBID: "..insertID.."]", 7)
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list) 
     triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
@@ -109,7 +112,7 @@ addEvent("faction_admin > delFaction", true)
 addEventHandler("faction_admin > delFaction", resourceRoot, function(factionID)
     factionID = tonumber(factionID)
     if getFactionPlayersCount(factionID) == 0 then 
-        triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "excluiu a facção #db3535"..getFactionName(factionID).."#557ec9.")
+        exports.oAdmin:sendMessageToAdmins(client, "excluiu a facção #db3535"..getFactionName(factionID).."#557ec9.", 7)
         local temp = server_faction_list
 
         deleteDutyMarker(factionID)
@@ -150,12 +153,19 @@ function loadFactions()
         local desc = v["description"]
 
         table.insert(server_faction_list, factionID, {factionID, factionName, factionType, allowedDutySkins, allowedDutyItems, vehicles, ranks, dutys, factionMoney, factionEditDate, dutyPos, desc})
-        table.insert(server_factionMembers_list, factionID, fromJSON(members))
+        local memTbl = fromJSON(members)
+        if type(memTbl) ~= "table" then memTbl = {} end
+        table.insert(server_factionMembers_list, factionID, memTbl)
         --iprint(server_factionMembers_list)
-        if (#dutyPos or 0) > 0 then 
+        if (#dutyPos or 0) >= 5 and type(dutyPos[1]) == "number" then
             createDutyMarker(factionID)
         end
     end
+end
+
+local function jsonOrEmpty(val)
+    if type(val) == "table" then return toJSON(val) end
+    return toJSON({})
 end
 
 function saveFactions() 
@@ -163,7 +173,9 @@ function saveFactions()
     for k, v in pairs(server_faction_list) do
         if v then 
             --print(toJSON(server_factionMembers_list[v[1]]))
-            local exec = dbExec(conn, "UPDATE factions SET name=?, type=?, money=?, ranks=?, editDate=?, members=?, dutys=?, dutyPos = ?, allowedDutyItems = ?, allowedDutySkins = ?, description = ? WHERE id=?", v[2], v[3], v[9], toJSON(v[7]), v[9], toJSON(server_factionMembers_list[v[1]]), toJSON(v[8]), toJSON(v[11]), toJSON(v[5]), toJSON(v[4]), v[12], v[1])
+            local memSave = server_factionMembers_list[v[1]]
+            if type(memSave) ~= "table" then memSave = {} end
+            local exec = dbExec(conn, "UPDATE factions SET name=?, type=?, money=?, ranks=?, editDate=?, members=?, dutys=?, dutyPos = ?, allowedDutyItems = ?, allowedDutySkins = ?, description = ? WHERE id=?", v[2], v[3], v[9], jsonOrEmpty(v[7]), v[9], toJSON(memSave), jsonOrEmpty(v[8]), jsonOrEmpty(v[11]), jsonOrEmpty(v[5]), jsonOrEmpty(v[4]), v[12], v[1])
         
             if exec then 
                 savedFactions[1] = savedFactions[1] + 1
@@ -204,13 +216,13 @@ function getPlayerAllFactions(player)
     local playerFactions = {}
 
     for keyFaction, factions in pairs(server_factionMembers_list) do 
-        for key, member in pairs(factions) do 
-
-            if member[1] == getElementData(player, "char:id") then 
-                table.insert(playerFactions, #playerFactions+1, keyFaction)
-                break
+        if type(factions) == "table" then
+            for key, member in pairs(factions) do
+                if member[1] == getElementData(player, "char:id") then 
+                    table.insert(playerFactions, #playerFactions+1, keyFaction)
+                    break
+                end
             end
-
         end
     end
 
@@ -268,7 +280,9 @@ function findPlayerFromCharID(id)
 end
 
 function ifPlayerLeaderOfTheFaction(factionID, playerID)
-    for k, v in pairs(server_factionMembers_list[factionID]) do 
+    local mem = server_factionMembers_list[factionID]
+    if type(mem) ~= "table" then return end
+    for k, v in pairs(mem) do 
         if v[1] == playerID then 
             return v[3]
         end
@@ -277,12 +291,16 @@ end
 
 
 function getFactionPlayersCount(factionID)
-    return #server_factionMembers_list[factionID]
+    local m = server_factionMembers_list[factionID]
+    if type(m) ~= "table" then return 0 end
+    return #m
 end
 
 function getPlayerRankInFaction(factionID, player)
     if isPlayerInFaction(player, factionID) then 
-        for k, v in pairs(server_factionMembers_list[factionID]) do 
+        local mem = server_factionMembers_list[factionID]
+        if type(mem) ~= "table" then return end
+        for k, v in pairs(mem) do 
             if v[1] == getElementData(player, "char:id") then 
                 return v[2]
             end
@@ -366,16 +384,18 @@ addEventHandler("faction > admin > modifyFactionDatas", resourceRoot, function(f
     end
 
     triggerClientEvent(root, "getFactionsFromServer > Return", root, server_faction_list)
-    triggerClientEvent("sendMessageToAdmins", getRootElement(), client, "modificou a facção #db3535" ..factionName.." #557ec9, tipo: #db3535"..faction_types[server_faction_list[factionID][3]].."#557ec9. #db3535[DBID: "..server_faction_list[factionID][1].."]")
+    exports.oAdmin:sendMessageToAdmins(client, "modificou a facção #db3535" ..factionName.." #557ec9, tipo: #db3535"..faction_types[server_faction_list[factionID][3]].."#557ec9. #db3535[DBID: "..server_faction_list[factionID][1].."]", 7)
 end)
 
 -- Líder --
 addEvent("faction > leader > fire", true)
 addEventHandler("faction > leader > fire", resourceRoot, function(factionID, charID)
-    for k, v in pairs(server_factionMembers_list[factionID]) do 
+    local memFire = server_factionMembers_list[factionID]
+    if type(memFire) ~= "table" then return end
+    for k, v in pairs(memFire) do 
         if v[1] == charID then 
             outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." expulsou o jogador "..factionLogNameColor..tostring(v[4]):gsub("_", " ")..factionLogMessageColor.." da facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
-            table.remove(server_factionMembers_list[factionID], k)
+            table.remove(memFire, k)
 
             local player = findPlayerFromCharID(charID) 
             if player then
@@ -383,13 +403,16 @@ addEventHandler("faction > leader > fire", resourceRoot, function(factionID, cha
             end
 
             triggerClientEvent(root, "getFactionMembersFromServer > Return", root, server_factionMembers_list)
+            break
         end
     end
 end)
 
 addEvent("faction > leader > setleader", true)
 addEventHandler("faction > leader > setleader", resourceRoot, function(factionID, charID, state)
-    for k, v in pairs(server_factionMembers_list[factionID]) do 
+    local memLeadEv = server_factionMembers_list[factionID]
+    if type(memLeadEv) ~= "table" then return end
+    for k, v in pairs(memLeadEv) do 
         if v[1] == charID then 
             if state then 
                 outputFactionLogToAdmins(factionLogNameColor..getPlayerName(client):gsub("_", " ")..factionLogMessageColor.." concedeu função de líder a "..factionLogNameColor..v[4]:gsub("_", " ")..factionLogMessageColor.." na facção "..factionLogNameColor..getFactionName(factionID)..factionLogMessageColor..".")
@@ -770,9 +793,38 @@ function getDutyMarker(factionID)
 end
 
 addEventHandler("onResourceStop", resourceRoot, function()
-    for k, v in ipairs(server_dutyMarkers) do 
+    for k, v in ipairs(server_dutyMarkers) do
         destroyElement(v)
     end
+end)
+
+addCommandHandler("setdutypos", function(player, cmd, factionID)
+    local adminLevel = getElementData(player, "user:admin") or 0
+    if adminLevel < 5 then
+        outputChatBox("[Facção] Requer nível de admin 5+.", player, 255, 80, 80)
+        return
+    end
+    factionID = tonumber(factionID)
+    if not factionID or not server_faction_list[factionID] then
+        outputChatBox("[Facção] Uso: /setdutypos <faction_id>", player, 255, 200, 0)
+        return
+    end
+    local x, y, z = getElementPosition(player)
+    local dim = getElementDimension(player)
+    local int = getElementInterior(player)
+    local newPos = {x, y, z, dim, int}
+
+    local oldPos = server_faction_list[factionID][11]
+    server_faction_list[factionID][11] = newPos
+
+    dbExec(conn, "UPDATE factions SET dutyPos=? WHERE id=?", toJSON(newPos), factionID)
+
+    deleteDutyMarker(factionID)
+    createDutyMarker(factionID)
+
+    local fname = server_faction_list[factionID][2] or ("#" .. factionID)
+    outputChatBox(string.format("[Facção] Plantão da facção %s definido em %.1f, %.1f, %.1f (dim %d, int %d).",
+        fname, x, y, z, dim, int), player, 100, 255, 100)
 end)
 
 addEvent("mainFactionSettings", true)

@@ -195,3 +195,129 @@ addEventHandler("sendMoney", getRootElement(), function(target, amount)
 	setElementData(client, "char:money", getElementData(client, "char:money") - amount)
 	setElementData(target, "char:money", getElementData(target, "char:money") + amount)
 end)
+
+--[[ /resfrente: não enviar elemento do cliente (triggerServerEvent rejeita muitos hits).
+    Dados primitivos + correspondência no servidor; getElementResource com pcall + fallback por árvore. ]]
+local function staffResfrenteResourceNameForElement(el)
+	if not isElement(el) then
+		return "(sem recurso)"
+	end
+	if type(getElementResource) == "function" then
+		local ok, res = pcall(getElementResource, el)
+		if ok and res then
+			local ok2, n = pcall(getResourceName, res)
+			if ok2 and n and n ~= "" then
+				return n
+			end
+		end
+	end
+	if type(getResources) ~= "function" then
+		return "(recurso desconhecido — getResources indisponível)"
+	end
+	local chain = {}
+	local cur = el
+	for _ = 1, 80 do
+		if not isElement(cur) then
+			break
+		end
+		chain[cur] = true
+		local p = getElementParent(cur)
+		if not isElement(p) then
+			break
+		end
+		cur = p
+	end
+	for _, res in ipairs(getResources()) do
+		if getResourceState(res) == "running" then
+			local rr = getResourceRootElement(res)
+			if rr and chain[rr] then
+				return getResourceName(res) or "?"
+			end
+			local okm, mr = pcall(getResourceMapRootElement, res)
+			if okm and mr and chain[mr] then
+				return (getResourceName(res) or "?") .. " [map]"
+			end
+			local okd, dr = pcall(getResourceDynamicElementRoot, res)
+			if okd and dr and chain[dr] then
+				return (getResourceName(res) or "?") .. " [dyn]"
+			end
+		end
+	end
+	return "(recurso desconhecido)"
+end
+
+local function staffResfrenteFindServerElement(elType, mid, int, dim, ox, oy, oz, hx, hy, hz, strictInterior, maxDist)
+	elType = tostring(elType or "object")
+	mid = tonumber(mid) or 0
+	int = tonumber(int) or 0
+	dim = tonumber(dim) or 0
+	ox, oy, oz = tonumber(ox) or 0, tonumber(oy) or 0, tonumber(oz) or 0
+	hx, hy, hz = tonumber(hx) or 0, tonumber(hy) or 0, tonumber(hz) or 0
+	maxDist = tonumber(maxDist) or 24
+	local best, bestD = nil, 999999
+	for _, el in ipairs(getElementsByType(elType, root, true)) do
+		if getElementDimension(el) == dim then
+			if not strictInterior or getElementInterior(el) == int then
+				if mid == 0 or tonumber(getElementModel(el)) == mid then
+					local ex, ey, ez = getElementPosition(el)
+					local da = getDistanceBetweenPoints3D(ex, ey, ez, ox, oy, oz)
+					local db = getDistanceBetweenPoints3D(ex, ey, ez, hx, hy, hz)
+					local d = math.min(da, db)
+					if d < bestD then
+						bestD = d
+						best = el
+					end
+				end
+			end
+		end
+	end
+	if best and bestD <= maxDist then
+		return best
+	end
+	return nil
+end
+
+addEvent("oCore>staffResfrenteResolve", true)
+addEventHandler("oCore>staffResfrenteResolve", resourceRoot, function(elType, mid, int, dim, ox, oy, oz, hx, hy, hz)
+	local pl = client
+	if not pl or not isElement(pl) or getElementType(pl) ~= "player" then
+		return
+	end
+	if not ((getElementData(pl, "user:admin") or 0) > 1) then
+		return
+	end
+	local hitEl = staffResfrenteFindServerElement(elType, mid, int, dim, ox, oy, oz, hx, hy, hz, true, 22)
+	if not hitEl then
+		hitEl = staffResfrenteFindServerElement(elType, mid, int, dim, ox, oy, oz, hx, hy, hz, false, 38)
+	end
+	if not hitEl then
+		triggerClientEvent(
+			pl,
+			"oCore>staffResfrenteResult",
+			pl,
+			false,
+			"Não encontrei o elemento no servidor (sincronização/modelo). Tenta outra vez ou aproxima-te.",
+			tostring(elType or "?"),
+			tonumber(mid) or 0,
+			tonumber(hx) or 0,
+			tonumber(hy) or 0,
+			tonumber(hz) or 0
+		)
+		return
+	end
+	local et = getElementType(hitEl)
+	local modelId = tonumber(getElementModel(hitEl)) or 0
+	local resName = staffResfrenteResourceNameForElement(hitEl)
+	triggerClientEvent(
+		pl,
+		"oCore>staffResfrenteResult",
+		pl,
+		true,
+		resName,
+		tostring(et or "?"),
+		modelId,
+		tonumber(hx) or 0,
+		tonumber(hy) or 0,
+		tonumber(hz) or 0
+	)
+end)

@@ -73,14 +73,30 @@ function getPlayerFromPartialName(thePlayer, nick, nomsg, type)
 	end
 	
 	if tonumber(nick) then
-        local nick = tonumber(nick) or 0
+        local num = tonumber(nick) or 0
 		for _, p in ipairs(players) do
             if getElementData(p, "user:loggedin") then
-                if tonumber(getElementData(p, "playerid")) == nick then
-                    table.insert(playerTbl, {p, getPlayerName(p):gsub("_", " "), nick})
+                if tonumber(getElementData(p, "playerid")) == num then
+                    table.insert(playerTbl, {p, getPlayerName(p):gsub("_", " "), num})
                 end
             end
         end
+		-- Fallback: ID numérico do personagem (char:id), quando não há slot playerid igual.
+		if #playerTbl == 0 then
+			for _, p in ipairs(players) do
+				if getElementData(p, "user:loggedin") and tonumber(getElementData(p, "char:id")) == num then
+					table.insert(playerTbl, {p, getPlayerName(p):gsub("_", " "), tonumber(getElementData(p, "playerid")) or num})
+				end
+			end
+		end
+		-- Fallback: ID da conta (user:id), quando o número não é slot nem personagem.
+		if #playerTbl == 0 then
+			for _, p in ipairs(players) do
+				if getElementData(p, "user:loggedin") and tonumber(getElementData(p, "user:id")) == num then
+					table.insert(playerTbl, {p, getPlayerName(p):gsub("_", " "), tonumber(getElementData(p, "playerid")) or num})
+				end
+			end
+		end
 	else
 		local nick = nick and nick:gsub("#%x%x%x%x%x%x", ""):lower() or nil
 		if nick then

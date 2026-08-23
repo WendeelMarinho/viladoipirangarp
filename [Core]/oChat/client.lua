@@ -13,6 +13,19 @@ local nametag = exports.oNametag
 local admin = exports.oAdmin
 local fonts = exports.oFont
 
+local function getTaggedChatPlayerName(player)
+	if not isElement(player) then return "" end
+	local name = getPlayerName(player):gsub("_", " ")
+	local raw = getElementData(player, "player:activeTag")
+	if raw and raw ~= "" and type(raw) == "string" then
+		local ok, tag = pcall(fromJSON, raw)
+		if ok and type(tag) == "table" and tag.text and tostring(tag.text) ~= "" then
+			return "[" .. tostring(tag.text) .. "] " .. name
+		end
+	end
+	return name
+end
+
 addEventHandler("onClientResourceStart", root, function(res)
     if getResourceName(res) == "oCore" or getResourceName(res) == "oChat" or getResourceName(res) == "oInterface" or getResourceName(res) == "oNametag" or getResourceName(res) == "oAdmin" then
 		core = exports.oCore
@@ -29,10 +42,18 @@ local seatWindows = {
 	[3] = 3
 }
 
+local function bindRadioIfNoChat3()
+	local oc3 = getResourceFromName("oChat3")
+	if oc3 and getResourceState(oc3) == "running" then
+		return
+	end
+	bindKey("y", "down", "chatbox", "Rádió")
+end
+
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	bindKey("b", "down", "chatbox", "OOC")
 	bindKey("t", "down", "chatbox", "Say")
-	bindKey("y", "down", "chatbox", "Rádió")
+	bindRadioIfNoChat3()
 end)
 
 addEvent("outputChatMessage", true)
@@ -89,16 +110,16 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 
 				if windows[1] and windows[2] then
 					if distance < 5 then
-						outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox(getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 5 and distance < 10 then
-						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 10 and distance < 13 then
-						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#868686"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
-					elseif distance > 13 and distance < 17 then
-						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+					elseif distance > 13 and distance <= 20 then
+						outputChatBox("#545454"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					end
 				else
@@ -123,16 +144,16 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 
 				if canSee then
 					if distance < 5 then
-						outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox(getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 5 and distance < 10 then
-						outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					elseif distance > 10 and distance < 13 then
-						outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+						outputChatBox("#868686"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
-					elseif distance > 13 and distance < 17 then
-						outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+					elseif distance > 13 and distance <= 20 then
+						outputChatBox("#545454"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 						nametag:addBubble(player, msg, 255, 255, 255)
 					end
 				end
@@ -168,7 +189,7 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 				if distance < 12 then
 					setElementData(player, "animation:emoji", "xd", false)
 					setElementData(player, "animation:start", getTickCount(), false)
-					outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." não para de rir.", 194, 162, 218)
+					outputChatBox("*** "..getTaggedChatPlayerName(player).." não para de rir.", 194, 162, 218)
 				end
 			elseif string.lower(msg) == "love" then
 				setElementData(player, "animation:emoji", "love", false)
@@ -190,43 +211,59 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
         setElementData(player, "animation:start", getTickCount(), false)
 			else
 				if distance < 5 then
-					outputChatBox(getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox(getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				elseif distance > 5 and distance < 10 then
-					outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				elseif distance > 10 and distance < 13 then
-					outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+					outputChatBox("#868686"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
-				elseif distance > 13 and distance < 17 then
-					outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz: "..firstUpper(msg), 255, 255, 255, true)
+				elseif distance > 13 and distance <= 20 then
+					outputChatBox("#545454"..getTaggedChatPlayerName(player).." diz: "..firstUpper(msg), 255, 255, 255, true)
 					nametag:addBubble(player, msg, 255, 255, 255)
 				end
 			end
 		end
 	elseif type == 2 then
-		outputChatBox(getPlayerName(player):gsub("_", " ").." diz (no veículo): "..firstUpper(msg), 255, 255, 255, true)
+		outputChatBox(getTaggedChatPlayerName(player).." diz (no veículo): "..firstUpper(msg), 255, 255, 255, true)
 	elseif type == 3 then
 		if distance < 10 then
-			outputChatBox(getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox(getTaggedChatPlayerName(player).." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 10 and distance < 15 then
-			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 15 and distance < 18 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#868686"..getTaggedChatPlayerName(player).." grita: "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 18 and distance < 20 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." grita: "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#545454"..getTaggedChatPlayerName(player).." grita: "..firstUpper(msg), 255, 255, 255, true)
 		end
 
 		--if not getPedOccupiedVehicle(player) then
 			--setPedAnimation(player, "on_lookers", "shout_01", 750, false, false, _, false)
 		--end
 	elseif type == 4 then
-		if distance < 1 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." sussurra: "..firstUpper(msg), 255, 255, 255, true)
+		if distance < 3 then
+			outputChatBox("#868686"..getTaggedChatPlayerName(player).." sussurra: "..firstUpper(msg), 255, 255, 255, true)
 			playSound("files/pszt.wav")
-		elseif distance > 1 and distance < 2 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." sussurra: "..firstUpper(msg), 255, 255, 255, true)
-			setSoundVolume(playSound("files/pszt.wav"), 0.5)
+		elseif distance >= 3 and distance < 6 then
+			outputChatBox("#747474"..getTaggedChatPlayerName(player).." sussurra: "..firstUpper(msg), 255, 255, 255, true)
+			setSoundVolume(playSound("files/pszt.wav"), 0.55)
+		elseif distance >= 6 and distance < 9 then
+			outputChatBox("#626262"..getTaggedChatPlayerName(player).." sussurra: "..firstUpper(msg), 255, 255, 255, true)
+		elseif distance >= 9 and distance <= 10 then
+			outputChatBox("#505050"..getTaggedChatPlayerName(player).." sussurra: "..firstUpper(msg), 255, 255, 255, true)
+		end
+	elseif type == 25 then
+		if distance <= 5 then
+			if distance < 2 then
+				outputChatBox("#919191"..getTaggedChatPlayerName(player).." sussurra (/w): "..firstUpper(msg), 255, 255, 255, true)
+				playSound("files/pszt.wav")
+			elseif distance < 3.5 then
+				outputChatBox("#7d7d7d"..getTaggedChatPlayerName(player).." sussurra (/w): "..firstUpper(msg), 255, 255, 255, true)
+				setSoundVolume(playSound("files/pszt.wav"), 0.45)
+			else
+				outputChatBox("#696969"..getTaggedChatPlayerName(player).." sussurra (/w): "..firstUpper(msg), 255, 255, 255, true)
+			end
 		end
 	elseif type == 5 then
 		if #oocTable >= countOOCChatLines() then
@@ -237,15 +274,15 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 		if getElementData(player,"user:aduty") then
 			message  = admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getElementData(player, "user:adminnick"):gsub("_", " ")..": (( "..msg.." ))"
 		else
-			message  = getPlayerName(player):gsub("_", " ")..": (( "..msg.." ))"
+			message  = "#bdbdbd"..getTaggedChatPlayerName(player).." #ababab(( "..msg.." ))"
 		end
 		table.insert(oocTable, message)
 		outputConsole("[OOC] "..message:gsub("#%x%x%x%x%x%x",""))
 	elseif type == 6 then
-		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." "..msg, 194, 162, 218)
+		outputChatBox("*** "..getTaggedChatPlayerName(player).." "..msg, 194, 162, 218)
 		nametag:addBubble(player, msg, 194, 162, 218)
 	elseif type == 7 then
-		outputChatBox(" *"..firstUpper(msg).." (("..getPlayerName(player):gsub("_", " ").."))", 255, 51, 102)
+		outputChatBox(" *"..firstUpper(msg).." (("..getTaggedChatPlayerName(player).."))", 255, 51, 102)
 
 		nametag:addBubble(player, msg, 255, 51, 102)
 	elseif type == 8 then
@@ -275,41 +312,41 @@ addEventHandler("outputChatMessage", getRootElement(), function(player, msg, typ
 
 		exports.oInfobox:outputInfoBox("Administrador abriu um chamado público. Veja o chat.", "info")
 	elseif type == 12 then
-		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." tenta "..msg.." e consegue.", 80, 191, 110)
+		outputChatBox("*** "..getTaggedChatPlayerName(player).." tenta "..msg.." e consegue.", 80, 191, 110)
 	elseif type == 13 then
-		outputChatBox("*** "..getPlayerName(player):gsub("_", " ").." tenta "..msg.." e não consegue.", 204, 84, 78)
+		outputChatBox("*** "..getTaggedChatPlayerName(player).." tenta "..msg.." e não consegue.", 204, 84, 78)
 	elseif type == 14 then
-		outputChatBox(admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getPlayerName(player):gsub("_", " ")..": #ffffff(( "..msg.." )) ", 255, 255, 255, true)
+		outputChatBox(admin:getAdminColor(getElementData(player, "user:admin")).."["..admin:getAdminPrefix(getElementData(player, "user:admin")).."] "..getTaggedChatPlayerName(player)..": #ffffff(( "..msg.." )) ", 255, 255, 255, true)
 	elseif type == 15 then
 		if distance < 5 then
-			outputChatBox(getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox(getTaggedChatPlayerName(player).." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 5 and distance < 10 then
-			outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		elseif distance > 10 and distance < 13 then
-			outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
-		elseif distance > 13 and distance < 17 then
-			outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
+			outputChatBox("#868686"..getTaggedChatPlayerName(player).." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
+		elseif distance > 13 and distance <= 20 then
+			outputChatBox("#545454"..getTaggedChatPlayerName(player).." diz (no telefone): "..firstUpper(msg), 255, 255, 255, true)
 		end
 	elseif type == 16 then
 		if not (player == localPlayer) then
 			if distance < 5 then
-				outputChatBox(getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox(getTaggedChatPlayerName(player).." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			elseif distance > 5 and distance < 10 then
-				outputChatBox("#b9b9b9"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox("#b9b9b9"..getTaggedChatPlayerName(player).." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			elseif distance > 10 and distance < 13 then
-				outputChatBox("#868686"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
+				outputChatBox("#868686"..getTaggedChatPlayerName(player).." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
-			elseif distance > 13 and distance < 17 then
-				outputChatBox("#545454"..getPlayerName(player):gsub("_", " ").." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
+			elseif distance > 13 and distance <= 20 then
+				outputChatBox("#545454"..getTaggedChatPlayerName(player).." fala no rádio: "..firstUpper(msg), 255, 255, 255, true)
 				nametag:addBubble(player, msg, 255, 255, 255)
 			end
 		end
 	elseif type == 17 then
-		outputChatBox("(("..getPlayerName(player):gsub("_", " ")..")) Megafone <O: "..firstUpper(msg), 235, 146, 52, true)
+		outputChatBox("(("..getTaggedChatPlayerName(player)..")) Megafone <O: "..firstUpper(msg), 235, 146, 52, true)
 	elseif type == 18 then
-		outputChatBox(">> "..getPlayerName(player):gsub("_", " ").." "..msg, 131, 98, 162)
+		outputChatBox(">> "..getTaggedChatPlayerName(player).." "..msg, 131, 98, 162)
 
 		nametag:addBubble(player, msg, 194, 162, 218)
 	end
@@ -329,6 +366,26 @@ function chatMessage(_, ...)
 					end
 				end
 				params = params:sub(2)
+				cmd = (cmd or ""):gsub("^%s+", ""):gsub("%s+$", ""):lower()
+				--[[ Mesmo fluxo que /getpos: implementação no oCore (executeCommandHandler directo).
+				    Aqui só cobre se a mensagem vier pelo handler Say em vez do routing MTA. ]]
+				if cmd == "resfrente" or cmd == "recursoafrente" or cmd == "frontresource" then
+					local okr, err = pcall(function()
+						exports.oCore:runStaffResourceInFrontRaycast()
+					end)
+					if not okr then
+						outputChatBox(
+							"#cc4444[oChat]#ffffff /resfrente: "
+								.. tostring(err)
+								.. " — reinicia oCore ou verifica meta export.",
+							255,
+							255,
+							255,
+							true
+						)
+					end
+					return
+				end
 				if not executeCommandHandler(cmd, params) then
 					triggerServerEvent("executeChatCommand", localPlayer, cmd, params)
 				end
@@ -380,7 +437,7 @@ addCommandHandler("say", chatMessage)
 addCommandHandler("Say", chatMessage)
 
 local lastRadioInteraction = 0
-function chatMessage(_, ...)
+function radioChatMessage(_, ...)
 	if not isSpam(_) then
 		if ... then
 			local msg = table.concat({...}, " ")
@@ -415,10 +472,10 @@ function chatMessage(_, ...)
 		end
 	end
 end
-addCommandHandler("Rádió", chatMessage)
-addCommandHandler("rádió", chatMessage)
-addCommandHandler("radio", chatMessage)
-addCommandHandler("r", chatMessage)
+addCommandHandler("Rádió", radioChatMessage)
+addCommandHandler("rádió", radioChatMessage)
+addCommandHandler("radio", radioChatMessage)
+addCommandHandler("r", radioChatMessage)
 
 addEventHandler("onClientRender", getRootElement(), function()
 	if getElementData(localPlayer,"user:loggedin") then

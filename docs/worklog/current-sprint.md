@@ -86,7 +86,7 @@ Documentação completa: [`docs/features/sistemas-premium.md`](../features/siste
 |----------|-----|-----|
 | `oTerritory/server.lua` | `not x == 0` (precedência incorreta) | `(x or 0) ~= 0` |
 | `oTerritory/server.lua` | `goto`/`::continue::` incompatível Lua 5.1 | Extraído para função local `tickTerritory()` |
-| `oAdmin/hub/c_adminHub.lua` | Overlap 12px hint bar / field strip | `targetEditY` +16px |
+| `oAdmin/hub/c_adminHub.lua` (legado, removido → `hub/v2/`) | Overlap 12px hint bar / field strip | Equivalente no layout v2 (`hub/v2/c_layout.lua` / vistas `c_views.lua`) |
 
 ### Estado pós-Sprint E
 - 4 recursos novos com symlinks em `mods/deathmatch/resources/` ✅

@@ -12,6 +12,7 @@
     <export function="getWantedLevel"  type="server" />
     <export function="isWanted"        type="server" />
     <export function="getBounty"       type="server" />
+    <export function="addBounty"        type="server" />
 
     <include resource="oDashboard" />
     <include resource="oCore" />

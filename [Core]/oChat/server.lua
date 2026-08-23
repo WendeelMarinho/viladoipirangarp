@@ -27,6 +27,12 @@ addEventHandler("sendChatMessage", getRootElement(), function(msg, tbl, type)
 	end
 
 	if not (type == 9 or type == 10) then
+		local muteUntil = tonumber(getElementData(client, "adminChatMuteUntil")) or 0
+		if muteUntil > getRealTime().timestamp then
+			outputChatBox(exports.oCore:getServerPrefix("red-dark", "Chat", 3) .. "Estás silenciado (admin). Aguarda o tempo expirar.", client, 255, 80, 80, true)
+			return
+		end
+
 		local playerid = getElementData(client, "char:id")
 
 		if not rpLOGS[playerid] then 
@@ -64,9 +70,35 @@ addEventHandler("sendChatMessage", getRootElement(), function(msg, tbl, type)
 	triggerClientEvent(tbl, "outputChatMessage", client, client, msg, type)
 end)
 
+addEvent("oChat > staffResfrenteLog", true)
+addEventHandler("oChat > staffResfrenteLog", resourceRoot, function(resName, elType, hx, hy, hz)
+	if not client or not isElement(client) or getElementType(client) ~= "player" then
+		return
+	end
+	if not ((getElementData(client, "user:admin") or 0) > 1) then
+		return
+	end
+	local n = getPlayerName(client):gsub("_", " ")
+	outputDebugString(
+		"[oChat/resfrente] " .. n .. " → recurso=" .. tostring(resName) .. " tipo=" .. tostring(elType) .. " hit="
+			.. string.format("%.1f,%.1f,%.1f", tonumber(hx) or 0, tonumber(hy) or 0, tonumber(hz) or 0),
+		2
+	)
+end)
+
 addEvent("executeChatCommand", true)
 addEventHandler("executeChatCommand", getRootElement(), function(cmd, params)
-	executeCommandHandler(cmd, client, params)
+	--[[ Comandos só-cliente: o cliente já tratou; se ainda chegam aqui, evitar ACL "Access denied" no log. ]]
+	cmd = tostring(cmd or ""):lower()
+	if cmd == "resfrente" or cmd == "recursoafrente" or cmd == "frontresource" then
+		return
+	end
+	local ok = pcall(function()
+		executeCommandHandler(cmd, client, params)
+	end)
+	if not ok then
+		outputDebugString("[oChat] executeChatCommand falhou: " .. tostring(cmd), 2)
+	end
 end)
 
 function removeHex(msg)

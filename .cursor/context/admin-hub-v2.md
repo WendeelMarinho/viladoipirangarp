@@ -1,10 +1,10 @@
 # Cursor Context — Admin Hub v2 (Redesign Completo)
 
-## Ler antes de implementar
+## Ler antes (implementação / manutenção)
 
 1. `oAdmin/meta.xml` — entender a estrutura de arquivos atual
-2. `oAdmin/hub/c_adminHub.lua` — código client atual (740 linhas) a ser substituído
-3. `oAdmin/hub/s_adminHub.lua` — código server atual (464 linhas) a ser substituído
+2. `oAdmin/hub/v2/c_main.lua` + módulos `c_*.lua` — cliente v2 (substitui o monolito antigo)
+3. `oAdmin/hub/v2/s_hub.lua` — servidor v2 (base = handlers `adminHub >` + eventos `adminHub2 >`)
 4. `oAdmin/g_admin.lua` — funções globais: `isPlayerInAdminDuty`, `getPlayerAdminLevel`
 5. `oAdmin/g_commands.lua` — tabela `adminCMD` e `hasPermission(player, perm, silent)`
 6. `.cursor/context/novos-sistemas.md` — padrões do servidor (exports, eventos, DB)
@@ -14,9 +14,13 @@
 
 ## Objetivo
 
-Substituir completamente os arquivos `hub/c_adminHub.lua` e `hub/s_adminHub.lua` por uma
-arquitetura modular dividida em `hub/v2/`. O painel atual é monolítico (740 linhas num só
-arquivo), sem estado centralizado, sem confirmações, sem feedback de loading, sem histórico.
+**Implementado** — os monolitos `hub/c_adminHub.lua` e `hub/s_adminHub.lua` foram **removidos**
+e substituídos pela árvore modular `hub/v2/` descrita abaixo; `s_hub.lua` mantém os eventos
+legados `adminHub > *` e acrescenta `adminHub2 > *`.
+
+Motivação do redesign (contexto histórico): o painel antigo era monolítico (centenas de linhas
+num só arquivo), sem estado centralizado consistente, sem confirmações, sem feedback de loading,
+sem histórico.
 
 O v2 deve ser:
 - **Contextual** — mostra apenas o necessário na aba ativa
@@ -25,7 +29,7 @@ O v2 deve ser:
 
 ---
 
-## Estrutura de arquivos a criar
+## Estrutura em `hub/v2/`
 
 ```
 oAdmin/hub/v2/
@@ -47,26 +51,35 @@ oAdmin/hub/v2/
 
 ## Alterações em `oAdmin/meta.xml`
 
-**Remover** as duas linhas antigas:
-```xml
-<script src="hub/c_adminHub.lua" type="client" cache="false"></script>
-<script src="hub/s_adminHub.lua" type="server" cache="false"></script>
-```
+**Estado atual:** os scripts `hub/c_adminHub.lua` e `hub/s_adminHub.lua` já não existem.
 
-**Adicionar** em seu lugar (ordem obrigatória — cada arquivo depende do anterior):
+Ordem real no `meta.xml` (trecho):
+
+1. `g_commands.lua`, `g_admin.lua`, `c_commands.lua`, `c_admin.lua` (shared/client base do recurso).
+2. Bloco **hub v2** — ordem obrigatória entre si (`shared_state` → … → `c_main`).
+3. `playerstats.lua` e demais scripts client/server do recurso.
+4. Servidor: `s_admin.lua` **antes** de `hub/v2/s_hub.lua`.
+
 ```xml
-<script src="hub/v2/shared_state.lua" type="shared"  cache="false"></script>
-<script src="hub/v2/c_layout.lua"     type="client"  cache="false"></script>
-<script src="hub/v2/c_theme.lua"      type="client"  cache="false"></script>
-<script src="hub/v2/c_toast.lua"      type="client"  cache="false"></script>
-<script src="hub/v2/c_modal.lua"      type="client"  cache="false"></script>
-<script src="hub/v2/c_history.lua"    type="client"  cache="false"></script>
-<script src="hub/v2/c_catalog.lua"    type="client"  cache="false"></script>
-<script src="hub/v2/c_sidebar.lua"    type="client"  cache="false"></script>
-<script src="hub/v2/c_tabs.lua"       type="client"  cache="false"></script>
-<script src="hub/v2/c_views.lua"      type="client"  cache="false"></script>
-<script src="hub/v2/c_main.lua"       type="client"  cache="false"></script>
-<script src="hub/v2/s_hub.lua"        type="server"  cache="false"></script>
+<script src="g_commands.lua" type="shared" cache="false"></script>
+<script src="g_admin.lua" type="shared" cache="false"></script>
+<script src="c_commands.lua" type="client" cache="false"></script>
+<script src="c_admin.lua" type="client" cache="false"></script>
+<script src="hub/v2/shared_state.lua" type="shared" cache="false"></script>
+<script src="hub/v2/c_layout.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_theme.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_toast.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_modal.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_history.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_catalog.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_sidebar.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_tabs.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_views.lua" type="client" cache="false"></script>
+<script src="hub/v2/c_main.lua" type="client" cache="false"></script>
+<script src="playerstats.lua" type="client" cache="false"></script>
+<script src="s_admin.lua" type="server" cache="false"></script>
+<script src="hub/v2/s_hub.lua" type="server" cache="false"></script>
+<!-- … resto do recurso … -->
 ```
 
 ---
@@ -1513,12 +1526,14 @@ end)
 
 ## 12. `s_hub.lua` (server)
 
-**Manter todos os handlers do `s_adminHub.lua` existente** (nomes de eventos com prefixo `adminHub >`
-continuam funcionando para compatibilidade). Adicionar novos handlers com prefixo `adminHub2 >`.
+**Implementação:** este ficheiro é a base que antes morava em `hub/s_adminHub.lua`. Mantém todos os
+handlers legados com prefixo `adminHub >` e acrescenta `adminHub2 >`. Ao criar um servidor novo a
+partir deste contexto, copiar o `s_hub.lua` atual do repositório — não recriar só pelo pseudocódigo
+abaixo.
 
 ```lua
--- COPIAR INTEGRALMENTE o conteúdo de s_adminHub.lua como base.
--- Em seguida, ADICIONAR:
+-- BASE: conteúdo herdado do antigo s_adminHub.lua (eventos adminHub >).
+-- A seguir, garantir que existem os handlers adminHub2 > descritos neste documento.
 
 -- Auto-push de snapshot após cada ação bem-sucedida
 -- Em cada handler que altera dinheiro/cc/pp/banco, após a operação:
@@ -1744,8 +1759,8 @@ end)
 | `adminHub2 > freeze` | C→S | `partial, state` |
 
 ### Eventos v1 preservados
-Todos os `adminHub > *` do `s_adminHub.lua` atual **continuam funcionando** sem alteração.
-O `s_hub.lua` deve incluir o conteúdo completo do `s_adminHub.lua` original como base.
+Os eventos `adminHub > *` continuam definidos em `hub/v2/s_hub.lua` (paridade com o antigo
+`hub/s_adminHub.lua`) para compatibilidade com código ou painéis que ainda os invoquem.
 
 ---
 
@@ -1818,17 +1833,20 @@ end
 | 9 | `c_tabs.lua` | c_theme, c_layout |
 | 10 | `c_views.lua` | todos os componentes |
 | 11 | `c_main.lua` | tudo client |
-| 12 | `s_hub.lua` | — (cópia de s_adminHub.lua + novos eventos) |
+| 12 | `s_hub.lua` | — (base herdada do antigo `s_adminHub.lua` + eventos `adminHub2 >`) |
 | 13 | `meta.xml` | após todos os arquivos criados |
 
 Implementar e testar cada arquivo com `luac5.1 -p` antes de avançar.
 Após criar os 12 arquivos, atualizar `meta.xml` e testar in-game.
 
+**Extras já aplicados no projeto:** mute IC via `adminChatMuteUntil` em `[Core]/oChat/server.lua`
+(quando o hub aplica mute administrativo).
+
 ---
 
 ## 17. Checklist antes de declarar concluído
 
-- [ ] `luac5.1 -p` sem erros em todos os 12 arquivos
+- [ ] `luac5.1 -p` sem erros em todos os `.lua` sob `hub/v2/` (e alterações correlatas, ex. `oChat`)
 - [ ] `meta.xml` atualizado com todas as entradas na ordem correta
 - [ ] Painel abre/fecha sem erros no console
 - [ ] Snapshot carrega automaticamente ao digitar o alvo (debounce 800ms)

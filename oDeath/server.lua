@@ -144,6 +144,19 @@ addEventHandler("animEnd->onServer", resourceRoot, function()
     animEnd(client)
 end)
 
+-- oWanted: se o killer for policial em serviço, registar crime no morto
+addEventHandler("onPlayerWasted", root, function(ammo, killer, weapon, bodypart)
+    if not isElement(killer) or getElementType(killer) ~= "player" then return end
+    if killer == source then return end
+    local dead = source
+    local ok, isLaw = pcall(function()
+        return exports.oFactionScripts:isInLawEnforcementDuty(killer)
+    end)
+    if ok and isLaw then
+        pcall(function() exports.oWanted:addCrime(dead, "homicidio") end)
+    end
+end)
+
 addEvent("respawnPlayer", true)
 addEventHandler("respawnPlayer", getRootElement(), function()
     spawnPlayer(client, 1157.4061279297,-1333.8961181641,15.4140625, 270, getElementModel(client))

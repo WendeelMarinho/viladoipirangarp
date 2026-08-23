@@ -1,6 +1,6 @@
 -- ─── oWanted / server.lua ────────────────────────────────────────────────────
 
-local conn      = exports.oMysql:getDBConnection()
+local conn
 local dashboard = exports.oDashboard
 local core      = exports.oCore
 local infobox   = exports.oInfobox
@@ -10,6 +10,7 @@ local color, r, g, b = core:getServerColor()
 local wantedCache = {}
 
 addEventHandler("onResourceStart", resourceRoot, function()
+    conn = exports.oMysql:getDBConnection()
     color, r, g, b = core:getServerColor()
     loadWantedFromDB()
     -- Timer de decaimento: verifica a cada minuto
@@ -104,8 +105,8 @@ function addCrime(player, crimeKey)
     notifyPolice(player, charName, entry)
 end
 
--- clearWanted(player, officerName) → limpa procurado e paga bounty ao policial
-function clearWanted(player, officerPlayer)
+-- clearWanted(player, officerPlayer, tribunalMode) → tribunalMode=true: limpa sem recompensa/reputação
+function clearWanted(player, officerPlayer, tribunalMode)
     if not isElement(player) then return end
     local cid   = getElementData(player, "char:id")
     local entry = wantedCache[cid]
@@ -113,8 +114,8 @@ function clearWanted(player, officerPlayer)
 
     local bounty = entry.bounty
 
-    -- Pagar bounty ao policial ou facção
-    if officerPlayer and isElement(officerPlayer) then
+    -- Pagar bounty ao policial ou facção (ignorado em absolvição judicial)
+    if officerPlayer and isElement(officerPlayer) and not tribunalMode then
         local fid = getElementData(officerPlayer, "char:duty:faction") or 0
         if fid > 0 then
             local reward = math.floor(bounty * ARREST_REWARD_MULT)
@@ -122,6 +123,11 @@ function clearWanted(player, officerPlayer)
                 (getElementData(officerPlayer, "char:money") or 0) + reward)
             infobox:outputInfoBox("Prisão efetuada! Recompensa: R$" .. reward, "success", officerPlayer)
         end
+        pcall(function()
+            if exports.oReputation and exports.oReputation.applyArrestReputation then
+                exports.oReputation:applyArrestReputation(cid, officerPlayer)
+            end
+        end)
     end
 
     -- Limpar MDC wanted
@@ -148,6 +154,49 @@ end
 function getBounty(player)
     local cid = getElementData(player, "char:id")
     return (wantedCache[cid] or {}).bounty or 0
+end
+
+-- addBounty(player, amount) → aumenta recompensa sem novo crime (contratos / Deep Web)
+function addBounty(player, amount)
+    if not isElement(player) or getElementType(player) ~= "player" then return false end
+    if not getElementData(player, "user:loggedin") then return false end
+    amount = math.floor(tonumber(amount) or 0)
+    if amount <= 0 then return false end
+
+    local cid      = getElementData(player, "char:id")
+    local charName = (getElementData(player, "char:name") or getPlayerName(player)):gsub("_", " ")
+    local skin     = getElementModel(player)
+    local entry    = wantedCache[cid]
+    local now      = getRealTime().timestamp
+
+    if not entry then
+        entry = {
+            level = 1, bounty = 0, crimes = {}, expires_at = 0, db_id = nil,
+            char_name = charName, skin = skin,
+        }
+        wantedCache[cid] = entry
+    end
+
+    entry.bounty     = (entry.bounty or 0) + amount
+    entry.char_name  = charName
+    entry.skin       = skin
+    entry.level      = math.max(tonumber(entry.level) or 1, 1)
+    local decayMin   = WANTED_DECAY_MIN[entry.level] or WANTED_DECAY_MIN[1]
+    entry.expires_at = decayMin > 0 and (now + decayMin * 60) or 0
+
+    if entry.db_id then
+        dbExec(conn, "UPDATE wanted_active SET bounty=?,expires_at=?,char_name=?,skin=? WHERE id=?",
+            entry.bounty, entry.expires_at, charName, skin, entry.db_id)
+    else
+        local _, _, insertID = dbPoll(dbQuery(conn,
+            "INSERT INTO wanted_active (char_id,char_name,skin,crime_level,bounty,crimes,issued_at,expires_at) VALUES (?,?,?,?,?,?,?,?)",
+            cid, charName, skin, entry.level, entry.bounty, toJSON(entry.crimes), now, entry.expires_at), 200)
+        entry.db_id = insertID
+    end
+
+    syncPlayerWanted(player, entry)
+    notifyPolice(player, charName, entry)
+    return true
 end
 
 -- ─── Sync ─────────────────────────────────────────────────────────────────────
@@ -217,16 +266,15 @@ function decayWantedLevels()
 end
 
 -- ─── Eventos de crime automáticos ─────────────────────────────────────────────
--- Outros recursos chamam addCrime via export. Este bloco adiciona listners diretos.
+-- Outros recursos chamam addCrime via export. Este bloco adiciona listeners diretos.
 
--- Fugir do policial (detecção simples: policial a <15m e jogador não-policial correu)
 addEvent("oWanted > reportCrime", true)
 addEventHandler("oWanted > reportCrime", resourceRoot, function(crimeKey)
     if client ~= source then return end
     addCrime(client, crimeKey)
 end)
 
--- Prisão efetuada via cuff + detain (chamado por oFactionScripts quando preso na cela)
+-- Prisão efetuada via cuff + detain
 addEvent("oWanted > arrest", true)
 addEventHandler("oWanted > arrest", resourceRoot, function(criminal)
     if not isElement(criminal) then return end
@@ -258,27 +306,25 @@ addEventHandler("onElementDataChange", root, function(key, old, new)
     end
 end)
 
--- Quando policial mata alguém, registar homicídio automaticamente
+-- Homicídio: civil mata civil → crime registado no ASSASSINO
 addEventHandler("onPlayerWasted", root, function(totalAmmo, killer, killerWeapon, bodypart)
     local victim = source
     if not isElement(victim) or not isElement(killer) then return end
     if getElementType(killer) ~= "player" then return end
     if killer == victim then return end
-    -- Só regista se o assassino é policial de serviço
+    -- Policial a matar: não é crime
     if exports.oFactionScripts:isInLawEnforcementDuty(killer) then return end
-    -- Vítima é policial? Não registar
-    if exports.oFactionScripts:isInLawEnforcementDuty(victim) then return end
-    addCrime(victim, "homicidio")
+    -- Matar policial: crime mais grave (roubo level já cobre, homicidio para civis)
+    addCrime(killer, "homicidio")
 end)
 
--- Policial mata civil → registar na vítima como morto por policial (para jail)
+-- Policial mata procurado → limpar wanted e pagar bounty
 addEventHandler("onPlayerWasted", root, function(totalAmmo, killer, killerWeapon, bodypart)
     local victim = source
     if not isElement(victim) or not isElement(killer) then return end
     if getElementType(killer) ~= "player" then return end
     if killer == victim then return end
     if not exports.oFactionScripts:isInLawEnforcementDuty(killer) then return end
-    -- Policial matou alguém que tinha wanted → bonus de bounty ao policial
     local cid = getElementData(victim, "char:id")
     if wantedCache[cid] then
         clearWanted(victim, killer)

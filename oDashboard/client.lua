@@ -55,6 +55,10 @@ local optionsScrolls = {
 crosshairDatas = {1, {255, 255, 255}}
 ------------------
 
+-- Página VIP & Sócio (page 8) --
+local selectedVipCard = 0   -- 1-3 = VIP tiers, 4-6 = Sócio tiers, 0 = nenhum
+local vipConfirmCard  = 0   -- card que mostra "Confirmar?"
+
 -- Painel de facção --
 local selectedFactionLine = 0
 local factionPanelPage = 1
@@ -1983,7 +1987,7 @@ function render()
             dxDrawText("Informações premium", sx*0.54, sy*0.225, sx*0.54+sx*0.35, sy*0.225+sy*0.05, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
         dxDrawRectangle(sx*0.54, sy*0.225+sy*0.05, sx*0.35, sy*0.58-sy*0.05, tocolor(27, 27, 27, 100*alpha_pagebg))
         dxDrawRectangle(sx*0.54, sy*0.813, sx*0.35, sy*0.03, tocolor(27, 27, 27, 100*alpha_pagebg))
-        dxDrawText("Saldo premium: "..color..comma_value(getElementData(localPlayer, "char:pp")).."#ffffffPP", sx*0.54, sy*0.813, sx*0.54+sx*0.345, sy*0.813+sy*0.03, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], "right", "center", false, false, false, true)
+        dxDrawText("Pontos Plus: "..color..comma_value(getElementData(localPlayer, "char:pp")).."#ffffff IP+", sx*0.54, sy*0.813, sx*0.54+sx*0.345, sy*0.813+sy*0.03, tocolor(255, 255, 255, 255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], "right", "center", false, false, false, true)
 
         local starty = sy*0.225+sy*0.06
 
@@ -2101,6 +2105,103 @@ function render()
                 startX = startX + 152/myX*sx
             end
         end
+    elseif activePage == 8 then
+        -- ── VIP & SÓCIO ─────────────────────────────────────────────────────
+        local hH      = 45/myY*sy    -- header do painel
+        local stH     = 30/myY*sy    -- linha de status atual
+        local cH      = 98/myY*sy    -- altura do card
+        local benLH   = 22/myY*sy    -- altura de cada linha de benefício
+        local cGap    = 6/myY*sy
+
+        local serverNow = tonumber(getElementData(root, "dash:timestamp")) or 0
+
+        local vipPanels = {
+            {x=sx*0.15, y=sy*0.295, w=sx*0.375, label="VIP",   tiers=vipTiersDisplay,   idOff=0,
+             curTier=getElementData(localPlayer,"char:vip_tier"),   curExpire=tonumber(getElementData(localPlayer,"char:vip_expire"))   or 0},
+            {x=sx*0.545, y=sy*0.295, w=sx*0.345, label="SÓCIO", tiers=socioTiersDisplay, idOff=3,
+             curTier=getElementData(localPlayer,"char:socio_tier"), curExpire=tonumber(getElementData(localPlayer,"char:socio_expire")) or 0},
+        }
+
+        dxDrawText("VIP & SÓCIO", sx*0.33, sy*0.21, sx*0.33+sx*0.38, sy*0.295, tocolor(255,255,255,255*alpha_pagebg), 0.9/myX*sx, fonts["bebasneue-25"], "center", "center")
+        dxDrawText("Ative um plano para receber bônus de entrada, veículos exclusivos e salário horário.", sx*0.33, sy*0.258, sx*0.33+sx*0.38, sy*0.295, tocolor(255,255,255,100*alpha_pagebg), 0.7/myX*sx, fonts["condensed-bold"], "center", "center")
+
+        for _, panel in ipairs(vipPanels) do
+            local px, py, pw = panel.x, panel.y, panel.w
+            local isSubActive = panel.curExpire > serverNow
+
+            -- painel de fundo
+            dxDrawRectangle(px, py, pw, hH, tocolor(27,27,27,220*alpha_pagebg))
+            dxDrawText(panel.label, px, py, px+pw, py+hH, tocolor(255,255,255,255*alpha_pagebg), 1/myX*sx, fonts["bebasneue-18"], "center", "center")
+            dxDrawRectangle(px, py+hH, pw, 590/myY*sy, tocolor(27,27,27,80*alpha_pagebg))
+
+            -- linha de status
+            local stY = py + hH + 4/myY*sy
+            dxDrawRectangle(px+3/myX*sx, stY, pw-6/myX*sx, stH, tocolor(18,18,18,180*alpha_pagebg))
+            if isSubActive and panel.curTier and panel.curTier ~= false then
+                local tierName = tostring(panel.curTier)
+                for _, t in ipairs(panel.tiers) do
+                    if t.id == panel.curTier then tierName = t.name; break end
+                end
+                local dLeft = math.max(0, math.floor((panel.curExpire - serverNow) / 86400))
+                dxDrawText(color.."✔ #ffffff"..tierName.."  #aaaaaa"..dLeft.." dia(s) restante(s)", px+8/myX*sx, stY, px+pw-4/myX*sx, stY+stH, tocolor(255,255,255,255*alpha_pagebg), 0.78/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
+            else
+                dxDrawText("Sem plano ativo", px+8/myX*sx, stY, px+pw-4/myX*sx, stY+stH, tocolor(180,180,180,160*alpha_pagebg), 0.78/myX*sx, fonts["condensed-bold"], "left", "center")
+            end
+
+            local cY = stY + stH + cGap
+
+            for i, tier in ipairs(panel.tiers) do
+                local cardID      = panel.idOff + i
+                local isActiveTier = isSubActive and (panel.curTier == tier.id)
+                local isSelected  = (selectedVipCard == cardID)
+
+                -- fundo do card
+                local bgA = isActiveTier and 200 or (isSelected and 150 or 100)
+                dxDrawRectangle(px+3/myX*sx, cY, pw-6/myX*sx, cH, tocolor(27,27,27, bgA*alpha_pagebg))
+                dxDrawRectangle(px+3/myX*sx, cY, 4/myX*sx,    cH, tocolor(r,g,b, (isActiveTier and 255 or (isSelected and 200 or 70))*alpha_pagebg))
+
+                -- nome do tier
+                dxDrawText(tier.name, px+14/myX*sx, cY+3/myY*sy, px+pw-102/myX*sx, cY+28/myY*sy, tocolor(255,255,255,255*alpha_pagebg), 0.88/myX*sx, fonts["bebasneue-18"], "left", "center")
+
+                -- preço e duração
+                dxDrawText(comma_value(tier.ppPrice).." IP+  ·  "..tier.durationDays.." dias", px+14/myX*sx, cY+30/myY*sy, px+pw-102/myX*sx, cY+50/myY*sy, tocolor(210,210,210,210*alpha_pagebg), 0.77/myX*sx, fonts["condensed-bold"], "left", "center")
+
+                -- salário + bônus
+                dxDrawText(color.."$"..comma_value(tier.hourlySalary).."/h  #aaaaaa·  "..color.."$"..comma_value(tier.activationCash).." bônus ativ.", px+14/myX*sx, cY+50/myY*sy, px+pw-102/myX*sx, cY+72/myY*sy, tocolor(255,255,255,190*alpha_pagebg), 0.74/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
+
+                -- dica expandir
+                dxDrawText(isSelected and "▲ recolher" or "▼ ver benefícios", px+14/myX*sx, cY+72/myY*sy, px+pw-102/myX*sx, cY+90/myY*sy, tocolor(160,160,160,140*alpha_pagebg), 0.68/myX*sx, fonts["condensed-bold"], "left", "center")
+
+                -- botão
+                local btnX = px+pw-100/myX*sx
+                local btnY = cY + (cH - 40/myY*sy) / 2
+                local btnW = 94/myX*sx
+                local btnH = 40/myY*sy
+                if isActiveTier then
+                    core:dxDrawButton(btnX, btnY, btnW, btnH, 38,115,38, 200*alpha_pagebg, "ATIVO", tocolor(255,255,255,255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0,0,0,120*alpha_pagebg))
+                elseif vipConfirmCard == cardID then
+                    core:dxDrawButton(btnX, btnY, btnW, btnH, r,g,b, 240*alpha_pagebg, "Confirmar?", tocolor(255,255,255,255*alpha_pagebg), 0.74/myX*sx, fonts["condensed-bold"], true, tocolor(0,0,0,150*alpha_pagebg))
+                else
+                    core:dxDrawButton(btnX, btnY, btnW, btnH, r,g,b, 200*alpha_pagebg, "Ativar", tocolor(255,255,255,255*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], true, tocolor(0,0,0,100*alpha_pagebg))
+                end
+
+                cY = cY + cH + cGap
+
+                -- área de benefícios expandida
+                if isSelected then
+                    local benH = #tier.benefits * benLH + 8/myY*sy
+                    dxDrawRectangle(px+3/myX*sx, cY, pw-6/myX*sx, benH, tocolor(14,22,14,210*alpha_pagebg))
+                    for bi, ben in ipairs(tier.benefits) do
+                        dxDrawText("• "..ben, px+10/myX*sx, cY+(bi-1)*benLH+4/myY*sy, px+pw-6/myX*sx, cY+bi*benLH+4/myY*sy, tocolor(210,240,210,230*alpha_pagebg), 0.76/myX*sx, fonts["condensed-bold"], "left", "center", false, false, false, true)
+                    end
+                    cY = cY + benH + 4/myY*sy
+                end
+            end
+        end
+
+        -- barra de IP+ disponíveis
+        dxDrawRectangle(sx*0.15, sy*0.865, sx*0.74, 26/myY*sy, tocolor(18,18,18,160*alpha_pagebg))
+        dxDrawText("IP+ disponíveis: "..color..comma_value(getElementData(localPlayer,"char:pp")), sx*0.15, sy*0.865, sx*0.89, sy*0.865+26/myY*sy, tocolor(255,255,255,220*alpha_pagebg), 0.8/myX*sx, fonts["condensed-bold"], "right", "center", false, false, false, true)
     end
     --dxDrawRectangle(sx*0.14,sy*0.2,sx*0.765,sy*0.67, tocolor(255, 255, 255, 100)) -- Área central
 end
@@ -3539,15 +3640,79 @@ function click(key,state)
                         startX = startX + 152/myX*sx
                     end
                 end
-        
+
+            elseif activePage == 8 then
+                -- ── VIP & SÓCIO click handler ─────────────────────────────
+                local hH    = 45/myY*sy
+                local stH   = 30/myY*sy
+                local cH    = 98/myY*sy
+                local benLH = 22/myY*sy
+                local cGap  = 6/myY*sy
+
+                local serverNow = tonumber(getElementData(root, "dash:timestamp")) or 0
+
+                local vipPanels = {
+                    {x=sx*0.15, y=sy*0.295, w=sx*0.375, tiers=vipTiersDisplay,   idOff=0, line="vip",
+                     curTier=getElementData(localPlayer,"char:vip_tier"),   curExpire=tonumber(getElementData(localPlayer,"char:vip_expire"))   or 0},
+                    {x=sx*0.545, y=sy*0.295, w=sx*0.345, tiers=socioTiersDisplay, idOff=3, line="socio",
+                     curTier=getElementData(localPlayer,"char:socio_tier"), curExpire=tonumber(getElementData(localPlayer,"char:socio_expire")) or 0},
+                }
+
+                for _, panel in ipairs(vipPanels) do
+                    local px, py, pw = panel.x, panel.y, panel.w
+                    local isSubActive = panel.curExpire > serverNow
+
+                    local stY = py + hH + 4/myY*sy
+                    local cY  = stY + stH + cGap
+
+                    for i, tier in ipairs(panel.tiers) do
+                        local cardID      = panel.idOff + i
+                        local isActiveTier = isSubActive and (panel.curTier == tier.id)
+                        local isSelected  = (selectedVipCard == cardID)
+
+                        local btnX = px+pw-100/myX*sx
+                        local btnY = cY + (cH - 40/myY*sy) / 2
+                        local btnW = 94/myX*sx
+                        local btnH = 40/myY*sy
+
+                        -- clique no corpo do card → expandir/recolher
+                        if core:isInSlot(px+3/myX*sx, cY, pw-104/myX*sx, cH) then
+                            selectedVipCard = (selectedVipCard == cardID) and 0 or cardID
+                            vipConfirmCard  = 0
+                        end
+
+                        -- clique no botão Ativar / Confirmar
+                        if not isActiveTier and core:isInSlot(btnX, btnY, btnW, btnH) then
+                            if vipConfirmCard == cardID then
+                                local pp = tonumber(getElementData(localPlayer, "char:pp")) or 0
+                                if pp >= tier.ppPrice then
+                                    triggerServerEvent("dash > vip > activate", resourceRoot, panel.line, tier.id, tier.ppPrice)
+                                    vipConfirmCard = 0
+                                else
+                                    infobox:outputInfoBox("IP+ insuficientes! Você precisa de "..comma_value(tier.ppPrice).." IP+.", "error")
+                                    vipConfirmCard = 0
+                                end
+                            else
+                                vipConfirmCard  = cardID
+                                selectedVipCard = cardID
+                            end
+                        end
+
+                        cY = cY + cH + cGap
+                        if isSelected then
+                            cY = cY + #tier.benefits * benLH + 12/myY*sy
+                        end
+                    end
+                end
+
             end
         else
             if sliderEditing > 0 then
-                triggerEvent(options["graphics"][sliderEditing][5], root, options["graphics"][sliderEditing][6]) 
+                triggerEvent(options["graphics"][sliderEditing][5], root, options["graphics"][sliderEditing][6])
                 sliderEditing = 0
             end
 
-            if sliderEditingVignette > 0 then 
+            if sliderEditingVignette > 0 then
                 exports.oShader_Vignette:setShaderValues(vignetteSetup[1][6], vignetteSetup[2][6])
                 sliderEditingVignette = 0
             end

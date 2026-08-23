@@ -6,7 +6,7 @@ pages = {
     {"Organizações","factions.png"},
     {"Premium","pp.png"},
     {"Presente diário e Case Shop","daily.png"},
-    --{"Kisállat","pet.png"},
+    {"VIP & Sócio","pp.png"},
 }
 
 charStats = {
@@ -41,9 +41,9 @@ userStats = {
 
 patrimonioItens = {
     {"Dinheiro (mão)", "char:money"},
-    {"Casino Coin", "char:cc"},
+    {"Fichas cassino", "char:cc"},
     {"Saldo bancário", "_bankmoney"},
-    {"Pontos Premium", "char:pp"},
+    {"Pontos Plus", "char:pp"},
 }
 
 adminPrefix = {"AS","A1","A2","A3","FA","SA","</>","T"}
@@ -702,7 +702,7 @@ end
 
 -- Do mais barato ao um pouco mais caro, exceto livros mestres
 creates = {
-    {name = "REBOOT BOX", price = 0, money_type = "$", icon = "reboot", specialtag = "REBOOT", tagcolor = {247, 60, 47}, expire = 1673218740, gifts = {
+    {name = "CAIXA BIXIGA", price = 0, money_type = "$", icon = "reboot", specialtag = "EVENTO", tagcolor = {247, 60, 47}, expire = 1673218740, gifts = {
         {item = 89, rarity = 3, money = 0, type = 1, itemvalue = 1},
         {item = 90, rarity = 3, money = 0, type = 1, itemvalue = 1},
         {item = 91, rarity = 3, money = 0, type = 1, itemvalue = 1},
@@ -736,7 +736,7 @@ creates = {
         {item = 0, rarity = 4, money = 2500, type = 3, itemvalue = 1},
     }},
 
-    {name = "GOLDEN CASE", price = 9000, money_type = "$", icon = "gold", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "CAIXA OURO SP", price = 9000, money_type = "$", icon = "gold", specialtag = "", tagcolor = {200, 165, 20}, gifts = {
         {item = 27, rarity = 3, money = 0, type = 1, itemvalue = 6},
         {item = 27, rarity = 3, money = 0, type = 1, itemvalue = 5},
         {item = 28, rarity = 4, money = 0, type = 1, itemvalue = 5},
@@ -745,7 +745,7 @@ creates = {
         {item = 42, rarity = 1, money = 0, type = 1, itemvalue = 4},
     }},
 
-    {name = "WINTER CASE", price = 9500, money_type = "$", icon = "winter", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "CAIXA TROPICAL", price = 9500, money_type = "$", icon = "winter", specialtag = "", tagcolor = {30, 160, 80}, gifts = {
         {item = 27, rarity = 3, money = 0, type = 1, itemvalue = 2},
         {item = 28, rarity = 3, money = 0, type = 1, itemvalue = 3},
         {item = 28, rarity = 2, money = 0, type = 1, itemvalue = 6},
@@ -755,7 +755,7 @@ creates = {
         {item = 38, rarity = 4, money = 0, type = 1, itemvalue = 2},
     }},
 
-    {name = "PINK CASE", price = 7500, money_type = "$", icon = "pink", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "CAIXA IPIRANGA", price = 7500, money_type = "$", icon = "pink", specialtag = "", tagcolor = {180, 40, 130}, gifts = {
         {item = 27, rarity = 3, money = 0, type = 1, itemvalue = 7},
         {item = 28, rarity = 4, money = 0, type = 1, itemvalue = 7},
         {item = 30, rarity = 2, money = 0, type = 1, itemvalue = 4},
@@ -763,7 +763,7 @@ creates = {
         {item = 123, rarity = 1, money = 0, type = 1, itemvalue = 1},
     }},
 
-    {name = "LIVROS MESTRES", price = 4500, money_type = "$", icon = "mesterkonyvek", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "CAIXA DOS SÁBIOS", price = 4500, money_type = "$", icon = "mesterkonyvek", specialtag = "", tagcolor = {80, 120, 220}, gifts = {
         {item = 117, rarity = 3, money = 0, type = 1, itemvalue = 1},
         {item = 118, rarity = 4, money = 0, type = 1, itemvalue = 1},
         {item = 119, rarity = 3, money = 0, type = 1, itemvalue = 1},
@@ -775,7 +775,7 @@ creates = {
         {item = 126, rarity = 4, money = 0, type = 1, itemvalue = 1},
     }},
 
-    {name = "KNIFE CASE", price = 5000, money_type = "$", icon = "knives", specialtag = "", tagcolor = {247, 60, 47}, gifts = {
+    {name = "CAIXA FERRO", price = 5000, money_type = "$", icon = "knives", specialtag = "", tagcolor = {100, 100, 120}, gifts = {
         {item = 32, rarity = 1, money = 0, type = 1, itemvalue = 1},
         {item = 32, rarity = 2, money = 0, type = 1, itemvalue = 2},
         {item = 32, rarity = 2, money = 0, type = 1, itemvalue = 3},
@@ -785,6 +785,24 @@ creates = {
         {item = 32, rarity = 3, money = 0, type = 1, itemvalue = 7},
     }},
 
+}
+
+-- VIP & Sócio — dados de display e preço em PP para o Dashboard (page 8)
+vipTiersDisplay = {
+    {id="vip_sigma",      line="vip",   name="VIP Sigma",           durationDays=30, ppPrice=5000,  activationCash=800000,  hourlySalary=15000,
+     benefits={"Kit de vida e colete (cooldown 1 min).", "Veículos reservados: Silvia S15, Impreza STI, Tiger 800.", "3 personagens · 2 acessórios · 3 armas.", "RGB carro/farol · Tag exclusiva ingame + Discord."}},
+    {id="vip_omega",      line="vip",   name="VIP Omega",           durationDays=30, ppPrice=10000, activationCash=1000000, hourlySalary=30000,
+     benefits={"Tudo do Sigma + blindagem (cooldown 1 min).", "Fleet ampliada: R34, Supra MK4, BMW M4 e mais.", "4 personagens · 3 acessórios · 6 armas.", "Sem fome/sede · 8 vagas de garagem."}},
+    {id="vip_ipiranga",   line="vip",   name="VIP Ipiranga",        durationDays=30, ppPrice=20000, activationCash=2000000, hourlySalary=40000,
+     benefits={"Tudo do Omega + reparar + /tunning (CD 2 min).", "Helicóptero · Mini Lamborghini · Mini XRE.", "4 acessórios · kit arma estendido + taco.", "8 vagas · sem fome/sede · tag VIP Ipiranga."}},
+}
+socioTiersDisplay = {
+    {id="socio_semanal",       line="socio", name="Sócio Semanal",        durationDays=7,  ppPrice=1500,  activationCash=250000,  hourlySalary=8000,
+     benefits={"Badge «Sócio» Discord + cor de nome ingame.", "1 veículo leve reservado (spawn RP).", "Desconto 10% em itens cosméticos da loja Plus.", "1 kit utilitário (cooldown 5 min)."}},
+    {id="socio_mensal",        line="socio", name="Sócio Ouro (Mensal)",  durationDays=30, ppPrice=6000,  activationCash=600000,  hourlySalary=18000,
+     benefits={"Inclui benefícios do nível semanal.", "2 veículos sociais + 1 acessório exclusivo.", "Canal exclusivo Discord staff-player.", "Salário horário reforçado."}},
+    {id="socio_patrocinador",  line="socio", name="Sócio Patrocinador",   durationDays=30, ppPrice=25000, activationCash=3000000, hourlySalary=50000,
+     benefits={"/cv · /pskin · /eventovip · /spectar e mais.", "Kits vida/colete/reparo/blindagem (CD 1 min).", "Fleet premium completa · placa personalizada.", "4 acessórios · 3 armas tier A · 10 vagas garagem."}},
 }
 
 dailyBoxRewards = {

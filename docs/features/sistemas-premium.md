@@ -303,7 +303,7 @@ Nenhuma entrada manual necessária — o grupo `Everyone` já tem `resource.*` w
 |----------|-----|-----|
 | `oTerritory/server.lua` | `not x == 0` (precedência) | `(x or 0) ~= 0` |
 | `oTerritory/server.lua` | `goto`/`::continue::` (Lua 5.1 incompatível) | Extraído para `tickTerritory()` local |
-| `oAdmin/hub/c_adminHub.lua` | 12px overlap entre `drawTabHintBar` e `drawFieldStrip` | `targetEditY` aumentado 16px |
+| `oAdmin/hub/c_adminHub.lua` (substituído por `hub/v2/`) | 12px overlap entre hint bar e faixa de campos | Layout v2 modular (`c_layout.lua` / `c_views.lua`) |
 
 ---
 

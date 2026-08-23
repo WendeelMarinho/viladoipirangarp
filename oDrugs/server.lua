@@ -320,7 +320,7 @@ addCommandHandler("createcrafting", function(player, cmd)
 
         local id = createDrugCraftTable(x, y, z-1, rotZ, dim, int) or "0"
 
-        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "létrehozott egy drogkészítő asztalt. #db3535(#"..id..")", 8)
+        triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "criou uma mesa de fabricação de drogas. #db3535(#"..id..")", 8)
     end
 end)
 
@@ -335,7 +335,7 @@ addCommandHandler("delcrafting", function(player, cmd, id)
                 destroyElement(craftingTables[id])
                 craftingTables[id] = false 
 
-                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "törölte a(z) #db3535"..id.." #557ec9ID-vel rendelkező drogkészítő asztalt.", 8)
+                triggerClientEvent("sendMessageToAdmins", getRootElement(), player, "removeu a mesa de fabricação de drogas #db3535"..id.."#557ec9.", 8)
                 dbExec(conn, "DELETE FROM craftingTabels WHERE id=?", id)
             else
                 outputChatBox(core:getServerPrefix("red-dark", "Erro", 3).."Nenhuma mesa de fabricação encontrada com este ID!", player, 255, 255, 255, true)

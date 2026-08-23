@@ -160,6 +160,52 @@ addEventHandler("dashboad > setPlayer > walkStyle", resourceRoot, function(value
     setPedWalkingStyle(client, walkingStyles[value])
 end)
 
+local function fmtNum(n)
+    local s = tostring(math.floor(tonumber(n) or 0))
+    return s:reverse():gsub("(%d%d%d)", "%1."):reverse():gsub("^%.", "")
+end
+
+-- Tabela canônica de preços (validação server-side — não confiar no cliente)
+local VIP_PP_COSTS = {
+    vip_sigma           = 5000,
+    vip_omega           = 10000,
+    vip_ipiranga        = 20000,
+    socio_semanal       = 1500,
+    socio_mensal        = 6000,
+    socio_patrocinador  = 25000,
+}
+
+addEvent("dash > vip > activate", true)
+addEventHandler("dash > vip > activate", resourceRoot, function(line, tierId, _ppCostClient)
+    if line ~= "vip" and line ~= "socio" then return end
+    tierId = tostring(tierId or "")
+    local expected = VIP_PP_COSTS[tierId]
+    if not expected then return end  -- tier inválido
+
+    local pp = tonumber(getElementData(client, "char:pp")) or 0
+    if pp < expected then
+        infobox:outputInfoBox("IP+ insuficientes para ativar este plano.", "error", client)
+        return
+    end
+
+    -- debita PP antes de tentar — estorna se falhar
+    setElementData(client, "char:pp", pp - expected)
+
+    local ok, reason = exports.oIpirangaVIP:grantSubscription(client, line, tierId)
+    if ok then
+        local label = (line == "vip") and "VIP" or "Sócio"
+        infobox:outputInfoBox("Plano "..label.." ativado! Detalhes no chat.", "success", client)
+        outputChatBox(core:getServerPrefix("green-dark", "VIP", 2)..
+            color..getPlayerName(client):gsub("_"," ")..
+            "#ffffff ativou o plano "..color..tierId..
+            "#ffffff usando "..color..fmtNum(expected).." IP+#ffffff.", client, 255, 255, 255, true)
+        exports.oLogs:createLog(client, "vip_compra", "Plano "..tierId.." ativado por "..expected.." IP+")
+    else
+        setElementData(client, "char:pp", pp)  -- estorno
+        infobox:outputInfoBox("Erro ao ativar: "..tostring(reason)..". IP+ estornados.", "error", client)
+    end
+end)
+
 function setDashboardRealtime()
     local realtime = getRealTime()
     setElementData(root, "dash:timestamp", getTimestamp(realtime.year + 1900, realtime.month, realtime.day, realtime.hour, realtime.minute, realtime.second))

@@ -1,6 +1,7 @@
-local connection = exports.oMysql:getDBConnection()
+local connection
 
-addEventHandler("onResourceStart", resourceRoot, function() 
+addEventHandler("onResourceStart", resourceRoot, function()
+    connection = exports.oMysql:getDBConnection()
     loadGates()
 end)
 
@@ -26,8 +27,8 @@ addEventHandler("gate > createGateOnServer", resourceRoot, function(gatePosition
 
     setElementData(obj, "gate:id", insertID)
 
-    exports.oAdmin:sendMessageToAdmins(client, "létrehozott egy kaput. #db3535(ID: "..insertID..")")
-    outputChatBox(core:getServerPrefix("green-dark", "Kapu", 2).."Sikeresen létrehoztál egy kaput. "..color.."(ID: "..insertID..")", client, 255, 255, 255, true)
+    exports.oAdmin:sendMessageToAdmins(client, "criou um portão. #db3535(ID: "..insertID..")")
+    outputChatBox(core:getServerPrefix("green-dark", "Portão", 2).."Portão criado com sucesso. "..color.."(ID: "..insertID..")", client, 255, 255, 255, true)
 end)
 
 function loadGates() 
@@ -80,13 +81,13 @@ function delGate(player, cmd, target)
                 dbExec(connection, "DELETE FROM gates WHERE id=?", target)
                 destroyElement(gate)
 
-                exports.oAdmin:sendMessageToAdmins(player, "kitörölt egy kaput. #db3535(ID: "..target..")")
-                outputChatBox(core:getServerPrefix("green-dark", "Kapu", 2).."Sikeresen töröltél egy kaput. "..color.."(ID: "..target..")", player, 255, 255, 255, true)
+                exports.oAdmin:sendMessageToAdmins(player, "eliminou um portão. #db3535(ID: "..target..")")
+                outputChatBox(core:getServerPrefix("green-dark", "Portão", 2).."Portão eliminado com sucesso. "..color.."(ID: "..target..")", player, 255, 255, 255, true)
             else
-                outputChatBox(core:getServerPrefix("red-dark", "Kapu", 2).."Nincs ilyen ID-vel rendelkező kapu! "..color.."("..target..")", player, 255, 255, 255, true)
+                outputChatBox(core:getServerPrefix("red-dark", "Portão", 2).."Não existe portão com esse ID! "..color.."("..target..")", player, 255, 255, 255, true)
             end 
         else
-            outputChatBox(core:getServerPrefix("server", "Használat", 3).."/"..cmd.." [Kapu ID]", player, 255, 255, 255, true)
+            outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [ID do portão]", player, 255, 255, 255, true)
         end
     end
 end
@@ -95,37 +96,51 @@ addCommandHandler("delgate", delGate)
 local gateTimers = {}
 addEvent("gate > setGateState", true)
 addEventHandler("gate > setGateState", resourceRoot, function(gate)
+    -- Verificar permissão de facção (apenas para portões registados numa HQ)
+    local gateID = getElementData(gate, "gate:id")
+    if gateID and exports.oFactionHQ and exports.oFactionHQ.isHQGate then
+        local ok, isHQ = pcall(function() return exports.oFactionHQ:isHQGate(gateID) end)
+        if ok and isHQ then
+            local ok2, canOpen = pcall(function() return exports.oFactionHQ:canOpenGate(client, gateID) end)
+            if ok2 and not canOpen then
+                outputChatBox(core:getServerPrefix("red-dark", "Portão", 2) ..
+                    "#ffffffSem permissão de facção para operar este portão.", client, 255, 255, 255, true)
+                return
+            end
+        end
+    end
+
     if not isTimer(gateTimers[gate]) then
         local gate = gate
         gateTimers[gate] = setTimer(function()
-            if isTimer(gateTimers[gate]) then 
+            if isTimer(gateTimers[gate]) then
                 killTimer(gateTimers[gate])
             end
         end, gateMoveingTime + 1000, 1)
         setElementData(gate, "gate:inMove", true)
-        local state =  getElementData(gate, "gate:state") 
+        local state =  getElementData(gate, "gate:state")
 
         local newpos
         local oldpos
 
-        local modelName = "kaput"
+        local modelName = "portão"
 
         local model = getElementModel(gate)
 
-        if model == 3089 then 
-            modelName = "ajtót"
-        elseif model == 968 then 
-            modelName = "sorompót"
+        if model == 3089 then
+            modelName = "porta"
+        elseif model == 968 then
+            modelName = "cancela"
         end
 
-        if state then 
+        if state then
             newpos = getElementData(gate, "gate:openPos")
             oldpos = getElementData(gate, "gate:closePos")
-            exports.oChat:sendLocalMeAction(client, "kinyitja a közelében lévő "..modelName..".")
+            exports.oChat:sendLocalMeAction(client, "abre o " .. modelName .. " próximo.")
         else
             newpos = getElementData(gate, "gate:closePos")
             oldpos = getElementData(gate, "gate:openPos")
-            exports.oChat:sendLocalMeAction(client, "bezárja a közelében lévő "..modelName..".")
+            exports.oChat:sendLocalMeAction(client, "fecha o " .. modelName .. " próximo.")
         end
 
         setElementData(gate, "gate:state", not state)

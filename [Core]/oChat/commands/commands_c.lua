@@ -62,6 +62,16 @@ addCommandHandler("c", function(cmd, ...)
 	end
 end, false, false)
 
+addCommandHandler("w", function(cmd, ...)
+	if not isSpam() and not isPedDead(localPlayer) then
+		if ... then
+			triggerServerEvent("sendChatMessage", localPlayer, removeHex(table.concat({...}, " ")), getNearestPlayers(localPlayer, 5), 25)
+		else
+			outputChatBox(core:getServerPrefix("server", "Uso", 3).."/"..cmd.." [texto]", 255, 255, 255, true)
+		end
+	end
+end, false, false)
+
 addCommandHandler("asay", function(cmd, ...)
 	if not isSpam() and getElementData(localPlayer, "user:admin") >= 2 then
 		if ... then

@@ -1,0 +1,13 @@
+<meta>
+	<info author="Ipiranga RP" name="oWelcome" version="2.0.0" type="script" description="Boas-vindas, guia e notícias do servidor" />
+	<script src="vip_socio_config.lua" type="shared" />
+	<script src="global.lua" type="shared" />
+	<script src="server.lua" type="server" />
+	<script src="client/theme.lua" type="client" />
+	<script src="client/animations.lua" type="client" />
+	<script src="client/components.lua" type="client" />
+	<script src="client/tabs.lua" type="client" />
+	<script src="client/renderer.lua" type="client" />
+	<script src="client/main.lua" type="client" />
+	<min_mta_version client="1.5.9" server="1.5.9" />
+</meta>

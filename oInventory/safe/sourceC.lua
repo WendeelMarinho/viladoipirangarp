@@ -62,7 +62,7 @@ func.safe.nearby = function()
 		cache.safe.show = not cache.safe.show
 		if cache.safe.show then
 			addEventHandler("onClientRender",getRootElement(),func.safe.render)
-			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Széf információ megjelenítve.",0,0,0,true)
+			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Informações do cofre exibidas.",0,0,0,true)
 		else
 			removeEventHandler("onClientRender",getRootElement(),func.safe.render)
 			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Széf információ eltüntetve.",0,0,0,true)

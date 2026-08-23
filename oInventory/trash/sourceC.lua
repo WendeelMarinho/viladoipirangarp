@@ -62,7 +62,7 @@ func.trash.nearby = function()
 		cache.trash.show = not cache.trash.show
 		if cache.trash.show then
 			addEventHandler("onClientRender",getRootElement(),func.trash.render)
-			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Kuka információ megjelenítve.",220,20,60,true)
+			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Informações do lixo exibidas.",220,20,60,true)
 		else
 			removeEventHandler("onClientRender",getRootElement(),func.trash.render)
 			outputChatBox(core:getServerPrefix("server", "Inventory", 3).."Kuka információ eltüntetve.",220,20,60,true)

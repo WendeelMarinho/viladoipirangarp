@@ -4,4 +4,6 @@
 
 	<file src="files/utility.txd" />
 
+	<export function="applySafeVehicleTuning" type="server" />
+	<min_mta_version server="1.5.9" />
 </meta>
